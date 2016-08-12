@@ -6,13 +6,13 @@
 title: Hexo
 subtitle:
 description:
-author: John Doe
-language:
+author: Winddoing
+language: zh-CN
 timezone:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://yoursite.com
+url: http://winddoing.coding.me
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
@@ -63,9 +63,11 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: landscape
+theme: fexo
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
-    type:
+    type: git    #部署类型
+    repository: https://git.coding.net/Winddoing/Winddoing.git  #部署的仓库
+    branch: coding-pages   #部署分支

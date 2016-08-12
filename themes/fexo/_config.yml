@@ -1,0 +1,73 @@
+# Blog info
+blog_name: 竹风月影
+slogan: 守护心灵的月亮
+
+# Set avatar (Absolute url and relative url)
+avatar: /images/avatar.jpg
+
+# Set favicon
+favicon: /images/favicon.ico
+
+# For seo
+keywords: Winddoing,嵌入式,Linux,shell,C语言,网络,
+description: 爱捣腾技术,也爱钻研,爱分享,也爱交流,爱思考,也爱自由,因为经历, 所以幸福.
+
+init_page_content: HOME_NAV  # HOME_NAV | POST
+
+home_nav:
+  - name: Blog
+    url: /archives
+    target_blank: false #不在新页面打开
+  - name: About
+    url: /aboutme
+    target_blank: false #不在新页面打开
+  - name: Github
+    url: https://github.com/Winddoing
+    target_blank: true #在新页面打开
+
+# config page nav
+page_nav:
+  - name: 博客
+    url: /archives/
+    target_blank: false # 不在新页面打开
+  - name: 分类
+    url: /category/
+    target_blank: false
+  - name: 标签
+    url: /tag/
+    target_blank: false
+  - name: 友链
+    url: /link/
+    target_blank: false
+  - name: 关于
+    url: /about/
+    target_blank: false
+  - name: RSS
+    url: /atom.xml
+    target_blank: true # 在新页面打开
+
+page_nav_style: CIRCLE  # CIRCLE|ROUND_RECT
+
+
+# 面包屑
+breadcrumb:
+  isShow: false # true|fase
+
+# 盒子
+toolbox:
+  isShow: false # true|fase
+
+post:
+  header_align: LEFT # LEFT|CENTER
+  showToc: true # true|false
+  showComments: true
+
+# Stats
+google_analytics:
+baidu_analytics:
+
+# Comment service
+duoshuo_shortname: linfeng
+
+# Custom CSS style
+# personal_style: /css/forsigner.css
