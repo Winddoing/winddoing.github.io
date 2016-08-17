@@ -69,5 +69,5 @@ theme: fexo
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
     type: git    #部署类型
-    repository: https://git.coding.net/Winddoing/Winddoing.git  #部署的仓库
-    branch: coding-pages   #部署分支
+    repository: git@github.com:Winddoing/Winddoing.github.io.git  #部署的仓库
+    branch: master   #部署分支
