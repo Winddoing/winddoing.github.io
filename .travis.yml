@@ -11,7 +11,7 @@ before_install:
 before_script:
     - git config --global user.name 'Winddoing' #设置github用户名
     - git config --global user.email 'shaowangquan@gmail.com' #设置github用户邮箱
-    - sed -i'' "s~git@github.com:Winddoing/Winddoing.github.io.git~https://${REPO_TOKEN}:x-oauth-basic@github.com/Winddoing/Winddoing.github.io.git~" _config.yml
+    - sed -i'' "/^ *repo/s~github\.com~${REPO_TOKEN}@github.com~" _config.yml
 
 install:
     - npm install
