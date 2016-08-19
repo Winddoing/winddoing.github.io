@@ -8,7 +8,7 @@ keywords: Makedown, 语法
 
 在这里主要记录makedown的使用语法，以备后续写作时的不时之需。
 
-<!--maoe-->
+<!--more-->
 
 ## Markdown语法
 

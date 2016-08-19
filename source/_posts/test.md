@@ -10,13 +10,12 @@ tags: Travis-CI
 
 This is a test page!
 
-![test](/images/code_c++.jpg)
-
 <!--more-->
 
-### 站点构建：
+![test](/images/code_c++.jpg)
 
-[![Build Status](https://travis-ci.org/Winddoing/Winddoing.github.io.svg?branch=web_source)](https://travis-ci.org/Winddoing/Winddoing.github.io)
+
+### 站点构建：[![Build Status](https://travis-ci.org/Winddoing/Winddoing.github.io.svg?branch=web_source)](https://travis-ci.org/Winddoing/Winddoing.github.io)
 
 ### C
 
