@@ -4,10 +4,12 @@ node_js:
 branches:
     only:
         - web_source  # 设置自动化部署的源码分支
+
 before_install:
     - export TZ='Asia/Shanghai'  # 设置时区
     - npm install -g hexo
     - npm install -g hexo-cli
+
 before_script:
     - git config --global user.name 'Winddoing' #设置github用户名
     - git config --global user.email 'shaowangquan@gmail.com' #设置github用户邮箱
@@ -15,8 +17,13 @@ before_script:
 
 install:
     - npm install hexo-generator-search --save
+
+cache:
+    directories:
+        - node_modules
 script:
     - hexo clean
     - hexo generate
+
 after_success:
     - hexo deploy
