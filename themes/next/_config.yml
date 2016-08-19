@@ -11,7 +11,7 @@ keywords: "Hexo, NexT, Winddoing,嵌入式,Linux,shell,C语言,网络"
 # Set rss to false to disable feed link.
 # Leave rss as empty to use site's feed link.
 # Set rss to specific value if you have burned your feed already.
-#rss:
+rss:
 
 # Specify the date when the site was setup
 since: 2016
@@ -76,8 +76,7 @@ font:
   enable: true
 
   # Uri of fonts host. E.g. //fonts.googleapis.com (Default)
-  # http://libs.useso.com
-  host: //fonts.useso.com
+  host:
 
   # Global font settings used on <body> element.
   global:
@@ -102,13 +101,13 @@ font:
   # The `size` option use `px` as unit
   logo:
     external: true
-    family: Calligraffitti
-    size: 30
+    family:
+    size:
 
   # Font settings for <code> and code blocks.
   codes:
     external: true
-    family: Consolas
+    family:
 
 
 
@@ -186,7 +185,7 @@ sidebar:
 
 # Blogrolls
 #links_title: Links
-links_layout: block
+#links_layout: block
 #links_layout: inline
 #links:
   #Title: http://example.com/
@@ -239,7 +238,7 @@ auto_excerpt:
 
 # MathJax Support
 mathjax:
-  enable: true
+  enable: false
   cdn: //cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML
 
 
