@@ -1,6 +1,5 @@
 #!/bin/sh
 
-echo "sssssss$#"
 if [ $# != 1 ];then
 	echo "usage: $0 "update commit!!!""
 	exit 1;
