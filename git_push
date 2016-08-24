@@ -8,14 +8,14 @@ fi
 
 COMMIT=$1
 
-echo "Add all change ..."
+echo "Add all change ...\n"
 git add -A
 
-echo "View add results ..."
+echo "View add results ...\n"
 git status
 
-echo "Add commit:<$COMMIT> ..."
+echo "Add commit:<$COMMIT> ...\n"
 git commit -m "$COMMIT"
 
-echo "Push to github ..."
+echo "Push to github ...\n"
 git push origin web_source
