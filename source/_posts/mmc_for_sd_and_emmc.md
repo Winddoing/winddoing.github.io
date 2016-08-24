@@ -12,6 +12,8 @@ tags: 驱动, mmc, sd, emmc
 
 ![mmc子系统](/images/mmc_framework.png)
 
+<!---more--->
+
 Linux MMC子系统主要分成三个部分：
 
 - MMC核心层：完成不同协议和规范的实现，为host层和设备驱动层提供接口函数。MMC核心层由三个部分组成：MMC，SD和SDIO，分别为三类设备驱动提供接口函数；
