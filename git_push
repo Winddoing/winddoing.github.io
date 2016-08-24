@@ -1,0 +1,21 @@
+#!/bin/sh
+
+echo "sssssss$#"
+if [ $# != 1 ];then
+	echo "usage: $0 "update commit!!!""
+	exit 1;
+fi
+
+COMMIT=$1
+
+echo "Add all change ..."
+git add -A
+
+echo "View add results ..."
+git status
+
+echo "Add commit:<$COMMIT> ..."
+git commit -m "$COMMIT"
+
+echo "Push to github ..."
+git push origin web_source
