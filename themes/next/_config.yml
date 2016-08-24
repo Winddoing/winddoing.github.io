@@ -11,7 +11,11 @@ keywords: "Hexo, NexT, Winddoing,嵌入式,Linux,shell,C语言,网络"
 # Set rss to false to disable feed link.
 # Leave rss as empty to use site's feed link.
 # Set rss to specific value if you have burned your feed already.
-rss:
+#rss:
+feed:
+    type: atom
+    path: atom.xml
+    limit: 20
 
 # Specify the date when the site was setup
 since: 2016
@@ -33,7 +37,7 @@ menu:
   #about: /about
   archives: /archives
   tags: /tags
-  #commonweal: /404.html
+  commonweal: /404.html
 
 
 # Enable/Disable menu icons.

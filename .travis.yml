@@ -17,6 +17,7 @@ before_script:
 
 install:
     - npm install hexo-generator-search --save
+    - npm install  hexo-generator-feed --save
 
 cache:
     directories:
