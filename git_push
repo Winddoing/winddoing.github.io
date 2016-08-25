@@ -55,16 +55,16 @@ done
 echo "[2]Add all change ..."
 git add -A
 
-echo "[3]View add results ..."
-git status
+#echo "[3]View add results ..."
+#git status
 
-echo "[4]Add commit:<$COMMIT> of branch:<$BRANCH>...\n"
+echo "[3]Add commit:<$COMMIT> ...\n"
 git commit -m "$COMMIT"
 
-echo "[5]Push to github ..."
+echo "[4]Push to github ..."
 git push $REMOTE $BRANCH
 
-echo "[6]Submit finish ..."
+echo "[5]Submit finish ..."
 unset COMMIT BRANCH REMOTE CUR_TIME
 
 exit 1;
