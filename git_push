@@ -62,7 +62,7 @@ git status
 if [ x$MANUAL != xyes ];then
 	manual_enter
 else
-	echo -n "Whether submit changes:[yes/y] yes"
+	echo " Whether submit changes:[yes/y] yes"
 fi
 
 echo "[2]Add all change ..."
