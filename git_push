@@ -1,20 +1,70 @@
 #!/bin/sh
 
-if [ $# != 1 ];then
-	echo "usage: $0 "update commit!!!""
+CUR_TIME=`date`
+BRANCH=web_source
+REMOTE=origin
+COMMIT="$CUR_TIME update branch-$BRANCH"
+
+usage()
+{
+	echo "usage: $0 -m \"update commit!!!\""
+	echo "	-m <commit>"
+	echo "	-r <remote>"
+	echo "	-b <branch>"
+	echo "	-h help"
+	echo ""
+	echo "Default config:"
+	echo "	--remote:<$REMOTE>"
+	echo "	--branch:<$BRANCH>"
+	echo ""
+	echo "E.g $0 -m \"add a.c\" -r origin -b web_source"
+
 	exit 1;
-fi
+}
 
-COMMIT=$1
+while getopts b:hm:r: ops
+do
+	case $ops in
+		b)
+			BRANCH=$OPTARG ;;
+		r)
+			REMOTE=$OPTARG ;;
+		m)
+			COMMIT=$OPTARG ;;
+		h)
+			usage ;;
+		?)
+			usage
+			exit 1
+		;;
+	esac
+done
 
-echo "Add all change ...\n"
-git add -A
-
-echo "View add results ...\n"
+echo "[1]View change file ..."
 git status
 
-echo "Add commit:<$COMMIT> ...\n"
+echo -n "Whether submit changes:[yes/y]"
+read enter_x
+
+while [ x$enter_x != xyes ] && [ x$enter_x != xy ] && [ x$enter_x != x ]
+do
+	echo -n "Whether submit changes:[yes/y]"
+	read enter_x
+done
+
+echo "[2]Add all change ..."
+git add -A
+
+echo "[3]View add results ..."
+git status
+
+echo "[4]Add commit:<$COMMIT> of branch:<$BRANCH>...\n"
 git commit -m "$COMMIT"
 
-echo "Push to github ...\n"
-git push origin web_source
+echo "[5]Push to github ..."
+git push $REMOTE $BRANCH
+
+echo "[6]Submit finish ..."
+unset COMMIT BRANCH REMOTE CUR_TIME
+
+exit 1;
