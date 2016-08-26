@@ -4,7 +4,7 @@ layout: post
 title: 【转】Micro2440 移植boa服务器
 thread: 166
 categories: ARM
-tags: boa ARM
+tags: boa | ARM
 ---
 
 Boa是一种非常小巧的Web服务器，其可执行代码只有大约60KB左右。作为一种单任务Web服务器，Boa只能依次完成用户的请求，而不会fork出新的进程来处理并发连接请求。但Boa支持CGI，能够为CGI程序fork出一个进程来执行。Boa的设计目标是速度和安全。
