@@ -4,7 +4,7 @@ layout: post
 title: 移植mjpg-streamer
 thread: 166
 categories: 嵌入式
-tags: ARM, mjpg-streamer
+tags: [ARM, mjpg-streamer]
 ---
 
 Mjpg‐streamer是一个开源软件，用于从webcam摄像头采集图像，把它们以流的形式通过基于ip的网络传输到浏览器如Firefox，Cambozola，VLC播放器，Windows的移动设备或者其他拥有浏览器的移动设备

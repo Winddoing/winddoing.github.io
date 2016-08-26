@@ -3,7 +3,7 @@ title: Markdown语法
 date: 2016-08-19 22:18:39
 tags: Makedown
 categories: Makedown
-keywords: Makedown, 语法
+keywords: [Makedown, 语法]
 ---
 
 在这里主要记录makedown的使用语法，以备后续写作时的不时之需。
