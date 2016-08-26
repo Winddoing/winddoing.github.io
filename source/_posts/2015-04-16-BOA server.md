@@ -25,7 +25,7 @@ Boa是一种非常小巧的Web服务器，其可执行代码只有大约60KB左�
 
 ### 2.修改文件
 
-####(1)修改boa-0.94.13的 src/compat.h文件
+#### (1)修改boa-0.94.13的 src/compat.h文件
 　　找到
 
 		#define TIMEZONE_OFFSET(foo) foo##->tm_gmtoff
@@ -38,7 +38,7 @@ Boa是一种非常小巧的Web服务器，其可执行代码只有大约60KB左�
 
 		util.c:100:1: error: pasting "t" and "->" does not give a valid preprocessing token make: *** [util.o] 错误 1
 
-####(2)修改boa-0.94.13的src/log.c
+#### (2)修改boa-0.94.13的src/log.c
 
 　　注释掉
 
@@ -56,15 +56,17 @@ Boa是一种非常小巧的Web服务器，其可执行代码只有大约60KB左�
 
 		log.c:73 unable to dup2 the error log:bad file deor
 
-####(3)修改boa-0.94.13的src/boa.c
+#### (3)修改boa-0.94.13的src/boa.c
 
 　　注释掉下面两句话：
+
 		if (passwdbuf == NULL) {
 			DIE(”getpwuid”);
 		}
 		if (initgroups(passwdbuf->pw_name, passwdbuf->pw_gid) == -1) {
 			DIE(”initgroups”);
 		}
+
 　　为
 
 		#if 0
@@ -93,13 +95,13 @@ Boa是一种非常小巧的Web服务器，其可执行代码只有大约60KB左�
 		#endif
 　　否则会出现问题：
 		boa.c:228 - icky Linux kernel bug!: No such file or directory
-###3、生成Makefile文件
+### 3、生成Makefile文件
 　　执行：
 
 　　#cd /opt/FriendlyARM/boa/boa-0.94.13/src
 　　#./configure
 
-###4、修改Makefile
+### 4、修改Makefile
 
 　　#cd /opt/FriendlyARM/boa/boa-0.94.13/src
 
@@ -108,7 +110,7 @@ Boa是一种非常小巧的Web服务器，其可执行代码只有大约60KB左�
 　　修改CC = gcc 为 CC = arm-linux-gcc
 　　修改CPP = gcc -E 为 CC = arm-linux-gcc -E
 
-###5、编译
+### 5、编译
 
 　　还是在/opt/FriendlyARM/boa/boa-0.94.13/src目录下
 
@@ -126,45 +128,45 @@ Boa是一种非常小巧的Web服务器，其可执行代码只有大约60KB左�
 
 　　可以发现boa的大小前后差距很大这为我们节省了很大的空间
 
-###6、Boa的配置
+### 6、Boa的配置
 
 　　这一步的工作也在电脑虚拟机上完成。
 　　在boa-0.94.13目录下已有一个示例boa.conf，可以在其基础上进行修改。如下：
 
 　　#vi boa.conf
 
-####(1)Group的修改
+#### (1)Group的修改
 
 　　修改 Group nogroup
 　　为 Group 0
 
-####(2)user的修改
+#### (2)user的修改
 
 　　修改 User nobody
 　　为 User 0
     或者统一设置为
         User root
         Group root
-####(3)ScriptAlias的修改
+#### (3)ScriptAlias的修改
 
 　　修改ScriptAlias/cgi-bin/ /usr/lib/cgi-bin/
 　　为 ScriptAlias/cgi-bin/ /www/cgi-bin/
 
-####(5)DoucmentRoot的修改
+#### (5)DoucmentRoot的修改
 　　修改DoucmentRoot /var/www
 　　为DoucmentRoot /www
 
-####(6)ServerName的设置
+#### (6)ServerName的设置
 　　修改#ServerName www.your.org.here
 　　为 ServerName www.your.org.here
 　　否则会出现错误“gethostbyname::No such file or directory”
 
-####(7)AccessLog修改
+#### (7)AccessLog修改
 　　修改AccessLog /var/log/boa/access_log
 　　为#AccessLog /var/log/boa/access_log
 否则会出现错误提示：“unable to dup2 the error log: Bad file deor”
 
-###7、以下配置和boa.conf的配置有关，都是在mini2440开发板的ARM根文件系统中创建：
+### 7、以下配置和boa.conf的配置有关，都是在mini2440开发板的ARM根文件系统中创建：
 　　创建目录/etc/boa并且把主机的boa可执行文件（/opt/FriendlyARM/boa/boa-0.94.13/src） 和 boa.conf（/opt/FriendlyARM/boa/boa-0.94.13）拷贝到这个目录下
 
 　　#mkdir /etc/boa
@@ -197,7 +199,7 @@ Boa是一种非常小巧的Web服务器，其可执行代码只有大约60KB左�
 
 		#mkdir /var/log
 
-###8.执行boa服务器
+### 8.执行boa服务器
 
 进入/etc/boa目录，修改boa的执行权限，
 
@@ -205,4 +207,4 @@ Boa是一种非常小巧的Web服务器，其可执行代码只有大约60KB左�
 		#./boa
 开启boa
 
-###9.在windows xp ie输入开发板的ip（http://192.168.1.230）地址，即可访问到mini2440的默认网页。
+### 9.在windows xp ie输入开发板的ip（http://192.168.1.230）地址，即可访问到mini2440的默认网页。
