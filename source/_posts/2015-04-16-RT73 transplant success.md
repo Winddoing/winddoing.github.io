@@ -4,7 +4,7 @@ layout: post
 title: RT73网卡的移植
 thread: 164
 categories: ARM
-tags: RT73, ARM, 网卡
+tags: [RT73, ARM, 网卡]
 ---
 
 
