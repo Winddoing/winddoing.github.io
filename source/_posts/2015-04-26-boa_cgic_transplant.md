@@ -4,7 +4,7 @@ layout: post
 title: BOA服务器的配置与cgic移植
 thread: 166
 categories: ARM
-tags: Boa; cgic
+tags: boa, cgic
 ---
 
 上次在开发板上成功移植完boa服务器，最近使用C语言进行CGI编程，只在宿主机上搭建CGI的测试环境。
