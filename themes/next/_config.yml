@@ -18,7 +18,7 @@ feed:
     limit: 20
 
 # Specify the date when the site was setup
-since: 2016
+since: 2014
 
 # Canonical, set a canonical link tag in your hexo, you could use it for your SEO of blog.
 # See: https://support.google.com/webmasters/answer/139066
