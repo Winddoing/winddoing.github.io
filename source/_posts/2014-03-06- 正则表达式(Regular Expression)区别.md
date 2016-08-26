@@ -4,7 +4,7 @@ layout: post
 title: 正则表达式(Regular Expression) [^,*]与[^,]*区别
 thread: 166
 categories: 正则表达式
-tags: shell
+tags: Shell
 ---
 
 
