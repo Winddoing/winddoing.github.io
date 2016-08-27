@@ -29,7 +29,7 @@ add_commit() {
 	read n_commit
 
 	if [ -n $n_commit ]; then
-		exit 1;
+		return 1;
 	fi
 
 	COMMIT=$n_commit
@@ -51,11 +51,12 @@ manual_enter(){
 	tmp=$enter_x
 
 	echo "------------[$tmp]"
-	if [ $tmp == e ]; then
+	if [ x$tmp = xe ] || [ x$tmp = xeditor ]; then
 		add_commit
 	fi
 }
 
+echo "xxxxxxxxxxxxx=$COMMIT"
 while getopts b:hm:r:y ops
 do
 	case $ops in
