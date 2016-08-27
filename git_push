@@ -26,7 +26,7 @@ usage()
 
 add_commit() {
 
-	read -p "Add new commit<e.g \"new commit\">:" n_commit
+	read -p "Add new commit<e.g \"new_commit\">:" n_commit
 
 	if [ -n $n_commit ]; then
 		COMMIT=$n_commit
