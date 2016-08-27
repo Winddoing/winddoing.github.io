@@ -47,7 +47,7 @@ manual_enter(){
 	done
 
 	echo "------------[$enter_x]"
-	if [[ "x"$enter_x -eq "xe" ]]; then
+	if "x$enter_x" -eq "xe"; then
 		add_commit
 	fi
 }
