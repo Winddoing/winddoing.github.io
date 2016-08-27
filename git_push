@@ -40,13 +40,13 @@ manual_enter(){
 	read enter_x
 
 	while [ x$enter_x != xyes ] && [ x$enter_x != xy ] && [ x$enter_x != x ] && \
-		[ x$enter_x == xeditor ] && [ x$enter_x == xe ]
+		[ x$enter_x != xeditor ] && [ x$enter_x != xe ]
 	do
 		echo -n "Whether submit changes or add commit:[yes/y],[editor/e]"
 		read enter_x
 	done
 
-	if [ x$enter_x == xE ] || [ x$enter_x == xe ]; then
+	if [ x$enter_x == xeditor ] || [ x$enter_x == xe ]; then
 		add_commit
 	fi
 }
