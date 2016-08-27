@@ -36,6 +36,8 @@ add_commit() {
 }
 
 manual_enter(){
+	local tmp
+
 	echo -n "Whether submit changes or add commit:[yes/y],[editor/e]"
 	read enter_x
 
@@ -46,8 +48,10 @@ manual_enter(){
 		read enter_x
 	done
 
-	echo "------------[$enter_x]"
-	if "x$enter_x" -eq "xe"; then
+	tmp=$enter_x
+
+	echo "------------[$tmp]"
+	if [ $tmp == e ]; then
 		add_commit
 	fi
 }
