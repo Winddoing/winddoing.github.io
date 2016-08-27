@@ -25,14 +25,14 @@ usage()
 }
 
 add_commit() {
-	echo -n "Add new commit:"
-	read n_commit
+
+	read -p "Add new commit:" n_commit
 
 	if [ -n $n_commit ]; then
-		return 1;
+		COMMIT=$n_commit
 	fi
 
-	COMMIT=$n_commit
+	return 1;
 }
 
 manual_enter(){
@@ -44,48 +44,54 @@ manual_enter(){
 	while [ x$enter_x != xyes ] && [ x$enter_x != xy ] && [ x$enter_x != x ] && \
 		[ x$enter_x != xeditor ] && [ x$enter_x != xe ]
 	do
-		echo -n "Whether submit changes or add commit:[yes/y],[editor/e]"
-		read enter_x
+		read -p "Whether submit changes or add commit:[yes/y],[editor/e]" enter_x
 	done
 
 	tmp=$enter_x
 
-	echo "------------[$tmp]"
 	if [ x$tmp = xe ] || [ x$tmp = xeditor ]; then
 		add_commit
 	fi
 }
 
-echo "xxxxxxxxxxxxx=$COMMIT"
-while getopts b:hm:r:y ops
-do
-	case $ops in
-		b)
-			BRANCH=$OPTARG ;;
-		r)
-			REMOTE=$OPTARG ;;
-		m)
-			COMMIT=$OPTARG ;;
-		y)
-			MANUAL="yes" ;;
-		h)
-			usage ;;
-		?)
-			usage
-			exit 1
-		;;
-	esac
-done
+exec_mode() {
+	if [ x$1 != xyes ];then
+		manual_enter
+	else
+		echo " Whether submit changes:[yes/y] yes"
+	fi
+}
 
+arg_parse() {
+	while getopts b:hm:r:y ops
+	do
+		case $ops in
+			b)
+				BRANCH=$OPTARG ;;
+			r)
+				REMOTE=$OPTARG ;;
+			m)
+				COMMIT=$OPTARG ;;
+			y)
+				MANUAL="yes" ;;
+			h)
+				usage ;;
+			?)
+				usage
+				exit 1
+				;;
+		esac
+	done
+}
+
+echo "[0]Push code ..."
+arg_parse
 
 echo "[1]View change file ..."
 git status
 
-if [ x$MANUAL != xyes ];then
-	manual_enter
-else
-	echo " Whether submit changes:[yes/y] yes"
-fi
+#select execute mode
+exec_mode $MANUAL
 
 echo "[2]Add all change ..."
 git add -A
