@@ -24,8 +24,19 @@ usage()
 	exit 1;
 }
 
+add_commit() {
+	echo -n "Add new commit:"
+	read n_commit
+
+	if [ -n $n_commit ]; then
+		exit 1;
+	fi
+
+	COMMIT=$n_commit
+}
+
 manual_enter(){
-	echo -n "Whether submit changes:[yes/y]"
+	echo -n "Whether submit changes or add commit:[yes/y],[edit/e]"
 	read enter_x
 
 	while [ x$enter_x != xyes ] && [ x$enter_x != xy ] && [ x$enter_x != x ]
@@ -33,6 +44,10 @@ manual_enter(){
 		echo -n "Whether submit changes:[yes/y]"
 		read enter_x
 	done
+
+	if [ x$enter_x == xE ] || [ x$enter_x == xe ]; then
+		add_commit
+	fi
 }
 
 while getopts b:hm:r:y ops
