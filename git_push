@@ -46,6 +46,7 @@ manual_enter(){
 		read enter_x
 	done
 
+	echo "------------[$enter_x]"
 	if [ x$enter_x -eq xeditor ] || [ x$enter_x -eq xe ]; then
 		add_commit
 	fi
