@@ -20,9 +20,13 @@ tags: [Cortex-A8, uboot, linux, bulidroot, ARM]
 ## 交叉编译工具
 
 作为嵌入式开发交叉编译工具链是必不可少的，主要是为了在宿主机（PC）上，开发目标机（arm开发板）中可以运行的程序。
+
 ### 下载
+
 这里选择[gcc-arm-none-eabi-5_4-2016q2-20160622-linux.tar.bz2](https://launchpadlibrarian.net/268330503/gcc-arm-none-eabi-5_4-2016q2-20160622-linux.tar.bz2)
+
 ### 配置
+
 由于PC中从在多个交叉编译工具链，这里采用脚本envsetup.sh设置，每进入一个终端需要运行其脚本进行配置，方可使用该编译工具链。
 ``` shell
 #!/bin/bash
@@ -43,7 +47,9 @@ source envsetup.sh
 ## uboot移植
 
 ### 编译
+
 1. 查找Cortex-A8相关的README，进行参考，全局搜索
+
 ``` shell
 grep "Cortex-A8" . -rn
 ```
