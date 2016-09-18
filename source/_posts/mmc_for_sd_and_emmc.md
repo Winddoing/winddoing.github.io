@@ -106,6 +106,27 @@ unsigned long		private[0] ____cacheline_aligned;
 
 ## 数据读写
 
+在mmc驱动的核心是数据的读写，根据sd协议数据的读写流程基本一致。
+
+>cmd + data
+>cmd_line   先发送读写命令
+>data_line  进行数据传输
+
+### 读流程
+
+数据读命令:CMD17和CMD18（single block和multiple block）
+![数据读](/images/mmc_single_read.png)
+**注**:多个block和多根数据线读，流程基本一致，主要是在数据传输时，将读的数据分配给了4根数据线。
+
+### 写流程
+
+数据读命令:CMD24和CMD25（single block和multiple block）
+![数据写](/images/mmc_single_write.png)
+
+>在写的过程中由于控制器需要等到卡将数据全部写完，才视一次传输完成。而在卡写的过程中，
+>只有数据完全写入后，标志数据传输完成的busy位才会返回。同时返回的还有此次写数据后的状态status(CRC校验值)。
+>如果CRC的校验值大于"010",将代表数据传输失败（如果status为“101”， 表示写数据出现CRC错误）
+
 ## 总结
 
 ## 附：相关简写
