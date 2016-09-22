@@ -1,5 +1,5 @@
 ---
-title: 【转】pyton练习项目
+title: 【转】python练习项目
 date: 2016-09-10 23:07:24
 categories: Python
 tags: [python]
