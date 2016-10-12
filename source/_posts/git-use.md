@@ -11,7 +11,8 @@ tags: [Git]
 ### 1. 创建本地git库
      mkdir test.git
 进入test.git
-     git init --bare --shared
+
+		 git init --bare --shared
 
 ### 2. 创建分支
      git branch branch_name
