@@ -12,8 +12,7 @@ tags: [Cortex-A8, uboot, linux, bulidroot, ARM]
 ## 实验环境：
 * 开发板：Cortex-A8
 * 开发系统：Linux machine 4.2.0-27-generic #32~14.04.1-Ubuntu SMP
-
-~~* uboot：u-boot-2016-07~~
+* ~~uboot：u-boot-2016-07~~
 * uboot：u-boot-v2014.07-rc4
 * linux：linux-4.0.9
 * 文件系统：buildroot
@@ -74,7 +73,7 @@ grep "Cortex-A8" . -rn
 
 #### 改变uboot版本
 
-最新的uboot采用图形界面的配置方式及增加了设备树的配置，由于对这两方面都不太了解尤其设备树，根据自己比较熟悉的使用方式，选择u-boot-v2014.07-rc4。设备树等uboot可以正常启动后在深入学习添加。
+>最新的uboot采用图形界面的配置方式及增加了设备树的配置，由于对这两方面都不太了解尤其设备树，根据自己比较熟悉的使用方式，选择u-boot-v2014.07-rc4。设备树等uboot可以正常启动后在深入学习添加。
 
 #### 选择默认配置编译
 
