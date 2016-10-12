@@ -12,7 +12,9 @@ tags: [Cortex-A8, uboot, linux, bulidroot, ARM]
 ## 实验环境：
 * 开发板：Cortex-A8
 * 开发系统：Linux machine 4.2.0-27-generic #32~14.04.1-Ubuntu SMP
-* uboot：u-boot-2016-07
+
+~~* uboot：u-boot-2016-07~~
+* uboot：u-boot-v2014.07-rc4
 * linux：linux-4.0.9
 * 文件系统：buildroot
 >在实际的操作中可能会有所变动，不断更新
@@ -69,3 +71,25 @@ grep "Cortex-A8" . -rn
 ```
 为了以后方便使用可将以上两句命令添加到envsetup.sh脚本中。
 参考：./README --- 4963 Building the Software:
+
+#### 改变uboot版本
+
+最新的uboot采用图形界面的配置方式及增加了设备树的配置，由于对这两方面都不太了解尤其设备树，根据自己比较熟悉的使用方式，选择u-boot-v2014.07-rc4。设备树等uboot可以正常启动后在深入学习添加。
+
+#### 选择默认配置编译
+
+1. 选择配置
+
+根据README在boards.cfg选择smdkc100，后续在此基础上进行移植
+2. 指定编译器
+
+根据上文（3. 指定交叉编译工具链）即可
+3. 编译
+
+```
+make smdkc100_config
+make
+```
+顺利编译通过，接下来将添加spl和uboot
+
+### 添加SPL阶段
