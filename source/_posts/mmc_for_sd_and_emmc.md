@@ -123,9 +123,62 @@ unsigned long		private[0] ____cacheline_aligned;
 数据读命令:CMD24和CMD25（single block和multiple block）
 ![数据写](/images/mmc_single_write.png)
 
+注：
+
+S----start 起始位<0>  
+E----end   结束位<1>  
+
+| status | 说明 |
+| ------ | ---- |
+|“010”   | 数据被接受写入卡中 |
+|“101”   | 由于CRC错误，数据不被卡接受 |
+|“110”   | 由于写错误，数据不被卡接受 |
+
 >在写的过程中由于控制器需要等到卡将数据全部写完，才视一次传输完成。而在卡写的过程中，
 >只有数据完全写入后，标志数据传输完成的busy位才会返回。同时返回的还有此次写数据后的状态status(CRC校验值)。
 >如果CRC的校验值大于"010",将代表数据传输失败（如果status为“101”， 表示写数据出现CRC错误）
+
+## mmc中的request处理
+
+在mmc子系统中将msc控制器和卡初始化完成后，进入数据传输阶段。在此阶段主要维护一个属于当前控制器的一个线程kthread_run(mmc_queue_thread, mq, "mmcqd/%d%s",host->index, subname ? subname : "")，mmc_queue_thread线程在一个while(1)循环中现实对block层的request请求队列的数据处理。
+
+### 维护mmc_queue_thread线程状态
+
+1. 进入该线程将其设置为set_current_state(TASK_INTERRUPTIBLE)
+2. 处理request请求数据，set_current_state(TASK_RUNNING)
+3. 数据处理完毕后，如果没有需要处理的数据，调用schedule()
+
+### Block层的request请求队列
+
+请求队列的组成方式：
+![request请求队列](/images/block_request_queue.png)
+具体的实现方式在block设备驱动继续。
+
+### request请求队列的处理
+
+1. 通过blk_fetch_request(q)从request请求队列中取出一个request请求。
+2. 如果request请求队列中有需要处理的数据，调用issue_fn(mq, req)的回调函数进行数据处理。
+
+### 一个request请求的处理流程
+
+这里以multiple block的读写为例进行说明：
+#### 写数据的处理
+
+在一个写操作中的request基本可以分为三类:
+* a. 使用写命令CMD25写1024block的数据写操作
+* b. 先进行数据同步操作，接着使用cmd13获取卡的状态,判断没有错误后,再使用CMD25写1024block数据
+* c. 先进行数据同步操作，再单独发送cmd13命令检测卡的状态
+
+>注: 一次request请求所传输的数据量有block层设置.在注册card层初始化mmc_queue时,根据block的设置进行配置.
+mmc_blk_probe->mmc_blk_alloc->mmc_blk_alloc_req->mmc_init_queue->blk_queue_max_hw_sectors->blk_limits_max_hw_sectors->BLK_DEF_MAX_SECTORS=1024
+
+#### 读数据的处理
+
+在进行读操作时的request,分为两类:
+* a. 携带数据和读命令的request， 及CMD18 + data（512block）
+* b. 进行数据同步的request
+
+
 
 ## 总结
 
