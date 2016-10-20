@@ -35,3 +35,8 @@ int main()
 ``` bash
 $ pwd
 ```
+
+### 站点设置
+
+[配置：](http://theme-next.iissnan.com/)
+[图标选择：](http://fontawesome.io/icons/)
