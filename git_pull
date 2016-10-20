@@ -1,0 +1,6 @@
+#!/bin/sh
+
+BRANCH=web_source
+REMOTE=origin
+echo "=======git pull======="
+git pull $REMOTE $BRANCH

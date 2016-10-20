@@ -91,4 +91,14 @@ make
 ```
 顺利编译通过，接下来将添加spl和uboot
 
+#### 添加自己配置
+
+1. 添加配置文件s5pv210.h
+        cp include/configs/smdkc100.h include/configs/s5pv210.h
+
+2. 添加编译配置boards.cfg
+        Active  arm         armv7          s5pc1xx     samsung   smdkc100   s5pv210      Winddoing <winddoing@sina.cn>
+
 ### 添加SPL阶段
+
+在uboot中SPL阶段的控制是通过spl/Makefile中的CONFIG_SPL_BUILD宏控制
