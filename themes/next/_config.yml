@@ -6,7 +6,7 @@
 favicon: /favicon.ico
 
 # Set default keywords (Use a comma to separate)
-keywords: "Hexo, NexT, Winddoing,Ç¶ÈëÊ½,Linux,shell,CÓïÑÔ,ÍøÂç"
+keywords: "Hexo, NexT, Winddoing,åµŒå…¥å¼,Linux,shell,Cè¯­è¨€,ç½‘ç»œ"
 
 # Set rss to false to disable feed link.
 # Leave rss as empty to use site's feed link.
@@ -33,7 +33,7 @@ canonical: true
 # When running the site in a subdirectory (e.g. domain.tld/blog), remove the leading slash (/archives -> archives)
 menu:
   home: /
-  #categories: /categories
+  categories: /categories
   #about: /about
   archives: /archives
   tags: /tags
@@ -133,7 +133,7 @@ font:
 links_title: Links
 links:
   CSDN: http://blog.csdn.net/sdreamq
-  ÎÏÎÑ¿Æ¼¼: http://www.wowotech.net/
+  èœ—çªç§‘æŠ€: http://www.wowotech.net/
 
 
 # Social Links Icons
@@ -237,7 +237,7 @@ auto_excerpt:
 #wechat_subscriber:
     #enabled: true
     #qcode: /images/weixin.jpg
-    #description: »¶Ó­¹Ø×¢Öñ·çÔÂÓ°
+    #description: ï¿½ï¿½Ó­ï¿½ï¿½×¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó°
 
 
 
@@ -334,12 +334,12 @@ busuanzi_count:
   enable: true
   # custom uv span for the whole site
   site_uv: true
-  site_uv_header: ±¾Õ¾·Ã¿ÍÊı
-  site_uv_footer: ÈË´Î
+  site_uv_header: æœ¬ç«™è®¿å®¢æ•°
+  site_uv_footer: äººæ¬¡
   # custom pv span for the whole site
   site_pv: true
-  site_pv_header: ±¾Õ¾×Ü·ÃÎÊÁ¿
-  site_pv_footer: ´Î
+  site_pv_header: æœ¬ç«™æ€»è®¿é—®é‡
+  site_pv_footer: æ¬¡
   # custom pv span for one page only
   page_pv: true
   page_pv_header: <i class="fa fa-file-o"></i>
