@@ -93,9 +93,3 @@
     }
   };
 </script>
-
-
-{# Canonical, good for google search engine (SEO) : https://support.google.com/webmasters/answer/139066 #}
-{% if theme.canonical %}
-  <link rel="canonical" href="{{ config.url }}/{{ page.canonical_path.replace('index.html', '') }}"/>
-{% endif %}

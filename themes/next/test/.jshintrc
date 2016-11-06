@@ -4,6 +4,7 @@
   "eqeqeq": true,
   "undef": true,
   "newcap": true,
+  "undef": true,
   "unused": true,
   "laxcomma": false,
   "asi": false,
