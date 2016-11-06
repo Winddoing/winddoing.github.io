@@ -8,6 +8,29 @@ tags: [MMC, SD, dd]
 测试sd卡的读写速度
 
 <!--- more --->
+## mmc驱动测速
+
+结合mmc子系统提供的测试列表进行速度测试和其他相关测试。
+
+### 添加配置
+
+```
+->DeviceDriver
+    -> MMC/SD/SDIO card support (MMC [=y])
+    [*]MMC host test driver
+```
+
+### 绑定
+
+编译并启动新编译的linux内核，进入文件系统。
+
+### 挂载debugfs
+
+```
+# mount -t debugfs none /mnt
+```
+
+
 
 ## 测试命令  dd
 
