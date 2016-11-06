@@ -37,7 +37,7 @@ menu:
   #about: /about
   archives: /archives
   tags: /tags
-  schedule: /schedule
+  #schedule: /schedule
   #commonweal: /404.html
   #project: /project
 
@@ -132,6 +132,7 @@ font:
 #social:
 links_title: Links
 links:
+  嵌入式相关: https://winddoing.gitbooks.io/embedded_linux_notes/content/
   CSDN: http://blog.csdn.net/sdreamq
   蜗窝科技: http://www.wowotech.net/
 
