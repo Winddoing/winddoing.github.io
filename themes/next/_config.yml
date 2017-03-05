@@ -243,7 +243,7 @@ auto_excerpt:
     #description: ��ӭ��ע������Ӱ
 
 
-reward_comment: 坚持原创技术分享，您的支持将鼓励我继续创作！
+#reward_comment: 坚持原创技术分享，您的支持将鼓励我继续创作！
 #wechatpay: /path/to/wechat-reward-image
 #alipay: /path/to/alipay-reward-image
 
