@@ -90,7 +90,7 @@ font:
   global:
     # external: true will load this font family from host.
     external: true
-    family: Monda
+    family: Georgia
 
   # Font settings for Headlines (h1, h2, h3, h4, h5, h6)
   # Fallback to `global` font settings.
@@ -102,7 +102,7 @@ font:
   # Fallback to `global` font settings.
   posts:
     external: true
-    family: Georgia
+    family:
 
   # Font settings for Logo
   # Fallback to `global` font settings.
@@ -116,7 +116,7 @@ font:
   codes:
     external: true
     family: Monaco
-    size: 13px
+    size: 15px
 
 
 
