@@ -59,7 +59,7 @@ mmc子系统是将msc（mobile storage controller）控制器及其该控制器�
 
 ### mmc_host
   该结构体主要为msc控制器所抽象化的一个对象，用于对当前控制器的描述。
-```
+``` C
 struct mmc_host {
 struct device		*parent;
 struct device		class_dev;
