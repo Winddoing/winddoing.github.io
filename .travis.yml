@@ -17,7 +17,7 @@ before_script:
     - sed -i'' "/^ *repo/s~github\.com~${REPO_TOKEN}@github.com~" _config.yml
 
 install:
-    - npm install hexo-generator-search --save
+    - npm install  hexo-generator-search --save
     - npm install  hexo-generator-feed --save
 
 cache:
