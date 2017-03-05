@@ -102,7 +102,7 @@ font:
   # Fallback to `global` font settings.
   posts:
     external: true
-    family:
+    family: Georgia
 
   # Font settings for Logo
   # Fallback to `global` font settings.
@@ -115,8 +115,8 @@ font:
   # Font settings for <code> and code blocks.
   codes:
     external: true
-    family: PT Mono
-    size:
+    family: Monaco
+    size: 13px
 
 
 
