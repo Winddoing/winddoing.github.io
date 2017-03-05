@@ -96,7 +96,7 @@ font:
   # Fallback to `global` font settings.
   headings:
     external: true
-    family: Roboto Slab
+    family: Microsoft YaHei
 
   # Font settings for posts
   # Fallback to `global` font settings.
@@ -110,7 +110,7 @@ font:
   logo:
     external: true
     family: Lobster Two
-    size: 24
+    size: 22
 
   # Font settings for <code> and code blocks.
   codes:
