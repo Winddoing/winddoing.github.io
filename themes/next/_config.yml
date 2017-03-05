@@ -6,7 +6,7 @@
 favicon: /favicon.ico
 
 # Set default keywords (Use a comma to separate)
-keywords: "Hexo, NexT, Winddoing,嵌入式,Linux,shell,C语言,网络"
+keywords: "Hexo, NexT, Winddoing,嵌入式,Linux,shell,C语言,网络， 个人博客，专注嵌入式系统开发， mips"
 
 # Set rss to false to disable feed link.
 # Leave rss as empty to use site's feed link.
@@ -168,8 +168,7 @@ toc:
   enable: true
 
   # Automatically add list number to toc.
-  number: true
-
+  number: false
 
 # Creative Commons 4.0 International License.
 # http://creativecommons.org/
