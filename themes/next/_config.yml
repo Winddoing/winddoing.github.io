@@ -130,11 +130,11 @@ font:
 # Key is the link label showing to end users.
 # Value is the target link (E.g. GitHub: https://github.com/iissnan)
 #social:
-#links_title: Links
-#links:
-#  嵌入式相关: https://winddoing.gitbooks.io/embedded_linux_notes/content/
-#  CSDN: http://blog.csdn.net/sdreamq
-#  蜗窝科技: http://www.wowotech.net/
+links_title: Links
+links:
+  嵌入式相关: https://winddoing.gitbooks.io/embedded_linux_notes/content/
+  CSDN: http://blog.csdn.net/sdreamq
+  蜗窝科技: http://www.wowotech.net/
 
 
 # Social Links Icons
@@ -194,14 +194,12 @@ sidebar:
 
 
 # Blogrolls
-links_title: Links
-links_layout: block
-links_layout: inline
-links:
+#links_title: Links
+#links_layout: block
+#links_layout: inline
+#links:
   #Title: http://example.com/
-  嵌入式相关: https://winddoing.gitbooks.io/embedded_linux_notes/content/
-  CSDN: http://blog.csdn.net/sdreamq
-  蜗窝科技: http://www.wowotech.net/
+
 
 
 # ---------------------------------------------------------------
@@ -243,7 +241,7 @@ auto_excerpt:
     #description: ��ӭ��ע������Ӱ
 
 
-#reward_comment: 坚持原创技术分享，您的支持将鼓励我继续创作！
+reward_comment: 坚持原创技术分享，您的支持将鼓励我继续创作！
 #wechatpay: /path/to/wechat-reward-image
 #alipay: /path/to/alipay-reward-image
 
