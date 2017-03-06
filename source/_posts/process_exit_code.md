@@ -157,7 +157,7 @@ This is father, his count is: 1 (0x7fff54e86d1c), his pid is: 4499, son exit sta
 ```
 此时子进程的`退出码=8`，而`signal=b`
 
-#### 信号
+### 信号
 
 linux内核中x86的信号列表：
 ``` C
