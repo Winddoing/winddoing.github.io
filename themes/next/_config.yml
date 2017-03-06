@@ -168,7 +168,7 @@ toc:
   enable: true
 
   # Automatically add list number to toc.
-  number: false
+  number: true
 
 # Creative Commons 4.0 International License.
 # http://creativecommons.org/
