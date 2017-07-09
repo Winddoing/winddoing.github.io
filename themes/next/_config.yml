@@ -205,10 +205,10 @@ sidebar:
   offset_float: 0
 
   # Back to top in sidebar
-  b2t: false
+  b2t: true
 
   # Scroll percent label in b2t button
-  scrollpercent: false
+  scrollpercent: true
 
 
 # Blog rolls
@@ -246,8 +246,8 @@ post_meta:
 # Dependencies: https://github.com/willin/hexo-wordcount
 post_wordcount:
   item_text: true
-  wordcount: false
-  min2read: false
+  wordcount: true
+  min2read: true
 
 # Wechat Subscriber
 #wechat_subscriber:
@@ -257,7 +257,7 @@ post_wordcount:
 
 # Declare license on posts
 post_copyright:
-  enable: false
+  enable: true
   license: CC BY-NC-SA 3.0
   license_url: https://creativecommons.org/licenses/by-nc-sa/3.0/
 
@@ -435,7 +435,7 @@ busuanzi_count:
 
 
 # Enable baidu push so that the blog will push the url to baidu automatically which is very helpful for SEO
-baidu_push: false
+baidu_push: true
 
 # Google Calendar
 # Share your recent schedule to others via calendar page
@@ -467,12 +467,12 @@ algolia_search:
 
 # Local search
 local_search:
-  enable: false
+  enable: true
 
 # External URL with BASE64 encrypt & decrypt
 # Usage: {% exturl text url "title" %}
 # Alias: {% extlink text url "title" %}
-exturl: false
+exturl: true
 
 
 #! ---------------------------------------------------------------
@@ -487,7 +487,7 @@ use_motion: true
 fancybox: true
 
 # Canvas-nest
-canvas_nest: false
+canvas_nest: true
 
 # Script Vendors.
 # Set a CDN address for the vendor you want to customize.
