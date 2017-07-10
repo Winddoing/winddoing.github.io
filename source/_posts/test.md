@@ -1,42 +1,45 @@
 ---
-title: Test
-date: 2016-08-18 23:07:24
-categories: Test
-tags: [Travis-CI, Test]
+title: Audio驱动总结--ALSA
+date: 2016-07-10 23:07:24
+categories: 驱动
+tags: [Audio, alsa, 驱动]
 ---
 
 
-## Test
-
-This is a test page!
+接触Audio的这几个月,对控制的理解和对alsa框架的理解其中学习的进行总结
 
 <!--more-->
 
-![test](/images/code_c++.jpg)
+## 音频的数据
 
 
-### 站点构建：[![Build Status](https://travis-ci.org/Winddoing/Winddoing.github.io.svg?branch=web_source)](https://travis-ci.org/Winddoing/Winddoing.github.io)
+## 数据流的处理
 
-### C
 
-```C
-#include <stdio.h>
+## alsa的基本框架
 
-int main()
-{
-	printf("Hello World!\n");
 
-	return 0;
-}
-```
+## PCM设备
 
-### shell
+### 录
 
-``` bash
-$ pwd
-```
 
-### 站点设置
+### 放
 
-[配置：](http://theme-next.iissnan.com/)
-[图标选择：](http://fontawesome.io/icons/)
+
+## control设备
+
+
+## codec
+
+
+## 数据路由
+
+
+## amixer的设置
+
+
+
+
+
+
