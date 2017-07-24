@@ -100,13 +100,13 @@ font:
   global:
     # external: true will load this font family from host.
     external: true
-    family: Microsoft YaHei
+    family: Lato
 
   # Font settings for Headlines (h1, h2, h3, h4, h5, h6)
   # Fallback to `global` font settings.
   headings:
     external: true
-    family: Microsoft YaHei
+    family:
 
   # Font settings for posts
   # Fallback to `global` font settings.
@@ -119,14 +119,14 @@ font:
   # The `size` option use `px` as unit
   logo:
     external: true
-    family: Lobster Two
-    size: 22
+    family:
+    size:
 
   # Font settings for <code> and code blocks.
   codes:
     external: true
-    family: Monaco
-    size: 12
+    family:
+    size:
 
 
 
