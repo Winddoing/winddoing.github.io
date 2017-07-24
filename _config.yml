@@ -73,6 +73,12 @@ tag_generator:
 search:
   path: search.xml
   field: post
+
+sitemap:
+path: sitemap.xml
+baidusitemap:
+path: baidusitemap.xml
+
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
