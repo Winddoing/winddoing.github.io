@@ -1,7 +1,7 @@
 ---
 title: 等待队列
 date: 2016-10-20 23:07:24
-categories: kernel
+categories: Linux内核
 tags: [process, queue]
 ---
 

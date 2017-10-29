@@ -1,7 +1,7 @@
 ---
 title: Linux内核中的read_mostly
 date: 2017-10-24 23:07:24
-categories: kernel
+categories: Linux内核
 tags: [编译]
 ---
 

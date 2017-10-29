@@ -1,7 +1,7 @@
 ---
 title: uImage dump成反汇编
 date: 2017-10-28 23:07:24
-categories: kernel
+categories: Linux内核
 tags: [umage, 反汇编]
 ---
 
