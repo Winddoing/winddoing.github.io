@@ -1,7 +1,7 @@
 ---
 title: Test
 date: 2016-08-18 23:07:24
-categories: Test
+categories: 随笔
 tags: [Travis-CI, Test]
 ---
 
