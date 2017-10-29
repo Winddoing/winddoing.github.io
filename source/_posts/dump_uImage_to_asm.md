@@ -39,7 +39,7 @@ gunzip Image.gz
 
 >通过gcc的工具将二进制的指令码反汇编,CPU的取指是以word进行,也就是每一个wrod对应一条指令
 
-```
+```C
 #include<stdio.h>
 
 int main(int argc, char *argv[])
@@ -72,7 +72,7 @@ gcc m.c -o m
 ```
 Image.c
 
-```
+``` C
 #include <stdio.h>
 int main(int argc, char *argv[])
 {	asm volatile (		".word 0x00000000   \t\n"
@@ -119,7 +119,7 @@ Image.S
 
 ## 将PC指针替换成内核入口地址
 
-```
+```python
 #!/usr/bin/env python
 
 fp = open("Image.S","r")
