@@ -102,3 +102,39 @@ make
 ### 添加SPL阶段
 
 在uboot中SPL阶段的控制是通过spl/Makefile中的CONFIG_SPL_BUILD宏控制
+
+
+## 使用最新的uboot
+
+### 环境
+
+1. 指定编译工具链
+```
+export CROSS_COMPILE
+```
+2. 使用相关配置测试工具链
+```
+$make s5pc210_universal_defconfig
+$make -j12
+```
+
+### 添加自定义配置
+
+在`s5pc210_universal_defconfig`配置基础上修改。
+
+#### 添加配置文件
+
+1. 拷贝现有相关配置
+```
+$cp include/configs/s5pc210_universal.h include/configs/s5pc210_a8.h
+$cp configs/s5pc210_universal_defconfig configs/s5pc210_a8_defconfig
+```
+2.添加板级
+```
+board/samsung/cortex-a8/
+configs/s5pc210_a8_defconfig
+include/configs/s5pc210_a8.h
+```
+#### 添加SPL
+
+### 错误

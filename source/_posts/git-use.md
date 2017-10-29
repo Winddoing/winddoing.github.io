@@ -6,7 +6,7 @@ tags: [Git]
 ---
 
 记录平时对git的使用方法和技巧
-
+[TOC]
 <!--- more --->
 ### 1. 创建本地git库
      mkdir test.git
