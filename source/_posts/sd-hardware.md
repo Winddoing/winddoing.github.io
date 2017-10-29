@@ -1,7 +1,7 @@
 ---
 title: SD卡的硬件电路及相关属性
 date: 2016-10-21 23:07:24
-categories: SD
+categories: 设备驱动
 tags: [SD, 电路]
 ---
 

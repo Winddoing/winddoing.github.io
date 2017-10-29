@@ -3,7 +3,7 @@ date: 2015-05-06 07:49
 layout: post
 title: mini2440基于boa服务器通过WEB控制GPIO
 thread: 166
-categories: ARM
+categories: 系统应用
 tags: [S3C2440, Boa, Web]
 ---
 

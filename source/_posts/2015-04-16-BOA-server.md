@@ -3,7 +3,7 @@ date: 2015-04-16 03:49
 layout: post
 title: 【转】Micro2440 移植boa服务器
 thread: 166
-categories: ARM
+categories: 系统应用
 tags: [boa, ARM]
 ---
 

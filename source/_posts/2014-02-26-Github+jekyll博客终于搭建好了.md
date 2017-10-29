@@ -3,7 +3,7 @@ date: 2014-02-26
 layout: post
 title: Github搭建博客的简单记录
 thread: 146
-categories: git
+categories: Git
 tags: Git
 ---
 

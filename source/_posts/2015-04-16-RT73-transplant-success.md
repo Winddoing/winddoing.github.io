@@ -3,7 +3,7 @@ date: 2015-04-16 01:49
 layout: post
 title: RT73网卡的移植
 thread: 164
-categories: ARM
+categories: 系统应用
 tags: [RT73, ARM, 网卡]
 ---
 
