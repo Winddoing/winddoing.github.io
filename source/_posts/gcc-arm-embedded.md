@@ -1,7 +1,7 @@
 ---
 title: arm交叉编译工具
 date: 2016-09-17 23:07:24
-categories: arm
+categories: 编译工具
 tags: [arm, 交叉编译工具]
 ---
 

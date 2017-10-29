@@ -1,7 +1,7 @@
 ---
 title: Audio驱动总结--ALSA
 date: 2017-07-10 23:07:24
-categories: 驱动
+categories: 设备驱动
 tags: [Audio, alsa, 驱动]
 ---
 

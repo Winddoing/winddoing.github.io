@@ -1,7 +1,7 @@
 ---
 title: sd卡测速
 date: 2016-10-12 23:07:24
-categories: MMC
+categories: 设备驱动
 tags: [MMC, SD, dd]
 ---
 

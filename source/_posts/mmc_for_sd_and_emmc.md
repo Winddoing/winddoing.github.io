@@ -1,7 +1,7 @@
 ---
 title: MMC子系统
 date: 2016-08-23 23:07:24
-categories: 驱动
+categories: 设备驱动
 tags: [驱动, MMC, SD, EMMC]
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: 音频接口I2S
 date: 2017-03-05 23:07:24
-categories: Audio
+categories: 设备驱动
 tags: [Audio, I2S]
 ---
 
