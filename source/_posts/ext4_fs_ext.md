@@ -15,6 +15,13 @@ ext4文件系统在制作时，已将大小进行固定，但是在实际的使�
 mount -t ext4 roofs.ext4 tmp
 ```
 
+## resize2fs
+
+```
+resize2fs system.ext4 30000
+```
+> filesystem size: 30MB
+
 ## 容量扩展
 
 ### 创建空的文件系统
