@@ -17,10 +17,12 @@ mount -t ext4 roofs.ext4 tmp
 
 ## resize2fs
 
+文件系统扩展容量：
+
 ```
-resize2fs system.ext4 30000
+resize2fs system.ext4 300000
 ```
-> filesystem size: 30MB
+> 文件系统大小: 300MB
 
 ## 容量扩展
 
