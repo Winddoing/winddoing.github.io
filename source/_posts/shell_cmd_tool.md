@@ -1,7 +1,7 @@
 ---
 date: 2015-06-18 01:49
 layout: post
-title: find命令——文件中字符查找
+title: 常用的shell命令
 thread: 166
 categories: 常用工具
 tags: [Shell, xargs]
