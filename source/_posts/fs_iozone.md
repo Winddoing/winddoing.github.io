@@ -125,7 +125,9 @@ iozone -i 0 -i 1 -s 8m   -f /testfile -y 2k -q 8m -Rab /iozone_test.xls
 
 >在嵌入式开发板上导出表格数据全为0，无法使用
 
+## 测试
 
-
-
+```
+./iozone -s 100M -ac -S 512k 2>&1 | tee test.log
+```
 

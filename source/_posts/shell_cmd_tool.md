@@ -32,3 +32,11 @@ tags: [Shell, xargs]
 
 * `>` : 以覆盖文件内容的方式，若此文件不存在，则创建
 * `>>` : 以追加的方式写入文件
+
+## tee
+
+```
+make USE_NINJA=false USE_CLANG_PLATFORM_BUILD=false 2>&1 | tee build.log
+```
+
+
