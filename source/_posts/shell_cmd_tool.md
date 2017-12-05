@@ -35,8 +35,16 @@ tags: [Shell, xargs]
 
 ## tee
 
-```
+``` shell
 make USE_NINJA=false USE_CLANG_PLATFORM_BUILD=false 2>&1 | tee build.log
 ```
 
+## ssh
 
+``` shell
+xbin="u-boot-with-spl-mbr-gpt.bin"                                              
+xdst="user@192.168.10.44:/home/user/x2000_ddr_test"
+
+scp $xbin fpga@192.168.4.13:/tmp/$xbin           
+ssh fpga@192.168.4.13 "scp /tmp/$xbin $xdst"     
+```
