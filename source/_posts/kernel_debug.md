@@ -53,57 +53,6 @@ for (i = 0; i <= MAXJSAMPLE; i++)
 asm __volatile__("ssnop\n\t");
 asm __volatile__("ssnop\n\t");
 ```
-
-## strace
-
-### 用法：
-
-``` shell
-strace a.out
-```
-
-## gdb
-
-core dump
-### 查看core设置
-
-``` shell
-ulimit -a
-```
-
-### 开启core file
-
-``` shell
-limit -c unlimited
-```
-
-### 使用
-
-* 异常程序(段错误)
-
-``` C
-int main(int argc, char *argv[])
-{
-    int *a;
-
-    *a = 1;
-
-    while(1)
-    {
-
-    }
-    return EXIT_SUCCESS;
-}
-```
-
-* 运行异常程序后,生成core文件
-
-* 使用gdb查看异常位置
-
-``` shell
-gdb ./a.out core
-```
-
 ## ftrace
 
 ftrace 是内建于 Linux 内核的跟踪工具，从 2.6.27 开始加入主流内核。使用 ftrace 可以调试或者分析内核中发生的事情。ftrace 提供了不同的跟踪器，以用于不同的场合，比如跟踪内核函数调用、对上下文切换进行跟踪、查看中断被关闭的时长、跟踪内核态中的延迟以及性能问题等
