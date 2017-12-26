@@ -48,3 +48,25 @@ xdst="user@192.168.10.44:/home/user/x2000_ddr_test"
 scp $xbin fpga@192.168.4.13:/tmp/$xbin           
 ssh fpga@192.168.4.13 "scp /tmp/$xbin $xdst"     
 ```
+
+## tftp
+
+> 开发板（busybox）
+
+
+``` shell
+tftp -g -r user/xxxx/system.tar 192.168.4.13
+```
+
+tftp的服务器(PC):
+
+``` shell
+# /etc/default/tftpd-hpa
+
+TFTP_USERNAME="tftp"
+TFTP_DIRECTORY="/home/"
+TFTP_ADDRESS="0.0.0.0:69"
+TFTP_OPTIONS="--secure"
+```
+> file: /etc/default/tftpd-hpa
+
