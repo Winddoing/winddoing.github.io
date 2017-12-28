@@ -29,7 +29,7 @@ Linux kernel doc: [memory-barriers](https://www.kernel.org/doc/Documentation/mem
 ```
 > [MIPS] file: arch/mips/include/asm/barrier.h 
 
-< !--more -- >
+<!--more-->
 
 ## smp_mb
 
