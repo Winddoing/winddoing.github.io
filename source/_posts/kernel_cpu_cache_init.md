@@ -164,7 +164,6 @@ c0_config: Config寄存器主要描述CPU资源信息和配置，`CONF_CM_CMASK`
 ### cpu_has_rixi = 1 和 cpu_has_rixi = 0 区别
 
 * cpu_has_rixi = 1
-
 ``` C
 protection_map[0]  = __pgprot(_page_cachable_default | _PAGE_PRESENT | _PAGE_NO_EXEC | _PAGE_NO_READ);
 ```
