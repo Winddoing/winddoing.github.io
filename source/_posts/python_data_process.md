@@ -1,7 +1,7 @@
 ---
 title: python数据处理
 date: 2016-11-18 23:07:24
-categories: python
+categories: Python
 tags: [python]
 ---
 
