@@ -32,32 +32,10 @@ struct plat_smp_ops {
 };
 ```
 
-### init
+### smp init
 
-```
-start_kernel
-	|
-setup_arch(&command_line)
-	|
-prom_init();  ---->register_smp_ops (.smp_setup)
-	|
-rest_init
-	|
-	\----> kernel_init
-				|
-		kernel_init_freeable
-				|
-		smp_prepare_cpus  --> (.prepare_cpus)
-				|
-		     smp_init
-				|
-			cpu_up
-				|
-			_cpu_up
-				|
-			__cpu_up --> (mp_ops->boot_secondary)
 
-```
+![smp_init](/images/smp/smp-init.png)
 
 ```
 smp_prepare_cpus  --> (.prepare_cpus)
@@ -72,10 +50,9 @@ smp_prepare_cpus  --> (.prepare_cpus)
 
 ### init_secondary
 
-在boot_secondary中，将per CPU进行reset后，系统
-``` 
+在boot_secondary中，将per CPU进行reset后，系统所有CPU依次启动
 
-```
+![smp_init](/images/smp/smp-init-secondary.png)
 
 ## 系统启动
 
@@ -190,7 +167,7 @@ void __init prom_init(void)
 #endif
 }
 ```
->file: arch/mips/xburst2/core/prom.c 
+>file: arch/mips/xburst2/core/prom.c
 
 将`struct plat_smp_ops`结构体注册SMP框架
 
@@ -213,5 +190,3 @@ void smp_prepare_boot_cpu(void)
 
 
 ## 开核
-
-
