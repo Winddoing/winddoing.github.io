@@ -41,6 +41,99 @@ void _exit(int status);
 3. 对象i是对象o的成员，o的析构函数被调用时，对象i的析构函数也被调用。
 
 
+## Sample
 
+``` C
+#include <iostream>
+#include <stdlib.h>
+#include <stdio.h>
+#include <unistd.h>
+#include <pthread.h>
 
+using namespace std;
 
+class Test
+{
+	public:
+		Test(int i) 
+		{
+			m_i = i; 
+			printf("%s: construct %d\n", __func__, m_i);
+		};
+		~Test() 
+		{
+			printf("%s: destruct %d\n", __func__,  m_i);
+		};
+	private:
+		int m_i;
+};
+
+Test t_1(1);
+
+void *threadFunc(void *arg)
+{
+	Test t_3(3);
+
+/*	exit(1);*/
+	return NULL;
+}
+
+int main(int argc, char* argv[])
+{
+	pthread_t thread; 
+	int err;
+	Test t_2(2);
+
+	err = pthread_create(&thread, NULL, threadFunc, NULL);
+	if (err != 0)
+		printf("pthread_create fail!!!\n");
+
+	pthread_join(thread,NULL);
+	printf("Hello World\n");
+
+	return 0;
+/*	exit (0);*/
+/*	_exit(0);*/
+}
+```
+
+### main(return), threadFunc(return)
+
+```
+Test: construct 1
+Test: construct 2
+Test: construct 3
+~Test: destruct 3
+Hello World
+~Test: destruct 2
+~Test: destruct 1
+```
+### main(return)，threadFunc(exit)
+
+```
+Test: construct 1
+Test: construct 2
+Test: construct 3
+~Test: destruct 1
+```
+
+### main(exit)，threadFunc(return)
+
+```
+Test: construct 1
+Test: construct 2
+Test: construct 3
+~Test: destruct 3
+Hello World
+~Test: destruct 1
+```
+
+### main(_exit)，threadFunc(return)
+
+```
+Test: construct 1
+Test: construct 2
+Test: construct 3
+~Test: destruct 3
+Hello World
+```
