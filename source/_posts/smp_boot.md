@@ -186,7 +186,52 @@ void smp_prepare_boot_cpu(void)
 
 
 
-## 关核
+## 开关核
+
+```
+echo 0 > /sys/devices/system/cpu/cpu1/online //关
+echo 1 > /sys/devices/system/cpu/cpu1/online //开
+```
+
+``` C
+static ssize_t __ref store_online(struct device *dev,
+				  struct device_attribute *attr,
+				  const char *buf, size_t count)
+{
+	...
+	cpu_hotplug_driver_lock();
+	switch (buf[0]) {
+	case '0':
+		ret = cpu_down(cpuid);
+		...
+		break;
+	case '1':
+		from_nid = cpu_to_node(cpuid);
+		ret = cpu_up(cpuid);
+		...
+		break;
+	default:
+		ret = -EINVAL;
+	}
+	cpu_hotplug_driver_unlock();
+	...
+}
+
+static DEVICE_ATTR(online, 0644, show_online, store_online);
+```
+>file: drivers/base/cpu.c
+
+### echo 0 > online
 
 
-## 开核
+```
+cpu_down
+	\->_cpu_down(cpu, 0)
+		\->take_cpu_down
+			\->__cpu_disable()
+				\->mp_ops->cpu_disable()
+```
+>file: arch/mips/include/asm/smp.h
+
+
+### echo 1 > online
