@@ -16,7 +16,7 @@ tags: [app, free]
 在多线程测试中，由于其中一个线程因为异常而exit(-1)退出时，另外的线程也可能因为异常对象的生命周期结束而执行析构函数去delete同一个变量。
 <!--more-->
 
-## exit and _exit
+## `exit` and `_exit`
 
 >用于终止一个程序
 
@@ -40,8 +40,35 @@ void _exit(int status);
 2. delete指向对象的指针时，或delete指向对象的基类类型指针，而其基类虚构函数是虚函数时；
 3. 对象i是对象o的成员，o的析构函数被调用时，对象i的析构函数也被调用。
 
+## 固定程序的加载地址
 
-## Sample
+关闭`ASLR`，每次执行时，进程的加载地址将被固定。
+
+``` C
+echo 0 > /proc/sys/kernel/randomize_va_space
+```
+>ASLR（Address space layout randomization）是一种针对缓冲区溢出的安全保护技术，通过对堆、栈、共享库映射等线性区布局的随机化，通过增加攻击者预测目的地址的难度，防止攻击者直接定位攻击代码位置，达到阻止溢出攻击的目的。
+
+## 信号处理
+
+``` C
+
+```
+在自定义捕获异常信号时，对异常的处理中不能使用`exit()`来结束进程。
+
+原因：
+1. 在异常处理中，系统已经陷入内核态进行`do_singal`的操作，而测试的异常处理函数中存在`exit()`，执行exit并等待其完成需要等异常信号的完成，而测试正在进行异常信号的处理，因此将造成死锁现象。
+2. 异常处理的多次重入，如果在执行exit时，产生新的相同的异常信号，但是此时由于系统的性能下降（存在多个进程执行，压力测试），使其exit的执行需要一定的CPU周期后才可以完成，这时将进行可能在一次进入异常处理，并再一次执行exit，可能将对相同的资源进行再一次的释放，从而造成`double free`的错误
+
+
+### 疑问？？？
+
+1. 如果在信号处理中调用exit可以造成死锁，为啥不是必现？
+
+2. 两次重入可能对资源造成二次释放的现象，为啥每次释放的地址相同？
+
+
+## example
 
 ``` C
 #include <iostream>
@@ -55,12 +82,12 @@ using namespace std;
 class Test
 {
 	public:
-		Test(int i) 
+		Test(int i)
 		{
-			m_i = i; 
+			m_i = i;
 			printf("%s: construct %d\n", __func__, m_i);
 		};
-		~Test() 
+		~Test()
 		{
 			printf("%s: destruct %d\n", __func__,  m_i);
 		};
@@ -80,7 +107,7 @@ void *threadFunc(void *arg)
 
 int main(int argc, char* argv[])
 {
-	pthread_t thread; 
+	pthread_t thread;
 	int err;
 	Test t_2(2);
 
