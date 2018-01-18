@@ -68,6 +68,52 @@ echo 0 > /proc/sys/kernel/randomize_va_space
 2. 两次重入可能对资源造成二次释放的现象，为啥每次释放的地址相同？
 
 
+## 进程号
+
+``` C
+struct task_struct {
+    ...
+    pid_t pid;
+    pid_t tgid;
+    ...
+}
+```
+
+用户空间获取`pid`和`tgid`, 分别是`getpid`和`syscall(SYS_gettid)`。
+
+在linux系统中，我们用pid区分每一个进程，linux给每一个进程和轻量级进程都分配一个pid，但是linux程序员希望由一个进程产生的轻量级进程具有相同的pid，这样当我们向进程发送信号时，此信号可以影响进程及进程产生的轻量级进程。
+为了做到这一点，linux用了线程组（可以理解为轻量级进程组）的概念，在线程组内，每个线程都使用此线程组内第一个线程(thread group leader)的pid，并将此值存入tgid
+
+### pid和tgid的关系
+
+>The four threads will have the same PID but only when viewed from above. What you (as a user) call a PID is not what the kernel (looking from below) calls a PID.
+
+>In the kernel, each thread has it's own ID, called a PID (although it would possibly make more sense to call this a TID, or thread ID) and they also have a TGID (thread group ID) which is the PID of the thread that started the whole process.
+
+>Simplistically, when a new process is created, it appears as a thread where both the PID and TGID are the same (new) number.
+
+>When a thread starts another thread, that started thread gets its own PID (so the scheduler can schedule it independently) but it inherits the TGID from the original thread.
+
+>That way, the kernel can happily schedule threads independent of what process they belong to, while processes (thread group IDs) are reported to you.
+
+```
+              USER VIEW
+ <-- PID 43 --> <----------------- PID 42 ----------------->
+                     +---------+
+                     | process |
+                    _| pid=42  |_
+                  _/ | tgid=42 | \_ (new thread) _
+       _ (fork) _/   +---------+                  \
+      /                                        +---------+
++---------+                                    | process |
+| process |                                    | pid=44  |
+| pid=43  |                                    | tgid=42 |
+| tgid=43 |                                    +---------+
++---------+
+ <-- PID 43 --> <--------- PID 42 --------> <--- PID 44 --->
+                     KERNEL VIEW
+```
+
 ## example
 
 ``` C
