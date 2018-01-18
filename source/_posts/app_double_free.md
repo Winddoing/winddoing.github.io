@@ -52,7 +52,23 @@ echo 0 > /proc/sys/kernel/randomize_va_space
 ## 信号处理
 
 ``` C
+void Exception::InstallException(){
+	memset(&mCurrentAction,0,sizeof(struct sigaction));
+	mCurrentAction.sa_handler = Exception::segv_handler;
+	mCurrentAction.sa_flags = SA_RESTART | SA_SIGINFO;
+	sigemptyset(&mCurrentAction.sa_mask);
 
+	sigaction (SIGSEGV, &mCurrentAction, NULL);
+}
+void Exception::unInstallException(){
+	sigaction (SIGSEGV, &mOldAction, NULL);
+}
+void Exception::segv_handler(int sig)
+{
+	...
+	exit(-1); //Error
+	...
+}
 ```
 在自定义捕获异常信号时，对异常的处理中不能使用`exit()`来结束进程。
 
@@ -113,6 +129,7 @@ struct task_struct {
  <-- PID 43 --> <--------- PID 42 --------> <--- PID 44 --->
                      KERNEL VIEW
 ```
+
 
 ## example
 
@@ -210,3 +227,9 @@ Test: construct 3
 ~Test: destruct 3
 Hello World
 ```
+
+## 参考
+
+1. [The Linux Process Principle，NameSpace, PID、TID、PGID、PPID、SID、TID、TTY](https://www.cnblogs.com/LittleHann/p/4026781.html)
+2. [task_struct解析(三) 进程id ](http://blog.chinaunix.net/uid-21718047-id-3069416.html)
+
