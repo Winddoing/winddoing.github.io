@@ -223,6 +223,30 @@ static DEVICE_ATTR(online, 0644, show_online, store_online);
 
 ### echo 0 > online
 
+实现接口：
+
+``` C
+#ifdef CONFIG_HOTPLUG_CPU
+static inline int __cpu_disable(void)
+{
+    extern struct plat_smp_ops *mp_ops; /* private */
+
+    return mp_ops->cpu_disable();
+}
+
+static inline void __cpu_die(unsigned int cpu)
+{
+    extern struct plat_smp_ops *mp_ops; /* private */
+
+    mp_ops->cpu_die(cpu);
+}
+
+extern void play_dead(void);
+#endif
+```
+>file: arch/mips/include/asm/smp.h
+
+调用关系：
 
 ```
 cpu_down
@@ -230,8 +254,49 @@ cpu_down
 		\->take_cpu_down
 			\->__cpu_disable()
 				\->mp_ops->cpu_disable()
+        \->__cpu_die(cpu)
 ```
->file: arch/mips/include/asm/smp.h
+>file: /kernel/cpu.c
+
+
+将被关闭的CPU的中断迁移走后，使其处理完成最后的（飞行状态）任务，进入idle模式，在idle模式判断自己是否需要关闭，如果需要将执行到`play_dead`将自己杀掉（关闭中断）。
+
+``` C
+static void cpu_idle_loop(void)
+{
+    while (1) {
+        ...
+
+        if (cpu_is_offline(smp_processor_id()))
+            arch_cpu_idle_dead();
+        ...
+    }
+}
+```
+>file: kernel/cpu/idle.c
+
+
+``` C
+#ifdef CONFIG_HOTPLUG_CPU
+void arch_cpu_idle_dead(void)
+{
+	/* What the heck is this check doing ? */
+	if (!cpu_isset(smp_processor_id(), cpu_callin_map))
+		play_dead();
+}
+#endif
+```
+>file: arch/mips/kernel/process.c
 
 
 ### echo 1 > online
+
+调用被开核的`boot_secondary`,重新走一次启动时的第二阶段。
+
+```
+cpu_up
+	\->_cpu_up
+		\->__cpu_up
+			\->mp_ops->boot_secondary(cpu, tidle)
+```
+>file: /kernel/cpu.c
