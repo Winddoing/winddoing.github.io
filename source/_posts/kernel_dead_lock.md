@@ -182,7 +182,17 @@ unsigned long loops_per_jiffy = (1<<12);
 ```
 >file: /init/main.c
 
-`loops_per_jiffy`:定义超时时间, (1<<12 = 4096)_delay(1)为4096s
+`loops_per_jiffy`:定义超时时间, (4096)_delay(1)为4096s
 
 
 
+```
+[15299.717341] BUG: spinlock lockup suspected on CPU#1, rixitest/4186
+[15299.723758]  lock: 0x8c77d644, .magic: dead4ead, .owner: rixitest/4161, .owner_cpu: 0
+[15299.731858] CPU: 1 PID: 4186 Comm: rixitest Not tainted 3.10.14-00058-g5afe79c #3
+```
+
+>`lockup suspected on CPU#1`: 说明当前检测到死锁的CPU为核1
+>`.owner_cpu: 0`:说明之前上锁的CPU为核0
+
+>以上log说明有一把锁，在核0上锁后，没有释放之前核1有一次去上锁，从而导致死锁
