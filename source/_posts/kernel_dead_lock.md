@@ -192,6 +192,23 @@ unsigned long loops_per_jiffy = (1<<12);
 [15299.731858] CPU: 1 PID: 4186 Comm: rixitest Not tainted 3.10.14-00058-g5afe79c #3
 ```
 
+``` C
+static void spin_dump(raw_spinlock_t *lock, const char *msg)
+{
+	...
+	printk(KERN_EMERG "BUG: spinlock %s on CPU#%d, %s/%d\n",
+		msg, raw_smp_processor_id(),
+		current->comm, task_pid_nr(current));
+	printk(KERN_EMERG " lock: %pS, .magic: %08x, .owner: %s/%d, "
+			".owner_cpu: %d\n",
+		lock, lock->magic,
+		owner ? owner->comm : "<none>",
+		owner ? task_pid_nr(owner) : -1,
+		lock->owner_cpu);
+	dump_stack();
+}
+```
+
 >`lockup suspected on CPU#1`: 说明当前检测到死锁的CPU为核1
 >`.owner_cpu: 0`:说明之前上锁的CPU为核0
 
