@@ -8,6 +8,9 @@ tags: [IPI, SMP]
 
 >IPI(Interrupt-Procecesorr Interrupt)
 
+
+
+
 <!--more-->
 
 MIPS架构下的IPI通信

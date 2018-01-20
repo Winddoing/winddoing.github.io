@@ -75,10 +75,10 @@ spin_lock
 _raw_spin_lock
 	|
 __raw_spin_lock --> {
-						preempt_disable();
-						spin_acquire(&lock->dep_map, 0, 0, _RET_IP_);
-						LOCK_CONTENDED(lock, do_raw_spin_trylock, do_raw_spin_lock);
-					}
+		preempt_disable();
+		spin_acquire(&lock->dep_map, 0, 0, _RET_IP_);
+		LOCK_CONTENDED(lock, do_raw_spin_trylock, do_raw_spin_lock);
+	}
 ```
 
 
