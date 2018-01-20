@@ -300,3 +300,8 @@ cpu_up
 			\->mp_ops->boot_secondary(cpu, tidle)
 ```
 >file: /kernel/cpu.c
+
+
+## 参考
+
+1. [ clement-smp-bring-up-on-arm-soc.pdf](https://free-electrons.com/pub/conferences/2014/elc/clement-smp-bring-up-on-arm-soc/clement-smp-bring-up-on-arm-soc.pdf)
