@@ -37,7 +37,7 @@ system run    A send IPI CPU1             |
                                     +---------------------------+
 ```
 
-在多核处理器中，每一个CPU核有一个`mailbox`(相当于邮箱)，如果需要进行IPI通信时，其主要通过IPI的中断实现。假设CPU0需要给CPU1发送一个`action`(IPI的类型：`SMP_CALL_FUNCTION`,`SMP_RESCHEDULE_YOURSELF`)时, 只需要CPU0向CPU1的`mailbox`中写于`action`的id（相当于信），此时CPU1将产生一个IPI中断（表明收到信），`mailbox`的中断处理程序将读取`mailbox`（相当于看信）中的`action`，判断`action`的类型进行相应的处理。
+在多核处理器中，每一个CPU核有一个`mailbox`(相当于邮箱)，如果需要进行IPI通信时，其主要通过IPI的中断实现。假设CPU0需要给CPU1发送一个`action`(`action`I的类型：`SMP_CALL_FUNCTION`,`SMP_RESCHEDULE_YOURSELF`等)时, 只需要CPU0向CPU1的`mailbox`中写于`action`的id（相当于信），此时CPU1将产生一个IPI中断（表明收到信），`mailbox`的中断处理程序将读取`mailbox`（相当于看信）中的`action`，判断`action`的类型进行相应的处理。
 
 <!--more-->
 
