@@ -95,7 +95,7 @@ struct task_struct {
 }
 ```
 
-用户空间获取`pid`和`tgid`, 分别是`getpid`和`syscall(SYS_gettid)`。
+用户空间获取`pid`和`tgid`, 分别是`syscall(SYS_gettid)`和`getpid`
 
 在linux系统中，我们用pid区分每一个进程，linux给每一个进程和轻量级进程都分配一个pid，但是linux程序员希望由一个进程产生的轻量级进程具有相同的pid，这样当我们向进程发送信号时，此信号可以影响进程及进程产生的轻量级进程。
 为了做到这一点，linux用了线程组（可以理解为轻量级进程组）的概念，在线程组内，每个线程都使用此线程组内第一个线程(thread group leader)的pid，并将此值存入tgid
