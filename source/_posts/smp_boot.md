@@ -59,6 +59,8 @@ smp_prepare_cpus  --> (.prepare_cpus)
 
 系统上电后，boot CPU启动，执行`start_kernel`（init/main.c），并分别调用`boot_cpu_init`和`setup_arch`两个接口，进行possible CPU相关的初始化。
 
+![smp-booting](/images/smp/smp-booting.png)
+
 ``` C
 /*
  *	Activate the first processor.
