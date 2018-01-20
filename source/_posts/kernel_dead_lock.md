@@ -267,5 +267,5 @@ static void spin_dump(raw_spinlock_t *lock, const char *msg)
 >死锁的产生和发送IPI的先后顺序：先死锁后发送IPI
 
 1. 最开始的两个打印可以得到，CPU0进行上锁时，发现该锁被CPU1所持有，所以造成两核互锁
-2. CPU1上完`spin_lock_irq(siglock)`锁后，发送IPI（sched调度），此时信号处理进程被调度到CPU0，并且也进行`spin_lock_irq(siglock)`上锁，由于CPU1上完锁后等待IPI的完成，但是此时CPU1已经关闭中断的IE位，其中包括IPI中断，因此IPI无法完成，CPU1的锁无法释放，同时CPU0又在上同一把锁`siglock`,从而造成死锁
+2. CPU1上完`spin_lock_irq(siglock)`锁后，发送IPI（sched调度），此时信号处理进程被调度到CPU0，并且也进行`spin_lock_irq(siglock)`上锁，由于CPU1上完锁后等待IPI的完成，但是此时CPU1已经***关闭中断的IE位，其中包括IPI中断，因此IPI无法完成***，CPU1的锁无法释放，同时CPU0又在上同一把锁`siglock`,从而造成死锁
 
