@@ -213,3 +213,59 @@ static void spin_dump(raw_spinlock_t *lock, const char *msg)
 >`.owner_cpu: 0`:说明之前上锁的CPU为核0
 
 >以上log说明有一把锁，在核0上锁后，没有释放之前核1有一次去上锁，从而导致死锁
+
+## 场景
+
+### 信号异常造成的死锁
+
+> 两核互锁
+
+```
+[   50.920653] BUG: spinlock lockup suspected on CPU#0, rixitest/835
+[   50.933282]  lock: 0x8c57c9e4, .magic: dead4ead, .owner: rixitest/507, .owner_cpu: 1
+[   50.941294] CPU: 0 PID: 835 Comm: rixitest Not tainted 3.10.14-00058-g5afe79c-dirty  
+
+[   50.949568] Stack : 8211374a 0000004b 80510000 80510000 00000343 80050000 8c888d40   
+
+	8049e028 00000000 00000343 82112ee0 8004eee8 8cff7ee8 82120000 803e79ac
+	80510000 8003b454 8c57c9e4 00000000 8049fb4c 8cff7d74 8cff7d74 8c888d40
+	00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000
+	00000000 00000000 00000000 00000000 00000000 00000000 00000000 8cff7d08
+	...                                               
+[   50.986508] Call Trace:                            
+[   50.989051] [<80021cf4>] show_stack+0x48/0x70      
+[   50.993564] [<8021c804>] do_raw_spin_lock+0x12c/0x184 //spin_lock_irq(&sighand->siglock)
+[   50.998793] [<8004ecc0>] get_signal_to_deliver+0xb8/0x690
+[   51.004378] [<8001fb08>] do_signal+0x30/0x1fc      
+[   51.008887] [<80020c84>] do_notify_resume+0x34/0x90
+[   51.013940] [<8001b8a4>] work_notifysig+0x10/0x18  
+[   51.018802]                                        
+[   64.332523] SMP[0] action:1 will reenter, mailbox:1, timeout:16777216
+[   64.339172] CPU: 1 PID: 507 Comm: rixitest Not tainted 3.10.14-00058-g5afe79c-dirty  
+
+[   64.347425] Stack : 8211374a 0000004b 80510000 80510000 000001fb 01000000 8c54b9c0   
+
+	8049e028 00000001 000001fb 82112ee0 00000000 8c551ee8 82120000 803e79ac
+	00000000 8003b454 00000006 00000000 8049fb4c 8c551c14 8c551c14 8c54b9c0
+	00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000
+	00000000 00000000 00000000 00000000 00000000 00000000 00000000 8c551ba8
+	...                                               
+[   64.384270] Call Trace:                            
+[   64.386796] [<80021cf4>] show_stack+0x48/0x70      
+[   64.391295] [<80011eb4>] xburst2_send_ipi_single+0xb4/0x114
+[   64.397051] [<8006d800>] try_to_wake_up+0x298/0x31c
+[   64.402093] [<8004c7fc>] signal_wake_up_state+0x44/0x68
+[   64.407489] [<80138e44>] zap_process+0x80/0xbc    //spin_lock_irq(&tsk->sighand->siglock);  
+[   64.412077] [<8013926c>] do_coredump+0x160/0xc24   
+[   64.416843] [<8004f24c>] get_signal_to_deliver+0x644/0x690
+[   64.422504] [<8001fb08>] do_signal+0x30/0x1fc      
+[   64.427002] [<80020c84>] do_notify_resume+0x34/0x90
+[   64.432040] [<8001b8a4>] work_notifysig+0x10/0x18  
+[   64.436889]                                        
+```
+
+>死锁的产生和发送IPI的先后顺序：先死锁后发送IPI
+
+1. 最开始的两个打印可以得到，CPU0进行上锁时，发现该锁被CPU1所持有，所以造成两核互锁
+2. CPU1上完`spin_lock_irq(siglock)`锁后，发送IPI（sched调度），此时信号处理进程被调度到CPU0，并且也进行`spin_lock_irq(siglock)`上锁，由于CPU1上完锁后等待IPI的完成，但是此时CPU1已经关闭中断的IE位，其中包括IPI中断，因此IPI无法完成，CPU1的锁无法释放，同时CPU0又在上同一把锁`siglock`,从而造成死锁
+

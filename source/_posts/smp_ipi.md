@@ -12,6 +12,9 @@ tags: [IPI, SMP]
 
 MIPS架构下的IPI通信
 
+
+> 1. 关闭中断后还会发送IPI
+
 ## MIPS接口
 
 ``` C
