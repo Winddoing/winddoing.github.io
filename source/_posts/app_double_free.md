@@ -130,6 +130,47 @@ struct task_struct {
                      KERNEL VIEW
 ```
 
+## 信号handle的重入
+
+``` C
+void Exception::InstallException(){
+	memset(&mCurrentAction,0,sizeof(struct sigaction));
+	mCurrentAction.sa_handler = Exception::segv_handler;
+	mCurrentAction.sa_flags = SA_RESTART | SA_SIGINFO;
+	sigemptyset(&mCurrentAction.sa_mask);
+
+	sigaction (SIGSEGV, &mCurrentAction, NULL);
+}
+void Exception::unInstallException(){
+	sigaction (SIGSEGV, &mOldAction, NULL);
+}
+void Exception::segv_handler(int sig)
+{
+	...
+
+	Exception::unInstallException();
+}
+```
+
+> 1. 将异常信号的handle应用程序自定义接受后，由于异常信号的不断产生将不断的进入handle，连续多次的进入会对程序造成什么影响？？?
+> 2. 如果进入异常处理后，最后又交给内核处理，结果会咋样？？？
+
+***信号的处理handler，必须是可重入的***
+
+### SIG_DFL and SIG_IGN
+
+``` C
+typedef void __signalfn_t(int);
+typedef __signalfn_t __user *__sighandler_t;
+
+#define SIG_DFL ((__force __sighandler_t)0) /* default signal handling */
+#define SIG_IGN ((__force __sighandler_t)1) /* ignore signal */
+#define SIG_ERR ((__force __sighandler_t)-1)    /* error return from signal */
+```
+>file: include/uapi/asm-generic/signal-defs.h
+
+signal函数中的信号处理函数handler，可以是用户指定的一个信号处理函数，也可以是内核特定的函数指针SIG_IGN或SIG_DFL。若信号句柄是SIG_IGN或SIG_DFL，则分别表示对捕获的信号采取忽略操作或者默认操作。
+
 
 ## example
 
@@ -232,4 +273,4 @@ Hello World
 
 1. [The Linux Process Principle，NameSpace, PID、TID、PGID、PPID、SID、TID、TTY](https://www.cnblogs.com/LittleHann/p/4026781.html)
 2. [task_struct解析(三) 进程id ](http://blog.chinaunix.net/uid-21718047-id-3069416.html)
-
+3. [#define SIG_DFL ((void(*)(int))0)](http://www.cnblogs.com/liulipeng/p/3555395.html)
