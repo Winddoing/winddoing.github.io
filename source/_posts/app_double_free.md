@@ -157,6 +157,11 @@ void Exception::segv_handler(int sig)
 
 ***信号的处理handler，必须是可重入的***
 
+| 可重入函数 |
+| :--------: |
+|  _exit()   |
+
+
 ### SIG_DFL and SIG_IGN
 
 ``` C
