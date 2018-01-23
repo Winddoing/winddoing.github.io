@@ -159,7 +159,7 @@ void Exception::segv_handler(int sig)
 
 | 可重入函数 |
 | :--------: |
-|  _exit()   |
+|  `_exit()`   |
 
 
 ### SIG_DFL and SIG_IGN
@@ -279,3 +279,4 @@ Hello World
 1. [The Linux Process Principle，NameSpace, PID、TID、PGID、PPID、SID、TID、TTY](https://www.cnblogs.com/LittleHann/p/4026781.html)
 2. [task_struct解析(三) 进程id ](http://blog.chinaunix.net/uid-21718047-id-3069416.html)
 3. [#define SIG_DFL ((void(*)(int))0)](http://www.cnblogs.com/liulipeng/p/3555395.html)
+4. [深入理解可重入与线程安全](http://blog.csdn.net/tangaowen/article/details/47856705)
