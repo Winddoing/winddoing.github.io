@@ -280,3 +280,4 @@ Hello World
 2. [task_struct解析(三) 进程id ](http://blog.chinaunix.net/uid-21718047-id-3069416.html)
 3. [#define SIG_DFL ((void(*)(int))0)](http://www.cnblogs.com/liulipeng/p/3555395.html)
 4. [深入理解可重入与线程安全](http://blog.csdn.net/tangaowen/article/details/47856705)
+5. [【C/C++】对于可重入、线程安全、异步信号安全几个概念的理解](http://blog.csdn.net/LG1259156776/article/details/52732879)
