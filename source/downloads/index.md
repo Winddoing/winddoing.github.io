@@ -1,7 +1,7 @@
 ---
 title: Download
 date: 2018-02-02 23:07:24
-comments: fase
+comments: false
 ---
 
 ## Kernel
