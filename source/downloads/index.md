@@ -12,3 +12,4 @@ comments: false
 ## Linux
 
 * [LTP使用说明](/downloads/linux/LTP使用说明.doc)
+* [embedded_linux_notes.pdf](/downloads/linux/embedded_linux_notes.pdf)
