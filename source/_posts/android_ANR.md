@@ -67,3 +67,7 @@ Heap: 15% free, 1338KB/`1585KB`; 51388 objects
 > 6. `堆扩展`后的大小
 > 7. 进程最多能申请的内存
 
+
+## 参考
+
+1. [ANR机制以及问题分析](http://blog.csdn.net/tabactivity/article/details/52945343)
