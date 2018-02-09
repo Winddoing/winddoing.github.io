@@ -16,4 +16,5 @@ comments: false
 
 ## 协议
 
+* [如何做通信总线类的工作](/downloads/如何做通信总线类的工作.doc)
 * [I2C协议以及其相关bug分析总结](/downloads/I2C协议以及其相关bug分析总结.docx)
