@@ -70,3 +70,13 @@ TFTP_OPTIONS="--secure"
 ```
 > file: /etc/default/tftpd-hpa
 
+
+## 解压ramdisk
+
+```
+gunzip rootfs.cpio.gz
+mkdir tmp
+cd tmp
+cpio -i -F ../rootfs.cpio
+```
+>code: [unzip_ramdisk.sh](https://raw.githubusercontent.com/Winddoing/MyCode/master/android/debug/unzip_ramdisk.sh)
