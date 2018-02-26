@@ -77,3 +77,8 @@ done
 chmod 777 './'$data_dir -R
 rm *.ff -f
 ```
+
+
+## 参考
+
+1. [shell中各种括号的作用()、(())、[]、[[]]、{}](http://blog.csdn.net/taiyang1987912/article/details/39551385)
