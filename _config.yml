@@ -70,9 +70,9 @@ archive_generator:
 tag_generator:
   per_page: 20
 
-search:
-  path: search.xml
-  field: post
+#search:
+# path: search.xml
+# field: post
 
 # Extensions
 ## Plugins: https://hexo.io/plugins/

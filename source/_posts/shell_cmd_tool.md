@@ -73,10 +73,36 @@ TFTP_OPTIONS="--secure"
 
 ## 解压ramdisk
 
-```
+``` shell
 gunzip rootfs.cpio.gz
 mkdir tmp
 cd tmp
 cpio -i -F ../rootfs.cpio
 ```
 >code: [unzip_ramdisk.sh](https://raw.githubusercontent.com/Winddoing/MyCode/master/android/debug/unzip_ramdisk.sh)
+
+
+## minicom
+
+记录串口的输出日志：
+
+``` shell
+#!/bin/sh
+
+mkdir dd
+echo "while [ 1 ];do killall minicom; sleep 36000;done" > ./b.sh
+chmod +x ./b.sh
+./b.sh &
+
+while [ 1 ]
+do
+	ff=`date +%Y%m%d%H%M`;
+	echo $ff;
+	minicom -w -C ./dd/$ff -o;
+done
+```
+
+串口输出增加时间戳：
+```
+Ctrl + a ; n
+```
