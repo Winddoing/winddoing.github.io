@@ -54,6 +54,24 @@ cd /usr; ./runltp -f crashme
 | fork12 | 尽可能的fork子进程，目的是耗尽系统的pid号，主要冲突是pid_max和内存容量|
 
 
+## mm
+
+### max_map_count
+
+```
+# cat /proc/sys/vm/max_map_count
+65530
+```
+>限制一个进程所拥有的最大内存区域(64MB)
+
+### min_free_kbytes
+
+```
+# cat /proc/sys/vm/min_free_kbytes
+1961
+```
+>表示系统所保留空闲内存的最低限
+
 ### 压力测试
 
 >验证产品在系统高使用率时的健壮性。
@@ -64,3 +82,4 @@ cd /usr; ./runltp -f crashme
 2. [测试 Linux 的可靠性](https://www.ibm.com/developerworks/cn/linux/l-rel/)
 3. [Building a Robust Linux kernel piggybacking The Linux Test Project
 ](http://ltp.sourceforge.net/documentation/technical_papers/ltp-ols-2008-paper.pdf)
+4. [[kernel]----理解kswapd的低水位min_free_kbytes](https://www.cnblogs.com/muahao/p/6532527.html)
