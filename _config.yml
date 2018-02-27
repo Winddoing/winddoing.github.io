@@ -10,6 +10,8 @@ author: Winddoing
 language: zh-Hans
 timezone:
 
+keywords: "Hexo, NexT, Winddoing,嵌入式,Linux,shell,C语言,网络， 个人博客，专注嵌入式系统开发， mips"
+
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
 url: http://winddoing.github.io
