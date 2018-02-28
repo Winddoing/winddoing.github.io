@@ -13,6 +13,7 @@ comments: false
 
 * [LTP使用说明](/downloads/linux/LTP使用说明.doc)
 * [embedded_linux_notes.pdf](/downloads/linux/embedded_linux_notes.pdf)
+* [cgroup](/downloads/linux/Red_Hat_Enterprise_Linux-6-cgroup_Guide-zh-CN.pdf)
 
 ## 协议
 

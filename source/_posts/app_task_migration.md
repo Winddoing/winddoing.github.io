@@ -44,8 +44,7 @@ echo PID0 > /mnt/cpu0/tasks
 或
 echo PID1 > /mnt/cpu1/tasks
 ```
-## Cgroup
-
+## [Cgroup](https://winddoing.github.io/2018/02/28/app_cgroup/)
 
 
 ## 参考
