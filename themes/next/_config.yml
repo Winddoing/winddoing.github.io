@@ -311,14 +311,14 @@ font:
   # Global font settings used on <body> element.
   global:
     external: true
-    family: Lato
+    family: Monda
     size: 13
 
   # Font settings for Headlines (h1, h2, h3, h4, h5, h6).
   # Fallback to `global` font settings.
   headings:
     external: true
-    family:
+    family: Roboto Slab
     size:
 
   # Font settings for posts.
@@ -331,13 +331,13 @@ font:
   # Fallback to `global` font settings.
   logo:
     external: true
-    family:
+    family: Lobster Two
     size:
 
   # Font settings for <code> and code blocks.
   codes:
     external: true
-    family:
+    family: PT Mono
     size:
 
 
@@ -352,7 +352,7 @@ mathjax:
   cdn: //cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML
 
 # Han Support docs: https://hanzi.pro/
-han: true
+han: false
 
 # Swiftype Search API Key
 #swiftype_key:
