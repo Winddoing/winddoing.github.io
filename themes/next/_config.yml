@@ -101,7 +101,7 @@ menu:
   #schedule: /schedule/ || calendar
   #sitemap: /sitemap.xml || sitemap
   #commonweal: /404/ || heartbeat
-  
+
 
 # Enable/Disable menu icons.
 menu_icons:
@@ -264,7 +264,7 @@ post_copyright:
 # ---------------------------------------------------------------
 
 # Reduce padding / margin indents on devices with narrow width.
-mobile_layout_economy: true
+mobile_layout_economy: false
 
 # Android Chrome header panel color ($black-deep).
 android_chrome_color: "#222"
@@ -331,7 +331,7 @@ font:
   # Fallback to `global` font settings.
   logo:
     external: true
-    family: Lobster Two
+    family:
     size:
 
   # Font settings for <code> and code blocks.
@@ -700,7 +700,7 @@ pace: false
 pace_theme: pace-theme-minimal
 
 # Canvas-nest
-canvas_nest: true
+canvas_nest: false
 
 # three_waves
 three_waves: false
