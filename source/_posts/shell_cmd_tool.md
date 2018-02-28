@@ -102,7 +102,22 @@ do
 done
 ```
 
-串口输出增加时间戳：
+* 串口输出增加时间戳：
 ```
 Ctrl + a ; n
 ```
+
+* 串口打印内存信息：
+```
+Ctrl + a; f; m
+```
+>`Ctrl + a; f`(send break)进行发送命令，`m`查看当前内存状态的命令
+
+| break signal | |
+| :----------: | :----: |
+| m | 查看当前内存状态的命令 |
+
+
+## 参考
+
+1. [minicom中文手册](https://www.cnblogs.com/my-blog/archive/2008/12/10/1351753.html)
