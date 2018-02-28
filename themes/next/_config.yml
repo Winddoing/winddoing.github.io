@@ -312,7 +312,7 @@ font:
   global:
     external: true
     family: Monda
-    size: 13
+    size: 16
 
   # Font settings for Headlines (h1, h2, h3, h4, h5, h6).
   # Fallback to `global` font settings.
