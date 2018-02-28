@@ -23,8 +23,27 @@ tags: [进程, cgroup]
 
 ## Task migration(LTP)
 
+>ltp-full-20140115/testcases/kernel/controllers/cpuctl/cpuctl_test02.c
 
+通过cgroup将两个cgroup同两个物理核进行绑定，然后在两个cgroup中的tasks中进行两个进程ID的移动，从而进行进程的迁移
 
+```
+mount -t cgroup -o cpuset cgroup /mnt
+cd /mnt
+#创建子cgroup，cpu0, cpu1
+mkdir cpu0 cpu1
+#将CPU0绑定到子cgroup.cpu0
+cd cpu0
+echo 0 > cpuset.cpus
+#将CPU1绑定到子cgroup.cpu1
+cd cpu1
+echo 1 > cpuset.cpus
+
+#进程迁移
+echo PID0 > /mnt/cpu0/tasks
+或
+echo PID1 > /mnt/cpu1/tasks
+```
 ## Cgroup
 
 
