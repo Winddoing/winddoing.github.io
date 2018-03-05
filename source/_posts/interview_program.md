@@ -131,6 +131,60 @@ int main()
 4. 信号量：信号量是一个计数器，可以用来控制多个进程对共享资源的访问。
 5. socket
 6. 信号（sinal）：信号是一种比较复杂的通信方式，用于通知接收进程某个事件已经发生
+
 >[进程间通信的方式——信号、管道、消息队列、共享内存](https://www.cnblogs.com/LUO77/p/5816326.html)
 
+## 字符串反转
+
+``` C
+char *revstr(char *str)
+{
+    char    *start = str;
+    char    *end = str + strlen(str) - 1;
+    char    ch;
+
+    if (str != NULL) {
+        while (start < end) {
+            ch = *start;
+            *start++ = *end;
+            *end-- = ch;
+        }
+    }
+    return str;
+}
+```
+
+``` C
+#include<stdio.h>                                    
+int my_strlen(char *str)                             
+{                                                    
+        if(*str == '\0')                             
+                return 0;                            
+        else                                         
+                return my_strlen(str+1) + 1;         
+}                                                    
+
+void reverse_string(char *string)                    
+{                                                    
+        int len = my_strlen(string);                 
+        if(len <= 1)                                 
+                return ;                             
+        else {                                       
+                char temp = string[0];               
+                string[0] = string[len-1];           
+                string[len-1] = '\0';                
+                reverse_string(string+1);            
+                string[len-1] = temp;                
+        }                                            
+}                                                    
+int main() {                                         
+        char ch[] = "abcdefghijklmno";               
+
+        printf("0:%s\n",ch);                         
+        reverse_string(ch);                          
+        printf("1:%s\n",ch);                         
+
+        return 0;                                    
+}                                                    
+```
 ## 链表
