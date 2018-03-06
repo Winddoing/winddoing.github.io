@@ -4,14 +4,14 @@ layout: post
 title: 常用的shell命令
 thread: 166
 categories: 常用工具
-tags: [Shell, xargs]
+tags: [shell]
 ---
 
 常用的shell命令： `find`, `cat`
 
 <!-- more -->
 
-## Find
+## find
 
 ``` shell
 [root@linfeng etc]# find . -type f -name "*" | xargs grep "root/init.sh"
@@ -20,7 +20,7 @@ tags: [Shell, xargs]
 * `-type f` : 表示只找文件
 * `-name "xxx"` :  表示查找特定文件；也可以不写，表示找所有文件
 
-## Cat
+## cat
 
 >cat和重定向进行写文件操作
 
@@ -177,7 +177,6 @@ static struct sysrq_key_op *sysrq_key_table[36] = {
 	NULL,				/* y */
 	&sysrq_ftrace_dump_op,		/* z */
 };
-
  ```
 
 
