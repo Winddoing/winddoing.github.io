@@ -42,11 +42,11 @@ make USE_NINJA=false USE_CLANG_PLATFORM_BUILD=false 2>&1 | tee build.log
 ## ssh
 
 ``` shell
-xbin="u-boot-with-spl-mbr-gpt.bin"                                              
+xbin="u-boot-with-spl-mbr-gpt.bin"
 xdst="user@192.168.10.44:/home/user/x2000_ddr_test"
 
-scp $xbin fpga@192.168.4.13:/tmp/$xbin           
-ssh fpga@192.168.4.13 "scp /tmp/$xbin $xdst"     
+scp $xbin fpga@192.168.4.13:/tmp/$xbin
+ssh fpga@192.168.4.13 "scp /tmp/$xbin $xdst"
 ```
 
 ## tftp
@@ -116,6 +116,69 @@ Ctrl + a; f; m
 | break signal | |
 | :----------: | :----: |
 | m | 查看当前内存状态的命令 |
+
+>内核提供接口`drivers/tty/sysrq.c`,通过按键的方式获取内核的调试信息
+
+``` C
+static struct sysrq_key_op *sysrq_key_table[36] = {
+	&sysrq_loglevel_op,		/* 0 */
+	&sysrq_loglevel_op,		/* 1 */
+	&sysrq_loglevel_op,		/* 2 */
+	&sysrq_loglevel_op,		/* 3 */
+	&sysrq_loglevel_op,		/* 4 */
+	&sysrq_loglevel_op,		/* 5 */
+	&sysrq_loglevel_op,		/* 6 */
+	&sysrq_loglevel_op,		/* 7 */
+	&sysrq_loglevel_op,		/* 8 */
+	&sysrq_loglevel_op,		/* 9 */
+
+	/*
+	 * a: Don't use for system provided sysrqs, it is handled specially on
+	 * sparc and will never arrive.
+	 */
+	NULL,				/* a */
+	&sysrq_reboot_op,		/* b */
+	&sysrq_crash_op,		/* c & ibm_emac driver debug */
+	&sysrq_showlocks_op,		/* d */
+	&sysrq_term_op,			/* e */
+	&sysrq_moom_op,			/* f */
+	/* g: May be registered for the kernel debugger */
+	NULL,				/* g */
+	NULL,				/* h - reserved for help */
+	&sysrq_kill_op,			/* i */
+#ifdef CONFIG_BLOCK
+	&sysrq_thaw_op,			/* j */
+#else
+	NULL,				/* j */
+#endif
+	&sysrq_SAK_op,			/* k */
+#ifdef CONFIG_SMP
+	&sysrq_showallcpus_op,		/* l */
+#else
+	NULL,				/* l */
+#endif
+	&sysrq_showmem_op,		/* m */
+	&sysrq_unrt_op,			/* n */
+	/* o: This will often be registered as 'Off' at init time */
+	NULL,				/* o */
+	&sysrq_showregs_op,		/* p */
+	&sysrq_show_timers_op,		/* q */
+	&sysrq_unraw_op,		/* r */
+	&sysrq_sync_op,			/* s */
+	&sysrq_showstate_op,		/* t */
+	&sysrq_mountro_op,		/* u */
+	/* v: May be registered for frame buffer console restore */
+	NULL,				/* v */
+	&sysrq_showstate_blocked_op,	/* w */
+	/* x: May be registered on ppc/powerpc for xmon */
+	/* x: May be registered on sparc64 for global PMU dump */
+	NULL,				/* x */
+	/* y: May be registered on sparc64 for global register dump */
+	NULL,				/* y */
+	&sysrq_ftrace_dump_op,		/* z */
+};
+
+ ```
 
 
 ## 参考
