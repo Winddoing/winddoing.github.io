@@ -71,8 +71,11 @@ TFTP_OPTIONS="--secure"
 > file: /etc/default/tftpd-hpa
 
 
-## 解压ramdisk
+## cpio
 
+>解压，制作 ramdisk
+
+* 解压
 ``` shell
 gunzip rootfs.cpio.gz
 mkdir tmp
@@ -81,6 +84,11 @@ cpio -i -F ../rootfs.cpio
 ```
 >code: [unzip_ramdisk.sh](https://raw.githubusercontent.com/Winddoing/MyCode/master/android/debug/unzip_ramdisk.sh)
 
+* 制作
+``` shell
+find . | cpio -o -Hnewc |gzip -9 > ../image.cpio.gz
+```
+>`-H`: 选项指定打包文件的具体格式，要生成init ramfs，只能用`newc`格式
 
 ## minicom
 
