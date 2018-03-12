@@ -5,5 +5,16 @@ comments: false
 ---
 
 
+mail: winddoing@sina.cn
 
-## 站点构建状态：[![Build Status](https://travis-ci.org/Winddoing/Winddoing.github.io.svg?branch=web_source)](https://travis-ci.org/Winddoing/Winddoing.github.io)
+
+
+
+
+* See MIPS Run
+* 设备驱动程序
+* Linux内核设计与实现
+* Linux内核精髓（精通linux内核必会的75个技巧）
+* 程序员的自我修养--链接，装载与库
+* 深入理解Linux内核
+
