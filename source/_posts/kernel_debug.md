@@ -171,3 +171,36 @@ blk function_graph wakeup_rt wakeup preemptirqsoff preemptoff irqsoff function n
 <idle>-0       0dNh3   28us+: _raw_spin_unlock_irqrestore <-try_to_wake_up
 ....
 ```
+
+### 使用
+
+> 内核中断
+
+``` shell
+# echo 0 > tracing_on 
+# echo > trace
+# echo nop > current_tracer 
+# echo irq > set_event 
+# echo 1 > tracing_on
+# cat trace_pipe 
+		sh-100   [000] d.h3  1333.894909: irq_handler_entry: irq=58 name=uart1
+		sh-100   [000] d.h3  1333.894931: irq_handler_exit: irq=58 ret=handled
+	<idle>-0     [000] d.h2  1333.902444: irq_handler_entry: irq=34 name=jz-timerirq
+
+# cat trace
+# tracer: nop
+#
+# entries-in-buffer/entries-written: 5510/5510   #P:1
+#
+#                              _-----=> irqs-off
+#                             / _----=> need-resched
+#                            | / _---=> hardirq/softirq
+#                            || / _--=> preempt-depth
+#                            ||| /     delay
+#           TASK-PID   CPU#  ||||    TIMESTAMP  FUNCTION
+#              | |       |   ||||       |         |
+              sh-100   [000] d.h3  1342.498892: irq_handler_exit: irq=58 ret=handled
+		<idle>-0     [000] d.h2  1342.673707: irq_handler_entry: irq=34 name=jz-timerirq
+		<idle>-0     [000] d.h2  1342.673717: irq_handler_exit: irq=34 ret=handled
+
+```
