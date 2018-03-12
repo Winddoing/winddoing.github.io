@@ -1,4 +1,4 @@
-
+---
 title: Audio驱动总结--ALSA
 date: 2017-07-10 23:07:24
 categories: 设备驱动
@@ -126,15 +126,28 @@ ASoC被分为`Machine`、`Platform`和`Codec`三大部分。其中的Machine驱�
 
 >是指某一款机器，可以是某款设备，某款开发板，又或者是某款智能手机，由此可以看出Machine几乎是不可重用的，每个Machine上的硬件实现可能都不一样，CPU不一样，Codec不一样，音频的输入、输出设备也不一样，Machine为CPU、Codec、输入输出设备提供了一个`载体`。
 
+这一部分将平台驱动和Codec驱动绑定在一起，描述了板级的硬件特征。主要负责Platform和Codec之间的耦合以及部分和设备或板子特定的代码。Machine驱动负责处理机器特有的一些控件和音频事件（例如，当播放音频时，需要先行打开一个放大器）；单独的Platform和Codec驱动是不能工作的，它必须由Machine驱动把它们结合在一起才能完成整个设备的音频处理工作。ASoC的一切都从Machine驱动开始，包括声卡的注册，绑定Platform和Codec驱动等等
+
 * Platform
 用于实现平台相关的DMA驱动和音频接口等。
 
 > 一般是指某一个SoC平台，比如pxaxxx,s3cxxxx,omapxxx等等，与音频相关的通常包含该SoC中的时钟、DMA、I2S、PCM等等，只要指定了SoC，那么我们可以认为它会有一个对应的Platform，它只与SoC相关，与Machine无关，这样我们就可以把Platform抽象出来，使得同一款SoC不用做任何的改动，就可以用在不同的Machine中。实际上，把Platform认为是某个SoC更好理解。
 
+这一部分只关心CPU本身，不关心Codec。主要处理两个问题：`DMA引擎`和`SoC集成的PCM、I2S或AC '97数字接口控制`。主要作用是完成音频数据的管理，最终通过CPU的数字音频接口（DAI）把音频数据传送给Codec进行处理，最终由Codec输出驱动耳机或者是喇叭的音信信号。在具体实现上，ASoC有把Platform驱动分为两个部分：`snd_soc_platform_driver`和`snd_soc_dai_driver`。其中，platform_driver负责管理音频数据，把音频数据通过dma或其他操作传送至cpu dai中，dai_driver则主要完成cpu一侧的dai的参数配置，同时也会通过一定的途径把必要的dma等参数与snd_soc_platform_driver进行交互。
+
 * Codec
 用于实现平台无关的功能，如寄存器读写接口，音频接口，各widgets的控制接口和DAPM的实现等
 
 > 字面上的意思就是编解码器，Codec里面包含了I2S接口、D/A、A/D、Mixer、PA（功放），通常包含多种输入（Mic、Line-in、I2S、PCM）和多个输出（耳机、喇叭、听筒，Line-out），Codec和Platform一样，是可重用的部件，同一个Codec可以被不同的Machine使用。嵌入式Codec通常通过I2C对内部的寄存器进行控制。
+
+这一部分只关心Codec本身，与CPU平台相关的特性不由此部分操作。在移动设备中，Codec的作用可以归结为4种，分别是：
+1. 对PCM等信号进行D/A转换，把数字的音频信号转换为模拟信号。
+2. 对Mic、Linein或者其他输入源的模拟信号进行A/D转换，把模拟的声音信号转变CPU能够处理的数字信号。
+3. 对音频通路进行控制，比如播放音乐，收听调频收音机，又或者接听电话时，音频信号在codec内的流通路线是不一样的。
+4. 对音频信号做出相应的处理，例如音量控制，功率放大，EQ控制等等。
+
+ASoC对Codec的这些功能都定义好了一些列相应的接口，以方便地对Codec进行控制。ASoC对Codec驱动的一个基本要求是：`驱动程序的代码必须要做到平台无关性，以方便同一个Codec的代码不经修改即可用在不同的平台上`。
+
 
 ![alsa-asoc-arch](/images/audio/alsa/alas-asoc-arch.png)
 
@@ -157,7 +170,7 @@ Widget是各个组件内部的小单元。处在活动通路上电，不在活�
 
 ## PCM设备
 
-### 放音 -- 应用 
+### 放音 -- 应用
 
 >`tinyplay`播放音乐
 
@@ -657,6 +670,3 @@ asoc:snd_soc_reg_write
 ### 扫频
 
 >利用正弦波信号的频率随时间在一定范围内反复扫描
-
-
-
