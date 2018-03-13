@@ -9,6 +9,12 @@ tags: [kernel, Debug]
 
 <!--more-->
 
+|  工具  |  描述    |
+| :----: | :-----: |
+| debugfs文件系统 | 提供了 procfs, sysfs, debugfs以及 relayfs 来与用户空间进行数据交互, 尤其是 debugfs, 这是内核开发者们实现的专门用来调试的文件系统接口. 其他的工具或者接口, 多数都依赖于 debugfs |
+| printk | 强大的输出系统, 没有什么逻辑上的bug是用PRINT解决不了的 |
+| ftrace以及其前端工具trace-cmd等 | 内核提供了 ftrace 工具来实现检查点, 事件等的检测, 这一框架依赖于 debugfs, 他在 debugfs 中的 tracing 子系统中为用户提供了丰富的操作接口, 我们可以通过该系统对内核实现检测和分析. 功能虽然强大, 但是其操作并不是很简单, 因此使用者们为实现了 trace-cmd 等前端工具, 简化了 ftrace 的使用.|
+|
 
 ## objdump
 
@@ -177,12 +183,12 @@ blk function_graph wakeup_rt wakeup preemptirqsoff preemptoff irqsoff function n
 > 内核中断
 
 ``` shell
-# echo 0 > tracing_on 
+# echo 0 > tracing_on
 # echo > trace
-# echo nop > current_tracer 
-# echo irq > set_event 
+# echo nop > current_tracer
+# echo irq > set_event
 # echo 1 > tracing_on
-# cat trace_pipe 
+# cat trace_pipe
 		sh-100   [000] d.h3  1333.894909: irq_handler_entry: irq=58 name=uart1
 		sh-100   [000] d.h3  1333.894931: irq_handler_exit: irq=58 ret=handled
 	<idle>-0     [000] d.h2  1333.902444: irq_handler_entry: irq=34 name=jz-timerirq
@@ -202,5 +208,8 @@ blk function_graph wakeup_rt wakeup preemptirqsoff preemptoff irqsoff function n
               sh-100   [000] d.h3  1342.498892: irq_handler_exit: irq=58 ret=handled
 		<idle>-0     [000] d.h2  1342.673707: irq_handler_entry: irq=34 name=jz-timerirq
 		<idle>-0     [000] d.h2  1342.673717: irq_handler_exit: irq=34 ret=handled
-
 ```
+
+## 参考
+
+1. [Linux内核调试的方式以及工具集锦](http://blog.csdn.net/gatieme/article/details/68948080)
