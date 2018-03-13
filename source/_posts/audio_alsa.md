@@ -167,6 +167,13 @@ Widget是各个组件内部的小单元。处在活动通路上电，不在活�
 * soc芯片的驱动开发者，Platform实现snd_pcm的操作方法集和DAI的配置如操作 DMA，I2S/AC97/PCM的设定等;
 * 板级的开发者，描述Machine上codec与platform之间的总线连接， earphone/Speaker的布线情况就可以了。
 
+### DAPM
+
+
+### DPCM
+
+>[Dynamic PCM](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/plain/Documentation/sound/soc/dpcm.rst?h=v4.16-rc5)
+
 
 ## PCM设备
 
