@@ -5,7 +5,7 @@ categories: Linux内核
 tags: [kernel, OOM]
 ---
 
-
+内核出现OOM的log分析：
 
 <!--more-->
 
