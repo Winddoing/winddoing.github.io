@@ -5,6 +5,9 @@ type: "download"
 comments: false
 ---
 
+## uboot
+* [uboot启动流程.pdf](/downloads/uboot/uboot启动流程.pdf)
+
 ## Kernel
 * [sk_buff详解.pdf](/downloads/kernel/sk_buff详解.pdf)
 
