@@ -63,7 +63,7 @@ asm __volatile__("ssnop\n\t");
 
 ftrace 是内建于 Linux 内核的跟踪工具，从 2.6.27 开始加入主流内核。使用 ftrace 可以调试或者分析内核中发生的事情。ftrace 提供了不同的跟踪器，以用于不同的场合，比如跟踪内核函数调用、对上下文切换进行跟踪、查看中断被关闭的时长、跟踪内核态中的延迟以及性能问题等
 
->Documentation/trace/ftrace.txt
+>[Documentation/trace/ftrace.txt](https://elixir.bootlin.com/linux/v4.16-rc5/source/Documentation/trace)
 
 ### kernel配置
 
