@@ -1,7 +1,7 @@
 ---
 title: 高端内存
 date: 2018-03-14 23:07:24
-categories:Linux内核
+categories: Linux内核
 tags: [内存]
 ---
 
@@ -25,8 +25,6 @@ Linux高端内存是针对物理内存来说的，虚拟内存没有高端这个
          Logical Addresses          Physical Addresses
 ```
 <!--more-->
-
-##
 
 ## 启动参数"mem="
 
