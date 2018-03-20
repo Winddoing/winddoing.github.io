@@ -77,7 +77,7 @@ SECTIONS
 	...
 }
 ```
->[u-boot-spl.lds](/downloads/uboot/u-boot-spl.lds)
+>[u-boot-spl.lds](/downloads/uboot/u-boot-spl.lds.txt)
 
 在bootram将SPL搬到静态ram中后，执行SPL的代码将从`_start`开始。
 
@@ -88,7 +88,7 @@ SECTIONS
 #define CONFIG_SYS_INIT_SP_OFFSET   0x400000   
 ```
 
-```
+``` asm
 #define RESERVED_FOR_SC(x) .space 1536, x
 
 	.set noreorder
@@ -159,12 +159,12 @@ cache_clear_a_line:
 	j	board_init_f
 	nop
 ```
->[start.S](/downloads/uboot/start.S)
+>[start.S](/downloads/uboot/spl_start.S)
 
 1. 设置spl的空间布局,加载识别区域，SC填充区域等
 2. 选择MMU类型
 3. 通过SR，使能异常向量和配置中断屏蔽位
-4. 配置一个特殊的中断异常入口（0x200） 
+4. 配置一个特殊的中断异常入口（0x200）
 5. 初始化cache
 6. 跳转`board_init_f`
 
