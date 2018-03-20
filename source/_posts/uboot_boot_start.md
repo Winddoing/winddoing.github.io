@@ -64,6 +64,17 @@ SECTIONS
 		*(.text*)
 	} >.sram
 	...
+
+	.bss : {                          
+		. = ALIGN(4);                 
+		__bss_start = .;              
+		*(.sbss.*)                    
+		*(.bss.*)                     
+		*(COMMON)                     
+		. = ALIGN(4);                 
+		__bss_end = .;                
+	} >.sram                          
+	...
 }
 ```
 >[u-boot-spl.lds](/downloads/uboot/u-boot-spl.lds)
@@ -231,6 +242,18 @@ void board_init_f(ulong dummy)
 
 ##### 为什么要清除BSS段？
 
+``` C
+/* Clear the BSS */                                      
+memset(__bss_start, 0, (char *)&__bss_end - __bss_start);
+```
+
+>可执行程序包括BSS段、代码段、数据段。BSS（Block Started by Symbol）通常指用来存放程序中未初始化的全局变量和静态变量的一块内存区域，特点是可读可写，在程序执行之前BSS段会自动清0。所以，未初始化的全局变量在程序执行之前已经成0
+
+bss段起源于unix中。变量分两种，`全局变量`和`局部变量`。局部变量是保留在栈中的，根据C语言规定，如果对局部变量不进行初始化，初始值是不确定的，在栈中位置也不固定。全局变量有专门的数据段存储，且初始化值为0，且位置是固定的。综上，数据分为俩种，`位置固定（全局，数据段）`，`位置不固定（局部-栈里）`。
+
+其实，数据段里的这么多`全局变量都初始化为0存在目标文件中是没有必要的，增大了存储空间使用`。所以就把数据段里边数据，也即未初始化全局变量存放到了BSS段里边. 并未占有真正的空间。`当有目标文件被载入的时候，清除bss段，将全局变量清0`, 其实也是在为bss段分配空间.
+
+
 
 #### board_init_r
 
@@ -298,9 +321,18 @@ void board_init_r(gd_t *dummy1, ulong dummy2)
 ```
 >file: common/spl/spl.c
 
-1. timer_init为什么初始化两次？
+1. 从存储介质（sd/emmc）读取uboot，并跳转到uboot执行
+2. 在SPL运行完后，已可以直接加载kernel或相应的BIN文件执行
 
 ### 执行C代码所必需的条件或者环境？
+
+``` C
+la  sp, STACK_TOP   // sp         
+j   main                          
+nop                               
+```
+1. 禁止看门狗，防止CPU不断的重启
+2. 设置堆栈
 
 ### SPL执行阶段其栈空间的位置？
 
@@ -319,7 +351,7 @@ void board_init_r(gd_t *dummy1, ulong dummy2)
 	|             |
 	|             |
 	|             |
-	+-------------+ <--+0xb2408000
+	+-------------+ <-+ 0xb2408000
 ```
 
 CPU上电后，在bootrom中执行时，由于其是固化的代码段（只读）。因此在上电初期将Data段，BSS段以及栈指定到TCSM中（一个静态RAM，CPU上电即可以使用）。bootrom中一些外围设备如sd boot的SD控制器等初始化完成后，在SD卡中将SPL加载到TCSM中，bootrom的PC跳入SPL进行执行，此时***依然使用bootrom的栈空间***。
