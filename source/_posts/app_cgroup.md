@@ -8,7 +8,7 @@ tags: [Linux, Cgroup]
 
 CGroup 是 Control Groups 的缩写，是 Linux 内核提供的一种可以限制、记录、隔离进程组 (process groups) 所使用的物力资源 (如 cpu memory i/o 等等) 的机制。
 
->CGroup 是将任意进程进行分组化管理的 Linux 内核功能。CGroup 本身是提供将进程进行分组化管理的功能和接口的基础结构，I/O 或内存的分配控制等具体的资源管理功能是通过这个功能来实现的。这些具体的资源管理功能称为 CGroup 子系统或控制器。CGroup 子系统有控制内存的 Memory 控制器、控制进程调度的 CPU 控制器等。运行中的内核可以使用的 Cgroup 子系统由`/proc/cgroup` 来确认
+CGroup 是将任意进程进行分组化管理的 Linux 内核功能。CGroup 本身是提供将进程进行分组化管理的功能和接口的基础结构，I/O 或内存的分配控制等具体的资源管理功能是通过这个功能来实现的。这些具体的资源管理功能称为 CGroup 子系统或控制器。CGroup 子系统有控制内存的 Memory 控制器、控制进程调度的 CPU 控制器等。运行中的内核可以使用的 Cgroup 子系统由`/proc/cgroup` 来确认
 
 <!--more-->
 ## Cgroup虚拟文件系统
@@ -104,8 +104,9 @@ blkio     0       1       1
 > 一子系统最多只能附加到一个层级
 
 * 控制族群（control group）
-控制族群就是一组按照某种标准划分的进程。Cgroups 中的资源控制都是以控制族群为单位实现。一个进程可以加入到某个控制族群，也从一个进程组迁移到另一个控制族群。一个进程组的进程可以使用 cgroups 以控制族群为单位分配的资源，同时受到 cgroups 以控制族群为单位设定的限制；
-```
+
+控制族群就是一组按照某种标准划分的进程。Cgroups 中的资源控制都是以控制族群为单位实现。一个进程可以加入到某个控制族群，也从一个进程组迁移到另一个控制族群。一个进程组的进程可以使用 cgroups 以控制族群为单位分配的资源，同时受到 cgroups 以控制族群为单位设定的限制.
+``` shell
 [root@buildroot cpu]# mkdir aaa
 [root@buildroot cpu]# mkdir bbb
 [root@buildroot cpu]# ls
@@ -126,12 +127,11 @@ cgroup.clone_children  cpu.cfs_quota_us       cpu.stat
 cgroup.event_control   cpu.rt_period_us       notify_on_release
 cgroup.procs           cpu.rt_runtime_us      tasks
 cpu.cfs_period_us      cpu.shares
-
 ```
 
 * 任务（task）
 在 cgroups 中，任务就是系统的一个进程
-```
+``` shell
 [root@buildroot cpu]# cat tasks
 1
 2
@@ -141,7 +141,8 @@ cpu.cfs_period_us      cpu.shares
 ### 关系
 
 * 每次在系统中创建新层级时，该系统中的所有任务都是那个层级的默认 cgroup（我们称之为 `root cgroup`，此cgroup在创建层级时自动创建，后面在该层级中创建的cgroup都是此cgroup的后代）的初始成员;
-`root cgroup`
+
+`root cgroup:`
 ```
 [root@buildroot mnt]# cat tasks
 1
@@ -149,7 +150,8 @@ cpu.cfs_period_us      cpu.shares
 3
 ...
 ```
-`subsys cgroup`
+
+`subsys cgroup:`
 ```
 [root@buildroot mnt]# mkdir aaa
 [root@buildroot mnt]# cd aaa/
@@ -161,6 +163,19 @@ cpu.cfs_period_us      cpu.shares
 * 系统中的进程（任务）创建子进程（任务）时，该子任务自动成为其父进程所在 cgroup的成员。然后可根据需要将该子任务移动到不同的 cgroup 中，但开始时它总是继承其父任务的cgroup。
 
 
+## CPU资源控制
+
+CPU资源的控制，主要是对CPU计算的控制，可以最大化的利用CPU资源。而`进程`是对CPU资源的利用实体。
+
+CPU资源控制的体现方式：
+1. 时间片
+2. 调度策略
+
+
+## 进程迁移
+
+
+## CPU子系统实现
 
 ## 参考
 
