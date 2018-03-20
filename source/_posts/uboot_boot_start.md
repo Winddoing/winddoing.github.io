@@ -78,34 +78,84 @@ SECTIONS
 ```
 
 ```
+#define RESERVED_FOR_SC(x) .space 1536, x
+
 	.set noreorder
-	.set mips32r2
 
 	.globl _start
-	.text
+	.section .start_section
 _start:
-	/* Initialize $gp */
-	bal	1f
-	 nop
-	.word	_gp
-1:
-	lw	gp, 0(ra)
+	/* magic value ("MSPL") */
+	.word 0x4d53504c
+	.space 508, 0
+	RESERVED_FOR_SC(0)
 
-	/* Set up temporary stack */
-	li	sp, CONFIG_SYS_SDRAM_BASE + CONFIG_SYS_INIT_SP_OFFSET
-	la	t9, board_init_f
+#ifdef CONFIG_SPL_VERSION
+	.word (0x00000000 | CONFIG_SPL_VERSION)
+	.space (512-20),0
+#else
+	.space (512-16),0
+#endif
 
-	jr	t9
-	 nop
+	/* Invalidate BTB */
+	mfc0	v0, CP0_CONFIG, 7
+	nop
+	ori	v0, v0, 2 /* MMU类型：BAT类型*/
+	mtc0	v0, CP0_CONFIG, 7
+	nop
 
-	 ...
+	/*
+	 * CU0=UM=EXL=IE=0, BEV=ERL=1, IP2~7=1
+	 */
+	li	t0, 0x0040FC04
+	mtc0	t0, CP0_STATUS
+
+	/* CAUSE register */
+	/* IV=1, use the specical interrupt vector (0x200) */
+	li	t1, 0x00800000
+	mtc0	t1, CP0_CAUSE
+
+	.set push
+	.set	mips32
+init_caches:
+	li	t0, CONF_CM_CACHABLE_NONCOHERENT
+	mtc0	t0, CP0_CONFIG
+	nop
+
+	/* enable idx-store-data cache insn */
+	li      t0, 0x20000000
+	mtc0    t0, CP0_ECC
+
+	li	t1, KSEG0		/* Start address */
+#define CACHE_ALLOC_END (CONFIG_SYS_DCACHE_SIZE)
+
+	ori     t2, t1, CACHE_ALLOC_END	/* End address */
+	mtc0	zero, CP0_TAGLO, 0
+	mtc0	zero, CP0_TAGLO, 1
+cache_clear_a_line:
+	cache   INDEX_STORE_TAG_I, 0(t1)
+	cache   INDEX_STORE_TAG_D, 0(t1)
+	addiu   t1, t1, CONFIG_SYS_CACHELINE_SIZE
+	bne     t1, t2, cache_clear_a_line
+	nop
+	.set pop
+
+	/* Set up stack */
+#ifdef CONFIG_SPL_STACK
+	li	sp, CONFIG_SPL_STACK
+#endif
+
+	j	board_init_f
+	nop
 ```
 >[start.S](/downloads/uboot/start.S)
 
-1. 设置栈指针的位置`0x80400000`
-2. 跳转`board_init_f`
-
-#### DDR没有初始化完成，该地址`0x80400000`指向那段空间？
+1. 设置spl的空间布局,加载识别区域，SC填充区域等
+2. 选择MMU类型
+3. 通过SR，使能异常向量和配置中断屏蔽位
+4. 配置一个特殊的中断异常入口（0x200） 
+5. 初始化cache
+6. 跳转`board_init_f`
 
 
 ### soc.c
@@ -177,6 +227,10 @@ void board_init_f(ulong dummy)
 4. 初始化时钟,配置CPU，DDR和外设的时钟大小
 5. 初始化看门狗
 6. 初始化DDR
+7. 清除BSS段
+
+##### 为什么要清除BSS段？
+
 
 #### board_init_r
 
@@ -244,6 +298,30 @@ void board_init_r(gd_t *dummy1, ulong dummy2)
 ```
 >file: common/spl/spl.c
 
-1. timer_init为什么执行两次？
+1. timer_init为什么初始化两次？
+
+### 执行C代码所必需的条件或者环境？
+
+### SPL执行阶段其栈空间的位置？
+
+```
+    TCSM
+	+-------------+ <-+ 0xb2400000
+	|  .data .bss |       4K
+	+----------+--+ <-+ 0xb2401000
+	|    stack |  |       4K
+	+----------v--+ <-+ 0xb2402000
+	|             |
+	|             |
+	|             |
+	|   load spl  |       24KB
+	|             |
+	|             |
+	|             |
+	|             |
+	+-------------+ <--+0xb2408000
+```
+
+CPU上电后，在bootrom中执行时，由于其是固化的代码段（只读）。因此在上电初期将Data段，BSS段以及栈指定到TCSM中（一个静态RAM，CPU上电即可以使用）。bootrom中一些外围设备如sd boot的SD控制器等初始化完成后，在SD卡中将SPL加载到TCSM中，bootrom的PC跳入SPL进行执行，此时***依然使用bootrom的栈空间***。
 
 ## uboot
