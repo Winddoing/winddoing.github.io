@@ -796,10 +796,11 @@ in_ram:
 1. 移动gp指针
 2. 复制代码到RAM中
 3. 刷新一下cache
-4. 跳到RAM代码当中去（in_ram）,in_ram的主要工作是：更新GOT;清空BSS段；最后跳到board_init_r。我们可以看到board_init_r最后一个参数是在分支延迟槽中赋值的。
-这其实这里主要说一下GOTs(global offset tables)这个东东，这是uboot能跳转到不同空间运行的原理
+4. 跳到RAM代码当中去（in_ram）,in_ram的主要工作是：更新GOT;清空BSS段；最后跳到`board_init_r`。
 
 ##### uboot GOT
+
+>GOTs(global offset tables):是uboot能跳转到不同空间运行的原理.
 
 ##### 划分RAM
 
@@ -815,7 +816,7 @@ in_ram:
 |    Board Info    |
 +------------------+
 |                  |
-|   mallco(+en^)   |
+|   mallco(+env)   |
 +------------------+
 |                  |
 |   uboot code     |
