@@ -169,7 +169,84 @@ cache_clear_a_line:
 
 ### soc.c
 
+#### 数据结构
+
+##### bd_t
+
+>保存板子参数
+
+``` C
+typedef struct bd_info {                                                           
+    unsigned int    bi_baudrate;    /*serial console baudrate*/                  
+    unsigned long   bi_arch_number; /*unique id for this board*/                 
+    unsigned long   bi_boot_params; /*where this board expects params*/          
+    unsigned long   bi_memstart;    /*start of DRAM memory*/                     
+    phys_size_t bi_memsize; /*size  of DRAM memory in bytes*/                    
+    unsigned long   bi_flashstart;  /*start of FLASH memory*/                    
+    unsigned long   bi_flashsize;   /*size  of FLASH memory*/                    
+    unsigned long   bi_flashoffset; /*reserved area for startup monitor*/        
+} bd_t;                                                                            
+```
+>file: arch/mips/include/asm/u-boot.h
+
+
+##### gd_t
+
+>全局的系统初始化参数
+
+``` C
+typedef struct global_data {
+	bd_t *bd;
+	unsigned long flags;
+	unsigned int baudrate;
+	unsigned long cpu_clk;	/* CPU clock in Hz!		*/
+	unsigned long bus_clk;
+	/* We cannot bracket this with CONFIG_PCI due to mpc5xxx */
+	unsigned long pci_clk;
+	unsigned long mem_clk;
+#if defined(CONFIG_LCD) || defined(CONFIG_VIDEO)
+	unsigned long fb_base;	/* Base address of framebuffer mem */
+#endif
+	...
+#ifdef CONFIG_BOARD_TYPES
+	unsigned long board_type;
+#endif
+	unsigned long have_console;	/* serial_init() was called */
+#ifdef CONFIG_PRE_CONSOLE_BUFFER
+	unsigned long precon_buf_idx;	/* Pre-Console buffer index */
+#endif
+#ifdef CONFIG_MODEM_SUPPORT
+	unsigned long do_mdm_init;
+	unsigned long be_quiet;
+#endif
+	unsigned long env_addr;	/* Address  of Environment struct */
+	unsigned long env_valid;	/* Checksum of Environment valid? */
+
+	unsigned long ram_top;	/* Top address of RAM used by U-Boot */
+
+	unsigned long relocaddr;	/* Start address of U-Boot in RAM */
+	phys_size_t ram_size;	/* RAM size */
+	unsigned long mon_len;	/* monitor len */
+	unsigned long irq_sp;		/* irq stack pointer */
+	unsigned long start_addr_sp;	/* start_addr_stackpointer */
+	unsigned long reloc_off;
+	struct global_data *new_gd;	/* relocated global data */
+	const void *fdt_blob;	/* Our device tree, NULL if none */
+	void *new_fdt;		/* Relocated FDT */
+	unsigned long fdt_size;	/* Space reserved for relocated FDT */
+	void **jt;		/* jump table */
+	char env_buf[32];	/* buffer for getenv() before reloc. */
+#ifdef CONFIG_TRACE
+	void		*trace_buff;	/* The trace buffer */
+#endif
+	struct arch_global_data arch;	/* architecture-specific data */
+} gd_t;
+```
+>file: include/asm-generic/global_data.h
+
+
 #### board_init_f
+
 ``` C
 void board_init_f(ulong dummy)
 {
