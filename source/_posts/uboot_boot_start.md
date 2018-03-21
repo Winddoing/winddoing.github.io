@@ -238,6 +238,26 @@ void board_init_f(ulong dummy)
 6. 初始化DDR
 7. 清除BSS段
 
+##### ginfo
+
+``` C
+#include <asm-generic/global_data.h>                                             
+#define DECLARE_GLOBAL_DATA_PTR     register volatile gd_t *gd asm ("k0")         
+
+DECLARE_GLOBAL_DATA_PTR;                          
+gd_t gdata __attribute__ ((section(".data")));    
+
+struct global_info ginfo __attribute__ ((section(".data"))) = {   
+    .extal      = CONFIG_SYS_EXTAL,                               
+    .cpufreq    = CONFIG_SYS_CPU_FREQ,                            
+    .ddrfreq    = CONFIG_SYS_MEM_FREQ,                            
+    .uart_idx   = CONFIG_SYS_UART_INDEX,                          
+    .baud_rate  = CONFIG_BAUDRATE,                                
+	...
+}
+```
+系统信息的结构体 (gd 是指 Global Data, bd 是指 Board info Data) 应该存放于在 DRAM 控制器未初始化之前就能使用的空间中，比如TCSM中。
+
 ##### 为什么要清除BSS段？
 
 ``` C
@@ -428,6 +448,7 @@ jr	t9
 
 #### 为什么不直接跳转，而使用`jr`
 
+这样就可以知道代码的位置,而不是标号值。
 
 ### board.c
 
@@ -505,7 +526,7 @@ void board_init_f(ulong bootflag)
 
 	/* round down to next 4 kB limit.
 	 */
-	addr &= ~(4096 - 1);
+	addr &= ~(4096 - 1);	//addr &= ~0x0FFF 这种计算是常用的地址对齐，向下 4K 字节对齐
 	printf("Top of RAM usable for U-Boot at: %08lx\n", addr);
 #ifdef CONFIG_LCD
 #ifdef CONFIG_FB_ADDR
@@ -523,13 +544,13 @@ void board_init_f(ulong bootflag)
 	 */
 	len = bss_end() - CONFIG_SYS_MONITOR_BASE;
 	addr -= len;
-	addr &= ~(16 * 1024 - 1);
+	addr &= ~(16 * 1024 - 1); // 向下 64K 字节对齐
 
 	printf("Reserving %ldk for U-Boot at: %08lx\n", len >> 10, addr);
 
 	 /* Reserve memory for malloc() arena.
 	 */
-	addr_sp = addr - TOTAL_MALLOC_LEN;
+	addr_sp = addr - TOTAL_MALLOC_LEN;	// 划分 malloc() 使用的空间，即所谓的堆空间
 	printf("Reserving %dk for malloc() at: %08lx\n",
 			TOTAL_MALLOC_LEN >> 10, addr_sp);
 
@@ -562,7 +583,7 @@ void board_init_f(ulong bootflag)
 	 * Clear initial stack frame
 	 */
 	addr_sp -= 16;
-	addr_sp &= ~0xF;
+	addr_sp &= ~0xF; // 栈空间 16 字节对齐
 	s = (ulong *)addr_sp;
 	*s-- = 0;
 	*s-- = 0;
@@ -576,6 +597,7 @@ void board_init_f(ulong bootflag)
 	bd->bi_memsize	= gd->ram_size;		/* size of DRAM in bytes */
 	bd->bi_baudrate	= gd->baudrate;		/* Console Baudrate */
 
+	// 将在临时栈空间中的 GD 数据拷贝入 DRAM 中，至此， BD 和 GD 都已经存在于 DRAM 中了
 	memcpy(id, (void *)gd, sizeof(gd_t));
 
 	relocate_code(addr_sp, id, addr);
@@ -617,7 +639,14 @@ init_fnc_t *init_sequence[] = {
 
 #### relocate_code
 
-重定位，U-boot 将自己的代码段、数据段、 BSS 段等搬到在 DRAM 中。
+重定位，U-boot 将自己的代码段、数据段、 BSS 段等搬到在 DRAM 中.
+
+``` C
+relocate_code(addr_sp, id, addr);
+```
+>id: 之前在 U-boot 的 1M 空间中分配的 GD 结构体的地址
+>addr: U-boot 重新定位到 DRAM 之后的代码起始地址
+
 
 ``` asm
 /*
@@ -762,6 +791,38 @@ in_ram:
 	 move	a1, a2
 
 	.end	relocate_code
+```
+
+1. 移动gp指针
+2. 复制代码到RAM中
+3. 刷新一下cache
+4. 跳到RAM代码当中去（in_ram）,in_ram的主要工作是：更新GOT;清空BSS段；最后跳到board_init_r。我们可以看到board_init_r最后一个参数是在分支延迟槽中赋值的。
+这其实这里主要说一下GOTs(global offset tables)这个东东，这是uboot能跳转到不同空间运行的原理
+
+##### uboot GOT
+
+##### 划分RAM
+
+```
++------------------+
+|                  |
+|    boot params   |
++------------------+
+|                  |
+|    Global Data   |
++------------------+
+|                  |
+|    Board Info    |
++------------------+
+|                  |
+|   mallco(+en^)   |
++------------------+
+|                  |
+|   uboot code     |
+|                  |
+|                  |
+|                  |
++------------------+
 ```
 
 #### board_init_r
