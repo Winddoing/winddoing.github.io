@@ -5,8 +5,11 @@ categories: uboot
 tags: [uboot, boot]
 ---
 
+Bootloader 是在操作系统运行之前执行的一段小程序。通过这段小程序，我们可以初始化硬件设备、建立内存空间的映射表，从而建立适当的系统软硬件环境，为最终调用操作系统内核做好准备。
 
 uboot引导系统启动, UBoot包含两个阶段的启动，一个是SPL启动，一个是正常的启动我们称为第二阶段Uboot。当然，我们也可以选择使用SPL和不使用，主要根据CPU中的SRAM（或者cache，bootram阶段需要初始化完成）的大小，如果不能放下uboot大小，则必须先使用SPL启动，进行DDR的初始化，以获取更大的可以空间。
+
+>Version: u-boot-201307
 
 ```
 +----------------+-----------------------------------+
@@ -46,8 +49,8 @@ ENTRY: _start (start.S)
 ### u-boot-spl.lds
 
 ``` C
-#define CONFIG_SPL_TEXT_BASE        0xf4001000                     
-#define CONFIG_SPL_MAX_SIZE     (12 * 1024)                        
+#define CONFIG_SPL_TEXT_BASE        0xf4001000
+#define CONFIG_SPL_MAX_SIZE     (12 * 1024)
 ```
 ``` asm
 MEMORY { .sram : ORIGIN = CONFIG_SPL_TEXT_BASE,\
@@ -65,15 +68,15 @@ SECTIONS
 	} >.sram
 	...
 
-	.bss : {                          
-		. = ALIGN(4);                 
-		__bss_start = .;              
-		*(.sbss.*)                    
-		*(.bss.*)                     
-		*(COMMON)                     
-		. = ALIGN(4);                 
-		__bss_end = .;                
-	} >.sram                          
+	.bss : {
+		. = ALIGN(4);
+		__bss_start = .;
+		*(.sbss.*)
+		*(.bss.*)
+		*(COMMON)
+		. = ALIGN(4);
+		__bss_end = .;
+	} >.sram
 	...
 }
 ```
@@ -238,7 +241,7 @@ void board_init_f(ulong dummy)
 ##### 为什么要清除BSS段？
 
 ``` C
-/* Clear the BSS */                                      
+/* Clear the BSS */
 memset(__bss_start, 0, (char *)&__bss_end - __bss_start);
 ```
 
@@ -322,9 +325,9 @@ void board_init_r(gd_t *dummy1, ulong dummy2)
 ### 执行C代码所必需的条件或者环境？
 
 ``` C
-la  sp, STACK_TOP   // sp         
-j   main                          
-nop                               
+la  sp, STACK_TOP   // sp
+j   main
+nop
 ```
 1. 禁止看门狗，防止CPU不断的重启
 2. 设置堆栈
@@ -392,8 +395,8 @@ SECTIONS
 ### start.S
 
 ``` C
-#define CONFIG_SYS_SDRAM_BASE       0x80000000 /* cached (KSEG0) address */  
-#define CONFIG_SYS_INIT_SP_OFFSET   0x400000   
+#define CONFIG_SYS_SDRAM_BASE       0x80000000 /* cached (KSEG0) address */
+#define CONFIG_SYS_INIT_SP_OFFSET   0x400000
 ```
 
 ``` asm
@@ -423,19 +426,22 @@ jr	t9
 
 >`CONFIG_SYS_SDRAM_BASE ＝ 0x8000 0000` ，是 MIPS 虚拟寻址空间中`kseg0`段的起始地址（参考《 See MIPS Run 》），它经过 CPU TLB 翻译后是 DRAM 内存的起始物理地址。
 
+#### 为什么不直接跳转，而使用`jr`
+
+
 ### board.c
 
 #### uboot内存布局：
 
 ``` C
-#define CONFIG_SYS_SDRAM_BASE       0x80000000 /* cached (KSEG0) address */   
-#define CONFIG_SYS_SDRAM_MAX_TOP    0x90000000 /* don't run into IO space */  
-#define CONFIG_SYS_INIT_SP_OFFSET   0x400000                                  
-#define CONFIG_SYS_LOAD_ADDR        0x88000000                                
-#define CONFIG_SYS_MEMTEST_START    0x80000000                                
-#define CONFIG_SYS_MEMTEST_END      0x88000000                                
-#define CONFIG_SYS_TEXT_BASE        0x80100000                                
-#define CONFIG_SYS_MONITOR_BASE     CONFIG_SYS_TEXT_BASE                      
+#define CONFIG_SYS_SDRAM_BASE       0x80000000 /* cached (KSEG0) address */
+#define CONFIG_SYS_SDRAM_MAX_TOP    0x90000000 /* don't run into IO space */
+#define CONFIG_SYS_INIT_SP_OFFSET   0x400000
+#define CONFIG_SYS_LOAD_ADDR        0x88000000
+#define CONFIG_SYS_MEMTEST_START    0x80000000
+#define CONFIG_SYS_MEMTEST_END      0x88000000
+#define CONFIG_SYS_TEXT_BASE        0x80100000
+#define CONFIG_SYS_MONITOR_BASE     CONFIG_SYS_TEXT_BASE
 ```
 ```
 +-------------------+ <-+ 0x9000 0000
@@ -577,6 +583,37 @@ void board_init_f(ulong bootflag)
 	/*NOTREACHED - relocate_code() does not return*/
 }
 ```
+
+* 调用init_sequence 函数队列，对板子进行一些初始化
+
+``` C
+/*
+ * initialization sequence configurable to the user.
+ *
+ * The requirements for any new initalization function is simple: it
+ * receives a pointer to the "global data" structure as it's only
+ * argument, and returns an integer return code, where 0 means
+ * "continue" and != 0 means "fatal error, hang the system".
+ */
+typedef int (init_fnc_t)(void);
+
+init_fnc_t *init_sequence[] = {
+	 board_early_init_f,
+	 timer_init,
+	 env_init,		/* initialize environment */
+#ifdef CONFIG_INCA_IP
+	 incaip_set_cpuclk,	/* set cpu clock according to env. variable */
+#endif
+	 init_baudrate,		/* initialize baudrate settings */
+	 serial_init,		/* serial communications setup */
+	 console_init_f,
+	 display_banner,		/* say that we are here */
+	 checkboard,
+	 init_func_ram,
+	 NULL,
+};
+```
+* 为uboot在DRAM中执行准备条件
 
 #### relocate_code
 
@@ -778,29 +815,7 @@ void board_init_r(gd_t *id, ulong dest_addr)
 	bd->bi_flashsize = 0;
 	bd->bi_flashoffset = 0;
 #endif
-
-#ifdef CONFIG_CMD_NAND
-	puts("NAND:  ");
-	nand_init();		/* go init the NAND */
-#endif
-#ifdef CONFIG_CMD_SPINAND
-	spi_nand_init();
-#endif
-#ifdef CONFIG_CMD_SFCNAND
-	sfc_nand_init();
-#endif
-#ifdef CONFIG_CMD_SFC_NOR
-	sfc_nor_flash_init();
-#endif
-#ifdef CONFIG_CMD_ZM_NAND
-	puts("NAND_ZM:	");
-	nand_zm_init();
-#endif
-
-#if defined(CONFIG_CMD_ONENAND)
-	onenand_init();
-#endif
-
+	...
 #ifdef CONFIG_GENERIC_MMC
 	puts("MMC:   ");
 	mmc_initialize(bd);
@@ -809,12 +824,6 @@ void board_init_r(gd_t *id, ulong dest_addr)
 	/* relocate environment function pointers etc. */
 	env_relocate();
 
-#if defined(CONFIG_PCI)
-	/*
-	 * Do pci configuration
-	 */
-	pci_init();
-#endif
 
 /*leave this here (after malloc(), environment and PCI are working)*/
 	/* Initialize stdio devices */
@@ -828,11 +837,6 @@ void board_init_r(gd_t *id, ulong dest_addr)
 	/* Initialize from environment */
 	load_addr = getenv_ulong("loadaddr", 16, load_addr);
 
-#ifdef CONFIG_CMD_SPI
-	puts("SPI:   ");
-	spi_init();		/* go init the SPI */
-	puts("ready\n");
-#endif
 
 #ifdef CONFIG_USB_GADGET
 extern void board_usb_init(void);
@@ -858,3 +862,70 @@ extern void board_usb_init(void);
 	/*NOTREACHED - no way out of command loop except booting*/
 }
 ```
+
+1. 初始化串口
+2. 初始化系统内存分配函数
+3. 如果使用MMC存储介质，初始化MMC设备
+4. 初始化环境变量的指针,将 env_ptr 指针及其指向的地址初始化，用来存放环境变量结构体，然后将 flash 中的环境变量拷贝到内存中。
+5. 初始化sdio设备
+6. 初始化网络设备
+7. 进去命令循环（即整个boot的工作循环），接受用户从串口输入的命令，然后进行相应的工作
+
+
+#### main_loop
+
+
+``` C
+void main_loop(void)
+{
+	...
+	bootstage_mark_name(BOOTSTAGE_ID_MAIN_LOOP, "main_loop");
+
+	/*刷新LCD*/
+#if defined(CONFIG_UPDATE_TFTP)
+	update_tftp(0UL);
+#endif /* CONFIG_UPDATE_TFTP */
+/*从环境变量中取得bootdelay 内核等待延时*/
+#ifdef CONFIG_BOOTDELAY
+	process_boot_delay();
+#endif
+	/*
+	 * Main Loop for Monitor Command Processing
+	 */
+	for (;;) {
+		len = readline (CONFIG_SYS_PROMPT);
+
+		flag = 0;	/* assume no special flags for now */
+		if (len > 0)
+			strcpy (lastcommand, console_buffer);
+		else if (len == 0)
+			flag |= CMD_FLAG_REPEAT;
+
+		if (len == -1)
+			puts ("<INTERRUPT>\n");
+		else
+			rc = run_command(lastcommand, flag); //执行命令
+
+		if (rc <= 0) {
+			/* invalid command or not repeatable, forget it */
+			lastcommand[0] = 0;
+		}
+	}
+}
+```
+>file:common/main.c
+
+
+#### do_bootm
+
+将内核解压缩，然后调用do_bootm_linux引导内核
+
+
+#### do_bootm_linux
+
+启动内核
+
+
+
+
+
