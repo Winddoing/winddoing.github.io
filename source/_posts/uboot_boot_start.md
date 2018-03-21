@@ -872,7 +872,7 @@ extern void board_usb_init(void);
 7. 进去命令循环（即整个boot的工作循环），接受用户从串口输入的命令，然后进行相应的工作
 
 
-#### main_loop
+### main_loop
 
 
 ``` C
@@ -916,16 +916,11 @@ void main_loop(void)
 >file:common/main.c
 
 
-#### do_bootm
+### do_bootm
 
 将内核解压缩，然后调用do_bootm_linux引导内核
 
 
-#### do_bootm_linux
+### do_bootm_linux
 
 启动内核
-
-
-
-
-
