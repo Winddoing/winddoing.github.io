@@ -176,16 +176,16 @@ cache_clear_a_line:
 >保存板子参数
 
 ``` C
-typedef struct bd_info {                                                           
-    unsigned int    bi_baudrate;    /*serial console baudrate*/                  
-    unsigned long   bi_arch_number; /*unique id for this board*/                 
-    unsigned long   bi_boot_params; /*where this board expects params*/          
-    unsigned long   bi_memstart;    /*start of DRAM memory*/                     
-    phys_size_t bi_memsize; /*size  of DRAM memory in bytes*/                    
-    unsigned long   bi_flashstart;  /*start of FLASH memory*/                    
-    unsigned long   bi_flashsize;   /*size  of FLASH memory*/                    
-    unsigned long   bi_flashoffset; /*reserved area for startup monitor*/        
-} bd_t;                                                                            
+typedef struct bd_info {
+    unsigned int    bi_baudrate;    /*serial console baudrate*/
+    unsigned long   bi_arch_number; /*unique id for this board*/
+    unsigned long   bi_boot_params; /*where this board expects params*/
+    unsigned long   bi_memstart;    /*start of DRAM memory*/
+    phys_size_t bi_memsize; /*size  of DRAM memory in bytes*/
+    unsigned long   bi_flashstart;  /*start of FLASH memory*/
+    unsigned long   bi_flashsize;   /*size  of FLASH memory*/
+    unsigned long   bi_flashoffset; /*reserved area for startup monitor*/
+} bd_t;
 ```
 >file: arch/mips/include/asm/u-boot.h
 
@@ -318,18 +318,18 @@ void board_init_f(ulong dummy)
 ##### ginfo
 
 ``` C
-#include <asm-generic/global_data.h>                                             
-#define DECLARE_GLOBAL_DATA_PTR     register volatile gd_t *gd asm ("k0")         
+#include <asm-generic/global_data.h>
+#define DECLARE_GLOBAL_DATA_PTR     register volatile gd_t *gd asm ("k0")
 
-DECLARE_GLOBAL_DATA_PTR;                          
-gd_t gdata __attribute__ ((section(".data")));    
+DECLARE_GLOBAL_DATA_PTR;
+gd_t gdata __attribute__ ((section(".data")));
 
-struct global_info ginfo __attribute__ ((section(".data"))) = {   
-    .extal      = CONFIG_SYS_EXTAL,                               
-    .cpufreq    = CONFIG_SYS_CPU_FREQ,                            
-    .ddrfreq    = CONFIG_SYS_MEM_FREQ,                            
-    .uart_idx   = CONFIG_SYS_UART_INDEX,                          
-    .baud_rate  = CONFIG_BAUDRATE,                                
+struct global_info ginfo __attribute__ ((section(".data"))) = {
+    .extal      = CONFIG_SYS_EXTAL,
+    .cpufreq    = CONFIG_SYS_CPU_FREQ,
+    .ddrfreq    = CONFIG_SYS_MEM_FREQ,
+    .uart_idx   = CONFIG_SYS_UART_INDEX,
+    .baud_rate  = CONFIG_BAUDRATE,
 	...
 }
 ```
