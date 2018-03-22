@@ -716,7 +716,11 @@ init_fnc_t *init_sequence[] = {
 
 #### relocate_code
 
-重定位，U-boot 将自己的代码段、数据段、 BSS 段等搬到在 DRAM 中.
+重定位，U-boot运行后将自己的代码段,数据段,BSS 段等搬到DRAM 中的另一个位置继续运行.
+
+**目的：**
+1. 为kernel腾出内存的低端空间，防止kernel解压覆盖uboot。
+2. 对于由静态存储器（spiflash nandflash）启动，这个relocation是必须的，将代码搬到DRAM中运行
 
 ``` C
 relocate_code(addr_sp, id, addr);
@@ -875,9 +879,21 @@ in_ram:
 3. 刷新一下cache
 4. 跳到RAM代码当中去（in_ram）,in_ram的主要工作是：更新GOT;清空BSS段；最后跳到`board_init_r`。
 
+##### 疑问
+
+1. 如何对函数进行寻址调用
+2. 如何对全局变量进行寻址操作（读写）
+3. 对于全局指针变量中存储的其他变量或函数地址在relocation之后如何操作
+
 ##### uboot GOT
 
 >GOTs(global offset tables):是uboot能跳转到不同空间运行的原理.
+
+一个完整可运行的bin文件，link时指定的链接地址，load时的加载地址，运行时的运行地址，这3个地址应该是一致的。但是`relocation`后运行地址不同于加载地址，特别是链接地址，uboot任何进行函数跳转？？？
+
+compiler在cc时加入`-fpic`或`-fpie`选项，会在目标文件中生成GOT（global offset table），将本文件中需要relocate的值存放在GOT中，函数尾部的Label来存储GOT的offset以及其中变量的offset，变量寻址首先根据尾部Label相对寻址找到GOT地址，以及变量地址在GOT中的位置，从而确定变量地址，这样对于目标文件统一修改GOT中的值，就修改了变量地址的offset，完成了relocation。
+
+ld时加入-pie选项，就会将GOT并入到`rel.dyn`段中，uboot在relocate_code中统一根据rel.dyn段修改需要relocation的数值
 
 ##### 划分RAM
 
@@ -1063,3 +1079,8 @@ void main_loop(void)
 ### do_bootm_linux
 
 启动内核
+
+
+## 参考
+
+1. [uboot的relocation原理详细分析](http://blog.csdn.net/skyflying2012/article/details/37660265)

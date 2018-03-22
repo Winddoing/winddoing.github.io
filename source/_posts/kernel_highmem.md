@@ -41,4 +41,6 @@ mem参数由early_parse_mem函数处理。每一个`mem=size@addr`格式的参�
 
 
 
+## 参考
 
+1. [Linux内核高端内存](http://ilinuxkernel.com/?p=1013)
