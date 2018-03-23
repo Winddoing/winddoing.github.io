@@ -101,7 +101,7 @@ devices   0       1       1
 freezer   0       1       1
 blkio     0       1       1
 ```
-> 一子系统最多只能附加到一个层级
+> 一个子系统最多只能附加到一个层级
 
 * 控制族群（control group）
 
@@ -163,19 +163,101 @@ cpu.cfs_period_us      cpu.shares
 * 系统中的进程（任务）创建子进程（任务）时，该子任务自动成为其父进程所在 cgroup的成员。然后可根据需要将该子任务移动到不同的 cgroup 中，但开始时它总是继承其父任务的cgroup。
 
 
-## CPU资源控制
+## 限制cpu的资源
 
 CPU资源的控制，主要是对CPU计算的控制，可以最大化的利用CPU资源。而`进程`是对CPU资源的利用实体。
 
-CPU资源控制的体现方式：
-1. 时间片
-2. 调度策略
+### 实时进程控制 -- 系统整体
+
+>控制实时进程的CPU资源占用
+
+* 获取当前系统的设置
+``` shell
+# sysctl -n kernel.sched_rt_period_us   # 实时进程调度的单位CPU时间 1 秒
+1000000
+# sysctl -n kernel.sched_rt_runtime_us  # 实时进程在 1 秒中实际占用的CPU时间, 0.95秒
+950000
+```
+* 设置实时进程占用CPU时间
+``` shell
+# sysctl -w kernel.sched_rt_runtime_us=970000 # 设置实时进程每1秒中只占0.97秒的CPU时间
+kernel.sched_rt_runtime_us = 970000
+```
+>sysctl -w : 临时修改指定参数的值
+
+### 实时进程控制 -- 系统部分
+
+>通过cgroup对一组进程中的实时进程的CPU资源进行控制.
+
+``` shell
+# mount -t cgroup cgroup -o cpu /mnt/
+# ls
+cgroup.clone_children  cpu.cfs_quota_us       notify_on_release
+cgroup.event_control   cpu.rt_period_us       release_agent
+cgroup.procs           cpu.rt_runtime_us      tasks
+cgroup.sane_behavior   cpu.shares
+cpu.cfs_period_us      cpu.stat
+# cat cpu.rt_period_us cpu.rt_runtime_us
+1000000
+950000
+```
+
+通过虚拟文件系统mount出CPU子系统，为CPU子系统的根节点，其可以控制整个系统的进程`tasks`,因此如果想对部分实时进程进行控制，需要创建子cgroup，并将需要控制的进程搬到新的cgroup中。
+
+``` shell
+# mkdir rt_ctl
+# cd rt_ctl/
+# echo PID > tasks
+# echo 1000000 > cpu.rt_period_us
+# echo 920000 > cpu.rt_runtime_us
+```
+通过配置`cpu.rt_period_us`和`cpu.rt_runtime_us`就可以对` rt_ctl cgroup` 中的进程组中的实时进程进行CPU使用时间的控制.
+
+在子cgroup中，对相关子系统进行修改时，该子系统的相关属性小于父cgroup属性的相应值。
+
+``` shell
+# echo 960000 > cpu.rt_runtime_us 
+sh: write error: Invalid arguments
+```
+
+## 限制进程的内存资源
 
 
 ## 进程迁移
 
+在多核处理器时，如果想将一个进程指定到特定的CPU上进行执行，可通过`cpuset`子系统实现。
+
+>`cpuset`:针对 CPU 核心进行隔离，其实就是把要运行的进程绑定到指定的核心上运行，通过让不同的进程占用不同的核心，以达到运算资源隔离的目的。为cgroup中的任务分配独立`CPU（在多核系统）`和`内存节点`。
+
+1. 挂载 cgroup 文件系统, 并指定 -o cpuset
+2. 指定 A 的物理CPU为 0 (双核CPU的每个核编号分别是 CPU0, CPU1)
+3. 指定 B 的物理CPU也为 1
+
+``` shell
+# mount -t cgroup -o cpuset cgroup /mnt/
+# cat cpuset.cpus cpuset.mems 
+0-1
+0
+# cd /mnt/
+# mkdir A B # 创建子cgroup A 和 B
+# cat A/cpuset.cpus 
+
+# cat B/cpuset.cpus 
+
+# echo 0 > A/cpuset.cpus # 设置A组也绑定到CPU0
+# echo 1 > B/cpuset.cpus # 设置B组也绑定到CPU1
+# echo 0 > A/cpuset.mems
+# echo 0 > B/cpuset.mems
+# echo pid1 > A/tasks
+# echo pid2 > B/tasks
+```
+>
+
 
 ## CPU子系统实现
+
+
+
 
 ## 参考
 
@@ -183,3 +265,4 @@ CPU资源控制的体现方式：
 2. [控制族群（CGROUP）](https://access.redhat.com/documentation/zh-cn/red_hat_enterprise_linux/6/html/resource_management_guide/ch01)
 3. [Linux内核工程导论——CGroup子系统](http://blog.csdn.net/ljy1988123/article/details/48032577)
 4. [Linux资源控制-使用cgroup控制CPU和内存](http://blog.csdn.net/arnoldlu/article/details/52945252)
+5. [cgroup实践-资源控制](https://www.jianshu.com/p/dc3140699e79)
