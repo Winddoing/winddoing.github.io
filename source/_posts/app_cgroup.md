@@ -216,12 +216,61 @@ cpu.cfs_period_us      cpu.stat
 在子cgroup中，对相关子系统进行修改时，该子系统的相关属性小于父cgroup属性的相应值。
 
 ``` shell
-# echo 960000 > cpu.rt_runtime_us 
+# echo 960000 > cpu.rt_runtime_us
 sh: write error: Invalid arguments
 ```
 
 ## 限制进程的内存资源
 
+内核配置：
+
+```
+Location:
+  -> General setup
+    -> Control Group support (CGROUPS [=y])
+      -> Resource counters (RESOURCE_COUNTERS [=y])
+        -> Memory Resource Controller for Control Groups (MEMCG [=y])
+```
+
+``` shell
+# mount -t cgroup -o memory cgroup /mnt/
+#
+# cd /mnt/
+# ls
+cgroup.clone_children               memory.kmem.usage_in_bytes
+cgroup.event_control                memory.limit_in_bytes
+cgroup.procs                        memory.max_usage_in_bytes
+cgroup.sane_behavior                memory.move_charge_at_immigrate
+memory.failcnt                      memory.oom_control
+memory.force_empty                  memory.pressure_level
+memory.kmem.failcnt                 memory.soft_limit_in_bytes
+memory.kmem.limit_in_bytes          memory.stat
+memory.kmem.max_usage_in_bytes      memory.swappiness
+memory.kmem.slabinfo                memory.usage_in_bytes
+memory.kmem.tcp.failcnt             memory.use_hierarchy
+memory.kmem.tcp.limit_in_bytes      notify_on_release
+memory.kmem.tcp.max_usage_in_bytes  release_agent
+memory.kmem.tcp.usage_in_bytes      tasks
+```
+>`memsw`:表示虚拟内存，不带`memsw`的仅包括物理内存
+
+* `limit_in_bytes` 是用来限制内存使用 ,memory.memsw.limit_in_bytes 必须大于或等于 memory.limit_in_byte。要解除内存限制，对应的值设为 -1
+>这种方式限制进程内存占用会有个风险。当进程试图占用的内存超过限制时，会触发 oom ，导致进程直接被杀，从而造成可用性问题。即使关闭控制组的 oom killer，在内存不足时，进程虽然不会被杀，但是会长时间进入 D 状态（等待系统调用的不可中断休眠），并被放到 OOM-waitqueue 等待队列中， 仍然导致服务不可用。因此，用 memory.limit_in_bytes 或 memory.memsw.limit_in_bytes 限制进程内存占用仅应当作为一个保险，避免在进程异常时耗尽系统资源
+
+* `memory.oom_control`：内存超限之后的OOM行为控制
+``` shell
+# cat memory.oom_control
+oom_kill_disable 0
+under_oom 0
+```
+>关闭oom killer： `oom_kill_disable为1`
+
+* `memory.soft_limit_in_bytes`: memory.limit_in_bytes 的不同是，这个限制并不会阻止进程使用超过限额的内存，只是在系统内存足够时，会优先回收超过限额的内存，使之向限定值靠拢。
+
+* `memory.usage_in_bytes`: 当前使用量
+* `memory.max_usage_in_bytes`: 最高使用量
+* `memory.failcnt`: 发生的缺页次数（申请内存失败的次数)
+* `memory.stat`: 就是内存使用情况报告了。包括当前资源总量、使用量、换页次数、活动页数量等等
 
 ## 进程迁移
 
@@ -235,26 +284,56 @@ sh: write error: Invalid arguments
 
 ``` shell
 # mount -t cgroup -o cpuset cgroup /mnt/
-# cat cpuset.cpus cpuset.mems 
+# cat cpuset.cpus cpuset.mems
 0-1
 0
 # cd /mnt/
 # mkdir A B # 创建子cgroup A 和 B
-# cat A/cpuset.cpus 
+# cat A/cpuset.cpus
 
-# cat B/cpuset.cpus 
+# cat B/cpuset.cpus
 
-# echo 0 > A/cpuset.cpus # 设置A组也绑定到CPU0
-# echo 1 > B/cpuset.cpus # 设置B组也绑定到CPU1
-# echo 0 > A/cpuset.mems
-# echo 0 > B/cpuset.mems
-# echo pid1 > A/tasks
-# echo pid2 > B/tasks
+# echo 0 > A/cpuset.cpus # 设置A组绑定到CPU0
+# echo 1 > B/cpuset.cpus # 设置B组绑定到CPU1
+# echo 0 > A/cpuset.mems # 设置A组绑定内存
+# echo 0 > B/cpuset.mems # 设置A组绑定内存
+# echo pid1 > A/tasks #将B组进程迁入A组
+# echo pid2 > B/tasks #将A组进程迁入B组
 ```
->
+>``` shell
+># echo $$ > tasks
+>sh: write error: No space left on devices
+>```
+>**原因**：没有配置`cpuset.mems`
 
+### 应用实例
+
+>ltp-full-20140115/testcases/kernel/controllers/cpuctl/cpuctl_test02.c
 
 ## CPU子系统实现
+
+### Linux内核配置：
+
+```
+Symbol: CGROUPS [=y]
+Type  : boolean
+Prompt: Control Group support
+  Location:
+      -> General setup
+
+Symbol: CGROUP_SCHED [=y]
+Type  : boolean
+Prompt: Group CPU scheduler
+  Location:
+      -> General setup
+	        -> Control Group support (CGROUPS [=y])
+```
+
+通过`CONFIG_CGROUPS`配置cgroup框架的实现,`CONFIG_CGROUP_SCHED`控制CPU子系统。
+
+
+### Cgroup
+
 
 
 
@@ -266,3 +345,6 @@ sh: write error: Invalid arguments
 3. [Linux内核工程导论——CGroup子系统](http://blog.csdn.net/ljy1988123/article/details/48032577)
 4. [Linux资源控制-使用cgroup控制CPU和内存](http://blog.csdn.net/arnoldlu/article/details/52945252)
 5. [cgroup实践-资源控制](https://www.jianshu.com/p/dc3140699e79)
+6. [cgroup原理简析:vfs文件系统](https://www.cnblogs.com/acool/p/6852250.html)
+7. [Cgroup简介-概述](https://blog.csdn.net/woniu_slowly/article/details/38317973)
+8. [Linux cgroup机制分析之框架分析](https://blog.csdn.net/jk198310/article/details/9288877)
