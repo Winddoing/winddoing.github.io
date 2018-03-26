@@ -314,7 +314,7 @@ under_oom 0
 
 >ltp-full-20140115/testcases/kernel/controllers/cpuctl/cpuctl_test02.c
 
-## CPU子系统实现
+## Cgroup框架的实现
 
 ### Linux内核配置：
 
@@ -577,6 +577,8 @@ struct cg_cgroup_link {
 ### cgroup文件系统的挂载
 
 ### 创建子cgroup
+
+## CPU子系统实现
 
 
 
