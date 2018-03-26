@@ -340,6 +340,7 @@ Prompt: Group CPU scheduler
 ``` shell
 # mount -t cgroup -o cpu cgroup /mnt/
 # mkdir tst_cgroup
+# rmdir tst_cgroup
 ```
 在文件系统中cgroup的挂载目录,也就是cgroup虚拟文件系统的根目录用数据结构`struct cgroupfs_root`表示.而cgroup用`struct cgroup`表示.
 
@@ -590,6 +591,6 @@ struct cg_cgroup_link {
 4. [Linux资源控制-使用cgroup控制CPU和内存](http://blog.csdn.net/arnoldlu/article/details/52945252)
 5. [cgroup实践-资源控制](https://www.jianshu.com/p/dc3140699e79)
 6. [cgroup原理简析:vfs文件系统](https://www.cnblogs.com/acool/p/6852250.html)
-7. [Cgroup简介-概述](https://blog.csdn.net/woniu_slowly/article/details/38317973)
+7. [Docker背后的内核知识——cgroups资源限制](http://www.infoq.com/cn/articles/docker-kernel-knowledge-cgroups-resource-isolation)
 8. [Linux cgroup机制分析之框架分析](https://blog.csdn.net/jk198310/article/details/9288877)
 9. [Linux cgroup机制分析之框架分析1](http://www.xuebuyuan.com/624249.html)
