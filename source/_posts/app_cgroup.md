@@ -8,12 +8,16 @@ tags: [Linux, Cgroup]
 
 CGroup 是 Control Groups 的缩写，是 Linux 内核提供的一种可以限制、记录、隔离进程组 (process groups) 所使用的物力资源 (如 cpu memory i/o 等等) 的机制。
 
-CGroup 是将任意进程进行分组化管理的 Linux 内核功能。CGroup 本身是提供将进程进行分组化管理的功能和接口的基础结构，I/O 或内存的分配控制等具体的资源管理功能是通过这个功能来实现的。这些具体的资源管理功能称为 CGroup 子系统或控制器。CGroup 子系统有控制内存的 Memory 控制器、控制进程调度的 CPU 控制器等。运行中的内核可以使用的 Cgroup 子系统由`/proc/cgroup` 来确认
+CGroup 是将任意进程进行分组化管理的 Linux 内核功能。CGroup 本身是提供将进程进行分组化管理的功能和接口的基础结构，I/O 或内存的分配控制等具体的资源管理功能是通过这个功能来实现的。这些具体的资源管理功能称为 CGroup 子系统或控制器。CGroup 子系统有控制内存的 Memory 控制器、控制进程调度的 CPU 控制器等。运行中的内核可以使用的 Cgroup 子系统由`/proc/cgroup` 来确认，根据系统对资源的需求，这个根进程组将被进一步细分为子进程组，子进程组内的进程是根进程组内进程的子集。而这些子进程组很有可能继续被进一步细分，最终，系统内所有的进程组形成一颗具有层次等级（hierarchy）关系的进程组树。
+
+![cgroup tree](/images/cgroup/cgroup_tree.jpeg)
 
 <!--more-->
 ## Cgroup虚拟文件系统
 
 >CGroup 提供了一个 CGroup 虚拟文件系统，作为进行分组管理和各子系统设置的用户接口。要使用 CGroup，必须挂载 CGroup 文件系统。这时通过挂载选项指定使用哪个子系统。
+
+![cgroup stru](/images/cgroup/cgroup_struct.jpeg)
 
 ``` shell
 [root@buildroot /]# mount -t cgroup cgroup /mnt/
@@ -331,10 +335,248 @@ Prompt: Group CPU scheduler
 
 通过`CONFIG_CGROUPS`配置cgroup框架的实现,`CONFIG_CGROUP_SCHED`控制CPU子系统。
 
+### 基本应用
 
-### Cgroup
+``` shell
+# mount -t cgroup -o cpu cgroup /mnt/
+# mkdir tst_cgroup
+```
+在文件系统中cgroup的挂载目录,也就是cgroup虚拟文件系统的根目录用数据结构`struct cgroupfs_root`表示.而cgroup用`struct cgroup`表示.
 
+### 数据结构
 
+#### cgroupfs_root
+
+``` C
+/*
+ * A cgroupfs_root represents the root of a cgroup hierarchy, and may be
+ * associated with a superblock to form an active hierarchy.  This is
+ * internal to cgroup core.  Don't access directly from controllers.
+ */
+struct cgroupfs_root {
+	struct super_block *sb;  //cgroup文件系统的超级块
+
+	/*
+	 * The bitmask of subsystems intended to be attached to this
+	 * hierarchy
+	 */
+	unsigned long subsys_mask; //hierarchy相关联的subsys 位图
+
+	/* Unique id for this hierarchy. */
+	int hierarchy_id;
+
+	/* The bitmask of subsystems currently attached to this hierarchy */
+	unsigned long actual_subsys_mask;
+
+	/* A list running through the attached subsystems */
+	struct list_head subsys_list; //hierarchy中的subsys链表
+
+	/* The root cgroup for this hierarchy */
+	struct cgroup top_cgroup;
+
+	/* Tracks how many cgroups are currently defined in hierarchy.*/
+	int number_of_cgroups;
+
+	/* A list running through the active hierarchies */
+	struct list_head root_list;
+
+	/* All cgroups on this root, cgroup_mutex protected */
+	struct list_head allcg_list;
+
+	/* Hierarchy-specific flags */
+	unsigned long flags;
+
+	/* IDs for cgroups in this hierarchy */
+	struct ida cgroup_ida;
+
+	/* The path to use for release notifications. */
+	char release_agent_path[PATH_MAX];
+
+	/* The name for this hierarchy - may be empty */
+	char name[MAX_CGROUP_ROOT_NAMELEN];
+};
+```
+#### cgroup
+
+``` C
+struct cgroup {
+	unsigned long flags;		/* "unsigned long" so bitops work */
+
+	/*
+	 * count users of this cgroup. >0 means busy, but doesn't
+	 * necessarily indicate the number of tasks in the cgroup
+	 */
+	atomic_t count;
+
+	int id;				/* ida allocated in-hierarchy ID */
+
+	/*
+	 * We link our 'sibling' struct into our parent's 'children'.
+	 * Our children link their 'sibling' into our 'children'.
+	 */
+	struct list_head sibling;	/* my parent's children */
+	struct list_head children;	/* my children */
+	struct list_head files;		/* my files */
+
+	struct cgroup *parent;		/* my parent */
+	struct dentry *dentry;		/* cgroup fs entry, RCU protected */
+
+	/*
+	 * This is a copy of dentry->d_name, and it's needed because
+	 * we can't use dentry->d_name in cgroup_path().
+	 *
+	 * You must acquire rcu_read_lock() to access cgrp->name, and
+	 * the only place that can change it is rename(), which is
+	 * protected by parent dir's i_mutex.
+	 *
+	 * Normally you should use cgroup_name() wrapper rather than
+	 * access it directly.
+	 */
+	struct cgroup_name __rcu *name;
+
+	/* Private pointers for each registered subsystem */
+	struct cgroup_subsys_state *subsys[CGROUP_SUBSYS_COUNT];
+
+	struct cgroupfs_root *root;
+
+	/*
+	 * List of cg_cgroup_links pointing at css_sets with
+	 * tasks in this cgroup. Protected by css_set_lock
+	 */
+	struct list_head css_sets;
+
+	struct list_head allcg_node;	/* cgroupfs_root->allcg_list */
+	struct list_head cft_q_node;	/* used during cftype add/rm */
+
+	/*
+	 * Linked list running through all cgroups that can
+	 * potentially be reaped by the release agent. Protected by
+	 * release_list_lock
+	 */
+	struct list_head release_list;
+
+	/*
+	 * list of pidlists, up to two for each namespace (one for procs, one
+	 * for tasks); created on demand.
+	 */
+	struct list_head pidlists;
+	struct mutex pidlist_mutex;
+
+	/* For RCU-protected deletion */
+	struct rcu_head rcu_head;
+	struct work_struct free_work;
+
+	/* List of events which userspace want to receive */
+	struct list_head event_list;
+	spinlock_t event_list_lock;
+
+	/* directory xattrs */
+	struct simple_xattrs xattrs;
+};
+```
+
+`struct cgroupfs_root`和`struct cgroup`就是表示了一种空间层次关系,它就对应着挂载点下面的文件示意图。
+
+但是，cgroup主要是管理进程，是进程的行为控制，因此`struct task_struct`和`struct cgroup`之间存在着一定的关系？
+
+#### task_struct
+
+``` C
+struct task_struct {
+    ...
+#ifdef CONFIG_CGROUP_SCHED
+	struct task_group *sched_task_group;
+#endif
+    ...
+#ifdef CONFIG_CGROUPS
+	/* Control Group info protected by css_set_lock */
+	struct css_set __rcu *cgroups;
+	/* cg_list protected by css_set_lock and tsk->alloc_lock */
+	struct list_head cg_list;
+#endif
+    ...
+};
+```
+`struct task_struct`中并没有一个直接的成员指向cgroup,而是指向了`struct css_set`的结构
+
+#### css_set
+
+``` C
+/*
+ * A css_set is a structure holding pointers to a set of
+ * cgroup_subsys_state objects. This saves space in the task struct
+ * object and speeds up fork()/exit(), since a single inc/dec and a
+ * list_add()/del() can bump the reference count on the entire cgroup
+ * set for a task.
+ */
+
+struct css_set {
+
+	/* Reference count */
+	atomic_t refcount;
+
+	/*
+	 * List running through all cgroup groups in the same hash
+	 * slot. Protected by css_set_lock
+	 */
+	struct hlist_node hlist;
+
+	/*
+	 * List running through all tasks using this cgroup
+	 * group. Protected by css_set_lock
+	 */
+	struct list_head tasks;
+
+	/*
+	 * List of cg_cgroup_link objects on link chains from
+	 * cgroups referenced from this css_set. Protected by
+	 * css_set_lock
+	 */
+	struct list_head cg_links;
+
+	/*
+	 * Set of subsystem states, one for each subsystem. This array
+	 * is immutable after creation apart from the init_css_set
+	 * during subsystem registration (at boot time) and modular subsystem
+	 * loading/unloading.
+	 */
+	struct cgroup_subsys_state *subsys[CGROUP_SUBSYS_COUNT];
+
+	/* For RCU-protected deletion */
+	struct rcu_head rcu_head;
+};
+```
+那从`struct css_set`怎么转换到cgroup呢? 再来看一个辅助的数据结构`struct cg_cgroup_link`
+
+#### cg_cgroup_link
+
+``` C
+/* Link structure for associating css_set objects with cgroups */            
+struct cg_cgroup_link {                                                      
+    /*                                                                       
+     * List running through cg_cgroup_links associated with a                
+     * cgroup, anchored on cgroup->css_sets                                  
+     */                                                                      
+    struct list_head cgrp_link_list;                                         
+    struct cgroup *cgrp;                                                     
+    /*                                                                       
+     * List running through cg_cgroup_links pointing at a                    
+     * single css_set object, anchored on css_set->cg_links                  
+     */                                                                      
+    struct list_head cg_link_list;                                           
+    struct css_set *cg;                                                      
+};                                                                                                                     
+```
+
+#### 关系
+
+![cgroup data struct](/images/cgroup/cgroup_data_struct.jpeg)
+
+### cgroup初始化
+
+### cgroup文件系统的挂载
+
+### 创建子cgroup
 
 
 
@@ -348,3 +590,4 @@ Prompt: Group CPU scheduler
 6. [cgroup原理简析:vfs文件系统](https://www.cnblogs.com/acool/p/6852250.html)
 7. [Cgroup简介-概述](https://blog.csdn.net/woniu_slowly/article/details/38317973)
 8. [Linux cgroup机制分析之框架分析](https://blog.csdn.net/jk198310/article/details/9288877)
+9. [Linux cgroup机制分析之框架分析1](http://www.xuebuyuan.com/624249.html)
