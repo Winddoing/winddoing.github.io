@@ -148,9 +148,40 @@ int main()
 
 #### IPC命名空间（CLONE_NEWIPC）
 
+IPC Namespace 是用来隔离 System V IPC 和POSIX message queues.每一个IPC Namespace都有他们自己的System V IPC 和POSIX message queue。
+
+验证：消息队列
+
+* ipcs查看队列
+```
+$ ipcs -q
+```
+* ipcmk创建队列
+```
+$ ipcmk -Q
+```
+* ipcrm删除队列
+```
+$ ipcrm -q 0
+```
+
 #### PID命名空间（CLONE_NEWPID）
 
+PID namespace是用来隔离进程 id。同样的一个进程在不同的 PID Namespace 里面可以拥有不同的 PID。空间内的PID 是独立分配的，意思就是命名空间内的虚拟 PID 可能会与命名空间外的 PID 相冲突，于是命名空间内的 PID 映射到命名空间外时会使用另外一个 PID。比如说，命名空间内第一个 PID 为1，而在命名空间外就是该 PID 已被 init 进程所使用。
+
+验证： `echo $$`
+
+>在子进程的shell里输入ps,top等命令，我们还是可以看得到所有进程。说明并没有完全隔离。这是因为，像ps, top这些命令会去读/proc文件系统，所以，因为/proc文件系统在父进程和子进程都是一样的，所以这些命令显示的东西都是一样的。
+
 #### mount命名空间（CLONE_NEWNS）
+
+进程运行时可以将挂载点与系统分离，使用这个功能时，我们可以达到 chroot 的功能进程运行时可以将挂载点与系统分离，使用这个功能时，可以达到 chroot 的功能
+
+>在通过`CLONE_NEWNS`创建mount namespace后，父进程会把自己的文件结构复制给子进程中。而子进程中新的namespace中的所有mount操作都只影响自身的文件系统，而不对外界产生任何影响。这样可以做到比较严格地隔离。
+
+### 小应用
+
+
 
 ## 参考
 
