@@ -452,7 +452,7 @@ baidushare:
 needmoreshare2:
   enable: true
   postbottom:
-    enable: true
+    enable: false
     options:
       iconStyle: box
       boxForm: horizontal
