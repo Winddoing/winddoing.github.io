@@ -255,14 +255,20 @@ static inline unsigned int arch_spin_trylock(arch_spinlock_t *lock)
    e0450000    sc  a1,0(v0)
    10a0fffc    beqz    a1,80071228 <lg_local_lock+0x40>
    00042c02    srl a1,a0,0x10
-   3084ffff    andi    a0,a0,0xffff
    14850120    bne a0,a1,800716c4 <lg_double_unlock+0x88>
    00a42023    subu    a0,a1,a0
 
    0000000f    sync			//smp_llsc_mb(); 
    ...
 ```
+> 指令：ll和sc
+> > ll: 指令的功能是从内存中读取一个字，以实现接下来的 RMW（Read-Modify-Write） 操作
+>
+> > sc: 指令的功能是向内存中写入一个字，以完成前面的 RMW 操作
+>
+
 
 ## 参考
 
 1. [Linux内核同步机制之（四）：spin lock](http://www.wowotech.net/kernel_synchronization/spinlock.html)
+2. [Linux 的 Spinlock 在 MIPS 多核处理器中的设计与实现](https://www.ibm.com/developerworks/cn/linux/l-cn-spinlock_mips/index.html)
