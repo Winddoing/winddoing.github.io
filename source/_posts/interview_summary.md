@@ -36,6 +36,11 @@ emmc协议的初始化流程（sd，sdio），之间的不同区别差异
 小块内存（小于1page）申请
 [Linux slab 分配器剖析](https://www.ibm.com/developerworks/cn/linux/l-linux-slab-allocator/)
 
+* 页表
+linux内核支持几级页表，mips cpu使用几级页表，其中寻址的原理
+
+* cache
+
 ## 中断
 
 * request_irq()
