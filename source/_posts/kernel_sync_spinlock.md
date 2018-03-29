@@ -201,6 +201,8 @@ static inline void arch_spin_lock(arch_spinlock_t *lock)
 ```
 >file: arch/mips/include/asm/spinlock.h
 
+**算法：[Ticket lock: A fair lock](/downloads/kernel/spinlock/mcs.pdf)**
+
 #### arch_spin_trylock
 
 ``` C
