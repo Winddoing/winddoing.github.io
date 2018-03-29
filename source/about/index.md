@@ -18,3 +18,7 @@ mail: winddoing@sina.cn
 * 程序员的自我修养--链接，装载与库
 * 深入理解Linux内核
 
+
+## 网站配置
+
+* [hexo的next主题个性化教程：打造炫酷网站](https://blog.csdn.net/qq_33699981/article/details/72716951)
