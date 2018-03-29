@@ -140,7 +140,7 @@ social:
   #YouTube: https://youtube.com/yourname || youtube
   #Instagram: https://instagram.com/yourname || instagram
   #Skype: skype:yourname?call|chat || skype
-  Travis CI: https://travis-ci.org/Winddoing/Winddoing.github.io || burn
+  Travis CI: https://travis-ci.org/Winddoing/Winddoing.github.io || terminal
 
 social_icons:
   enable: true
