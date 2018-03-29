@@ -10,6 +10,7 @@ comments: false
 
 ## Kernel
 * [sk_buff详解.pdf](/downloads/kernel/sk_buff详解.pdf)
+* [spin lock(Ticket lock: A fair lock)](/downloads/kernel/spinlock/mcs.pdf)
 
 ## Linux
 * [LTP使用说明](/downloads/linux/LTP使用说明.doc)
