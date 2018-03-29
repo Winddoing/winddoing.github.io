@@ -59,3 +59,5 @@ I2C: 以1根串行数据线`（SDA）`和1根串行时钟线`（SCL）`实 现�
 ## 参考
 
 1. [Linux I2C framework(3)_I2C consumer](http://www.wowotech.net/linux_kenrel/i2c_consumer.html)
+2. [示波器分析I2C时序波形图](https://blog.csdn.net/ASKLW/article/details/77834077)
+3. [I2C设备调试及波形分析](https://blog.csdn.net/smallmuou/article/details/7183656)

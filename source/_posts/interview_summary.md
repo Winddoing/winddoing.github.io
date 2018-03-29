@@ -30,10 +30,11 @@ emmc协议的初始化流程（sd，sdio），之间的不同区别差异
 ## 内存管理
 
 * 伙伴系统
-大块内存的申请，算法原理
+大块内存的申请，算法原理 Buddy system
 
-* slub
+* slab
 小块内存（小于1page）申请
+[Linux slab 分配器剖析](https://www.ibm.com/developerworks/cn/linux/l-linux-slab-allocator/)
 
 ## 中断
 

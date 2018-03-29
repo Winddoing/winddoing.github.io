@@ -267,6 +267,32 @@ static inline unsigned int arch_spin_trylock(arch_spinlock_t *lock)
 > > sc: 指令的功能是向内存中写入一个字，以完成前面的 RMW 操作
 >
 
+## Q&A
+
+### 为什么要关闭抢占？
+
+如果不禁止内核抢断(或者不禁止中断)，可能会有以下的情况发生（假设进程B比进程A具有更高的优先级）：
+
+* 进程A获得spinlock lock
+* 进程B运行(抢占进程A)
+* 进程B获取spinlock lock
+
+由于进程B比进程A优先级高，所以进程B在进程A之前运行，而进程B需要进程A释放lock之后才能运行，于是，死锁
+
+### 为什么不能睡眠？
+
+spinlock中的代码不能有睡眠（schedule()之类的放弃CPU的代码），因为此时内核抢占已经关闭，如果让出CPU正好调度到的另一个进程也需要这个锁，整个系统将形成死锁。
+
+### spinlock阶段，来中断？
+
+1. 进程A获取spinlcok锁，访问资源R
+2. 中断响应后，在中断处理程序中，也去获取spinlock锁，并访问资源R
+
+如果在进程A没有释放spinlock锁时，如果触发中断后，进程A和中断怎么处理？？
+
+>此时不能使用spin_lock,应该使用spin_lock_irq
+
+
 
 ## 参考
 
