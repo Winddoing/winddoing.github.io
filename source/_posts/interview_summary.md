@@ -82,3 +82,9 @@ android启动进入桌面
 ## 系统的整体启动
 
 bootram->spl->uboot->kernel->fs
+
+## 文件系统
+
+实现
+
+* ext4文件系统的掉电保护
