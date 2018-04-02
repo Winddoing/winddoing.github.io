@@ -1,9 +1,16 @@
----
+ ---
 title: Cgroup框架的实现
 date: 2018-03-30 23:07:24
 categories: Linux内核
 tags: [linux, Cgroup]
 ---
+CGoup核心主要创建一系列sysfs文件，用户空间可以通过这些节点控制CGroup各子系统行为，以及各子系统模块根据参数。在执行过程中或调度进程到不同CPU上，或控制CPU占用时间，或控制IO带宽等等。另外，在每个系统的proc文件系统中都有一个cgroup，显示该进程对应的CGroup各子系统信息。
+
+![cgroup strutc](/images/cgroup/cgroup_struct.png)
+
+<!--more-->
+
+## 内核配置
 
 ```
 Symbol: CGROUPS [=y]
@@ -21,8 +28,6 @@ Prompt: Group CPU scheduler
 ```
 
 通过`CONFIG_CGROUPS`配置cgroup框架的实现,`CONFIG_CGROUP_SCHED`控制CPU子系统。
-
-<!--more-->
 
 ## 基本应用
 
@@ -421,7 +426,7 @@ int __init cgroup_init(void)
 }
 ```
 
-1. bdi_init用于初始化后备存储器的一些字段，这些字段包括回写链表、回写锁等，关系到读写策略，和挂载关系并不大
+1.bdi_init用于初始化后备存储器的一些字段，这些字段包括回写链表、回写锁等，关系到读写策略，和挂载关系并不大
 
 ### subsys
 
@@ -439,7 +444,7 @@ SUBSYS(debug)
 
 ## cgroup文件系统的挂载
 
-># mount -t cgroup -o cpu cgroup /mnt/
+>mount -t cgroup -o cpu cgroup /mnt/
 
 ### 注册：
 
@@ -465,7 +470,7 @@ SyS_mount
 
 ## 创建子cgroup
 
-``` 
+```
 SyS_mkdirat
 	\->cgroup_mkdir
 ```
@@ -479,5 +484,5 @@ SyS_mkdirat
 
 1. [Linux Cgroups 详解](https://files.cnblogs.com/files/lisperl/cgroups%E4%BB%8B%E7%BB%8D.pdf)
 2. [Cgroup框架分析](https://blog.csdn.net/zhangyifei216/article/details/49491549)
-3. [Linux cgroup机制分析之框架分析1](http://www.xuebuyuan.com/624249.html)
+3. [Linux cgroup机制分析之框架分析](http://www.xuebuyuan.com/624249.html)
 4. [Android/Linux下CGroup框架分析及其使用](http://www.cnblogs.com/arnoldlu/p/6208443.html)
