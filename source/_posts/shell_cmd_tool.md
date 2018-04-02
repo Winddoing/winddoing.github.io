@@ -20,6 +20,14 @@ tags: [shell]
 * `-type f` : 表示只找文件
 * `-name "xxx"` :  表示查找特定文件；也可以不写，表示找所有文件
 
+### 批量修改文件名后缀
+
+>mv ./htxynl.f90 ./htxynl.f77
+
+```
+find . -name "*.f90" | awk -F "." '{print $2}' | xargs -i -t mv .{}.f90  .{}.f77
+```
+
 ## cat
 
 >cat和重定向进行写文件操作

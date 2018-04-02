@@ -2,7 +2,7 @@
 title: Cgroup框架的实现
 date: 2018-03-30 23:07:24
 categories: Linux内核
-tags: [linux，Cgroup]
+tags: [linux, Cgroup]
 ---
 
 ```
@@ -24,7 +24,7 @@ Prompt: Group CPU scheduler
 
 <!--more-->
 
-### 基本应用
+## 基本应用
 
 ``` shell
 # mount -t cgroup -o cpu cgroup /mnt/
@@ -33,11 +33,11 @@ Prompt: Group CPU scheduler
 ```
 在文件系统中cgroup的挂载目录,也就是cgroup虚拟文件系统的根目录用数据结构`struct cgroupfs_root`表示.而cgroup用`struct cgroup`表示.
 
-### 数据结构
+## 数据结构
 
 主要用于对进程不同资源的管理和配置，以及进程和cgroup之间的关系。
 
-#### task_struct
+### task_struct
 
 ``` C
 struct task_struct {
@@ -59,7 +59,7 @@ struct task_struct {
 
 `cg_list`: 是一个链表结构，用于将连到同一个css_set的进程组织成一个链表。
 
-#### css_set
+### css_set
 
 ``` C
 /*
@@ -113,7 +113,7 @@ struct css_set {
 
 那从`struct css_set`怎么转换到cgroup呢? 再来看一个辅助的数据结构`struct cg_cgroup_link`
 
-#### cgroup_subsys_state
+### cgroup_subsys_state
 
 ``` C
 /* Per-subsystem/per-cgroup state maintained by the system. */
@@ -152,7 +152,7 @@ cgroup指针指向了一个cgroup结构，也就是进程属于的cgroup.
 
 ![task cgroup](/images/cgroup/task_cgroup_relation.png)
 
-#### cgroup
+### cgroup
 
 ``` C
 struct cgroup {
@@ -236,7 +236,7 @@ struct cgroup {
 * `root`指向了一个cgroupfs_root的结构，就是cgroup所在的层级对应的结构体
 
 
-#### cgroupfs_root
+### cgroupfs_root
 
 ``` C
 /*
@@ -287,10 +287,11 @@ struct cgroupfs_root {
 	char name[MAX_CGROUP_ROOT_NAMELEN];
 };
 ```
+`top_cgroup`指向了所在层级的根cgroup，也就是创建层级时自动创建的那个cgroup。
 
 
 
-#### cg_cgroup_link
+### cg_cgroup_link
 
 ``` C
 /* Link structure for associating css_set objects with cgroups */
@@ -310,21 +311,173 @@ struct cg_cgroup_link {
 };
 ```
 
-#### 关系
+`cgrp_link_list`连入到`cgroup->css_set`指向的链表，cgrp则指向此`cg_cgroup_link`相关的cgroup。
+
+`cg_link_list`则连入到`css_set->cg_links`指向的链表,cg则指向此`cg_cgroup_link`相关的css_set。
+
+### 联系
 
 ![cgroup data struct](/images/cgroup/cgroup_data_struct.jpeg)
 
-### cgroup初始化
 
-### cgroup文件系统的挂载
+|	数据结构	|	划分	|
+|	:------:	|	:---:	|
+|	cgroupfs_root	|	层级（hierarchy）	|
+|	css_set	|	子系统（subsystem）	|
+|	cgroup	|	进程控制组	|
 
-### 创建子cgroup
+## cgroup初始化
 
-## CPU子系统实现
+```
+start_kernel
+	\->cgroup_init_early();
+		\->init_cgroup_root
+		\->cgroup_init_subsys
+	\->cgroup_init();
+		\->cgroup_init_subsys
+		\->kobject_create_and_add
+		\->register_filesystem
+```
+
+### cgroup_init_early
+
+第一阶段：主要进行数据结构的初始化和链表之间关系的绑定
+
+``` C
+int __init cgroup_init_early(void)
+{
+    atomic_set(&init_css_set.refcount, 1);
+    INIT_LIST_HEAD(&init_css_set.cg_links); //初始化全局结构体struct css_set init
+    INIT_LIST_HEAD(&init_css_set.tasks);
+    INIT_HLIST_NODE(&init_css_set.hlist);
+    css_set_count = 1;  //系统中struct css_set计数
+    init_cgroup_root(&rootnode); //初始化全局结构体struct cgroupfs_root
+    root_count = 1;		//系统中的层级计数
+    init_task.cgroups = &init_css_set; //使系统的初始化进程cgroup指向init_css_set
+
+    init_css_set_link.cg = &init_css_set;
+	/* dummytop is a shorthand for the dummy hierarchy's top cgroup */
+    init_css_set_link.cgrp = dummytop;
+
+    list_add(&init_css_set_link.cgrp_link_list,
+         &rootnode.top_cgroup.css_sets);
+    list_add(&init_css_set_link.cg_link_list,
+         &init_css_set.cg_links);
+
+	//对一些需要在系统启动时初始化的subsys进行初始化
+    for (i = 0; i < CGROUP_SUBSYS_COUNT; i++) {
+        struct cgroup_subsys *ss = subsys[i];
+
+		...
+        if (ss->early_init)
+            cgroup_init_subsys(ss);
+    }
+    return 0;
+}
+```
+
+
+### cgroup_init
+
+第二阶段： 主要生成cgroup虚拟文件系统
+
+``` C
+/**
+ * cgroup_init - cgroup initialization
+ *
+ * Register cgroup filesystem and /proc file, and initialize
+ * any subsystems that didn't request early init.
+ */
+
+int __init cgroup_init(void)
+{
+	...
+    err = bdi_init(&cgroup_backing_dev_info);
+
+    for (i = 0; i < CGROUP_SUBSYS_COUNT; i++) {
+        struct cgroup_subsys *ss = subsys[i];
+
+        /* at bootup time, we don't worry about modular subsystems */
+        if (!ss || ss->module)
+            continue;
+        if (!ss->early_init)
+            cgroup_init_subsys(ss);
+        if (ss->use_id)
+            cgroup_init_idr(ss, init_css_set.subsys[ss->subsys_id]);
+    }
+
+    /* Add init_css_set to the hash table */
+    key = css_set_hash(init_css_set.subsys);
+    hash_add(css_set_table, &init_css_set.hlist, key);
+    BUG_ON(!init_root_id(&rootnode));
+	...
+    cgroup_kobj = kobject_create_and_add("cgroup", fs_kobj);
+
+    err = register_filesystem(&cgroup_fs_type);
+
+    proc_create("cgroups", 0, NULL, &proc_cgroupstats_operations);
+	...
+    return err;
+}
+```
+
+1. bdi_init用于初始化后备存储器的一些字段，这些字段包括回写链表、回写锁等，关系到读写策略，和挂载关系并不大
+
+### subsys
+
+``` C
+#define SUBSYS(_x) [_x ## _subsys_id] = &_x ## _subsys,
+#define IS_SUBSYS_ENABLED(option) IS_BUILTIN(option)
+static struct cgroup_subsys *subsys[CGROUP_SUBSYS_COUNT] = {
+#include <linux/cgroup_subsys.h>
+#if IS_SUBSYS_ENABLED(CONFIG_CGROUP_DEBUG)
+SUBSYS(debug)
+#endif
+};
+```
+>file: kernel/cgroup.c
+
+## cgroup文件系统的挂载
+
+># mount -t cgroup -o cpu cgroup /mnt/
+
+### 注册：
+
+``` C
+static struct file_system_type cgroup_fs_type = {
+	.name = "cgroup",
+	.mount = cgroup_mount,
+	.kill_sb = cgroup_kill_sb,
+};
+```
+
+### 调用关系：
+
+``` C
+SyS_mount
+	\->do_mount
+		\->vfs_kern_mount
+			\->mount_fs
+				\->cgroup_mount
+```
+
+
+
+## 创建子cgroup
+
+``` 
+SyS_mkdirat
+	\->cgroup_mkdir
+```
+
+
+
+## DEBUG子系统实现
 
 
 ## 参考
 
 1. [Linux Cgroups 详解](https://files.cnblogs.com/files/lisperl/cgroups%E4%BB%8B%E7%BB%8D.pdf)
 2. [Cgroup框架分析](https://blog.csdn.net/zhangyifei216/article/details/49491549)
-333. [Linux cgroup机制分析之框架分析1](http://www.xuebuyuan.com/624249.html)
+3. [Linux cgroup机制分析之框架分析1](http://www.xuebuyuan.com/624249.html)
+4. [Android/Linux下CGroup框架分析及其使用](http://www.cnblogs.com/arnoldlu/p/6208443.html)
