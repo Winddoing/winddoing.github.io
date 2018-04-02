@@ -78,6 +78,18 @@ chmod 777 './'$data_dir -R
 rm *.ff -f
 ```
 
+## 修改文件名后缀
+
+``` shell
+for file in `find . -name "*.f90"`
+do
+	newfile=${file%.*}.f77
+	#echo "$newfile"
+	mv $file $newfile
+done
+```
+>[Linux批量更改文件后缀名](https://blog.csdn.net/longxibendi/article/details/6387732)
+
 
 ## 参考
 
