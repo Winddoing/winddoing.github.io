@@ -4,6 +4,7 @@ date: 2018-03-30 23:07:24
 categories: Linux内核
 tags: [linux, Cgroup]
 ---
+
 CGoup核心主要创建一系列sysfs文件，用户空间可以通过这些节点控制CGroup各子系统行为，以及各子系统模块根据参数。在执行过程中或调度进程到不同CPU上，或控制CPU占用时间，或控制IO带宽等等。另外，在每个系统的proc文件系统中都有一个cgroup，显示该进程对应的CGroup各子系统信息。
 
 ![cgroup strutc](/images/cgroup/cgroup_struct.png)
@@ -97,6 +98,7 @@ struct css_set {
 	 * cgroups referenced from this css_set. Protected by
 	 * css_set_lock
 	 */
+     //由cg_cgroup_link组成的链表，链表上每一项cg_cgroup_link都指向和css_set关联的cgroup.
 	struct list_head cg_links;
 
 	/*
@@ -105,6 +107,10 @@ struct css_set {
 	 * during subsystem registration (at boot time) and modular subsystem
 	 * loading/unloading.
 	 */
+     /*
+     *css_set关联的css.每一个subsystem对应数组中相应id的项。
+     *subsys应当包括所有子系统的css.如果此css_set没有制定某个subsystem的css或者subsystem没有mount，则默认初始化为根css.
+     */
 	struct cgroup_subsys_state *subsys[CGROUP_SUBSYS_COUNT]; //是进程与一个特定子系统相关的信息
 
 	/* For RCU-protected deletion */
@@ -196,6 +202,7 @@ struct cgroup {
 	struct cgroup_name __rcu *name;
 
 	/* Private pointers for each registered subsystem */
+    //此cgroup关联subsystem的css结构，每个subsystem的css在数组中对应subsys[subsystem->subsys_id].
 	struct cgroup_subsys_state *subsys[CGROUP_SUBSYS_COUNT];
 
 	struct cgroupfs_root *root;
@@ -204,7 +211,7 @@ struct cgroup {
 	 * List of cg_cgroup_links pointing at css_sets with
 	 * tasks in this cgroup. Protected by css_set_lock
 	 */
-	struct list_head css_sets;
+	struct list_head css_sets; //通过cs_cgroup_link指向此cgroup关联的css_set
 
 	struct list_head allcg_node;	/* cgroupfs_root->allcg_list */
 	struct list_head cft_q_node;	/* used during cftype add/rm */
@@ -240,6 +247,34 @@ struct cgroup {
 * `subsys`是一个指针数组，存储一组指向cgroup_subsys_state的指针。这组指针指向了此cgroup跟各个子系统相关的信息
 * `root`指向了一个cgroupfs_root的结构，就是cgroup所在的层级对应的结构体
 
+cgroup和css_set是多对多的关系，既：一个css_set可以对应多个cgroup,同时一个cgroup也可以被多个css_set所包含。
+这种多对多的映射关系，是通过cg_cgroup_link这个中间结构来关联的。
+
+### cg_cgroup_link
+
+``` C
+/* Link structure for associating css_set objects with cgroups */
+struct cg_cgroup_link {
+    /*
+     * List running through cg_cgroup_links associated with a
+     * cgroup, anchored on cgroup->css_sets
+     */
+    struct list_head cgrp_link_list;
+    struct cgroup *cgrp;
+    /*
+     * List running through cg_cgroup_links pointing at a
+     * single css_set object, anchored on css_set->cg_links
+     */
+    struct list_head cg_link_list;
+    struct css_set *cg;
+};
+```
+
+一个cg_cgroup_link需要包含两类信息，即关联的cgroup和css_set信息，一个cg_cgroup_link可以让一个cgroup和一个css_set相关联。但是正如我们前面所说，css_set和cgroup是多对多的对应关系，所以，一个css_set需要保存多个cg_cgroup_link，一个cgroup也需要保存多个cg_cgroup_link信息。具体来说，css_set中的cg_links维护了一个链表，链表中的元素为cg_cgroup_link中的cg_link_list.cgroup中的css_set也维护了一个cg_cgroup_link链表，链表中元素为cgrp_link_list.
+
+`cgrp_link_list`连入到`cgroup->css_set`指向的链表，cgrp则指向此`cg_cgroup_link`相关的cgroup。
+
+`cg_link_list`则连入到`css_set->cg_links`指向的链表,cg则指向此`cg_cgroup_link`相关的css_set。
 
 ### cgroupfs_root
 
@@ -296,29 +331,6 @@ struct cgroupfs_root {
 
 
 
-### cg_cgroup_link
-
-``` C
-/* Link structure for associating css_set objects with cgroups */
-struct cg_cgroup_link {
-    /*
-     * List running through cg_cgroup_links associated with a
-     * cgroup, anchored on cgroup->css_sets
-     */
-    struct list_head cgrp_link_list;
-    struct cgroup *cgrp;
-    /*
-     * List running through cg_cgroup_links pointing at a
-     * single css_set object, anchored on css_set->cg_links
-     */
-    struct list_head cg_link_list;
-    struct css_set *cg;
-};
-```
-
-`cgrp_link_list`连入到`cgroup->css_set`指向的链表，cgrp则指向此`cg_cgroup_link`相关的cgroup。
-
-`cg_link_list`则连入到`css_set->cg_links`指向的链表,cg则指向此`cg_cgroup_link`相关的css_set。
 
 ### 联系
 
@@ -475,7 +487,7 @@ SyS_mkdirat
 	\->cgroup_mkdir
 ```
 
-
+## task
 
 ## DEBUG子系统实现
 
