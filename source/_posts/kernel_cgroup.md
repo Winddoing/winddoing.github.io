@@ -35,57 +35,123 @@ Prompt: Group CPU scheduler
 
 ### 数据结构
 
-#### cgroupfs_root
+主要用于对进程不同资源的管理和配置，以及进程和cgroup之间的关系。
+
+#### task_struct
+
+``` C
+struct task_struct {
+    ...
+#ifdef CONFIG_CGROUP_SCHED
+	struct task_group *sched_task_group;
+#endif
+    ...
+#ifdef CONFIG_CGROUPS
+	/* Control Group info protected by css_set_lock */
+	struct css_set __rcu *cgroups;
+	/* cg_list protected by css_set_lock and tsk->alloc_lock */
+	struct list_head cg_list;
+#endif
+    ...
+};
+```
+`struct task_struct`中并没有一个直接的成员指向cgroup,而是指向了`struct css_set`的结构, css_set存储路与进程相关的cgroup信息。
+
+`cg_list`: 是一个链表结构，用于将连到同一个css_set的进程组织成一个链表。
+
+#### css_set
 
 ``` C
 /*
- * A cgroupfs_root represents the root of a cgroup hierarchy, and may be
- * associated with a superblock to form an active hierarchy.  This is
- * internal to cgroup core.  Don't access directly from controllers.
+ * A css_set is a structure holding pointers to a set of
+ * cgroup_subsys_state objects. This saves space in the task struct
+ * object and speeds up fork()/exit(), since a single inc/dec and a
+ * list_add()/del() can bump the reference count on the entire cgroup
+ * set for a task.
  */
-struct cgroupfs_root {
-	struct super_block *sb;  //cgroup文件系统的超级块
+
+struct css_set {
+
+	/* Reference count */
+	atomic_t refcount;  //引用计数，因为一个css_set可以被多个进程共用，这些进程的cgroup信息相同
 
 	/*
-	 * The bitmask of subsystems intended to be attached to this
-	 * hierarchy
+	 * List running through all cgroup groups in the same hash
+	 * slot. Protected by css_set_lock
 	 */
-	unsigned long subsys_mask; //hierarchy相关联的subsys 位图
+	struct hlist_node hlist;
 
-	/* Unique id for this hierarchy. */
-	int hierarchy_id;
+	/*
+	 * List running through all tasks using this cgroup
+	 * group. Protected by css_set_lock
+	 */
+	struct list_head tasks;
 
-	/* The bitmask of subsystems currently attached to this hierarchy */
-	unsigned long actual_subsys_mask;
+	/*
+	 * List of cg_cgroup_link objects on link chains from
+	 * cgroups referenced from this css_set. Protected by
+	 * css_set_lock
+	 */
+	struct list_head cg_links;
 
-	/* A list running through the attached subsystems */
-	struct list_head subsys_list; //hierarchy中的subsys链表
+	/*
+	 * Set of subsystem states, one for each subsystem. This array
+	 * is immutable after creation apart from the init_css_set
+	 * during subsystem registration (at boot time) and modular subsystem
+	 * loading/unloading.
+	 */
+	struct cgroup_subsys_state *subsys[CGROUP_SUBSYS_COUNT]; //是进程与一个特定子系统相关的信息
 
-	/* The root cgroup for this hierarchy */
-	struct cgroup top_cgroup;
-
-	/* Tracks how many cgroups are currently defined in hierarchy.*/
-	int number_of_cgroups;
-
-	/* A list running through the active hierarchies */
-	struct list_head root_list;
-
-	/* All cgroups on this root, cgroup_mutex protected */
-	struct list_head allcg_list;
-
-	/* Hierarchy-specific flags */
-	unsigned long flags;
-
-	/* IDs for cgroups in this hierarchy */
-	struct ida cgroup_ida;
-
-	/* The path to use for release notifications. */
-	char release_agent_path[PATH_MAX];
-
-	/* The name for this hierarchy - may be empty */
-	char name[MAX_CGROUP_ROOT_NAMELEN];
+	/* For RCU-protected deletion */
+	struct rcu_head rcu_head;
 };
 ```
+>file: include/linux/cgroup.h
+
+主要用来描述一个个子系统，通过`cgroup_subsys_state`定义不同子系统的相关控制信息，`hlist`将同一个子系统下的所有css_set组织成一个hash表，方便内核查找特定的css_set.
+`tasks`指向所有连到此css_set的进程连成的链表。
+
+那从`struct css_set`怎么转换到cgroup呢? 再来看一个辅助的数据结构`struct cg_cgroup_link`
+
+#### cgroup_subsys_state
+
+``` C
+/* Per-subsystem/per-cgroup state maintained by the system. */
+struct cgroup_subsys_state {
+    /*
+     * The cgroup that this subsystem is attached to. Useful
+     * for subsystems that want to know about the cgroup
+     * hierarchy structure
+     */
+    struct cgroup *cgroup;
+
+    /*
+     * State maintained by the cgroup system to allow subsystems
+     * to be "busy". Should be accessed via css_get(),
+     * css_tryget() and css_put().
+     */
+
+    atomic_t refcnt;
+
+    unsigned long flags;
+    /* ID for this css, if possible */
+    struct css_id __rcu *id;
+
+    /* Used to put @cgroup->dentry on the last css_put() */
+    struct work_struct dput_work;
+};
+```
+>file: include/linux/cgroup.h
+
+cgroup指针指向了一个cgroup结构，也就是进程属于的cgroup.
+
+
+进程受到子系统的控制，实际上是通过加入到特定的cgroup实现的，因为cgroup在特定的层级上，而子系统又是附加到曾经上的 。通过以上三个结构，进程就可以和cgroup关联起来了 ：
+
+>task_struct->css_set->cgroup_subsys_state->cgroup。
+
+![task cgroup](/images/cgroup/task_cgroup_relation.png)
+
 #### cgroup
 
 ``` C
@@ -165,97 +231,83 @@ struct cgroup {
 };
 ```
 
-`struct cgroupfs_root`和`struct cgroup`就是表示了一种空间层次关系,它就对应着挂载点下面的文件示意图。
+* `sibling`,`children`和`parent`三个list_head负责将同一层级的cgroup连接成一颗cgroup树。
+* `subsys`是一个指针数组，存储一组指向cgroup_subsys_state的指针。这组指针指向了此cgroup跟各个子系统相关的信息
+* `root`指向了一个cgroupfs_root的结构，就是cgroup所在的层级对应的结构体
 
-但是，cgroup主要是管理进程，是进程的行为控制，因此`struct task_struct`和`struct cgroup`之间存在着一定的关系？
 
-#### task_struct
-
-``` C
-struct task_struct {
-    ...
-#ifdef CONFIG_CGROUP_SCHED
-	struct task_group *sched_task_group;
-#endif
-    ...
-#ifdef CONFIG_CGROUPS
-	/* Control Group info protected by css_set_lock */
-	struct css_set __rcu *cgroups;
-	/* cg_list protected by css_set_lock and tsk->alloc_lock */
-	struct list_head cg_list;
-#endif
-    ...
-};
-```
-`struct task_struct`中并没有一个直接的成员指向cgroup,而是指向了`struct css_set`的结构
-
-#### css_set
+#### cgroupfs_root
 
 ``` C
 /*
- * A css_set is a structure holding pointers to a set of
- * cgroup_subsys_state objects. This saves space in the task struct
- * object and speeds up fork()/exit(), since a single inc/dec and a
- * list_add()/del() can bump the reference count on the entire cgroup
- * set for a task.
+ * A cgroupfs_root represents the root of a cgroup hierarchy, and may be
+ * associated with a superblock to form an active hierarchy.  This is
+ * internal to cgroup core.  Don't access directly from controllers.
  */
-
-struct css_set {
-
-	/* Reference count */
-	atomic_t refcount;
+struct cgroupfs_root {
+	struct super_block *sb;  //cgroup文件系统的超级块
 
 	/*
-	 * List running through all cgroup groups in the same hash
-	 * slot. Protected by css_set_lock
+	 * The bitmask of subsystems intended to be attached to this
+	 * hierarchy
 	 */
-	struct hlist_node hlist;
+	unsigned long subsys_mask; //hierarchy相关联的subsys 位图
 
-	/*
-	 * List running through all tasks using this cgroup
-	 * group. Protected by css_set_lock
-	 */
-	struct list_head tasks;
+	/* Unique id for this hierarchy. */
+	int hierarchy_id;
 
-	/*
-	 * List of cg_cgroup_link objects on link chains from
-	 * cgroups referenced from this css_set. Protected by
-	 * css_set_lock
-	 */
-	struct list_head cg_links;
+	/* The bitmask of subsystems currently attached to this hierarchy */
+	unsigned long actual_subsys_mask;
 
-	/*
-	 * Set of subsystem states, one for each subsystem. This array
-	 * is immutable after creation apart from the init_css_set
-	 * during subsystem registration (at boot time) and modular subsystem
-	 * loading/unloading.
-	 */
-	struct cgroup_subsys_state *subsys[CGROUP_SUBSYS_COUNT];
+	/* A list running through the attached subsystems */
+	struct list_head subsys_list; //hierarchy中的subsys链表
 
-	/* For RCU-protected deletion */
-	struct rcu_head rcu_head;
+	/* The root cgroup for this hierarchy */
+	struct cgroup top_cgroup;
+
+	/* Tracks how many cgroups are currently defined in hierarchy.*/
+	int number_of_cgroups;
+
+	/* A list running through the active hierarchies */
+	struct list_head root_list;
+
+	/* All cgroups on this root, cgroup_mutex protected */
+	struct list_head allcg_list;
+
+	/* Hierarchy-specific flags */
+	unsigned long flags;
+
+	/* IDs for cgroups in this hierarchy */
+	struct ida cgroup_ida;
+
+	/* The path to use for release notifications. */
+	char release_agent_path[PATH_MAX];
+
+	/* The name for this hierarchy - may be empty */
+	char name[MAX_CGROUP_ROOT_NAMELEN];
 };
 ```
-那从`struct css_set`怎么转换到cgroup呢? 再来看一个辅助的数据结构`struct cg_cgroup_link`
+
+
 
 #### cg_cgroup_link
 
 ``` C
-/* Link structure for associating css_set objects with cgroups */            
-struct cg_cgroup_link {                                                      
-    /*                                                                       
-     * List running through cg_cgroup_links associated with a                
-     * cgroup, anchored on cgroup->css_sets                                  
-     */                                                                      
-    struct list_head cgrp_link_list;                                         
-    struct cgroup *cgrp;                                                     
-    /*                                                                       
-     * List running through cg_cgroup_links pointing at a                    
-     * single css_set object, anchored on css_set->cg_links                  
-     */                                                                      
-    struct list_head cg_link_list;                                           
-    struct css_set *cg;                                                      
-};                                                                                                                     
+/* Link structure for associating css_set objects with cgroups */
+struct cg_cgroup_link {
+    /*
+     * List running through cg_cgroup_links associated with a
+     * cgroup, anchored on cgroup->css_sets
+     */
+    struct list_head cgrp_link_list;
+    struct cgroup *cgrp;
+    /*
+     * List running through cg_cgroup_links pointing at a
+     * single css_set object, anchored on css_set->cg_links
+     */
+    struct list_head cg_link_list;
+    struct css_set *cg;
+};
 ```
 
 #### 关系

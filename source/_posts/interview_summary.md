@@ -75,6 +75,11 @@ spinlock中不能睡眠，如果存在sleep会怎么样？中断上下文，进�
 
 用处，实现，应用场景？
 
+## 内核抢占
+
+* 抢占与spinlock之间的关系？
+* 关闭抢占后，让出CPU的方法？ schedule
+
 ## Android的启动
 
 android启动进入桌面
