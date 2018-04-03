@@ -150,6 +150,7 @@ __asm__ __volatile__(
 ``` C
 #define barrier() __asm__ __volatile__("": : :"memory")
 ```
+>file: include/linux/compiler-gcc.h
 
 >"memory"作为clobber部分另外一个作用是可以让在这条指令之后的指令,告诉gcc应该刷新 内存状态.内存的状态可能发生修改,如果需要操作的话,需要重新把内存内容载入寄存器
 
