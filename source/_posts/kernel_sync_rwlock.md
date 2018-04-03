@@ -1,6 +1,6 @@
 ---
-title: Linux内核同步机制: rwlock
-date: 2018-04-03 23:07:24
+title: Linux内核同步机制【rwlock】
+date: 2018-04-03 12:07:24
 categories: Linux内核
 tags: [linux, lock]
 ---
