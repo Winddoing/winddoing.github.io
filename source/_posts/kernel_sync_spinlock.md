@@ -1,5 +1,5 @@
 ---
-title: Linux内核同步机制:spin lock
+title: Linux内核同步机制【spin lock】
 date: 2018-03-29 23:07:24
 categories: Linux内核
 tags: [linux, lock]
