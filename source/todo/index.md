@@ -9,4 +9,5 @@ comments: true
 * [轻松认识 Linux kernel](http://www.bricktou.com/)
 * [asciiflow画图](http://asciiflow.com/)
 * [kindle推](http://www.kindlepush.com/main)
+* [dirtysalt's homepage](https://dirtysalt.github.io/html/index.html)
 

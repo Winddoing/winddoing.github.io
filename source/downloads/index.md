@@ -27,3 +27,18 @@ comments: false
 
 ## 工具
 * [Makefile.pdf](/downloads/tools/Makefile.pdf)【[html](https://seisman.github.io/how-to-write-makefile/)】
+
+## 计算机体系结构-MIPS【[html](http://www0.cs.ucl.ac.uk/staff/electran/gc03/pdf/filelist.xml)】
+* [06processor_colour.pdf](/downloads/computer_architecture/06processor_colour.pdf)
+* [07mips_examples_colour.pdf](/downloads/computer_architecture/07mips_examples_colour.pdf)
+* [08_data_structures.pdf](/downloads/computer_architecture/08_data_structures.pdf)
+* [09stacks.pdf](/downloads/computer_architecture/09stacks.pdf)
+* [10_input_output.prn.pdf](/downloads/computer_architecture/10_input_output.prn.pdf)
+* [11interrupts.pdf](/downloads/computer_architecture/11interrupts.pdf)
+* [12IO_systems.pdf](/downloads/computer_architecture/12IO_systems.pdf)
+* [13disks_serial.pdf](/downloads/computer_architecture/13disks_serial.pdf)
+* [14memorycache.pdf](/downloads/computer_architecture/14memorycache.pdf)
+* [15CpuInternals.pdf](/downloads/computer_architecture/15CpuInternals.pdf)
+* [16_mem_man_notes.pdf](/downloads/computer_architecture/16_mem_man_notes.pdf)
+* [h02transistors.pdf](/downloads/computer_architecture/h02transistors.pdf)
+
