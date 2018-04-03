@@ -48,10 +48,6 @@ Prompt: Group CPU scheduler
 ``` C
 struct task_struct {
     ...
-#ifdef CONFIG_CGROUP_SCHED
-	struct task_group *sched_task_group;
-#endif
-    ...
 #ifdef CONFIG_CGROUPS
 	/* Control Group info protected by css_set_lock */
 	struct css_set __rcu *cgroups;
@@ -330,6 +326,79 @@ struct cgroupfs_root {
 `top_cgroup`指向了所在层级的根cgroup，也就是创建层级时自动创建的那个cgroup。
 
 
+### cgroup_subsys
+
+``` C
+/*
+ * Control Group subsystem type.
+ * See Documentation/cgroups/cgroups.txt for details
+ */
+
+struct cgroup_subsys {
+    struct cgroup_subsys_state *(*css_alloc)(struct cgroup *cgrp);
+    int (*css_online)(struct cgroup *cgrp);
+    void (*css_offline)(struct cgroup *cgrp);
+    void (*css_free)(struct cgroup *cgrp);
+
+    int (*allow_attach)(struct cgroup *cgrp, struct cgroup_taskset *tset);
+    int (*can_attach)(struct cgroup *cgrp, struct cgroup_taskset *tset);
+    void (*cancel_attach)(struct cgroup *cgrp, struct cgroup_taskset *tset);
+    void (*attach)(struct cgroup *cgrp, struct cgroup_taskset *tset);
+    void (*fork)(struct task_struct *task);
+    void (*exit)(struct cgroup *cgrp, struct cgroup *old_cgrp,
+             struct task_struct *task);
+    void (*bind)(struct cgroup *root);
+
+    int subsys_id;
+    int disabled;
+    int early_init;
+    /*
+     * True if this subsys uses ID. ID is not available before cgroup_init()
+     * (not available in early_init time.)
+     */
+    bool use_id;
+
+    /*
+     * If %false, this subsystem is properly hierarchical -
+     * configuration, resource accounting and restriction on a parent
+     * cgroup cover those of its children.  If %true, hierarchy support
+     * is broken in some ways - some subsystems ignore hierarchy
+     * completely while others are only implemented half-way.
+     *
+     * It's now disallowed to create nested cgroups if the subsystem is
+     * broken and cgroup core will emit a warning message on such
+     * cases.  Eventually, all subsystems will be made properly
+     * hierarchical and this will go away.
+     */
+
+     bool broken_hierarchy;
+     bool warned_broken_hierarchy;
+
+#define MAX_CGROUP_TYPE_NAMELEN 32
+     const char *name;
+
+     /*
+      * Link to parent, and list entry in parent's children.
+      * Protected by cgroup_lock()
+      */
+     struct cgroupfs_root *root;
+     struct list_head sibling;
+     /* used when use_id == true */
+     struct idr idr;
+     spinlock_t id_lock;
+
+     /* list of cftype_sets */
+     struct list_head cftsets;
+
+     /* base cftypes, automatically [de]registered with subsys itself */
+     struct cftype *base_cftypes;
+     struct cftype_set base_cftset;
+
+     /* should be defined only by modular subsystems */
+     struct module *module;
+ };
+```
+Cgroup_subsys定义了一组操作，让各个子系统根据各自的需要去实现。这个相当于C++中抽象基类，然后各个特定的子系统对应cgroup_subsys则是实现了相应操作的子类。类似的思想还被用在了cgroup_subsys_state中，cgroup_subsys_state并未定义控制信息，而只是定义了各个子系统都需要的共同信息，比如该cgroup_subsys_state从属的cgroup。然后各个子系统再根据各自的需要去定义自己的进程控制信息结构体，最后在各自的结构体中将cgroup_subsys_state包含进去，这样通过Linux内核的container_of等宏就可以通过cgroup_subsys_state来获取相应的结构体。
 
 
 ### 联系
@@ -470,14 +539,65 @@ static struct file_system_type cgroup_fs_type = {
 
 ### 调用关系：
 
-``` C
+```
 SyS_mount
 	\->do_mount
 		\->vfs_kern_mount
 			\->mount_fs
 				\->cgroup_mount
+					\->cgroup_populate_dir  //生成基础的文件属性
 ```
+cgoup基础的文件：
 
+``` C
+/*for hysterical raisins, we can't put this on the older files*/
+#define CGROUP_FILE_GENERIC_PREFIX "cgroup."
+static struct cftype files[] = {
+    {
+        .name = "tasks",
+        .open = cgroup_tasks_open,
+        .write_u64 = cgroup_tasks_write,
+        .release = cgroup_pidlist_release,
+        .mode = S_IRUGO | S_IWUSR,
+    },
+    {
+        .name = CGROUP_FILE_GENERIC_PREFIX "procs",
+        .open = cgroup_procs_open,
+        .write_u64 = cgroup_procs_write,
+        .release = cgroup_pidlist_release,
+        .mode = S_IRUGO | S_IWUSR,
+    },
+    {
+        .name = "notify_on_release",
+        .read_u64 = cgroup_read_notify_on_release,
+        .write_u64 = cgroup_write_notify_on_release,
+    },
+    {
+        .name = CGROUP_FILE_GENERIC_PREFIX "event_control",
+        .write_string = cgroup_write_event_control,
+        .mode = S_IWUGO,
+    },
+    {
+        .name = "cgroup.clone_children",
+        .flags = CFTYPE_INSANE,
+        .read_u64 = cgroup_clone_children_read,
+        .write_u64 = cgroup_clone_children_write,
+    },
+    {
+        .name = "cgroup.sane_behavior",
+        .flags = CFTYPE_ONLY_ON_ROOT,
+        .read_seq_string = cgroup_sane_behavior_show,
+    },
+    {
+        .name = "release_agent",
+        .flags = CFTYPE_ONLY_ON_ROOT,
+        .read_seq_string = cgroup_release_agent_show,
+        .write_string = cgroup_release_agent_write,
+        .max_write_len = PATH_MAX,
+    },
+    { } /* terminate */
+};
+```
 
 
 ## 创建子cgroup
@@ -485,11 +605,48 @@ SyS_mount
 ```
 SyS_mkdirat
 	\->cgroup_mkdir
+		\->cgroup_create
 ```
 
 ## task
 
+> echo $$ > task
+
+将当前进程迁移到一个cgroup中：
+
+Open:
+```
+do_sys_open
+ |->do_filp_open
+   |-> path_openat.isra.13
+     |->do_last.isra.12
+       |->finish_open
+         |->do_dentry_open.isra.2
+		   |->cgroup_pidlist_open
+```
+
+Write:
+```
+SyS_write
+  |->vfs_write
+    |->cgroup_file_write
+      |->cgroup_tasks_write
+        |->attach_task_by_pid
+```
+
+
 ## DEBUG子系统实现
+
+
+``` C
+struct cgroup_subsys debug_subsys = {
+    .name = "debug",
+    .css_alloc = debug_css_alloc,
+    .css_free = debug_css_free,
+    .subsys_id = debug_subsys_id,
+    .base_cftypes = debug_files,
+};                                           SS
+```
 
 
 ## 参考
