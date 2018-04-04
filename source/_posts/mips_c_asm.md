@@ -84,9 +84,9 @@ int get_counter()
 {
 	int rst;
 
-	__asm__ __volatile__(		/* mfc0 为取cp0 寄存器值的指令 */
-	"mfc0	%0, $25\n\t"		/* %0 表示列表开始的第一个寄存器 */
-	: "=r" (rst)				/* 告诉gcc 让rst对应一个通用寄存器 */
+	__asm__ __volatile__(	/* mfc0 为取cp0 寄存器值的指令 */
+	"mfc0	%0, $25\n\t"	/* %0 表示列表开始的第一个寄存器 */
+	: "=r" (rst)		/* 告诉gcc 让rst对应一个通用寄存器 */
 	);
 
 	return rst;
