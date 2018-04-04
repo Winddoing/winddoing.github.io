@@ -85,6 +85,8 @@ table:0kB bounce:0kB free_cma:0kB writeback_tmp:0kB pages_scanned:31 all_unrecla
 >`rss`:"Resident Set Size", 实际驻留"在内存中"的内存数. 不包括已经交换出去的代码. 举一个例子: 如果你有一个程序使用了100K内存, 操作系统交换出40K内存, 那么RSS为60K. RSS还包括了与其它进程共享的内存区域. 这些区域通常用于libc库等.
 
 
+## 处理流程
+
 
 
 
@@ -93,5 +95,5 @@ table:0kB bounce:0kB free_cma:0kB writeback_tmp:0kB pages_scanned:31 all_unrecla
 
 1. [Linux中进程内存RSS与cgroup内存的RSS统计 - 差异](http://blog.163.com/digoal@126/blog/static/1638770402016514102751241/)
 2. [进程实际内存占用: 私有驻留内存数(Private RSS)介绍](http://blog.chinaunix.net/uid-29043620-id-5754325.html)
-
-
+3. [Out of Memory(OOM)处理流程](https://e-mailky.github.io/2017-01-14-oom)
+4. [Taming the OOM killer](https://lwn.net/Articles/317814/)
