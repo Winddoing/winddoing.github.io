@@ -154,7 +154,7 @@ links_layout: block
 #links_layout: inline
 links:
   #Title: http://example.com/
-  嵌入式相关: https://winddoing.gitbooks.io/embedded_linux_notes/content/
+  嵌入式相关: https://winddoing.gitbooks.io/embedded_notes/content/
   CSDN: http://blog.csdn.net/sdreamq
   蜗窝科技: http://www.wowotech.net/
 
