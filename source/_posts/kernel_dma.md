@@ -5,10 +5,11 @@ categories: Linux内核
 tags: [DMA, kernel]
 ---
 
->1. DMA的映射机制
->2. DMA的数据处理
->3. DMA物理通道和逻辑通道
->4. DMA地址空间的排布
+>* DMA的映射机制
+>* DMA的数据处理
+>* DMA物理通道和逻辑通道
+>* DMA地址空间的排布
+>* 一致性和流式DMA的定义和区别
 
 <!--more-->
 
