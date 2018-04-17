@@ -19,3 +19,4 @@ tags: [DMA, kernel]
 2. [内核文档](https://www.kernel.org/doc/Documentation/DMA-API-HOWTO.txt)
 3. [Kernel Korner - Using DMA](https://www.linuxjournal.com/article/7104)
 4. [LDD3-ch15](https://static.lwn.net/images/pdf/LDD3/ch15.pdf)
+5. [DMAR 与 IOMMU](http://linuxperf.com/?p=67)
