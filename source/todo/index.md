@@ -4,7 +4,7 @@ date: 2018-01-07 23:07:24
 comments: true
 ---
 
-{% centerquote %} ### 阶段性、归纳、总结，将知识点、系统化、章节化 ### {% endcenterquote %}
+{% centerquote %} ### __阶段性、归纳、总结，将知识点、系统化、章节化__ ### {% endcenterquote %}
 
 * [Embedded Linux Experts](http://elixir.free-electrons.com/linux/latest/source)
 * [The Linux Kernel’s documentation(4.11)](https://www.kernel.org/doc/html/v4.11/index.html)
