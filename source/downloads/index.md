@@ -47,3 +47,7 @@ comments: false
 
 * [Linux Device Drivers, 2nd Edition](https://www.xml.com/ldd/chapter/book)
 * [Linux Device Drivers, 3nd Edition](https://lwn.net/Kernel/LDD3/)
+
+## Code
+
+* [保证嵌入式系统的代码质量](http://www-01.ibm.com/software/cn/rational/events/download/pdf/1123SH_3.pdf)

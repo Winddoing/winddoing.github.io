@@ -1,7 +1,7 @@
 ---
 title: GCC内嵌汇编(mips)
 date: 2018-04-03 23:12:24
-categories: 随笔
+categories: MIPS
 tags: [mips, 汇编]
 ---
 

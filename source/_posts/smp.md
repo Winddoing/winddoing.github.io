@@ -61,3 +61,4 @@ atomic
 ## 参考
 
 1. [Linux内核源代码情景分析]
+2. [基于多核处理器的RTOS多核扩展分析与研究 一](http://blog.sina.com.cn/s/blog_70dd16910101axyw.html)
