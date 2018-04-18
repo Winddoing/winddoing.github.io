@@ -63,3 +63,8 @@ tags: [Git]
 
 ### 14.切换标签
 		git checkout <Tag>
+
+
+## DoTo
+
+1. [Git 最佳实践：分支管理](http://blog.jobbole.com/109466/)
