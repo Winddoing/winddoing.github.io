@@ -5,6 +5,7 @@ comments: true
 ---
 
 {% centerquote %} ### __阶段性、归纳、总结，将知识点、系统化、章节化__ ### {% endcenterquote %}
+{% centerquote %} ###工作###：不要老想着写代码，###学习###：学习能力,方法 {% endcenterquote %}
 
 * [Embedded Linux Experts](http://elixir.free-electrons.com/linux/latest/source)
 * [The Linux Kernel’s documentation(4.11)](https://www.kernel.org/doc/html/v4.11/index.html)
