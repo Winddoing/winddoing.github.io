@@ -195,6 +195,11 @@ static struct sysrq_key_op *sysrq_key_table[36] = {
 };
  ```
 
+## sshfs
+
+```
+sudo sshfs xxx@192.168.1.2:/home_back/xxx/work/aaa /home/user/aaa -o gid=1000,uid=1000,allow_other
+```
 
 ## 参考
 
