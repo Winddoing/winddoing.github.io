@@ -21,10 +21,18 @@
 https://blog.csdn.net/innost/article/details/8474683
 
 
+/dev/hidraw2   android
+
+/dev/input/mouse1  linux
+
+
+
 ## S    
 
 1. 添加mouse设备驱动
 2. 创建子线程，a）建立socket连接；b）轮询查找uibc进行读数
+
+
 
 ### signal
 
@@ -41,7 +49,28 @@ FD_ISSET
 判断描述符fd是否在给定的描述符集fdset中，通常配合select函数使用，由于select函数成功返回时会将未准备好的描述符位清零。通常我们使用FD_ISSET是为了检查在select函数返回后，某个描述符是否准备好，以便进行接下来的处理操作。
 
 
-## HID驱动
+### HID驱动
 
 
-S端相当于device端，
+S端相当于device端，模拟鼠标的输入
+
+[usb hid gadget驱动](https://blog.csdn.net/abcamus/article/details/52980107?locationNum=5&fps=1)
+
+
+ifconfig eth1 up
+ifconfig eth1 192.168.1.111 netmask 255.255.255.0
+
+tftp -gr vx_uibc 192.168.1.11 | chmod +x vx_uibc
+
+
+
+
+编译kernel找不到指定的defconfig
+
+修改Makefile
+
+ARCH        ?= arm
+
+
+
+/dev/hidraw
