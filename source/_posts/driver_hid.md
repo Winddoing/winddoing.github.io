@@ -1,6 +1,6 @@
 ---
 title: HID设备
-date: 2016-05-8 23:17:24
+date: 2018-05-8 23:17:24
 categories: 设备驱动
 tags: [HID, 驱动]
 ---
