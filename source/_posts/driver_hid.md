@@ -60,3 +60,4 @@ BYTE3 BYTE2 BYTE1 BYTE0
 4. [Linux之访问/dev/hidraw](https://blog.csdn.net/qq_33750826/article/details/79397984)
 5. [USB与BT HID reports描述符实践与抓包分析](https://blog.csdn.net/sy373466062/article/details/78223563)
 6. [usb hid gadget模拟鼠标键盘](https://blog.csdn.net/luckywang1103/article/details/41282551)
+7. [USB/HID设备报告描述符详解](http://blog.chinaunix.net/uid-23215128-id-2521477.html)
