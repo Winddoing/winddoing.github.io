@@ -31,7 +31,7 @@ dinfo: bustype:[0x00000003], vendor:[0x046d], product:[0xffffc077]
 
 
 
-## S    
+## S
 
 1. 添加mouse设备驱动
 2. 创建子线程，a）建立socket连接；b）轮询查找uibc进行读数
@@ -44,7 +44,7 @@ dinfo: bustype:[0x00000003], vendor:[0x046d], product:[0xffffc077]
 signal(SIGPIPE, SIG_IGN);
 ```
 https://blog.csdn.net/sukhoi27smk/article/details/43760605
-实际这个函数的目的就是防止程序收到SIGPIPE后自动退出   
+实际这个函数的目的就是防止程序收到SIGPIPE后自动退出
 
 
 ### select
@@ -63,7 +63,7 @@ S端相当于device端，模拟鼠标的输入
 [usb hid gadget驱动](https://blog.csdn.net/abcamus/article/details/52980107?locationNum=5&fps=1)
 
 
-access_ok | 检查用户空间内存块是否可用   
+access_ok | 检查用户空间内存块是否可用
 
 ifconfig eth1 up
 ifconfig eth1 192.168.1.111 netmask 255.255.255.0
@@ -92,6 +92,7 @@ make  modules
 
 tftp -gr g_hid.ko 192.168.1.11
 tftp -gr dwc_otg.ko 192.168.1.11
+tftp -gr vx_uibc_s 192.168.1.11
 
 
 ~ # insmod g_hid.ko
@@ -121,11 +122,11 @@ Bus 002 Device 004: ID 0525:a4ac Netchip Technology, Inc.
 
 驱动中的定义：
 ```
-#define HIDG_VENDOR_NUM     0x0525  /* XXX NetChip */                     
-#define HIDG_PRODUCT_NUM    0xa4ac  /* Linux-USB HID gadget */             
+#define HIDG_VENDOR_NUM     0x0525  /* XXX NetChip */
+#define HIDG_PRODUCT_NUM    0xa4ac  /* Linux-USB HID gadget */
 ```
 
-cat  /sys/kernel/debug/usb/devices   
+cat  /sys/kernel/debug/usb/devices
 
 cat  /proc/bus/input/devices
 
@@ -137,7 +138,7 @@ Device Descriptor:
   bLength                18
   bDescriptorType         1
   bcdUSB               2.00
-  bDeviceClass            0 (Defined at Interface level)
+  bDeviceClass            0 (Defined at Interface level)：
   bDeviceSubClass         0
   bDeviceProtocol         0
   bMaxPacketSize0        64
@@ -201,45 +202,106 @@ Device Status:     0x0001
   Self Powered
 
 ```
+
+
+WARN::ep0_do_stall:1290: req 21.0a protocol STALL; err -22
+
 ## struct hidg_func_descriptor
 
 结构体含义：
 
 ``` C
-/*hid descriptor for a mouse*/                                             
-static struct hidg_func_descriptor vx_device_mouse_data = {                
-    .subclass = 0,  /*NO SubClass*/                                        
-    .protocol = 2,  /*Mouse*/                                              
-    .report_length = 4,                                                    
-    .report_desc_length = 52,                                              
-    .report_desc={                                                         
-        0x05,0x01,  /*Usage Page (Generic Desktop Controls)*/              
-        0x09,0x02,  /*Usage (Mouse)*/                                      
-        0xa1,0x01,  /*Collction (Application)*/                            
-        0x09,0x01,  /*Usage (pointer)*/                                    
-        0xa1,0x00,  /*Collction (Physical)*/                               
-        0x05,0x09,  /*Usage Page (Button)*/                                
-        0x19,0x01,  /*Usage Minimum(1)*/                                   
-        0x29,0x03,  /*Usage Maximum(3) */                                  
-        0x15,0x00,  /*Logical Minimum(1)*/                                 
-        0x25,0x01,  /*Logical Maximum(1)*/                                 
-        0x95,0x03,  /*Report Count(5)  */                                  
-        0x75,0x01,  /*Report Size(1)*/                                     
-        0x81,0x02,  /*Input(Data,Variable,Absolute,BitFiled)*/             
-        0x95,0x01,  /*Report Count(1)*/                                    
-        0x75,0x05,  /*Report Size(5) */                                    
-        0x81,0x01,  /*Input(Constant,Array,Absolute,BitFiled) */           
-        0x05,0x01,  /*Usage Page (Generic Desktop Controls)*/              
-        0x09,0x30,  /*Usage(x)*/                                           
-        0x09,0x31,  /*Usage(y)*/                                           
-        0x09,0x38,  /*Usage(Wheel)*/                                       
-        0x15,0x81,  /*Logical Minimum(-127)*/                              
-        0x25,0x7f,  /*Logical Maximum(127)*/                               
-        0x75,0x08,  /*Report Size(8)*/                                     
-        0x95,0x02,  /*Report Count(2)  */                                  
-        0x81,0x06,  /*Input(Data,Variable,Relative,BitFiled)*/             
-        0xc0,   /*End Collection*/                                         
-        0xc0    /*End Collection*/                                         
-    }                                                                      
-};                                                                         
+/*hid descriptor for a mouse*/
+static struct hidg_func_descriptor vx_device_mouse_data = {
+    .subclass = 0,  /*NO SubClass*/
+    .protocol = 2,  /*Mouse*/
+    .report_length = 4,
+    .report_desc_length = 52,
+    .report_desc={
+        0x05,0x01,  /*Usage Page (Generic Desktop Controls)*/
+        0x09,0x02,  /*Usage (Mouse)*/
+        0xa1,0x01,  /*Collction (Application)*/
+        0x09,0x01,  /*Usage (pointer)*/
+        0xa1,0x00,  /*Collction (Physical)*/
+        0x05,0x09,  /*Usage Page (Button)*/
+        0x19,0x01,  /*Usage Minimum(1)*/
+        0x29,0x03,  /*Usage Maximum(3) */
+        0x15,0x00,  /*Logical Minimum(1)*/
+        0x25,0x01,  /*Logical Maximum(1)*/
+        0x95,0x03,  /*Report Count(5)  */
+        0x75,0x01,  /*Report Size(1)*/
+        0x81,0x02,  /*Input(Data,Variable,Absolute,BitFiled)*/
+        0x95,0x01,  /*Report Count(1)*/
+        0x75,0x05,  /*Report Size(5) */
+        0x81,0x01,  /*Input(Constant,Array,Absolute,BitFiled) */
+        0x05,0x01,  /*Usage Page (Generic Desktop Controls)*/
+        0x09,0x30,  /*Usage(x)*/
+        0x09,0x31,  /*Usage(y)*/
+        0x09,0x38,  /*Usage(Wheel)*/
+        0x15,0x81,  /*Logical Minimum(-127)*/
+        0x25,0x7f,  /*Logical Maximum(127)*/
+        0x75,0x08,  /*Report Size(8)*/
+        0x95,0x02,  /*Report Count(2)  */
+        0x81,0x06,  /*Input(Data,Variable,Relative,BitFiled)*/
+        0xc0,   /*End Collection*/
+        0xc0    /*End Collection*/
+    }
+};
 ```
+
+window下的usb抓包软件：`USBlyzer`
+
+官网下载地址：http://www.usblyzer.com/download.htm
+下载：http://bbs.armfly.com/job.php?action=download&aid=9919
+
+```
+Item Tag (Value) Raw Data
+Usage Page (Generic Desktop) 05 01
+Usage (Mouse) 09 02
+Collection (Application) A1 01
+    Usage (Pointer) 09 01
+    Collection (Physical) A1 00
+        Usage Page (Button) 05 09
+        Usage Minimum (Button 1) 19 01
+        Usage Maximum (Button 5) 29 05
+        Logical Minimum (0) 15 00
+        Logical Maximum (1) 25 01
+        Report Count (5) 95 05
+        Report Size (1) 75 01
+        Input (Data,Var,Abs,NWrp,Lin,Pref,NNul,Bit) 81 02
+        Report Count (1) 95 01
+        Report Size (3) 75 03
+        Input (Cnst,Ary,Abs) 81 01
+        Usage Page (Generic Desktop) 05 01
+        Usage (X) 09 30
+        Usage (Y) 09 31
+        Logical Minimum (-2048) 16 00 F8
+        Logical Maximum (2047) 26 FF 07
+        Report Size (12) 75 0C
+        Report Count (2) 95 02
+        Input (Data,Var,Rel,NWrp,Lin,Pref,NNul,Bit) 81 06
+        Usage (Wheel) 09 38
+        Logical Minimum (-127) 15 81
+        Logical Maximum (127) 25 7F
+        Report Size (8) 75 08
+        Report Count (1) 95 01
+        Input (Data,Var,Rel,NWrp,Lin,Pref,NNul,Bit) 81 06
+        Usage Page (Consumer Devices) 05 0C
+        Usage (AC Pan) 0A 38 02
+        Report Count (1) 95 01
+        Report Size (8) 75 08
+        Logical Minimum (-127) 15 81
+        Logical Maximum (127) 25 7F
+        Input (Data,Var,Rel,NWrp,Lin,Pref,NNul,Bit) 81 06
+    End Collection C0
+End Collection C0
+
+```
+write数据时，数据的长度，怎么决定
+
+
+## 网络
+
+GoAhead是一个开源(商业许可)、简单、轻巧、功能强大、可以在多个平台运行的嵌入式Web Server。GoAhead Web Server是为嵌入式实时操作系统（RTOS）量身定制的Web服务器。
+
+nc 192.168.49.1 1111
