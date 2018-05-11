@@ -305,3 +305,11 @@ write数据时，数据的长度，怎么决定
 GoAhead是一个开源(商业许可)、简单、轻巧、功能强大、可以在多个平台运行的嵌入式Web Server。GoAhead Web Server是为嵌入式实时操作系统（RTOS）量身定制的Web服务器。
 
 nc 192.168.49.1 1111
+
+
+## 多线程
+
+```
+pthread_setcancelstate(PTHREAD_CANCEL_ENABLE, NULL);            
+pthread_setcanceltype(PTHREAD_CANCEL_ASYNCHRONOUS, NULL);       
+```
