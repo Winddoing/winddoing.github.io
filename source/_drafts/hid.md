@@ -313,3 +313,14 @@ nc 192.168.49.1 1111
 pthread_setcancelstate(PTHREAD_CANCEL_ENABLE, NULL);            
 pthread_setcanceltype(PTHREAD_CANCEL_ASYNCHRONOUS, NULL);       
 ```
+
+## HID Report 描述及usage 概念
+
+* [Linux HID 驱动开发(2) USB HID Report 描述及usage 概念](https://blog.csdn.net/liwendovo/article/details/7736205)
+
+每种HID动作的编码，HID有一个专用术语usage (用法），USB协议中支持所有编码表称为usage tables.这里有全部编码表。
+http://www.rlocman.ru/i/File/2011/09/09/1.pdf
+
+在usb.org网站有HID decriptor tools工具下载 可以用创建和解析report descriptor包格式
+
+       http://www.usb.org/developers/hidpage/dt2_4.zip
