@@ -25,6 +25,9 @@ udev下载：[http://www.kernel.org/pub/linux/utils/kernel/hotplug/](http://www.
 
 ![udev工作流程](/images/udev/udev_work_flow.jpg)
 
+## 配置udev
+
+udev需要内核`sysfs`和`tmpfs`的支持，sysfs为udev提供`设备入口`和`uevent通道`，tmpfs为udev设备文件提供存放空间.
 
 ## 使用
 
@@ -94,12 +97,22 @@ KERNEL=="sda", NAME="my_root_disk", MODE="0660"
 
 ### 实例
 
+#### hidraw
+
 ```
 ACTION!="add", GOTO="uibc_exit"
 KERNEL=="hidraw2", SUBSYSTEM=="hidraw", RUN+="/etc/udev/xxx.sh"
 LABEL="uibc_exit"
 ```
 >file: /etc/udev/rules.d/22-xxx.rules
+
+#### SD
+
+```
+action!="add",goto="farsight"
+kernel=="mmcblk[0-9]p[0-9]",run+="/sbin/mount-sd.sh %k"
+label="farsight"
+```
 
 ### 注意
 
@@ -115,6 +128,7 @@ echo "print debug info ..." > /dev/ttyS000
 
 ### 查询sysfs文件系统：
 
+例如：设备 sda 的 SYSFS{size} 可以通过 cat /sys/block/sda/size得到；SYSFS{model} 信息可以通过 cat /sys/block/sda/device/model得到。
 
 ### udevadm info
 
@@ -122,11 +136,73 @@ echo "print debug info ..." > /dev/ttyS000
 udevadm info  --query=all --name=/dev/hidraw2
 ```
 
+设备信息：
+```
+# udevadm info  --query=all --name=/dev/hidraw2
+P: /devices/platform/soc/f9890000.ehci/usb1/1-1/1-1:1.2/0003:1C4D:0503.0003/hidraw/hidraw2
+N: hidraw2
+S: usb/by-devid/_/hidraw2
+E: UDEV_LOG=3
+E: DEVPATH=/devices/platform/soc/f9890000.ehci/usb1/1-1/1-1:1.2/0003:1C4D:0503.0003/hidraw/hidraw2
+E: MAJOR=251
+E: MINOR=2
+E: DEVNAME=/dev/hidraw2
+E: SUBSYSTEM=hidraw
+E: DEVLINKS=/dev/usb/by-devid/_/hidraw2
+```
+
 ## 调试
 
+### 查看udev是否处理内核的uevent事件
 
 ```
 udevadm  monitor
+```
+
+例如：U盘的插入/拔出
+```
+# udevadm monitor
+monitor will print the received events for:
+UDEV - the event which udev sends out after rule processing
+KERNEL - the kernel uevent
+
+usb 1-1: new high-speed USB device number 4 using ehci-platform
+KERNEL[209.826989] add  usb-storage 1-1:1.0: USB Mass Storage device detected
+    /devices/platform/soscsi host0: usb-storage 1-1:1.0
+c/f9890000.ehci/usb1/1-1 (usb)
+KERNEL[209.827627] add      /devices/platform/soc/f9890000.ehci/usb1/1-1/1-1:1.0 (usb)
+UDEV  [209.834354] add      /devices/platform/soc/f9890000.ehci/usb1/1-1 (usb)
+...
+UDEV  [209.841660] add      /devices/platform/soc/f9890000.ehci/usb1/1-1/1-1:1.0/host0/scsi_host/host0 (scsi_host)
+scsi 0:0:0:0: Direct-Access     General  UDisk            5.00 PQ: 0 ANSI: 2
+KERNEL[210.848174] add      /devsd 0:0:0:0: [sda] 15728640 512-byte logical blocks: (8.05 GB/7.50 GiB)
+ices/platform/soc/f98900sd 0:0:0:0: [sda] Write Protect is off
+00.ehci/usb1/1-1/1-1:1.0sd 0:0:0:0: [sda] No Caching mode page found
+/host0/target0:0sd 0:0:0:0: [sda] Assuming drive cache: write through
+:0 (scsi)
+KERNEL[210.848626] add      /devices/platform/soc/f9890000.ehci/usb1/ sda: sda1 sda2
+1-1/1-1:1.0/host0/target0:0:0/0:0:0:0 (scsi)
+KERNEL[210.848995]sd 0:0:0:0: [sda] Attached SCSI removable disk
+ add      /devices/platform/soc/f9890000.ehci/usb1/1-1/1-1:1.0/host0/target0:0:0/0:0:0:0/scsi_disk/0:0:0:0 (scsi_disk)
+KERNEL[210.849804] add      /devices/platform/soc/f9890000.ehci/usb1/1-1/1-1:1.0/host0/target0:0:0/0:0:0:0/scsi_device/0:0:0:0 (scsi_device)
+UDEV  [210.858522] add      /devices/platform/soc/f9890000.ehci/usb1/1-1/1-1:1.0/host0/target0:0:0/0:0:0:0/scsi_device/0:0:0:0 (scsi_device)
+...
+dudisk1110 -> /dev/sda
+udisk1110p1 -> /dev/sda1
+
+usb usb1-port1: disabled by hub (EMI?), re-enabling...
+usb 1-1: USB disconnect, device number 4
+KERNEL[213.650748] remove   /devices/platform/soc/f9890000.ehci/usb1/1-1/1-1:1.0/host0/target0:0:0/0:0:0:0/bsg/0:0:0:0 (bsg)
+...
+UDEV  [213.652991] remove   /devices/platform/soc/f9890000.ehci/usb1/1-1/1-1:1.0/host0/target0:0:0/0:0:0:0/bsg/0:0:0:0 (bsg)
+KERNEL[213.653175] remove   /devices/virtual/bdi/8:0 (bdi)
+UDEV  [213.774157] remove   /devices/platform/soc/f9890000.ehci/usb1/1-1/1-1:1.0 (usb)
+```
+
+### 重启udev
+
+```
+udevadm trigger --type=devices --action=change
 ```
 
 ## Q&A
@@ -139,3 +215,4 @@ udev 完全在用户态 (userspace) 工作，利用设备加入或移除时内�
 
 * [Writing udev rules](http://www.reactivated.net/writing_udev_rules.html)
 * [使用 udev 高效、动态地管理 Linux 设备文件](https://www.ibm.com/developerworks/cn/linux/l-cn-udev/index.html?ca=drs-cn-0304)
+* [udev使用方法（附实例）](http://blog.chinaunix.net/uid-26514815-id-3453208.html)
