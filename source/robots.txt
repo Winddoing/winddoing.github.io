@@ -10,7 +10,5 @@ Disallow: /fonts/
 Disallow: /vendors/
 Disallow: /fancybox/
 
-Sitemap: https://winddoing.github.io//sitemap.xml
-Sitemap: https://winddoing.github.io//baidusitemap.xml
-
-
+Sitemap: https://winddoing.github.io/sitemap.xml
+Sitemap: https://winddoing.github.io/baidusitemap.xml
