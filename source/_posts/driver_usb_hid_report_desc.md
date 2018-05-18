@@ -30,9 +30,9 @@ tags: [HID, 驱动]
 | input 	| 输入数据格式	|
 | output	| 输出数据格式	|
 | Logical Minimum | 取值范围	|
-| logical_maximum |		|
-| physical_minimum|		|
-| physical_maximum|		|
+| logical_maximum |	取值范围	|
+| physical_minimum|	取值范围	|
+| physical_maximum|	取值范围	|
 | report size | report输入字节宽度	|
 | report count | report总数	|
 
@@ -43,10 +43,88 @@ tags: [HID, 驱动]
 
 ## 实例分析（鼠标）
 
+```
+HID Descriptor
+Offset Field Size Value Description
+0 bLength 1 09h  
+1 bDescriptorType 1 21h HID
+2 bcdHID 2 0111h 1.11
+4 bCountryCode 1 00h  
+5 bNumDescriptors 1 01h  
+6 bDescriptorType 1 22h Report
+7 wDescriptorLength 2 002Eh 46 bytes  <-------描述符大小
+
+Endpoint Descriptor 81 1 In, Interrupt, 10 ms
+Offset Field Size Value Description
+0 bLength 1 07h  
+1 bDescriptorType 1 05h Endpoint
+2 bEndpointAddress 1 81h 1 In
+3 bmAttributes 1 03h Interrupt
+ 1..0: Transfer Type  ......11  Interrupt
+ 7..2: Reserved  000000..   
+4 wMaxPacketSize 2 0004h 4 bytes  <-----------包数据宽度
+6 bInterval 1 0Ah 10 ms
+
+Interface 0 HID Report Descriptor Mouse
+Item Tag (Value) Raw Data
+Usage Page (Generic Desktop) 05 01  
+Usage (Mouse) 09 02  
+Collection (Application) A1 01  
+    Usage (Pointer) 09 01  
+    Collection (Physical) A1 00  
+        Usage Page (Button) 05 09  
+        Usage Minimum (Button 1) 19 01  
+        Usage Maximum (Button 3) 29 03  
+        Logical Minimum (0) 15 00  
+        Logical Maximum (1) 25 01  
+        Report Count (8) 95 08  
+        Report Size (1) 75 01  
+        Input (Data,Var,Abs,NWrp,Lin,Pref,NNul,Bit) 81 02
+
+        Usage Page (Generic Desktop) 05 01  
+        Usage (X) 09 30  
+        Usage (Y) 09 31  
+        Usage (Wheel) 09 38  
+        Logical Minimum (-127) 15 81  
+        Logical Maximum (127) 25 7F  
+        Report Size (8) 75 08  
+        Report Count (3) 95 03  
+        Input (Data,Var,Rel,NWrp,Lin,Pref,NNul,Bit) 81 06  
+    End Collection C0  
+End Collection C0  
+```
+
+### 获取数据格式--Input
+
+从Report描述符可以获取信息，鼠标输入的数据可以分两部分：
+
+| 序号 | 设备类型 | 格式 | 宽度 | 大小 | 取值范围 |
+| :-:| :---:| :--:| :--: | :--: | :-------:|
+| 1 | Usage Page (Button) | Input (Data,Var,Abs,NWrp,Lin,Pref,NNul,Bit) | Report Size (1) | Report Count (8) | Logical Minimum (0) ~ Logical Maximum (1) |
+| 2 | Usage Page (Generic Desktop) |Input (Data,Var,Rel,NWrp,Lin,Pref,NNul,Bit) | Report Size (8) | Report Count (3) | Logical Minimum (-127) ~ Logical Maximum (127) |
+
+数据格式：
+```
++---------------+---------------+--------------------------------+
+| Usage (Wheel) |   Usage (Y)   |   Usage (X)   |7|6|5|4|3|2|1||0|
++---------------+---------------+--------------------------+-+--++
+                                                           | |  v
+                                                           | v  Usage Page (Button)
+                                                           v Usage Minimum (Button 1)
+                                                           Usage Maximum (Button 3)
+
+```
+* 第一部分：一个字节（Byte），其中每个bit代表一种含义, `Usage Page (Button)`,`Usage Minimum (Button 1)`,`Usage Maximum (Button 3) `
+* 第二部分：三个字节（Byte），其中一个字节代表一种含义，`Usage (X)`,`Usage (Y)`,`Usage (Wheel)`
+
+
+
 ## 相关文件
 
-* [Universal Serial Bus HID Usage Tables](http://www.usb.org/developers/hidpage/Hut1_12v2.pdf)
+* [Device Class Definition for HID 1.11](http://www.usb.org/developers/hidpage/HID1_11.pdf)
+* [HID Usage Tables 1.12](http://www.usb.org/developers/hidpage/Hut1_12v2.pdf)
 * [USB HID to PS2 Scan Code Translation Table.pdf](http://d1.amobbs.com/bbs_upload782111/files_41/ourdev_651088NZ5EKW.pdf)
+* [USB HID usage table](http://www.freebsddiary.org/APC/usb_hid_usages.php)
 
 
 ## 总结
