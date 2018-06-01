@@ -129,6 +129,131 @@ ntpd -p 192.168.1.11 -qNn
 ntpd -ddnNl
 ```
 
+## 应用--RTP网络延时
+
+### 场景
+
+有A和B两个开发板并且通过WIFI直连（P2P）使用TCP协议搭建了RTP，使用RTP进行视频传输，计算其中的网络延时
+
+> A --- 服务器 --- 接收端 --- R
+> B --- 客户端 --- 发射端 --- S
+
+### 时间戳
+
+#### 打时间戳
+
+`gettimeofday`获取的时间存放在`unsigned long long`中需要64bit的空间
+
+```
+struct timeval now;
+unsigned long long rtp_time_r = 0;
+
+gettimeofday(&now, NULL);                                                                                                                                
+rtp_time_r = 1000000 * now.tv_sec + now.tv_usec;
+```
+
+#### long long和char转换
+
+```
+int main(int argc, const char *argv[])
+{
+	char dst[30];
+	unsigned long long rtpTime = 0x1234567898765;
+	unsigned long long rtp_time_s = 0;
+	int i = 0, j = 56;
+
+	memset(dst, 0, sizeof(char) * 30);
+
+	for (i = 0;  i < sizeof(rtpTime);  i++) {
+		dst[19 - i] = （unsigned char）((rtpTime >> j) & 0xFF);
+		printf("===> func: %s, line: %d, rtpTime: %016llx, %d, dst[%d]=%02x\n",
+				__func__, __LINE__, (rtpTime >> j) & 0xFF, j, 19 - i, dst[19 - i]);
+		j -= 8;
+	}
+
+	printf("===> func: %s, line: %d\n", __func__, __LINE__);
+	j = 56;
+	for (i = 0;  i < sizeof(rtp_time_s);  i++) {
+		rtp_time_s |= (unsigned long long)dst[19 - i] << j;
+		j -= 8;
+	}
+
+	printf("===> func: %s, line: %d,  old: %016llx\n", __func__, __LINE__, rtpTime);
+	printf("===> func: %s, line: %d,  new: %016llx\n", __func__, __LINE__, rtp_time_s);
+
+	return 0;
+}
+```
+
+### 测试方法
+
+>一帧数据将会被拆分成多个RTP包进行传输
+
+1. 在S端对每一帧数据中的RTP打入相同的时间戳Ts
+2. 在R端将接收到的S端头中的时间戳解析Ts，并且此时获取R端的时间戳Tr
+3. 判断一帧的数据，并计算R和S的网络延时
+
+``` C
+static unsigned long long t_count_t = 0;                             
+static unsigned long long t_count_r = 0;                             
+static unsigned long long t_count_s = 0;                             
+static unsigned long long time_sum_r = 0;                            
+static unsigned long long time_sum_s = 0;                            
+static unsigned long long rtp_time_s_t = 0;                          
+static unsigned long long rtp_time_r_t = 0;                          
+static unsigned long long rtp_time_diff = 0;                         
+static unsigned long long rtp_time_max = 0;                          
+static unsigned long long rtp_time_min = 0xffffff;                   
+
+void parse_rtp_head_time(unsigned char *data, int line)                                                                                                      
+{                                                                                                                                                            
+    struct timeval now;                                                                                                                                      
+    unsigned long long rtp_time_r = 0;                                                                                                                       
+    unsigned long long rtp_time_s = 0;                                                                                                                       
+
+    //1.                                                                                                                                                         
+    int i = 0, j = 56;                                                                                                                                       
+    for (i = 0;  i < sizeof(rtp_time_s);  i++) {                                                                                                             
+        rtp_time_s |= (unsigned long long)data[19 - i] << j;                                                                                                 
+        j -= 8;                                                                                                                                              
+    }                                                                                                                                                        
+
+    memset(&now, 0, sizeof(now));                                                                                                                            
+    gettimeofday(&now, NULL);                                                                                                                                
+    rtp_time_r = 1000000 * now.tv_sec + now.tv_usec;                                                                                                         
+
+    if (rtp_time_s_t != rtp_time_s) {                                                                                                                        
+        t_count_t++;                                                                                                                                         
+        if (t_count_t > 3000) {                                                                                                                              
+            if (rtp_time_r_t >= rtp_time_s_t) {                                                                                                              
+                t_count_r++;                                                                                                                                 
+                rtp_time_diff = rtp_time_r_t - rtp_time_s_t;                                                                                                 
+                time_sum_r += rtp_time_diff;                                                                                                                 
+                rtp_time_max = (rtp_time_max > rtp_time_diff) ? rtp_time_max : rtp_time_diff;                                                                
+                rtp_time_min = (rtp_time_min < rtp_time_diff) ? rtp_time_min : rtp_time_diff;                                                                
+            } else {                                                                                                                                         
+                t_count_s++;                                                                                                                                 
+                time_sum_s += (rtp_time_s_t - rtp_time_r_t);                                                                                                 
+            }                                                                                                                                                
+        }                                                                                                                                                    
+        rtp_time_s_t = rtp_time_s;                                                                                                                           
+    }                                                                                                                                                        
+    rtp_time_r_t = rtp_time_r;                                                                                                                               
+
+    if (!(t_count_t % 10000)) {                                                                                                                              
+        printf("%llu, t_count_r=%llu, time_sum_r=%llu, v=%llu, max:%llu, min:%llu\n",                                                                        
+                t_count_t, t_count_r, time_sum_r, (t_count_r != 0) ? (time_sum_r / t_count_r):111111, rtp_time_max, rtp_time_min);                           
+        printf("%llu, t_count_s=%llu, time_sum_s=%llu, v=%llu\n",                                                                                            
+                t_count_t, t_count_s, time_sum_s, (t_count_s != 0) ? (time_sum_s / t_count_s):111111);                                                       
+    }                                                                                                                                                        
+}                                                                                                                                                            
+```
+
+### 注意事项
+
+* R端必须先启动授时，然后启动S端进行授时，方可进行正常的测试
+* **如果S端先进行授时，而R端后进行授时，那么在R端解析到的S端时间有可能比R端的时间小，导致计算出现负数（越界），最后的结果偏差离谱**
+
 ## 参考
 
 * [移植ntp服务到arm-linux平台](https://blog.csdn.net/zgrjkflmkyc/article/details/45098831)
