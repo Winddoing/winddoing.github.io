@@ -144,7 +144,7 @@ ntpd -ddnNl
 
 `gettimeofday`获取的时间存放在`unsigned long long`中需要64bit的空间
 
-```
+``` C
 struct timeval now;
 unsigned long long rtp_time_r = 0;
 
@@ -154,7 +154,7 @@ rtp_time_r = 1000000 * now.tv_sec + now.tv_usec;
 
 #### long long和char转换
 
-```
+``` C
 int main(int argc, const char *argv[])
 {
 	char dst[30];
