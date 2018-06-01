@@ -71,18 +71,18 @@ ntpdate cn.pool.ntp.org
 移植其中包括客户端和服务端
 
 ``` shell
-#!/bin/bash                                                                                                                              
-wget https://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/ntp-4.2.8p11.tar.gz              
-tar zxvf ntp-4.2.8p11.tar.gz                                                                                                                                     
-cd ntp-4.2.8p11                                                                                                                          
-PWD=`pwd`                                                                                                                                
-echo "xxxxxxxxxxxx$PWD"                                                                                                                  
-rm $PWD/install -rf                                                                                                                      
-mkdir $PWD/install                                                                                                                       
-echo "./configure --host=arm-linux CC=arm-gcc49-linux-gnueabi-gcc --prefix=$PWD/install/  --with-yielding-select=yes"                    
-./configure --host=arm-linux CC=arm-gcc49-linux-gnueabi-gcc --prefix=$PWD/install/  --with-yielding-select=yes                           
-make                                                                                                                                     
-make install                                                                                                                             
+#!/bin/bash
+wget https://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/ntp-4.2.8p11.tar.gz
+tar zxvf ntp-4.2.8p11.tar.gz
+cd ntp-4.2.8p11
+PWD=`pwd`
+echo "xxxxxxxxxxxx$PWD"
+rm $PWD/install -rf
+mkdir $PWD/install
+echo "./configure --host=arm-linux CC=arm-gcc49-linux-gnueabi-gcc --prefix=$PWD/install/  --with-yielding-select=yes"
+./configure --host=arm-linux CC=arm-gcc49-linux-gnueabi-gcc --prefix=$PWD/install/  --with-yielding-select=yes
+make
+make install
 ```
 
 ### 同步
@@ -148,7 +148,7 @@ ntpd -ddnNl
 struct timeval now;
 unsigned long long rtp_time_r = 0;
 
-gettimeofday(&now, NULL);                                                                                                                                
+gettimeofday(&now, NULL);
 rtp_time_r = 1000000 * now.tv_sec + now.tv_usec;
 ```
 
@@ -166,12 +166,12 @@ int main(int argc, const char *argv[])
 
 	for (i = 0;  i < sizeof(rtpTime);  i++) {
 		dst[19 - i] = （unsigned char）((rtpTime >> j) & 0xFF);
-		printf("===> func: %s, line: %d, rtpTime: %016llx, %d, dst[%d]=%02x\n",
+		//printf("===> func: %s, line: %d, rtpTime: %016llx, %d, dst[%d]=%02x\n",
 				__func__, __LINE__, (rtpTime >> j) & 0xFF, j, 19 - i, dst[19 - i]);
 		j -= 8;
 	}
 
-	printf("===> func: %s, line: %d\n", __func__, __LINE__);
+	//printf("===> func: %s, line: %d\n", __func__, __LINE__);
 	j = 56;
 	for (i = 0;  i < sizeof(rtp_time_s);  i++) {
 		rtp_time_s |= (unsigned long long)dst[19 - i] << j;
@@ -184,6 +184,14 @@ int main(int argc, const char *argv[])
 	return 0;
 }
 ```
+>不同的gcc编译器，编译完的运行结果不一样，测试`gcc version 6.4.0 20170724 (Debian 6.4.0-2)`编译运行结果错误
+
+
+在嵌入式交叉编译中，测试结果正常：
+
+>===> func: main, line: 38,  old: 0001234567898765
+>===> func: main, line: 39,  new: 0001234567898765
+
 
 ### 测试方法
 
@@ -194,60 +202,69 @@ int main(int argc, const char *argv[])
 3. 判断一帧的数据，并计算R和S的网络延时
 
 ``` C
-static unsigned long long t_count_t = 0;                             
-static unsigned long long t_count_r = 0;                             
-static unsigned long long t_count_s = 0;                             
-static unsigned long long time_sum_r = 0;                            
-static unsigned long long time_sum_s = 0;                            
-static unsigned long long rtp_time_s_t = 0;                          
-static unsigned long long rtp_time_r_t = 0;                          
-static unsigned long long rtp_time_diff = 0;                         
-static unsigned long long rtp_time_max = 0;                          
-static unsigned long long rtp_time_min = 0xffffff;                   
+static unsigned long long t_count_t = 0;
+static unsigned long long t_count_r = 0;
+static unsigned long long t_count_s = 0;
+static unsigned long long time_sum_r = 0;
+static unsigned long long time_sum_s = 0;
+static unsigned long long rtp_time_s_t = 0;
+static unsigned long long rtp_time_r_t = 0;
+static unsigned long long rtp_time_diff = 0;
+static unsigned long long rtp_time_max = 0;
+static unsigned long long rtp_time_min = 0xffffff;
 
-void parse_rtp_head_time(unsigned char *data, int line)                                                                                                      
-{                                                                                                                                                            
-    struct timeval now;                                                                                                                                      
-    unsigned long long rtp_time_r = 0;                                                                                                                       
-    unsigned long long rtp_time_s = 0;                                                                                                                       
+void parse_rtp_head_time(unsigned char *data, int line)
+{
+    struct timeval now;
+    unsigned long long rtp_time_r = 0;
+    unsigned long long rtp_time_s = 0;
 
-    //1.                                                                                                                                                         
-    int i = 0, j = 56;                                                                                                                                       
-    for (i = 0;  i < sizeof(rtp_time_s);  i++) {                                                                                                             
-        rtp_time_s |= (unsigned long long)data[19 - i] << j;                                                                                                 
-        j -= 8;                                                                                                                                              
-    }                                                                                                                                                        
+    //1. 获取Ｓ端的时间戳
+    int i = 0, j = 56;
+    for (i = 0;  i < sizeof(rtp_time_s);  i++) {
+        rtp_time_s |= (unsigned long long)data[19 - i] << j;
+        j -= 8;
+    }
 
-    memset(&now, 0, sizeof(now));                                                                                                                            
-    gettimeofday(&now, NULL);                                                                                                                                
-    rtp_time_r = 1000000 * now.tv_sec + now.tv_usec;                                                                                                         
+	//2. 获取Ｒ端的时间戳
+    memset(&now, 0, sizeof(now));
+    gettimeofday(&now, NULL);
+    rtp_time_r = 1000000 * now.tv_sec + now.tv_usec;
 
-    if (rtp_time_s_t != rtp_time_s) {                                                                                                                        
-        t_count_t++;                                                                                                                                         
-        if (t_count_t > 3000) {                                                                                                                              
-            if (rtp_time_r_t >= rtp_time_s_t) {                                                                                                              
-                t_count_r++;                                                                                                                                 
-                rtp_time_diff = rtp_time_r_t - rtp_time_s_t;                                                                                                 
-                time_sum_r += rtp_time_diff;                                                                                                                 
-                rtp_time_max = (rtp_time_max > rtp_time_diff) ? rtp_time_max : rtp_time_diff;                                                                
-                rtp_time_min = (rtp_time_min < rtp_time_diff) ? rtp_time_min : rtp_time_diff;                                                                
-            } else {                                                                                                                                         
-                t_count_s++;                                                                                                                                 
-                time_sum_s += (rtp_time_s_t - rtp_time_r_t);                                                                                                 
-            }                                                                                                                                                
-        }                                                                                                                                                    
-        rtp_time_s_t = rtp_time_s;                                                                                                                           
-    }                                                                                                                                                        
-    rtp_time_r_t = rtp_time_r;                                                                                                                               
+	//3. 判断并计算一帧数据的时间
+    if (rtp_time_s_t != rtp_time_s) {
+        t_count_t++;
+        if (t_count_t > 3000) {
+            if (rtp_time_r_t >= rtp_time_s_t) {
+                t_count_r++;
+                rtp_time_diff = rtp_time_r_t - rtp_time_s_t;
+                time_sum_r += rtp_time_diff;
+                rtp_time_max = (rtp_time_max > rtp_time_diff) ? rtp_time_max : rtp_time_diff;
+                rtp_time_min = (rtp_time_min < rtp_time_diff) ? rtp_time_min : rtp_time_diff;
+            } else {
+                t_count_s++;
+                time_sum_s += (rtp_time_s_t - rtp_time_r_t);
+            }
+        }
+        rtp_time_s_t = rtp_time_s;
+    }
+    rtp_time_r_t = rtp_time_r;
 
-    if (!(t_count_t % 10000)) {                                                                                                                              
-        printf("%llu, t_count_r=%llu, time_sum_r=%llu, v=%llu, max:%llu, min:%llu\n",                                                                        
-                t_count_t, t_count_r, time_sum_r, (t_count_r != 0) ? (time_sum_r / t_count_r):111111, rtp_time_max, rtp_time_min);                           
-        printf("%llu, t_count_s=%llu, time_sum_s=%llu, v=%llu\n",                                                                                            
-                t_count_t, t_count_s, time_sum_s, (t_count_s != 0) ? (time_sum_s / t_count_s):111111);                                                       
-    }                                                                                                                                                        
-}                                                                                                                                                            
+	//4. 判断一万帧数据后打印结果
+    if (!(t_count_t % 10000)) {
+        printf("%llu, t_count_r=%llu, time_sum_r=%llu, v=%llu, max:%llu, min:%llu\n",
+                t_count_t, t_count_r, time_sum_r, (t_count_r != 0) ? (time_sum_r / t_count_r):111111, rtp_time_max, rtp_time_min);
+        printf("%llu, t_count_s=%llu, time_sum_s=%llu, v=%llu\n",
+                t_count_t, t_count_s, time_sum_s, (t_count_s != 0) ? (time_sum_s / t_count_s):111111);
+    }
+}
 ```
+
+### 操作流程
+
+1. 先启动Ｒ，并进行授时
+2. 启动Ｓ端，并进行授时
+3. 视频传输，等待计算结果
 
 ### 注意事项
 
