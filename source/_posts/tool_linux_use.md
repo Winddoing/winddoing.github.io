@@ -53,6 +53,8 @@ sudo cp mtextra.ttf  symbol.ttf  WEBDINGS.TTF  wingding.ttf  WINGDNG2.ttf  WINGD
 
 ## 微信
 
+[https://github.com/geeeeeeeeek/electronic-wechat/releases/download/V2.0/linux-x64.tar.gz)[https://github.com/geeeeeeeeek/electronic-wechat/releases/download/V2.0/linux-x64.tar.gz]
+
 ## 钉钉 for Linux
 
 * [钉钉Linux版](https://club.doui.cc/t/view/15c8b0ea25957196a9156b2d.html)
@@ -72,4 +74,14 @@ sudo apt-get remove teamviewer
 
 ```
 sudo apt install gnome-tweak-tool 
+```
+
+## 邮件
+
+Evolution
+
+## 画图
+
+```
+sudo apt-get install  kolourpaint4
 ```
