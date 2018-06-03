@@ -85,3 +85,25 @@ Evolution
 ```
 sudo apt-get install  kolourpaint4
 ```
+
+## 虚拟机
+
+VirtualBox
+
+## 音视频文件分析工具 -- MediaInfo
+
+```
+sudo apt-get install mediainfo mediainfo-gui
+```
+
+## 词典
+
+stardict(星际译王)
+
+```
+sudo apt install stardict
+```
+
+词典的词库网站下载词库：[下载](http://download.huzheng.org/)
+
+[linux下StarDict和词典的安装](https://blog.csdn.net/suyingshipp/article/details/7736297)
