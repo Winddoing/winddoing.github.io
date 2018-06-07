@@ -107,3 +107,8 @@ sudo apt install stardict
 词典的词库网站下载词库：[下载](http://download.huzheng.org/)
 
 [linux下StarDict和词典的安装](https://blog.csdn.net/suyingshipp/article/details/7736297)
+
+
+## 画图--结构图流程图
+
+亿图：[http://www.edrawsoft.cn/download-edrawmax.php](http://www.edrawsoft.cn/download-edrawmax.php)
