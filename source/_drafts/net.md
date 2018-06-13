@@ -80,3 +80,36 @@ WIFI连接配置
 1. S和AP怎么进行连接
 2. R和AP怎么进行连接
 3. S和R之间存在连接吗
+
+
+
+
+
+## 基本流程
+
+1. S监听0.0.0.0的7236端口
+2. R发送广播，广播自己的IP地址（S端存在udp server）
+3. S按切换键（获取R端IP）
+4. RTSP连接
+
+
+
+
+
+
+##抓包
+
+```
+tcpdump -i wlan0 -w file.pcap
+```
+
+解析：wireshark
+
+
+
+
+
+
+在服务器端，启动数据包捕获：
+
+tcpdump -i wlan0 –n multicast
