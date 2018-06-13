@@ -9,6 +9,8 @@ Linux下常用工具：
 
 <!--more-->
 
+> ubuntu 18.04
+
 ## wps
 
 [http://community.wps.cn/download/](http://community.wps.cn/download/)
@@ -39,7 +41,7 @@ sudo dpkg -i wps-office-fonts_1.0_all.deb
 wps_symbol_fonts.zip
 
 ```
-unzip wps_symbol_fonts.zip 
+unzip wps_symbol_fonts.zip
 sudo cp mtextra.ttf  symbol.ttf  WEBDINGS.TTF  wingding.ttf  WINGDNG2.ttf  WINGDNG3.ttf  /usr/share/fonts
 ```
 
@@ -73,7 +75,7 @@ sudo apt-get remove teamviewer
 ## 主题
 
 ```
-sudo apt install gnome-tweak-tool 
+sudo apt install gnome-tweak-tool
 ```
 
 ## 邮件
@@ -112,3 +114,26 @@ sudo apt install stardict
 ## 画图--结构图流程图
 
 亿图：[http://www.edrawsoft.cn/download-edrawmax.php](http://www.edrawsoft.cn/download-edrawmax.php)
+
+## vooya
+
+vooya – Raw YUV/RGB Video Player
+
+[http://www.offminor.de/downloads.html](http://www.offminor.de/downloads.html)
+
+
+## dia
+
+流程图
+
+```
+sudo apt install dia
+```
+
+
+## 实时显示上下行网速、CPU及内存使用率
+
+```
+sudo add-apt-repository ppa:fossfreedom/indicator-sysmonitor
+sudo apt-get install indicator-sysmonitor
+```
