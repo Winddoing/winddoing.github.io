@@ -113,3 +113,34 @@ tcpdump -i wlan0 -w file.pcap
 在服务器端，启动数据包捕获：
 
 tcpdump -i wlan0 –n multicast
+
+
+
+
+如果仍收不到组播数据，使用dropwatch来分析那个系统函数把数据包丢掉了
+
+#dropwatch -l kas
+
+
+
+
+
+
+
+# 调试
+
+## 数据验证
+
+1. 排除混杂模式，确保网卡进入组播模式
+```
+tcpdump -i wlan0 -p -nnn
+```
+>`-p`：    将网卡设置为非混杂模式
+
+2. 写小应用进行简单的测试
+
+
+recv接收不到数据
+
+
+UDP调用connect()的作用
