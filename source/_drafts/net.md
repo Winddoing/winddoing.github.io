@@ -124,9 +124,6 @@ tcpdump -i wlan0 –n multicast
 
 
 
-
-
-
 # 调试
 
 ## 数据验证
@@ -144,3 +141,19 @@ recv接收不到数据
 
 
 UDP调用connect()的作用
+
+
+
+```
+# netstat -n
+Active Internet connections (w/o servers)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       
+tcp        0      0 192.168.100.3:47518     192.168.100.2:7236      ESTABLISHED
+udp        0      0 239.0.0.11:15550        192.168.100.2:42152     ESTABLISHED
+udp        0      0 239.0.0.11:15551        192.168.100.2:42153     ESTABLISH
+```
+
+## inet_pton
+
+
+内核配置：
