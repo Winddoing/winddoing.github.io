@@ -15,9 +15,7 @@ comments: false
 {% endnote %}
 
 {% note primary %}
-人之能，不仅在学，且在悟。悟之根本，不在少学，在难后重学。大难而有大悟，始得大成！   
-    
-                                                  ----鬼谷子
+**人之能，不仅在学，且在悟。悟之根本，不在少学，在难后重学。大难而有大悟，始得大成！**   ___鬼谷子___
 {% endnote %}
 
 {% note success %} Content (md partial supported) {% endnote %}
