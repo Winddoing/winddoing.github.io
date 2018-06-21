@@ -95,3 +95,5 @@ IGMP Snooping的出现就可以解决这个问题，其工作原理为：主机�
 ## 参考
 
 * [组播技术](https://blog.csdn.net/jianchaolv/article/details/7909948)
+* [组播学习笔记](https://blog.csdn.net/samtaoys/article/details/51981323)
+* [单播，组播(多播)，广播以及任播](http://colobu.com/2014/10/21/udp-and-unicast-multicast-broadcast-anycast/#0-tsina-1-67000-397232819ff9a47a7b7e80a40613cfe1)
