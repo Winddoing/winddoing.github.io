@@ -15,6 +15,7 @@ tags: [debug]
 tcpdump -i wlan0 -p  -w file.pcap
 ```
 参数：
+
 | arg   |       |
 | :---: | :----:|
 | -p    |  将网卡设置为非混杂模式 |
