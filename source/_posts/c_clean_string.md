@@ -12,7 +12,8 @@ tags: [字符串]
 
 
 ``` C
-static void clean_string(char * const str) {
+static void clean_string(char * const str)
+{
 	char *start = str;
 	char *end = str;
 	char *p = str;
