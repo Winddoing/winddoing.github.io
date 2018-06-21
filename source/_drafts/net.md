@@ -155,5 +155,17 @@ udp        0      0 239.0.0.11:15551        192.168.100.2:42153     ESTABLISH
 
 ## inet_pton
 
+>linux-3.18.24
 
 内核配置：
+
+
+```
+# netstat -n
+Active Internet connections (w/o servers)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       
+tcp        0      0 192.168.100.3:40964     192.168.100.2:7236      ESTABLISHED
+netstat: /proc/net/tcp6: No such file or directory
+udp        0      0 239.0.0.11:15550        192.168.100.2:*         ESTABLISHED
+udp        0      0 239.0.0.11:15551        192.168.100.2:1         ESTABLISHED
+```
