@@ -89,6 +89,20 @@ IGMP是针对IP层设计的，只能记录路由器上的三层接口与IP组播
 IGMP Snooping的出现就可以解决这个问题，其工作原理为：主机发往IGMP查询器的报告消息经过交换机时，交换机对这个消息进行监听并记录下来，为端口和组播MAC地址建立起映射关系；当交换机收到组播数据时，根据这样的映射关系，只向连有组成员的端口转发组播数据。
 
 
+## 组播编程
+
+多播的程序设计使用setsockopt()函数和getsockopt()函数来实现，组播的选项是`IP层`的，其选项值和含义
+
+| getsockopt()/setsockopt()的选项 | 含    义 |
+| :-----------------------------:| :------: |
+| IP_MULTICAST_TTL               | 设置多播组数据的TTL值 |
+| IP_ADD_MEMBERSHIP              | 在指定接口上加入组播组 |
+| IP_DROP_MEMBERSHIP						 | 退出组播组					 |
+| IP_MULTICAST_IF 							 | 获取默认接口或设置接口 |
+| IP_MULTICAST_LOOP 						 | 禁止组播数据回送			 |
+
+
+
 ## 实例--视频会议
 
 ![组播实例](/images/net/multicast/multicast_r_s_samp.png)
@@ -96,15 +110,115 @@ IGMP Snooping的出现就可以解决这个问题，其工作原理为：主机�
 1. 路由器新建两个AP（AP-S和AP-R），其中均开启组播功能，为什么建两个，作用，关系
 2. R1和R2两个加入组播（239.0.0.1）
 
+### S
 
-## 注意
+1. 建立socket
+``` C
+fd = socket(AF_INET, SOCK_DGRAM, 0);
+```
+
+2. 绑定
+``` C
+struct sockaddr_in localAddr
+memset(localAddr.sin_zero, 0, sizeof(localAddr.sin_zero));
+localAddr.sin_family = AF_INET;
+localAddr.sin_addr.s_addr = htonl(INADDR_ANY);
+localAddr.sin_port = htons(netParam->local_port);	//port(Random): Pick an even integer in range [1024, 65534)
+bind(fd, (const struct sockaddr *)&localAddr, sizeof(localAddr));
+```
+
+3. 连接
+``` C
+struct sockaddr_in remoteAddr;
+memset(remoteAddr.sin_zero, 0, sizeof(remoteAddr.sin_zero));
+remoteAddr.sin_family = AF_INET;
+remoteAddr.sin_addr.s_addr = htonl(INADDR_ANY);
+remoteAddr.sin_port = htons(netParam->remote_port); 	//port: 15550
+ret = inet_pton(AF_INET, netParam->remoteip, &remoteAddr.sin_addr);	//remoteip: 239.0.0.1
+ret = connect(fd, (const struct sockaddr *)&remoteAddr, sizeof(remoteAddr));
+```
+>通过connect指定了连接的IP和端口后，可以通过`netstat`命令查看
+>```
+># netstat -n
+> Active Internet connections (w/o servers)
+> Proto Recv-Q Send-Q Local Address           Foreign Address         State
+> tcp        0      0 192.168.100.2:7236      192.168.100.3:37536     ESTABLISHED
+> udp        0      0 192.168.100.2:55226     239.0.0.11:15550        ESTABLISHED
+> udp        0      0 192.168.100.2:55227     239.0.0.11:15551        ESTABLISHED
+> ```
+
+### 路由器
+
+>为啥建立两个AP？
+
+
+
+### R
+
+>测试代码实现
+
+在绑定后使用connect进行指定ip和port连接
+
+``` C
+struct sockaddr_in remoteAddr;
+
+memset(remoteAddr.sin_zero, 0, sizeof(remoteAddr.sin_zero));                                                             
+remoteAddr.sin_family = AF_INET;  /* 建立新的连接 */     
+//remoteAddr.sin_family = AF_INET;  /* 断开旧的连接 */                                                                     
+inet_pton(AF_INET,player->rtpUdp.rip, &remoteAddr.sin_addr);                                                             
+remoteAddr.sin_port = htons(player->rtpUdp.rport);   //port: 0                                                                    
+do {                                                                                                                     
+    ret = connect(player->rtpUdp.fd,(struct sockaddr *)&remoteAddr,remoteAddrLen);                                       
+} while(ret == -1 && errno == EINTR);  
+```
+
+
+```
+# netstat -n
+Active Internet connections (w/o servers)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       
+tcp        0      0 192.168.100.3:40964     192.168.100.2:7236      ESTABLISHED
+udp        0      0 239.0.0.11:15550        192.168.100.2:*         ESTABLISHED   #Foreign port: 0
+udp        0      0 239.0.0.11:15551        192.168.100.2:1         ESTABLISHED
+```
+
+
+## 注意--无法得到数据原因
+
+> select一直出现timeout
 
 1. 接收组播的网络端口（也就是R端），必须设置该组播的IP，负责接收不到组播数据
+2. 数据包被操作系统过滤掉了，所以系统调用socket无法看到数据包。
+
+
+## 调试
+
+### ifconfig -- 判断是支持组播
+
+``` shell
+# ifconfig
+wlan0     Link encap:Ethernet  HWaddr 04:E6:76:C3:63:DC  
+          inet addr:192.168.100.2  Bcast:192.168.100.255  Mask:255.255.255.0
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:1413 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:316 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000
+          RX bytes:88628 (86.5 KiB)  TX bytes:40942 (39.9 KiB)
+```
+
+
+* `UP`: 代表网卡开启状态
+* `BROADCAST`: 支持广播
+* `RUNNING`: 代表网卡的网线被接上
+* `MULTICAST`: 支持组播
+* `RX packets`和`TX packets`: 表示网卡接收和发送的数据包个数，***但是由于端口的错误等，可能导致select或recv超时或者接收不到数据***
+* `RX bytes`和`TX bytes`: 表示接收和发送的数据大小
+
 
 
 ## 测试代码
 
-R端加入组播的实现：  
+R端加入组播的实现： Client
 
 [Code：](https://raw.githubusercontent.com/Winddoing/CodeWheel/master/socket/multicast/multicast-tst.c)
 
@@ -265,8 +379,59 @@ failed:
 }
 ```
 
+Server：
+
+``` C
+#include <stdlib.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+#include <time.h>
+#include <string.h>
+#include <stdio.h>
+#include <unistd.h>
+
+#define HELLO_PORT 12345
+#define HELLO_GROUP "225.0.0.37"
+
+int main(int argc, char *argv[])
+{
+	struct sockaddr_in addr;
+	int fd;
+	char *message="Hello, World!";
+
+	/* create what looks like an ordinary UDP socket */
+	if ((fd=socket(AF_INET,SOCK_DGRAM,0)) < 0)
+	{
+		perror("socket");
+		exit(1);
+	}
+
+	/* set up destination address */
+	memset(&addr,0,sizeof(addr));
+	addr.sin_family=AF_INET;
+	addr.sin_addr.s_addr=inet_addr(HELLO_GROUP);
+	addr.sin_port=htons(HELLO_PORT);
+
+	printf("message: %s, (HEX: 0x%08x)\n", message, *(unsigned int*)message);
+	/* now just sendto() our destination! */
+	while (1)
+	{
+		if (sendto(fd,message, strlen(message), 0, (struct sockaddr *) &addr, sizeof(addr)) < 0)
+		{
+			perror("sendto");
+			exit(1);
+		}
+		sleep(1); //会影响接受端select的超时时间，延时越大，select的超时越大
+	}
+}
+```
+
 ## 参考
 
 * [组播技术](https://blog.csdn.net/jianchaolv/article/details/7909948)
 * [组播学习笔记](https://blog.csdn.net/samtaoys/article/details/51981323)
 * [单播，组播(多播)，广播以及任播](http://colobu.com/2014/10/21/udp-and-unicast-multicast-broadcast-anycast/#0-tsina-1-67000-397232819ff9a47a7b7e80a40613cfe1)
+* [组播（Multicast）传输](https://www.cnblogs.com/ghj1976/p/5276452.html)
+* [多播,IP_MULTICAST_TTL,IP_ADD_MEMBERSHIP,IP_MULTICAST_IF,IP_DROP_MEMBERSHIP](http://blog.chinaunix.net/uid-28458801-id-5085099.html)
