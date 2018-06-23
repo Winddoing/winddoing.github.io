@@ -77,10 +77,22 @@ IGMP运行于`主机和与主机直连的路由器`之间，其实现的功能�
 
 ![组播初始化数据包](/images/net/multicast/multicast_start_package.png)
 
+
+***IGMPv2 destination address***
+
+|     Message Type    |	    Multicast Address    |
+| :-----------------: | :-----------------------:|
+| General Query	      | All hosts (224.0.0.1)    |
+| Group-Specific Query| The group being queried  |
+| Membership Report	  | The group being reported |
+| Leave Group	All     | routers (224.0.0.2)      |
+
 组播相关的含义：
 1. IGMPv2: Membership Query, general
+> 发给所有主机
 
 2. IGMPv2: Membership Report group 239.0.0.11
+> 收到后，回应组播地址
 
 ### IGMP Snooping
 
