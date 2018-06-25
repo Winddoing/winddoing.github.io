@@ -5,11 +5,13 @@ categories: 多媒体
 tags: [RTP]
 ---
 
-![流媒体协议](/images/media/media_protocol.png)
+![media_c_s](/images/media/media_C_S.jpg)
 
 >用一句简单的话总结：RTSP发起/终结流媒体、RTP传输流媒体数据 、RTCP对RTP进行控制，同步。
 
 <!--more-->
+
+![流媒体协议](/images/media/media_protocol.png)
 
 -  RTP：实时传输协议（Real-time Transport Protocol）
 
@@ -73,6 +75,66 @@ RTP协议的目的是提供实时数据（如交互式的音频和视频）的�
 
 由RTSP控制的媒体流集合可以用表示描述（Presentation  Description）来定义，所谓表示是指流媒体服务器提供给客户机的一个或者多个媒体流的集合，而表示描述则包含了一个表示中各个媒体流的相关信 息，如数据编码/解码算法、网络地址、媒体流的内容等。虽然RTSP服务器同样也使用标识符来区别每一流连接会话（Session），但RTSP连接并没有被绑定到传输层连接（如TCP等），也就是说在整个 RTSP连接期间，RTSP用户可打开或者关闭多个对RTSP服务器的可靠传输连接以发出RTSP  请求。此外，RTSP连接也可以基于面向无连接的传输协议（如UDP等）。
 
+>[Real Time Streaming Protocol (RTSP)](https://www.ietf.org/rfc/rfc2326.txt)
+
+```
+=======================================================================================================================================
+RTSP/Packet Counter:
+Topic / Item            Count         Average       Min val       Max val       Rate (ms)     Percent       Burst rate    Burst start
+---------------------------------------------------------------------------------------------------------------------------------------
+Total RTSP Packets      18                                                      0.0005        100%          0.0700        5.792
+ RTSP Response Packets  0                                                       0.0000        0.00%         -             -
+  ???: broken           0                                                       0.0000                      -             -
+  5xx: Server Error     0                                                       0.0000                      -             -
+  4xx: Client Error     0                                                       0.0000                      -             -
+  3xx: Redirection      0                                                       0.0000                      -             -
+  2xx: Success          0                                                       0.0000                      -             -
+  1xx: Informational    0                                                       0.0000                      -             -
+ RTSP Request Packets   9                                                       0.0002        50.00%        0.0400        5.848
+  SET_PARAMETER         2                                                       0.0001        22.22%        0.0200        5.859
+  SETUP                 1                                                       0.0000        11.11%        0.0100        5.933
+  PLAY                  1                                                       0.0000        11.11%        0.0100        5.986
+  OPTIONS               2                                                       0.0001        22.22%        0.0200        5.751
+  GET_PARAMETER         3                                                       0.0001        33.33%        0.0100        5.848
+ Other RTSP Packets     9                                                       0.0002        50.00%        0.0400        5.792
+
+---------------------------------------------------------------------------------------------------------------------------------------
+```
+
+>RTSP是一种基于`文本`的协议，用`CRLF`作为一行的结束符。使用基于文本协议的好处在于我们可以随时在使用过程中的增加自定义的参数，也可以随便将协议包抓住很直观的进行分析。
+
+### 报文
+
+RTSP有两类报文：`请求报文`和`响应报文`
+
+* 请求报文:指从客户端向服务器发送请求报文
+* 响应报文:指从服务器到客户端的回答
+
+RTSP报文由三部分组成，即`开始行`、`首部行`和`实体主体`。
+
+#### 请求报文
+
+在请求报文中，开始行就是请求行，RTSP请求报文的结构如图
+
+![请求报文](/images/media/rtsp_request_message.jpg)
+
+RTSP请求报文的常用方法及作用：
+
+| 方法	| 作用	|
+| :--: | :---: |
+| OPTIONS       | 获得服务器提供的可用方法								|
+| DESCRIBE      | 得到会话描述信息											|
+| SETUP         | 客户端提醒服务器建立会话，并确定传输模式	|
+| TEARDOWN      | 客户端发起关闭请求											|
+| PLAY          | 客户端发送播放请求											|
+| SET_PARAMETER | 给URI指定的表示或媒体流设置参数值		|
+| GET_PARAMETER | 获取URI中指定的表示或流的任何指定参数或参数的值 |
+
+#### 响应报文
+
+响应报文的`开始行`是`状态行`，RTSP响应报文的结构如图：
+
+![响应报文](/images/media/rtsp_answer_message.jpg)
 
 
 ## RTCP
@@ -84,4 +146,6 @@ RTCP控制协议需要与RTP数据协议一起配合使用，**当应用程序�
 
 * [RTSP/RTP 媒体传输和控制协议](https://blog.csdn.net/ww506772362/article/details/52609379)
 * [RTP Payload Format for H.264 Video](https://tools.ietf.org/pdf/rfc6184.pdf)【[html](https://tools.ietf.org/html/rfc6184)】
+* [Real-Time Streaming Protocol (RTSP) 2.0 Parameters](https://www.iana.org/assignments/rtspv2-parameters/rtspv2-parameters.xhtml)
 * [RTP/RTSP/RTCP的区别](http://www.txrjy.com/thread-357928-1-1.html)
+* [RTSP协议介绍](https://yq.aliyun.com/articles/229295)
