@@ -169,3 +169,8 @@ netstat: /proc/net/tcp6: No such file or directory
 udp        0      0 239.0.0.11:15550        192.168.100.2:*         ESTABLISHED
 udp        0      0 239.0.0.11:15551        192.168.100.2:1         ESTABLISHED
 ```
+
+IGMPv2通过查询器选举机制为所连网段选举唯一的查询器。查询器周期性的发送普遍组查询消息进行成员关系查询；主机发送报告消息来应答查询。当要加入组播组时，主机不必等待查询消息，主动发送报告消息。当要离开组播组时，主机发送离开组消息；收到离开组消息后，查询器发送特定组查询消息来确定是否所有组成员都已离开。
+
+* [IGMPV2基本原理](http://blog.sina.com.cn/s/blog_c079d59e0102whjg.html)
+* [IGMP Snooping概念和配置方法---交换](https://blog.csdn.net/mingzznet/article/details/9253607)
