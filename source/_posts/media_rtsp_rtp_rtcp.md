@@ -137,9 +137,146 @@ RTSP请求报文的常用方法及作用：
 ![响应报文](/images/media/rtsp_answer_message.jpg)
 
 
+#### 示例-交互
+
+```
+OPTIONS * RTSP/1.0
+Date: Thu, 01 Jan 1970 00:11:07 +0000
+Server: linux
+CSeq: 1
+Require: org.wfa.wfd1.0
+
+RTSP/1.0 200 OK
+Date: Thu, 01 Jan 1970 00:00:49 +0000
+User-Agent: stagefright/1.1 (Linux;Android 4.1)
+CSeq: 1
+Public: org.wfa.wfd1.0, GET_PARAMETER, SET_PARAMETER
+
+OPTIONS * RTSP/1.0
+Date: Thu, 01 Jan 1970 00:00:49 +0000
+User-Agent: stagefright/1.1 (Linux;Android 4.1)
+CSeq: 1
+Require: org.wfa.wfd1.0
+
+RTSP/1.0 200 OK
+Date: Thu, 01 Jan 1970 00:11:07 +0000
+Server: linux
+CSeq: 1
+Public: org.wfa.wfd1.0, SETUP, TEARDOWN, PLAY, PAUSE, GET_PARAMETER, SET_PARAMETER
+
+GET_PARAMETER rtsp://localhost/wfd1.0 RTSP/1.0
+Date: Thu, 01 Jan 1970 00:11:07 +0000
+Server: linux
+CSeq: 2
+Content-Type: text/parameters
+Content-Length: 90
+
+wfd_video_formats
+wfd_audio_codecs
+wfd_client_rtp_ports
+wfd_rtp_multicast: 239.0.0.11
+RTSP/1.0 200 OK
+Date: Thu, 01 Jan 1970 00:00:49 +0000
+User-Agent: stagefright/1.1 (Linux;Android 4.1)
+CSeq: 2
+Content-Type: text/parameters
+Content-Length: 259
+
+wfd_video_formats: 28 00 02 02 0001DEFF 157C7FFF 00000FFF 00 0000 0000 11 none none, 01 02 0001DEFF 157C7FFF 00000FFF 00 0000 0000 11 none none
+wfd_audio_codecs: LPCM 00000002 00, AAC 00000001 00
+wfd_client_rtp_ports: RTP/AVP/UDP;unicast 15550 0 mode=play
+SET_PARAMETER rtsp://localhost/wfd1.0 RTSP/1.0
+Date: Thu, 01 Jan 1970 00:11:07 +0000
+Server: linux
+CSeq: 3
+Content-Type: text/parameters
+Content-Length: 203
+
+wfd_video_formats: wfd_audio_codecs: LPCM 00000002 00
+wfd_presentation_URL: rtsp://192.168.100.2/wfd1.0/streamid=0 none
+wfd_client_rtp_ports: RTP/AVP/UDP;unicast 15550 0 mode=play
+wfd_display_edid:
+RTSP/1.0 200 OK
+Date: Thu, 01 Jan 1970 00:00:49 +0000
+User-Agent: stagefright/1.1 (Linux;Android 4.1)
+CSeq: 3
+
+SET_PARAMETER rtsp://localhost/wfd1.0 RTSP/1.0
+Date: Thu, 01 Jan 1970 00:11:07 +0000
+Server: linux
+CSeq: 4
+Content-Type: text/parameters
+Content-Length: 27
+
+wfd_trigger_method: SETUP
+RTSP/1.0 200 OK
+Date: Thu, 01 Jan 1970 00:00:49 +0000
+User-Agent: stagefright/1.1 (Linux;Android 4.1)
+CSeq: 4
+
+SETUP rtsp://192.168.100.2/wfd1.0/streamid=0 RTSP/1.0
+Date: Thu, 01 Jan 1970 00:00:49 +0000
+User-Agent: stagefright/1.1 (Linux;Android 4.1)
+CSeq: 2
+Transport: RTP/AVP/UDP;unicast;client_port=15550-15551
+
+RTSP/1.0 200 OK
+Date: Thu, 01 Jan 1970 00:11:07 +0000
+Server: linux
+CSeq: 2
+Session: 1649760492;timeout=319201969439387
+Transport: RTP/AVP/UDP;unicast;client_port=15550-15551;server_port=22648-22649
+
+PLAY rtsp://192.168.100.2/wfd1.0/streamid=0 RTSP/1.0
+Date: Thu, 01 Jan 1970 00:00:49 +0000
+User-Agent: stagefright/1.1 (Linux;Android 4.1)
+CSeq: 3
+Session: 1649760492
+
+RTSP/1.0 200 OK
+Date: Thu, 01 Jan 1970 00:11:07 +0000
+Server: linux
+CSeq: 3
+Session: 1649760492;timeout=319201969439387
+Range: npt=now-
+
+GET_PARAMETER rtsp://localhost/wfd1.0 RTSP/1.0
+Date: Thu, 01 Jan 1970 00:11:27 +0000
+Server: linux
+CSeq: 5
+Session: 1649760492
+
+RTSP/1.0 200 OK
+Date: Thu, 01 Jan 1970 00:01:08 +0000
+User-Agent: stagefright/1.1 (Linux;Android 4.1)
+CSeq: 5
+Content-Type: text/parameters
+Content-Length: 0
+
+GET_PARAMETER rtsp://localhost/wfd1.0 RTSP/1.0
+Date: Thu, 01 Jan 1970 00:11:47 +0000
+Server: linux
+CSeq: 6
+Session: 1649760492
+
+RTSP/1.0 200 OK
+Date: Thu, 01 Jan 1970 00:01:28 +0000
+User-Agent: stagefright/1.1 (Linux;Android 4.1)
+CSeq: 6
+Content-Type: text/parameters
+Content-Length: 0
+```
+
 ## RTCP
 
 RTCP控制协议需要与RTP数据协议一起配合使用，**当应用程序启动一个RTP会话时将同时占用两个端口，分别供RTP和RTCP使用**。`RTP本身并不能为按序传输数据包提供可靠的保证，也不提供流量控制和拥塞控制，这些都由RTCP来负责完成`。通常RTCP会采用与RTP相同的分发机制，向会话中的所有成员周期性地发送控制信息，应用程序通过接收这些数据，从中获取会话参与者的相关资料，以及网络状况、分组丢失概率等反馈信息，从而能够对服务质量进行控制或者对网络状况进行诊断。
+
+## 开源代码
+
+- C++
+	* [JRTPLIB](http://research.edm.uhasselt.be/jori/page/CS/Jrtplib.html)【[Code](https://github.com/j0r1/JRTPLIB.git)】
+	* [myRtspClient](https://github.com/Ansersion/myRtspClient)
+
 
 
 ## 参考
