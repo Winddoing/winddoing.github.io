@@ -79,6 +79,16 @@ IGMPv1 没有专门定义`离开组播组`的报文。当运行IGMPv1 的主机�
 
 * `Group Address`: 组地址
 
+```
+Internet Group Management Protocol
+    [IGMP Version: 2]
+    Type: Membership Report (0x16)
+    Max Resp Time: 0.0 sec (0x00)
+    Checksum: 0xfaf3 [correct]
+    [Checksum Status: Good]
+    Multicast Address: 239.0.0.11
+```
+
 ### 设置max_resp_time
 
 ```
