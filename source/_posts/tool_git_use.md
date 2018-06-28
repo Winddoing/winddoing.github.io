@@ -1,7 +1,7 @@
 ---
 title: Git操作
 date: 2016-10-7 23:07:24
-categories: Git
+categories: 工具
 tags: [Git]
 ---
 

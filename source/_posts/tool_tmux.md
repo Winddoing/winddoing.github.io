@@ -1,7 +1,7 @@
 ---
 title: tmux
 date: 2018-03-21 23:07:24
-categories: 常用工具
+categories: 工具
 tags: [tmux]
 ---
 

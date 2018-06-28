@@ -1,7 +1,7 @@
 ---
 title: tftp
 date: 2018-05-8 23:07:24
-categories: 常用工具
+categories: 工具
 tags: [tftp]
 ---
 
@@ -14,7 +14,7 @@ tftp:
 
 ### 软件包：
 
-`tftpd（服务端）`，`tftp（客户端）`，`xinetd` 
+`tftpd（服务端）`，`tftp（客户端）`，`xinetd`
 
 ```
 sudo apt-get install tftpd tftp xinetd
@@ -65,4 +65,3 @@ tftp –gr 源文件名  服务器地址
 ```
 tftp –pr 目标文件名 服务器地址
 ```
-

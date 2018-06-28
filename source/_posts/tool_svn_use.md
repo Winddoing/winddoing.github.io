@@ -1,7 +1,7 @@
 ---
 title: SVN的基础使用
 date: 2018-05-7 23:07:24
-categories: SVN
+categories: 工具
 tags: [svn]
 ---
 
@@ -72,6 +72,28 @@ svn rm http://svn_server/xxx_repository/br_feature001
 ```
 revert PATH...
 ```
+
+## 补丁-patch
+
+### 制作补丁
+
+```
+svn diff > patch.diff
+```
+
+### 打补丁
+
+```
+patch < to-file.patch
+```
+
+### 取消补丁
+
+```
+patch -RE  < to-file.patch
+```
+> `-R`: 取消打过的补丁
+> `-E`: 选项说明如果发现了空文件，那么就删除它
 
 ## 示例--创建分支提交
 
