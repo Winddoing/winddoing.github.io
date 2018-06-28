@@ -1,8 +1,8 @@
 ---
 title: Windows常用工具
 date: 2018-05-13 23:07:24
-categories: 常用工具
-tags: [工具]
+categories: 工具
+tags: [windows]
 ---
 
 

@@ -1,9 +1,8 @@
 ---
 title: Markdown语法
 date: 2016-08-19 22:18:39
-tags: Makedown
-categories: Makedown
-keywords: [Makedown, 语法]
+categories: 常用工具
+tags: [markdown]
 ---
 
 在这里主要记录makedown的使用语法，以备后续写作时的不时之需。
@@ -30,7 +29,9 @@ keywords: [Makedown, 语法]
 
 * 强调 `**文字**` ， `__文字__`
 
-* 代码 \```，```
+* 删除线：`~~xxxx~~`
+
+* 代码 \```，\```
 
 * 待办事宜 `- [ ] 表示未完成`和`- [x] 表示已完成`
 > - [ ] 表示未完成
