@@ -2,7 +2,7 @@
 title: uboot
 date: 2018-03-19 23:07:24
 categories: uboot
-tags: [uboot, boot]
+tags: [uboot]
 ---
 
 Bootloader 是在操作系统运行之前执行的一段小程序。通过这段小程序，我们可以初始化硬件设备、建立内存空间的映射表，从而建立适当的系统软硬件环境，为最终调用操作系统内核做好准备。
