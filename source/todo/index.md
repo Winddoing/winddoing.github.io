@@ -18,3 +18,4 @@ comments: true
 * [ProcessOn - 免费在线作图,实时协作](https://www.processon.com/)
 * [坚果云](https://www.jianguoyun.com/d/home)
 * [woboq_codebrowser](https://woboq.com/codebrowser.html)
+* [特殊字符编码查询（�）](https://apps.timwhitlock.info/unicode/inspect?s=%EF%BF%BD)
