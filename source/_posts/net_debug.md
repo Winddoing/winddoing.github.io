@@ -22,8 +22,6 @@ tcpdump -i wlan0 -p  -w file.pcap
 
 ## 分析--wireshark
 
-data.data == 80:21:03:47:00:18
-
 
 ## netstat
 

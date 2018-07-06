@@ -19,3 +19,10 @@
 代码可以参考ffmpeg， mpegtsenc.c
 
 [将H264与AAC打包Ipad可播放的TS流的总结](http://www.cnblogs.com/wangqiguo/archive/2013/03/29/2987949.html)
+
+
+PMT
+
+普通帧
+
+关键帧
