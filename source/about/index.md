@@ -4,9 +4,16 @@ date: 2016-08-18 23:07:24
 comments: false
 ---
 
+{% centerquote %} ### 涸辙遗鲋，旦暮成枯；人而无志，与彼何殊 ### {% endcenterquote %}
 
-mail: winddoing@sina.cn
 
+{% note info %} 自由之地，书我所想，记我所需 {% endnote %}
+
+
+>mail: [winddoing@sina.cn](http://chat.daovoice.io/?id=a28f1641)
+
+
+## Books
 
 * See MIPS Run
 * 设备驱动程序
