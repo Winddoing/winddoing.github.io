@@ -27,3 +27,5 @@ comments: false
 {% note info %} Content (md partial supported) {% endnote %}
 
 {% note warning %} Content (md partial supported) {% endnote %}
+
+{% note danger %} Content (md partial supported) {% endnote %}
