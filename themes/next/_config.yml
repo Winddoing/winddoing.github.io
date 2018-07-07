@@ -384,6 +384,9 @@ changyan:
   appid:
   appkey:
 
+# Online contact 
+daovoice: true
+daovoice_app_id: a28f1641
 
 # Valine.
 # You can get your appid and appkey from https://leancloud.cn
