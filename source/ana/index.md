@@ -4,10 +4,7 @@ date: 2016-08-18 23:07:24
 comments: false
 ---
 
-
-{% note danger %}
-## 知其然 知其所以然 ##
-{% endnote %}
+{% centerquote %} ### 知其然 知其所以然 ### {% endcenterquote %}
 
 {% note default %}
   微笑着，去唱生活的歌谣，不要埋怨生活给予了太多的磨难，不必抱怨生命中有太多的曲折。
