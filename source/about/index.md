@@ -8,9 +8,6 @@ comments: false
 mail: winddoing@sina.cn
 
 
-
-
-
 * See MIPS Run
 * 设备驱动程序
 * Linux内核设计与实现
@@ -22,3 +19,4 @@ mail: winddoing@sina.cn
 ## 网站配置
 
 * [hexo的next主题个性化教程：打造炫酷网站](https://blog.csdn.net/qq_33699981/article/details/72716951)
+* [DaoVoice](https://dashboard.daovoice.io/app/a28f1641/users?segment=all-users)
