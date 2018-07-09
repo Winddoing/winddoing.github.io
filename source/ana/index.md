@@ -24,7 +24,7 @@ comments: false
 ~~~***每一件事到最后都是好事，如果不是，说明还没到最后***~~~
 {% endnote %}
 
-{% note info %} Content (md partial supported) {% endnote %}
+{% note info %} 每一个你不满意的现在，都有一个你没有努力的曾经。{% endnote %}
 
 {% note warning %} Content (md partial supported) {% endnote %}
 
