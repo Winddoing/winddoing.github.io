@@ -12,7 +12,7 @@ comments: false
 
 >**MAIL**: [winddoing@sina.cn](http://chat.daovoice.io/?id=a28f1641)
 
-## 折腾游记
+## 折腾记
 
 * 2013.04: 第一次接触博客[Chinaunix](http://blog.chinaunix.net/uid/28769209/year-201304-list-1.html)。
 * 2013.09: 第二次[CSDN](https://blog.csdn.net/sdreamq)---由于Chinaunix中文章的排版不方便，选择了CSDN。
@@ -22,7 +22,7 @@ comments: false
 * 2016.11: 升级主题`next v5.0.1`。
 * 2017.07: 升级主题`next v5.1.1`。
 * 2018.02: 升级主题`next v5.1.4`。
-* 2018.07: 添加DaoVoice和开通打赏功能.
+* 2018.07: 添加[DaoVoice](http://www.daovoice.io)和开通打赏功能.
 * 至今依旧： ***使用，简单方便，升级主要是当时博客出现问题。***
 
 ## Books
