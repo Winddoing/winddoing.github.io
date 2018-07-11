@@ -323,7 +323,9 @@ typedef struct TS_PMT
 * [UDP_RTP+MPEG2-TS浅析](https://blog.csdn.net/H514434485/article/details/52120625)
 * [TS Stream 详解](https://www.cnblogs.com/big-devil/p/8589377.html)
 
+* [关于ES、PES、PS以及TS码流](https://blog.csdn.net/liangxiaozhang/article/details/17628761)
 
+* [多媒体文件格式之TS](https://www.cnblogs.com/tocy/p/media_container_6-mpegts.html)
 
 ## H264 -> TS
 
