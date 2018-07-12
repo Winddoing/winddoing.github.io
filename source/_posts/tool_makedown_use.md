@@ -1,7 +1,7 @@
 ---
 title: Markdown语法
 date: 2016-08-19 22:18:39
-categories: 常用工具
+categories: 工具
 tags: [markdown]
 ---
 
