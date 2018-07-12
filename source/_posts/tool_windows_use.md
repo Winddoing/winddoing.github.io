@@ -34,3 +34,15 @@ Windows下的常用工具，提高使用效率
 ## 系统镜像下载
 
 网站：[https://msdn.itellyou.cn/](https://msdn.itellyou.cn/)
+
+## Windows 10 下清理 WinSxS
+
+图形界面操作[http://www.chuyu.me/zh-Hans/index.html](http://www.chuyu.me/zh-Hans/index.html)
+
+```
+Dism.exe /online /Cleanup-Image /StartComponentCleanup /ResetBase
+```
+## 磁盘文件目录大小可视化布局
+
+[SpaceSniffer](http://www.uderzo.it/main_products/space_sniffer/)
+> SpaceSniffer_1.1.4.0.1399531007
