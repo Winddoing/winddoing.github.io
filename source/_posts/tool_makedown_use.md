@@ -48,6 +48,8 @@ e=>end
 st->e
 ```
 
+* 段落缩进 `&ensp;&ensp;`（两个空格）
+
 ## Atom和Makedown预览
 
 1.  命令：ctrl + shift + p
