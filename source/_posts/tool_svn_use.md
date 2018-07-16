@@ -29,7 +29,7 @@ svn checkout svn_path local_path
 ```
 svn add files
 ```
-* `--no-ignore`: disregard default and svn:ignore and svn:global-ignores property ignores
+* `--no-ignore`: disregard default and svn:ignore and svn:global-ignores property ignores(忽略默认值和 svn:ignore 属性)
 * `--force`: 强制添加
 
 #### 递归添加
