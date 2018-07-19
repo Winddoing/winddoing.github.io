@@ -157,6 +157,7 @@ links:
   嵌入式相关: https://winddoing.gitbooks.io/embedded_notes/content/
   CSDN: http://blog.csdn.net/sdreamq
   蜗窝科技: http://www.wowotech.net/
+  xiongxianze: https://blog.csdn.net/xiongxianze
 
 # Sidebar Avatar
 # in theme directory(source/images): /images/avatar.gif
@@ -384,7 +385,7 @@ changyan:
   appid:
   appkey:
 
-# Online contact 
+# Online contact
 daovoice: true
 daovoice_app_id: a28f1641
 
