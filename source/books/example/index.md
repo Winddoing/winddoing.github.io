@@ -3,21 +3,33 @@ title: Example
 date: 2018-07-21 8:07:24
 ---
 
-
-This is a test page!
-
+{% centerquote %} This is a test page! {% endcenterquote %}
 
 
-```C
-#include <stdio.h>
+<!-- vim-markdown-toc GFM -->
 
-int main()
-{
-	printf("Hello World!\n");
+* [Example1](#example1)
+* [Example2](#example2)
+* [Example3](#example3)
 
-	return 0;
-}
-```
+<!-- vim-markdown-toc -->
 
-[配置：](http://theme-next.iissnan.com/)
-[图标选择：](http://fontawesome.io/icons/)
+## Example1
+
+{% note warning %} Content (md partial supported) {% endnote %}
+
+{% note danger %} Content (md partial supported) {% endnote %}
+
+
+## Example2
+
+{% note info %} Content (md partial supported) {% endnote %}
+
+{% note success %} Content (md partial supported) {% endnote %}
+
+
+## Example3
+
+{% note primary %} Content (md partial supported) {% endnote %}
+
+{% note default %} Content (md partial supported) {% endnote %}
