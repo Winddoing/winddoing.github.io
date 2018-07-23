@@ -23,11 +23,11 @@ comments: false
 * 至今依旧： ***使用，简单方便，升级主要是当时博客出现问题。***
 
 
-{% centerquote %} [winddoing@sina.cn](http://chat.daovoice.io/?id=a28f1641){% endcenterquote %}
+{% note primar %} [winddoing@sina.cn](http://chat.daovoice.io/?id=a28f1641) {% endnote %}
 
-{% note warning %} [Books's Home](books) {% endnote %}
+{% note warning %} [Books's Home](../books) {% endnote %}
 
-{% note danger %} [ANA](ana) {% endnote %}
+{% note danger %} [ANA](../ana) {% endnote %}
 
 
 ## Books
