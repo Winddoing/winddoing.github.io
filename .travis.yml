@@ -26,6 +26,7 @@ install:
     - npm install --save hexo-generator-baidu-sitemap
     - npm install --save hexo-generator-sitemap
     - npm install --save hexo-filter-flowchart
+    - npm install --save hexo-filter-sequence
 
 cache:
     directories:
