@@ -6,11 +6,8 @@ comments: false
 
 {% centerquote %} ### 涸辙遗鲋，旦暮成枯；人而无志，与彼何殊 ### {% endcenterquote %}
 
+{% centerquote %} 自由之地，书我所想，记我所需 {% endcenterquote %}
 
-{% note info %} 自由之地，书我所想，记我所需 {% endnote %}
-
-
->**MAIL**: [winddoing@sina.cn](http://chat.daovoice.io/?id=a28f1641)
 
 ## 折腾记
 
@@ -26,10 +23,12 @@ comments: false
 * 至今依旧： ***使用，简单方便，升级主要是当时博客出现问题。***
 
 
-{% note warning %} [Books's Home](books) {% endnote %}
-{% note danger %} [ANA](ana)  {% endnote %}
+{% centerquote %} [winddoing@sina.cn](http://chat.daovoice.io/?id=a28f1641){% endcenterquote %}
 
-,    
+{% note warning %} [Books's Home](books) {% endnote %}
+
+{% note danger %} [ANA](ana) {% endnote %}
+
 
 ## Books
 
