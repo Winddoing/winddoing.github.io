@@ -31,24 +31,74 @@ tags: [markdown]
 
 * 删除线：`~~xxxx~~`
 
-* 代码 \```，\```
+* 代码: 三个```。
 
 * 待办事宜 `- [ ] 表示未完成`和`- [x] 表示已完成`
 > - [ ] 表示未完成
 > - [x] 表示已完成
 
+* 段落缩进 `&ensp;&ensp;`（两个空格）
+
 * 流程图
+
+| 操作模块   | 说明    |
+| :-------: | :-----: |
+| start`    | 开始     |
+| end       | 结束     |
+| opration  | 普通操作块 |
+| condition | 判断块   |
+| subroutine| 子任务块 |
+| inputoutput | 输入输出块 |
+
 ```
-graph TB
-A-->B
+''' flow
+//定义部分
+st=>start: Start:>http://www.google.com[blank]
+e=>end:>http://www.google.com
+op1=>operation: My Operation
+sub1=>subroutine: My Subroutine
+cond=>condition: Yes or No?:>http://www.google.com
+io=>inputoutput: catch something...
+
+//判断和位置控制
+st->op1->cond
+cond(yes)->io->e
+cond(no)->sub1(right)->op1
+'''
 ```
+> st 是变量名， start 是指操作模块名，冒号后面就是内容了。需要注意的是，`冒号后要加空格`才能识别
+
 ``` flow
-st=>start: Start
-e=>end
-st->e
+//定义部分
+st=>start: Start:>http://www.google.com[blank]
+e=>end:>http://www.google.com
+op1=>operation: My Operation
+sub1=>subroutine: My Subroutine
+cond=>condition: Yes or No?:>http://www.google.com
+io=>inputoutput: catch something...
+
+//判断和位置控制
+st->op1->cond
+cond(yes)->io->e
+cond(no)->sub1(right)->op1
 ```
 
-* 段落缩进 `&ensp;&ensp;`（两个空格）
+* 时序图
+
+```
+'''sequence
+Alice->Bob: Hello Bob, how are you?
+Note right of Bob: Bob thinks
+Bob-->Alice: I am good thanks!
+'''
+```
+
+```sequence
+Alice->Bob: Hello Bob, how are you?
+Note right of Bob: Bob thinks
+Bob-->Alice: I am good thanks!
+```
+
 
 ## Atom和Makedown预览
 
