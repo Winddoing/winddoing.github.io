@@ -21,11 +21,11 @@ comments: false
 {% endnote %}
 
 {% note success %}
-~~~***每一件事到最后都是好事，如果不是，说明还没到最后***~~~
+~~每一件事到最后都是好事，如果不是，说明还没到最后~~
 {% endnote %}
 
 {% note info %} 每一个你不满意的现在，都有一个你没有努力的曾经。{% endnote %}
 
-{% note warning %} Content (md partial supported) {% endnote %}
+{% note warning %} 「他强任他强，清风拂山岗；他横任他横，明月照大江」  —— 金庸{% endnote %}
 
 {% note danger %} Content (md partial supported) {% endnote %}
