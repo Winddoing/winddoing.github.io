@@ -27,7 +27,6 @@ install:
     - npm install --save hexo-generator-sitemap
     - npm install --save hexo-filter-flowchart
     - npm install --save hexo-filter-sequence
-    - npm install --save hexo-html-minifier                   // HTML压缩
     - npm install --save hexo-clean-css                       // CSS压缩
     - npm install --save hexo-uglify                          // JS压缩
     - npm install --save hexo-imagemin                        // imagages压缩
