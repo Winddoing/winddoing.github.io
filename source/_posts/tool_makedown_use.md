@@ -68,7 +68,8 @@ cond(no)->sub1(right)->op1
 ```
 > st 是变量名， start 是指操作模块名，冒号后面就是内容了。需要注意的是，`冒号后要加空格`才能识别
 
-``` flow
+
+```flow
 //定义部分
 st=>start: Start:>http://www.google.com[blank]
 e=>end:>http://www.google.com
