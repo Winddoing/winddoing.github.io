@@ -46,3 +46,8 @@ Dism.exe /online /Cleanup-Image /StartComponentCleanup /ResetBase
 
 [SpaceSniffer](http://www.uderzo.it/main_products/space_sniffer/)
 > SpaceSniffer_1.1.4.0.1399531007
+
+## 同步软件--FreeFileSync
+
+[FreeFileSync](https://freefilesync.org/download.php)
+> 硬盘和U盘的同步
