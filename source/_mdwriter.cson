@@ -19,7 +19,7 @@ siteUrl: "https://winddoing.github.io"
 
 # Root directory to your blog
 # - Leave it empty to use the current project path (recommended)
-siteLocalDir: "source"
+siteLocalDir: ""
 # Directory to drafts from siteLocalDir
 siteDraftsDir: "_drafts/"
 # Directory to posts from siteLocalDir
