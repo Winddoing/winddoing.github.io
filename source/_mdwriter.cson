@@ -31,8 +31,8 @@ siteImagesDir: "images/{year}/{month}/"
 # URLs to tags/posts/categories JSON files
 # https://github.com/zhuochun/md-writer/wiki/Settings-for-Front-Matters
 urlForPosts: ""
-urlForTags: ""
-urlForCategories: ""
+urlForTags: "https://winddoing.github.io/blog/tags.json"
+urlForCategories: "https://winddoing.github.io/blog/categories.json"
 
 # The front matter key name
 frontMatterNameTags: "tags"
@@ -51,8 +51,6 @@ frontMatter: """
 layout: "{layout}"
 title: title
 date: "{date}"
-categories:
-tags: []
 ---
 """
 
