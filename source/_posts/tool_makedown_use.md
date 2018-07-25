@@ -9,6 +9,14 @@ tags: [markdown]
 
 <!--more-->
 
+## Atom 插件
+
+```
+atom-hexo
+markdown-scroll-sync
+markdown-writer
+```
+
 ## Markdown语法
 
 * 分段： `两个回车`
