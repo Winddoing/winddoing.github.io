@@ -28,6 +28,7 @@ install:
     - npm install --save hexo-filter-flowchart
     - npm install --save hexo-filter-sequence
     - npm install --save hexo-autonofollow
+    - npm install --save hexo-generator-atom-markdown-writer-meta
 
 cache:
     directories:
