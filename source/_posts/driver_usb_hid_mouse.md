@@ -151,6 +151,9 @@ struct hidg_func_descriptor {
 
 主要是一个设备如何填充`struct hidg_func_descriptor`数据结构。
 
+> You can add as many HID functions as you want, only limited by the amount of interrupt endpoints your gadget driver supports.
+
+添加`hidg`设备的个数，受USB的endpoint的限制，如果endpoint只有一对，只能添加一个`hidg0`设备。
 
 ### 获取USB鼠标HID Descriptor
 
