@@ -7,8 +7,17 @@ comments: false
 ## 书籍
 
 ### 计算机
-- 《图解TCPIP(第5版).乌尼日其其格》|[书摘](diagram_tcp_ip_5)|
-- 《道法自然：面向对象实践指南.王咏武》|[书摘](the_guide_object-oriented_practice)|
+- [x]《See MIPS Run》|书摘|（★★★★★）
+- [x]《设备驱动程序》|书摘|（★★★★★）
+- [x]《Linux内核设计与实现》|书摘|（★★★★★）
+- [x]《Linux内核精髓（精通linux内核必会的75个技巧）》|书摘|（★）
+- [x]《程序员的自我修养--链接，装载与库》|书摘|（★）
+- [x]《深入理解Linux内核》|书摘|（★★★）
+- [x]《图解TCPIP(第5版).乌尼日其其格》|[书摘](diagram_tcp_ip_5)|（★）
+- [x]《道法自然：面向对象实践指南.王咏武》|[书摘](the_guide_object-oriented_practice)|（★）
+- [ ]《重构改善既有代码的设计》|摘要|（☆☆）
+- [ ]《代码整洁之道》|摘要|（☆☆）
+
 
 ### 其他
 * [example](example)
