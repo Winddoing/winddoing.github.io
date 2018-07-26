@@ -173,9 +173,9 @@ footnoteDefinitionTag: "[^{label}]: {content}"
 footnoteInsertPosition: "paragraph"
 
 # Table default alignments: "empty", "left", "right", "center"
-tableAlignment: "empty"
+tableAlignment: "center"
 # Insert extra pipes at the beginning and the end of table rows
-tableExtraPipes: false
+tableExtraPipes: true
 
 # Template variables is a key-value map used in template string
 templateVariables:
