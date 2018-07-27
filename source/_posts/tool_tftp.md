@@ -44,6 +44,10 @@ service tftp
 sudo /etc/init.d/xinetd restart
 ```
 
+## window工具--tftpd服务
+
+下载：[tftpd32](https://pan.baidu.com/s/1vhF6tD7zwLhDLQDmSY5Hsw)
+
 ## 本地测试
 
 ```
