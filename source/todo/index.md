@@ -20,3 +20,4 @@ comments: true
 * [woboq_codebrowser](https://woboq.com/codebrowser.html) —— 在线阅读GCC, Linux Kernel, GNU C Library等源码
 * [特殊字符编码查询（�）](https://apps.timwhitlock.info/unicode/inspect?s=%EF%BF%BD) —— 查找字符编码
 * [PlantUML在线做图](http://www.plantuml.com/plantuml/uml/SyfFKj2rKt3CoKnELR1Io4ZDoSa70000) —— 在线画UML
+* [在线秒表](http://cube.smmous.com/)【[window](https://pan.baidu.com/s/1jaSLV9ldNSgb1uwnIlIT5A)】 —— 方便测试
