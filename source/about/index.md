@@ -8,9 +8,6 @@ comments: false
 
 {% centerquote %} 自由之地，书我所想，记我所需 {% endcenterquote %}
 
-
-## 折腾记
-
 * 2013.04: 第一次接触博客[Chinaunix](http://blog.chinaunix.net/uid/28769209/year-201304-list-1.html)。
 * 2013.09: 第二次[CSDN](https://blog.csdn.net/sdreamq)---由于Chinaunix中文章的排版不方便，选择了CSDN。
 * 2014.02: 在无意中发现了Github，并且可以搭建静态网站，喜欢折腾的我选择了[github](https://shaowangquan.github.io)。
@@ -29,6 +26,7 @@ comments: false
 
 {% note danger %} [ANA](../ana) {% endnote %}
 
+{% note warning %} [Music](../music) {% endnote %}
 
 ## 网站配置
 
