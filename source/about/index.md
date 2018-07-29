@@ -19,14 +19,11 @@ comments: false
 * 2018.07: 添加[DaoVoice](http://www.daovoice.io)和开通打赏功能.
 * 至今依旧： ***使用，简单方便，升级主要是当时博客出现问题。***
 
+>|[Books](../books)|[ANA](../ana)|[Music](../music)|
+
 
 {% note primar %} [winddoing@sina.cn](http://chat.daovoice.io/?id=a28f1641) {% endnote %}
 
-{% note warning %} [Books's Home](../books) {% endnote %}
-
-{% note danger %} [ANA](../ana) {% endnote %}
-
-{% note warning %} [Music](../music) {% endnote %}
 
 ## 网站配置
 
