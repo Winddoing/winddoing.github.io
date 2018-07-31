@@ -59,7 +59,7 @@ date: "{date}"
 # File extension of posts/drafts
 fileExtension: ".md"
 # File slug separator
-slugSeparator: "-"
+slugSeparator: "_"
 
 # Rename filename based on title in front matter when publishing
 publishRenameBasedOnTitle: false
