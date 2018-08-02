@@ -50,5 +50,5 @@ comments: false
 
 ## Code
 
-* [保证嵌入式系统的代码质量](http://www-01.ibm.com/software/cn/rational/events/download/pdf/1123SH_3.pdf)
+* [保证嵌入式系统的代码质量](http://www-01.ibm.com/software/cn/rational/events/download/pdf/1123SH_3.pdf)|[local](docs/保证嵌入式系统的代码质量.pdf)|
 * [MISRA Compliance:2016](https://www.misra.org.uk/LinkClick.aspx?fileticket=w_Syhpkf7xA%3D&tabid=57)
