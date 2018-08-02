@@ -137,3 +137,10 @@ sudo apt install dia
 sudo add-apt-repository ppa:fossfreedom/indicator-sysmonitor
 sudo apt-get install indicator-sysmonitor
 ```
+
+## gedit汉字乱码
+
+```
+gsettings set org.gnome.gedit.preferences.encodings candidate-encodings "['GB18030', 'GB2312', 'GBK', 'UTF-8', 'BIG5', 'CURRENT', 'UTF-16']"
+```
+> ubntu 18.04
