@@ -48,7 +48,7 @@ Usage: ping -6 [-aAbBdDfhLnOqrRUvV] [-c count] [-i interval] [-I interface]
 ping 127.0.0.1
 ```
 * 程序中判断网络连接情况
-```
+``` C
 for (i = 0; i < MAX_S_CONNECT_NUM; i++) {
     if (rIpList[i].valid == 1) {
         retry_num = 5;
