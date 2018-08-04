@@ -156,7 +156,7 @@ imageTag: "![{alt}](/{src})"
 # Use relative path to image from the opened file
 relativeImagePath: false
 # Rename copyed image based on title/alt
-renameImageOnCopy: false
+renameImageOnCopy: true
 
 # Inline link tag template
 linkInlineTag: "[{text}]({url})"
