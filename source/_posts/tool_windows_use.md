@@ -51,3 +51,12 @@ Dism.exe /online /Cleanup-Image /StartComponentCleanup /ResetBase
 
 [FreeFileSync](https://freefilesync.org/download.php)
 > 硬盘和U盘的同步
+
+## esEye -- Elecard StreamEye Tools
+
+esEye 分析264的码流结构
+
+## edid_manager
+
+[edid_managerv1x0](https://pan.baidu.com/s/1BPgXadM9Mnwwio1PU4jiPQ)
+> EDID查询
