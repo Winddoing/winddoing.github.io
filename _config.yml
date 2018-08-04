@@ -81,6 +81,10 @@ search:
   format: html
   limit: 10000
 
+
+skip_render: 
+  - README.md
+
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
