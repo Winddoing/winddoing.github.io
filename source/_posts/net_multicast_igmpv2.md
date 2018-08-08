@@ -124,3 +124,4 @@ IGMPv3 在兼容和继承IGMPv1 和IGMPv2 的基础上，进一步增强了主�
 * [IGMPV2基本原理](http://blog.sina.com.cn/s/blog_c079d59e0102whjg.html)
 * [IGMP Snooping技术学习笔记](https://blog.csdn.net/achejq/article/details/7347214)
 * [H3C F1000-S防火墙基础配置及telnet登录！](http://blog.51cto.com/rongshu/1900182)
+* [IGMP Snooping技术介绍](http://www.h3c.com/cn/d_200805/605838_30003_0.htm)
