@@ -22,3 +22,4 @@ comments: true
 * [PlantUML在线做图](http://www.plantuml.com/plantuml/uml/SyfFKj2rKt3CoKnELR1Io4ZDoSa70000) —— 在线画UML
 * [在线秒表](http://cube.smmous.com/)【[window](https://pan.baidu.com/s/1jaSLV9ldNSgb1uwnIlIT5A)】 —— 方便测试
 * [EasyEDA](https://easyeda.com/editor#id=817e5fbef04e4725bb8c6f2c6f4d4b25|65379c4ec9e14037a2ee8c095c02632a) —— 在线画电路原理图
+* [CHM to PDF](https://www.zamzar.com/convert/chm-to-pdf/?yyue=a21bo.50862.201879#tool) —— 在线文件转换（chm2pdf）
