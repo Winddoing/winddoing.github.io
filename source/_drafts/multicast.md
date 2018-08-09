@@ -174,3 +174,9 @@ IGMPv2通过查询器选举机制为所连网段选举唯一的查询器。查�
 
 * [IGMPV2基本原理](http://blog.sina.com.cn/s/blog_c079d59e0102whjg.html)
 * [IGMP Snooping概念和配置方法---交换](https://blog.csdn.net/mingzznet/article/details/9253607)
+
+
+## 编程
+
+* [linux下编写IGMP可能用到的几个结构体](https://blog.csdn.net/shanzhizi/article/details/8750042)
+* [××××××IP组播×××××××](https://blog.csdn.net/liujianfeng1984/article/details/44138671)
