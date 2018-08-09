@@ -116,6 +116,13 @@ ip igmp snooping query-max-response-time seconds
 
 IGMPv3 在兼容和继承IGMPv1 和IGMPv2 的基础上，进一步增强了主机的控制能力，并增强了查询和报告报文的功能。
 
+
+## IGMP snooping查询器
+
+在运行了IGMP的组播网络中，会有一台三层组播设备充当IGMP查询器，负责发送`IGMP查询报文`，使三层组播设备能够在网络层`建立并维护组播转发表项，从而在网络层正常转发组播数据`。
+
+
+
 ## 参考
 
 * [IGMP技术总结](https://blog.csdn.net/livelylittlefish/article/details/4286142)
