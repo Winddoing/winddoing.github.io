@@ -55,9 +55,24 @@ IP地址由“网络标识（网络地址）”和“主机标识（主机地址
 
 * `ICMP`:主要功能
 > 确定IP包是否成功送达目标地址,通知在发送过程中IP包被废弃的具体原因，改善网络设置等。
-> 
+>
 >**消息：两类**
 >
 >a. 一类是通知出错原因的消息；   b. 一类是用于诊断的查询消息
+
+* ICMP消息类型：
+
+| 消息类型（十进制） | 内容                                  |
+|:------------------:|:--------------------------------------|
+|         0          | 回送应答（Echo Reply）                |
+|         3          | 目标不可达（Destination Unreachable） |
+|         4          | 原点抑制（Source Quench）             |
+|         5          | 重定向或者改变路由（Redirect）        |
+|         8          | 回送请求（Echo Request）              |
+|         9          | 路由器公告（Router Advertisement）    |
+|         10         | 路由器请求（Router Solicitation）     |
+|         11         | 超时（Time Exceeded）                 |
+|         17         | 地址子网请求（Address Mark Request）  |
+|         18         | 地址子网应答（Address Mark Reply）    |
 
 * 在ICMP中，包以文明的形式像TCP/UDP一样通过IP进行传输。
