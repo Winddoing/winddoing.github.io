@@ -27,3 +27,7 @@ AAA是`认证（Authentication）`、`授权（Authorization）`和`计费（Acc
 * 认证（Authentication）：是对用户的身份进行验证，判断其是否为合法用户。
 * 授权（Authorization）：是对通过认证的用户，授权其可以使用哪些服务。
 * 计费（Accounting）：是记录用户使用网络服务的资源情况，这些信息将作为计费的依据。
+
+## EDCA
+
+[EDCA机制详解](https://blog.csdn.net/lin_shuqing/article/details/75099047)
