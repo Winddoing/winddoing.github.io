@@ -49,6 +49,8 @@ IP地址由“网络标识（网络地址）”和“主机标识（主机地址
 
 * `Qos`：Quality Of Serice（服务质量）
 
+* ARP: (Address Resolution Protocol),根据IP地址定位MAC地址
+>ARP采用广播实现
 * RARP:(Reverse Address Resolution Protocol),根据MAC地址定位IP地址。
 > 搭建一个RARP的服务器，在一个设备接入时，RARP会根据提前注册的设备的MAC地址查找出IP，并配置到该设备
 
@@ -76,3 +78,20 @@ IP地址由“网络标识（网络地址）”和“主机标识（主机地址
 |         18         | 地址子网应答（Address Mark Reply）    |
 
 * 在ICMP中，包以文明的形式像TCP/UDP一样通过IP进行传输。
+
+* ICMPv6：在ICMPv6中，从IP地址定位MAC地址的协议ARP转为ICMP的邻居探索消息（Neighbor Discovery）。
+> 邻居请求消息利用IPv6的`多播`地址实现传输
+* 在ICMPv6中，ICMP大致分为两类，一类是`错误消息`，另一类是`信息消息`
+
+* HDCP: (Dynamic Host Configuration Protocol)自动设置IP地址，统一管理IP地址分配
+> 在使用DHCP之前，都有架设一台DHCP服务器，一般由该网段的路由器充当HDCP服务器
+
+* DHCP现实即插即用：指只要物理上一接通，无需进行专门的设置就可以直接使用。
+
+* DHCP功能的实现：主要分两个阶段，在发送DHCP发现包和DHCP请求包时，DHCP即插即用的IP尚未确定。因此，DHCP发现包的目标地址为广播`255.255.255.255`,而源地址为`0.0.0.0`,表示未知。
+* DHCP中继代理：对不同网段的IP地址分配，由一个DHCP服务器统一管理和维护。
+> DHCP客户端会向DHCP中继代理发送DHCP请求包，而DHCP中继代理在收到这个`广播包`后再以单播的形式发给DHCP服务器。服务器端收到该包以后再向  DHCP中继代理返回应答，并由DHCP中继代理将此包转发给DHCP客户端（单播）。
+>
+> DHCP包中包含了主机的MAC地址。DHCP中继代理`利用MAC地址使用单播的方式`将包返回给了DHCP客户端
+
+* NAT:(Network Address Translator)是用于在本地网络中使用私有地址，在连接互联网时转而使用全局IP地址的技术。
