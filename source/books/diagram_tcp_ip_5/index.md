@@ -95,3 +95,5 @@ IP地址由“网络标识（网络地址）”和“主机标识（主机地址
 > DHCP包中包含了主机的MAC地址。DHCP中继代理`利用MAC地址使用单播的方式`将包返回给了DHCP客户端
 
 * NAT:(Network Address Translator)是用于在本地网络中使用私有地址，在连接互联网时转而使用全局IP地址的技术。
+
+* 多播：在多播通信中确认接收端是否存在非常重要，是通过`MLD（Multicast Listener Discovery）`实现。它是IPv4中的`IGMP`和IPv6中的`ICMPv6`的功能之一。
