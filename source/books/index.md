@@ -20,13 +20,11 @@ comments: false
 - 《代码整洁之道》|书摘|
 
 
-### 其他
-* [example](example)
-
-
-## 总结
-
-
 ## 记录
 
 - 【[V4L2框架](V4L2)】
+- 【[图形图像基础](graphic_images_basis_knowledge)】
+
+
+### 其他
+* [example](example)
