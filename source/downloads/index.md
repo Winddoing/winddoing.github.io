@@ -18,6 +18,7 @@ comments: false
 * [cgroup](/downloads/linux/Red_Hat_Enterprise_Linux-6-cgroup_Guide-zh-CN.pdf)
 * [Linux 4.0 IO协议栈框架图](/downloads/linux/Linux-storage-stack-diagram_v4.0.png)【[html](https://www.thomas-krenn.com/de/wikiDE/images/b/ba/Linux-storage-stack-diagram_v4.0.png)】
 * [Mastering the DMA and IOMMU APIs](/downloads/linux/DMA_and_IOMMU.pdf)
+* [内存---jemalloc](linux/jemalloc.pdf)
 
 ## 驱动
 * [belloni-alsa-asoc](/downloads/driver/alsa/belloni-alsa-asoc_0.pdf)
