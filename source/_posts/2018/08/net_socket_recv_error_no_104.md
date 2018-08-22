@@ -33,7 +33,12 @@ The rule that applies is: When a process writes to a socket that has received an
 The default action of this signal is to terminate the process, so the process must catch the signal to avoid being involuntarily terminated.
 If the process either catches the signal and returns from the signal handler, or ignores the signal, the write operation returns EPIPE.
 
+### tcp_syncookies
 
+在高并发的情况下，内核会认为系统受到了SYN flood攻击，会发送cookies（possible SYN flooding on port 80. Sending cookies），这样会减慢影响请求的速度，所以在应用服务武器上设置下这个参数为0禁用系统保护就可以进行大并发测试了。
+```
+net.ipv4.tcp_syncookies = 0
+```
 
 ## 返回值: n==0
 
