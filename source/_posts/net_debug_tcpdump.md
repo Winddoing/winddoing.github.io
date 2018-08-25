@@ -90,6 +90,10 @@ cp ${PWD}/${TCPDUMP}/out/sbin/tcpdump .
 # tcpdump -i wlan0 -v -n udp -c 5
 ```
 
+* 指定端口号
+``` shell
+tcpdump -i wlan0 tcp port 7236 -w rrrr.pcap
+```
 ## 分析--wireshark
 
 
