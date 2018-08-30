@@ -13,6 +13,7 @@
 	"Debug",
 	"EMMC",
 	"FSM",
+    "FFmpeg",
 	"GPIO",
 	"Git",
 	"H264",
