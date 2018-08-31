@@ -44,6 +44,10 @@ categories:
 
 HDMI接口中的数据信号采用的是S最小化传输`差分信号`协议。这种协议会将标准8bit数据转换为10bit信号，并且在转换过程中使用`微分传送`。
 
+### 最大分辨率
+
+![hdmi_interface_max_pix](/images/2018/08/hdmi_interface_max_pix.png)
+>接口所支持的协议不同，最大分辨率将不同
 
 ## VGA
 
@@ -68,6 +72,10 @@ VGA显示中，FPGA需要产生５个信号分别是：行`同步信号HS`、`�
 |  G   | 绿基色 （0~0.714V 模拟信号） |
 |  B   | 蓝基色 （0~0.714V 模拟信号） |
 
+### 最大分辨率
+
+VGA接口所能支持的最大分辨率是`2048X1536px`
+
 ## DVI
 
 DVI（Digital Visual Interface），即数字视频接口.
@@ -80,6 +88,13 @@ DVI是基于`TMDS(Transition Minimized Differential Signaling)`，转换`最小�
 1. DVI-A（12+5）
 2. DVI-D（24+1/18+1）: 只有数字接口
 3. DVI-I（24+5）: 有数字和模拟接口
+
+### 最大分辨率
+
+* DVI-I单通道最大分辨率:`1920x1200,60Hz`
+* DVI-I双通道最大分辨率:`2560x1600,60Hz/1920x1200,120Hz`
+* DVI-D单通道最大分辨率:`1920x1200,60Hz`
+* DVI-D双通道最大分辨率:`2560x1600,60Hz/1920x1080,120Hz`
 
 ## 参考
 
