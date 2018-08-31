@@ -16,7 +16,8 @@ keywords: "Hexo, NexT, Winddoing,嵌入式,Linux,shell,C语言,网络， 个人�
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
 url: http://winddoing.github.io
 root: /
-permalink: :year/:month/:day/:title/
+#permalink: :year/:month/:day/:title/
+permalink: post/:abbrlink.html
 
 # Directory
 source_dir: source
