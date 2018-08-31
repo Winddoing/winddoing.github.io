@@ -24,7 +24,8 @@ $blue         = #0684bd
 $blue-deep    = #262a30
 $orange       = #fc6423
 
-
+$my-code-foreground = #dd0055  // 用``围出的代码块字体颜色
+$my-code-background = #eee  // 用``围出的代码块背景颜色
 
 // Scaffolding
 // Settings for some of the most global styles.
@@ -147,8 +148,8 @@ $code-font-family               = $font-family-monospace
 $code-font-size                 = 13px
 $code-font-size                 = unit(hexo-config('font.codes.size'), px) if hexo-config('font.codes.size') is a 'unit'
 $code-border-radius             = 3px
-$code-foreground                = $black-light
-$code-background                = $gainsboro
+$code-foreground                = $my-code-foreground
+$code-background                = $my-code-background
 
 
 
