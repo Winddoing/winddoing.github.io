@@ -49,7 +49,7 @@ frontMatterDate: "{year}-{month}-{day} {hour}:{minute}"
 frontMatter: """
 ---
 layout: "{layout}"
-title: title
+title: "{title}"
 date: "{date}"
 ---
 
