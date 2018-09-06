@@ -100,3 +100,4 @@ WiFi总共有14个信道
 
 - [WIFI的传输信道与标准WIFI的频道传输能力](https://blog.csdn.net/huguohu2006/article/details/52250119)
 - [《深入理解Android：Wi-Fi，NFC和GPS》章节连载[节选]--第三章 Wi-Fi基础知识](https://blog.csdn.net/innost/article/details/20651445)
+- [世界各个地区WIFI 2.4G及5G信道划分表（附无线通信频率分配表）](https://blog.csdn.net/dxpqxb/article/details/80969760)
