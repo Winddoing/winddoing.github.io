@@ -29,6 +29,8 @@ comments: false
 
 ## 工具
 * [Makefile.pdf](/downloads/tools/Makefile.pdf)【[html](https://seisman.github.io/how-to-write-makefile/)】
+* [gcc6.1手册](https://gcc.gnu.org/onlinedocs/gcc-6.1.0/gcc.pdf)
+* [GNU C参考手册](https://www.gnu.org/software/gnu-c-manual/gnu-c-manual.pdf)
 
 ## 计算机体系结构-MIPS【[html](http://www0.cs.ucl.ac.uk/staff/electran/gc03/pdf/filelist.xml)】
 * [06processor_colour.pdf](/downloads/computer_architecture/06processor_colour.pdf)
