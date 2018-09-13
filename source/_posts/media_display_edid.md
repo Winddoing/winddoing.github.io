@@ -44,6 +44,10 @@ parse-edid < edid.bin
 下载：[EDID Manager](https://pan.baidu.com/s/11VxNBrbvu4-4daB7R7huEw)
 
 
+### Window： EDID编辑
+
+下载：[Phoenix EDID Designer](https://pan.baidu.com/s/1EynJUGQ-FHp_ByvY5Vhpyw)
+
 ## 示例： Lenovo 1600x900
 
 > 视频输出接口： `VGA`
