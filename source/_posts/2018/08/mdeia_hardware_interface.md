@@ -91,6 +91,8 @@ VGA接口所能支持的最大分辨率是`2048X1536px`
 
 DVI（Digital Visual Interface），即数字视频接口.
 
+![DVI_interface](/images/2018/09/dvi_interface.png)
+
 DVI是基于`TMDS(Transition Minimized Differential Signaling)`，转换`最小差分信号`技术来传输数字信号，TMDS运用先进的编码算法把8bit数据(R、G、B中的每路基色信号)通过最小转换编码为10bit数据(包含行场同步信息、时钟信息、数据DE、纠错等)，经过DC平衡后，采用差分信号传输数据，它和LVDS、TTL相比有较好的电磁兼容性能，可以用低成本的专用电缆实现长距离、高质量的数字信号传输。
 
 
@@ -106,6 +108,12 @@ DVI是基于`TMDS(Transition Minimized Differential Signaling)`，转换`最小�
 * DVI-I双通道最大分辨率:`2560x1600,60Hz/1920x1200,120Hz`
 * DVI-D单通道最大分辨率:`1920x1200,60Hz`
 * DVI-D双通道最大分辨率:`2560x1600,60Hz/1920x1080,120Hz`
+
+## DP
+
+DisplayPort也是一种高清数字显示接口标准，可以连接电脑和显示器，也可以连接电脑和家庭影院。
+
+![dp_interface](/images/2018/09/dp_interface.png)
 
 ## 参考
 
