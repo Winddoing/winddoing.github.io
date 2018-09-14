@@ -200,6 +200,12 @@ static struct sysrq_key_op *sysrq_key_table[36] = {
 ```
 sudo sshfs xxx@192.168.1.2:/home_back/xxx/work/aaa /home/user/aaa -o gid=1000,uid=1000,allow_other
 ```
+## md5sum --- 字符串
+
+``` shell
+$echo -n '123456' | md5sum
+e10adc3949ba59abbe56e057f20f883e  -
+```
 
 ## 参考
 
