@@ -97,6 +97,8 @@ Redis没有直接使用C语言中的字符串，而是自己构建了SDS这样�
 
 ### SDS
 
+字符串是Redis中最基本的数据，Redis使用key作为存取value的唯一标示符，而key的通俗理解就是字符串。
+
 ``` C
 typedef char *sds;
 
@@ -218,3 +220,86 @@ sds sdsnewlen(const void *init, size_t initlen) {
     return s;
 }
 ```
+
+#### SDS API
+
+| 函数 | 作用 | 时间复杂度 |
+|:-:|:-|:-|
+| sdsnew  | 创建一个包含给定C字符串的SDS  | O(N), N为给定C字符串的长度  |
+| sdsempty | 创建一个不包含任何内容的空SDS  | O(1)  |
+| sdsfree  | 释放给定的SDS  | O(N)， N为释放SDS的长度  |
+| sdslen   | 返回SDS已使用看见字节数  | O(1), SDS中的len属性 |
+| sdsdup   | 创建一个给定SDS的副本（copy）  | O(N), N为给定SDS的长度 |
+| sdsupdatelen  | 更新SDS的长度  | O(N) |
+| sdsclear | 清空SDS保存的字符串内容 | O(1)  |
+
+
+### Test Code
+
+``` C
+#ifndef __TESTHELP_H
+#define __TESTHELP_H
+
+int __failed_tests = 0;
+int __test_num = 0;
+#define test_cond(descr,_c) do { \
+    __test_num++; printf("%d - %s: ", __test_num, descr); \
+    if(_c) printf("PASSED\n"); else {printf("FAILED\n"); __failed_tests++;} \
+} while(0);
+#define test_report() do { \
+    printf("%d tests, %d passed, %d failed\n", __test_num, \
+                    __test_num-__failed_tests, __failed_tests); \
+    if (__failed_tests) { \
+        printf("=== WARNING === We have failed tests here...\n"); \
+        exit(1); \
+    } \
+} while(0);
+#endif
+```
+
+### List
+
+Redis使用链表作为链表键的底层实现。
+
+``` C
+/* Node, List, and Iterator are the only data structures used currently. */
+
+typedef struct listNode {                                                   
+    struct listNode *prev;                                                  
+    struct listNode *next;                                                  
+    void *value;                                                            
+} listNode;                                                                 
+
+typedef struct listIter {                                                   
+    listNode *next;                                                         
+    int direction;                                                          
+} listIter;                                                                 
+```
+>adlist.h
+
+多个`listNode`可以通过`prev`和`next`指针组成双端链表。
+
+![redis_adlist](/images/2018/09/redis_adlist.png)
+
+``` C
+typedef struct list {                                                       
+    listNode *head;                                                         
+    listNode *tail;                                                         
+    void *(*dup)(void *ptr);                                                
+    void (*free)(void *ptr);                                                
+    int (*match)(void *ptr, void *key);                                     
+    unsigned long len;                                                      
+} list;  
+```
+- `dup`: 用于复制链表节点所保存的值。
+- `free`： 用于释放链表节点所保存的值。
+- `match`：用于对比链表节点所保存的值与另一个输入值是否相等。
+
+![redis_adlist_struct](/images/2018/09/redis_adlist_struct.png)
+
+-
+#### Redis链表实现特性
+
+* `双端`：链表节点带有prev和next指针，获取某个节点的前端节点和后端节点的复杂度都为O(1)
+* `无环`：表头节点的prev指针和表尾节点的next指针都指向NULL，对链表的访问以NULL为终点。
+* `多态`：链表节点使用`void *`指针保存节点值，并且可以通过list结构的dup、free、match三个属性对节点值设置类型特定函数，链表可以保存各种不同类型的值。
