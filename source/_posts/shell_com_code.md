@@ -36,12 +36,12 @@ do
 done < run.cfg
 
 #多线程：
-# init fifo file 
+# init fifo file
 THREAD1DIR=3 && FIFONR=4 && FIFONAME="$$.ff" && mkfifo $FIFONAME && str="exec $FIFONR<> $FIFONAME" && eval $str && rm $FIFONAME -f
 i=0
 while [ $i -lt $THREAD1DIR ]; do
 	i=$((i+1))
-	echo 
+	echo
 done >& $FIFONR
 #for (( i=0; i<$THREAD1DIR; i++ )); do
 
@@ -51,7 +51,7 @@ for i in $all
 do
 	if [ -d $i ]
 	then
-		read 
+		read
 		( echo $i" 1runing" && cd $i/ && ./$i'.run'.sh $cycles && cd - && echo >& $FIFONR ) &
 	fi
 done <& $FIFONR
@@ -71,7 +71,7 @@ do
 		src_dir='./'$i'/'
 		file_path=`find $src_dir/ -name *_*.log`
 		echo $file_path
-		mv $file_path $des_dir	
+		mv $file_path $des_dir
 	fi
 done
 chmod 777 './'$data_dir -R
@@ -90,6 +90,32 @@ done
 ```
 >[Linux批量更改文件后缀名](https://blog.csdn.net/longxibendi/article/details/6387732)
 
+## 检查网段IP占用情况
+
+``` shell
+#!/bin/bash
+
+up=0
+down=0
+
+for siteip in $(seq 1 255)
+do
+	#site="192.168.2.${siteip}"
+	site="172.16.189.${siteip}"
+	ping -c1 -W1 ${site} &> /dev/null
+	if [ "$?" == "0" ]; then
+		up=$[$up+1]
+		echo "$site is UP, cnt=$up"
+	else
+		down=$[$down+1]
+		echo "$site is DOWN, cnt=$down"
+	fi
+done
+# 除法
+alive=`awk 'BEGIN{printf "%.2f\n",('$up'/'$(($up + $down))')}'`
+
+echo "up:$up, down:$down, alive:$alive"
+```
 
 ## 参考
 
