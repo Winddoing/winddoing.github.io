@@ -1,10 +1,11 @@
 ---
-date: 2015-06-18 01:49
+date: '2015-06-18 01:49'
 layout: post
 title: 常用的shell命令
-thread: 166
-categories: 工具
-tags: [shell]
+tags:
+  - Shell
+categories:
+  - shell
 ---
 
 常用的shell命令： `find`, `cat`
