@@ -1,8 +1,10 @@
 ---
 title: shell常用代码
-date: 2018-02-04 23:07:24
-categories: 程序设计
-tags: [shell]
+date: 2018-02-04T23:07:24.000Z
+tags:
+  - Shell
+categories:
+  - shell
 ---
 
 {% note info %} shell常用代码： {% endnote %}

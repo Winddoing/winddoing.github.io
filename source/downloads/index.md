@@ -46,6 +46,9 @@ comments: false
 * [16_mem_man_notes.pdf](/downloads/computer_architecture/16_mem_man_notes.pdf)
 * [h02transistors.pdf](/downloads/computer_architecture/h02transistors.pdf)
 
+## 操作系统
+* [Operating Systems](http://cse.csusb.edu/tongyu/courses/cs460/notes/intro.php)
+
 ## 书
 
 * [Linux Device Drivers, 2nd Edition](https://www.xml.com/ldd/chapter/book)

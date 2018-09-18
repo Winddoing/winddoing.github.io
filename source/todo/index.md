@@ -26,3 +26,4 @@ comments: true
 * [在线文档查询](https://devdocs.io/) —— 各类语言工具的文档
 * [网络协议报文格式查询](http://support.huawei.com/onlinetoolsweb/einfofinder/PacketFormat?module=6&lang=zh) —— 华为设备为主
 * [pixabay](https://pixabay.com) —— 免费高清图片
+* [机器学习](http://ml.apachecn.org/mlia/) —— 机器学习基础知识
