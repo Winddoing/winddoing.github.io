@@ -208,6 +208,12 @@ $echo -n '123456' | md5sum
 e10adc3949ba59abbe56e057f20f883e  -
 ```
 
+## 查看硬盘型号和序列号
+
+``` shell
+sudo hdparm -i /dev/sda
+```
+
 ## 参考
 
 1. [minicom中文手册](https://www.cnblogs.com/my-blog/archive/2008/12/10/1351753.html)
