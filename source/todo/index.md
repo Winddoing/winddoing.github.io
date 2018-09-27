@@ -27,3 +27,4 @@ comments: true
 * [网络协议报文格式查询](http://support.huawei.com/onlinetoolsweb/einfofinder/PacketFormat?module=6&lang=zh) —— 华为设备为主
 * [pixabay](https://pixabay.com) —— 免费高清图片
 * [机器学习](http://ml.apachecn.org/mlia/) —— 机器学习基础知识
+* [.gitignore生成工具](https://www.codingsky.com/gitignore) —— 各种语音的`.gitignore`

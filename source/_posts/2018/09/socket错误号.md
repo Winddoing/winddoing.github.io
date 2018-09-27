@@ -184,12 +184,109 @@ int main(void)
 * include/uapi/asm-generic/errno.h/[_ASM_GENERIC_ERRNO_H](https://elixir.bootlin.com/linux/latest/source/include/uapi/asm-generic/errno.h)
 > Linux内核中的位置
 
-### 111：ECONNREFUSED
+### 111： ECONNREFUSED
+
+> A connect() on a stream socket found no one listening on the remote address.
+
+> From: `man connect`
+
+1. 拒绝连接。一般发生在连接建立时
+    - 拔服务器端网线测试，客户端设置keep alive时，recv较快返回0， 先收到ECONNREFUSED (Connection refused)错误码，其后都是ETIMEOUT。
+
+2. an error returned from connect(), so it can only occur in a client(if a client is defined as the party that initiates the connection
 
 > 场景：使用UDP在进程间socket通信，`sendto`发送消息时，返回错误，错误号为`111`.
 
-1. 拒绝连接。一般发生在连接建立时
+对端的socket没有进行接收所致。
 
-拔服务器端网线测试，客户端设置keep alive时，recv较快返回0， 先收到ECONNREFUSED (Connection refused)错误码，其后都是ETIMEOUT。
+### 115: EINPROGRESS
 
-2、an error returned from connect(), so it can only occur in a client(if a client is defined as the party that initiates the connection
+>The socket is `nonblocking` and the connection cannot be completed immediately. It is possible to `select(2)` or `poll(2)` for completion by selecting the socket for `writing`. After select(2) indicates writability, use getsockopt(2) to read the SO_ERROR option at level SOL_SOCKET to determine whether connect() completed successfully (SO_ERROR is zero) or unsuccessfully (SO_ERROR is one of the usual error codes listed here, explaining the reason for the failure).
+
+> From: `man connect`
+
+- 非阻塞的socket，connect调用后立即返回，连接过程还在执行
+
+> 场景： TCP连接中进行`connect`错误后，返回值：`-1`，错误号：`115`
+
+``` C
+int connect_timeout(int fd, struct sockaddr_in *addr, unsigned int wait_seconds)
+{
+	int ret;
+	socklen_t addrlen = sizeof(struct sockaddr_in);
+
+	if (wait_seconds > 0)
+		activate_nonblock(fd);	//设为非阻塞
+
+	ret = connect(fd, (struct sockaddr*)addr, addrlen);
+	if (ret < 0 && errno == EINPROGRESS) {
+		struct timeval timeout;
+		fd_set write_fdset;
+
+		FD_ZERO(&write_fdset);
+		FD_SET(fd, &write_fdset);
+
+		timeout.tv_sec = wait_seconds;
+		timeout.tv_usec = 0;
+
+		do {
+			ret = select(fd + 1, NULL, &write_fdset, NULL, &timeout);
+		} while (ret < 0 && errno == EINTR);
+
+		if (ret == 0) {
+			ret = -1;
+			errno = ETIMEDOUT;
+			printf("%s:%d, select error[%d]:%s, ret=%d\n", __func__, __LINE__, errno, strerror(errno), ret);
+		} else if (ret < 0) {
+			printf("%s:%d, select error[%d]:%s, ret=%d\n", __func__, __LINE__, errno, strerror(errno), ret);
+			return -1;
+		} else if (ret == 1) {
+			int err;
+			socklen_t socklen = sizeof(err);
+			ret = getsockopt(fd, SOL_SOCKET, SO_ERROR, &err, &socklen);
+			if (ret == -1) {
+				printf("%s:%d, getsockopt error[%d]:%s, ret=%d\n", __func__, __LINE__, errno, strerror(errno), ret);
+				return -1;
+			}
+			if (err == 0) {
+				ret = 0; //success
+			} else {
+				errno = err;
+				ret = -1;
+				printf("%s:%d, getsockopt error[%d]:%s, ret=%d\n", __func__, __LINE__, errno, strerror(errno), ret);
+			}
+		}
+	}
+	if (wait_seconds > 0) {
+		deactivate_nonblock(fd);	//设回阻塞
+	}
+	return ret;
+}
+
+int net_set_nonblocking(int sock)                      
+{                                                      
+    int flags, res;                                    
+
+    flags = fcntl(sock, F_GETFL, 0);                   
+    if (flags < 0) {                                   
+        flags = 0;                                     
+    }                                                  
+
+    res = fcntl(sock, F_SETFL, flags | O_NONBLOCK);    
+    if (res < 0) {                                     
+        printf("fcntl return err:%d!\n", res);         
+        return -1;                                     
+    }                                                  
+
+    return 0;                                          
+}                                                      
+```
+
+
+### 4: EINTR
+
+``` C
+do {            
+    n = recv(new_fd, buff, 500, 0);       
+} while (n < 0 && errno == EINTR);
+```

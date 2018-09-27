@@ -148,3 +148,14 @@ gsettings set org.gnome.gedit.preferences.encodings candidate-encodings "['GB180
 ## Albert
 
 全局搜索软件
+
+## 数据库:sqlitebrowser
+
+- 官网地址：[http://sqlitebrowser.org/](http://sqlitebrowser.org/)
+- 开源地址：[https://github.com/sqlitebrowser/sqlitebrowser](https://github.com/sqlitebrowser/sqlitebrowser)
+
+DB Browser for SQLite (DB4S) 是一款面向开发者的高质量的，可视化的开源的工具，他可以创建，设计，以及修改SQlite数据库。
+
+```
+sudo apt-get install sqlitebrowser
+```
