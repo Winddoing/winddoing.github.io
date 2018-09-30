@@ -99,7 +99,11 @@ extern void pthread_exit (void *__retval) __attribute__ ((__noreturn__));
    __THROW.  */
 extern int pthread_join (pthread_t __th, void **__thread_return);
 ```
-用于等待某个线程退出，成功返回0，否则返回Exxx（为正数）。
+> 以`阻塞`的方式等待thread指定的线程结束。当函数返回时，被等待线程的资源被收回。如果线程已经结束，那么该函数会立即返回。并且thread指定的线程必须是joinable的。
+
+作用：
+- 主线程等待子线程的终止
+- 在子线程调用了`pthread_join()``方法后面的代码，只有等到子线程结束了才能执行。
 
 ### pthread_detach
 
@@ -112,6 +116,62 @@ extern int pthread_detach (pthread_t __th) __THROW;
 ```
 用于是指定线程变为分离状态，就像进程脱离终端而变为后台进程类似。成功返回0，否则返回Exxx（为正数）。变为分离状态的线程，如果线程退出，它的所有资源将全部释放。而如果不是分离状态，线程必须保留它的线程ID，退出状态直到其它线程对它调用了pthread_join。
 
+
+### pthread_self
+
+``` C
+/* Obtain the identifier of the current thread.  */                             
+extern pthread_t pthread_self (void) __THROW __attribute__ ((__const__));       
+```
+获取线程自身的ID，该id由线程库维护，其id空间是各个进程独立的（即不同进程中的线程可能有相同的id）。
+
+- 比较两个线程ID
+``` C
+/* Compare two thread identifiers.  */                                  
+extern int pthread_equal (pthread_t __thread1, pthread_t __thread2)     
+  __THROW __attribute__ ((__const__));                                  
+```
+
+### 线程属性
+
+线程属性结构体`pthread_attr_t`
+
+``` C
+typedef struct{
+    int etachstate;     //线程的分离状态
+    int schedpolicy;    //线程的调度策略
+    struct　sched schedparam;//线程的调度参数
+    int inheritsched;   //线程的继承性
+    int scope;          //线程的作用域
+    size_t guardsize;   //线程栈末尾的警戒缓冲区大小
+    int stackaddr_set;  //线程栈的设置
+    void* stackaddr;    //线程栈的启始位置
+    size_t stacksize;   //线程栈大小
+}pthread_attr_t;
+```
+
+- 操作接口函数：
+
+``` C
+/* Initialize thread attribute *ATTR with default attributes                          
+   (detachstate is PTHREAD_JOINABLE, scheduling policy is SCHED_OTHER,                
+    no user-provided stack).  */                                                      
+extern int pthread_attr_init (pthread_attr_t *__attr) __THROW __nonnull ((1));        
+
+/* Destroy thread attribute *ATTR.  */                                                
+extern int pthread_attr_destroy (pthread_attr_t *__attr)                              
+     __THROW __nonnull ((1));                                                         
+
+/* Get detach state attribute.  */                                                    
+extern int pthread_attr_getdetachstate (const pthread_attr_t *__attr,                 
+                    int *__detachstate)                                               
+     __THROW __nonnull ((1, 2));                                                      
+
+/* Set detach state attribute.  */                                                    
+extern int pthread_attr_setdetachstate (pthread_attr_t *__attr,                       
+                    int __detachstate)                                                
+     __THROW __nonnull ((1));                                                         
+```
 
 ### 线程之间互斥
 
@@ -164,8 +224,8 @@ extern int pthread_mutex_setprioceiling (pthread_mutex_t *__restrict __mutex,
 
 ### 线程同步
 
-条件变量：
-> 使用条件变量可以以原子方式阻塞线程，直到某个特定条件为真为止。条件变量始终与互斥锁一起使用。对条件的测试是在互斥锁（互斥）的保护下进行的。如果条件为假，线程通常会基于条件变量阻塞，并以原子方式释放等待条件变化的互斥锁。
+信号量：
+> 使用条件变量（信号量）可以以原子方式阻塞线程，直到某个特定条件为真为止。条件变量始终与互斥锁一起使用。对条件的测试是在互斥锁（互斥）的保护下进行的。如果条件为假，线程通常会基于条件变量阻塞，并以原子方式释放等待条件变化的互斥锁。
 
 ``` C
 /* Functions for handling conditional variables.  */
@@ -215,6 +275,140 @@ extern int pthread_cond_timedwait (pthread_cond_t *__restrict __cond,
 ``` C
 int pthread_cond_broadcast (pthread_cond_t *__cond)
 ```
+
+### pthread_barrier_xxx
+
+线程同步，`pthread_barrier_*`其实只做且只能做一件事，就是充当栏杆（barrier意为栏杆)。形象的说就是把先后到达的多个线程挡在同一栏杆前，直到所有线程到齐，然后撤下栏杆同时放行。
+
+``` C
+/* Initialize BARRIER with the attributes in ATTR.  The barrier is        
+   opened when COUNT waiters arrived.  */                                 
+extern int pthread_barrier_init (pthread_barrier_t *__restrict __barrier,
+                 const pthread_barrierattr_t *__restrict                  
+                 __attr, unsigned int __count)                            
+     __THROW __nonnull ((1));                                             
+
+/* Destroy a previously dynamically initialized barrier BARRIER.  */      
+extern int pthread_barrier_destroy (pthread_barrier_t *__barrier)         
+     __THROW __nonnull ((1));                                             
+
+/* Wait on barrier BARRIER.  */                                           
+extern int pthread_barrier_wait (pthread_barrier_t *__barrier)            
+     __THROWNL __nonnull ((1));                                           
+```
+1. init函数负责指定要等待的线程个数
+2. wait()函数由每个线程主动调用，它告诉栏杆“我到起跑线前了”。
+    - wait(）执行末尾栏杆会检查是否所有人都到栏杆前了
+    - 如果是，栏杆就消失所有线程继续执行下一句代码
+    - 如果不是，则所有已到wait()的线程等待，剩下没执行到wait()的线程继续执行
+3. destroy函数释放init申请的资源。
+
+应用场景：
+> 比如A和B两人相约在某一个地点C集合去打猎，A和B都知道地方C，但是他们到达的时间不确定，因此谁先到就需要在C点等。
+
+### pthread_once
+
+``` C
+/* Guarantee that the initialization function INIT_ROUTINE will be called
+   only once, even if pthread_once is executed several times with the     
+   same ONCE_CONTROL argument. ONCE_CONTROL must point to a static or     
+   extern variable initialized to PTHREAD_ONCE_INIT.                      
+
+   The initialization functions might throw exception which is why        
+   this function is not marked with __THROW.  */                          
+extern int pthread_once (pthread_once_t *__once_control,                  
+             void (*__init_routine) (void)) __nonnull ((1, 2));
+```
+
+pthread_once能够保证`__init_routine`只被调用一次，具体在哪个线程中执行是不定的
+
+
+- 用法:
+``` C
+pthread_once_t once=PTHREAD_ONCE_INIT;
+{
+    ...
+    pthread_once(&once,once_init_routine);
+}
+```
+
+## 线程私有数据Thread Specific Data (TSD)
+
+在单线程程序中，我们经常使用 “全局变量” 以实现多个函数间共享数据，在多线程环境下，由于数据空间是共享的，因此全局变量也为所有线程所共享。但有时应用程序设计中有必要提供`线程私有的全局变量`，仅在某个线程中有效，但却可以跨多个函数访问
+
+``` C
+/* Functions for handling thread-specific data.  */                             
+
+/* Create a key value identifying a location in the thread-specific             
+   data area.  Each thread maintains a distinct thread-specific data            
+   area.  DESTR_FUNCTION, if non-NULL, is called with the value                 
+   associated to that key when the key is destroyed.                            
+   DESTR_FUNCTION is not called if the value associated is NULL when            
+   the key is destroyed.  */                                                    
+extern int pthread_key_create (pthread_key_t *__key,                            
+                   void (*__destr_function) (void *))                           
+     __THROW __nonnull ((1));                                                   
+
+/* Destroy KEY.  */                                                             
+extern int pthread_key_delete (pthread_key_t __key) __THROW;                    
+
+/* Return current value of the thread-specific data slot identified by KEY.  */
+extern void *pthread_getspecific (pthread_key_t __key) __THROW;                 
+
+/* Store POINTER in the thread-specific data slot identified by KEY. */         
+extern int pthread_setspecific (pthread_key_t __key,                            
+                const void *__pointer) __THROW ;
+```
+
+
+## 数据结构
+
+> /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h
+
+``` C
+/* Thread identifiers.  The structure of the attribute type is not             
+   exposed on purpose.  */                                                     
+typedef unsigned long int pthread_t;                                           
+
+
+/* Keys for thread-specific data */                                            
+typedef unsigned int pthread_key_t;                                            
+
+
+/* Once-only execution */                                                      
+typedef int __ONCE_ALIGNMENT pthread_once_t;                                   
+
+union pthread_attr_t                            
+{                                               
+  char __size[__SIZEOF_PTHREAD_ATTR_T];         
+  long int __align;                             
+};                                              
+#ifndef __have_pthread_attr_t                   
+typedef union pthread_attr_t pthread_attr_t;    
+# define __have_pthread_attr_t 1                
+#endif                                          
+
+
+typedef union                                   
+{                                               
+  struct __pthread_mutex_s __data;              
+  char __size[__SIZEOF_PTHREAD_MUTEX_T];        
+  long int __align;                             
+} pthread_mutex_t;                              
+
+
+typedef union                                   
+{                                               
+  struct __pthread_cond_s __data;               
+  char __size[__SIZEOF_PTHREAD_COND_T];         
+  __extension__ long long int __align;          
+} pthread_cond_t;                               
+```
+
+## 示例
+
+- [pthread.c](https://raw.githubusercontent.com/Winddoing/CodeWheel/master/C/pthread/pthread.c)
+- [threadpool](https://github.com/Winddoing/CodeWheel/tree/master/C/pthread/threadpool)
 
 ## 参考
 
