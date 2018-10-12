@@ -48,23 +48,23 @@ sckey  size 256world
 struct spl_struct {                                     
     int len;                                            
     int enc_type;                                       
-                                                        
+
     int n_bit;                                          
     int ku_bit;                                         
     int rsa_enc_type;                                   
     /* pad to 2048bit.:256Bytes:64words*/               
     int reserved_0[64 - 5];                             
-                                                        
+
     int key_n[32];                                      
     int reserved_1[64 - 32];                            
     /*pad to 2048bit:256Bytes*/                         
     int key_ku[32];                                     
     /*pad to 2048bit:256Bytes*/                         
     int reserved_2[64 - 32];                            
-                                                        
+
     int spl_md5_sig_kr_enc[32];                         
     /*pad to 2048bit:256Bytes*/                         
-                                                        
+
     /*SPL BIN ....*/                                    
 };                                                      
 ```
@@ -126,12 +126,12 @@ md5 :  md 0xb3422b10
 
 ### default
 
-check nku md5: 
+check nku md5:
 
 x2000# md 0xb3422b10
 b3422b10: 69cfa45b 18a1eb8d 6c62fba9 da051983
 
-pc: 
+pc:
 
 key md5 0x69cfa45b
 key md5 0x18a1eb8d
@@ -140,10 +140,10 @@ key md5 0xda051983
 
 ### add nku
 
-check nku md5: 
+check nku md5:
 
 x2000# md 0xb3422b10
-b3422b10: 69895b40 5f783fa2 edaf882e 5ea0f9f7 
+b3422b10: 69895b40 5f783fa2 edaf882e 5ea0f9f7
 
 pc:
 
@@ -223,18 +223,18 @@ key md5 0x5ea0f9f7
 [2017-12-14 10:25:45] execpt data 0x7241ec44,0x41196d8d,0xaf30da74,0xad04f282
 
 
-user@ingenic-wqshao:~/seckey$ ./aes_c aes userkey
-0x7241ec44, 0x41196d8d, 0xaf30da74, 0xad04f282, 
+user@ingenic-xxx:~/seckey$ ./aes_c aes userkey
+0x7241ec44, 0x41196d8d, 0xaf30da74, 0xad04f282,
 RAND_SEED = 7554
-0x0614a2e1, 0xe568645f, 0xb9f7efa7, 0x745c5c40, 
+0x0614a2e1, 0xe568645f, 0xb9f7efa7, 0x745c5c40,
 RAND_SEED = 7554
-0x7241ec44, 0x41196d8d, 0xaf30da74, 0xad04f282, 
+0x7241ec44, 0x41196d8d, 0xaf30da74, 0xad04f282,
 
 
 ## scboot
 
 
-1. 
+1.
 
 ```
   TCSM                              eFuse
@@ -261,7 +261,7 @@ RAND_SEED = 7554
 +-------+           v            +----------+
 ```
 
-2. 
+2.
 
 ```
           +------------+    +----------+

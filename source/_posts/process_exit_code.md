@@ -116,12 +116,12 @@ This is father, his count is: 1 (0x7fff19658714), his pid is: 4017, son exit sta
 ``` shell
 =====>$./a.out &
 [1] 4066
-00:11 [wqshao@machine]~/work/MyCode/systemcall/test
+00:11 [xxx@machine]~/work/MyCode/systemcall/test
 =====>$pid=4067
 pid=0
 This is son, his count is: 2 (0x7ffe19987d04). and his pid is: 4067
 
-00:11 [wqshao@machine]~/work/MyCode/systemcall/test
+00:11 [xxx@machine]~/work/MyCode/systemcall/test
 =====>$kill 4067
 This is father, his count is: 1 (0x7ffe19987d04), his pid is: 4066, son exit status: 15[0000000f]
 ```
