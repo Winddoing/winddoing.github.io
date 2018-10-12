@@ -67,15 +67,26 @@ mkdir -p repos/manifest
 ```
 > file: default.xml
 
+#### xml文件语法
 * `remote`: 设置服务器端的路径和名称
     - `name`: 服务器端名称
     - `fetch`：指repo仓库服务器端所在的位置，可以是远程，也可以是本地，测试使用本地
+    ```
+    $ git remote -v
+    origin	/home/xxx/test/repo-test/server/repos/test1 (fetch)
+    origin	/home/xxx/test/repo-test/server/repos/test1 (push)
+    ```
 * `default`: 设置服务器端名和分支名
     - `remote`: 服务器端名称（与`remote`中的name相同）
     - `revision`: 分支名
+    - ` sync-j`： 指定在sync操作时的线程数，（sync-j="4"）
 * `project`: 设置repo管理的git仓库
     - `name`： git仓库服务端（远端）的名字
-    - `path` ： clone到本地的名字
+    - `path`： clone到本地的名字
+    - `revision`： 指定需要获取的git提交点，可以定义成固定的branch，或者是明确的commit哈希值
+    ```
+    <project name="test1" path="test1" revision="088216c4e32e"/>
+    ```
 
 #### 初始化仓库
 
