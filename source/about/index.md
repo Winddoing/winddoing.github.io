@@ -1,7 +1,7 @@
 ---
-title: About
+title: 关于
 date: 2016-08-18 23:07:24
-comments: false
+comments: true
 ---
 
 {% centerquote %}
@@ -11,23 +11,16 @@ comments: false
 
 {% centerquote %} ### 涸辙遗鲋，旦暮成枯；人而无志，与彼何殊 ### {% endcenterquote %}
 
-{% centerquote %} 自由之地，书我所想，记我所需 {% endcenterquote %}
 
 {% tabs about author %}
 <!-- tab 博主相关@user -->
+
+{% centerquote %} 自由之地，书我所想，记我所需 {% endcenterquote %}
 
 email,qq,github and more...
 <!-- endtab -->
 
 <!-- tab 站点相关@home -->
-xxx
-<!-- endtab -->
-
-<!-- tab ️🌱 友情链接 -->
-暂时没有友链哟
-<!-- endtab -->
-{% endtabs %}
-
 
 * 2013.04: 第一次接触博客[Chinaunix](http://blog.chinaunix.net/uid/28769209/year-201304-list-1.html)。
 * 2013.09: 第二次[CSDN](https://blog.csdn.net/sdreamq)---由于Chinaunix中文章的排版不方便，选择了CSDN。
@@ -41,6 +34,14 @@ xxx
 * 至今依旧： ***使用，简单方便，升级主要是当时博客出现问题。***
 
 - winddoing@sina.cn #【[BOOK](../books)】#【[ANA](../ana)】#【[MUSIC](../music)】
+
+<!-- endtab -->
+
+<!-- tab ️🌱 友情链接 -->
+暂时没有友链哟
+<!-- endtab -->
+{% endtabs %}
+
 
 
 ## 网站配置
