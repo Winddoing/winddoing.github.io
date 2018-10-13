@@ -35,6 +35,7 @@ cache:
     directories:
         - node_modules
 script:
+    - ./auto_init.sh
     - hexo clean
     - hexo generate
 
