@@ -4,12 +4,12 @@ date: 2016-08-18 23:07:24
 comments: true
 ---
 
+{% centerquote %} ### 涸辙遗鲋，旦暮成枯；人而无志，与彼何殊 ### {% endcenterquote %}
+
 {% centerquote %}
 <!-- 站点运行时间 -->
 <div id="days"></div>
 {% endcenterquote %}
-
-{% centerquote %} ### 涸辙遗鲋，旦暮成枯；人而无志，与彼何殊 ### {% endcenterquote %}
 
 
 {% tabs about author %}
@@ -17,7 +17,6 @@ comments: true
 
 {% centerquote %} 自由之地，书我所想，记我所需 {% endcenterquote %}
 
-email,qq,github and more...
 <!-- endtab -->
 
 <!-- tab 站点相关@home -->
@@ -48,6 +47,11 @@ email,qq,github and more...
 
 * [hexo的next主题个性化教程：打造炫酷网站](https://blog.csdn.net/qq_33699981/article/details/72716951)
 * [DaoVoice](https://dashboard.daovoice.io/app/a28f1641/users?segment=all-users)
+
+
+
+
+
 
 
 <script>
