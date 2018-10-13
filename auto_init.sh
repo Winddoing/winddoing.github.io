@@ -4,10 +4,11 @@
 # Description	:
 ##########################################################
 #!/bin/bash
+PWD=`pwd`
 
+echo "Current path: $PWD"
 
 sz=`du -sh`
-
-echo "size: $sz"
+echo "Data size: $sz"
 
 sed -i "s/xxx/$sz/g" `grep -l xxx source/about/index.md`
