@@ -29,6 +29,7 @@ install:
     - npm install --save hexo-filter-sequence
     - npm install --save hexo-autonofollow
     - npm install --save hexo-abbrlink
+    - npm install --save hexo-wordcount                 #字数统计
 
 cache:
     directories:
