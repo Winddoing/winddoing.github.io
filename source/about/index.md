@@ -9,6 +9,9 @@ comments: false
 <div id="days"></div>
 {% endcenterquote %}
 
+{% centerquote %} ### 涸辙遗鲋，旦暮成枯；人而无志，与彼何殊 ### {% endcenterquote %}
+
+{% centerquote %} 自由之地，书我所想，记我所需 {% endcenterquote %}
 
 {% tabs about author %}
 <!-- tab 博主相关@user -->
@@ -25,9 +28,6 @@ xxx
 <!-- endtab -->
 {% endtabs %}
 
-{% centerquote %} ### 涸辙遗鲋，旦暮成枯；人而无志，与彼何殊 ### {% endcenterquote %}
-
-{% centerquote %} 自由之地，书我所想，记我所需 {% endcenterquote %}
 
 * 2013.04: 第一次接触博客[Chinaunix](http://blog.chinaunix.net/uid/28769209/year-201304-list-1.html)。
 * 2013.09: 第二次[CSDN](https://blog.csdn.net/sdreamq)---由于Chinaunix中文章的排版不方便，选择了CSDN。
@@ -78,4 +78,4 @@ function setzero(i){
 }
 
 show_date_time();
-</script>>)}
+</script>
