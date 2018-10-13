@@ -23,8 +23,13 @@ comments: true
 * [在线秒表](http://cube.smmous.com/)【[window](https://pan.baidu.com/s/1jaSLV9ldNSgb1uwnIlIT5A)】 —— 方便测试
 * [EasyEDA](https://easyeda.com/editor#id=817e5fbef04e4725bb8c6f2c6f4d4b25|65379c4ec9e14037a2ee8c095c02632a) —— 在线画电路原理图
 * [CHM to PDF](https://www.zamzar.com/convert/chm-to-pdf/?yyue=a21bo.50862.201879#tool) —— 在线文件转换（chm2pdf）
+* [convert epub to pdf](https://cloudconvert.com/epub-to-pdf) —— 在线将epub转换pdf
 * [在线文档查询](https://devdocs.io/) —— 各类语言工具的文档
 * [网络协议报文格式查询](http://support.huawei.com/onlinetoolsweb/einfofinder/PacketFormat?module=6&lang=zh) —— 华为设备为主
 * [pixabay](https://pixabay.com) —— 免费高清图片
 * [机器学习](http://ml.apachecn.org/mlia/) —— 机器学习基础知识
 * [.gitignore生成工具](https://www.codingsky.com/gitignore) —— 各种语音的`.gitignore`
+* [CPP 在线帮助](http://www.cplusplus.com/reference/ )
+* [Linux命令手册](http://linux.51yip.com/)
+* [高级Bash脚本编程指南](http://manual.51yip.com/shell/) —— shell编程
+* [epub电子书在线阅读](http://www.neat-reader.cn/app#/)|[&A](http://www.nicetool.net/embed/epub_reader.html)|
