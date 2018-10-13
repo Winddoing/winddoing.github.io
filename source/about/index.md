@@ -4,26 +4,24 @@ date: 2016-08-18 23:07:24
 comments: false
 ---
 
-{% cq %}
+{% centerquote %}
 <!-- 站点运行时间 -->
 <div id="days"></div>
-{% endcq %}
+{% endcenterquote %}
 
 
 {% tabs about author %}
 <!-- tab 博主相关@user -->
 
-## 联系
 email,qq,github and more...
 <!-- endtab -->
 
 <!-- tab 站点相关@home -->
-## 站点及插件版本
+xxx
 <!-- endtab -->
 
 <!-- tab ️🌱 友情链接 -->
-暂时没有友链哟 `(ﾉ*･ω･)ﾉ～`
-想添加友链可以在下方留言~
+暂时没有友链哟
 <!-- endtab -->
 {% endtabs %}
 
