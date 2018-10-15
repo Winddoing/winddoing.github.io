@@ -10,7 +10,8 @@ echo "Current path: $PWD"
 
 echo "Current dirs:"
 ls
-tree -L 2
+
+du
 
 sz=`du -sh . | awk '{print $1}'`
 echo "Data size: $sz"
