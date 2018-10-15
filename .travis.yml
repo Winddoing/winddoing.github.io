@@ -10,7 +10,7 @@ before_install:
     - npm install
     - npm install -g hexo
     - npm install -g hexo-cli
-    - npm install gulp
+    - npm install -g gulp
 
 before_script:
     - git config --global user.name 'Winddoing' #设置github用户名
@@ -31,9 +31,11 @@ install:
     - npm install --save hexo-autonofollow
     - npm install --save hexo-abbrlink
     - npm install --save hexo-wordcount                 #字数统计
-    - npm install --save-dev babel-cli
-    - npm install --save-dev babel-preset-es2015
-    - npm install --save-dev gulp-minify-css gulp-babel gulp-uglify gulp-htmlmin gulp-htmlclean
+    - npm install --save gulp-minify-css
+    - npm install --save gulp-uglify
+    - npm install --save gulp-htmlmin
+    - npm install --save gulp-htmlclean
+    - npm install --save gulp-imagemin
 
 cache:
     directories:
