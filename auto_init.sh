@@ -8,7 +8,11 @@ PWD=`pwd`
 
 echo "Current path: $PWD"
 
-sz=`du -sh`
+echo "Current dirs:"
+ls
+tree -L 2
+
+sz=`du -sh . | awk '{print $1}'`
 echo "Data size: $sz"
 
 sed -i "s/xxx/$sz/g" `grep -l xxx source/about/index.md`
