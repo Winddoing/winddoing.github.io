@@ -48,7 +48,7 @@ footer:
   since: 2014
 
   # Icon between year and copyright info.
-  icon: at
+  icon: heart
 
   # If not defined, will be used `author` from Hexo main config.
   copyright:
