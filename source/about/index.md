@@ -35,7 +35,7 @@ comments: true
 - winddoing@sina.cn #【[BOOK](../books)】#【[ANA](../ana)】#【[MUSIC](../music)】
 
 {% note success %}
-网站源码数据包大小：xxx
+网站源码数据包大小：xxxM
 {% endnote %}
 
 <!-- endtab -->

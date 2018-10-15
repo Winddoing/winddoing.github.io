@@ -7,13 +7,13 @@
 PWD=`pwd`
 
 echo "Current path: $PWD"
-
 echo "Current dirs:"
 ls
 
-du
+node_modules_sz=`du -sh ./node_modules | awk '{print $1}'`
+all_sz=`du -sh  $SRC_DIR | awk '{print int($1)}'`
+sz=$(($all_sz-$node_modules_sz))
 
-sz=`du -sh . | awk '{print $1}'`
 echo "Data size: $sz"
 
 sed -i "s/xxx/$sz/g" `grep -l xxx source/about/index.md`
