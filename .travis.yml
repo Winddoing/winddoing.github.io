@@ -10,6 +10,7 @@ before_install:
     - npm install
     - npm install -g hexo
     - npm install -g hexo-cli
+    - npm install gulp
     - npm install -g gulp
 
 before_script:
