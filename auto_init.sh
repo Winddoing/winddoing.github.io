@@ -14,6 +14,7 @@ node_modules_sz=`du -sh ./node_modules | awk '{print int($1)}'`
 all_sz=`du -sh  $SRC_DIR | awk '{print int($1)}'`
 sz=$(($all_sz-$node_modules_sz))
 
+echo "all size: $all_sz, node_modules size: $node_modules_sz"
 echo "Data size: $sz"
 sed -i "s/xxx/$sz/g" `grep -l xxx source/about/index.md`
 
