@@ -8,10 +8,9 @@ branches:
 before_install:
     - export TZ='Asia/Shanghai'  # 设置时区
     - npm install
-    - npm install -g hexo
-    - npm install -g hexo-cli
-    - npm install gulp
-    - npm install -g gulp
+    - npm install hexo -g
+    - npm install hexo-cli -g
+    - npm install gulp -g
 
 before_script:
     - git config --global user.name 'Winddoing' #设置github用户名
