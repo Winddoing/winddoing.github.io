@@ -6,14 +6,8 @@ comments: true
 
 {% centerquote %} ### 涸辙遗鲋，旦暮成枯；人而无志，与彼何殊 ### {% endcenterquote %}
 
-{% tabs about author %}
-<!-- tab 博主相关@user -->
-
 {% centerquote %} 自由之地，书我所想，记我所需 {% endcenterquote %}
 
-<!-- endtab -->
-
-<!-- tab 站点相关@home -->
 
 * 2013.04: 第一次接触博客[Chinaunix](http://blog.chinaunix.net/uid/28769209/year-201304-list-1.html)。
 * 2013.09: 第二次[CSDN](https://blog.csdn.net/sdreamq)---由于Chinaunix中文章的排版不方便，选择了CSDN。
@@ -31,14 +25,6 @@ comments: true
 {% note success %}
 网站构建，源码数据包大小：`xxxM`; 构建时间：`xdate`; 当前构建状态：<img src='https://travis-ci.org/Winddoing/Winddoing.github.io.svg?branch=web_source' align='right'/>
 {% endnote %}
-
-<!-- endtab -->
-
-<!-- tab ️友情链接@link -->
-暂时没有友链哟
-<!-- endtab -->
-{% endtabs %}
-
 
 
 ## 网站配置
