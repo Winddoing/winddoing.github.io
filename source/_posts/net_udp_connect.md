@@ -57,9 +57,9 @@ do {
 2. 高并发服务中会增加系统稳定性.
 >原因: ???
 >
->假设client A 通过非connect的UDP与server B,C通信.B,C提供相同服务.为了负载均衡,我们让A与B,C交替通信.A 与 B通信IPa:PORTa <----> IPb:PORTb；
+>假设client A 通过非connect的UDP与server B,C通信.B,C提供相同服务.为了负载均衡,我们让A与B,C交替通信.A 与 B通信IPa:PORTa ---- IPb:PORTb；
 >
->A 与 C通信IPa:PORTa' <---->IPc:PORTc
+>A 与 C通信IPa:PORTa'--- IPc:PORTc
 >
 >假设PORTa 与 PORTa'相同了(在大并发情况下会发生这种情况),那么就有可能出现A等待B的报文,却收到了C的报文.导致收报错误.解决方法内就是采用connect的UDP通信方式.在A中创建两个udp,然后分别connect到B,C.
 

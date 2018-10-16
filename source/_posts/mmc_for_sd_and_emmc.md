@@ -23,10 +23,10 @@ Linux MMC子系统主要分成三个部分：
 ## 代码结构
 
 ```
-.                                  
-├── card                                        
-├── core                           
-└── host                 
+.
+├── card
+├── core
+└── host
 ```
 MMC子系统代码主要在drivers/mmc目录下，共有三个目录：
 
@@ -125,8 +125,8 @@ unsigned long		private[0] ____cacheline_aligned;
 
 注：
 
-S----start 起始位<0>  
-E----end   结束位<1>  
+- S: start 起始位[0]
+- E: end   结束位[1]
 
 | status | 说明 |
 | ------ | ---- |
