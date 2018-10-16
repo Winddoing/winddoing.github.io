@@ -17,7 +17,7 @@ comments: false
 	query.descending('time');
 	query.limit(1000);
 	query.find().then(function (todo) {
-	for (var i=0;i<20;i++){
+	for (var i=0;i<100;i++){
 		var result=todo[i].attributes;
 		time=result.time;
 		title=result.title;
