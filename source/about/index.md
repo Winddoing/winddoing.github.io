@@ -20,7 +20,7 @@ comments: true
 * 2018.07: 添加[DaoVoice](http://www.daovoice.io)和开通打赏功能.
 * 至今依旧： ***使用，简单方便，升级主要是当时博客出现问题。***
 
-- winddoing@sina.cn #【[BOOK](../books)】#【[ANA](../ana)】#【[MUSIC](../music)】
+- winddoing@sina.cn #【[BOOK](../books)】#【[ANA](../ana)】#【[MUSIC](../music)】#【[阅读排行](../top)】
 
 {% note success %}
 网站构建，源码数据包大小：`xxxM`; 构建时间：`xdate`; 当前构建状态：<img src='https://travis-ci.org/Winddoing/Winddoing.github.io.svg?branch=web_source' align='right'/>
