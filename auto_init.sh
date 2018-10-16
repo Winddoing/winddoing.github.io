@@ -23,3 +23,5 @@ sed -i "s/xxx/$sz/g" `grep -l xxx source/about/index.md`
 xdate=`date +%Y.%m.%d-%H:%M:%S`
 echo "Current time: $xdate"
 sed -i "s/xdate/$xdate/g" `grep -l xdate source/about/index.md`
+
+echo "exit. path: $PWD"
