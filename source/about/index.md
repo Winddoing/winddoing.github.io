@@ -18,6 +18,7 @@ comments: true
 * 2017.07: 升级主题`next v5.1.1`。
 * 2018.02: 升级主题`next v5.1.4`。
 * 2018.07: 添加[DaoVoice](http://www.daovoice.io)和开通打赏功能.
+* 2018.09: 添加[CNZZ统计](http://www.cnzz.com/stat/website.php?web_id=1254703532)
 * 至今依旧： ***使用，简单方便，升级主要是当时博客出现问题。***
 
 - winddoing@sina.cn #【[BOOK](../books)】#【[ANA](../ana)】#【[MUSIC](../music)】#【[阅读排行](../top)】
@@ -32,4 +33,3 @@ comments: true
 * [hexo的next主题个性化教程：打造炫酷网站](https://blog.csdn.net/qq_33699981/article/details/72716951)
 * [DaoVoice](https://dashboard.daovoice.io/app/a28f1641/users?segment=all-users)
 * [小图标](https://fontawesome.com/icons?from=io)
-
