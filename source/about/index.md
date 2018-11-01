@@ -24,9 +24,10 @@ comments: true
 - winddoing@sina.cn #【[BOOK](../books)】#【[ANA](../ana)】#【[MUSIC](../music)】#【[阅读排行](../top)】
 
 {% note success %}
-网站构建，源码数据包大小：`xxxM`; 构建时间：`xdate`; 当前构建状态：<img src='https://travis-ci.org/Winddoing/Winddoing.github.io.svg?branch=web_source' align='right'/>
+网站构建，源码数据包大小：`xxxM`; 构建时间：`xdate`;
 {% endnote %}
 
+{% centerquote %} [![Build Status](https://travis-ci.org/Winddoing/Winddoing.github.io.svg?branch=web_source)](https://travis-ci.org/Winddoing/Winddoing.github.io) {% endcenterquote %}
 
 ## 网站配置
 
