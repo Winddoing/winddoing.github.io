@@ -21,7 +21,7 @@ comments: true
 * 2018.09: 添加[CNZZ统计](http://www.cnzz.com/stat/website.php?web_id=1254703532)
 * 至今依旧： ***使用，简单方便，升级主要是当时博客出现问题。***
 
-- winddoing@sina.cn #【[BOOK](../books)】#【[ANA](../ana)】#【[MUSIC](../music)】#【[阅读排行](../top)】
+- winddoing@sina.cn #【[BOOK](../books)】#【[ANA](../ana)】#【[MUSIC](../music)】#【[阅读排行](../top)】#【[常用软件](../software)】
 
 {% note success %}
 网站构建，源码数据包大小：`xxxM`; 构建时间：`xdate`;
