@@ -28,4 +28,4 @@ comments: false
 
 {% note warning %} 「他强任他强，清风拂山岗；他横任他横，明月照大江」  —— 金庸{% endnote %}
 
-{% note danger %} Content (md partial supported) {% endnote %}
+{% note danger %} 趁年少去探求知识吧，它将弥补由于年老而带来的亏损。智慧乃是老年的精神养料，所以年轻时应该努力，这样，老了才不致空虚。 ——达·芬奇 {% endnote %}

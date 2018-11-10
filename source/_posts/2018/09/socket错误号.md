@@ -290,3 +290,9 @@ do {
     n = recv(new_fd, buff, 500, 0);       
 } while (n < 0 && errno == EINTR);
 ```
+
+### 34: ERANGE
+
+>#define	ERANGE		34	/* Math result not representable */
+
+在socket连接中，server端关闭了该连接
