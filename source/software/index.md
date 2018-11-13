@@ -4,6 +4,7 @@ date: 2018-11-06 23:07:24
 comments: false
 ---
 
+{% note danger %} Windows {% endnote %}
 
 | 软件名称  | 下载地址  | 备注  |
 |:-:|:-:|:-:|
@@ -15,3 +16,7 @@ comments: false
 
 
 > 存放地址：[https://coding.net/u/Winddoing/p/software_tools/git](https://coding.net/u/Winddoing/p/software_tools/git)
+
+{% note danger %} Linux (Ubuntu 18.04) {% endnote %}
+
+> 记录:[https://raw.githubusercontent.com/Winddoing/work_env/master/prepare.sh](https://raw.githubusercontent.com/Winddoing/work_env/master/prepare.sh)
