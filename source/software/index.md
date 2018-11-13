@@ -11,6 +11,7 @@ comments: false
 | Putty0.70-64bit | [Download](https://coding.net/u/Winddoing/p/software_tools/git/raw/master/putty.exe)  |   |
 | tftpd32  | [Download](https://coding.net/u/Winddoing/p/software_tools/git/raw/master/tftpd32.exe)  | 搭建Window下tftp服务  |
 | ElecardStreamEyeTools   | [Download](https://coding.net/u/Winddoing/p/software_tools/git/raw/master/ElecardStreamEyeTools.rar)  | 编码视频的可视化(解析es流) |
+| edid_manager  | [Download](https://coding.net/u/Winddoing/p/software_tools/git/raw/master/edid_managerv1x0.zip)  | 显示器edid读取和解析工具  |
 
 
 > 存放地址：[https://coding.net/u/Winddoing/p/software_tools/git](https://coding.net/u/Winddoing/p/software_tools/git)
