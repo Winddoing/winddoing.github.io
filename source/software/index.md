@@ -6,7 +6,7 @@ comments: false
 
 {% note danger %} ###Windows### {% endnote %}
 
-
+> 存放地址：[https://coding.net/u/Winddoing/p/software_tools/git](https://coding.net/u/Winddoing/p/software_tools/git)
 
 | 软件名称  | 下载地址  | 备注  |
 |:-:|:-:|:-:|
@@ -15,9 +15,6 @@ comments: false
 | tftpd32  | [Download](https://coding.net/u/Winddoing/p/software_tools/git/raw/master/tftpd32.exe)  | 搭建Window下tftp服务  |
 | ElecardStreamEyeTools   | [Download](https://coding.net/u/Winddoing/p/software_tools/git/raw/master/ElecardStreamEyeTools.rar)  | 编码视频的可视化(解析es流) |
 | edid_manager  | [Download](https://coding.net/u/Winddoing/p/software_tools/git/raw/master/edid_managerv1x0.zip)  | 显示器edid读取和解析工具  |
-
-> 存放地址：[https://coding.net/u/Winddoing/p/software_tools/git](https://coding.net/u/Winddoing/p/software_tools/git)
-
 
 
 {% note danger %} ###Linux (Ubuntu 18.04)### {% endnote %}
