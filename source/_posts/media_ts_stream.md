@@ -13,24 +13,102 @@ TS流
 
 ## 数据结构
 
+### TS头
+
 ``` C
 // Transport packet header
 typedef struct TS_packet_header
 {
-    unsigned sync_byte                        : 8;
-    unsigned transport_error_indicator        : 1;
-    unsigned payload_unit_start_indicator    : 1;
-    unsigned transport_priority                : 1;
-    unsigned PID                            : 13;
-    unsigned transport_scrambling_control    : 2;
-    unsigned adaption_field_control            : 2;
-    unsigned continuity_counter                : 4;
+	unsigned sync_byte                    : 8;	//同步字节, 固定为0x47,表示后面的是一个TS分组
+	unsigned transport_error_indicator    : 1;	//传输误码指示符
+	unsigned payload_unit_start_indicator : 1;	//效荷载单元起始指示符
+	unsigned transport_priority           : 1;	//传输优先, 1表示高优先级,传输机制可能用到，解码用不着
+	unsigned PID                          : 13;	//PID
+	unsigned transport_scrambling_control : 2;	//传输加扰控制
+	unsigned adaption_field_control       : 2;	//自适应控制 01仅含有效负载，10仅含调整字段，11含有调整字段和有效负载。为00解码器不进行处理
+	unsigned continuity_counter           : 4;	//连续计数器 一个4bit的计数器，范围0-15
 } TS_packet_header;
 ```
 
 >TS包的标识(即sync_byte)为`0x47`，并且为了确保这个TS包里的数据有效，所以我们一开始查找`47 40 00`这三组16进制数
+>> 包头大小: `4Byte`
+
+* `adaption_field_control` : 调整字段控制
+	- 0x00 : reserved for future use by ISO/IEC
+	- 0x01 : 无调整字段,仅含有效负载
+	- 0x10 : 仅含调整字段,无有效负载
+	- 0x11 : 调整字段后含有效负载
+```C
+if (adaption_field_control == '10' || adaption_field_control == '11') {
+        adaption_fields() //调整字段的处理
+}
+if (adaption_field_control == '01' || adaption_field_control == '11') {
+	for(i = 0; i < N ; i++) //N值 = 184 - 调整字段的字节数
+    {
+
+    }
+}
+```
+* `continuity_counter` : 用于对传输误码进行检测。在发送端对所有的包都做0-15的循环计数，在接收终端，如发现循环计数器的值有中断，表明数据在传输中有丢失。
 
 
+### PAT
+
+``` C
+// Program Association Table
+typedef struct PAT_Packet_tag
+{
+	unsigned table_id                        : 8;	//固定为0x00 ，标志是该表是PAT
+	unsigned section_syntax_indicator        : 1; 	//段语法标志位，固定为1
+	unsigned zero                            : 1; 	//0
+	unsigned reserved_1                      : 2; 	//保留位
+	unsigned section_length                  : 12;	//表示这个字节后面有用的字节数，包括CRC32
+	unsigned transport_stream_id             : 16;	//该传输流的ID，区别于一个网络中其它多路复用的流
+	unsigned reserved_2                      : 2; 	//保留位
+	unsigned version_number                  : 5; 	//范围0-31，表示PAT的版本号
+	unsigned current_next_indicator          : 1; 	//发送的PAT是当前有效还是下一个PAT有效
+	unsigned section_number                  : 8; 	//分段的号码。PAT可能分为多段传输，第一段为00，以后每个分段加1，最多可能有256个分段
+	unsigned last_section_number             : 8; 	//最后一个分段的号码
+	// for(i=0; i<N; i++) {  //N = (section_length - 4(CRC的4Byte) - 5(section_lengt以后的5Byte))/4
+	unsigned program_number                  : 16;
+	unsigned reserved_3                      : 3;
+	unsigned network_PID                     : 16;	// 或者program_map_PID
+	// }
+	unsigned CRC_32                          : 32;
+} PAT_Packet;
+```
+
+### PMT
+
+``` C
+// Program Map Table
+typedef struct PMT_Packet_tag
+{
+     unsigned table_id                        : 8;
+     unsigned section_syntax_indicator        : 1;
+     unsigned zero                            : 1;
+     unsigned reserved_1                      : 2;
+     unsigned section_length                  : 12;
+     unsigned program_number                  : 16;
+     unsigned reserved_2                      : 2;
+     unsigned version_number                  : 5;
+     unsigned current_next_indicator          : 1;
+     unsigned section_number                  : 8;
+     unsigned last_section_number             : 8;
+     unsigned reserved_3                      : 3;
+     unsigned PCR_PID                         : 13;
+     unsigned reserved_4                      : 4;
+     unsigned program_info_length             : 12;
+     // for(i=0; i<N; i++) {
+     unsigned stream_type                     : 8;
+     unsigned reserved_5                      : 3;
+     unsigned elementary_PID                  : 13;
+     unsigned reserved_6                      : 4;
+     unsigned ES_info_length                  : 12;
+     // }
+     unsigned CRC_32                          : 32;
+} PMT_Packet;
+```
 ## 数据包
 
 ```
@@ -138,7 +216,7 @@ ISO/IEC 13818-1 PID=0x0 CC=0
         .... .... .... .... .... .... ..01 .... = Adaptation Field Control: Payload only (0x1)
         .... .... .... .... .... .... .... 0000 = Continuity Counter: 0
     [MPEG2 PCR Analysis]
-    Pointer: 0
+    Pointer: 0    //自适应区,1Byte,如果为0 表示没有自适应区
 MPEG2 Program Association Table
     Table ID: Program Association Table (PAT) (0x00)
     1... .... .... .... = Syntax indicator: 1
