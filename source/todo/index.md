@@ -36,3 +36,6 @@ comments: true
 * [ToDo List](http://www.gxtodo.com/web/#/user/login) —— 任务管理网站
 * [atool](https://atool.vip/) —— 在线工具VIP
 * [清华大学开源软件镜像站](https://mirrors.tuna.tsinghua.edu.cn/) —— 大部分开源软件代码(android linux)
+* [The Linux Command Line 的中文版](https://billie66.github.io/TLCL/index.html) —— linux命令和shell
+* [一个有趣的网站收藏](https://123.kfd.me/)
+* [反向谷歌](https://kfd.me/) —— 可以进行谷歌搜索(2018.11.16)
