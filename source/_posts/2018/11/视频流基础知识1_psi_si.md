@@ -11,6 +11,8 @@ categories:
 
 在ts流转成es流的学习过程中,了解到PSI相关的基础知识在这里做一记录总结,方便以后查找和理解.
 
+>在数据传输前打包成MPEG-2的TS(传输流)包,这些TS包如果没有引导信息,接收端的解码器将无法找到需要的码流信息,因此MPEG-2专门定义了`PSI`(节目信息),PSI的作用**自动设置和引导解码器进行解码**
+
 <!--more-->
 
 ## PSI/SI关键词
@@ -88,9 +90,12 @@ categories:
 一个TS数据包的净荷为188个字节，当一个PSI/SI表的字节长度大于184字节时，就要对这个表进行分割，形成段（section）来传送。分段机制主要是将一个数据表分割成多个数据段。在PSI/SI表到TS包的转换过程中，段起到了中介的作用。由于一个数据包只有188字节，而段的长度是可变的，EIT表的段限长4096字节，其余PSI/SI表的段限长为1024字节。因此，一个段要分成几部分插入到TS包的净荷中。
 ![video_ts_table](/images/2018/11/video_ts_table.png)
 
+## 缩写
 
+* EPG(Electronic Program Guide) : 电子节目指南
 
 ## 参考
 
 * [【PSI/SI学习系列】2.PSI/SI深入学习1——预备知识](https://blog.csdn.net/kkdestiny/article/details/12993971)
 * [PSI/SI解析（各种id说明）](http://blog.sina.com.cn/s/blog_a57c156801014p57.html)
+* DVB-T Transport Stream :https://csie.ntut.edu.tw/labaspl/edu/MPEG2_TS(NCTU2)A.pdf
