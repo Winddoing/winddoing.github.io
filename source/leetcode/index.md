@@ -7,3 +7,5 @@ comments: false
 # [https://leetcode-cn.com/winddoing/](https://leetcode-cn.com/winddoing/)
 
 > 练习一些算法和基础,在这里总结一些好的思路和方法
+
+1. [LeetCode Test](x_posts/test.html)
