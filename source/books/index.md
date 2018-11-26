@@ -19,6 +19,9 @@ comments: false
 - 《重构改善既有代码的设计》|书摘|
 - 《代码整洁之道》|书摘|
 
+## 电子书
+
+- [LDD3[英]](http://www.makelinux.net/ldd3/)
 
 ## 记录
 

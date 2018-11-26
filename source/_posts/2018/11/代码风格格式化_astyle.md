@@ -72,7 +72,21 @@ astyle --style=linux -n ./*.c
 - `--style=linux` : linux风格缩进
 - `-n` : 不保存备份
 
+
+>```
+>astyle --style=linux --indent=force-tab=4 --convert-tabs --pad-oper --unpad-paren --break-blocks=all --delete-empty-lines *.c *.h
+>```
+
+### 递归格式化
+
+```
+astyle --style=linux --recursive *.c,*.h
+```
+> 必须中间加`,`
+
 ## 自定义规则
+
+>在`--style=linux`的基础上修改,只做必要改动
 
 ### 缩进Tab
 
@@ -86,6 +100,31 @@ astyle --style=linux -n ./*.c
 ### switch缩进
 
 默认
+
+### 操作符两边加空格
+```
+--pad-oper  OR  -p
+```
+### 删除括号()两边多余空格
+```
+--unpad-paren  OR  -U
+```
+### 空行分隔没有关系的块,类,标签(不包括函数块)
+```
+ --break-blocks  OR  -f
+```
+### 空行分隔无关系的块,包括else catch等
+```
+--break-blocks=all  OR  -F
+```
+### 删除多余空行
+```
+--delete-empty-lines  OR  -x
+```
+### Tab转换为空格
+```
+--convert-tabs  OR  -c
+```
 
 ## 参考
 
