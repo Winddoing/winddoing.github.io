@@ -41,22 +41,7 @@ $sudo apt install astyle
    Kernighan & Ritchie style formatting/indenting.
    Linux braces.
 
-   --style=stroustrup  OR  -A4
-   Stroustrup style formatting/indenting.
-   Linux braces.
-
-   --style=whitesmith  OR  -A5
-   Whitesmith style formatting/indenting.
-   Broken, indented braces.
-   Indented class blocks and switch blocks.
-
-   --style=vtk  OR  -A15
-   VTK style formatting/indenting.
-   Broken, indented braces except for the opening braces.
-
-   --style=ratliff  OR  --style=banner  OR  -A6
-   Ratliff style formatting/indenting.
-   Attached, indented braces.
+   ...
 
    --style=gnu  OR  -A7
    GNU style formatting/indenting.
@@ -77,21 +62,6 @@ $sudo apt install astyle
    --style=google  OR  -A14
    Google style formatting/indenting.
    Attached braces, indented class modifiers.
-
-   --style=mozilla  OR  -A16
-   Mozilla style formatting/indenting.
-   Linux braces, with broken braces for structs and enums,
-   and attached braces for namespaces.
-
-   --style=pico  OR  -A11
-   Pico style formatting/indenting.
-   Run-in opening braces and attached closing braces.
-   Uses keep one line blocks and keep one line statements.
-
-   --style=lisp  OR  -A12
-   Lisp style formatting/indenting.
-   Attached opening braces and attached closing braces.
-   Uses keep one line statements.
 ```
 
 ## 使用
@@ -101,3 +71,22 @@ astyle --style=linux -n ./*.c
 ```
 - `--style=linux` : linux风格缩进
 - `-n` : 不保存备份
+
+## 自定义规则
+
+### 缩进Tab
+
+默认tab是4个空格.
+
+```
+--indent=force-tab=#  OR  -T#
+```
+> 优先采用空格缩进, 这样配置后同vim中的tab缩进配置4个空格相同,格式化后的代码相当于vim中的`gg=G`
+
+### switch缩进
+
+默认
+
+## 参考
+
+* [Astyle编程语言格式化工具的中文说明](http://www.cnblogs.com/tfanalysis/articles/4874793.html)
