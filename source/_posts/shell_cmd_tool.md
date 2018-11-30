@@ -214,6 +214,13 @@ e10adc3949ba59abbe56e057f20f883e  -
 sudo hdparm -i /dev/sda
 ```
 
+## 格式化xml
+
+``` shell
+xmllint --format run_xunit.xml
+```
+> 在vim中直接敲xml,进行格式化
+
 ## 参考
 
 1. [minicom中文手册](https://www.cnblogs.com/my-blog/archive/2008/12/10/1351753.html)
