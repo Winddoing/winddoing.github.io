@@ -2,7 +2,7 @@
 title: 内核常见问题
 date: 2017-11-18 23:07:24
 categories: Linux内核
-tags: [Linux， Q&A]
+tags: [Linux]
 ---
 常见错误的总结；
 
