@@ -17,12 +17,12 @@ comments: false
 	query.descending('time');
 	query.limit(1000);
 	query.find().then(function (todo) {
-	for (var i=0;i<100;i++){
+	for (var i=1;i<=100;i++){
 		var result=todo[i].attributes;
 		time=result.time;
 		title=result.title;
 		url=result.url;
-		var content="<p>"+"<font color='#1C1C1C'>"+"【文章热度:"+time+"℃】"+"</font>"+"<a href='"+"https://winddoing.github.io"+url+"'>"+title+"</a>"+"</p>";
+		var content="<p>"+"<font color='#1C1C1C'>"+i+"."+"【文章热度:"+time+"℃】"+"</font>"+"<a href='"+"https://winddoing.github.io"+url+"'>"+title+"</a>"+"</p>";
 		document.getElementById("top").innerHTML+=content
 		}
 	}, function (error) {
