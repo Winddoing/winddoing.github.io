@@ -11,6 +11,8 @@ categories:
 
 Sparse诞生于2004年，是由Linux之父开发的，目的就是提供一个静态检查代码的工具，从而减少Linux内核的隐患。起始，在Sparse之前已经有了一个不错的代码静态检查工具（SWAT），只不过这个工具不是免费软件，使用上有一些限制。所以Linus自己开发了一个静态检查工具。
 
+>版本: linux4.4.166
+>
 >参考文档:[Documentation/sparse.txt](https://elixir.bootlin.com/linux/v4.4.166/source/Documentation/sparse.txt)
 
 <!--more-->
@@ -109,3 +111,4 @@ __releases(&info->lock)
 ## 参考
 
 * [内核工具 – Sparse 简介](https://www.cnblogs.com/wang_yb/p/3575039.html)
+* [what-does-static-int-function-acquires-releases-mean](https://stackoverflow.com/questions/21018778/what-does-static-int-function-acquires-releases-mean)
