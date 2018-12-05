@@ -44,6 +44,9 @@ fbmem_init(void)
 ### /proc/fb
 
 帧缓冲设备列表，代表的`帧缓冲设备编号`和`驱动程序`
+
+>This file contains a list of frame buffer devices, with the frame buffer device number and the driver that controls it. [^/proc/fb](https://www.centos.org/docs/5/html/5.2/Deployment_Guide/s2-proc-fb.html)
+
 ```
 =====>$cat /proc/fb
 0 radeondrmfb
