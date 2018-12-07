@@ -293,6 +293,6 @@ do {
 
 ### 34: ERANGE
 
->#define	ERANGE		34	/* Math result not representable */
+>#define	ERANGE		34	/* Math result not representable */  结果无法表示
 
 在socket连接中，server端关闭了该连接
