@@ -85,8 +85,11 @@ comments: false
 
 > 分页的基本方法是把地址空间人为的等分成固定大小的页,每一页的大小由硬件决定,或硬件支持多种大小的页,由操作系统选择决定页的大小
 
+页大小: MIPS 8K
+
 #### Page Fault
 
+![page_fault_flow](/images/2018/12/page_fault_flow.png)
 
 ***
 # 静态链接
