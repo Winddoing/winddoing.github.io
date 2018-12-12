@@ -11,3 +11,4 @@ comments: false
 > 一些看到的好的网站或者文章
 
 * [从机器学习谈起](http://www.cnblogs.com/subconscious/p/4107357.html)
+* [机器学习实用指南](https://github.com/apachecn/hands_on_Ml_with_Sklearn_and_TF)
