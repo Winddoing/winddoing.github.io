@@ -16,7 +16,7 @@ tags: [Cortex-A8, uboot, linux, bulidroot, ARM]
 * uboot：u-boot-v2014.07-rc4
 * linux：linux-4.0.9
 * 文件系统：buildroot
->在实际的操作中可能会有所变动，不断更新
+>在实际的操作中可能会有所变动，不断更新 [DebugCode](https://github.com/EmDepTeam)
 
 ## 交叉编译工具
 
