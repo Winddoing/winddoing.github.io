@@ -236,6 +236,167 @@ comments: false
 ***
 # 静态链接
 
+## GCC编译过程
+```
+$gcc hello.c
+```
+>编译的过程可以分解成4个步骤:`预处理(Prepressing)`,`编译(Compilation)`,`汇编(Assembly)`和`链接(Linking)`
+
+![Gcc编译过程](/images/2018/12/gcc编译过程.png)
+
+### 预编译-Prepressing
+
+```
+gcc -E hello.c -o hello.i
+或
+cpp hello.c > hello.i
+```
+预编译过程主要处理源代码中以`"#"`开始的预编译指令.比如"#include", "#define"
+
+处理规则:
+* 将所有的`"#define"`删除,并且展开所有的宏定义
+* 处理所有条件预编译指令,比如`"#if"`, `"ifdef"`, `"#elif"`, `"#else"`, `"#endif"`
+* 处理`"#include"`预编译指令,将包含的文件插入到该预编译指令的位置,注意这个过程是递归进行的,也就是说被包含的文件可能还包含其他文件
+* 删除所有注释`"//"`和`"/* */"`
+* 添加行号和文件标识,比如#2 "hello.c" 2,以便于编译时编译器产生调试用的行号信息及用于编译时产生编译错误和警告时能够显示行号
+* 保留所有的`"#pragma"`编译器指令,因为编译器需要使用它们
+
+### 编译-Compilation
+
+```
+gcc -S hello.i -o hello.s
+```
+
+编译的过程就是把预处理完的文件进行一系列词法分析,语法分析,语义分析及优化后生成相应的汇编代码文件
+
+### 汇编-Assembly
+
+```
+gcc -c hello.s -o hello.o
+或
+as hello.s -o hello.o
+```
+
+### 链接-Linking
+
+通过`ld`链接一些必要的文件使其生成一个可执行文件
+
+
+### 示例: Gcc 7.3.0
+
+环境编译器及系统: `gcc version 7.3.0 (Ubuntu 7.3.0-27ubuntu1~18.04)`
+
+```
+gcc hello.c -v
+```
+- `-v`: 显示编译器调用处理的细节
+- `-save-temps`: 不删除中间临时文件,如\*.i, \*.s
+
+
+```
+=====>$gcc hello.c -v  -save-temps
+Using built-in specs.
+COLLECT_GCC=gcc
+COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-linux-gnu/7/lto-wrapper
+OFFLOAD_TARGET_NAMES=nvptx-none
+OFFLOAD_TARGET_DEFAULT=1
+Target: x86_64-linux-gnu
+Configured with: ../src/configure -v --with-pkgversion='Ubuntu 7.3.0-27ubuntu1~18.04' --with-bugurl=file:///usr/share/doc/gcc-7/README.Bugs --enable-languages=c,ada,c++,go,brig,d,fortran,objc,obj-c++ --prefix=/usr --with-gcc-major-version-only --program-suffix=-7 --program-prefix=x86_64-linux-gnu- --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --with-sysroot=/ --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-gnu-unique-object --disable-vtable-verify --enable-libmpx --enable-plugin --enable-default-pie --with-system-zlib --with-target-system-zlib --enable-objc-gc=auto --enable-multiarch --disable-werror --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32,m64,mx32 --enable-multilib --with-tune=generic --enable-offload-targets=nvptx-none --without-cuda-driver --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu
+Thread model: posix
+gcc version 7.3.0 (Ubuntu 7.3.0-27ubuntu1~18.04)
+COLLECT_GCC_OPTIONS='-v' '-save-temps' '-mtune=generic' '-march=x86-64'
+ /usr/lib/gcc/x86_64-linux-gnu/7/cc1 -E -quiet -v -imultiarch x86_64-linux-gnu hello.c -mtune=generic -march=x86-64 -fpch-preprocess -fstack-protector-strong -Wformat -Wformat-security -o hello.i
+ignoring nonexistent directory "/usr/local/include/x86_64-linux-gnu"
+ignoring nonexistent directory "/usr/lib/gcc/x86_64-linux-gnu/7/../../../../x86_64-linux-gnu/include"
+#include "..." search starts here:
+#include <...> search starts here:
+ /usr/lib/gcc/x86_64-linux-gnu/7/include
+ /usr/local/include
+ /usr/lib/gcc/x86_64-linux-gnu/7/include-fixed
+ /usr/include/x86_64-linux-gnu
+ /usr/include
+End of search list.
+COLLECT_GCC_OPTIONS='-v' '-save-temps' '-mtune=generic' '-march=x86-64'
+
+
+ /usr/lib/gcc/x86_64-linux-gnu/7/cc1 -fpreprocessed hello.i -quiet -dumpbase hello.c -mtune=generic -march=x86-64 -auxbase hello -version -fstack-protector-strong -Wformat -Wformat-security -o hello.s
+GNU C11 (Ubuntu 7.3.0-27ubuntu1~18.04) version 7.3.0 (x86_64-linux-gnu)
+	compiled by GNU C version 7.3.0, GMP version 6.1.2, MPFR version 4.0.1, MPC version 1.1.0, isl version isl-0.19-GMP
+
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+GNU C11 (Ubuntu 7.3.0-27ubuntu1~18.04) version 7.3.0 (x86_64-linux-gnu)
+	compiled by GNU C version 7.3.0, GMP version 6.1.2, MPFR version 4.0.1, MPC version 1.1.0, isl version isl-0.19-GMP
+
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+Compiler executable checksum: c8081a99abb72bbfd9129549110a350c
+COLLECT_GCC_OPTIONS='-v' '-save-temps' '-mtune=generic' '-march=x86-64'
+
+
+ as -v --64 -o hello.o hello.s
+GNU assembler version 2.30 (x86_64-linux-gnu) using BFD version (GNU Binutils for Ubuntu) 2.30
+COMPILER_PATH=/usr/lib/gcc/x86_64-linux-gnu/7/:/usr/lib/gcc/x86_64-linux-gnu/7/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/7/:/usr/lib/gcc/x86_64-linux-gnu/
+LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/7/:/usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/7/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/7/../../../:/lib/:/usr/lib/
+COLLECT_GCC_OPTIONS='-v' '-save-temps' '-mtune=generic' '-march=x86-64'
+
+ /usr/lib/gcc/x86_64-linux-gnu/7/collect2 -plugin /usr/lib/gcc/x86_64-linux-gnu/7/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/7/lto-wrapper -plugin-opt=-fresolution=hello.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --sysroot=/ --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu --as-needed -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -z now -z relro /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/Scrt1.o /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/7/crtbeginS.o -L/usr/lib/gcc/x86_64-linux-gnu/7 -L/usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/7/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/7/../../.. hello.o -lgcc --push-state --as-needed -lgcc_s --pop-state -lc -lgcc --push-state --as-needed -lgcc_s --pop-state /usr/lib/gcc/x86_64-linux-gnu/7/crtendS.o /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/crtn.o
+COLLECT_GCC_OPTIONS='-v' '-save-temps' '-mtune=generic' '-march=x86-64'
+```
+**注意**:在链接时使用的是`collect2`,不是`ld`,那么二者有什么关系??
+
+>`collect2`是`ld`链接器的一个`封装`,最终还是要调用ld来完成链接工作,collect2的作用是在实现main函数的代码前对目标文件中命名的特殊符号进行收集. 这些特殊的符号表明它们是全局构造函数或在main前执行，collect2会生成一个临时的.c文件，将这些符号的地址收集成一个数组，然后放到这个.c文件里面，编译后与其他目标文件一起被链接到最终的输出文件中。在这里我们没有加-nostdlib,所以自然不会调用__main,也就不会链接main函数所需引用的目标文件,也就不会对那些特殊的符号进行收集.
+
+
+## 目标文件--Object File
+
+目标文件及可执行文件,主要格式Windows下`PE(Portable Executable)`和Linux的`ELF(Executable Linkable Format)`,他们都是`COFF(Common file format)`的变种
+
+>可执行文件按照可执行文件格式存储,`动态链接库(DLL, Dynamic Linking Library)`及`静态链接库(Static Linking Library)`文件都是按照可执行文件格式存储
+
+### 文件格式-ELF
+
+* ELF格式文件分类:
+
+| ELF文件类型  | 说明  | 示例  |
+|:-:|:-:|:-:|
+| 可重定位文件(Relocatablr File)  | 包含代码和数据,可以被用来链接成可执行文件或共享目标文件,`静态链接库属于这类`  |  Linux的.o, Windows的.obj |
+| 可执行文件(Executable File)  | 包含可以直接执行的程序,它的代表就是ELF可执行文件,一般没有扩展名  | 比如/bin/bash文件, Windows的.exe  |
+| 共享目标文件(Share Object File)  | 包含代码和数据,可以在两种情况下使用,一种链接器使用生成目标文件,另一种动态链接器可以将几个共享目标文件和可执行文件结合,作为进程映像一起运行  | Linux的.so, Windows的DLL  |
+| 核心转储文件(Core Dump File)  | 当进程意外终止时,系统可以将该进程的地址空间内容及终止时的一些其他信息转存到核心转储文件  | Linux下的core dump  |
+
+* 查看
+
+```
+=====>$file a.out
+a.out: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, for GNU/Linux 3.2.0, BuildID[sha1]=fadad58a4fd9204e015da490f57908c27ba46ccf, not stripped
+```
+
+### ELF的格式
+
+目标文件的内容包含代码和数据,还有链接时必要的一些信息,比如符号表,调试信息,字符串等.一般目标文件将这些信息按不同的属性,以`"节"(Section)`的形式存储,有时候也就`"段"(Segment)`,在一般情况下都表示一个一定长度的区域
+
+> `Section`与`Segment`的区别:???
+> - 在ELF的`链接视图`中,不同的属性称为`Section`
+> - 在ELF的`装载视图`中,不同的属性称为`Segment`
+
+
+ELF文件:
+
+| Executable File / Object File | 说明                                         |
+|:-----------------------------:|:---------------------------------------------|
+|          File Header          | 包含一个`段表(Section Table)`                |
+|         .text section         | 代码段, 机器指令                             |
+|         .data section         | 数据段, 全局变量和局部静态变量数据           |
+|         .bss section          | 未初始化的全局变量和局部静态变量,默认值为`0` |
+
+**注**:
+- `段表`,是一个描述文件中各个段的数组,描述了文件中各个段在文件中的偏移位置及段的属性等
+- `.bss`, 只是为未初始化的全局变量和局部静态变量预留位置而已,它并没有内容,所以它在文件中也不占空间
+
+**总体来说,程序源代码被编译后主要分成两种段, `程序指令`和`程序数据`,代码段属于程序指令,而数据段和.bss段 属于程序数据**
+
+### 数据和指令分段的好处
+
+
 
 ***
 # 装载与动态链接
