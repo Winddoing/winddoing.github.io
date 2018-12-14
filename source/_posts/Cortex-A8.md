@@ -138,3 +138,14 @@ include/configs/s5pc210_a8.h
 #### 添加SPL
 
 ### 错误
+
+
+
+
+
+
+
+
+## 参考
+
+* [S5PV210开发版配置](https://blog.csdn.net/JerryGou/article/details/79027479)
