@@ -139,6 +139,24 @@ include/configs/s5pc210_a8.h
 
 ### 错误
 
+```
+./tools/mkexynosspl  spl/u-boot-spl.bin spl/qt210-spl.bin
+make[1]: ./tools/mkexynosspl: Command not found
+scripts/Makefile.spl:283: recipe for target 'spl/qt210-spl.bin' failed
+make[1]: *** [spl/qt210-spl.bin] Error 127
+Makefile:1508: recipe for target 'spl/u-boot-spl' failed
+make: *** [spl/u-boot-spl] Error 2
+```
+
+这是个可执行文件是在make时自动增加头信息用的
+
+### 参考
+
+* [【u-boot-2016到s5pv210】1.1 自定义板卡ok210](https://blog.csdn.net/gjianw217/article/details/79939889)
+* [u-boot-2016.09移植(3)-u-boot-spl.bin](https://blog.csdn.net/keyue123/article/details/53072164)
+* [u-boot-2016.11移植uboot-spl.bin](https://blog.csdn.net/Config_init/article/details/53373423)
+* [u-boot v2018.01 启动流程分析](https://blog.csdn.net/weixin_39655765/article/details/80058644)
+
 
 
 
