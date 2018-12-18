@@ -30,6 +30,7 @@ comments: true
 * [机器学习](http://ml.apachecn.org/mlia/) —— 机器学习基础知识
 * [.gitignore生成工具](https://www.codingsky.com/gitignore) —— 各种语音的`.gitignore`
 * [CPP 在线帮助](http://www.cplusplus.com/reference/ )
+* [C++ 参考手册](https://zh.cppreference.com/w/%E9%A6%96%E9%A1%B5) —— C语言和C++的使用手册
 * [Linux命令手册](http://linux.51yip.com/)
 * [高级Bash脚本编程指南](http://manual.51yip.com/shell/) —— shell编程
 * [epub电子书在线阅读](http://www.neat-reader.cn/app#/)|[&A](http://www.nicetool.net/embed/epub_reader.html)|
