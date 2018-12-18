@@ -396,6 +396,217 @@ ELF文件:
 
 ### 数据和指令分段的好处
 
+1. `权限控制`, 当程序被装载后,数据和指令分别被映射到两个虚存区域.由于数据局域对进程来说是`可读写`的,指令区域对进程来说是`只读`的,所以这两个虚存区域的权限可以被分别设置成可读写和只读.这样可以**防止程序被有意或无意的修改.**
+2. CPU的设计角度出发,现代CPU都有着缓存(Cache)体系.指令区和数据区的分离有利于提高程序的局部性.现代CPU的缓存一般都设计成**数据缓存(D-Cache)和指令缓存(I-Cache)分离,所以程序的指令和数据分开存放对CPU的缓存命中率提高有好处.**
+3. `指令共享`, 当系统中运行多个该程序的副本时,它们的指令都是一样的,所以内存中只需要保存一份程序的指令部分.
+
+
+## 挖掘SimpleSection.o
+
+示例分析ELF格式的文件
+
+``` C
+/*#############################################################
+ *     File Name	: SimpleSection.c
+ *     Author		: winddoing
+ *     Created Time	: 2018年12月18日 星期二 15时17分55秒
+ *     Description	:
+ *          gcc -c SimpleSection.c -o SimpleSection.o
+ *          gcc version 7.3.0 (Ubuntu 7.3.0-27ubuntu1~18.04)
+ *############################################################*/
+
+int printf(const char* format, ...);
+
+int global_init_var = 84;
+int global_uninit_var;
+
+void func1(int i)
+{
+    printf("%d\n", i);
+}
+
+int main(int argc, const char *argv[])
+{
+    static int static_var = 85;
+    static int static_var2;
+
+    int a = 1;
+    int b;
+
+    func1(static_var + static_var2 + a + b);
+
+    return a;
+}
+```
+系统环境: ubuntu18.04 64bit, gcc version 7.3.0
+
+```
+gcc -c SimpleSection.c -o SimpleSection.o
+```
+> `-c`: 表示只编译不链接
+
+
+Object文件的内部结构:
+
+```
+$objdump -h SimpleSection.o
+```
+> - `-h`: 打印ELF文件各个段的基本信息
+> - `-x`: 全部详细打印输出
+
+
+
+``` C
+SimpleSection.o:     file format elf64-x86-64
+
+Sections:
+Idx Name          Size      VMA               LMA               File off  Algn
+  0 .text         0000005e  0000000000000000  0000000000000000  00000040  2**0
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+  1 .data         00000008  0000000000000000  0000000000000000  000000a0  2**2
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          00000004  0000000000000000  0000000000000000  000000a8  2**2
+                  ALLOC
+  3 .rodata       00000004  0000000000000000  0000000000000000  000000a8  2**0
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA
+  4 .comment      0000002b  0000000000000000  0000000000000000  000000ac  2**0
+                  CONTENTS, READONLY
+  5 .note.GNU-stack 00000000  0000000000000000  0000000000000000  000000d7  2**0
+                  CONTENTS, READONLY
+  6 .eh_frame     00000058  0000000000000000  0000000000000000  000000d8  2**3
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, DATA
+```
+
+
+|  Section Name | 注释  |
+|:-:|:-:|
+| .text  | 代码段  |
+| .data  | 数据段  |
+| .bss  | BSS段  |
+| .rodata  | 只读数据段  |
+| .comment  | 注释信息段  |
+| .note.GNU-stack  | 堆栈提示段  |
+| .eh_frame   | 展开堆栈所需的调用帧信息  |
+
+> eh_frame,    http://blog.51cto.com/zorro/1034925
+
+
+### ELF的结构
+
+```
++----------------------+
+|                      |
+|                      |
+|                      |
+|      Other Data      |
+|                      |
+|                      |
+|                      |
+|                      |
++----------------------+ 0x0000 00d8
+|       .eh_frame      |
++----------------------+ 0x0000 00d7
+|                      |
+|       .comment       |
+|                      |
++----------------------+ 0x0000 00ac
+|       .rodata        |
+|                      |
++----------------------+ 0x0000 00a8
+|        .data         |
++----------------------+ 0x0000 00a0
+|                      |
+|                      |
+|        .text         |
+|                      |
+|                      |
++----------------------+ 0x0000 0040
+|                      |
+|     ELF Header       |
+|                      |
++----------------------+ 0x0000 0000
+```
+
+查看ELF文件中代码段,数据段,和BSS段的长度,`size`命令
+
+```
+$size SimpleSection.o
+   text	   data	    bss	    dec	    hex	filename
+    186	      8	      4	    198	     c6	SimpleSection.o
+```
+
+### 代码段
+
+```
+$objdump -s -d SimpleSection.o
+```
+> - `-s`: 将所有段的内容以十六进制的方式打印出来
+> - `-d`: 将所有包含指令的段反汇编
+
+``` C
+SimpleSection.o:     file format elf64-x86-64
+
+Contents of section .text:
+ 0000 554889e5 4883ec10 897dfc8b 45fc89c6  UH..H....}..E...
+ 0010 488d3d00 000000b8 00000000 e8000000  H.=.............
+ 0020 0090c9c3 554889e5 4883ec20 897dec48  ....UH..H.. .}.H
+ 0030 8975e0c7 45f80100 00008b15 00000000  .u..E...........
+ 0040 8b050000 000001c2 8b45f801 c28b45fc  .........E....E.
+ 0050 01d089c7 e8000000 008b45f8 c9c3      ..........E...  
+Contents of section .data:
+ 0000 54000000 55000000                    T...U...        
+Contents of section .rodata:
+ 0000 25640a00                             %d..            
+Contents of section .comment:
+ 0000 00474343 3a202855 62756e74 7520372e  .GCC: (Ubuntu 7.
+ 0010 332e302d 32377562 756e7475 317e3138  3.0-27ubuntu1~18
+ 0020 2e303429 20372e33 2e3000             .04) 7.3.0.     
+Contents of section .eh_frame:
+ 0000 14000000 00000000 017a5200 01781001  .........zR..x..
+ 0010 1b0c0708 90010000 1c000000 1c000000  ................
+ 0020 00000000 24000000 00410e10 8602430d  ....$....A....C.
+ 0030 065f0c07 08000000 1c000000 3c000000  ._..........<...
+ 0040 00000000 3a000000 00410e10 8602430d  ....:....A....C.
+ 0050 06750c07 08000000                    .u......        
+
+Disassembly of section .text:
+
+0000000000000000 <func1>:
+   0:	55                   	push   %rbp
+   1:	48 89 e5             	mov    %rsp,%rbp
+   4:	48 83 ec 10          	sub    $0x10,%rsp
+   8:	89 7d fc             	mov    %edi,-0x4(%rbp)
+   b:	8b 45 fc             	mov    -0x4(%rbp),%eax
+   e:	89 c6                	mov    %eax,%esi
+  10:	48 8d 3d 00 00 00 00 	lea    0x0(%rip),%rdi        # 17 <func1+0x17>
+  17:	b8 00 00 00 00       	mov    $0x0,%eax
+  1c:	e8 00 00 00 00       	callq  21 <func1+0x21>
+  21:	90                   	nop
+  22:	c9                   	leaveq
+  23:	c3                   	retq   
+
+0000000000000024 <main>:
+  24:	55                   	push   %rbp
+  25:	48 89 e5             	mov    %rsp,%rbp
+  28:	48 83 ec 20          	sub    $0x20,%rsp
+  2c:	89 7d ec             	mov    %edi,-0x14(%rbp)
+  2f:	48 89 75 e0          	mov    %rsi,-0x20(%rbp)
+  33:	c7 45 f8 01 00 00 00 	movl   $0x1,-0x8(%rbp)
+  3a:	8b 15 00 00 00 00    	mov    0x0(%rip),%edx        # 40 <main+0x1c>
+  40:	8b 05 00 00 00 00    	mov    0x0(%rip),%eax        # 46 <main+0x22>
+  46:	01 c2                	add    %eax,%edx
+  48:	8b 45 f8             	mov    -0x8(%rbp),%eax
+  4b:	01 c2                	add    %eax,%edx
+  4d:	8b 45 fc             	mov    -0x4(%rbp),%eax
+  50:	01 d0                	add    %edx,%eax
+  52:	89 c7                	mov    %eax,%edi
+  54:	e8 00 00 00 00       	callq  59 <main+0x35>
+  59:	8b 45 f8             	mov    -0x8(%rbp),%eax
+  5c:	c9                   	leaveq
+  5d:	c3                   	retq   
+```
+
+
 
 
 ***
