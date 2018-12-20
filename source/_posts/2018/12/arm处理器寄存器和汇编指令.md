@@ -7,7 +7,7 @@ tags:
   - 寄存器
 categories:
   - ARM
-  - 汇编语言
+  - 汇编
 ---
 
 
