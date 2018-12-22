@@ -552,22 +552,22 @@ Contents of section .text:
  0020 0090c9c3 554889e5 4883ec20 897dec48  ....UH..H.. .}.H
  0030 8975e0c7 45f80100 00008b15 00000000  .u..E...........
  0040 8b050000 000001c2 8b45f801 c28b45fc  .........E....E.
- 0050 01d089c7 e8000000 008b45f8 c9c3      ..........E...  
+ 0050 01d089c7 e8000000 008b45f8 c9c3      ..........E...
 Contents of section .data:
- 0000 54000000 55000000                    T...U...        
+ 0000 54000000 55000000                    T...U...
 Contents of section .rodata:
- 0000 25640a00                             %d..            
+ 0000 25640a00                             %d..
 Contents of section .comment:
  0000 00474343 3a202855 62756e74 7520372e  .GCC: (Ubuntu 7.
  0010 332e302d 32377562 756e7475 317e3138  3.0-27ubuntu1~18
- 0020 2e303429 20372e33 2e3000             .04) 7.3.0.     
+ 0020 2e303429 20372e33 2e3000             .04) 7.3.0.
 Contents of section .eh_frame:
  0000 14000000 00000000 017a5200 01781001  .........zR..x..
  0010 1b0c0708 90010000 1c000000 1c000000  ................
  0020 00000000 24000000 00410e10 8602430d  ....$....A....C.
  0030 065f0c07 08000000 1c000000 3c000000  ._..........<...
  0040 00000000 3a000000 00410e10 8602430d  ....:....A....C.
- 0050 06750c07 08000000                    .u......        
+ 0050 06750c07 08000000                    .u......
 
 Disassembly of section .text:
 
@@ -583,7 +583,7 @@ Disassembly of section .text:
   1c:	e8 00 00 00 00       	callq  21 <func1+0x21>
   21:	90                   	nop
   22:	c9                   	leaveq
-  23:	c3                   	retq   
+  23:	c3                   	retq
 
 0000000000000024 <main>:
   24:	55                   	push   %rbp
@@ -603,7 +603,107 @@ Disassembly of section .text:
   54:	e8 00 00 00 00       	callq  59 <main+0x35>
   59:	8b 45 f8             	mov    -0x8(%rbp),%eax
   5c:	c9                   	leaveq
-  5d:	c3                   	retq   
+  5d:	c3                   	retq
+```
+
+### 数据段和只读数据段
+
+- 数据段: `.data`主要存放`初始化`了的**全局静态变量**和**局部静态变量**
+> 在SimpleSection.c示例中, 有这样两个变量`global_init_var`和`static_var`, 一共8字节,所以`.data`段的大小将是8字节
+
+- 只读数据段: `.rodata`存放的只读数据.一般是程序中的**只读变量**(const修饰的变量)和**字符串常量**
+> **好处:**
+> - 操作系统在加载时,将`.rodata`段映射成只读后,任何对这个段的操作,将被视为非法操作,保证了程序的安全性
+> - 在嵌入式平台中,有些存储器是采用的只读存储器,如ROM,这样将`rodata`段放在该存储区域就可以保证程序访问存储器的正确性(比如固化在CPU中的bootram的数据段映射)
+
+``` shell
+$objdump -s SimpleSection.o
+```
+
+``` C
+Contents of section .data:
+ 0000 54000000 55000000                    T...U...
+Contents of section .rodata:
+ 0000 25640a00                             %d..
+```
+
+`global_init_var=84`十六进制表示`54`,占四字节,由于是**小端模式Little Endian**, 排列顺序:[54 00 00 00]
+
+### BBS段
+
+- BBS段: `.bss`存放`未初始化`的**全局变量**和**局部静态变量**
+> 在示例中`global_uninit_var`和`static_var2`两个变量将存放在BSS段,准确说就是.bss段为其预留空间,但是我们看到该段大小只有4字节,而这两个变量的大小是8字节.
+
+不同的语言与不同的编译器实现有关,有些编译器会将**全局的未初始化变量**存放到BSS段,有些则不存放,只是预留一个**未定义的全局变量符号**,等到最终链接成可执行文件时,再在BSS段分配空间.(弱符号和强符号)
+
+**编译单元内部可见的静态变量**(static修饰),的确存放在BSS段
+
+``` shell
+$objdump -h SimpleSection.o
+```
+
+``` C
+Sections:
+Idx Name          Size      VMA               LMA               File off  Algn
+  2 .bss          00000004  0000000000000000  0000000000000000  000000a8  2**2
+                  ALLOC
+```
+
+### 其他段
+
+|    常用段名    | 说明                                                                        |
+|:--------------:|:----------------------------------------------------------------------------|
+|   `.rodata1`   | Read only Data 只存放只读数据,比如字符串常量,全局const变量,和`.rodata`一样  |
+|   `.comment`   | 存放编译器版本信息,比如字符串:".GCC: (Ubuntu 7.3.0-27ubuntu1~18.04) 7.3.0." |
+|    `.debug`    | 调试信息                                                                    |
+|   `.dynamic`   | 动态链接信息                                                                |
+|    `.hash`     | 符号哈希表                                                                  |
+|    `.line`     | 调试时的行号表,即源代码行号与编译后指令的对应表                             |
+|    `.note`     | 额外的编译器信息,比如程序的公司名,发布版本号                                |
+|   `.strtab`    | String Table字符串表,用于存储ELF文件中用到的各种字符串                      |
+|   `.symtab`    | Symbol Table符号表                                                          |
+|  `.shstrtab`   | Section String Table 段名表                                                 |
+| `.plt` `.got`  | 动态链接的跳转表和全局入口表                                                |
+| `.init` `fini` | 程序初始化和终结代码段                                                      |
+
+- 将一个二进制文件,比如图片,音乐作为目标文件中的一个段, 使用`objcopy`工具
+
+``` shell
+$objcopy -I binary -O elf64-x86-64  pic.jpg pic.o
+```
+
+``` shell
+$objdump -ht pic.o
+```
+
+``` C
+pic.o:     file format elf64-little
+
+Sections:
+Idx Name          Size      VMA               LMA               File off  Algn
+  0 .data         000799df  0000000000000000  0000000000000000  00000040  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+SYMBOL TABLE:
+0000000000000000 l    d  .data	0000000000000000 .data
+0000000000000000 g       .data	0000000000000000 _binary_pic_jpg_start
+00000000000799df g       .data	0000000000000000 _binary_pic_jpg_end
+00000000000799df g       *ABS*	0000000000000000 _binary_pic_jpg_size
+```
+符号`_binary_pic_jpg_start`,`_binary_pic_jpg_end`,`_binary_pic_jpg_size`表示该图片文件所在内存中的起始地址,结束地址和大小.可以在程序中直接声明并使用它们.
+
+### 自定义段
+
+GCC提供的一种扩展机制,可以指定变量所处的段.
+
+> 比如为了满足某些硬件的内存或IO地址布局,将某些变量或代码放到指定的段
+
+在全局变量或函数前加`"__attribute__((section("name")))"`属性就可以把相应的变量或函数放到以`"name"`作为段名的段中
+``` C
+__attribute__((section("FOO"))) int global = 42;
+__attribute__((section("BAR"))) void foo()
+{
+
+}
 ```
 
 

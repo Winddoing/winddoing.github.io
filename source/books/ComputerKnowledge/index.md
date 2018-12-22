@@ -17,3 +17,8 @@ comments: true
 > `PMS`（production management system）工程生产管理系统
 
 > `PMS`（Plant Management System - Requirements）设备管理体系-要求
+
+
+## FAE
+
+> 英文Field Application Engineer的缩写，也叫现场技术支持工程师、售前售后服务工程师。
