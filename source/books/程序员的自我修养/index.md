@@ -706,6 +706,205 @@ __attribute__((section("BAR"))) void foo()
 }
 ```
 
+## ELF文件结构描述
+
+```
++----------------------+
+|     ELF Header       |
++----------------------+
+|        .text         |
++----------------------+
+|        .data         |
++----------------------+
+|        .bss          |
++----------------------+
+|        ...           |
++----------------------+
+|    other sections    |
++----------------------+
+| Section header table | <== 段表: 描述ELF文件所有段的信息
++----------------------+
+|   String Tables      |
+|                      |
+|   Symbol Tables      |
+|                      |
+|                      |
++----------------------+
+```
+
+> ELF文件分析工具: `readelf`
+
+### 头文件
+
+``` shell
+$readelf -h SimpleSection.o
+```
+> - `-h`: Display the ELF file header
+
+```
+头            ELF Header:
+ELF魔数          Magic:   7f 45 4c 46 02 01 01 00 00 00 00 00 00 00 00 00
+文件机器字节长度   Class:                             ELF64
+数据存储方式      Data:                              2's complement, little endian
+版本            Version:                           1 (current)
+运行平台         OS/ABI:                            UNIX - System V
+ABI版本         ABI Version:                       0
+ELF重定位类型    Type:                              REL (Relocatable file)
+硬件平台         Machine:                           Advanced Micro Devices X86-64
+硬件平台版本      Version:                           0x1
+入口地址         Entry point address:               0x0
+程序入口         Start of program headers:          0 (bytes into file)
+段表位置         Start of section headers:          1112 (bytes into file)
+                Flags:                             0x0
+                Size of this header:               64 (bytes)
+                Size of program headers:           0 (bytes)
+                Number of program headers:         0
+                Size of section headers:           64 (bytes)
+                Number of section headers:         13
+                Section header string table index: 12
+```
+
+* 数据结构定义
+
+```
+typedef struct                                                                                  
+{                                                                                               
+  unsigned char e_ident[EI_NIDENT]; /* Magic number and other info */                           
+  Elf64_Half    e_type;         /* Object file type */                                          
+  Elf64_Half    e_machine;      /* Architecture */                                              
+  Elf64_Word    e_version;      /* Object file version */                                       
+  Elf64_Addr    e_entry;        /* Entry point virtual address */                               
+  Elf64_Off e_phoff;        /* Program header table file offset */                              
+  Elf64_Off e_shoff;        /* Section header table file offset */                              
+  Elf64_Word    e_flags;        /* Processor-specific flags */                                  
+  Elf64_Half    e_ehsize;       /* ELF header size in bytes */                                  
+  Elf64_Half    e_phentsize;        /* Program header table entry size */                       
+  Elf64_Half    e_phnum;        /* Program header table entry count */                          
+  Elf64_Half    e_shentsize;        /* Section header table entry size */                       
+  Elf64_Half    e_shnum;        /* Section header table entry count */                          
+  Elf64_Half    e_shstrndx;     /* Section header string table index */                         
+} Elf64_Ehdr;                                                                                   
+```
+> file: /usr/include/elf.h
+
+>**ELF魔数**: 最开始的4个字节所有的ELF文件 都必须相同,分别是`0x7f`,`0x45`,`0x4c`, `0x46`
+> - 第一个字节对应ASCII字符: DEL字符
+> - 后面3个字符对应ASCII字符: E, L, F
+
+### 段表
+
+**段表**:保存各个段的基本属性,描述各个段的信息,如段名,段的长度,在文件中的偏移,读写权限等
+
+``` shell
+$readelf -S SimpleSection.o
+```
+> - `-S`: Display the sections' header,每个段的头信息
+
+```
+There are 13 section headers, starting at offset 0x458:
+
+Section Headers:
+  [Nr] Name              Type             Address           Offset
+       Size              EntSize          Flags  Link  Info  Align
+  [ 0]                   NULL             0000000000000000  00000000
+       0000000000000000  0000000000000000           0     0     0
+  [ 1] .text             PROGBITS         0000000000000000  00000040
+       000000000000005e  0000000000000000  AX       0     0     1
+  [ 2] .rela.text        RELA             0000000000000000  00000348
+       0000000000000078  0000000000000018   I      10     1     8
+  [ 3] .data             PROGBITS         0000000000000000  000000a0
+       0000000000000008  0000000000000000  WA       0     0     4
+  [ 4] .bss              NOBITS           0000000000000000  000000a8
+       0000000000000004  0000000000000000  WA       0     0     4
+  [ 5] .rodata           PROGBITS         0000000000000000  000000a8
+       0000000000000004  0000000000000000   A       0     0     1
+  [ 6] .comment          PROGBITS         0000000000000000  000000ac
+       000000000000002b  0000000000000001  MS       0     0     1
+  [ 7] .note.GNU-stack   PROGBITS         0000000000000000  000000d7
+       0000000000000000  0000000000000000           0     0     1
+  [ 8] .eh_frame         PROGBITS         0000000000000000  000000d8
+       0000000000000058  0000000000000000   A       0     0     8
+  [ 9] .rela.eh_frame    RELA             0000000000000000  000003c0
+       0000000000000030  0000000000000018   I      10     8     8
+  [10] .symtab           SYMTAB           0000000000000000  00000130
+       0000000000000198  0000000000000018          11    11     8
+  [11] .strtab           STRTAB           0000000000000000  000002c8
+       000000000000007c  0000000000000000           0     0     1
+  [12] .shstrtab         STRTAB           0000000000000000  000003f0
+       0000000000000061  0000000000000000           0     0     1
+Key to Flags:
+  W (write), A (alloc), X (execute), M (merge), S (strings), I (info),
+  L (link order), O (extra OS processing required), G (group), T (TLS),
+  C (compressed), x (unknown), o (OS specific), E (exclude),
+  l (large), p (processor specific)
+```
+
+* 各段在文件的分布:
+```
+start +------------------+0x0000 0000
+      |   ELF Header     |
+      |   e_shoff=0x458 +--------------------+
+      +------------------+0x0000 0040        |
+      |                  |                   |
+      |     .text        |                   |
+      |                  |                   |
+      +------------------+0x0000 00a0        |
+      |     .data        |                   |
+      +------------------+0x0000 00a8        |
+      |     .rodata      |                   |
+      +------------------+0x0000 00ac        |
+      |                  |                   |
+      |     .comment     |                   |
+      +------------------+0x0000 00d7        |
+      | .note.GNU|stack  |                   |
+      +------------------+0x0000 00d8        |
+      |     .eh_frame    |                   |
+      |                  |                   |
+      |                  |                   |
+      |                  |                   |
+      +------------------+0x0000 0130        |
+      |     .symtab      |                   |
+      |                  |                   |
+      |                  |                   |
+      |                  |                   |
+      +------------------+0x0000 02c8        |
+      |     .strtab      |                   |
+      |                  |                   |
+      |                  |                   |
+      |                  |                   |
+      +------------------+0x0000 0348        |
+      |    .rela.text    |                   |
+      |                  |                   |
+      |                  |                   |
+      +------------------+0x0000 03c0        |
+      |  .rela.eh_frame  |                   |
+      |                  |                   |
+      |                  |                   |
+      +------------------+0x0000 03f0        |
+      |     .shstrtab    |                   |
+      |                  |                   |
+      |               <--+0x0000 0451        |
+      |                  |                   |
+      +------------------+0x0000 0458 <------+
+      |                  |
+      |   Section Table  |
+      |                  |
+      |                  |
+      |                  |
+      |                  |
+      |                  |
+ end  +------------------+0x0000 0798
+```
+> 文件大小:SimpleSection.o = 1944 = 0x798 Bit
+
+**段的名字只是在编译和链接过程中有意义,不能正真代表段的类型**
+
+- `.rela.text`: 重定位表(Relocation Table), 链接器处理目标文件时,对目标文件中的某些部位进行重定位,即代码段和数据段中那些绝对地址的引用位置.
+- `.strtab`: 字符串表(String Table), 用于保存普通的字符串
+- `.shstrtab`: 段表字符串表(Section Header String Table), 用于保存段表中用到的字符串
+
+## 链接的接口--符号
+
 
 
 
@@ -723,5 +922,7 @@ __attribute__((section("BAR"))) void foo()
 ## objdump
 
 ## objcopy
+
+## readelf
 
 ***
