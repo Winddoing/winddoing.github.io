@@ -6,65 +6,65 @@ tags: [Git]
 ---
 
 记录平时对git的使用方法和技巧
-[TOC]
+
 <!--- more --->
-### 1. 创建本地git库
+## 1. 创建本地git库
      mkdir test.git
 进入test.git
 
 		 git init --bare --shared
 
-### 2. 创建分支
+## 2. 创建分支
      git branch branch_name
      删除本地分支：
                git branch -d branch_name
 
-### 3. 切换分支
+## 3. 切换分支
      git checkout  branch_name
 
-### 4. 下载
+## 4. 下载
      git clone  URL
 
-### 5. 日志
+## 5. 日志
      git commit
 
-### 6. 提交
+## 6. 提交
      git push 远程库名  分支名
 
-### 7. 更新
+## 7. 更新
      git pull 远程库名  分支名
 
-### 8.添加代码
+## 8.添加代码
      git add <filename>
      git add -A    #添加所有修改
 
-### 9.查看日志
+## 9.查看日志
      git log
      git log -n     #查看前n条日志
      git log --stat  #查看日志的修改情况
      git log -p       #查看日志的具体修改
      git log <filename/dirname>  #查看该文件或目录的修改日志
 
-### 10.回退
+## 10.回退
      git reset HEAD <filename> #将该文件从缓冲区撤回
 
-### 11.查看远程库
+## 11.查看远程库
      git remote -v
      添加远程库：
      git remote add <name> <url>
 
-### 12.获取远程库中的最新版本，但与git pull 不同它不会merge
+## 12.获取远程库中的最新版本，但与git pull 不同它不会merge
      git  fetch  远程库名  分支名
 作用：可以对比远程库与当前本地的差异。
 
-### 13.查看标签
+## 13.查看标签
 		git tag
 作用：一个稳定的版本或者完成一个功能，为了发布或者保存而打的标签，主要是发布
 
-### 14.切换标签
+## 14.切换标签
 		git checkout <Tag>
 
-### 15.暂存当前改动
+## 15.暂存当前改动
 
 ```
 git stash
@@ -95,6 +95,51 @@ git stash drop [stash_id]
 git stash clear
 ```
 >删除所有存储的进度。
+
+## 16.恢复本地错误操作
+
+```
+git reflog
+```
+> 查看所有分支的所有操作记录（包括已经被删除的 commit 记录和 reset 的操作）
+
+```
+$git reflog -h
+usage: git reflog [ show | expire | delete ]
+```
+> - `show`: 显示所有条目,缺省值
+> - `expire`: 删除掉更老的reflog条目
+> - `delete`: 从reflog中删除一个条目
+
+## 17.模块管理
+
+1. 添加模块
+```
+git submodule add projectB.git projectB
+```
+
+2. 使用子模块
+```
+git submodule init
+git submodule update
+```
+> 克隆项目后，默认子模块目录下无任何内容。需要在项目根目录执行此命令完成子模块的下载
+>
+> **在clone整个项目时添加递归参数:`--recurse-submodules`**
+
+3. 删除子模块
+
+    1. `rm -rf 子模块目录` 删除子模块目录及源码
+    2. `vi .gitmodules` 删除项目目录下.gitmodules文件中子模块相关条目
+    3. `vi .git/config` 删除配置项中子模块相关条目
+    4. `rm .git/module/*` 删除模块下的子模块目录，每个子模块对应一个目录，注意只删除对应的子模块目录即可
+
+执行完成后，再执行添加子模块命令即可，如果仍然报错，执行如下：
+```
+git rm --cached 子模块名称
+```
+
+
 
 ## DoTo
 
