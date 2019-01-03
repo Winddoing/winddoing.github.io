@@ -50,12 +50,52 @@ make USE_NINJA=false USE_CLANG_PLATFORM_BUILD=false 2>&1 | tee build.log
 
 ## ssh
 
+### 跨服务器拷贝文件
 ``` shell
 xbin="u-boot-with-spl-mbr-gpt.bin"
 xdst="user@192.168.10.44:/home/user/x2000_ddr_test"
 
 scp $xbin fpga@192.168.4.13:/tmp/$xbin
 ssh fpga@192.168.4.13 "scp /tmp/$xbin $xdst"
+```
+### ssh的key值
+
+1. 权限必须是`600`
+```
+chmod 600 ~/.ssh/authorized_keys
+```
+2. 添加key值
+```
+ssh-add ~/.ssh/authorized_keys
+```
+3. 查看生效key值
+```
+ssh-add -l
+```
+4. 测试key值
+```
+ssh -T git@github.com
+```
+5. 免密登录
+```
+ssh-copy-id ssh name@ip
+```
+6. 使用多个key值
+>man ssh_config
+
+```
+cp /etc/ssh/ssh_config ~/.ssh/config
+```
+编辑~/.ssh/config
+```
+...
+#   StrictHostKeyChecking ask
+    IdentityFile ~/.ssh/id_rsa
+    IdentityFile ~/.ssh/xxxx
+#   IdentityFile ~/.ssh/id_dsa
+#   IdentityFile ~/.ssh/id_ecdsa
+#   IdentityFile ~/.ssh/id_ed25519
+...
 ```
 
 ## tftp
