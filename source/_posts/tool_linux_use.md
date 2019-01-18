@@ -159,3 +159,9 @@ DB Browser for SQLite (DB4S) 是一款面向开发者的高质量的，可视化
 ```
 sudo apt-get install sqlitebrowser
 ```
+
+## PyCharm
+
+>python编辑器
+
+[http://www.jetbrains.com/pycharm/](http://www.jetbrains.com/pycharm/)
