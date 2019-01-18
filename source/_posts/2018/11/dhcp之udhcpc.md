@@ -71,6 +71,18 @@ esac
 exit 0
 ```
 
+## dhcpcd配置静态IP
+
+配置文件`/etc/dhcpcd.conf`
+
+追加IP配置信息：
+```
+interface eth0
+static ip_address=172.16.xx.xx/24       #配置IP地址  
+static routers=172.16.xx.xx             #网关
+static domain_name_servers=172.16.xx.xx #DNS
+```
+
 ## 参考
 
 * [网络基本功（三十一）：细说DHCP](https://wizardforcel.gitbooks.io/network-basic/content/30.html)
