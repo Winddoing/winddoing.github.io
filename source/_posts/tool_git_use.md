@@ -45,6 +45,10 @@ tags: [Git]
      git log -p       #查看日志的具体修改
      git log <filename/dirname>  #查看该文件或目录的修改日志
 
+### tig
+
+> 命令行下查看git历史提交记录的工具
+
 ## 10.回退
      git reset HEAD <filename> #将该文件从缓冲区撤回
 
@@ -137,6 +141,14 @@ git submodule update
 执行完成后，再执行添加子模块命令即可，如果仍然报错，执行如下：
 ```
 git rm --cached 子模块名称
+```
+
+## 18.commit统计
+
+可以大致了解一下每个人对这个项目提交的commit数量和大致的贡献度
+
+``` shell
+git summary
 ```
 
 
