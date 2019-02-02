@@ -14,6 +14,18 @@ categories:
 
 <!--more-->
 
+## 判断软连接
+
+``` shell
+#!/bin/bash
+
+if [ -h "a.sh" ]; then
+    echo "It's a soft connection"
+fi
+```
+> `-h`: 软连接
+
+
 
 ``` shell
 #!/bin/bash

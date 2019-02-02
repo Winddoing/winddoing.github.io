@@ -254,6 +254,13 @@ e10adc3949ba59abbe56e057f20f883e  -
 sudo hdparm -i /dev/sda
 ```
 
+## 获取计算机硬件信息
+
+``` shell
+sudo dmidecode
+```
+> dmidecode遵循SMBIOS/DMI标准，其输出的信息包括BIOS、系统、主板、处理器、内存、缓存等等。
+
 ## 格式化xml
 
 ``` shell

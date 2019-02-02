@@ -119,6 +119,14 @@ alive=`awk 'BEGIN{printf "%.2f\n",('$up'/'$(($up + $down))')}'`
 echo "up:$up, down:$down, alive:$alive"
 ```
 
+## 提取本地IP
+
+```
+ip=`ifconfig | grep "inet " | grep -v "127.0.0.1"| awk '{print $2}'`
+```
+> `-v`: 排除
+
+
 ## 参考
 
 1. [shell中各种括号的作用()、(())、[]、[[]]、{}](http://blog.csdn.net/taiyang1987912/article/details/39551385)
