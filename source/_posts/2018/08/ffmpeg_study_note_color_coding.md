@@ -220,3 +220,4 @@ YCbCr模型来源于YUV模型。YCbCr是 YUV 颜色空间的偏移版本.
 
 * [V4L2文档翻译（十）](https://blog.csdn.net/airk000/article/details/25032901)
 * [YUV与RGB互转各种公式](https://www.cnblogs.com/luoyinjie/p/7219319.html)
+* [运用NEON指令集加速RGB与YUV相互转换](https://www.jianshu.com/p/e498326a55b1)
