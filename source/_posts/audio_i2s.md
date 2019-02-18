@@ -44,3 +44,13 @@ LRCLK=44.1kHz
 
 ### RJ (Left Justified)
 ![I2S-RJ](/images/audio/I2S-RJ.png)
+
+
+## I2S--八声道
+
+![i2s_channel_8](/images/2019/02/i2s_channel_8.png)
+>i2s normal mode
+
+## 参考
+
+* [16I2S/PCM Controller (8 channel)](http://www.t-firefly.com/download/firefly-rk3288/docs/TRM/rk3288-chapter-16-i2s-pcm-controller-(8-channel).pdf)
