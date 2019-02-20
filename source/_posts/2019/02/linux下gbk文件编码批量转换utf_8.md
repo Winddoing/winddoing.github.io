@@ -1,7 +1,11 @@
 ---
-layout: "post"
-title: "Linux下GBK文件编码批量转换UTF-8"
-date: "2019-02-18 19:46"
+layout: post
+title: Linux下GBK文件编码批量转换UTF-8
+date: '2019-02-18 19:46'
+tags:
+  - Shell
+categories:
+  - shell
 ---
 
 Windows默认是`GBK`编码格式，Linux默认是`UTF-8`的格式，不同格式之间的乱码处理。
