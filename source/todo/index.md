@@ -42,3 +42,4 @@ comments: true
 * [反向谷歌](https://kfd.me/) —— 可以进行谷歌搜索(2018.11.16)
 * [algorithm-visualizer](http://algorithm-visualizer.org) —— [github](https://github.com/algorithm-visualizer/algorithm-visualizer)开源的可视化工具
 * [在线屏幕测试](http://pingmu.zh-ang.com/) —— 显示器测试工具
+* [上海研发公共服务平台](http://www.sstir.cn/) ——  科技文献检索，知网、万方
