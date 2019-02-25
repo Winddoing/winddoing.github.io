@@ -27,6 +27,7 @@ comments: true
 * [在线文档查询](https://devdocs.io/) —— 各类语言工具的文档
 * [网络协议报文格式查询](http://support.huawei.com/onlinetoolsweb/einfofinder/PacketFormat?module=6&lang=zh) —— 华为设备为主
 * [pixabay](https://pixabay.com) —— 免费高清图片
+* [stockio](https://www.stockio.com/) —— 免费照片矢量图
 * [机器学习](http://ml.apachecn.org/mlia/) —— 机器学习基础知识
 * [.gitignore生成工具](https://www.codingsky.com/gitignore) —— 各种语音的`.gitignore`
 * [CPP 在线帮助](http://www.cplusplus.com/reference/ )
@@ -42,4 +43,6 @@ comments: true
 * [反向谷歌](https://kfd.me/) —— 可以进行谷歌搜索(2018.11.16)
 * [algorithm-visualizer](http://algorithm-visualizer.org) —— [github](https://github.com/algorithm-visualizer/algorithm-visualizer)开源的可视化工具
 * [在线屏幕测试](http://pingmu.zh-ang.com/) —— 显示器测试工具
+* [All To All](http://www.alltoall.net/) —— 在线文件转换导航
+* [squoosh](https://squoosh.app/) —— 免费图片压缩JPG.PNG
 * [上海研发公共服务平台](http://www.sstir.cn/) ——  科技文献检索，知网、万方
