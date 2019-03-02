@@ -68,11 +68,12 @@ ARM体系结构的应用程序二进制接口（`ABI`， Application Binary Inte
 - 被调用者保存的寄存器`（X19-X29）`： 这些寄存器保存在被调用者帧中。 它们可以被被调用者修改子程序，只要它们在返回之前保存并恢复。
 
 - 特殊用途寄存器`（X8，X16-X18，X29，X30）`：
-  - `X8`： 是间接结果寄存器。 用于传递地址的位置间接结果
+  - `X8`： 是间接结果寄存器,用于保存子程序返回地址，`尽量不使用`
   - `X16`和`X17`： 程序内调用临时寄存器
-  - `X18`： 平台寄存器，保留用于平台ABI
+  - `X18`： 平台寄存器，保留用于平台ABI，`尽量不使用`
   - `X29`： 帧指针寄存器（FP）
   - `X30`： 链接寄存器（LR）
+  - `X31`： 堆栈指针寄存器SP或零寄存器ZXR
 
 ### NEON和浮点寄存器
 
@@ -121,4 +122,4 @@ STR Rn, <addr>
 
 ## 参考
 
-* [Programmer’s Guide for ARMv8-A](/downloads/arm/DEN0024A_v8_architecture_PG.pdf)
+* [Programmer’s Guide for ARMv8-A](/downloads/arm/DEN0024A_v8_architecture_PG.pdf)=

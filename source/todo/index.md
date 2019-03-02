@@ -46,3 +46,5 @@ comments: true
 * [All To All](http://www.alltoall.net/) —— 在线文件转换导航
 * [squoosh](https://squoosh.app/) —— 免费图片压缩JPG.PNG
 * [上海研发公共服务平台](http://www.sstir.cn/) ——  科技文献检索，知网、万方
+* [在线配色](http://www.peise.net/tools/web/) —— 颜色的选择
+* [ARM架构相关数据手册](http://infocenter.arm.com/help/index.jsp) —— CPU

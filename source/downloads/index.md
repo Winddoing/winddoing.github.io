@@ -7,6 +7,7 @@ comments: false
 
 ## ARM
 * [Programmer’s Guide for ARMv8-A](/downloads/arm/DEN0024A_v8_architecture_PG.pdf)
+* [ARM Technical Support Knowledge Articles](http://infocenter.arm.com/help/basic/help.jsp?topic=/com.arm.doc.dui0204ic/CJAJIIGG.html) --- ARM相关手册
 
 ## uboot
 * [uboot启动流程.pdf](/downloads/uboot/uboot启动流程.pdf)
@@ -53,14 +54,16 @@ comments: false
 * [Operating Systems](http://cse.csusb.edu/tongyu/courses/cs460/notes/intro.php)
 
 ## 书
-
 * [Linux Device Drivers, 2nd Edition](https://www.xml.com/ldd/chapter/book)
 * [Linux Device Drivers, 3nd Edition](https://lwn.net/Kernel/LDD3/)
 
 ## Code
-
 * [保证嵌入式系统的代码质量](http://www-01.ibm.com/software/cn/rational/events/download/pdf/1123SH_3.pdf)|[local](docs/保证嵌入式系统的代码质量.pdf)|
 * [MISRA Compliance:2016](https://www.misra.org.uk/LinkClick.aspx?fileticket=w_Syhpkf7xA%3D&tabid=57)
+
+## 多媒体
+* [JPEG-图像压缩编码](/downloads/jpeg/itu-t81.pdf)
+
 
 ## 应用工具
 
