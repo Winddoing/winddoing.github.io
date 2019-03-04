@@ -1,7 +1,12 @@
 ---
-layout: "post"
-title: "ARMv8中的SIMD运算"
-date: "2019-03-01 11:18"
+layout: post
+title: ARMv8中的SIMD运算
+date: '2019-03-01 11:18'
+tags:
+  - SIMD
+categories:
+  - ARM
+  - SIMD
 ---
 
 `NEON`是一种压缩的SIMD架构，主要是给多媒体使用，结果并行计算的问题。

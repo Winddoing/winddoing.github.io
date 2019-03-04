@@ -172,3 +172,9 @@ sudo apt-get install sqlitebrowser
 查看yuv格式的文件
 
 - 官网：[http://datahammer.de](http://datahammer.de/)
+
+## Motirx
+
+[Motirx](https://github.com/agalwood/Motrix)是一款全能的下载工具，支持下载 HTTP、FTP、BT、磁力链、百度网盘等资源
+
+- 官网： [https://motrix.app](https://motrix.app)

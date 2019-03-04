@@ -1010,8 +1010,84 @@ int main()
 
 ## 静态链接
 
+> 将相同性质的段合并到一起，如所有输入文件的`.text`段合并到输出文件的`.text`段
+
+### 链接
+
+链接器一般采用`两步`链接：
+- 第一步： 空间与地址分配
+- 第二部： 符号解析与定位
+
+```
+$ld a.o b.o -e main -o ab
+```
+> - `-e main`: 表示将main函数作为程序入口，ld链接器默认的程序入口为`_start`
+
+### ld链接脚本
+
+> 控制链接过程，就是控制`输入段`如何变成`输出段`。
+
+- 输入段（Input Section）： 输入文件中的段
+- 输出段（Output Section）：输出文件中的段
+
+#### ld链接脚本语法
+
+链接脚本由一系列语句构成，语句分两种，一种是`命令语句`，另一种是`赋值语句`。
+
+链接脚本语法与C语言相似：
+- 语句之间使用分号“`；`”作为分隔符
+- 表达式与运算符
+  - `+`、 `-`、 `*`、 `/`、 `+=`、 `-=`、 `*=`、 `&`、 `|`、 `>>`、 `<<`
+- 注释和字符引用
+  - 注释：`/**/`
+
+命令语句：
+
+|        命令语句        | 说明                                                                                                                                 |
+|:----------------------:|:-------------------------------------------------------------------------------------------------------------------------------------|
+|     ENTRY(symbol)      | 指定符号的入口地址。入口地址即进程执行的第一条用户空间的指令所在进程地址空间的地址，它被指定在ELF文件头Elf32_Ehdr中的e_entry成员中。 |
+|   STARTUP(filename)    | 将文件filename作为链接过程中的第一个输入文件                                                                                         |
+|    SEARCH_DIR(path)    | 将路径path加入到ld链接器的库查找目录。与“`-Lpath`”命令作用相同                                                                       |
+| INPUT(file, file, ...) | 将指定文件作为链接过程中的输入文件                                                                                                   |
+|    INCLUDE filename    | 将指定文件包含到链接脚本                                                                                                             |
+|    PROVIDE(symbol)     | 在链接脚本中定义某个符号                                                                                                             |
+
+语法格式：
+```
+SECTIONS
+{
+    ...
+    secname : {contents}
+    ...
+}
+```
+> secname: 表示输出段段名
+
+#### 示例
+
+```
+ENTRY(nomain)
+SECTIONS
+{
+    - = 0x08048000 + SIZEOF_HEADERS;
+
+    tinytext : { *(.text) *(.data) *(.rodata)}
+
+    /DISCARD/ : { *(.comment)}
+}
+```
+解析：
+- `ENTRY(nomain)`: 指定程序入口为nomain()函数
+- `SECTIONS`： 链接脚本主体
+- `. = 0x08048000 + SIZEOF_HEADERS`：将当前虚拟地址设置成0x08048000+SIZEOF_HEADERS, SIZEOF_HEADERS为输出文件头大小。
+- `tinytext : { *(.text) *(.data) *(.rodata)}`： 段的转换，即为所以输入文件中的名字为".text" ".data" ".rodata"的段依次合并到输出文件的"tinytext"。
+- `/DISCARD/ : { *(.comment)}`： 将所有输入文件中的".comment"的段丢弃，不保存到输出文件
+
 ***
 # 装载与动态链接
+
+## 可执行文件的装载与进程
+
 
 
 ***
@@ -1020,6 +1096,12 @@ int main()
 
 ***
 # 工具
+
+## gcc
+
+### -fno-builtin
+
+> 关闭内置函数优化选项
 
 ## objdump
 
@@ -1030,5 +1112,44 @@ int main()
 ## nm
 
 ## strip
+
+## ar
+
+> 查看函数库里的详细情况和用多个对象文件生成一个库文件
+
+```
+$ar
+Usage: ar [emulation options] [-]{dmpqrstx}[abcDfilMNoPsSTuvV] [--plugin <name>] [member-name] [count] archive-file file...
+       ar -M [<mri-script]
+ commands:
+  d            - delete file(s) from the archive
+  m[ab]        - move file(s) in the archive
+  p            - print file(s) found in the archive
+  q[f]         - quick append file(s) to the archive
+  r[ab][f][u]  - replace existing or insert new file(s) into the archive
+  s            - act as ranlib
+  t            - display contents of archive
+  x[o]         - extract file(s) from the archive
+```
+
+```
+ar -t libname.a
+```
+> 显示所有对象文件(.o文件)的列表
+
+```
+ar -rv libname.a  objfile1.o objfile2.o ... objfilen.o
+```
+> 把objfile1.o--objfilen.o打包成一个库文件
+
+## ld
+
+```
+ld --help
+Usage: ld [options] file...
+Options:
+  -e ADDRESS: 指定程序入口
+  -T FILE：读取链接脚本（*.ld）
+```
 
 ***
