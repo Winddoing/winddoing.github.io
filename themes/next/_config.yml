@@ -399,7 +399,7 @@ daovoice_app_id: a28f1641
 # You can get your appid and appkey from https://leancloud.cn
 # more info please open https://valine.js.org
 valine:
-  enable: true
+  enable: false
   appid: WlP1cO3pcFfMi6jjtil9rTa0-gzGzoHsz # your leancloud application appid
   appkey: Qx5fywuCYGfUtLxPHIxY4hgS # your leancloud application appkey
   notify: false # mail notifier , https://github.com/xCss/Valine/wiki
@@ -416,7 +416,7 @@ valine:
 
 # Support for LiveRe comments system.
 # You can get your uid from https://livere.com/insight/myCode (General web site)
-#livere_uid: MTAyMC8yOTM5OC81OTY2
+livere_uid: MTAyMC8yOTM5OC81OTY2
 
 # Gitment
 # Introduction: https://imsun.net/posts/gitment-introduction/
