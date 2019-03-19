@@ -22,3 +22,7 @@ comments: true
 ## FAE
 
 > 英文Field Application Engineer的缩写，也叫现场技术支持工程师、售前售后服务工程师。
+
+## 鲁棒
+
+>鲁棒是Robust的音译，也就是健壮、强壮、坚定、粗野的意思。鲁棒性（robustness）就是系统的健壮性。它是在异常和危险情况下系统生存的关键。

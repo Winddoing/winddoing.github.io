@@ -41,10 +41,11 @@ comments: true
 * [The Linux Command Line 的中文版](https://billie66.github.io/TLCL/index.html) —— linux命令和shell
 * [一个有趣的网站收藏](https://123.kfd.me/)
 * [反向谷歌](https://kfd.me/) —— 可以进行谷歌搜索(2018.11.16)
-* [algorithm-visualizer](http://algorithm-visualizer.org) —— [github](https://github.com/algorithm-visualizer/algorithm-visualizer)开源的可视化工具
+* [algorithm-visualizer](http://algorithm-visualizer.org) —— [github](https://github.com/algorithm-visualizer/algorithm-visualizer)开源的可视化算法演示工具
 * [在线屏幕测试](http://pingmu.zh-ang.com/) —— 显示器测试工具
 * [All To All](http://www.alltoall.net/) —— 在线文件转换导航
 * [squoosh](https://squoosh.app/) —— 免费图片压缩JPG.PNG
 * [上海研发公共服务平台](http://www.sstir.cn/) ——  科技文献检索，知网、万方
 * [在线配色](http://www.peise.net/tools/web/) —— 颜色的选择
 * [ARM架构相关数据手册](http://infocenter.arm.com/help/index.jsp) —— CPU
+* [UZER.ME](https://uzer.me/) —— 云端应用（Matlab，PS，PPT，xMind等）

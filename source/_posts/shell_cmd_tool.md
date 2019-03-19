@@ -98,6 +98,17 @@ cp /etc/ssh/ssh_config ~/.ssh/config
 ...
 ```
 
+### ssh登录到远程的特定目录
+
+``` shell
+ssh -t xx@192.168.1.1 "cd /home/xx/test; bash"
+```
+或
+``` shell
+ssh -t xx@192.168.1.1 "cd /home/xx/test && bash"
+```
+- `-t` :标志用于强制分配伪终端
+
 ## tftp
 
 > 开发板（busybox）
