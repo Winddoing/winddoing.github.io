@@ -91,16 +91,70 @@ NEON 内在函数在头文件`arm_neon.h`中定义。头文件既定义内在函
 ## 内嵌汇编编程
 
 ``` asm
-asm volatile(                         
-    "mnemonic+operand \n\t"           
-    "mnemonic+operand \n\t"           
-    "mnemonic+operand \n\t"           
+asm volatile(
+    "mnemonic+operand \n\t"
+    "mnemonic+operand \n\t"
+    "mnemonic+operand \n\t"
 
-    : //Output operands               
-    : //Output operands               
-    : //Dirty registers etc           
-);                                    
+    : //output operand list  /*输出操作数列表*/
+    : //input operand list   /*输入操作数列表*/
+    : //Dirty registers etc  /*被改变资源列表*/
+);
 ```
+
+### 操作符&修饰符
+
+``` asm
+asm volatile(
+        "add %0, %1, %2"
+
+        : "=r" (ret)
+        : "r" (a), "r" (b)
+        );
+```
+
+| **操作符** |            含义            |
+|:----------:|:--------------------------:|
+|    `r`     |         通用寄存器         |
+|    `m`     |     一个有效的内存地址     |
+|    `I`     |     数据处理中的立即数     |
+|    `X`     | 被修饰的操作符只能作为输出 |
+
+| **修饰符** |     含义     |
+|:----------:|:------------:|
+|    `无`    |     只读     |
+|    `=`     |     只写     |
+|    `+`     |   可读可写   |
+|    `&`     | 只能作为输出 |
+
+### 传参
+
+#### 参数序列
+
+``` asm
+asm volatile(
+        "add %0, %1, %2"
+
+        : "=r" (ret)
+        : "r" (a), "r" (b)
+        );
+```
+> - `ret`: `%0`, 第一个参数
+> - `a`  : `%1`, 第二个参数
+> - `b`  : `%2`, 第三个参数
+
+#### 参数名
+
+``` asm
+asm volatile(
+        "add %[result], %[a], %[b]"
+
+        : [result] "=r" (ret)
+        : [a] "r" (a), [b] "r" (b)
+        );
+```
+> 传入参数不依赖参数序列
+
 
 ## 示例
 
@@ -367,35 +421,43 @@ static void matrix_mul_asm(uint16_t **aa, uint16_t **bb, uint16_t **cc)
 
     asm volatile(
         "ld4 {v0.8h, v1.8h, v2.8h, v3.8h}, [%0]     \n\t"
-        "ld4 {v4.8h, v5.8h, v6.8h, v7.8h}, [%0]     \n\t"
         "ld4 {v8.8h, v9.8h, v10.8h, v11.8h}, [%1]   \n\t"
-        "ld4 {v12.8h, v13.8h, v14.8h, v15.8h}, [%1] \n\t"
 
         "mul v0.8h, v0.8h, v8.8h                    \n\t"
         "mul v1.8h, v1.8h, v9.8h                    \n\t"
         "mul v2.8h, v2.8h, v10.8h                   \n\t"
         "mul v3.8h, v3.8h, v11.8h                   \n\t"
+
+        "st4 {v0.8h, v1.8h, v2.8h, v3.8h}, [%2]     \n\t"
+
+
+        "add x1, %0, #64                            \n\t"
+        "add x2, %1, #64                            \n\t"
+        "add x3, %2, #64                            \n\t"
+
+        //"ld4 {v4.8h-v7.8h}, [x1]                    \n\t"
+        "ld4 {v4.8h, v5.8h, v6.8h, v7.8h}, [x1]     \n\t"
+        "ld4 {v12.8h, v13.8h, v14.8h, v15.8h}, [x2] \n\t"
+
         "mul v4.8h, v4.8h, v12.8h                   \n\t"
         "mul v5.8h, v5.8h, v13.8h                   \n\t"
         "mul v6.8h, v6.8h, v14.8h                   \n\t"
         "mul v7.8h, v7.8h, v15.8h                   \n\t"
 
-        "st4 {v0.8h, v1.8h, v2.8h, v3.8h}, [%2]     \n\t"
-        "st4 {v4.8h, v5.8h, v6.8h, v7.8h}, [%2]     \n\t"
+        "st4 {v4.8h, v5.8h, v6.8h, v7.8h}, [x3]     \n\t"
 
         : "+r"(a),   //%0
           "+r"(b),   //%1
           "+r"(c)    //%2
         :
-        : "cc", "memory", "v0", "v1", "v2", "v3", "v4", "v5", "v6", "v7", "v8", "v9", "v10", "v11", "v12", "v13", "v14", "v15"
-    );
+        : "cc", "memory", "x1", "x2", "x3", "v0", "v1", "v2", "v3", "v4", "v5", "v6", "v7",
+            "v8", "v9", "v10", "v11", "v12", "v13", "v14", "v15"
+      );
 }
 ```
 > 内嵌汇编实现方式`8x8`
 
-**注意**：
 
-- 在`LD4`数据加载时一次可以加载4行，如果8行数据分两次加载，传入的矩阵的二维数组`地址不变`
 
 ## 参考
 
@@ -406,3 +468,4 @@ static void matrix_mul_asm(uint16_t **aa, uint16_t **bb, uint16_t **cc)
 * [Coding for NEON - Part 3: Matrix Multiplication](https://community.arm.com/processors/b/blog/posts/coding-for-neon---part-3-matrix-multiplication)
 * [Coding for NEON - Part 4: Shifting Left and Right](https://community.arm.com/processors/b/blog/posts/coding-for-neon---part-4-shifting-left-and-right)
 * [Coding for NEON - Part 5: Rearranging Vectors](https://community.arm.com/processors/b/blog/posts/coding-for-neon---part-5-rearranging-vectors)
+* [ARM® Cortex®-A72 MPCore Processor Technical Reference Manual](http://infocenter.arm.com/help/topic/com.arm.doc.100095_0003_06_en/cortex_a72_mpcore_trm_100095_0003_06_en.pdf)
