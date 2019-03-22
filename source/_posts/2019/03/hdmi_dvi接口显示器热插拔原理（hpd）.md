@@ -1,7 +1,11 @@
 ---
-layout: "post"
-title: "HDMI/DVI接口显示器热插拔原理（HPD）"
-date: "2019-03-19 16:16"
+layout: post
+title: HDMI/DVI接口显示器热插拔原理（HPD）
+date: '2019-03-19 16:16'
+tags:
+  - HDMI
+categories:
+  - 多媒体
 ---
 
 ![hdmi_cable_link](/images/2019/03/hdmi_cable_link.png)
