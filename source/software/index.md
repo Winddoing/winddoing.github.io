@@ -7,13 +7,14 @@ comments: false
 # **Windows**(64Bit)
 > 存放地址：[https://coding.net/u/Winddoing/p/software_tools/git](https://coding.net/u/Winddoing/p/software_tools/git)
 
-|       软件名称         | 下载地址                                                                                              | 备注                       |
+|       软件名称        | 下载地址                                                                                             | 备注                       |
 |:---------------------:|:-----------------------------------------------------------------------------------------------------|:---------------------------|
 |     OnlyStopWatch     | [Download](https://coding.net/u/Winddoing/p/software_tools/git/raw/master/OnlyStopWatch.exe)         | 秒表，毫秒级               |
 |    Putty0.70-64bit    | [Download](https://coding.net/u/Winddoing/p/software_tools/git/raw/master/putty.exe)                 | ssh                        |
 |        tftpd32        | [Download](https://coding.net/u/Winddoing/p/software_tools/git/raw/master/tftpd32.exe)               | 搭建Window下tftp服务       |
 | ElecardStreamEyeTools | [Download](https://coding.net/u/Winddoing/p/software_tools/git/raw/master/ElecardStreamEyeTools.rar) | 编码视频的可视化(解析es流) |
-|     edid_manager      | [Download](https://coding.net/u/Winddoing/p/software_tools/git/raw/master/edid_managerv1x0.zip)      | 显示器edid读取和解析工具   |
+|     edid_manager      | [Download](https://coding.net/u/Winddoing/p/software_tools/git/raw/master/edid_managerv1x0.zip)      | 显示器edid的获取和解析工具         |
+|        EEditZ         | [Download](https://coding.net/u/Winddoing/p/software_tools/git/raw/master/setup_EEditZ-0p96.zip)     | EDID解析编辑工具           |
 
 # **Linux** (Ubuntu 18.04)
 
