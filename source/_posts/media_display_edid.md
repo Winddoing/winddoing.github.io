@@ -53,15 +53,15 @@ parse-edid < edid.bin
 > 视频输出接口： `VGA`
 
 ```
-00000000: 003f 3f3f 3f3f 3f00 303f 3f65 0101 0101  .??????.0??e....          
-00000010: 071a 0103 6c2c 1978 2e2c c5a4 5650 3f28  ....l,.x.,..VP?(          
-00000020: 0f50 543f 3f00 714f 3f3f 3f3f 3fc0 a9cf  .PT??.qO?????...          
-00000030: 9500 0101 0101 302a 403f 603f 6430 1850  ......0*@?`?d0.P          
-00000040: 1300 3f3f 1000 001e 0000 003f 0055 3041  ..??.......?.U0A          
-00000050: 595a 3834 300a 2020 2020 0000 003f 0032  YZ840.    ...?.2          
-00000060: 4b1e 5315 000a 2020 2020 2020 0000 003f  K.S...      ...?          
-00000070: 004c 454e 204c 5332 3033 3377 480a 0049  .LEN LS2033wH..I          
-00000080: 0a                                       .                         
+00000000: 003f 3f3f 3f3f 3f00 303f 3f65 0101 0101  .??????.0??e....
+00000010: 071a 0103 6c2c 1978 2e2c c5a4 5650 3f28  ....l,.x.,..VP?(
+00000020: 0f50 543f 3f00 714f 3f3f 3f3f 3fc0 a9cf  .PT??.qO?????...
+00000030: 9500 0101 0101 302a 403f 603f 6430 1850  ......0*@?`?d0.P
+00000040: 1300 3f3f 1000 001e 0000 003f 0055 3041  ..??.......?.U0A
+00000050: 595a 3834 300a 2020 2020 0000 003f 0032  YZ840.    ...?.2
+00000060: 4b1e 5315 000a 2020 2020 2020 0000 003f  K.S...      ...?
+00000070: 004c 454e 204c 5332 3033 3377 480a 0049  .LEN LS2033wH..I
+00000080: 0a                                       .
 ```
 > EDID： 128-byte EDID successfully retrieved from i2c bus 0
 
@@ -77,7 +77,7 @@ parse-edid < edid.bin
 
 	Block 0 (EDID Base Block), Bytes 0 - 127,  128  BYTES OF EDID CODE:
 
-		        0   1   2   3   4   5   6   7   8   9   
+		        0   1   2   3   4   5   6   7   8   9
 		000  |  00  FF  FF  FF  FF  FF  FF  00  30  AE
 		010  |  A9  65  01  01  01  01  07  1A  01  03
 		020  |  6C  2C  19  78  2E  2C  C5  A4  56  50
@@ -206,7 +206,7 @@ parse-edid < edid.bin
 Pixel clock：像素时脉(Pixel clock)指的是用来划分进来的影像水平线里的个别画素，Pixel clock会将每一条水平线分成取样的样本，越高频率的Pixel clock，每条扫瞄线会有越多的样本画素。
 
 ```
-pixclock = 1/dotclock  
+pixclock = 1/dotclock
 ```
 >dotclock是视频硬件在显示器上绘制像素的速率
 
@@ -222,9 +222,94 @@ dotclock = Htotal × Vtotal × framerate
 ```
 Pixel Clock = 60 x (1600 + 200) x (900 + 100) = 108000000Hz = 108Mhz
 ```
+## 扩展EDID - E-EDID
+
+> 大小`256Byte`， 追加一个128Byte的block， 在Block0中的 `Extension Block(s)  : 1`
+
+![edid_CEA_version3](/images/2019/03/edid_cea_version3.png)
+
+### 数据块 -- index=4
+
+在EDID的扩展块中，第四个字节开始，后的数据块是可变长的部分。
+
+![edid_CEA_data_block](/images/2019/03/edid_cea_data_block.png)
+
+- 子数据块头部格式：
+
+![EDID_CEA_data_block_head](/images/2019/03/edid_cea_data_block_head.png)
+
+- 数据标签
+
+![EDID_CEA_data_block_head_tag](/images/2019/03/edid_cea_data_block_head_tag.png)
+
+#### Video Data Block
+
+主要存储SVD（Short Video Description）
+
+```
+Video Data Block
+
+640x480p @ 59.94/60Hz - EDTV (4:3, 1:1)
+720x480p @ 59.94/60Hz - EDTV (16:9, 32:27)
+1280x720p @ 59.94/60Hz - HDTV (16:9, 1:1) [Native]
+```
+
+#### Audio Data Block
+
+进行短音频描述（short audio description）
+
+```
+Audio Data Block
+
+Audio Format #1    : LPCM, 2-Channel, 24-Bit, 20-Bit, 16-Bit
+Sampling Frequency : 48 kHz, 44.1 kHz, 32 kHz
+
+Audio Format #2    : AC-3, 2-Channel, 640 k Max bit rate
+Sampling Frequency : 96 kHz, 48 kHz, 44.1 kHz, 32 kHz
+```
+
+#### Speaker Allocation Data Block -- SADB
+
+```
+Speaker Allocation Data Block (SADB)
+
+Front Left/Front Right Audio Channel (FL/FR)
+```
+
+#### Vendor Specific Data Block -- VSDB
+
+![EDID_CEA_VASB](/images/2019/03/edid_cea_vasb.png)
+
+供应商指定的特定数据块，其中可以标识出数据接口是HDMI还是DVI接口。
+
+HDMI的源端可以检查是否为合理的HDMI VSDB，然后包含有IEEE Registration Identifier登记识别符号`0x000C03`，就可以判断为HDMI装置，而不是DVI装置。
+
+>In order to determine if a sink is an HDMI device, an HDMI Source shall check the E-EDID for the
+presence of an HDMI Vendor Specific Data Block within the first CEA Extension. Any device with
+an HDMI VSDB of any valid length, containing the IEEE Registration Identifier of `0x000C03`, shall
+be treated as an HDMI device.
+Any device with an E-EDID that does not contain a CEA Extension or does not contain an HDMI
+VSDB of any valid length shall be treated by the Source as a DVI device (see Appendix C).
+
+```
+Vendor Specific Data Block (VSDB)
+
+IEEE Registration Identifier: 0x000C03
+CEC Physical Address        : 0x0030
+Maximum TMDS Clock          : 165MHz
+```
+
+
+## 解析工具
+
+- [edid_manager](https://coding.net/u/Winddoing/p/software_tools/git/raw/master/edid_managerv1x0.zip) --- 获取即解析EDID
+- [EEditZ](https://coding.net/u/Winddoing/p/software_tools/git/raw/master/setup_EEditZ-0p96.zip) --- 编辑即解析EDID
 
 ## 参考
 
+* [EDID CEA Standard](http://read.pudn.com/downloads222/doc/1046129/CEA861D.pdf) -- 规范
+* [High-Definition Multimedia Interface Specification Version 1.3](https://engineering.purdue.edu/ece477/Archive/2012/Spring/S12-Grp10/Datasheets/CEC_HDMI_Specification.pdf) -- VSDB
+* [E-EDID Standard](http://read.pudn.com/downloads110/ebook/456020/E-EDID%20Standard.pdf)
 * [修改显示器EDID工具(源码)](https://github.com/bulletmark/edid-rw))
 * [http://hubpages.com/technology/how-to-reflash-a-monitors-corrupted-edid //读取和修改显示器的EDID](http://hubpages.com/technology/how-to-reflash-a-monitors-corrupted-edid)
 * [EDID使用说明](https://blog.csdn.net/ganshuyu/article/details/38844963)
