@@ -49,3 +49,4 @@ comments: true
 * [在线配色](http://www.peise.net/tools/web/) —— 颜色的选择
 * [ARM架构相关数据手册](http://infocenter.arm.com/help/index.jsp) —— CPU
 * [UZER.ME](https://uzer.me/) —— 云端应用（Matlab，PS，PPT，xMind等）
+* [BEAUTIFUL.AI](https://www.beautiful.ai/) —— 人工智能简报设计神器,制作PPT
