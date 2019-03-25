@@ -26,3 +26,9 @@ comments: true
 ## 鲁棒
 
 >鲁棒是Robust的音译，也就是健壮、强壮、坚定、粗野的意思。鲁棒性（robustness）就是系统的健壮性。它是在异常和危险情况下系统生存的关键。
+
+## EMI/RFI/EMP
+
+> - `EMI`:(Electromagnetic Interference ), 电磁干扰
+> - `RFI`:(Radio Frequency Interference ), 射频干扰
+> - `EMP`:(Electromagnetic Pulse),电磁脉冲
