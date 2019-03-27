@@ -5,7 +5,7 @@
   </li>
   <li class="post-copyright-statement">
     <strong>{{ __('post.copyright.statement') + __('symbol.colon') }}</strong>
-    {{ xxxxxxx }}
+    {{ post.copyright.statement_content }}
   </li>
   <li class="post-copyright-link">
     <strong>{{ __('post.copyright.link') + __('symbol.colon') }}</strong>
