@@ -38,7 +38,7 @@ post:
   copyright:
     author: 本文作者
     statement: 作者声明
-    statement_content: 本博文为个人笔记, 由于个人能力有限，难免出现错误，欢迎大家批评指正。
+    statement_content: '本博文为个人笔记, 由于个人能力有限，难免出现错误，欢迎大家批评指正。'
     link: 本文链接
     license_title: 版权声明
     license_content: '本博客所有文章除特别声明外，均采用
