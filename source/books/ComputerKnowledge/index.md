@@ -32,3 +32,7 @@ comments: true
 > - `EMI`:(Electromagnetic Interference ), 电磁干扰
 > - `RFI`:(Radio Frequency Interference ), 射频干扰
 > - `EMP`:(Electromagnetic Pulse),电磁脉冲
+
+## ESD
+
+> `ESD`（Electro-Static discharge）的意思是“静电释放”。国际上习惯将用于静电防护的器材统称为ESD，中文名称为静电阻抗器。

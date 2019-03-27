@@ -37,6 +37,7 @@ post:
   totalcount: 全站共计字数
   copyright:
     author: 本文作者
+    statement: 作者声明
     link: 本文链接
     license_title: 版权声明
     license_content: '本博客所有文章除特别声明外，均采用
