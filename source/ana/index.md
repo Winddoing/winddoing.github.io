@@ -5,7 +5,7 @@ comments: false
 ---
 
 {% centerquote %}
-    ### 知其然 知其所以然 ###
+    知其然, 知其所以然
 {% endcenterquote %}
 
 {% note default %}
@@ -44,3 +44,7 @@ comments: false
     向着永恒开战的时候
     你是我的军旗
 {% endnote %}
+
+{% centerquote %}
+    生如夏花之绚烂，死如秋叶之静美
+{% endcenterquote %}
