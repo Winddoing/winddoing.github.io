@@ -129,6 +129,18 @@ vooya – Raw YUV/RGB Video Player
 ```
 sudo apt install dia
 ```
+### 中文输入法
+
+1. 修改/usr/share/applications/dia.desktop文件
+> 把`Exec=dia %F`改成`Exec=env GTK_IM_MODULE=xim dia %F`
+
+
+2. 在终端启动时增加启动设置
+> 设置别名alias，执行命令`alias dia="env GTK_IM_MODULE=xim dia"`
+
+3. 文字输入框右键
+> 选择输入文字模式—>在文字输入框右键—>输入法(Input Methods)—>X输入法
+
 
 
 ## 实时显示上下行网速、CPU及内存使用率
