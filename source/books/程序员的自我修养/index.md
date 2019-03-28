@@ -1088,6 +1088,85 @@ SECTIONS
 
 ## 可执行文件的装载与进程
 
+### 进程的虚拟地址空间
+
+虚拟地址空间（Virtual Address Space）大小，有CPU位数决定。
+
+`PAE`： （Physical Address Extension）物理地址扩展，主要是为了解决32位CPU中通过增加地址线扩展内存而导致的实际物理内存大小与虚拟地址空间大小之间的不匹配问题
+>PAE，通过`页映射`改变不同时机对不同物理空间的访问机制， 在Linux系统中采用`mmap()`系统调用实现。
+
+### 页映射
+
+将内存和所有磁盘中的数据和指令按照`页（Page）`为单位进行划分后，在需要时进行动态映射的过程。
+
+>页大小，硬件规定页大小4k、8K、2M、4M等，常用`4K`大小
+
+![程序员的自我修养_page_map](/images/2019/03/程序员的自我修养_page_map.png)
+
+页的置换：
+- 先进先出算法（FIFO）：置换最先映射到页
+- 最少使用算法（LUR）：将内存中很少访问到的页置换出去
+
+
+### 进程的虚拟空间分布
+
+`segment`：从装载的角度重新划分了ELF的各个段，一个“segment”包含一个或多个属性类似的”Section”
+
+
+```
+readelf -l a.out
+
+Elf file type is DYN (Shared object file)
+Entry point 0x540
+There are 9 program headers, starting at offset 64
+
+Program Headers:
+  Type           Offset             VirtAddr           PhysAddr
+                 FileSiz            MemSiz              Flags  Align
+  PHDR           0x0000000000000040 0x0000000000000040 0x0000000000000040
+                 0x00000000000001f8 0x00000000000001f8  R      0x8
+  INTERP         0x0000000000000238 0x0000000000000238 0x0000000000000238
+                 0x000000000000001c 0x000000000000001c  R      0x1
+      [Requesting program interpreter: /lib64/ld-linux-x86-64.so.2]
+  LOAD           0x0000000000000000 0x0000000000000000 0x0000000000000000
+                 0x0000000000000878 0x0000000000000878  R E    0x200000
+  LOAD           0x0000000000000db8 0x0000000000200db8 0x0000000000200db8
+                 0x0000000000000258 0x0000000000000260  RW     0x200000
+  DYNAMIC        0x0000000000000dc8 0x0000000000200dc8 0x0000000000200dc8
+                 0x00000000000001f0 0x00000000000001f0  RW     0x8
+  NOTE           0x0000000000000254 0x0000000000000254 0x0000000000000254
+                 0x0000000000000044 0x0000000000000044  R      0x4
+  GNU_EH_FRAME   0x0000000000000730 0x0000000000000730 0x0000000000000730
+                 0x000000000000003c 0x000000000000003c  R      0x4
+  GNU_STACK      0x0000000000000000 0x0000000000000000 0x0000000000000000
+                 0x0000000000000000 0x0000000000000000  RW     0x10
+  GNU_RELRO      0x0000000000000db8 0x0000000000200db8 0x0000000000200db8
+                 0x0000000000000248 0x0000000000000248  R      0x1
+
+ Section to Segment mapping:
+  Segment Sections...
+   00     
+   01     .interp
+   02     .interp .note.ABI-tag .note.gnu.build-id .gnu.hash .dynsym .dynstr .gnu.version .gnu.version_r .rela.dyn .rela.plt .init .plt .plt.got .text .fini .rodata .eh_frame_hdr .eh_frame
+   03     .init_array .fini_array .dynamic .got .data .bss
+   04     .dynamic
+   05     .note.ABI-tag .note.gnu.build-id
+   06     .eh_frame_hdr
+   07     
+   08     .init_array .fini_array .dynamic .got
+```
+
+- `section`：ELF文件的链接视图
+- `segment`：ELF文件的执行视图
+
+- `VMA`：（Virtual Memory Area）虚拟内存区域
+- `AVMA`：（Anonvmous Virtual Memory Area）匿名虚拟内存区域，主设备号、次设备号以及文件节点号都是0，表示没有映射到文件中的VMA
+
+
+### 随机地址空间分布技术
+
+### 段地址对齐
+
 
 
 ***

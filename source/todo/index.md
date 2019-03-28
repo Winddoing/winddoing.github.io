@@ -9,6 +9,7 @@ comments: true
 
 * [Embedded Linux Experts](http://elixir.free-electrons.com/linux/latest/source) —— 在线查看Linux、busybox、uboot等源码
 * [The Linux Kernel’s documentation(4.11)](https://www.kernel.org/doc/html/v4.11/index.html) —— Linux内核文档（`Documentation`目录）
+* [man-page](http://man7.org/linux/man-pages/index.html) —— Linux man pages online
 * [轻松认识 Linux kernel](http://www.bricktou.com/) —— linux内核函数接口注解
 * [asciiflow](http://asciiflow.com/) —— ASCII画图
 * ~~[kindle推](http://www.kindlepush.com/main) —— kindle电子书搜索~~
