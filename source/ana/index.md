@@ -38,3 +38,9 @@ comments: false
 {% note info %}
     去了解一个事物的本质，才可以征服该事物。
 {% endnote %}
+
+{% note success %}
+    当我跨过沉沦的一切
+    向着永恒开战的时候
+    你是我的军旗
+{% endnote %}
