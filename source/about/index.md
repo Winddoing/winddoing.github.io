@@ -4,7 +4,7 @@ date: 2016-08-18 23:07:24
 comments: true
 ---
 
-{% centerquote %} ### 涸辙遗鲋，旦暮成枯；人而无志，与彼何殊 ### {% endcenterquote %}
+{% centerquote %} *** 涸辙遗鲋，旦暮成枯；人而无志，与彼何殊 *** {% endcenterquote %}
 
 {% centerquote %} 自由之地，书我所想，记我所需 {% endcenterquote %}
 
@@ -29,8 +29,7 @@ comments: true
 
 {% centerquote %} 站点构建状态:[![Build Status](https://travis-ci.org/Winddoing/Winddoing.github.io.svg?branch=web_source)](https://travis-ci.org/Winddoing/Winddoing.github.io) {% endcenterquote %}
 
-## 网站配置
-
-* [hexo的next主题个性化教程：打造炫酷网站](https://blog.csdn.net/qq_33699981/article/details/72716951)
-* [DaoVoice](https://dashboard.daovoice.io/app/a28f1641/users?segment=all-users)
-* [小图标](https://fontawesome.com/icons?from=io)
+- *** 网站配置 ***
+> * [hexo的next主题个性化教程：打造炫酷网站](https://blog.csdn.net/qq_33699981/article/details/72716951)
+> * [DaoVoice](https://dashboard.daovoice.io/app/a28f1641/users?segment=all-users)
+> * [小图标](https://fontawesome.com/icons?from=io)
