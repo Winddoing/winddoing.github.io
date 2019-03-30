@@ -1,5 +1,5 @@
 ---
-title: 相册
+title: 摄影
 date: 2019-3-30 22:32:22
 type: "photos"
 fancybox: false
@@ -8,13 +8,15 @@ comments: false
 
 
 <link rel="stylesheet" href="./ins.css">
+
 <div class="photos-btn-wrap">
     <a class="photos-btn active" href="javascript:void(0)">Photos</a>
-        <a class="photos-btn" href="#">待续</a>
+
 </div>
-<div class="instagram itemscope">
-    <a href="https://www.instagram.com/lawlitewang20/" target="_blank" class="open-ins">图片正在加载中…</a>
+    <div class="instagram itemscope">
+        <a href="https://www.instagram.com/lawlitewang20/" target="_blank" class="open-ins">图片正在加载中…</a>
 </div>
+
 <script>
     (function() {
         var loadScript = function(path) {
