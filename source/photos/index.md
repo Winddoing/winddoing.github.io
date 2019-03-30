@@ -5,18 +5,19 @@ type: "photos"
 comments: false
 ---
 
-
 <link rel="stylesheet" href="./ins.css">
 <link rel="stylesheet" href="./photoswipe.css">
 <link rel="stylesheet" href="./default-skin/default-skin.css">
 
+<!---
 <div class="photos-btn-wrap">
     <a class="photos-btn active" href="javascript:void(0)">Photos</a>
     <a class="photos-btn" href="/photos/videos.html">Videos</a>
 </div>
+--->
 
 <div class="instagram itemscope">
-    <a href="https://www.instagram.com/lawlitewang20/" target="_blank" class="open-ins">图片正在加载中…</a>
+    <a href="https://winddoing.github.io" target="_blank" class="open-ins">图片正在加载中…</a>
 </div>
 
 <script>
