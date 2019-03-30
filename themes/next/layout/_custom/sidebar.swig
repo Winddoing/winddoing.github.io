@@ -9,7 +9,7 @@
      </div>
      <ul class="links-of-blogroll-list">
        {% set posts = site.posts.sort('-date') %}
-       {% for post in posts.slice('0', '5') %}
+       {% for post in posts.slice('0', '7') %}
          <li>
             <a href="{{ url_for(post.path) }}" title="{{ post.title }}" target="_blank">{{ post.title }}</a>
          </li>
