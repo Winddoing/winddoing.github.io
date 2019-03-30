@@ -1,10 +1,12 @@
 ---
-layout: post
-slug: "photos"
-title: "相册"
-noDate: "true"
-comments: "false"
+title: 相册
+date: 2019-3-30 22:32:22
+type: "photos"
+fancybox: false
+comments: false
 ---
+
+
 <link rel="stylesheet" href="./ins.css">
 <div class="photos-btn-wrap">
     <a class="photos-btn active" href="javascript:void(0)">Photos</a>
