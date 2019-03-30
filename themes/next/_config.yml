@@ -164,6 +164,11 @@ links:
 # in site  directory(source/uploads): /uploads/avatar.gif
 avatar: /images/Winddoing.jpg
 
+# Sidebar blog
+recent_posts_title: 近期文章
+recent_posts_layout: block
+recent_posts: true
+
 
 # 永久链接-OK
 abbrlink:
