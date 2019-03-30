@@ -12,6 +12,7 @@ comments: true
 * [man-page](http://man7.org/linux/man-pages/index.html) —— Linux man pages online
 * [轻松认识 Linux kernel](http://www.bricktou.com/) —— linux内核函数接口注解
 * [asciiflow](http://asciiflow.com/) —— ASCII画图
+* [codelf](https://unbug.github.io/codelf/) —— 搜索更好的变量名，函数名
 * ~~[kindle推](http://www.kindlepush.com/main) —— kindle电子书搜索~~
 * [dirtysalt's homepage](https://dirtysalt.github.io/html/index.html) —— 一个有阅读价值的博客
 * [计算机书籍控](http://bestcbooks.com/) —— 计算机相关书籍介绍与部分电子书
