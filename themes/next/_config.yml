@@ -150,8 +150,8 @@ social_icons:
 # Blog rolls
 links_icon: link
 links_title: Links
-links_layout: block
-#links_layout: inline
+#links_layout: block
+links_layout: inline
 links:
   #Title: http://example.com/
   嵌入式相关: https://winddoing.gitbooks.io/embedded_notes/content/
