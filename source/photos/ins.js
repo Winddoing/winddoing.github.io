@@ -116,8 +116,8 @@
                 var data = res.list[j].arr;
                 var liTmpl = "";
                 for (var i = 0, len = data.link.length; i < len; i++) {
-                    var minSrc = 'https://raw.githubusercontent.com/wugenqiang/myblog_album/master/min_photos/' + data.link[i];
-                    var src = 'https://raw.githubusercontent.com/wugenqiang/myblog_album/master/photos/' + data.link[i];
+                    var minSrc = 'https://dev.tencent.com/u/Winddoing/p/photos/git/raw/master/min_images/' + data.link[i];
+                    var src = 'https://dev.tencent.com/u/Winddoing/p/photos/git/raw/master/images/' + data.link[i];
                     var type = data.type[i];
                     var target = src + (type === 'video' ? '.mp4' : '.jpg');
                     src += '';
