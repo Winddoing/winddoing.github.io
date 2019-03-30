@@ -2,7 +2,6 @@
 title: 摄影
 date: 2019-3-30 22:32:22
 type: "photos"
-fancybox: false
 comments: false
 ---
 
