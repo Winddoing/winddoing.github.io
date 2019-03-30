@@ -9,7 +9,7 @@
 PWD=`pwd`
 
 DIR="$PWD/resource"
-SRC_DIR="software_tools blog_docs Own-Treasure-Box"
+SRC_DIR="software_tools blog_docs Own-Treasure-Box photos"
 
 if [ ! -d $DIR ]; then
 	mkdir $DIR
