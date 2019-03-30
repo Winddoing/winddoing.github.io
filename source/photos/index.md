@@ -8,6 +8,7 @@ comments: false
 
 
 <link rel="stylesheet" href="./ins.css">
+<link rel="stylesheet" href="./photoswipe.css">
 
 <div class="photos-btn-wrap">
     <a class="photos-btn active" href="javascript:void(0)">Photos</a>
@@ -29,4 +30,3 @@ comments: false
         }, 0)
     })()
 </script>
-
