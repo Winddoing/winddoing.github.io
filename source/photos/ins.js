@@ -11,7 +11,7 @@
         /******/ // Check if module is in cache
         /******/
         if (installedModules[moduleId])
-            /******/
+        /******/
             return installedModules[moduleId].exports;
         /******/
         /******/ // Create a new module (and put it into the cache)
@@ -122,15 +122,15 @@
                     var target = src + (type === 'video' ? '.mp4' : '.jpg');
                     src += '';
                     liTmpl += '<figure class="thumb" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">\
-                        <a href="' + src + '" itemprop="contentUrl" data-size="1080x1080" data-type="' + type + '" data-target="' + src + '">\
-                        <img class="reward-img" data-type="' + type + '" data-src="' + minSrc + '" src="assets/empty.png" itemprop="thumbnail" onload="lzld(this)">\
+                        <a href="' + src + '" itemprop="contentUrl" data-size="1920x1080" data-type="' + type + '" data-target="' + src + '">\
+                          <img class="reward-img" data-type="' + type + '" data-src="' + minSrc + '" src="assets/empty.png" itemprop="thumbnail" onload="lzld(this)">\
                         </a>\
                         <figcaption style="display:none" itemprop="caption description">' + data.text[i] + '</figcaption>\
-                        </figure>';
+                    </figure>';
                 }
                 ulTmpl = ulTmpl + '<section class="archives album"><h1 class="year">' + data.year + '年<em>' + data.month + '月</em></h1>\
-                    <ul class="img-box-ul">' + liTmpl + '</ul>\
-                    </section>';
+                                      <ul class="img-box-ul">' + liTmpl + '</ul>\
+                                   </section>';
             }
             document.querySelector('.instagram').innerHTML = '<div class="photos" itemscope itemtype="http://schema.org/ImageGallery">' + ulTmpl + '</div>';
             createVideoIncon();
@@ -620,8 +620,8 @@
                 }
 
                 return instances[
-                    instances.push(createInViewport(container)) - 1
-                ].isInViewport(elt, offset, cb);
+                instances.push(createInViewport(container)) - 1
+                    ].isInViewport(elt, offset, cb);
             }
 
             function addEvent(el, type, fn) {
@@ -659,17 +659,17 @@
                         return !!(a.compareDocumentPosition(b) & 16);
                     } :
                     global.document.documentElement.contains ?
-                    function(a, b) {
-                        return a !== b && (a.contains ? a.contains(b) : false);
-                    } :
-                    function(a, b) {
-                        while (b = b.parentNode) {
-                            if (b === a) {
-                                return true;
+                        function(a, b) {
+                            return a !== b && (a.contains ? a.contains(b) : false);
+                        } :
+                        function(a, b) {
+                            while (b = b.parentNode) {
+                                if (b === a) {
+                                    return true;
+                                }
                             }
-                        }
-                        return false;
-                    };
+                            return false;
+                        };
             }
 
             function createInViewport(container) {
