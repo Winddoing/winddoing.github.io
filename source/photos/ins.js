@@ -169,7 +169,8 @@
             if (!searchData) {
                 var xhr = new XMLHttpRequest();
                 /* xhr.open('GET', './data.json?t=' + +new Date(), true); */
-                xhr.open('GET', 'https://coding.net/u/Winddoing/p/photos/git/raw/master/data.json?t=' + +new Date(), true);
+                /* xhr.open('GET', 'https://coding.net/u/Winddoing/p/photos/git/raw/master/data.json?t=' + +new Date(), true); */
+                xhr.open('GET', 'https://winddoing.github.io/photos/data.json?t=' + +new Date(), true);
 
                 xhr.onload = function() {
                     if (this.status >= 200 && this.status < 300) {
