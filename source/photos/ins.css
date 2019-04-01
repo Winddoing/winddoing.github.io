@@ -40,7 +40,7 @@ figure {
     display: inline-block;
     text-align: center;
     background: #ededed;
-    outline: 1px solid #ddd;
+    outline: 3px solid #FFF;
 }
 .instagram .thumb a {
     position: relative;
