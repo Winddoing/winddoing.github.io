@@ -299,6 +299,20 @@ CEC Physical Address        : 0x0030
 Maximum TMDS Clock          : 165MHz
 ```
 
+## 首选最佳分辨率
+
+> A.2.10.1 First Detailed Timing Descriptor
+The VESA E-EDID Standard [10] requires that the First Detailed Timing Descriptor be used for the most
+`“preferred”` video format and subsequent detailed timing descriptors are listed in order of decreasing
+preference.
+
+> All DTDs and SVDs shall be listed in order of priority; meaning that the first is the one that the display
+manufacturer has identified as optimal.
+
+> The first 18 Byte Descriptor Block shall contain the preferred timing mode. The display manufacturer
+defines the “Preferred Timing Mode (PTM)” as the video timing mode that will produce the best quality
+image on the display’s viewing screen. 
+
 
 ## 解析工具
 

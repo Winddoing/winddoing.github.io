@@ -29,7 +29,17 @@ comments: true
 
 {% centerquote %} 站点构建状态:[![Build Status](https://travis-ci.org/Winddoing/Winddoing.github.io.svg?branch=web_source)](https://travis-ci.org/Winddoing/Winddoing.github.io) {% endcenterquote %}
 
-- *** 网站配置 ***
-> * [hexo的next主题个性化教程：打造炫酷网站](https://blog.csdn.net/qq_33699981/article/details/72716951)
-> * [DaoVoice](https://dashboard.daovoice.io/app/a28f1641/users?segment=all-users)
-> * [小图标](https://fontawesome.com/icons?from=io)
+{% tabs First unique name %}
+<!-- tab 网站配置 -->
+
+* [hexo的next主题个性化教程：打造炫酷网站](https://blog.csdn.net/qq_33699981/article/details/72716951)
+* [DaoVoice](https://dashboard.daovoice.io/app/a28f1641/users?segment=all-users)
+* [小图标](https://fontawesome.com/icons?from=io)
+
+<!-- endtab -->
+
+<!-- tab 。。。 -->
+**。。。**
+<!-- endtab -->
+
+{% endtabs %}
