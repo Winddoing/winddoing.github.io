@@ -1269,14 +1269,118 @@ readelf -sD libxx.so
 
 ### 动态链接重定位表
 
+PIC模式的共享对象也需要`重定位`，其代码段是地址无关，不需要重定位，但是数据段其中包含决定地址并且GOT表也在数据段
+
+### 动态链接器的自举
+
+动态链接器本身是一个共享对象，但是其具有特殊性**不可以依赖其他任何对象，其本身所需要的全局变量和静态变量的重定位工作由它本身完成**
+
+`自举（bootstrap）`：具有一定限制条件的启动代码
+
+动态链接器的入口地址是自举代码的入口地址。
+
+### 显石运行时链接
+
+动态库的装载API：`#include <dlfcn.h>`
+- `dlopen`：打开动态库
+- `dlsym`：查找符号
+- `dlerror`：错误处理
+- `dlclose`：关闭动态库
 
 
+## Linux共享库的组织
+
+兼容即接口，二进制接口（`ABI`，Application Binary Interface）
+
+### 共享库版本命名
+
+> libname.so.z.y.z
+
+- `x`:主版本号（Major Version Number），表示库的重大升级，不同主版本号之间不兼容
+- `y`:次版本号（Minor Version Number），表示库的增量升级，高的次版本号的库向后兼容低的次版本号的库
+- `z`:发布版本号（Release Version Number），表示库的错误修正、性能改进等，不添加如何新的接口也不对任何接口进行改动
+
+### SO-NAME
+
+> 共享库的命名机制，即共享库的文件名去掉次版本号和发布版本号，保留主版本号，本质就是一个`软链接`
 
 
+### 共享库查找过程
 
+动态链接器会在`/lib`、`/user/lib`和由`/etc/ld.so.conf`配置文件指定的目录中查找共享库
+
+### 环境变量
+
+#### LD_LIBRARY_PATH
+
+>改变动态链接器装载共享库路径的方法
+
+```
+export LD_LIBRARY_PATH = /xxxx/libname.so.x
+```
+
+#### LD_PRELOAD
+
+> 指定预先要装载的共享库路径
+
+#### LD_DEBUG
+
+> 打开动态链接器调试功能
+
+```
+LD_DEBUG=files ./a.out
+      1696:
+      1696:	WARNING: Unsupported flag value(s) of 0x8000000 in DT_FLAGS_1.
+      1696:
+      1696:	file=libc.so.6 [0];  needed by ./a.out [0]
+      1696:	file=libc.so.6 [0];  generating link map
+      1696:	  dynamic: 0x00007f36e1202b80  base: 0x00007f36e0e18000   size: 0x00000000003f0ae0
+      1696:	    entry: 0x00007f36e0e39cb0  phdr: 0x00007f36e0e18040  phnum:                 10
+      1696:
+      1696:
+      1696:	calling init: /lib/x86_64-linux-gnu/libc.so.6
+      1696:
+      1696:
+      1696:	initialize program: ./a.out
+      1696:
+      1696:
+      1696:	transferring control: ./a.out
+      1696:
+```
+
+```
+LD_DEBUG=help ./a.out
+Valid options for the LD_DEBUG environment variable are:
+
+  libs        display library search paths
+  reloc       display relocation processing
+  files       display progress for input file
+  symbols     display symbol table processing
+  bindings    display information about symbol binding
+  versions    display version dependencies
+  scopes      display scope information
+  all         all previous options combined
+  statistics  display relocation statistics
+  unused      determined unused DSOs
+  help        display this help message and exit
+
+To direct the debugging output into a file instead of standard output
+a filename can be specified using the LD_DEBUG_OUTPUT environment variable.
+```
 
 ***
 # 库与运行库
+
+## 内存
+
+
+## 运行库
+
+
+## 系统调用与API
+
+
+## 运行库实现
 
 
 ***
@@ -1297,6 +1401,12 @@ readelf -sD libxx.so
 ## nm
 
 ## strip
+
+> 清除掉共享库或可执行文件的所有符号和调试信息
+
+```
+strip libname.so.x
+```
 
 ## ar
 
@@ -1341,6 +1451,16 @@ Options:
 
 > 查看一个程序主模块或共享库依赖哪些共享库
 
+
+## ldconfig
+
+>为共享库目录下的各个共享库创建、删除或更新相应的SO-NAME
+
+- 安装
+
+```
+ldconfig -n libname.so.x
+```
 
 
 ***
