@@ -1373,6 +1373,41 @@ a filename can be specified using the LD_DEBUG_OUTPUT environment variable.
 
 ## 内存
 
+```
++-----------------------+ 0xffff ffff
+|                       |
+|     kernel space      |
+|                       |
++-----------------------+ 0xc000 0000
+|         stack         |
++-----------+-----------+
+|           |           |
+|           v           |
+|         unused        |
++-----------------------+
+|  dynamic libraries    |
++-----------------------+ 0x4000 0000
+|         unused        |
+|           ^           |
+|           |           |
++-----------+-----------+
+|          heap         |
++-----------------------+
+|  read/write sections  |
++-----------------------+
+|  readonly sections    |
+|   .init .rodata .text |
++-----------------------+ 0x0804 8000
+|       reserved        |
++-----------------------+ 0
+```
+> Linux进程地址空间分布
+
+#### Segment fault
+
+原因：
+- 指针初始化为NULL，没有指定空间直接开始使用
+- 没有初始化栈上的指针，直接开始使用，该指针一般是一个随机数
 
 ## 运行库
 
