@@ -38,8 +38,10 @@ comments: true
 
 <!-- endtab -->
 
-<!-- tab 。。。 -->
-**。。。**
+<!-- tab 捐助 -->
+
+![alipay](/images/alipay.jpg)
+
 <!-- endtab -->
 
 {% endtabs %}
