@@ -16,6 +16,10 @@ comments: false
 </div>
 --->
 
+{% centerquote %}
+   ** 一个人的行走范围，就是他的世界。**——北岛
+{% endcenterquote %}
+
 <div class="instagram itemscope">
     <a href="https://winddoing.github.io" target="_blank" class="open-ins">图片正在加载中…</a>
 </div>
