@@ -1153,14 +1153,14 @@ Program Headers:
 
  Section to Segment mapping:
   Segment Sections...
-   00     
+   00
    01     .interp
    02     .interp .note.ABI-tag .note.gnu.build-id .gnu.hash .dynsym .dynstr .gnu.version .gnu.version_r .rela.dyn .rela.plt .init .plt .plt.got .text .fini .rodata .eh_frame_hdr .eh_frame
    03     .init_array .fini_array .dynamic .got .data .bss
    04     .dynamic
    05     .note.ABI-tag .note.gnu.build-id
    06     .eh_frame_hdr
-   07     
+   07
    08     .init_array .fini_array .dynamic .got
 ```
 
@@ -1403,11 +1403,52 @@ a filename can be specified using the LD_DEBUG_OUTPUT environment variable.
 ```
 > Linux进程地址空间分布
 
-#### Segment fault
+### Segment fault
 
 原因：
 - 指针初始化为NULL，没有指定空间直接开始使用
 - 没有初始化栈上的指针，直接开始使用，该指针一般是一个随机数
+
+### 栈
+
+> 在经典的计算机科学中，`栈`是一种特殊的容器，具有先进先出（FIFO）的规则，但是在计算机系统中，栈则是一个具有`FIFO`属性的内存区域
+
+栈保存了一个函数调用所需的维护信息，通常称为`堆栈帧`（Stack Frame）或`活动记录`（Activate Record）
+
+堆栈帧的内容：
+- 函数的返回地址和参数
+- 临时变量，包括函数的非静态变量以及编译器生成的其他临时变量
+- 保存的上下文，包含函数调用前后保持不变的寄存器
+
+### 堆
+
+#### mmap
+
+> 向操作系统申请一段虚拟地址空间，这段空间可以映射到一个文件，也可以不用射文件，不映射文件的时候叫`匿名空间`
+
+``` C
+#include <sys/mman.h>
+
+void *mmap(void *addr, size_t length, int prot, int flags,
+           int fd, off_t offset);
+int munmap(void *addr, size_t length);
+```
+- `addr`: 申请空间的起始地址，如果为`0`表示Linux系统会自动选择合适的起始地址
+- `length`: 申请空间的长度
+- `prot`: 设置申请的空间权限（可读、可写、可执行）
+- `flags`：设置申请空间的映射类型（文件类型，匿名空间）
+- `fd`：表示映射的文件描述符
+- `offset`： 指定文件映射的文件偏移
+
+glibc的malloc函数处理用户空间请求：对于小于128KB的请求，它会在现有堆空间里面，按照堆分配算法为它分配一块空间并返回；对于大于128KB的请求来说，会使用mmap分配一块匿名空间，然后在这块匿名空间中为用户分配空间。
+
+
+#### 堆分配算法
+
+- 空闲链表
+- 位图
+- 对象池
+
 
 ## 运行库
 
