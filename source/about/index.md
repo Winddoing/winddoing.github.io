@@ -27,14 +27,6 @@ comments: true
 网站构建，源码数据包大小：`xxxM`; 最后一次构建时间：`xdate`;
 {% endnote %}
 
-{% note info %}
-站点构建状态:[![Build Status](https://travis-ci.org/Winddoing/Winddoing.github.io.svg?branch=web_source)](https://travis-ci.org/Winddoing/Winddoing.github.io)
-{% endnote %}
-
-{% note info %}
-相册构建状态:[![构建状态](https://dev.tencent.com/badges/Winddoing/photos/branch/master/build.svg)](https://dev.tencent.com/u/Winddoing/p/photos/ci/job)
-{% endnote %}
-
 {% tabs First unique name %}
 <!-- tab 网站配置 -->
 
@@ -47,6 +39,18 @@ comments: true
 <!-- tab 捐助 -->
 
 ![alipay](/images/alipay.jpg)
+
+<!-- endtab -->
+
+<!-- tab 自动构建 -->
+
+{% centerquote %}
+站点状态:[![Build Status](https://travis-ci.org/Winddoing/Winddoing.github.io.svg?branch=web_source)](https://travis-ci.org/Winddoing/Winddoing.github.io)
+{% endcenterquote %}
+
+{% centerquote %}
+相册状态:[![构建状态](https://dev.tencent.com/badges/Winddoing/photos/branch/master/build.svg)](https://dev.tencent.com/u/Winddoing/p/photos/ci/job)
+{% endcenterquote %}
 
 <!-- endtab -->
 
