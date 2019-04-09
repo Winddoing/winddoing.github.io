@@ -28,7 +28,7 @@ comments: true
 {% endnote %}
 
 {% centerquote %}
-站点构建状态:[![Build Status](https://travis-ci.org/Winddoing/Winddoing.github.io.svg?branch=web_source)](https://travis-ci.org/Winddoing/Winddoing.github.io) photos:[![构建状态](https://dev.tencent.com/badges/Winddoing/photos/branch/master/build.svg)](https://dev.tencent.com/u/Winddoing/p/photos/ci/job)
+站点构建状态:[![Build Status](https://travis-ci.org/Winddoing/Winddoing.github.io.svg?branch=web_source)](https://travis-ci.org/Winddoing/Winddoing.github.io)[![构建状态](https://dev.tencent.com/badges/Winddoing/photos/branch/master/build.svg)](https://dev.tencent.com/u/Winddoing/p/photos/ci/job)
 {% endcenterquote %}
 
 {% tabs First unique name %}
