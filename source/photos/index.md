@@ -38,10 +38,15 @@ comments: false
 </script>
 
 
+<!---
 <a class="cloud-tie-join-count" href="javascript:void(0);" style="color:gray;font-size:14px;">
     <span class="icon-sort"></span>
     <span id="busuanzi_container_page_pv" style="color: rgb(239, 117, 34); font-size: 14px; display: inline;">
         访问量: <span id="busuanzi_value_page_pv"></span>次
     </span>
 </a>
+--->
 
+<span id="busuanzi_container_page_pv">
+    浏览量: <span id="busuanzi_value_page_pv"></span>次
+</span>
