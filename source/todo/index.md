@@ -49,6 +49,7 @@ comments: true
 * [squoosh](https://squoosh.app/) —— 免费图片压缩JPG.PNG
 * [上海研发公共服务平台](http://www.sstir.cn/) ——  科技文献检索，知网、万方
 * [在线配色](http://www.peise.net/tools/web/) —— 颜色的选择
+* [中国色](http://zhongguose.com/) —— 免费的配色网站
 * [ARM架构相关数据手册](http://infocenter.arm.com/help/index.jsp) —— CPU
 * [UZER.ME](https://uzer.me/) —— 云端应用（Matlab，PS，PPT，xMind等）
 * [BEAUTIFUL.AI](https://www.beautiful.ai/) —— 人工智能简报设计神器,制作PPT
