@@ -2,7 +2,7 @@
 title: Linux下常用工具
 date: 2018-05-13 23:37:24
 categories: 工具
-tags: [linux]
+tags: [Linux]
 ---
 
 Linux下常用工具：

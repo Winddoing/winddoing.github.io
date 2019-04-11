@@ -2,7 +2,7 @@
 title: Cortex-A8平台实验
 date: 2016-09-11 23:07:24
 categories: Cortex-A8
-tags: [Cortex-A8, uboot, linux, bulidroot, ARM]
+tags: [Cortex-A8, uboot, Linux, bulidroot, ARM]
 ---
 
 毕业的时候有把A8板子拿了过来，之前由于没有源程序（光盘丢失找不到资料）对它的开发和实验都一直没有做过，它上面的资源很多不想让它就静静的放着浪费。虽然已经很久没有接触ARM平台了，但是它与MIPS的上层基本原理相似，所以最近想倒腾它，希望可以把linux系统跑起来，也不枉失去它在我手中的价值嘿嘿嘿。在这里简单记录实验的过程和中间的少许思考吧。

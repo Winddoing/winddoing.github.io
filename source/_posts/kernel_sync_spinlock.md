@@ -2,7 +2,7 @@
 title: Linux内核同步机制【spin lock】
 date: 2018-03-29 23:07:24
 categories: Linux内核
-tags: [linux, lock]
+tags: [Linux, lock]
 ---
 1. spinlock的使用场景，为什么使用？
 2. 在spinlock控制临界区中，为什么不能睡眠？如果睡眠会产生什么结果？

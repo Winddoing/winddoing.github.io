@@ -3,7 +3,7 @@ layout: post
 title: Linux下去掉^M的方法
 date: '2018-10-23 11:49'
 tags:
-  - linux
+  - Linux
 categories:
   - 工具
 ---
