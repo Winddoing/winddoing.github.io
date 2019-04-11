@@ -2,7 +2,7 @@
 title: 文件系统性能测试--iozone
 date: 2017-12-2 23:07:24
 categories: 文件系统 
-tags: [文件相同， iozone]
+tags: [文件系统, iozone]
 ---
 
 

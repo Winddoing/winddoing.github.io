@@ -2,7 +2,7 @@
 title: Cgroup框架的实现
 date: 2018-03-30 23:07:24
 categories: Linux内核
-tags: [linux, Cgroup]
+tags: [Linux, Cgroup]
 ---
 
 CGoup核心主要创建一系列sysfs文件，用户空间可以通过这些节点控制CGroup各子系统行为，以及各子系统模块根据参数。在执行过程中或调度进程到不同CPU上，或控制CPU占用时间，或控制IO带宽等等。另外，在每个系统的proc文件系统中都有一个cgroup，显示该进程对应的CGroup各子系统信息。
