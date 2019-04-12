@@ -41,7 +41,7 @@ char* itoa(int val, int base){
     static char buf[32] = {0};
 	int i = 30;
 	for(; val && i ; --i, val /= base)
-		buf[i] = "0123456789abcdef"[val % base];
+	    buf[i] = "0123456789abcdef"[val % base];
 	return &buf[i+1];
 }
 ```
@@ -72,35 +72,34 @@ Rodrigo de Salvo Braz指出了一个bug：当输入为0时没有返回。现在�
  * C++ version std::string style "itoa":
  */
 std::string itoa(int value, unsigned int base) {
-	const char digitMap[] = "0123456789abcdef";
-	std::string buf;
+    const char digitMap[] = "0123456789abcdef";
+    std::string buf;
 
-        // Guard:
-	if (base == 0 || base > 16) {
-		// Error: may add more trace/log output here
-		return buf;
-	}
+    // Guard:
+    if (base == 0 || base > 16) {
+        // Error: may add more trace/log output here
+        return buf;
+    }
 
-	// Take care of negative int:
-	std::string sign;
-	int _value = value;
+    // Take care of negative int:
+    std::string sign;
+    int _value = value;
 
-	// Check for case when input is zero:
-	if (_value == 0) return "0";
+    // Check for case when input is zero:
+    if (_value == 0) return "0";
 
-	if (value < 0) {
-		_value = -value;
-		sign = "-";
-	}
+    if (value < 0) {
+        _value = -value;
+        sign = "-";
+    }
 
-	// Translating number to string with base:
-	for (int i = 30; _value && i ; --i) {
-		buf = digitMap[ _value % base ] + buf;
-		_value /= base;
-	}
+    // Translating number to string with base:
+    for (int i = 30; _value && i ; --i) {
+        buf = digitMap[ _value % base ] + buf;
+        _value /= base;
+    }
 
-	return sign.append(buf);
-
+    return sign.append(buf);
 }
 ```
 更新：(2005/05/07)
@@ -119,25 +118,25 @@ John Maloney指出了之前函数的多个问题。一个主要问题是函数�
  * C++ version std::string style "itoa":
  */
 std::string itoa(int value, int base) {
-	enum { kMaxDigits = 35 };
-	std::string buf;
-	buf.reserve( kMaxDigits ); // Pre-allocate enough space.
+    enum { kMaxDigits = 35 };
+    std::string buf;
+    buf.reserve( kMaxDigits ); // Pre-allocate enough space.
 
-	// check that the base if valid
-	if (base < 2 || base > 16) return buf;
-	int quotient = value;
+    // check that the base if valid
+    if (base < 2 || base > 16) return buf;
+    int quotient = value;
 
-	// Translating number to string with base:
-	do {
-		buf += "0123456789abcdef"[ std::abs( quotient % base ) ];
-		quotient /= base;
-	} while ( quotient );
+    // Translating number to string with base:
+    do {
+        buf += "0123456789abcdef"[ std::abs( quotient % base ) ];
+        quotient /= base;
+    } while ( quotient );
 
-	// Append the negative sign for base 10
-	if ( value < 0 && base == 10) buf += '-';
-	std::reverse( buf.begin(), buf.end() );
+    // Append the negative sign for base 10
+    if ( value < 0 && base == 10) buf += '-';
+    std::reverse( buf.begin(), buf.end() );
 
-	return buf;
+    return buf;
 }
 ```
 
@@ -148,23 +147,23 @@ std::string itoa(int value, int base) {
  * C++ version char* style "itoa":
  */
 char* itoa( int value, char* result, int base ) {
-	// check that the base if valid
-	if (base < 2 || base > 16) { *result = 0; return result; }
+    // check that the base if valid
+    if (base < 2 || base > 16) { *result = 0; return result; }
 
-	char* out = result;
-	int quotient = value;
+    char* out = result;
+    int quotient = value;
 
-	do {
-		*out = "0123456789abcdef"[ std::abs( quotient % base ) ];
-		++out;
-		quotient /= base;
-	} while ( quotient );
+    do {
+        *out = "0123456789abcdef"[ std::abs( quotient % base ) ];
+        ++out;
+        quotient /= base;
+    } while ( quotient );
 
-	// Only apply negative sign for base 10
-	if ( value < 0 && base == 10) *out++ = '-';
-	std::reverse( result, out );
-	*out = 0;
-	return result;
+    // Only apply negative sign for base 10
+    if ( value < 0 && base == 10) *out++ = '-';
+    std::reverse( result, out );
+    *out = 0;
+    return result;
 }
 ```
 更新：(2006/10/15)
@@ -184,25 +183,25 @@ void strreverse(char* begin, char* end) {
 }
 
 void itoa(int value, char* str, int base) {
-	static char num[] = "0123456789abcdefghijklmnopqrstuvwxyz";
-	char* wstr=str;
-	int sign;
+    static char num[] = "0123456789abcdefghijklmnopqrstuvwxyz";
+    char* wstr=str;
+    int sign;
 
-       // Validate base
-	if (base<2 || base>35){ *wstr='\0'; return; }
+    // Validate base
+    if (base<2 || base>35){ *wstr='\0'; return; }
 
-        // Take care of sign
-	if ((sign=value) < 0) value = -value;
+    // Take care of sign
+    if ((sign=value) < 0) value = -value;
 
-	// Conversion. Number is reversed.
-	do {
-              *wstr++ = num[value%base];
-        } while(value/=base);
-	if(sign<0) *wstr++='-';
-	*wstr='\0';
+    // Conversion. Number is reversed.
+    do {
+        *wstr++ = num[value%base];
+    } while(value/=base);
+    if(sign<0) *wstr++='-';
+    *wstr='\0';
 
-	// Reverse string
-	strreverse(str,wstr-1);
+    // Reverse string
+    strreverse(str,wstr-1);
 }
 
 /**
@@ -319,28 +318,28 @@ Lukás Chmela重写了代码，该函数不再有“最小负数”bug：
  * Released under GPLv3.
  */
 char* itoa(int value, char* result, int base) {
-	// check that the base if valid
-	if (base < 2 || base > 36) { *result = '\0'; return result; }
+    // check that the base if valid
+    if (base < 2 || base > 36) { *result = '\0'; return result; }
 
-	char* ptr = result, *ptr1 = result, tmp_char;
-	int tmp_value;
+    char* ptr = result, *ptr1 = result, tmp_char;
+    int tmp_value;
 
-	do {
-		tmp_value = value;
-		value /= base;
-		*ptr++ = "zyxwvutsrqponmlkjihgfedcba9876543210123456789
-                abcdefghijklmnopqrstuvwxyz" [35 + (tmp_value - value * base)];
-	} while ( value );
+    do {
+        tmp_value = value;
+        value /= base;
+        *ptr++ = "zyxwvutsrqponmlkjihgfedcba9876543210123456789
+            abcdefghijklmnopqrstuvwxyz" [35 + (tmp_value - value * base)];
+    } while ( value );
 
-	// Apply negative sign
-	if (tmp_value < 0) *ptr++ = '-';
-	*ptr-- = '\0';
-	while(ptr1 < ptr) {
-		tmp_char = *ptr;
-		*ptr--= *ptr1;
-		*ptr1++ = tmp_char;
-	}
-	return result;
+    // Apply negative sign
+    if (tmp_value < 0) *ptr++ = '-';
+    *ptr-- = '\0';
+    while(ptr1 < ptr) {
+        tmp_char = *ptr;
+        *ptr--= *ptr1;
+        *ptr1++ = tmp_char;
+    }
+    return result;
 }
 ```
 
@@ -359,27 +358,27 @@ char* itoa(int value, char* result, int base) {
  */
 std::string itoa(int value, int base) {
 
-	std::string buf;
+    std::string buf;
 
-	// check that the base if valid
-	if (base < 2 || base > 16) return buf;
+    // check that the base if valid
+    if (base < 2 || base > 16) return buf;
 
-	enum { kMaxDigits = 35 };
-	buf.reserve( kMaxDigits ); // Pre-allocate enough space.
+    enum { kMaxDigits = 35 };
+    buf.reserve( kMaxDigits ); // Pre-allocate enough space.
 
-	int quotient = value;
+    int quotient = value;
 
-	// Translating number to string with base:
-	do {
-		buf += "0123456789abcdef"[ std::abs( quotient % base ) ];
-		quotient /= base;
-	} while ( quotient );
+    // Translating number to string with base:
+    do {
+        buf += "0123456789abcdef"[ std::abs( quotient % base ) ];
+        quotient /= base;
+    } while ( quotient );
 
-	// Append the negative sign
-	if ( value < 0) buf += '-';
+    // Append the negative sign
+    if ( value < 0) buf += '-';
 
-	std::reverse( buf.begin(), buf.end() );
-	return buf;
+    std::reverse( buf.begin(), buf.end() );
+    return buf;
 }
 ```
 
@@ -392,28 +391,28 @@ std::string itoa(int value, int base) {
  * Released under GPLv3.
  */
 char* itoa(int value, char* result, int base) {
-	// check that the base if valid
-	if (base < 2 || base > 36) { *result = '\0'; return result; }
+    // check that the base if valid
+    if (base < 2 || base > 36) { *result = '\0'; return result; }
 
-	char* ptr = result, *ptr1 = result, tmp_char;
-	int tmp_value;
+    char* ptr = result, *ptr1 = result, tmp_char;
+    int tmp_value;
 
-	do {
-		tmp_value = value;
-		value /= base;
-		*ptr++ = "zyxwvutsrqponmlkjihgfedcba9876543210123456789
-                abcdefghijklmnopqrstuvwxyz" [35 + (tmp_value - value * base)];
-	} while ( value );
+    do {
+        tmp_value = value;
+        value /= base;
+        *ptr++ = "zyxwvutsrqponmlkjihgfedcba9876543210123456789
+            abcdefghijklmnopqrstuvwxyz" [35 + (tmp_value - value * base)];
+    } while ( value );
 
-	// Apply negative sign
-	if (tmp_value < 0) *ptr++ = '-';
-	*ptr-- = '\0';
-	while(ptr1 < ptr) {
-		tmp_char = *ptr;
-		*ptr--= *ptr1;
-		*ptr1++ = tmp_char;
-	}
-	return result;
+    // Apply negative sign
+    if (tmp_value < 0) *ptr++ = '-';
+    *ptr-- = '\0';
+    while(ptr1 < ptr) {
+        tmp_char = *ptr;
+        *ptr--= *ptr1;
+        *ptr1++ = tmp_char;
+    }
+    return result;
 }
 ```
 
