@@ -38,7 +38,7 @@ categories:
 
 ``` C
 char* itoa(int val, int base){
-	static char buf[32] = {0};
+    static char buf[32] = {0};
 	int i = 30;
 	for(; val && i ; --i, val /= base)
 		buf[i] = "0123456789abcdef"[val % base];
@@ -53,7 +53,8 @@ char* itoa(int val, int base){
 void my_itoa(int value, std::string& buf, int base){
 	int i = 30;
 	buf = "";
-	for(; value && i ; --i, value /= base) buf = "0123456789abcdef"[value % base] + buf;
+	for(; value && i ; --i, value /= base)
+        buf = "0123456789abcdef"[value % base] + buf;
 }
 ```
 更新：(2005/02/11)
@@ -328,7 +329,7 @@ char* itoa(int value, char* result, int base) {
 		tmp_value = value;
 		value /= base;
 		*ptr++ = "zyxwvutsrqponmlkjihgfedcba9876543210123456789
-                       abcdefghijklmnopqrstuvwxyz" [35 + (tmp_value - value * base)];
+                abcdefghijklmnopqrstuvwxyz" [35 + (tmp_value - value * base)];
 	} while ( value );
 
 	// Apply negative sign
@@ -401,7 +402,7 @@ char* itoa(int value, char* result, int base) {
 		tmp_value = value;
 		value /= base;
 		*ptr++ = "zyxwvutsrqponmlkjihgfedcba9876543210123456789
-                       abcdefghijklmnopqrstuvwxyz" [35 + (tmp_value - value * base)];
+                abcdefghijklmnopqrstuvwxyz" [35 + (tmp_value - value * base)];
 	} while ( value );
 
 	// Apply negative sign
@@ -421,7 +422,7 @@ char* itoa(int value, char* result, int base) {
 我已经对itoa的各个版本做了测试，研究其转换-32768到32768之间整数，基底在2到20之间时所需要的平均时间（代码仅仅在基底最高位16有效，因此其余的base仅仅是作为测试）。测试结果如下表所示：
 
 | function  | relative time  |
-|:-:|:-:|
+|:-|:-:|
 | char* style "itoa" (v 0.2) <br/> char* itoa(int value, char* result, int base)  |  1.0 (XP, Cygwin, g++) |
 | char* style "itoa" (v 0.3) <br/> char* itoa(int value, char* result, int base)  |  0.93 |
 | char* style "itoa" (v 0.4) <br/> char* itoa(int value, char* result, int base)  |  0.72 |
