@@ -18,6 +18,7 @@ comments: false
 |        gvim81         | [Download](https://coding.net/u/Winddoing/p/software_tools/git/raw/master/gvim81.exe)                | gvim81（网速不好时下载方便） |
 |   Git-2.21.0-64-bit   | [Download](https://coding.net/u/Winddoing/p/software_tools/git/raw/master/Git-2.21.0-64-bit.exe)     | git(网速不好时下载方便)      |
 | Beyond Compare 3.3.4  | [Download](https://coding.net/u/Winddoing/p/software_tools/git/raw/master/beyondcompare3.3.4.zip)    | 文件对比，内含注册码         |
+|     typora(64bit)     | [Download](https://coding.net/u/Winddoing/p/software_tools/git/raw/master/typora-setup-x64.exe)      | Markdown编辑器               |
 
 # **Linux** (Ubuntu 18.04)
 
