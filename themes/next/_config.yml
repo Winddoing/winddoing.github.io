@@ -349,7 +349,7 @@ font:
   # Fallback to `global` font settings.
   logo:
     external: true
-    family:
+    family: Comic Sans MS
     size:
 
   # Font settings for <code> and code blocks.
