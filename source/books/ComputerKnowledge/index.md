@@ -36,3 +36,22 @@ comments: true
 ## ESD
 
 > `ESD`（Electro-Static discharge）的意思是“静电释放”。国际上习惯将用于静电防护的器材统称为ESD，中文名称为静电阻抗器。
+
+## TSC
+
+> TSC: time stamp counter 时间戳计数器
+
+```
+static uint64_t rdtsc(void)
+{
+    uint64_t var;
+    uint32_t hi, lo;
+
+    __asm volatile
+        ("rdtsc" : "=a" (lo), "=d" (hi));
+
+    var = ((uint64_t)hi << 32) | lo;
+    return (var);
+}
+```
+> rdtsc指令返回的是自开机始CPU的周期数

@@ -80,6 +80,7 @@ __raw_spin_lock --> {
 		LOCK_CONTENDED(lock, do_raw_spin_trylock, do_raw_spin_lock);
 	}
 ```
+>file: include/linux/spinlock.h
 
 
 #### do_raw_spin_trylock
@@ -92,7 +93,7 @@ debug_spin_lock_before(raw_spinlock_t *lock)
 {
 	SPIN_BUG_ON(lock->magic != SPINLOCK_MAGIC, lock, "bad magic");
 	//进程重入
-	SPIN_BUG_ON(lock->owner == current, lock, "recursion"); 
+	SPIN_BUG_ON(lock->owner == current, lock, "recursion");
 	//CPU重入
 	SPIN_BUG_ON(lock->owner_cpu == raw_smp_processor_id(),
 							lock, "cpu recursion");
@@ -268,4 +269,3 @@ static void spin_dump(raw_spinlock_t *lock, const char *msg)
 
 1. 最开始的两个打印可以得到，CPU0进行上锁时，发现该锁被CPU1所持有，所以造成两核互锁
 2. CPU1上完`spin_lock_irq(siglock)`锁后，发送IPI（sched调度），此时信号处理进程被调度到CPU0，并且也进行`spin_lock_irq(siglock)`上锁，由于CPU1上完锁后等待IPI的完成，但是此时CPU1已经***关闭中断的IE位，其中包括IPI中断，因此IPI无法完成***，CPU1的锁无法释放，同时CPU0又在上同一把锁`siglock`,从而造成死锁
-
