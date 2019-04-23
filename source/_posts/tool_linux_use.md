@@ -190,3 +190,10 @@ sudo apt-get install sqlitebrowser
 [Motirx](https://github.com/agalwood/Motrix)是一款全能的下载工具，支持下载 HTTP、FTP、BT、磁力链、百度网盘（百度云）等资源
 
 - 官网： [https://motrix.app](https://motrix.app)
+
+
+## Deepin-Wine
+
+> 安装deepin_QQ、deepin_微信、deepin_迅雷和deepin_百度网盘
+
+https://github.com/wszqkzqk/deepin-wine-ubuntu
