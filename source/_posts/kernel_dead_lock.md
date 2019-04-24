@@ -1,10 +1,13 @@
 ---
 title: 死锁
-date: 2018-01-18 23:07:24
-categories: Linux内核
-tags: [lock]
+date: 2018-01-18T23:07:24.000Z
+categories:
+  - Linux内核
+  - 同步
+tags:
+  - spinlock
+  - 死锁
 ---
-
 
 ```
 [15299.717341] BUG: spinlock lockup suspected on CPU#1, rixitest/4186

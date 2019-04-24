@@ -1,9 +1,14 @@
 ---
 title: Linux内核同步机制【spin lock】
-date: 2018-03-29 23:07:24
-categories: Linux内核
-tags: [Linux, lock]
+date: 2018-03-29T23:07:24.000Z
+categories:
+  - Linux内核
+  - 同步
+tags:
+  - Linux
+  - spinlock
 ---
+
 1. spinlock的使用场景，为什么使用？
 2. 在spinlock控制临界区中，为什么不能睡眠？如果睡眠会产生什么结果？
 3. spinlock的实现和数据结构，在x86、ARM64、MIPS中的实现方式，不同吗？存在什么差异？
@@ -258,7 +263,7 @@ static inline unsigned int arch_spin_trylock(arch_spinlock_t *lock)
    14850120    bne a0,a1,800716c4 <lg_double_unlock+0x88>
    00a42023    subu    a0,a1,a0
 
-   0000000f    sync			//smp_llsc_mb(); 
+   0000000f    sync			//smp_llsc_mb();
    ...
 ```
 > 指令：ll和sc
