@@ -44,6 +44,12 @@ comments: true
 
 <!-- tab 自动构建 -->
 
+<p>
+站点状态: <img src="https://travis-ci.org/Winddoing/Winddoing.github.io.svg?branch=web_source"/>
+相册状态: <img src="https://dev.tencent.com/badges/Winddoing/photos/branch/master/build.svg"/>
+</p>
+
+
 {% centerquote %}
 站点状态:[![Build Status](https://travis-ci.org/Winddoing/Winddoing.github.io.svg?branch=web_source)](https://travis-ci.org/Winddoing/Winddoing.github.io)
 {% endcenterquote %}
