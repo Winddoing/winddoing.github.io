@@ -44,19 +44,10 @@ comments: true
 
 <!-- tab 自动构建 -->
 
-<p>
-站点状态: <img src="https://travis-ci.org/Winddoing/Winddoing.github.io.svg?branch=web_source"/>
-相册状态: <img src="https://dev.tencent.com/badges/Winddoing/photos/branch/master/build.svg"/>
-</p>
-
-
-{% centerquote %}
-站点状态:[![Build Status](https://travis-ci.org/Winddoing/Winddoing.github.io.svg?branch=web_source)](https://travis-ci.org/Winddoing/Winddoing.github.io)
-{% endcenterquote %}
-
-{% centerquote %}
-相册状态:[![构建状态](https://dev.tencent.com/badges/Winddoing/photos/branch/master/build.svg)](https://dev.tencent.com/u/Winddoing/p/photos/ci/job)
-{% endcenterquote %}
+| 名称  | 图标  |
+|:-----:|:-----:|
+| 站点 | <a href="https://travis-ci.org/Winddoing/Winddoing.github.io"><img src="https://travis-ci.org/Winddoing/Winddoing.github.io.svg?branch=web_source"></a> |
+| 相册 | <a href="https://dev.tencent.com/u/Winddoing/p/photos/git"><img src="https://dev.tencent.com/badges/Winddoing/photos/branch/master/build.svg"></a> |
 
 <!-- endtab -->
 
