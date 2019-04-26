@@ -9,7 +9,7 @@
 PWD=`pwd`
 
 DIR="$PWD/resource"
-SRC_DIR="software_tools blog_docs Own-Treasure-Box photos"
+SRC_DIR="software_tools blog_docs Own-Treasure-Box photos wiki"
 
 if [ ! -d $DIR ]; then
 	mkdir $DIR
@@ -24,7 +24,7 @@ do
 		git clone https://git.coding.net/Winddoing/$dir.git $DIR/$dir
 	fi
 
-	(cd $DIR/$dir; git pull)
+	(cd $DIR/$dir; git pull origin master)
 
-	echo "[$dir] update completed"
+	echo -e "[\033[31m$dir\033[0m] update completed"
 done

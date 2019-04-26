@@ -48,3 +48,11 @@ comments: false
 {% centerquote %}
     生如夏花之绚烂，死如秋叶之静美
 {% endcenterquote %}
+
+
+{% note info %}
+	无论人生上到那一层台阶，阶下有人在仰望你，阶上亦有人在俯视你；
+	你抬头自卑，低头自得，
+	唯有平视，才能看见真实的自己。
+{% endnote %}
+

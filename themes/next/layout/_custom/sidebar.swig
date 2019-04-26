@@ -46,3 +46,7 @@ function setzero(i){
 }
 show_date_time();
 </script>
+
+<a href="https://info.flagcounter.com/lOTs">
+	<img src="https://s01.flagcounter.com/map/lOTs/size_t/txt_000000/border_CCCCCC/pageviews_0/viewers_Winddoing/flags_0/" alt="Flag Counter" border="0">
+</a>
