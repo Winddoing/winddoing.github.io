@@ -54,10 +54,4 @@ comments: true
 
 <!-- endtab -->
 
-<!-- tab 访问地图 -->
-
-<a href="https://info.flagcounter.com/ea6l"><img src="https://s04.flagcounter.com/map/ea6l/size_l/txt_000000/border_CCCCCC/pageviews_1/viewers_0/flags_0/" alt="Flag Counter" border="0"></a>
-
-<!-- endtab -->
-
 {% endtabs %}

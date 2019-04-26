@@ -47,6 +47,6 @@ function setzero(i){
 show_date_time();
 </script>
 
-<a href="https://info.flagcounter.com/jUyi">
-	<img src="https://s01.flagcounter.com/count/jUyi/bg_383838/txt_FFFFFF/border_CCCCCC/columns_2/maxflags_2/viewers_3/labels_1/pageviews_0/flags_0/percent_0/" alt="Flag Counter" border="0">
+<a href="https://info.flagcounter.com/jUyi" target="_blank">
+	<img src="https://s01.flagcounter.com/count/jUyi/bg_3B3B3B/txt_FFFFFF/border_3B3B3B/columns_2/maxflags_2/viewers_3/labels_1/pageviews_0/flags_0/percent_0/" alt="Flag Counter" border="0">
 </a>
