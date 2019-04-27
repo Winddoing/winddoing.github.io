@@ -24,7 +24,7 @@ comments: true
 - winddoing@sina.cn #【[BOOK](../books)】#【[ANA](../ana)】#【[MUSIC](../music)】#【[阅读排行](../top)】#【[常用软件](../software)】
 
 {% note success %}
-网站构建，源码数据包大小：`xxx M`; 最后一次构建时间：`xdate`;
+网站构建，源码数据包大小：`xxx MB`; 最后一次构建时间：`xdate`;
 {% endnote %}
 
 {% tabs First unique name %}
@@ -44,9 +44,9 @@ comments: true
 
 <!-- tab 自动构建 -->
 
-| 名称  | 图标  |
+| 模块  | 图标  |
 |:-----:|:-----:|
-| 站点 | <a href="https://travis-ci.org/Winddoing/Winddoing.github.io"><img src="https://travis-ci.org/Winddoing/Winddoing.github.io.svg?branch=web_source"></a> |
+| 本站 | <a href="https://travis-ci.org/Winddoing/Winddoing.github.io"><img src="https://travis-ci.org/Winddoing/Winddoing.github.io.svg?branch=web_source"></a> |
 | 相册 | <a href="https://dev.tencent.com/u/Winddoing/p/photos/git"><img src="https://dev.tencent.com/badges/Winddoing/photos/branch/master/build.svg"></a> |
 
 <!-- endtab -->
