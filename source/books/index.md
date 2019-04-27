@@ -18,10 +18,23 @@ comments: false
 - 《道法自然：面向对象实践指南.王咏武》|[书摘](the_guide_object-oriented_practice)|
 - 《重构改善既有代码的设计》|书摘|
 - 《代码整洁之道》|书摘|
+- 《算法导论》|[书摘](算法导论)|
+
+### 小説
+
+- 《狼图腾》|书摘|
+- 《红楼梦》|书摘|
+- 《三国》|书摘|
+- 《三体》|书摘|
+- 《失控》|书摘|
+- 《2018》|书摘|
+
 
 ## 电子书
 
-- [LDD3[英]](http://www.makelinux.net/ldd3/)
+- [LDD3【英】](http://www.makelinux.net/ldd3/)
+- [算法导论【英】](http://ressources.unisciel.fr/algoprog/s00aaroot/aa00module1/res/%5BCormen-AL2011%5DIntroduction_To_Algorithms-A3.pdf)
+
 
 ## 记录
 
@@ -29,7 +42,7 @@ comments: false
 - 【[FrameBuffer框架](fb)】
 - 【[图形图像基础](graphic_images_basis_knowledge)】
 - 【[Redis](redis)】
--  [计算机相关](ComputerKnowledge)】
+- 【[计算机相关](ComputerKnowledge)】
 
 
 ### 其他
