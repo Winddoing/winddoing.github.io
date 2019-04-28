@@ -5,7 +5,7 @@ categories: Linux内核
 tags: [kernel, Debug]
 ---
 
-常用的Linux应用调试方法：
+常用的Linux应用调试方法：`GDB`
 
 <!--more-->
 ## strace
@@ -73,6 +73,7 @@ int main(int argc, char *argv[])
     return EXIT_SUCCESS;
 }
 ```
+- 编译*
 ```
 gcc -g test.c
 ```
@@ -141,16 +142,134 @@ cd .. #tmp
 
 目标平台直接使用gdb调试
 
-## gdb使用
+## gdb调试
 
 ```
 gdb ./a,out
 ```
 
-### gdb调试命令
+* 动态的改变你程序的执行环境
 
-- 运行  run
-- 断点  break
-- 单步执行 next
-- 查看变量数值 print
-- 监控变量值  watch
+### 启动调试
+
+| 启动方式  | 说明  |
+|:--------:|:------|
+| `$gdb`  | 直接进去交互模式  |
+| `$gdb -tui`   | 启动可以直接将屏幕分成两个部分，上面显示源代码,上下方向键可以查看源代码,想要命令行使用上下键就用`Ctrl+n`和`Ctrl+p`  |
+| `$gdb app`   | 启动gdb调试指定程序app  |
+| `$gdb <program> <PID>`  | <program>是程序的可执行文件名，<PID>是要调试程序的PID |
+| `$gdb <PID>`  | <PID>是要调试程序的PID, 此时无法查看源码，使用`file`命令指明可执行文件就可以显示源代码  |
+
+### 调试交互
+
+>以下所有命令可以在调试时，使用`Tab`进行补全
+
+| 命令  | 别名 |说明  |
+|:-----:|:---:|:-----|
+| `help` | | 显示帮助信息  |
+| `file app` | | 载入指定的程序,编译app的时候要加入`-g`调试选项  |
+| `list n1 n2`  | `l`  | 列出指定区域(n1到n2之间)的代码[详见list](#list)  |
+| `start`  |   | 开始执行程序,在main函数的第一条语句前面停下来  |
+| `run`  | `r` | 重新运行调试的程序, 它后面可以跟随发给该程序的任何参数，包括标准输入和标准输出说明符(<和> )和shell通配符（*、？、[、]）在内|
+| `continue`  |   | 继续运行程序直接运行到下一个断点  |
+| `next`  | `n`  | 执行下一步(执行一行代码，如果是函数也会跳过函数)  |
+| `next N `  | `n N`  | 执行N次下一步  |
+| `step`  |   | 单步进入(执行一行代码，如果遇到函数进入函数的内部，再一行一行的执行)  |
+| `finish`  |   | 执行完当前函数返回到调用它的函数  |
+| `until`  | `u`  | 指定程序直到退出当前循环体  |
+| `jump 5` | `j 5`  | 跳转执行程序到第5行  |
+| `return`  |   | 强制返回当前函数  |
+| `call <expr>`  |   | 强制调用函数, 如果函数的返回类型是void那么就不会打印函数的返回值  |
+| `print <expr>`  |   | 强制调用函数, 如果函数的返回值是void那么call不会打印返回值  |
+| `break 6`  | `b 6`  | 在当前的文件中某一行（假设为6）设定断点  |
+| `break 46 if testsize==100`  |   | 设置条件断点(如果testsize==100就在46行处断点)  |
+| `watch <expr>`  |   | <expr> 为表达式（变量）expr设置一个观察点。一量表达式值有变化时，马上停住程序(也是一种断点)  |
+| `watch i != 10`  |   | 检测表达式变化则停住,i != 10这个表达式一旦变化，则停住 |
+| `break func`  | `b func`  | 在当前的文件中为某一函数(假设为func)处设定断点  |
+| `break fileName:N`  | `b fileName:N`  | 给指定文件（fileName）的某个行（N）处设置断点  |
+| `info breakpoints`  | `info break`  | 显示当前gdb断点信息  |
+| `print var`  |   | print显示变量(var)值[详见print](#print)  |
+| `set var name=v`  |   | 设置变量的值  |
+| `delete N`  |   | 删除N号断点  |
+| `delete`  |   | 删除所有断点  |
+| `clear N`  |   | 清除行N上面的所有断点  |
+| `clear`  |   | 清除所有断点  |
+| `backtrace`  | `bt`  | 显示当前调用函数堆栈中的函数  |
+| `frame`  | `f`  | 查看栈帧  |
+| `set args no`  |   | 修改发送给程序的参数  |
+| `show args`  |   | 显示缺省的参数列表  |
+| `show language`  |   | 查看当前调试程序的语言环境,默认是c语言  |
+| `info function`  |   | 查看当前函数的程序语言  |
+| `set language c++`  |   | 手动设置当前的程序语言为c++  |
+| `set language`  |   | 查看可以设置的程序语言  |
+| `kill`  |   | 终止一个正在调试的程序  |
+| `whatis var`  |   | 显示一个变量var的类型  |
+| `ptype var`  |   | 以更详细的方式显示变量var的类型, 会打印出var的结构定义 |
+| `info source`  |   |  显示当前的调试源文件 |
+| `info locals`  | `i locals`  | 查看当前程序栈的局部变量  |
+| `info registers`  |   | 查看当前寄存器的值(不包括浮点寄存器)   |
+| `info all-registers`  |   | 查看当前寄存器的值,包括浮点寄存器  |
+| `info frame`  |   | 查看当前程序栈的信息  |
+| `x/10x $sp`  |   | 查看当前程序栈的内容  |
+| `display`  |   | 跟踪查看某个变量,每次停下来都显示它的值  |
+| `[Enter]`  |   | 直接回车，执行上一步命令  |
+| `quit`  | `q`  | 退出gdb环境  |
+
+
+#### list
+
+`list`默认显示当前行和之后的10行，再执行又下滚10行
+
+list后可以使用不同参数：
+- `<linenum>` : 行号
+- `<+offset>` : 当前行号的正偏移量
+- `<-offset>` : 当前行号的负偏移量
+- `<filename:linenum>` : 哪个文件的哪一行
+- `<function>` : 函数名
+- `<filename:function>` : 哪个文件中的哪个函数
+- `<*address>` : 程序运行时的语句在内存中的地址
+
+#### print
+
+`print`有打印显示变量（数组、结构体）与修改运行时变量的功能
+
+- `print /x var`: 用16进制显示(var)值
+> print可以指定显示的格式，这里用'/x'表示16进制的格式
+> - `x`: 按十六进制格式显示变量。
+> - `d`: 按十进制格式显示变量。
+> - `u`: 按十六进制格式显示无符号整型。
+> - `o`: 按八进制格式显示变量。
+> - `t`: 按二进制格式显示变量。
+> - `a`: 按十六进制格式显示变量。
+> - `c`: 按字符格式显示变量。
+> - `f`: 按浮点数格式显示变量。
+
+**使用打印功能时：`var`可以是变量、数组、结构体**
+
+``` C
+(gdb) print aa //数组
+$1 = {1, 3, 5, 6, 12, 33, 66, 12, 67}
+(gdb) print tst //结构体
+$2 = {a = 11, b = 88, c = 44}
+(gdb) print i //变量
+$3 = 9
+(gdb) print /x i
+$4 = 0x9
+(gdb) print /x tst
+$5 = {a = 0xb, b = 0x58, c = 0x2c}
+(gdb) print /x aa
+$6 = {0x1, 0x3, 0x5, 0x6, 0xc, 0x21, 0x42, 0xc, 0x43}
+```
+
+#### 打印内存地址
+
+`x[/n] <address>`打印内存地址的值,n表示后面连续n个地址的值
+
+```
+(gdb) x/10 0x7ffffffee3c8
+0x7ffffffee3c8: 0xfffee5f7      0x00007fff      0x00000000      0x00000000
+0x7ffffffee3d8: 0xfffee60f      0x00007fff      0xfffeec01      0x00007fff
+0x7ffffffee3e8: 0xfffeec11      0x00007fff
+(gdb) x 0x7ffffffee3c8
+0x7ffffffee3c8: 0xfffee5f7
+```
