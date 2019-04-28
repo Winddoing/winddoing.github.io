@@ -137,4 +137,20 @@ cd .. #gdb-8.2
 cd .. #tmp
 ```
 
+### 交叉编译
+
+目标平台直接使用gdb调试
+
+## gdb使用
+
+```
+gdb ./a,out
+```
+
 ### gdb调试命令
+
+- 运行  run
+- 断点  break
+- 单步执行 next
+- 查看变量数值 print
+- 监控变量值  watch
