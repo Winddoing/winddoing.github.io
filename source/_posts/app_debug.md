@@ -273,3 +273,40 @@ $6 = {0x1, 0x3, 0x5, 0x6, 0xc, 0x21, 0x42, 0xc, 0x43}
 (gdb) x 0x7ffffffee3c8
 0x7ffffffee3c8: 0xfffee5f7
 ```
+
+## 图形化gdb调试
+
+### cgdb
+
+cgdb是GNU调试器（GDB）的轻量级curses（基于终端）接口。 除了标准的gdb控制台之外，cgdb还提供了一个分屏视图，可以在执行时显示源代码。
+
+>官网： [http://cgdb.github.io](http://cgdb.github.io)
+
+![cgdb](/images/2019/04/cgdb.png)
+
+cgdb分为上下两栏，上面类似于vi窗口显示对应的代码，下面gdb窗口进行命令调试操作
+
+#### 操作
+
+| 命令  |         说明          |
+|:-----:|:---------------------:|
+| `ESC` |  输入焦点进入VI窗口   |
+|  `i`  | 输入焦点进入gdb控制台 |
+
+
+#### VI窗口
+
+调试快捷键
+
+| 功能键 | 作用                             |
+|:------:|:---------------------------------|
+|  `F5`  | Send a `run` command to GDB      |
+|  `F6`  | Send a `continue` command to GDB |
+|  `F7`  | Send a `finish` command to GDB   |
+|  `F8`  | Send a `next` command to GDB     |
+| `F10`  | Send a `step` command to GDB     |
+
+
+#### 控制台
+
+进入控制台使用方法与gdb一样
