@@ -8,8 +8,8 @@ comments: false
 
 - 静态RAM（SRAM）
 
-![SRAM](images/sram.jpg)
+![SRAM](./images/sram.jpg)
 
 - 动态RAM（DRAM）
 
-![DRAM](images/dram.jpg)
+![DRAM](./images/dram.jpg)
