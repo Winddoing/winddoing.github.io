@@ -61,29 +61,29 @@ $R_{vu} = Sq_{vu} \times Q_{vu}$
 ### 量化表
 
 ``` C
-//亮度分量量化表                                             
-static int quant_y[8][8] = {                                 
-    {16, 11, 10, 16, 24,  40,  51,  61},                     
-    {12, 12, 14, 19, 26,  58,  60,  55},                     
-    {14, 13, 16, 24, 40,  57,  69,  56},                     
-    {14, 17, 22, 29, 51,  87,  80,  62},                     
-    {18, 22, 37, 56, 68,  109, 103, 77},                     
-    {24, 35, 55, 64, 81,  104, 113, 92},                     
-    {49, 64, 78, 87, 103, 121, 120, 101},                    
-    {72, 92, 95, 98, 112, 100, 103, 99}                      
-};                                                           
+//亮度分量量化表
+static int quant_y[8][8] = {
+    {16, 11, 10, 16, 24,  40,  51,  61},
+    {12, 12, 14, 19, 26,  58,  60,  55},
+    {14, 13, 16, 24, 40,  57,  69,  56},
+    {14, 17, 22, 29, 51,  87,  80,  62},
+    {18, 22, 37, 56, 68,  109, 103, 77},
+    {24, 35, 55, 64, 81,  104, 113, 92},
+    {49, 64, 78, 87, 103, 121, 120, 101},
+    {72, 92, 95, 98, 112, 100, 103, 99}
+};
 
-//色度分量量化表                                             
-static int quant_uv[8][8] = {                                
-    {17, 18, 24, 47, 99, 99, 99, 99},                        
-    {18, 21, 26, 66, 99, 99, 99, 99},                        
-    {24, 26, 56, 99, 99, 99, 99, 99},                        
-    {47, 66, 99, 99, 99, 99, 99, 99},                        
-    {99, 99, 99, 99, 99, 99, 99, 99},                        
-    {99, 99, 99, 99, 99, 99, 99, 99},                        
-    {99, 99, 99, 99, 99, 99, 99, 99},                        
-    {99, 99, 99, 99, 99, 99, 99, 99}                         
-};                                                           
+//色度分量量化表
+static int quant_uv[8][8] = {
+    {17, 18, 24, 47, 99, 99, 99, 99},
+    {18, 21, 26, 66, 99, 99, 99, 99},
+    {24, 26, 56, 99, 99, 99, 99, 99},
+    {47, 66, 99, 99, 99, 99, 99, 99},
+    {99, 99, 99, 99, 99, 99, 99, 99},
+    {99, 99, 99, 99, 99, 99, 99, 99},
+    {99, 99, 99, 99, 99, 99, 99, 99},
+    {99, 99, 99, 99, 99, 99, 99, 99}
+};
 ```
 
 > 所谓JPEG的有损压缩，损的是量化过程中的高频部分; 因为对于人眼而言`低频部分比高频部分要重要得多`
@@ -206,37 +206,37 @@ code SIZE bits of CODE
 代码实现：
 
 ``` C
-/* Encode the DC coefficient difference per section F.1.2.1 */                         
+/* Encode the DC coefficient difference per section F.1.2.1 */
 
-temp = temp2 = block[0] - last_dc_val;                                                 
+temp = temp2 = block[0] - last_dc_val;
 
-/* This is a well-known technique for obtaining the absolute value without a           
- * branch.  It is derived from an assembly language technique presented in             
- * "How to Optimize for the Pentium Processors", Copyright (c) 1996, 1997 by           
- * Agner Fog.                                                                          
- */                                                                                    
-temp3 = temp >> (CHAR_BIT * sizeof(int) - 1);                                          
-temp ^= temp3;                                                                         
-temp -= temp3;                                                                         
+/* This is a well-known technique for obtaining the absolute value without a
+ * branch.  It is derived from an assembly language technique presented in
+ * "How to Optimize for the Pentium Processors", Copyright (c) 1996, 1997 by
+ * Agner Fog.
+ */
+temp3 = temp >> (CHAR_BIT * sizeof(int) - 1);
+temp ^= temp3;
+temp -= temp3;
 
-/* For a negative input, want temp2 = bitwise complement of abs(input) */              
-/* This code assumes we are on a two's complement machine */                           
-temp2 += temp3;                                                                        
+/* For a negative input, want temp2 = bitwise complement of abs(input) */
+/* This code assumes we are on a two's complement machine */
+temp2 += temp3;
 
-/* Find the number of bits needed for the magnitude of the coefficient */              
-nbits = JPEG_NBITS(temp); //查表计算位宽                                                             
+/* Find the number of bits needed for the magnitude of the coefficient */
+nbits = JPEG_NBITS(temp); //查表计算位宽
 
-/* Emit the Huffman-coded symbol for the number of bits */                             
-code = dctbl->ehufco[nbits];                                                           
-size = dctbl->ehufsi[nbits];                                                           
-EMIT_BITS(code, size)                                                                  
+/* Emit the Huffman-coded symbol for the number of bits */
+code = dctbl->ehufco[nbits];
+size = dctbl->ehufsi[nbits];
+EMIT_BITS(code, size)
 
-/* Mask off any extra bits in code */                                                  
-temp2 &= (((JLONG)1) << nbits) - 1;                                                    
+/* Mask off any extra bits in code */
+temp2 &= (((JLONG)1) << nbits) - 1;
 
-/* Emit that number of bits of the value, if positive, */                              
-/* or the complement of its magnitude, if negative. */                                 
-EMIT_BITS(temp2, nbits)                                                                
+/* Emit that number of bits of the value, if positive, */
+/* or the complement of its magnitude, if negative. */
+EMIT_BITS(temp2, nbits)
 ```
 > libjpeg-turbo: [jchuff.c](https://github.com/libjpeg-turbo/libjpeg-turbo/blob/master/jchuff.c)
 
@@ -265,7 +265,7 @@ RS = binary ’RRRRSSSS’
 
 ```
 系数： 12   5   -2   0   2   0   0   0   1    0     -1     0
-下标： 0    1    2   3   4   5   6   7   8  9 ~ 30  31  32 ~ 63   
+下标： 0    1    2   3   4   5   6   7   8  9 ~ 30  31  32 ~ 63
 ```
 
 ### DC系数编码
