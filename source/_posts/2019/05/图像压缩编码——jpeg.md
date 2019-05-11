@@ -294,7 +294,6 @@ RESULT = `100b`
 RESULT += ZZ(1) = `100101b`
 ```
 - ZZ(2) = -2, 'RRRRSSSS' = '0/2', 查AC Huffman编码表是`01`，幅值-2落入第2类，ZZ(2) - 1 = -3, -3用补码表示并`取后两位`（-2除去符号位占两个位宽）为`01`， 因此ZZ(2)的编码`0101`
-
 - ZZ(3) = 0
 - ZZ(4) = 2, 编码：`1101110`
 
@@ -313,8 +312,109 @@ RESULT += ZZ(4) = '1101110'
 - ZZ(0) ~ ZZ(30) = 0, ZZ(31) = -1;由于RRRR=22 > 15,故先编一个F/0,huffman编码为`11111111001`。然后RRRR=22 - 16 = 6，这时RRRRSSSS=6/1， Huffman编码`1111011`；幅值-1在第1类，取（-1-1=-2）补码的最后一位`0`，最后编码`11110110`
 - ZZ(32) ~ ZZ(63) = 0,直接用一个EOB(0/0)结束，编码`1010`
 
+## JPEG文件
+
+### 文件结构
+
+JPEG的每个标记都是由 2个字节组成，其前一个字节是固定值`0xFF`，每个标记之前还可以添加数目不限的0xFF填充字节(fill byte)
+
+|         标记          |    数值     |            作用            |
+|:---------------------:|:-----------:|:--------------------------:|
+| SOI（Start Of Image） |    0xD8     |          图像开始          |
+|         APP0          |    0xEO     |       JFIF应用数据块       |
+|         APPn          | 0xE1 ~ 0xEF | 其他的应用数据块(n, 1～15) |
+|          DQT          |    0xDB     |           量化表           |
+| SOF0(Start Of Frame)  |    0xC0     |           帧开始           |
+|          DHT          |    0xC4     |     霍夫曼(Huffman)表      |
+|          SOS          |    0xDA     |         扫描线开始         |
+|          EOI          |    0xD9     |          图像结束          |
+
+### jpeg文件解析示例
+
+```
+Frame 1: 345637 bytes on wire (2765096 bits), 345637 bytes captured (2765096 bits)
+MIME file
+JPEG File Interchange Format
+    Marker: Start of Image (0xffd8)
+    Marker segment: Reserved for application segments - 0 (0xFFE0)
+        Marker: Reserved for application segments - 0 (0xffe0)
+        Length: 16
+        Identifier: JFIF
+        Version: 1.1
+            Major Version: 1
+            Minor Version: 1
+        Units: Dots per inch (1)
+        Xdensity: 0
+        Ydensity: 0
+        Xthumbnail: 0
+        Ythumbnail: 0
+    Marker segment: Define quantization table(s) (0xFFDB)
+        Marker: Define quantization table(s) (0xffdb)
+        Length: 67
+        Remaining segment data: 65 bytes
+    Marker segment: Define quantization table(s) (0xFFDB)
+        Marker: Define quantization table(s) (0xffdb)
+        Length: 67
+        Remaining segment data: 65 bytes
+    Start of Frame header: Start of Frame (non-differential, Huffman coding) - Baseline DCT (0xFFC0)
+        Marker: Start of Frame (non-differential, Huffman coding) - Baseline DCT (0xffc0)
+        Length: 17
+        Sample Precision (bits): 8
+        Lines: 1080
+        Samples per line: 1920
+        Number of image components in frame: 3
+        Component identifier: 1
+        0010 .... = Horizontal sampling factor: 2
+        .... 0010 = Vertical sampling factor: 2
+        Quantization table destination selector: 0
+        Component identifier: 2
+        0001 .... = Horizontal sampling factor: 1
+        .... 0001 = Vertical sampling factor: 1
+        Quantization table destination selector: 1
+        Component identifier: 3
+        0001 .... = Horizontal sampling factor: 1
+        .... 0001 = Vertical sampling factor: 1
+        Quantization table destination selector: 1
+    Marker segment: Define Huffman table(s) (0xFFC4)
+        Marker: Define Huffman table(s) (0xffc4)
+        Length: 27
+        Remaining segment data: 25 bytes
+    Marker segment: Define Huffman table(s) (0xFFC4)
+        Marker: Define Huffman table(s) (0xffc4)
+        Length: 73
+        Remaining segment data: 71 bytes
+    Marker segment: Define Huffman table(s) (0xFFC4)
+        Marker: Define Huffman table(s) (0xffc4)
+        Length: 26
+        Remaining segment data: 24 bytes
+    Marker segment: Define Huffman table(s) (0xFFC4)
+        Marker: Define Huffman table(s) (0xffc4)
+        Length: 51
+        Remaining segment data: 49 bytes
+    Start of Segment header: Start of Scan (0xFFDA)
+        Marker: Start of Scan (0xffda)
+        Length: 12
+        Number of image components in scan: 3
+        Scan component selector: 1
+        0000 .... = DC entropy coding table destination selector: 0
+        .... 0000 = AC entropy coding table destination selector: 0
+        Scan component selector: 2
+        0001 .... = DC entropy coding table destination selector: 1
+        .... 0001 = AC entropy coding table destination selector: 1
+        Scan component selector: 3
+        0001 .... = DC entropy coding table destination selector: 1
+        .... 0001 = AC entropy coding table destination selector: 1
+        Start of spectral or predictor selection: 0
+        End of spectral selection: 63
+        0000 .... = Successive approximation bit position high: 0
+        .... 0000 = Successive approximation bit position low or point transform: 0
+    Entropy-coded segment (dissection is not yet implemented): f9354ef5d8ab0a2b96af8daa0006ad822804c0d54d18906a...
+    Marker: End of Image (0xffd9)
+```
+> wireshark解析
 
 ## 参考
 
 * [itu-t81.pdf](https://www.w3.org/Graphics/JPEG/itu-t81.pdf) —— 图像数字压缩和编码
 * [JPEG图像编码](https://blog.csdn.net/my_happy_life/article/details/82997597)
+* [JPEG File Interchange Format，JFIF](https://www.w3.org/Graphics/JPEG/jfif3.pdf)
