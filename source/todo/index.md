@@ -54,3 +54,4 @@ comments: true
 * [ARM架构相关数据手册](http://infocenter.arm.com/help/index.jsp) —— CPU
 * [UZER.ME](https://uzer.me/) —— 云端应用（Matlab，PS，PPT，xMind等）
 * [BEAUTIFUL.AI](https://www.beautiful.ai/) —— 人工智能简报设计神器,制作PPT
+* [Linux Desktop Testing Project](https://ldtp.freedesktop.org/wiki/) —— Linux桌面测试
