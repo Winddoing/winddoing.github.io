@@ -54,4 +54,6 @@ categories:
 * [GCC中SIMD指令的应用方法](https://www.ibm.com/developerworks/cn/linux/l-gccsimd)
 * [mmintrin.h与MMX指令集 Intrinsics函数](https://blog.csdn.net/u014713819/article/details/38433879)
 * [SIMD指令初学](https://blog.csdn.net/tercel_zhang/article/details/80694573)
+* [SSE指令集学习：Compiler Intrinsic](https://www.cnblogs.com/wangguchangqing/p/5466301.html)
+* [深入浅出指令编码之四：指令核心](https://www.pediy.com/kssd/pediy10/78121.html)
 * [An evaluation of the automatic generation of parallel X86 SIMD](https://www.cri.ensmp.fr/classement/doc/E-272.pdf)
