@@ -42,6 +42,21 @@ categories:
 
 > **注**： 紧缩整数包括了8位、16位、32位、64位的带符号和无符号整数。
 
+
+## SSE指令集
+
+- 数据传输：[Data movement instructions](http://www.tommesani.com/index.php/component/content/article/2-simd/59-sse-data-movement.html)
+- 算术运算：[Arithmetic instructions](http://tommesani.com/index.php/component/content/article/2-simd/46-sse-arithmetic.html)
+- 倒数运算：[Reciprocal instructions](http://www.tommesani.com/index.php/component/content/article/2-simd/61-sse-reciprocal.html)
+- 比较运算：[Comparison instructions](http://www.tommesani.com/index.php/component/content/article/2-simd/57-sse-comparison.html)
+- 数据转换：[Conversion instructions](http://www.tommesani.com/index.php/component/content/article/2-simd/58-sse-conversion.html)
+- 逻辑运算：[Logical instructions](http://www.tommesani.com/index.php/component/content/article/2-simd/60-sse-logical.html)
+- 整数运算：[Additional SIMD integer instructions (SSE Primer)](http://tommesani.com/index.php/component/content/article/2-simd/36-sse-primer.html)
+- 字节乱排：[Shuffle instructions](http://www.tommesani.com/index.php/component/content/article/2-simd/62-sse-shuffle.html)
+- 状态管理：[State Management instructions](http://www.tommesani.com/index.php/component/content/article/2-simd/63-sse-state-management.html)
+- 缓存控制：[Cacheability Control instructions](http://www.tommesani.com/index.php/component/content/article/2-simd/56-sse-cacheability-control.html)
+
+
 ## 指令函数
 
 >[Intel intrinsic](https://software.intel.com/sites/landingpage/IntrinsicsGuide/#)
