@@ -19,6 +19,7 @@ comments: true
 * [计算机书籍控](http://bestcbooks.com/) —— 计算机相关书籍介绍与部分电子书
 * [百度脑图](http://naotu.baidu.com/) —— 做思维导图
 * [ProcessOn - 免费在线作图,实时协作](https://www.processon.com/) —— 画流程图
+* [draw.io](https://www.draw.io/) —— 在线开源免费画流程图，思维导图，界面设计等
 * [坚果云](https://www.jianguoyun.com/d/home) —— 文档共享
 * [woboq_codebrowser](https://woboq.com/codebrowser.html) —— 在线阅读GCC, Linux Kernel, GNU C Library等源码
 * [特殊字符编码查询（�）](https://apps.timwhitlock.info/unicode/inspect?s=%EF%BF%BD) —— 查找字符编码
@@ -55,3 +56,4 @@ comments: true
 * [UZER.ME](https://uzer.me/) —— 云端应用（Matlab，PS，PPT，xMind等）
 * [BEAUTIFUL.AI](https://www.beautiful.ai/) —— 人工智能简报设计神器,制作PPT
 * [Linux Desktop Testing Project](https://ldtp.freedesktop.org/wiki/) —— Linux桌面测试
+* [鸠摩搜索](https://www.jiumodiary.com/) —— 电子书搜索引擎
