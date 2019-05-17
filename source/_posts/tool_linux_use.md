@@ -13,7 +13,7 @@ Linux下常用工具：
 
 ## wps
 
-[http://community.wps.cn/download/](http://community.wps.cn/download/)
+- [http://community.wps.cn/download/](http://community.wps.cn/download/)
 
 字体：[http://wps-community.org/download.html?vl=fonts#download](http://wps-community.org/download.html?vl=fonts#download)
 
@@ -36,7 +36,7 @@ sudo dpkg -i wps-office-fonts_1.0_all.deb
 
 ### 缺失字体
 
-[https://pan.baidu.com/s/1eS6xIzo](https://pan.baidu.com/s/1eS6xIzo)
+- [https://pan.baidu.com/s/1eS6xIzo](https://pan.baidu.com/s/1eS6xIzo)
 
 wps_symbol_fonts.zip
 
@@ -47,15 +47,15 @@ sudo cp mtextra.ttf  symbol.ttf  WEBDINGS.TTF  wingding.ttf  WINGDNG2.ttf  WINGD
 
 ## 福昕阅读
 
-[https://www.foxitsoftware.cn/downloads/](https://www.foxitsoftware.cn/downloads/)
+- [https://www.foxitsoftware.cn/downloads/](https://www.foxitsoftware.cn/downloads/)
 
 ## 搜狗输入法
 
-[https://pinyin.sogou.com/linux/?r=pinyin](https://pinyin.sogou.com/linux/?r=pinyin)
+- [https://pinyin.sogou.com/linux/?r=pinyin](https://pinyin.sogou.com/linux/?r=pinyin)
 
 ## 微信
 
-[https://github.com/geeeeeeeeek/electronic-wechat/releases/download/V2.0/linux-x64.tar.gz)[https://github.com/geeeeeeeeek/electronic-wechat/releases/download/V2.0/linux-x64.tar.gz]
+- https://github.com/geeeeeeeeek/electronic-wechat/releases/download/V2.0/linux-x64.tar.gz
 
 ## 钉钉 for Linux
 
@@ -108,27 +108,36 @@ sudo apt install stardict
 
 词典的词库网站下载词库：[下载](http://download.huzheng.org/)
 
-[linux下StarDict和词典的安装](https://blog.csdn.net/suyingshipp/article/details/7736297)
+- [linux下StarDict和词典的安装](https://blog.csdn.net/suyingshipp/article/details/7736297)
+
+### 有道词典---命令行
+
+- https://github.com/TimothyYe/ydict
+
+```
+ydict
+```
 
 
 ## 画图--结构图流程图
 
-亿图：[http://www.edrawsoft.cn/download-edrawmax.php](http://www.edrawsoft.cn/download-edrawmax.php)
+1. ~~亿图：[http://www.edrawsoft.cn/download-edrawmax.php](http://www.edrawsoft.cn/download-edrawmax.php) —— 收费~~
+
+2. **draw.io**: [draw.io](https://www.draw.io/) —— 在线开源免费的画流程图，思维导图，界面设计等
+
+  - 桌面版： https://github.com/jgraph/drawio-desktop
+3. dia 流程图
+```
+sudo apt install dia
+```
 
 ## vooya
 
 vooya – Raw YUV/RGB Video Player
 
-[http://www.offminor.de/downloads.html](http://www.offminor.de/downloads.html)
+- [http://www.offminor.de/downloads.html](http://www.offminor.de/downloads.html)
 
 
-## dia
-
-流程图
-
-```
-sudo apt install dia
-```
 ### 中文输入法
 
 1. 修改/usr/share/applications/dia.desktop文件
@@ -176,7 +185,7 @@ sudo apt-get install sqlitebrowser
 
 >python编辑器
 
-[http://www.jetbrains.com/pycharm/](http://www.jetbrains.com/pycharm/)
+- [http://www.jetbrains.com/pycharm/](http://www.jetbrains.com/pycharm/)
 
 
 ## 7yuv
@@ -196,4 +205,6 @@ sudo apt-get install sqlitebrowser
 
 > 安装deepin_QQ、deepin_微信、deepin_迅雷和deepin_百度网盘
 
-https://github.com/wszqkzqk/deepin-wine-ubuntu
+- https://github.com/wszqkzqk/deepin-wine-ubuntu
+
+## VS Code
