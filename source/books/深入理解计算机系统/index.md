@@ -185,8 +185,17 @@ movl A %eax
 现代的处理器往往引入`Write/Store Buffer`来提升存储系统的性能。Write Buffer的位置位于`L1 D-Cache`与`下一级存储器`之间
 
 > CPU架构：Open SPARC T1
+
 ![SPARC core](images/sparc_cpu_core.JPG)
 
+引入Write Buffer，其优点在于当D-Cache的脏行被替换，数据写回时，此时Cache无需等待可以继续工作，即：其认为数据回写入 Write Buffer即认为此回写操作已完成，无需等待下一级存储器的缓慢响应。Write-through之Cache亦是如此。
+
+### 高速缓存参数的性能影响
+
+- 不命中率（miss rate）
+- 命中率（hit rate）
+- 命中时间（hit time）:从高速缓存传送一个字到CPU所需的时间，包括组选择、行确认和字选择时间
+- 不命中处罚（miss penalty）
 
 ## 参考
 
