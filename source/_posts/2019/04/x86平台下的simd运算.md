@@ -62,6 +62,13 @@ categories:
 >[Intel intrinsic](https://software.intel.com/sites/landingpage/IntrinsicsGuide/#)
 
 
+## 操作码汇总表中的指令列
+
+- **mm** — An MMX register. The 64-bit MMX registers are: MM0 through MM7.
+- **xmm** — An XMM register. The 128-bit XMM registers are: XMM0 through XMM7; XMM8 through XMM15 are
+available using REX.R in 64-bit mode.
+- **ymm** — A YMM register. The 256-bit YMM registers are: YMM0 through YMM7; YMM8 through YMM15 are
+available in 64-bit mode.
 
 ## 参考
 
@@ -72,3 +79,4 @@ categories:
 * [SSE指令集学习：Compiler Intrinsic](https://www.cnblogs.com/wangguchangqing/p/5466301.html)
 * [深入浅出指令编码之四：指令核心](https://www.pediy.com/kssd/pediy10/78121.html)
 * [An evaluation of the automatic generation of parallel X86 SIMD](https://www.cri.ensmp.fr/classement/doc/E-272.pdf)
+* [Intel® 64 and IA-32 ArchitecturesSoftware Developer’s Manual](https://www.intel.com/content/dam/www/public/us/en/documents/manuals/64-ia-32-architectures-software-developer-instruction-set-reference-manual-325383.pdf)
