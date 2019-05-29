@@ -113,3 +113,38 @@ Bob-->Alice: I am good thanks!
 
 1.  命令：ctrl + shift + p
 2. 输入 markdown preview toggle(可以偷懒只输入**mdpt**，跟Sublime Text一样支持模糊匹配)
+
+
+## typora
+
+官网：https://typora.io
+
+> Debian/Ubuntu
+
+```
+# or use
+# sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys BA300B7755AFCFAE
+wget -qO - https://typora.io/linux/public-key.asc | sudo apt-key add -
+
+# add Typora's repository
+sudo add-apt-repository 'deb https://typora.io/linux ./'
+sudo apt-get update
+
+# install typora
+sudo apt-get install typora
+```
+
+> Windows: http://winddoing.github.io/software
+
+### 使用技巧
+
+#### 插入目录
+
+使用“[toc]"会自动根据使用的一二三级标题生成目录
+
+#### 插入分页符
+
+导出pdf时希望分页可以添加这个html实现
+```
+<div style="page-break-after: always;"></div>
+```
