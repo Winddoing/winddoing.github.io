@@ -66,6 +66,8 @@ expect *Last login*
 interact
 ```
 
+- 执行命令的超时时间可以设置`set timeout 5`,默认的超时时间是`10s`,如果设置为`-1`表示永不超时
+
 ## 示例--FIT升级FAT
 
 **还不能完全自动执行,中间确定reboot操作无法自动执行**
@@ -95,17 +97,26 @@ cat > update.exp << EOF
 spawn ssh admin@169.254.1.1
 
 expect {
-"*yes/no" { send "yes\r"; exp_continue}
-"*password:" { send "admin@huawei.com\r" }
+	"*yes/no" { send "yes\r"; exp_continue}
+	"*password:" { send "admin@huawei.com\r" }
 }
 
-expect "<Huawei>"
-send "system-view\r"
-send "ap-mode-switch prepare\r"
-send "ap-mode-switch check\r"
+expect {
+   "<Huawei>" {
+       send "system-view\r"
+       send "ap-mode-switch prepare\r"
+       send "ap-mode-switch check\r"
+       set timeout -1
+       send "ap-mode-switch tftp FatAP3010DN-V2_V200R008C10SPC500.bin 169.254.1.100\r"
+   }
+}
 
-send "ap-mode-switch tftp FatAP3010DN-V2_V200R008C10SPC500.bin 169.254.1.100\r"
-expect {"Y/N]:" { send "Y\r"}}
+expect {
+   "Y/N" {
+       set timeout 10
+       send "Y\r\n"
+   }
+}
 
 expect eof
 EOF
@@ -139,6 +150,35 @@ echo "over"
 ```
 ### expect脚本
 
+- 处理的交互流程：
+
+```
+spawn ssh admin@169.254.1.1
+admin@169.254.1.1's password:
+
+Info: Current mode: Fit (managed by the AC).
+Info: You are advised to change the password to ensure security.
+<Huawei>system-view
+Enter system view, return user view with Ctrl+Z.
+[Huawei]ap-mode-switch prepare
+Info: Prepare is ok, Use ap-mode-switch command to switch to fat ap.
+
+[Huawei]ap-mode-switch check
+Info: Ap-mode-switch check ok.
+
+[Huawei]ap-mode-switch tftp FatAP3010DN-V2_V200R008C10SPC500.bin 169.254.1.100
+Info: Preparing to upgrade. Please wait a moment .............
+Warning: Do Not Power-off!
+......................................................................................................................................................................................................................................................................................................................
+Info: Upgrade upgrade-assistant-package succeeded.
+
+Warning: System will reboot, if you want to switch to upgrade-assistant-package.
+Are you sure to execute these operations ? [Y/N]:Y
+Info: system is rebooting ,please wait...
+```
+
+- 实现：
+
 ``` shell
 #!/usr/bin/expect -f
 
@@ -147,17 +187,26 @@ echo "over"
 spawn ssh admin@169.254.1.1
 
 expect {
-"*yes/no" { send "yes\r"; exp_continue}
-"*password:" { send "admin@huawei.com\r" }
+    "*yes/no" { send "yes\r"; exp_continue}
+    "*password:" { send "admin@huawei.com\r" }
 }
 
-expect "<Huawei>"
-send "system-view\r"
-send "ap-mode-switch prepare\r"
-send "ap-mode-switch check\r"
+expect {
+   "<Huawei>" {
+       send "system-view\r"
+       send "ap-mode-switch prepare\r"
+       send "ap-mode-switch check\r"
+       set timeout -1
+       send "ap-mode-switch tftp FatAP3010DN-V2_V200R008C10SPC500.bin 169.254.1.100\r"
+   }
+}
 
-send "ap-mode-switch tftp FatAP3010DN-V2_V200R008C10SPC500.bin 169.254.1.100\r"
-expect {"Y/N]:" { send "Y\r"}}  //这个处理存在问题无法自动输入Y
+expect {
+   "Y/N" {
+       set timeout 10
+       send "Y\r\n"
+   }
+}
 
 expect eof
 ```
