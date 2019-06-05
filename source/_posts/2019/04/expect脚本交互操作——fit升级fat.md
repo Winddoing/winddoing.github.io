@@ -70,8 +70,6 @@ interact
 
 ## 示例--FIT升级FAT
 
-**还不能完全自动执行,中间确定reboot操作无法自动执行**
-
 ### shell脚本
 
 ``` shell
@@ -88,17 +86,20 @@ fi
 
 ssh-keygen -f "$home/.ssh/known_hosts" -R "169.254.1.1"
 
-
 cat > update.exp << EOF
 #!/usr/bin/expect -f
 
 #set timeout 10
-
 spawn ssh admin@169.254.1.1
 
 expect {
-	"*yes/no" { send "yes\r"; exp_continue}
-	"*password:" { send "admin@huawei.com\r" }
+	"*yes/no" {
+		send "yes\r";
+		exp_continue
+	}
+	"*password:" {
+		send "admin@huawei.com\r"
+	}
 }
 
 expect {
@@ -153,7 +154,11 @@ echo "over"
 - 处理的交互流程：
 
 ```
-spawn ssh admin@169.254.1.1
+$ssh admin@169.254.1.1
+The authenticity of host '169.254.1.1 (169.254.1.1)' can't be established.
+RSA key fingerprint is SHA256:ANKtrCYlGExlxhtgCoD1ZiOxflXyEsyvswS4fC5nzc8.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added '169.254.1.1' (RSA) to the list of known hosts.
 admin@169.254.1.1's password:
 
 Info: Current mode: Fit (managed by the AC).
@@ -183,12 +188,16 @@ Info: system is rebooting ,please wait...
 #!/usr/bin/expect -f
 
 #set timeout 10
-
 spawn ssh admin@169.254.1.1
 
 expect {
-    "*yes/no" { send "yes\r"; exp_continue}
-    "*password:" { send "admin@huawei.com\r" }
+    "*yes/no" {
+		send "yes\r";
+		exp_continue
+	}
+    "*password:" {
+		send "admin@huawei.com\r"
+	}
 }
 
 expect {
