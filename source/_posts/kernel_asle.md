@@ -43,3 +43,8 @@ echo 0 > /proc/sys/kernel/randomize_va_space
 ```
 sysctl -w kernel.randomize_va_space=0
 ```
+
+## 参考
+
+*[地址空间布局随机化(ASLR)增强研究综述](https://www.inforsec.org/wp/?p=1009)
+*[Remix: On-demand Live Randomization](http://ww2.cs.fsu.edu/~ychen/paper/Remix_slides.pdf)
