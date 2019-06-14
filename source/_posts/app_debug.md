@@ -318,10 +318,33 @@ gdb的图形化调试，方便
 
 ![vscode_debug](/images/2019/06/vscode_debug.png)
 
+### 常用插件
+
+| 插件  | 作用  |
+|:-:|:-:|
+| c-cpp-project-generator  | 直接生成项目文件  |
+| Chinese (Simplified)  | 汉化  |
+| CMake Tools  | cmake  |
+| Code Runner  | 结合WSL编译调试  |
+
 ### 编译
 
 > 配置文件：task.json
 
+```
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "type": "shell",
+            "command": "bash && make"
+        }
+    ]
+}
+```
 
 ### 调试
 
@@ -348,6 +371,58 @@ gdb的图形化调试，方便
             "environment": [],
             "externalConsole": false,
             "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        }
+    ]
+}
+```
+- `program`: 需要调试的程序（必须为完整程序路径，可以使用VSCode的环境变量）
+- `args`: 启动时传递给程序的命令行参数的JSON数据。例如： ["arg1", "arg2].
+- `stopAtEntry`: 是否停在程序入口点（停在main函数开始）
+- `cwd`: 设置调试器启动的应用程序的工作目录。
+- `environment`: 针对调试的程序，要添加到环境中的环境变量. 例如: [ { "name": "squid", "value": "clam" } ]。
+
+
+### 问题
+
+#### 设置断点失效
+
+> 检查编译时，是否添加`-g`选项
+
+#### Win10使用WSL
+
+安装插件`Code Runner`
+
+> launch.json
+```
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "(gdb) Bash on Windows Launch",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "/mnt/c/Users/Administrator/Desktop/test/bin/main",
+            "args": [],
+            "stopAtEntry": true,
+            "cwd": "/mnt/c/Users/Administrator/Desktop/test",
+            "environment": [],
+            "externalConsole": true,
+            "pipeTransport": {
+                "debuggerPath": "/usr/bin/gdb",
+                "pipeProgram": "${env:windir}\\system32\\bash.exe",
+                "pipeArgs": ["-c"],
+                "pipeCwd": ""
+            },
+             "sourceFileMap": {
+                "/mnt/c": "c:\\"
+            },
             "setupCommands": [
                 {
                     "description": "Enable pretty-printing for gdb",
