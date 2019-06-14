@@ -310,3 +310,56 @@ cgdb分为上下两栏，上面类似于vi窗口显示对应的代码，下面gd
 #### 控制台
 
 进入控制台使用方法与gdb一样
+
+
+## VScode
+
+gdb的图形化调试，方便
+
+![vscode_debug](/images/2019/06/vscode_debug.png)
+
+### 编译
+
+> 配置文件：task.json
+
+
+### 调试
+
+> 配置文件：lanuch.json
+
+```
+{
+    // 使用 IntelliSense 了解相关属性。
+    // 悬停以查看现有属性的描述。
+    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "(gdb) Launch",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "/home/wqshao/work/jpeg/jpeg_vgtp_tuning/build/bin/tunning_vgtp_codec",
+            "args": [
+                "-a", "-f", "/home/wqshao/Pictures/test_yuv/app_JDshopping_1080p_30fps_444_295.yuv",
+                "-r", "1920x1080", "-c", "20", "-s", "0", "-m", "0"
+            ],
+            "stopAtEntry": true,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        }
+    ]
+}
+```
+
+## 参考
+
+* [Visual Studio Code （VSCode） 之 C/C++ 调试配置详解](https://blog.csdn.net/zcshoucsdn/article/details/60466707)
