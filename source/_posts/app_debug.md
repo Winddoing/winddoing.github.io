@@ -327,6 +327,9 @@ gdb的图形化调试，方便
 | CMake Tools  | cmake  |
 | Code Runner  | 结合WSL编译调试  |
 
+同步配置插件`Settings Sync`
+> Sync gist: 6c03a9a9b3950b543c69a787b48befd0
+
 ### 编译
 
 > 配置文件：task.json
@@ -400,6 +403,7 @@ gdb的图形化调试，方便
 安装插件`Code Runner`
 
 > launch.json
+
 ```
 {
     "version": "0.2.0",
