@@ -390,6 +390,8 @@ gdb的图形化调试，方便
 - `stopAtEntry`: 是否停在程序入口点（停在main函数开始）
 - `cwd`: 设置调试器启动的应用程序的工作目录。
 - `environment`: 针对调试的程序，要添加到环境中的环境变量. 例如: [ { "name": "squid", "value": "clam" } ]。
+- `MIMode`:指定连接的调试器，只可以为gdb或lldb
+- `miDebuggerPath`： 指定gdb路径
 
 
 ### 问题
