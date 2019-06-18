@@ -328,7 +328,17 @@ gdb的图形化调试，方便
 | Code Runner  | 结合WSL编译调试  |
 
 同步配置插件`Settings Sync`
-> Sync gist: 6c03a9a9b3950b543c69a787b48befd0
+
+```
+CODE SETTINGS SYNC UPLOAD SUMMARY
+Version: 3.2.9
+--------------------
+GitHub Token: b7a56c3cf8a3a7739799e990fad4906ba2c4f324
+GitHub Gist: 3789cdfdf898124a04973b2e8feb0d74
+GitHub Gist Type: Secret
+
+Restarting Visual Studio Code may be required to apply color and file icon theme.
+```
 
 ### 编译
 
