@@ -18,3 +18,20 @@ categories:
 make VERBOSE=1
 ```
 > 在CMakeLists.txt中配置`set(CMAKE_VERBOSE_MAKEFILE ON)`
+
+
+## debug调试
+
+- 使用set命令，修改CMake文件
+
+```
+SET(CMAKE_CXX_FLAGS_DEBUG "$ENV{CXXFLAGS} -O0 -Wall -g")
+```
+
+- 使用环境变量
+
+```
+mkdir Debug
+cd Debug
+cmake -DCMAKE_BUILD_TYPE=Debug ..
+```
