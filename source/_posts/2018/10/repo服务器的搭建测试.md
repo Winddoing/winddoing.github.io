@@ -61,7 +61,7 @@ mkdir -p repos/manifest
 
 	<project name="test1" path="test1"/>
 	<project name="test2" path="test2"/>
-    <project name="test3" path="tst333"/>
+  <project name="test3" path="tst333"/>
 
 </manifest>
 ```
@@ -87,6 +87,27 @@ mkdir -p repos/manifest
     ```
     <project name="test1" path="test1" revision="088216c4e32e"/>
     ```
+#### manifest文件格式
+
+- <copyfile>标签
+
+> 可以作为<project>标签的子标签，每一个<copyfile>标签表明了在repo sync的时候从src把文件拷贝到dest。 src相对于该project来说，dest相对于根目录来说。
+
+- <linkfile>标签
+
+> 和<copyfile>标签的作用类似，不过是不进行拷贝，而是进行一个符号链接
+
+```
+-       <project name="tools" path="tools"/>
++       <project name="tools" path="tools">
++               <linkfile dest="envsetup.sh" src="envsetup.sh"/>
++       </project>
++
+```
+
+- <include>标签
+
+> 用来引入一个其他的manifest,有一个name属性指向被引用的manifest, 路径是相对于mamanifest库的根目录
 
 #### 初始化仓库
 
@@ -261,3 +282,4 @@ See 'repo help --all' for a complete list of recognized commands.
 
 - [本地/远程搭建repo](http://www.360doc.com/content/15/0122/22/426085_442956619.shtml)
 - [简易repo服务器搭建](https://blog.csdn.net/eastmoon502136/article/details/72598297)
+- [repo manifest文件格式说明](https://www.jianshu.com/p/d40444267e8d)
