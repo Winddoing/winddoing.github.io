@@ -312,6 +312,14 @@ cgdb分为上下两栏，上面类似于vi窗口显示对应的代码，下面gd
 进入控制台使用方法与gdb一样
 
 
+## PS
+
+### 查看线程CPU占用率
+
+```
+ps H -eo user,pid,ppid,%cpu,cmd --sort=%cpu
+```
+
 ## VScode
 
 gdb的图形化调试，方便
