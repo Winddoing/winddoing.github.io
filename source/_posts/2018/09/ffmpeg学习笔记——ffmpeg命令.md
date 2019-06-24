@@ -46,6 +46,12 @@ ffmpeg -i water.mp4 -c:v copy -bsf:v h264_mp4toannexb -an water.h264
 ffmpeg -i water.wmv -c:v libx264 -strict -2 water.mp4
 ```
 
+## mp4转yuv
+
+```
+ffmpeg -i food.mp4 food.yuv
+```
+
 ## ffmpge帮助信息
 
 ```

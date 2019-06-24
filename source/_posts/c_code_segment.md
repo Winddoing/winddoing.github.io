@@ -55,3 +55,14 @@ static void seedrand_val2()
 	printf("%s: rand_val=%d\n", __func__, rand_val);
 }
 ```
+
+## 伪随机数：rand
+
+```
+srand((unsigned)time(NULL));
+
+#define MIN_BANDWIDTH   60                                                                                          
+#define MAX_BANDWIDTH   200                                                                                         
+#define random() (MIN_BANDWIDTH + (int)((double)rand() / ((double)RAND_MAX+1.0) * (MAX_BANDWIDTH - MIN_BANDWIDTH)))
+```
+> 随机范围：60~200
