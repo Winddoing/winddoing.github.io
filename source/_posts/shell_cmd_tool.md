@@ -36,9 +36,13 @@ find . -name "*.f90" | awk -F "." '{print $2}' | xargs -i -t mv .{}.f90  .{}.f77
 ``` shell
 =====>$cat > test.sh << EOF
 > this is test
-> > EOF
+EOF
 ```
+结束方式：
+- 输入`EOF`，最好使用EOF
+- 使用`Ctrl+d`
 
+写入方式：
 * `>` : 以覆盖文件内容的方式，若此文件不存在，则创建
 * `>>` : 以追加的方式写入文件
 
@@ -187,7 +191,7 @@ Ctrl + a; f; m
 
 >内核提供接口`drivers/tty/sysrq.c`,通过按键的方式获取内核的调试信息
 
-``` C
+```
 static struct sysrq_key_op *sysrq_key_table[36] = {
 	&sysrq_loglevel_op,		/* 0 */
 	&sysrq_loglevel_op,		/* 1 */
@@ -281,6 +285,8 @@ xmllint --format run_xunit.xml
 
 ## tldr
 
+> Too Long Don’t Read!
+
 查找各种命令的常用例子
 
 ``` shell
@@ -312,7 +318,38 @@ Information about running processes.
 ```
 
 
+## top
 
+命令相关参数
+
+| 参数  | 作用  |
+|:-:|:-:|
+| `1`  | 显示每个CPU的运行情况  |
+| `z`  | 进入高亮模式（终端红色字体）  |
+| `b`  | 高亮显示正在运行的命令  |
+| `c`  | 显示command列的所有信息，包括参数  |
+| `t`  | 更直观的方式展示task/cpu信息，像htop一样  |
+| `m`  | 更直观的方式展示memory信息，像htop一样  |
+| `M`  | 根据内存使用率进行排序，%MEM列  |
+| `P`  | 根据CPU使用率进行排序，%CPU列  |
+
+## sed
+
+>参考：[sed命令详解](https://www.cnblogs.com/edwardlost/archive/2010/09/17/1829145.html)
+
+### 将当前目录(包括子目录)文件中的特定字符串并进行替换
+
+``` shell
+sed -i s/jpeg_encode.h/jpeg_codec.h/g `grep jpeg_encode.h -rl --include="*.c" ./`
+```
+- `-i` :表示操作的是文件
+- `反引号` :表示将grep命令的的结果作为操作文件
+
+### 当前目录文件替换
+
+``` shell
+sed -i s/xxxx/yyyy/g ./*.txt
+```
 
 ## 参考
 

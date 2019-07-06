@@ -208,3 +208,10 @@ sudo apt-get install sqlitebrowser
 - https://github.com/wszqkzqk/deepin-wine-ubuntu
 
 ## VS Code
+
+
+## franz
+
+>即时通讯聚合一一Franz：微信、钉钉、QQ
+
+- https://meetfranz.com/#download
