@@ -8,6 +8,8 @@ categories:
   - 编译工具
 ---
 
+`cmake`使用技巧记录
+
 <!--more-->
 
 ## 显示编译详细信息
@@ -35,3 +37,14 @@ mkdir Debug
 cd Debug
 cmake -DCMAKE_BUILD_TYPE=Debug ..
 ```
+
+## 生成编译命令文件 - compile_commands.json
+
+```
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+```
+或
+```
+cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
+```
+将在编译目录下生成`compile_commands.json`文件
