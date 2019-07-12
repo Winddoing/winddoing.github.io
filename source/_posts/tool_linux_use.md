@@ -215,3 +215,9 @@ sudo apt-get install sqlitebrowser
 >即时通讯聚合一一Franz：微信、钉钉、QQ
 
 - https://meetfranz.com/#download
+
+## Nitroshare
+
+> 跨平台局域网传输软件
+
+- https://nitroshare.net/

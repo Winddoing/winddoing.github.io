@@ -58,3 +58,5 @@ comments: true
 * [BEAUTIFUL.AI](https://www.beautiful.ai/) —— 人工智能简报设计神器,制作PPT
 * [Linux Desktop Testing Project](https://ldtp.freedesktop.org/wiki/) —— Linux桌面测试
 * [鸠摩搜索](https://www.jiumodiary.com/) —— 电子书搜索引擎
+* [润桐RainPat专利检索](https://www.rainpat.com/)
+* [carbon](https://dawnlabs.io/carbon) —— 代码生成高图片工具
