@@ -73,3 +73,7 @@ comments: false
     人们正踏上天堂之路，人们正走向地狱之门。
               ——《双城记》狄更斯
 {% endcenterquote %}
+
+{% note success %}
+  谁自重，谁就得到尊重；谁放纵，谁就得到伤痛。
+{% endnote %}
