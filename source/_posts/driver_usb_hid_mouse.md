@@ -63,6 +63,8 @@ uibc read device raw data[len: 6]: BIT5~BIT0    //抬起左键
 
 ### Device驱动
 
+* hid.c
+
 ```
 /*hid descriptor for a mouse*/                                                  
 static struct hidg_func_descriptor vx_device_mouse_data = {                     
@@ -135,6 +137,120 @@ static int __init hidg_init(void)
 module_init(hidg_init);                                                         
 ```
 >kernel: linux3.4.35, file:drivers/usb/gadget/hid.c
+
+* f_hid.c
+
+``` C
+Index: f_hid.c
+===================================================================
+--- f_hid.c	(revision 1771)
++++ f_hid.c	(working copy)
+@@ -185,12 +185,17 @@
+ 	wake_up(&hidg->write_queue);
+ }
+
++static int usb_ep_enable_done = 0;
++
+ static ssize_t f_hidg_write(struct file *file, const char __user *buffer,
+ 			    size_t count, loff_t *offp)
+ {
+ 	struct f_hidg *hidg  = file->private_data;
+ 	ssize_t status = -ENOMEM;
+
++	if (!usb_ep_enable_done)
++		return -ENODEV;
++
+ 	if (!access_ok(VERIFY_READ, buffer, count))
+ 		return -EFAULT;
+
+@@ -316,6 +321,7 @@
+ 	struct usb_request		*req  = cdev->req;
+ 	int status = 0;
+ 	__u16 value, length;
++	unsigned char report[2];
+
+ 	value	= __le16_to_cpu(ctrl->wValue);
+ 	length	= __le16_to_cpu(ctrl->wLength);
+@@ -324,15 +330,29 @@
+ 		"Value:0x%x\n", ctrl->bRequestType, ctrl->bRequest, value);
+
+ 	switch ((ctrl->bRequestType << 8) | ctrl->bRequest) {
+-	case ((USB_DIR_IN | USB_TYPE_CLASS | USB_RECIP_INTERFACE) << 8
+-		  | HID_REQ_GET_REPORT):
+-		VDBG(cdev, "get_report\n");
+-
+-		/* send an empty report */
+-		length = min_t(unsigned, length, hidg->report_length);
+-		memset(req->buf, 0x0, length);
++		case ((USB_DIR_IN | USB_TYPE_CLASS | USB_RECIP_INTERFACE) << 8
++				| HID_REQ_GET_REPORT):
++			VDBG(cdev, "get_report\n");
++		switch (value >> 8) {      
++		case HID_REQ_GET_PROTOCOL:                                    
++			report[0] = 0x02;                                         
++			report[1] = 0x0a;                                         
++
++			length = min_t(unsigned, length, 2);                      
++			VDBG(cdev, "HID_REQ_GET_PROTOCOL: REPORT[0x0a, 0x02]\n");        
++			length = 2;                                               
++			memcpy(req->buf, report, length);                         
++			goto respond;                                             
++			break;                                                    
++		default:                                                      
++			/* send an empty report */                                    
++			length = min_t(unsigned, length, hidg->report_length);        
++			memset(req->buf, 0x0, length);                                
++
++			goto respond;                                                 
++			break;                                                        
++		}                                                                 
+
+-		goto respond;
+ 		break;
+
+ 	case ((USB_DIR_IN | USB_TYPE_CLASS | USB_RECIP_INTERFACE) << 8
+@@ -381,6 +401,15 @@
+ 		}
+ 		break;
+
++	case ((USB_DIR_OUT | USB_TYPE_CLASS | USB_RECIP_INTERFACE) << 8  
++			| USB_REQ_GET_INTERFACE):  
++		VDBG(cdev, "get_interface | wLenght=%d\n", ctrl->wLength);  
++		/* send an empty report */  
++		length = min_t(unsigned, length, hidg->report_length);  
++		memset(req->buf, 0x0, length);  
++		goto respond;  
++		break;
++
+ 	default:
+ 		VDBG(cdev, "Unknown request 0x%x\n",
+ 			 ctrl->bRequest);
+@@ -427,11 +456,13 @@
+ 			ERROR(cdev, "config_ep_by_speed FAILED!\n");
+ 			goto fail;
+ 		}
++		printk("%s: usb_ep_enable\n", __func__);
+ 		status = usb_ep_enable(hidg->in_ep);
+ 		if (status < 0) {
+ 			ERROR(cdev, "Enable endpoint FAILED!\n");
+ 			goto fail;
+ 		}
++		usb_ep_enable_done = 1;
+ 		hidg->in_ep->driver_data = hidg;
+ 	}
+ fail:
+@@ -543,7 +574,9 @@
+ 	cdev_del(&hidg->cdev);
+
+ 	/* disable/free request and end point */
++	printk("%s: usb_ep_disable\n", __func__);
+ 	usb_ep_disable(hidg->in_ep);
++	usb_ep_enable_done = 0;
+ 	usb_ep_dequeue(hidg->in_ep, hidg->req);
+ 	kfree(hidg->req->buf);
+ 	usb_ep_free_request(hidg->in_ep, hidg->req);
+```
+>kernel: linux3.4.35, file:drivers/usb/gadget/f_hid.c
 
 ### hidg_func_descriptor
 
