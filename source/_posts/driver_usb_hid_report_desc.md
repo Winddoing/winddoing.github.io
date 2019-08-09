@@ -117,7 +117,114 @@ End Collection C0
 * 第一部分：一个字节（Byte），其中每个bit代表一种含义, `Usage Page (Button)`,`Usage Minimum (Button 1)`,`Usage Maximum (Button 3) `
 * 第二部分：三个字节（Byte），其中一个字节代表一种含义，`Usage (X)`,`Usage (Y)`,`Usage (Wheel)`
 
+## linux下获取HID
 
+```
+usbhid-dump  | grep -v : | xxd -r -p | hidrd-convert -o spec
+```
+```
+=====>$usbhid-dump -a1:5 -i0
+001:005:000:DESCRIPTOR         1564469117.021395
+ 05 01 09 02 A1 01 09 01 A1 00 05 09 19 01 29 03
+ 15 00 25 01 95 08 75 01 81 02 05 01 09 30 09 31
+ 09 38 15 81 25 7F 75 08 95 03 81 06 C0 C0
+
+=====>$usbhid-dump -a1:5 -i0 | grep -v : | xxd -r -p | hidrd-convert -o spec
+Usage Page (Desktop),               ; Generic desktop controls (01h)
+Usage (Mouse),                      ; Mouse (02h, application collection)
+Collection (Application),
+    Usage (Pointer),                ; Pointer (01h, physical collection)
+    Collection (Physical),
+        Usage Page (Button),        ; Button (09h)
+        Usage Minimum (01h),
+        Usage Maximum (03h),
+        Logical Minimum (0),
+        Logical Maximum (1),
+        Report Count (8),
+        Report Size (1),
+        Input (Variable),
+        Usage Page (Desktop),       ; Generic desktop controls (01h)
+        Usage (X),                  ; X (30h, dynamic value)
+        Usage (Y),                  ; Y (31h, dynamic value)
+        Usage (Wheel),              ; Wheel (38h, dynamic value)
+        Logical Minimum (-127),
+        Logical Maximum (127),
+        Report Size (8),
+        Report Count (3),
+        Input (Variable, Relative),
+    End Collection,
+End Collection
+=====>$usbhid-dump -a1:5 -i0 | grep -v : | xxd -r -p | hidrd-convert -o code
+0x05, 0x01, /*  Usage Page (Desktop),               */
+0x09, 0x02, /*  Usage (Mouse),                      */
+0xA1, 0x01, /*  Collection (Application),           */
+0x09, 0x01, /*      Usage (Pointer),                */
+0xA1, 0x00, /*      Collection (Physical),          */
+0x05, 0x09, /*          Usage Page (Button),        */
+0x19, 0x01, /*          Usage Minimum (01h),        */
+0x29, 0x03, /*          Usage Maximum (03h),        */
+0x15, 0x00, /*          Logical Minimum (0),        */
+0x25, 0x01, /*          Logical Maximum (1),        */
+0x95, 0x08, /*          Report Count (8),           */
+0x75, 0x01, /*          Report Size (1),            */
+0x81, 0x02, /*          Input (Variable),           */
+0x05, 0x01, /*          Usage Page (Desktop),       */
+0x09, 0x30, /*          Usage (X),                  */
+0x09, 0x31, /*          Usage (Y),                  */
+0x09, 0x38, /*          Usage (Wheel),              */
+0x15, 0x81, /*          Logical Minimum (-127),     */
+0x25, 0x7F, /*          Logical Maximum (127),      */
+0x75, 0x08, /*          Report Size (8),            */
+0x95, 0x03, /*          Report Count (3),           */
+0x81, 0x06, /*          Input (Variable, Relative), */
+0xC0,       /*      End Collection,                 */
+0xC0        /*  End Collection                      */
+```
+## hid设备操作接口
+
+通过`open`及`ioctl`操作HID设备节点`dev/hidrawN`
+
+>头文件：`#include <linux/hidraw.h>`
+``` c
+#ifndef _HIDRAW_H                                                           
+#define _HIDRAW_H                                                           
+
+
+
+#include <linux/hid.h>                                                      
+#include <linux/types.h>                                                    
+
+struct hidraw_report_descriptor {                                           
+    __u32 size;                                                             
+    __u8 value[HID_MAX_DESCRIPTOR_SIZE];                                    
+};                                                                          
+
+struct hidraw_devinfo {                                                     
+    __u32 bustype;                                                          
+    __s16 vendor;                                                           
+    __s16 product;                                                          
+};                                                                          
+
+/* ioctl interface */                                                       
+#define HIDIOCGRDESCSIZE    _IOR('H', 0x01, int)                            
+#define HIDIOCGRDESC        _IOR('H', 0x02, struct hidraw_report_descriptor)
+#define HIDIOCGRAWINFO      _IOR('H', 0x03, struct hidraw_devinfo)          
+#define HIDIOCGRAWNAME(len)     _IOC(_IOC_READ, 'H', 0x04, len)             
+#define HIDIOCGRAWPHYS(len)     _IOC(_IOC_READ, 'H', 0x05, len)             
+/* The first byte of SFEATURE and GFEATURE is the report number */          
+#define HIDIOCSFEATURE(len)    _IOC(_IOC_WRITE|_IOC_READ, 'H', 0x06, len)   
+#define HIDIOCGFEATURE(len)    _IOC(_IOC_WRITE|_IOC_READ, 'H', 0x07, len)   
+
+#define HIDRAW_FIRST_MINOR 0                                                
+#define HIDRAW_MAX_DEVICES 64                                               
+/* number of reports to buffer */                                           
+#define HIDRAW_BUFFER_SIZE 64                                               
+
+
+/* kernel-only API declarations */                                          
+
+#endif /* _HIDRAW_H */                                                      
+```
 
 ## 相关文件
 

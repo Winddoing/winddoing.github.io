@@ -76,6 +76,12 @@ svn copy -m "create branch" http://svn_server/xxx_repository http://svn_server/x
 ```
 svn switch http://svn_server/xxx_repository/br_feature001
 ```
+#### 更新SVN地址
+
+```
+svn switch --relocate http://192.168.1.1/repos[old addr]  http://192.168.1.11/repos[new addr]
+```
+> switch --relocate FROM TO [PATH...]
 
 ### 删除分支
 
