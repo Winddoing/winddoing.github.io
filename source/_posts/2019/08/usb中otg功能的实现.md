@@ -8,6 +8,10 @@ date: "2019-08-01 14:49"
 
 <!--more-->
 
+## 硬件接口
+
+![usb_otg_id_pin](/images/2019/08/usb_otg_id_pin.png)
+
 ## 参考
 
 - [DesignWare USB 2.0 OTG Controller (DWC_otg) Device Driver Documentation](https://www.cl.cam.ac.uk/~atm26/ephemeral/rpi/dwc_otg/doc/html/main.html)
