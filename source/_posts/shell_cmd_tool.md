@@ -351,6 +351,15 @@ sed -i s/jpeg_encode.h/jpeg_codec.h/g `grep jpeg_encode.h -rl --include="*.c" ./
 sed -i s/xxxx/yyyy/g ./*.txt
 ```
 
+## pkg-config
+
+> 用于获得某一个库/模块的所有编译相关的信息
+
+```
+$pkg-config --libs --cflags gl
+-I/usr/include/libdrm -lGL
+```
+
 ## 参考
 
 1. [minicom中文手册](https://www.cnblogs.com/my-blog/archive/2008/12/10/1351753.html)
