@@ -33,15 +33,45 @@ categories:
 - `/var/run/utmp`: 记录当前正在登录系统的用户信息；
 - `/var/log/btmp`: 记录失败的登录尝试信息。
 
+### /var/log/messages
+
+> 用于记录系统常见的系统和服务错误信息.
+
+如果系统默认没有开启，打开方法：
+
+将`/etc/rsyslog.d/50-default.conf`文件中的相关注释去掉
+
+```
+#
+# Some "catch-all" log files.
+#
+#*.=debug;\
+#   auth,authpriv.none;\
+#   news.none;mail.none -/var/log/debug
+#*.=info;*.=notice;*.=warn;\
+#   auth,authpriv.none;\
+#   cron,daemon.none;\
+#   mail,news.none      -/var/log/messages
+#
+```
+去掉第`4`行到第`10`行的`#`注释，并重启`rsyslog`服务：
+
+```
+sudo /etc/init.d/rsyslog restart
+```
+**注**：如果 /var/log/messages 被写满，导致空间被占用较多，可以查看下哪些内容被写入到文件了，然后在`/etc/rsyslog.d/50-default.conf`文件中注释掉即可.
+
 ## reisb
 
 利用`reisub`,可以在各种情况下安全地重启计算机
 
-在系统正常启动后需要激活内核`sysrq`功能 （via）
+在系统正常启动后需要激活内核`sysrq`功能:
 ```
 echo "1" > /proc/sys/Kernel/sysrq
+
+sysctl -w kernel.sysrq=1
 ```
-或者，修改`/etc/sysctl.conf`文件，设置`Kernel.sysrq = 1`
+或者，修改`/etc/sysctl.conf`文件，设置`kernel.sysrq = 1`
 
 > 方法： 按住 `Alt+Print(Sys Rq)`,然后依次按下 `reisub` 这几个键,按完`b`系统就会重启。
 
@@ -51,6 +81,7 @@ echo "1" > /proc/sys/Kernel/sysrq
 - `s`: Sync 将所有数据同步至磁盘
 - `u`: Unmount 将所有分区挂载为只读模式
 - `b`: reBoot 重启
+
 
 ## 判断死机情况
 

@@ -21,12 +21,39 @@ OpenGL, OpenGL ES, and OpenGL ES-SC API and Extension Registry
 
 - [OpenGL-Registry](https://github.com/KhronosGroup/OpenGL-Registry/)
 
+## EGL
+
+`EGL`是图形渲染API（如OpenGL ES）与本地平台窗口系统的一层接口，保证了OpenGL ES的平台独立性。EGL提供了若干功能：创建rendering surface、创建graphics context、同步应用程序和本地平台渲染API、提供对显示设备的访问、提供对渲染配置的管理等。
+
+egl是一个管理者的功能。包括管理所有的display ， context， surface，config。可能有很多的display ，每个display有很多的configs，这个display上可以创建很多的context和surface
+
+- [EGL Reference Pages](https://www.khronos.org/registry/EGL/sdk/docs/man/)
+- [1EGL 1.4 API Quick Reference Card](https://www.khronos.org/files/egl-1-4-quick-reference-card.pdf)
+
+
+## GLX
+
+`GLX`是OpenGL Extension to the X Window System的缩写。它作为x的扩展，是x协议和X server的一部分，已经包含在X server的代码中了。GLX提供了X window system使用的OpenGL接口，允许通过x调用OpenGL库。OpenGL 在使用时，需要与一个实际的窗口系统关联起来。
+
+##  GLX、EGL与OpenGL ES之间的关系？？
+
+> 一般EGL和OpenGL ES使用时都会先利用egl函数(egl开头)创建opengl本地环境，然后再利用opengl函数(gl开头)去画图。
+
+**EGL代替的是原先WGL/GLX那套context管理，跟图形API用的什么没关系**
+
+``` C
+EGLBoolean eglBindAPI( 	EGLenum api);
+```
+>Parameters api:
+>    Specifies the client API to bind, one of `EGL_OPENGL_API`, `EGL_OPENGL_ES_API`, or `EGL_OPENVG_API`.
+
 
 ## mesa
 
 ### Gallium
 
 - [Gallium’s documentation](https://gallium.readthedocs.io/en/latest/)
+- [Gallium3D Documentation doxygen](https://dri.freedesktop.org/doxygen/gallium/index.html)
 
 
 ## DRI
