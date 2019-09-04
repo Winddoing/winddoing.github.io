@@ -88,3 +88,215 @@ sysctl -w kernel.sysrq=1
 - 在桌面卡死不动的情况下，可以通过键盘`Caps Lock/Num Lock/Scroll Lock`按键按后,判断对应LED可以正常亮灭，确定属于X server崩溃，还是内核崩溃
   - LED亮灭正常，属于X server崩溃
   - LED灯没反应，属于内核崩溃
+
+## Kdump + crash
+
+`kdump`是一种基于kexec的内核崩溃转储技术。kdump需要两个内核，分别是生产内核和捕获内核，生产内核是捕获内核服务的对象，且保留了内存的一部分给捕获内核启动使用。当系统崩溃时，kdump使用kexec启动捕获内核，以相应的ramdisk一起组建一个微环境，用以对生产内核下的内存进行收集和转存。
+
+`kexec`是一个Linux内核到内核的引导加载程序，可以帮助从第一个内核的上下文引导到第二个内核。kexec会关闭第一个内核，绕过BIOS或固件阶段，并跳转到第二个内核。当第一个内核崩溃时第二个内核启动，第二个内核用于复制第一个内核的内存转储，可以使用gdb和crash等工具分析崩溃的原因。
+
+`crash`用于调试内核崩溃的转储文件
+
+### CentOS 7
+
+> Linux localhost.localdomain 4.14.0-115.10.1.el7a.aarch64 #1 SMP Tue Jul 30 14:50:37 UTC 2019 aarch64 aarch64 aarch64 GNU/Linux
+
+#### 安装kexec-tools
+
+```
+# yum install kexec-tools
+```
+#### 配置GRUB2中的内存
+
+- 在内核崩溃后，转存coredump文件所需的内存大小，配置参数`crashkernel=[size]`
+
+>配置文件： /etc/default/grub
+
+```
+GRUB_TIMEOUT=5
+GRUB_DISTRIBUTOR="$(sed 's, release .*$,,g' /etc/system-release)"
+GRUB_DEFAULT=saved
+GRUB_DISABLE_SUBMENU=true
+GRUB_TERMINAL_OUTPUT="console"
+GRUB_CMDLINE_LINUX="crashkernel=auto rd.lvm.lv=centos/root rd.lvm.lv=centos/swap"
+GRUB_DISABLE_RECOVERY="true"
+```
+**注**：在网络大多数的文章说`crashkernel=128M或512M`，但是测试直接配置`crashkernel=auto`同样可以转存coredump文件
+
+- 如果修改grub文件后，需要重新生成grub文件
+
+```
+grub2-mkconfig -o /boot/grub2/grub.cfg
+```
+
+ **注意不同的系统可能使用的grub不同**
+
+```
+ls -ls /boot/grub2
+0 lrwxrwxrwx. 1 root root 25 Aug 13 04:34 grubenv -> ../efi/EFI/centos/grubenv
+```
+
+#### 配置kdump
+
+>配置文件路径： `/etc/kdump.conf`
+
+```
+path /var/crash   #指定coredump文件放在/var/crash文件夹中
+core_collector makedumpfile -l --message-level 1 -d 31
+default reboot    #生成coredump后，重启系统
+```
+
+#### 开启kdump
+
+- 检查内核启动命令
+
+```
+$ cat /proc/cmdline
+BOOT_IMAGE=/vmlinuz-4.14.0-115.10.1.el7a.aarch64 root=/dev/mapper/centos-root ro crashkernel=auto rd.lvm.lv=centos/root rd.lvm.lv=centos/swap LANG=en_US.UTF-8
+```
+
+- 开启kdump服务
+
+```
+systemctl enable kdump.service  #设置开机启动
+systemctl start kdump.service   #启动kdump
+```
+
+#### 测试kdump
+
+```
+# systemctl is-active kdump
+active
+```
+
+- 查看捕获内核是否加载
+
+```
+# cat /sys/kernel/kexec_crash_loaded
+1
+```
+
+- 查看当前的保留内存
+
+```
+cat /sys/kernel/kexec_crash_size
+536870912
+```
+> 保留内存大小：512M
+> cat /proc/iomem | grep "Crash kernel" 应该有一个分配的范围。
+
+```
+dmesg | grep crashkernel
+```
+
+- 查看kdump服务状态
+
+```
+# service kdump status
+Redirecting to /bin/systemctl status kdump.service
+● kdump.service - Crash recovery kernel arming
+   Loaded: loaded (/usr/lib/systemd/system/kdump.service; enabled; vendor preset: enabled)
+   Active: active (exited) since Wed 2019-09-04 02:04:18 EDT; 1h 8min ago
+  Process: 1825 ExecStart=/usr/bin/kdumpctl start (code=exited, status=0/SUCCESS)
+ Main PID: 1825 (code=exited, status=0/SUCCESS)
+    Tasks: 0
+   CGroup: /system.slice/kdump.service
+
+Sep 04 02:04:16 localhost.localdomain dracut[3545]: drwxr-xr-x   2 root     root            0 Sep  4  2019 usr/share/zoneinfo/America
+Sep 04 02:04:16 localhost.localdomain dracut[3545]: -rw-r--r--   1 root     root         3519 Jul 10 17:44 usr/share/zoneinfo/America/New_York
+Sep 04 02:04:16 localhost.localdomain dracut[3545]: drwxr-xr-x   2 root     root            0 Sep  4  2019 var
+Sep 04 02:04:16 localhost.localdomain dracut[3545]: lrwxrwxrwx   1 root     root           11 Sep  4  2019 var/lock -> ../run/lock
+Sep 04 02:04:16 localhost.localdomain dracut[3545]: lrwxrwxrwx   1 root     root            6 Sep  4  2019 var/run -> ../run
+Sep 04 02:04:16 localhost.localdomain dracut[3545]: ========================================================================
+Sep 04 02:04:16 localhost.localdomain dracut[3545]: *** Creating initramfs image file '/boot/initramfs-4.14.0-115.10.1.el7a.aarch64kdump.img' done ***
+Sep 04 02:04:18 localhost.localdomain kdumpctl[1825]: kexec: loaded kdump kernel
+Sep 04 02:04:18 localhost.localdomain kdumpctl[1825]: Starting kdump: [OK]
+Sep 04 02:04:18 localhost.localdomain systemd[1]: Started Crash recovery kernel arming.
+```
+
+```
+# echo 1 > /proc/sys/kernel/sysrq
+# echo c > /proc/sysrq-trigger
+```
+这将强制Linux内核崩溃，并且`loaclhost(ip)-YYYY-MM-DD-HH：MM：SS/vmcore`文件将被复制到配置中选择的位置, 默认`/var/crash`
+
+
+#### 用crash工具分析
+
+- 安装对应的kernel-debuginfo软件包,[地址](http://debuginfo.centos.org/7/)
+
+> 内核版本：`uname -r` 4.14.0-115.10.1.el7a.aarch64
+
+``` shell
+wget http://debuginfo.centos.org/7/aarch64/kernel-debuginfo-$(uname -r).rpm
+wget http://debuginfo.centos.org/7/aarch64/kernel-debuginfo-common-aarch64-$(uname -r).rpm
+```
+
+- 启动crash
+
+```
+crash /lib/modules/4.14.0-115.10.1.el7a.aarch64/vmlinux /var/crash/127.0.0.1-2019-09-04-10\:02\:53/vmcore
+```
+在输入bt可以展示kernel-stack的backtrace，更多crash中的命令见`man crash`
+
+### ubuntu18.04
+
+#### 安装crashdump工具包
+
+```
+sudo apt-get install linux-crashdump
+```
+> linux-crashdump实际上安装了三个工具，分别是：crash，kexec-tools，以及makedumpfile
+
+
+#### 开启kdump服务
+
+```
+service kdump start
+```
+
+#### 查看kdump配置
+
+```
+$kdump-config show
+DUMP_MODE:        kdump
+USE_KDUMP:        1
+KDUMP_SYSCTL:     kernel.panic_on_oops=1
+KDUMP_COREDIR:    /var/crash
+crashkernel addr: 0x
+   /var/lib/kdump/vmlinuz: symbolic link to /boot/vmlinuz-4.15.0-58-generic
+kdump initrd:
+   /var/lib/kdump/initrd.img: symbolic link to /var/lib/kdump/initrd.img-4.15.0-58-generic
+current state:    ready to kdump
+
+kexec command:
+  /sbin/kexec -p --command-line="BOOT_IMAGE=/vmlinuz-4.15.0-58-generic root=UUID=1ff21bc1-eece-439d-a3ab-de37bc03537f ro quiet splash vt.handoff=1 nr_cpus=1 systemd.unit=kdump-tools-dump.service irqpoll nousb ata_piix.prefer_ms_hyperv=0" --initrd=/var/lib/kdump/initrd.img /var/lib/kdump/vmlinuz
+```
+
+#### Crash文件分析
+
+crash工具需要内核调试信息`dbgsym`
+
+- 安装dbgsym，下载[地址](http://ddebs.ubuntu.com/pool/main/l/linux/)
+
+```
+cat /proc/version
+Linux version 4.15.0-58-generic (buildd@lcy01-amd64-013) (gcc version 7.4.0 (Ubuntu 7.4.0-1ubuntu1~18.04.1)) #64-Ubuntu SMP Tue Aug 6 11:12:41 UTC 2019
+```
+
+```
+wget http://ddebs.ubuntu.com/pool/main/l/linux/linux-image-4.15.0-58-generic-dbgsym_4.15.0-58.64_arm64.ddeb
+```
+
+```
+crash /usr/lib/debug/boot/vmlinux /var/crash/201909041647/dump.201909041647
+```
+
+
+## 参考
+
+- [Kdump 实现的基本原理](https://www.ibm.com/developerworks/cn/linux/l-cn-kdump3/index.html?ca=drs-)
+- [kdump 的亲密战友 crash](https://www.ibm.com/developerworks/cn/linux/l-cn-kdump4/index.html?ca=drs-)
+- [CentOS7配置kdump](https://www.jianshu.com/p/8e031b28d98b)
+- [centos配置kdump捕获内核崩溃](http://www.361way.com/centos-kdump/3751.html)
+- [CentOS / RHEL 7 : How to configure kdump](https://www.thegeekdiary.com/centos-rhel-7-how-to-configure-kdump/)
