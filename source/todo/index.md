@@ -63,3 +63,4 @@ comments: true
 * [carbon](https://dawnlabs.io/carbon) —— 代码生成高图片工具
 * [历史时间轴在线看](http://gonnavis.com/timeline/#/)
 * [WebGL Samples](https://webglsamples.org/spacerocks/spacerocks.html) —— OpenGL测试
+* [SPECviewperf® 12](https://www.spec.org/gwpg/gpc.static/vp12info.html) —— 渲染性能测试
