@@ -97,6 +97,10 @@ sysctl -w kernel.sysrq=1
 
 `crash`用于调试内核崩溃的转储文件
 
+![kdump-panic](/images/2019/09/kdump_panic.png)
+
+>[A Kexec Based Kernel Crash Dumping Mechanism](http://lse.sourceforge.net/kdump/documentation/ols2005-kdump-presentation.pdf)
+
 ### CentOS 7
 
 > Linux localhost.localdomain 4.14.0-115.10.1.el7a.aarch64 #1 SMP Tue Jul 30 14:50:37 UTC 2019 aarch64 aarch64 aarch64 GNU/Linux
@@ -122,6 +126,19 @@ GRUB_CMDLINE_LINUX="crashkernel=auto rd.lvm.lv=centos/root rd.lvm.lv=centos/swap
 GRUB_DISABLE_RECOVERY="true"
 ```
 **注**：在网络大多数的文章说`crashkernel=128M或512M`，但是测试直接配置`crashkernel=auto`同样可以转存coredump文件
+
+> 在Linux4.15中使用`crashkernel=auto`，内核将通过`memblock_find_in_range`自动计算小内核的内存大小和起始位置，但是有些内核可能不支持，需要手动指定大小
+> ``` C
+>  if (!high)                                                             
+     crash_base = memblock_find_in_range(CRASH_ALIGN,                   
+                 CRASH_ADDR_LOW_MAX,                                    
+                 crash_size, CRASH_ALIGN);                              
+ if (!crash_base)                                                       
+     crash_base = memblock_find_in_range(CRASH_ALIGN,                   
+                 CRASH_ADDR_HIGH_MAX,                                   
+                 crash_size, CRASH_ALIGN);                              
+> ```
+> file：arch/x86/kernel/setup.c
 
 - 如果修改grub文件后，需要重新生成grub文件
 
@@ -218,6 +235,8 @@ Sep 04 02:04:18 localhost.localdomain systemd[1]: Started Crash recovery kernel 
 # echo 1 > /proc/sys/kernel/sysrq
 # echo c > /proc/sysrq-trigger
 ```
+> - `c`: Will perform a system crash by a NULL pointer dereference.(故意使内核崩溃)
+
 这将强制Linux内核崩溃，并且`loaclhost(ip)-YYYY-MM-DD-HH：MM：SS/vmcore`文件将被复制到配置中选择的位置, 默认`/var/crash`
 
 
@@ -232,12 +251,22 @@ wget http://debuginfo.centos.org/7/aarch64/kernel-debuginfo-$(uname -r).rpm
 wget http://debuginfo.centos.org/7/aarch64/kernel-debuginfo-common-aarch64-$(uname -r).rpm
 ```
 
+``` shell
+# rpm -ivh kernel-debuginfo-common-aarch64-4.14.0-115.10.1.el7a.aarch64.rpm
+# rpm -ivh kernel-debuginfo-4.14.0-115.10.1.el7a.aarch64.rpm
+```
+
+```
+ls /usr/lib/debug/lib/modules/4.14.0-115.10.1.el7a.aarch64/vmlinux
+/usr/lib/debug/lib/modules/4.14.0-115.10.1.el7a.aarch64/vmlinux
+```
+
 - 启动crash
 
 ```
-crash /lib/modules/4.14.0-115.10.1.el7a.aarch64/vmlinux /var/crash/127.0.0.1-2019-09-04-10\:02\:53/vmcore
+crash /usr/lib/debug/lib/modules/4.14.0-115.10.1.el7a.aarch64/vmlinux /var/crash/127.0.0.1-2019-09-04-10\:02\:53/vmcore
 ```
-在输入bt可以展示kernel-stack的backtrace，更多crash中的命令见`man crash`
+在输入`bt`可以展示kernel-stack的backtrace，更多crash中的命令见`man crash`
 
 ### ubuntu18.04
 
@@ -289,7 +318,14 @@ wget http://ddebs.ubuntu.com/pool/main/l/linux/linux-image-4.15.0-58-generic-dbg
 ```
 
 ```
-crash /usr/lib/debug/boot/vmlinux /var/crash/201909041647/dump.201909041647
+sudo dpkg -i linux-image-unsigned-4.15.0-58-generic-dbgsym_4.15.0-58.64_amd64.ddeb
+
+$ ls -lsh /usr/lib/debug/boot/vmlinux-4.15.0-58-generic
+566M -rw-r--r-- 1 root root 566M 8月   6 18:45 /usr/lib/debug/boot/vmlinux-4.15.0-58-generic
+```
+
+```
+sudo crash /usr/lib/debug/boot/vmlinux-4.15.0-58-generic /var/crash/201909041647/dump.201909041647
 ```
 
 
