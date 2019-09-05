@@ -30,6 +30,8 @@ comments: true
 * [CHM to PDF](https://www.zamzar.com/convert/chm-to-pdf/?yyue=a21bo.50862.201879#tool) —— 在线文件转换（chm2pdf）
 * [convert epub to pdf](https://cloudconvert.com/epub-to-pdf) —— 在线将epub转换pdf
 * [在线PDF解密去除限制](http://www.pdfdo.com/pdf-remove-restriction.aspx) ——  pdf可以复制和进行标记
+* [iloveimg](https://www.iloveimg.com/zh-cn) —— 在线图片编辑处理，压缩、裁剪、水印
+* [ilovepdf](https://www.ilovepdf.com/zh-cn) —— 在线pdf转换处理工具
 * [在线文档查询](https://devdocs.io/) —— 各类语言工具的文档
 * [网络协议报文格式查询](http://support.huawei.com/onlinetoolsweb/einfofinder/PacketFormat?module=6&lang=zh) —— 华为设备为主
 * [pixabay](https://pixabay.com) —— 免费高清图片
@@ -62,5 +64,14 @@ comments: true
 * [润桐RainPat专利检索](https://www.rainpat.com/)
 * [carbon](https://dawnlabs.io/carbon) —— 代码生成高图片工具
 * [历史时间轴在线看](http://gonnavis.com/timeline/#/)
+* [全历史](https://www.allhistory.com/)
 * [WebGL Samples](https://webglsamples.org/spacerocks/spacerocks.html) —— OpenGL测试
 * [SPECviewperf® 12](https://www.spec.org/gwpg/gpc.static/vp12info.html) —— 渲染性能测试
+* [AlteredQualia](https://alteredqualia.com/) —— WebGL各种好玩的工具
+    - [星球放射线](https://alteredqualia.com/three/examples/lines_sphere_gl.html)
+* [Stars-Emmision](https://wangyasai.github.io/Stars-Emmision/) —— 制作放射背景
+* [动态全球地图](https://earth.nullschool.net/zh-cn/) —— 地球：风，天气和海洋条件的全球地图
+* [发现中国](https://www.ageeye.cn/) —— 提供知识地图制作、分享的平台
+* [WeaveSilk](http://weavesilk.com/) —— 一个简洁的光效绘图网站
+* [Chartify](https://chartify.io/) —— 设计精美的图表和图形，数据可视化
+
