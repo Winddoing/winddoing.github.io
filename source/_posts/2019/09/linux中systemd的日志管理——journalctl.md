@@ -53,6 +53,7 @@ categories:
 #MaxLevelWall=emerg
 #LineMax=48K
 ```
+- [Journal service configuration files](https://www.freedesktop.org/software/systemd/man/journald.conf.html)
 
 ### 把日志保存到文件中
 
@@ -83,6 +84,14 @@ $man journalctl
 ``` shell
 $journalctl
 ```
+
+### 查看当前最后一次启动后日志
+
+``` shell
+$journalctl -xb
+```
+> `-x`: 使用消息目录中的说明文本扩充日志行
+> `-b`: 参数为空时，将显示当前引导的日志
 
 ### 查看内核日志（不显示应用日志）
 

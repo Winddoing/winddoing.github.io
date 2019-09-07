@@ -67,6 +67,60 @@ DESCRIPTION
        These  functions  return  information about a file.  No permissions are required on the file itself, but—in the case of stat() and lstat() — execute (search) permission is required on all of the  directories  in  path  that lead to the file.
 ```
 
+## 产生的原因
+
+- IO阻塞
+- 内核模块出错
+
+## amdgpu
+
+```
+23:02:20 localhost.localdomain kernel: amdgpu 0001:01:00.0: GPU fault detected: 146 0x0080442c
+23:02:20 localhost.localdomain kernel: amdgpu 0001:01:00.0:   VM_CONTEXT1_PROTECTION_FAULT_ADDR   0x00101A10
+23:02:20 localhost.localdomain kernel: amdgpu 0001:01:00.0:   VM_CONTEXT1_PROTECTION_FAULT_STATUS 0x0804402C
+23:02:20 localhost.localdomain kernel: amdgpu 0001:01:00.0: VM fault (0x2c, vmid 4) at page 1055248, read from 'TC1' (0x54433100) (68)
+23:02:34 localhost.localdomain kernel: amdgpu 0001:01:00.0: GPU fault detected: 146 0x00183d0c
+23:02:34 localhost.localdomain kernel: amdgpu 0001:01:00.0:   VM_CONTEXT1_PROTECTION_FAULT_ADDR   0x00101A03
+23:02:34 localhost.localdomain kernel: amdgpu 0001:01:00.0:   VM_CONTEXT1_PROTECTION_FAULT_STATUS 0x0A03D00C
+23:02:34 localhost.localdomain kernel: amdgpu 0001:01:00.0: VM fault (0x0c, vmid 5) at page 1055235, read from 'SDM1' (0x53444d31) (61)
+23:05:11 localhost.localdomain kernel: INFO: task qemu-system-aar:8361 blocked for more than 120 seconds.
+23:05:11 localhost.localdomain kernel:       Tainted: G        W      ------------   4.14.0-115.10.1.el7a.aarch64 #1
+23:05:11 localhost.localdomain kernel: "echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
+23:05:11 localhost.localdomain kernel: qemu-system-aar D    0  8361  30794 0x00000200
+23:05:11 localhost.localdomain kernel: Call trace:
+23:05:11 localhost.localdomain kernel: [<ffff000008085eb4>] __switch_to+0x8c/0xa8
+23:05:11 localhost.localdomain kernel: [<ffff00000885f9f0>] __schedule+0x340/0x914
+23:05:11 localhost.localdomain kernel: [<ffff00000885fff8>] schedule+0x34/0x8c
+23:05:11 localhost.localdomain kernel: [<ffff000005aac1f8>] amd_sched_entity_push_job+0x98/0x148 [amdgpu]
+23:05:11 localhost.localdomain kernel: [<ffff000005aacfa4>] amdgpu_job_submit+0x88/0xa4 [amdgpu]
+23:05:11 localhost.localdomain kernel: [<ffff000005a233ac>] amdgpu_vm_bo_update_mapping.constprop.21+0x2b0/0x354 [amdgpu]
+23:05:11 localhost.localdomain kernel: [<ffff000005a23b38>] amdgpu_vm_clear_freed+0xc8/0x1d0 [amdgpu]
+23:05:11 localhost.localdomain kernel: [<ffff000005a0efe8>] amdgpu_gem_va_ioctl+0x400/0x478 [amdgpu]
+23:05:11 localhost.localdomain kernel: [<ffff0000057b63c4>] drm_ioctl_kernel+0x74/0xd8 [drm]
+23:05:11 localhost.localdomain kernel: [<ffff0000057b6710>] drm_ioctl+0x2b4/0x3ec [drm]
+23:05:11 localhost.localdomain kernel: [<ffff0000059f0054>] amdgpu_drm_ioctl+0x54/0x90 [amdgpu]
+23:05:11 localhost.localdomain kernel: [<ffff0000082c2ee8>] do_vfs_ioctl+0xcc/0x8f0
+23:05:11 localhost.localdomain kernel: [<ffff0000082c379c>] SyS_ioctl+0x90/0xa4
+23:05:11 localhost.localdomain kernel: Exception stack(0xffff0000379cfec0 to 0xffff0000379d0000)
+23:05:11 localhost.localdomain kernel: fec0: 0000000000000014 00000000c0286448 0000fffffb7cfbb0 00000000c0286400
+23:05:11 localhost.localdomain kernel: fee0: 00000000c0006400 000000000000000e 0000000000000002 0000000000410000
+23:05:11 localhost.localdomain kernel: ff00: 000000000000001d 0000000017a53200 0000000000000289 000000002e6d71d2
+23:05:11 localhost.localdomain kernel: ff20: 0000000000000018 000000005d731dca 0021ee150a5f677c 0000e05d5e15bff7
+23:05:11 localhost.localdomain kernel: ff40: 0000ffffa16802a8 0000ffffa17660e0 0000000000000a00 0000ffff9c81f000
+23:05:11 localhost.localdomain kernel: ff60: 0000fffffb7cfbb0 00000000c0286448 0000000000000014 0000000000000040
+23:05:11 localhost.localdomain kernel: ff80: 0000000017a53818 000000001ad84f30 00000000000003e8 0000000017a53858
+23:05:11 localhost.localdomain kernel: ffa0: 000000001ad84f10 0000fffffb7cfb50 0000ffffa1655c48 0000fffffb7cfb50
+23:05:11 localhost.localdomain kernel: ffc0: 0000ffffa17660ec 0000000080000000 0000000000000014 000000000000001d
+23:05:11 localhost.localdomain kernel: ffe0: 0000000000000000 0000000000000000 0000000000000000 0000000000000000
+23:05:11 localhost.localdomain kernel: [<ffff00000808392c>] __sys_trace_return+0x0/0x4
+```
+
+```
+$ ps aux | grep "qemu"
+root      8361  9.4  6.8 11088576 4540480 pts/2 Dl+ 11:56  67:19 qemu-system-aarch64 -m 8192 -enable-kvm -machine virt-4.0,accel=kvm,gic-version=3 -cpu host -smp 8,sockets=2,cores=4,threads=1 -append console=ttyAMA0,38400 earlycon=pl011,0x09000000 nosmp drm.debug=0x0 rootwait rootdelay=5 androidboot.selinux=permissive -serial mon:stdio -kernel Image -initrd ramdisk.img -drive index=0,if=none,id=system,file=system.img -device virtio-blk-pci,drive=system -drive index=1,if=none,id=cache,file=cache.img -device virtio-blk-pci,drive=cache -drive index=2,if=none,id=userdata,file=userdata.img -device virtio-blk-pci,drive=userdata -netdev user,id=mynet,hostfwd=tcp::5550-:5555 -device virtio-net-pci,netdev=mynet -device virtio-gpu-pci,id=video0,virgl=on,max_outputs=1 -vnc :3 -device virtio-serial-pci -display gtk,gl=on -device qemu-xhci,id=usb -device usb-kbd -device usb-mouse
+```
+>进程状态：`Dl+`
+
 
 ## 参考
 
