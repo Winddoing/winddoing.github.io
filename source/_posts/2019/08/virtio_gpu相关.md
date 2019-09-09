@@ -64,6 +64,7 @@ EGLBoolean eglBindAPI( 	EGLenum api);
 > Virgil is an effort to provide 3D acceleration using `Gallium3D` for QEMU+KVM virtual machine guests.
 
 - [Virgil Linux News](https://www.phoronix.com/scan.php?page=search&q=Virgil)
+- [What’s new in the virtual world?(pdf)](https://xdc2018.x.org/slides/Virgl_Presentation.pdf)
 
 ### virgl_protocol
 
@@ -77,6 +78,13 @@ EGLBoolean eglBindAPI( 	EGLenum api);
 - [Linux GPU Driver Developer’s Guide](https://blog.csdn.net/u012839187/article/details/89875800)
 - [DRM memory management - 最好的GEM/TTM/PRIME解释](http://ju.outofmemory.cn/entry/158909)
 
+
+## piglit
+
+
+## GLSL
+
+> OpenGL着色语言（OpenGL Shading Language）是用来在OpenGL中着色编程的语言，也即开发人员写的短小的自定义程序，他们是在图形卡的GPU （Graphic Processor Unit图形处理单元）上执行的，代替了固定的渲染管线的一部分，使渲染管线中不同层次具有可编程性。
 
 ## 参考
 

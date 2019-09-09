@@ -8,7 +8,7 @@ categories:
   - 工具
 ---
 
-服务器中Linux系统出现死机后的处理：
+服务器中Linux系统出现死机后的处理：查看系统**日志**，定位死机原因
 
 > linux系统： CentOS
 
@@ -327,6 +327,36 @@ $ ls -lsh /usr/lib/debug/boot/vmlinux-4.15.0-58-generic
 ```
 sudo crash /usr/lib/debug/boot/vmlinux-4.15.0-58-generic /var/crash/201909041647/dump.201909041647
 ```
+
+
+## ubuntu apport
+
+`apport`就是ubuntu上的"crash report"服务，就是当有程序崩溃时弹出的那个发送error report的程序窗口, 并在`/var/crash/`中将保存一个`*.crash`的文件，其中存在CoreDump转储文件和当前崩溃程序运行环境的信息，可以解压获取并通过gdb获取相关信息。
+
+``` shell
+apport-unpack systemGeneratedCrashReportPath.crash yourNewUnpackDirectoryHere
+cd yourNewUnpackDirectoryHere/
+gdb `cat ExecutablePath` CoreDump #(pay attention to tildes here!)
+bt  #(output actual back-trace)
+```
+``` shell
+$cat ExecutablePath
+/usr/lib/x86_64-linux-gnu/piglit/bin/shader_runner
+```
+
+### 配置apport
+
+> 默认属于开启状态
+
+- 关闭`crash report`服务，修改`/etc/default/apport`文件中的`enabled=0`
+
+```
+# set this to 0 to disable apport, or to 1 to enable it
+# you can temporarily override this with
+# sudo service apport start force_start=1
+enabled=1
+```
+
 
 
 ## 参考
