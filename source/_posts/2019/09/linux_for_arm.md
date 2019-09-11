@@ -16,6 +16,11 @@ date: "2019-09-10 23:35"
 - http://isoredirect.centos.org/altarch/7/isos/aarch64/
 
 
+### 软件包
+
+- http://mirror.centos.org/altarch/7/os/aarch64/Packages/
+
+
 ## Archlinux
 
 >We build optimized packages for soft-float ARMv5te, hard-float ARMv6 and ARMv7, and ARMv8 AArch64 instruction sets to use each platform to its full potential.
@@ -26,3 +31,8 @@ date: "2019-09-10 23:35"
 ### 特点
 
  - 系统软件更新快，版本新
+
+
+## Beyond Linux® From Scratch (System V Edition)
+
+- http://www.linuxfromscratch.org/blfs/view/svn/index.html
