@@ -35,4 +35,7 @@ date: "2019-09-10 23:35"
 
 ## Beyond Linux® From Scratch (System V Edition)
 
+
+
+
 - http://www.linuxfromscratch.org/blfs/view/svn/index.html
