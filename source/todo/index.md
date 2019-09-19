@@ -76,3 +76,5 @@ comments: true
 * [Chartify](https://chartify.io/) —— 设计精美的图表和图形，数据可视化
 * [OpenGL Demo](https://www.opengl.org/archives/resources/code/samples/glut_examples/demos/demos.html) —— OpenGL Demo有源码
 * [Beyond Linux® From Scratch (System V Edition)](http://www.linuxfromscratch.org/blfs/view/svn/index.html) —— Linux系统中最新的软件版本和编译安装指南
+* [地球仪](https://cesiumjs.org/) —— WebGL 3D
+* [SpeedTest](https://www.speedtest.net) —— 测试网速

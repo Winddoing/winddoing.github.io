@@ -1,7 +1,11 @@
 ---
-layout: "post"
-title: "Linux for ARM"
-date: "2019-09-10 23:35"
+layout: post
+title: Linux for ARM
+date: '2019-09-10 23:35'
+tags:
+  - ARM
+categories:
+  - 系统应用
 ---
 
 支持arm架构CPU的PC或服务器中linux相关系统或软件
