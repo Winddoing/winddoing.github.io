@@ -24,10 +24,32 @@ ABRT (Automated Bug Reporting Tool) Daemon:
 
 ## 配置
 
+```
+# Product Signing (GPG) Keys:
+# https://access.redhat.com/security/team/key
+#
+OpenGPGCheck = no #捕获所有程序的崩溃信息
+
+# Blacklisted packages
+#
+BlackList = nspluginwrapper, valgrind, strace, mono-core
+
+# Process crashes in executables which do not belong to any package?
+#
+ProcessUnpackaged = yes #
+
+# Blacklisted executable paths (shell patterns)
+#
+BlackListedPaths = /usr/share/doc/*, */example*, /usr/bin/nspluginviewer, /usr/lib/xulrunner-*/plugin-container
+
+# interpreters names
+Interpreters = python2, python2.7, python, python3, python3.3, perl, perl5.16.2
+```
 > 配置文件： `/etc/abrt/abrt-action-save-package-data.conf`
 
 > 配置文件：`/etc/abrt/abrt.conf`
 
+- 配置参数[解析](https://docs.fedoraproject.org/en-US/Fedora/14/html/Deployment_Guide/configuring.html)
 
 - 重启服务
 ```
@@ -61,6 +83,12 @@ Directory:      /var/spool/abrt/vmcore-127.0.0.1-2019-09-05-10:31:32
 
 The Autoreporting feature is disabled. Please consider enabling it by issuing
 'abrt-auto-reporting enabled' as a user with root privileges
+```
+
+```
+# ls /var/spool/abrt/ccpp-2019-09-21-16:26:32-16439
+abrt_version  architecture  cmdline         coredump  dso_list  event_log   exploitable  hostname  last_occurrence  machineid  open_fds  os_release  proc_pid_status  reason    time  uid       uuid
+analyzer      cgroup        core_backtrace  count     environ   executable  global_pid   kernel    limits           maps       os_info   pid         pwd              runlevel  type  username  var_log_messages
 ```
 
 ### 删除文件包

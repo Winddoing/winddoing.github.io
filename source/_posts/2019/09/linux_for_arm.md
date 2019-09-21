@@ -24,6 +24,10 @@ categories:
 
 - http://mirror.centos.org/altarch/7/os/aarch64/Packages/
 
+### 不同版本
+
+- http://mirror.centos.org/altarch/
+
 
 ## Archlinux
 
