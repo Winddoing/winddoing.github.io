@@ -86,6 +86,16 @@ EGLBoolean eglBindAPI( 	EGLenum api);
 
 > OpenGL着色语言（OpenGL Shading Language）是用来在OpenGL中着色编程的语言，也即开发人员写的短小的自定义程序，他们是在图形卡的GPU （Graphic Processor Unit图形处理单元）上执行的，代替了固定的渲染管线的一部分，使渲染管线中不同层次具有可编程性。
 
+
+## X.org
+
+
+2018年X.Org开发者大会相关文档和视频（网络原因视频看不了）
+
+- https://www.x.org/wiki/Events/XDC2018/
+
+
+
 ## 参考
 
 - [virtio-gpu-wddm-dod](https://gitlab.com/spice/win32/virtio-gpu-wddm-dod)
