@@ -360,6 +360,17 @@ $pkg-config --libs --cflags gl
 -I/usr/include/libdrm -lGL
 ```
 
+## 命令行直接打开浏览器进入指定网页
+
+```
+$firefox --new-window https://winddoing.github.io
+```
+## 命令行直接打开文件管理（ubuntu）
+
+```
+$nautilus
+```
+
 ## 参考
 
 1. [minicom中文手册](https://www.cnblogs.com/my-blog/archive/2008/12/10/1351753.html)
