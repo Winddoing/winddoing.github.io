@@ -60,3 +60,9 @@ esEye 分析264的码流结构
 
 [edid_managerv1x0](https://pan.baidu.com/s/1BPgXadM9Mnwwio1PU4jiPQ)
 > EDID查询
+
+## dxdiag
+
+>按键盘`win+r`调出运行命令，输入`dxdiag`,如[DxDiag](src/DxDiag.txt)
+
+Dxdiag可以显示计算机上DirectX相关的文件，检查正在运行的文件、输入设备、视频驱动程序版本、以及当前的系统信息。
