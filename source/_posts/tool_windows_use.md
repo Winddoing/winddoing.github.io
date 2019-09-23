@@ -1,7 +1,9 @@
 ---
 title: Windows常用工具
 date: 2018-05-13 23:07:24
-categories: 工具
+categories:
+  - 工具
+  - window
 tags: [windows]
 ---
 
@@ -63,6 +65,6 @@ esEye 分析264的码流结构
 
 ## dxdiag
 
->按键盘`win+r`调出运行命令，输入`dxdiag`,如[DxDiag](src/DxDiag.txt)
+>按键盘`win+r`调出运行命令，输入`dxdiag`,如[DxDiag](https://winddoing.github.io/src/DxDiag.txt)
 
 Dxdiag可以显示计算机上DirectX相关的文件，检查正在运行的文件、输入设备、视频驱动程序版本、以及当前的系统信息。
