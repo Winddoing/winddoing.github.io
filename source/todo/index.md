@@ -78,3 +78,5 @@ comments: true
 * [Beyond Linux® From Scratch (System V Edition)](http://www.linuxfromscratch.org/blfs/view/svn/index.html) —— Linux系统中最新的软件版本和编译安装指南
 * [地球仪](https://cesiumjs.org/) —— WebGL 3D
 * [SpeedTest](https://www.speedtest.net) —— 测试网速
+* [Google Land Lines](https://lines.chromeexperiments.com/) —— 随便一笔 匹配地球
+* [FakeUpdate.net - Windows Update Prank by fediaFedia【[Mobile](http://fakeupdate.net/mobile/)】](http://fakeupdate.net/) —— 在线模拟各种系统升级过程

@@ -15,9 +15,30 @@ categories:
 
 <!--more-->
 
+```
+[  712.873530] amdgpu 0001:01:00.0: GPU fault detected: 146 0x0218082c
+[  712.878462] pcieport 0001:00:00.0: AER: Multiple Corrected error received: id=0000
+[  712.878469] pcieport 0001:00:00.0: PCIe Bus Error: severity=Corrected, type=Physical Layer, id=0000(Receiver ID)
+[  712.878471] pcieport 0001:00:00.0:   device [1def:e006] error status/mask=00000001/00002000
+[  712.878472] pcieport 0001:00:00.0:    [ 0] Receiver Error         (First)
+[  712.912617] amdgpu 0001:01:00.0:   VM_CONTEXT1_PROTECTION_FAULT_ADDR   0x00101043
+[  712.920085] amdgpu 0001:01:00.0:   VM_CONTEXT1_PROTECTION_FAULT_STATUS 0x0400802C
+[  712.927554] amdgpu 0001:01:00.0: VM fault (0x2c, vmid 2) at page 1052739, read from 'TC2' (0x54433200) (8)
+[  712.937273] amdgpu 0001:01:00.0: GPU fault detected: 146 0x03403d0c
+[  712.943527] amdgpu 0001:01:00.0:   VM_CONTEXT1_PROTECTION_FAULT_ADDR   0x00101468
+[  712.950995] amdgpu 0001:01:00.0:   VM_CONTEXT1_PROTECTION_FAULT_STATUS 0x0403D00C
+[  712.958463] amdgpu 0001:01:00.0: VM fault (0x0c, vmid 2) at page 1053800, read from 'SDM1' (0x53444d31) (61)
+[  712.968329] amdgpu 0001:01:00.0: GPU fault detected: 146 0x03a0770c
+[  712.974582] amdgpu 0001:01:00.0:   VM_CONTEXT1_PROTECTION_FAULT_ADDR   0x00101474
+[  712.982050] amdgpu 0001:01:00.0:   VM_CONTEXT1_PROTECTION_FAULT_STATUS 0x0A07700C
+[  712.989519] amdgpu 0001:01:00.0: VM fault (0x0c, vmid 5) at page 1053812, read from 'SDM0' (0x53444d30) (119)
+```
+
 ## 造成的现象
 
 系统整体卡住，有时鼠标键盘无响应，但是可以通过ssh登录系统，并且测试无法kill掉xorg
+
+
 
 ## GPU页错误
 
