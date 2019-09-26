@@ -26,7 +26,7 @@ categories:
 
 ### 不同版本
 
-- http://mirror.centos.org/altarch/
+- http://mirror.centos.org
 
 
 ## Archlinux
