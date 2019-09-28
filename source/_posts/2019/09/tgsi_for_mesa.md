@@ -19,6 +19,9 @@ categories:
 
 > TGSI, Tungsten Graphics Shader Infrastructure, is an intermediate language for describing shaders. Since Gallium is inherently shaderful, shaders are an important part of the API. TGSI is the only intermediate representation used by all drivers.
 
+![shader_IRs_2015](/images/2019/09/shader_irs_2015.png)
+![new_shader_ir](/images/2019/09/new_shader_ir.png)
+
 TGSI是所有驱动程序使用的唯一中间表示形式,这里`特指`的是着色器的中间形式，着色器对驱动而言的所有格式将是TGSI。
 
 ## TGSI中间语言
@@ -179,3 +182,4 @@ st_link_tgsi
 - [The State of Open Source 3D](http://www.informit.com/articles/article.aspx?p=1554200)
 - [learnopengl--Shaders](https://learnopengl.com/Getting-started/Shaders)|[【CN】](https://learnopengl-cn.github.io/#)
 - [Linux环境下的图形系统和AMD R600显卡编程(11)——R600指令集](https://www.cnblogs.com/shoemaker/p/linux_graphics11.html)
+- [GLSL compiler](https://www.x.org/wiki/Events/XDC2015/Program/turner_glsl_compiler.pdf)
