@@ -59,7 +59,7 @@ sudo cp mtextra.ttf  symbol.ttf  WEBDINGS.TTF  wingding.ttf  WINGDNG2.ttf  WINGD
 
 ## 钉钉 for Linux
 
-* [钉钉Linux版](https://club.doui.cc/t/view/15c8b0ea25957196a9156b2d.html)
+* [https://github.com/nashaofu/dingtalk](https://github.com/nashaofu/dingtalk)
 
 ## Teamviewer
 
