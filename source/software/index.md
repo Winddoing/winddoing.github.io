@@ -24,6 +24,7 @@ comments: false
 |   BusHound+v6.0.1     | [Download](https://coding.net/u/Winddoing/p/software_tools/git/raw/master/BusHound+v6.0.1.7z)        | USB抓包工具 |
 |   win10专业版激活     | [Download](https://coding.net/u/Winddoing/p/software_tools/git/raw/master/神龙激活工具.rar)          | win10 |
 |        飞秋           | [Download](https://coding.net/u/Winddoing/p/software_tools/git/raw/master/飞秋FeiQ.exe)              | 局域网通信工具（聊天传文件） |
+|      GifCam           | [Download](https://coding.net/u/Winddoing/p/software_tools/git/raw/master/GifCam.exe)              | 制作gif文件，可以用于录屏 |
 
 > 注: 所有工具均为互联网下载，暂存这里只为下次使用方便
 
