@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-    - "8"  # nodejs的版本
+    - "12"  # nodejs的版本
 branches:
     only:
         - web_source  # 设置自动化部署的源码分支
