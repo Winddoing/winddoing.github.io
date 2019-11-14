@@ -10,18 +10,19 @@ set -ev
 
 GITWEB_REF="https://github.com/Winddoing/Winddoing.github.io.git"
 CODING_REF="git.coding.net/Winddoing/winddoing.git"
+CUR_TIME=`date`
 
 ls .
 
 cd ./public
 
-ls ./*
+ls .
 
 git init 
 
 git add -A
 
-git commit -m "bak"
+git commit -m "backup: $CUR_TIME"
 
 git branch
 
