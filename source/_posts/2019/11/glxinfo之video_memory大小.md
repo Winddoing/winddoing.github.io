@@ -7,6 +7,7 @@ tags:
   - 显存
 categories:
   - 多媒体
+abbrlink: 18632
 ---
 
 mesa中的显存大小：
