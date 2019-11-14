@@ -6,6 +6,7 @@ tags:
   - Shell
 categories:
   - shell
+abbrlink: 55887
 ---
 
 软连接的截取和定位

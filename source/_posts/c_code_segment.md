@@ -1,8 +1,10 @@
 ---
 title: C代码片段
-date: 2018-06-19 12:07:24
 categories: 程序设计
-tags: [C]
+tags:
+  - C
+abbrlink: 16839
+date: 2018-06-19 12:07:24
 ---
 
 记录一些遇到代码片段：

@@ -1,8 +1,10 @@
 ---
 title: EDID
-date: 2018-07-11 9:07:24
 categories: 多媒体
-tags: [edid]
+tags:
+  - edid
+abbrlink: 47714
+date: 2018-07-11 09:07:24
 ---
 
 > 环境： ubuntu 18.04

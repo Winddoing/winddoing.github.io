@@ -1,8 +1,11 @@
 ---
 title: jiffies && HZ
-date: 2017-12-25 23:07:24
 categories: Linux内核
-tags: [kernel, time]
+tags:
+  - kernel
+  - time
+abbrlink: 33522
+date: 2017-12-25 23:07:24
 ---
 
 ## jiffies

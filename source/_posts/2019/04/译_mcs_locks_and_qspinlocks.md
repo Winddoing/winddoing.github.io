@@ -7,6 +7,7 @@ tags:
 categories:
   - Linux内核
   - 同步
+abbrlink: 12400
 ---
 
 原文： https://lwn.net/Articles/590243/

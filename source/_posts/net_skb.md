@@ -1,8 +1,11 @@
 ---
 title: Socket Buffer
-date: 2017-12-29 23:07:24
 categories: Linux内核
-tags: [kernel, socket]
+tags:
+  - kernel
+  - socket
+abbrlink: 21941
+date: 2017-12-29 23:07:24
 ---
 
 

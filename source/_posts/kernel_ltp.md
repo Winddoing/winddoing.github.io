@@ -1,8 +1,11 @@
 ---
 title: LTP测试
-date: 2017-12-21 23:07:24
 categories: 计算机系统
-tags: [LTP, kernel]
+tags:
+  - LTP
+  - kernel
+abbrlink: 39613
+date: 2017-12-21 23:07:24
 ---
 
 LTP套件是由 Linux Test Project 所开发的一套系统测试套件。它基于系统资源的利用率统计开发了一个测试的组合,为系统提供足够的压力。

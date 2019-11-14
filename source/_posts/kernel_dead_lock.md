@@ -1,12 +1,13 @@
 ---
 title: 死锁
-date: 2018-01-18T23:07:24.000Z
 categories:
   - Linux内核
   - 同步
 tags:
   - spinlock
   - 死锁
+abbrlink: 28384
+date: 2018-01-18 23:07:24
 ---
 
 ```

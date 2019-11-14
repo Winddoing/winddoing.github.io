@@ -7,6 +7,7 @@ tags:
 categories:
   - Linux内核
   - 同步
+abbrlink: 50889
 ---
 
 `Ticket Spinlock`思路：类似银行办业务，先取一个号排队，然后等待叫号叫到自己

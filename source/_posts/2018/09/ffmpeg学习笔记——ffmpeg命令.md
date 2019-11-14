@@ -6,6 +6,7 @@ tags:
   - FFmpeg
 categories:
   - FFmpeg
+abbrlink: 41754
 ---
 
 ffmpeg命令相关用法。

@@ -7,6 +7,7 @@ tags:
   - build
 categories:
   - 编译工具
+abbrlink: 28042
 ---
 
 转载：https://stackoverflow.com/questions/5837764/autotools-vs-cmake-for-both-windows-and-linux-compilation

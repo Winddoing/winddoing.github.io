@@ -6,6 +6,7 @@ tags:
   - 内存
 categories:
   - 程序设计
+abbrlink: 9412
 ---
 
 在linux系统编程中常见的内存申请方式和其特性，`malloc`，`calloc`, `realloc`

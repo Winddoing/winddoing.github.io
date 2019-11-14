@@ -1,8 +1,11 @@
 ---
 title: Namespace
-date: 2018-03-27 23:07:24
 categories: 进程
-tags: [namespace, 进程]
+tags:
+  - namespace
+  - 进程
+abbrlink: 31401
+date: 2018-03-27 23:07:24
 ---
 
 容器，cgroup，namespace之间的关系：

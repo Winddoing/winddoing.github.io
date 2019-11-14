@@ -6,6 +6,7 @@ categories:
   - 网络
 tags:
   - 网络
+abbrlink: 21135
 ---
 
 `iperf`是一个网络性能测试工具。Iperf可以测试TCP和UDP带宽质量。Iperf可以测量最大TCP带宽，具有多种参数和UDP特性。 Iperf可以报告带宽，延迟抖动和数据包丢失。利用Iperf这一特性，可以用来测试一些网络设备如路由器，防火墙，交换机等的性能。

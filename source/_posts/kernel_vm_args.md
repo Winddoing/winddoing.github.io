@@ -1,8 +1,11 @@
 ---
 title: Linux内存的VM参数
-date: 2018-02-27 23:07:24
 categories: Linux内核
-tags: [kernel, VM]
+tags:
+  - kernel
+  - VM
+abbrlink: 18938
+date: 2018-02-27 23:07:24
 ---
 
 ```

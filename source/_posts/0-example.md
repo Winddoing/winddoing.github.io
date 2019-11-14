@@ -1,8 +1,11 @@
 ---
 title: Example
-date: 2016-08-18 8:07:24
 categories: 随笔
-tags: [Travis-CI, Test]
+tags:
+  - Travis-CI
+  - Test
+abbrlink: 10323
+date: 2016-08-18 08:07:24
 ---
 
 

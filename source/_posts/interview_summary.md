@@ -1,9 +1,11 @@
 ---
 title: 面试总结
-date: 2018-03-28 23:07:24
 categories: 随笔
-tags: [面试]
+tags:
+  - 面试
 password: xiaomi
+abbrlink: 42863
+date: 2018-03-28 23:07:24
 ---
 
 

@@ -1,8 +1,11 @@
 ---
 title: UDP广播
-date: 2018-07-04 8:07:24
 categories: 网络
-tags: [net, broadcast]
+tags:
+  - net
+  - broadcast
+abbrlink: 34165
+date: 2018-07-04 08:07:24
 ---
 
 

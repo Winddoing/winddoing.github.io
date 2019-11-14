@@ -1,8 +1,10 @@
 ---
 title: TS流
-date: 2018-07-16 8:07:24
 categories: 多媒体
-tags: [TS]
+tags:
+  - TS
+abbrlink: 36727
+date: 2018-07-16 08:07:24
 ---
 
 TS流

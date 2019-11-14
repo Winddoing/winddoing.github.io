@@ -1,8 +1,11 @@
 ---
 title: 内存屏障
-date: 2017-12-27 23:07:24
 categories: Linux内核
-tags: [mem, barrier]
+tags:
+  - mem
+  - barrier
+abbrlink: 15089
+date: 2017-12-27 23:07:24
 ---
 
 >Memory barrier能够让`CPU`或`编译器`在内存访问上有序。一个Memory barrier之前的**内存访问操作必定先于其之后的完成**。

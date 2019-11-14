@@ -2,10 +2,13 @@
 layout: post
 title: ARM--GCC内嵌汇编
 date: '2018-12-14 10:02'
-tags: [ARM, 汇编]
+tags:
+  - ARM
+  - 汇编
 categories:
   - ARM
   - 汇编
+abbrlink: 4526
 ---
 
 记录ARM平台中相关的汇编操作和总结

@@ -6,6 +6,7 @@ tags:
   - Makefile
 categories:
   - 编译工具
+abbrlink: 24934
 ---
 
 `cmake`使用技巧记录

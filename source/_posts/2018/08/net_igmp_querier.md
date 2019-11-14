@@ -1,7 +1,8 @@
 ---
-layout: "post"
+layout: post
 title: IGMP snooping 查询器
-date: "2018-08-11 14:23"
+date: '2018-08-11 14:23'
+abbrlink: 51576
 ---
 
 IGMP在本地网络上的`主机`和`路由器`之间传达组成员信息，路由器定时向所有主机组多播IGMP查询。主机多播IGMP报告报文以响应查询。

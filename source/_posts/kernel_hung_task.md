@@ -1,8 +1,10 @@
 ---
 title: Hung Task
-date: 2018-03-15 23:07:24
 categories: Linux内核
-tags: [Task]
+tags:
+  - Task
+abbrlink: 16306
+date: 2018-03-15 23:07:24
 ---
 
 

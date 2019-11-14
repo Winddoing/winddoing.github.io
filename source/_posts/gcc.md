@@ -1,12 +1,13 @@
 ---
 title: GCC
-date: 2018-01-05T23:07:24.000Z
 categories:
   - 编译工具
   - gcc
 tags:
   - builtin_xxx
   - gcc
+abbrlink: 54464
+date: 2018-01-05 23:07:24
 ---
 
 GCC的使用和相关特性。

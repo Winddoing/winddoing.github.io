@@ -6,6 +6,7 @@ tags:
   - 错误号
 categories:
   - 网络
+abbrlink: 54884
 ---
 
 socket编程中的出现的错误号基本含义：

@@ -1,8 +1,10 @@
 ---
 title: MIPS架构下的中断处理
-date: 2018-03-22 23:22:24
 categories: Linux内核
-tags: [中断]
+tags:
+  - 中断
+abbrlink: 61535
+date: 2018-03-22 23:22:24
 ---
 
 内核版本: 3.10.14

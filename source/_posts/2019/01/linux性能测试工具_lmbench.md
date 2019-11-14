@@ -7,6 +7,7 @@ tags:
 categories:
   - 工具
   - 性能测试
+abbrlink: 54953
 ---
 
 Lmbench是一套简易，可移植的，符合ANSI/C标准为UNIX/POSIX而制定的微型测评工具。一般来说，它衡量两个关键特征：`反应时间`和`带宽`。Lmbench旨在使系统开发者深入了解关键操作的基础成本。

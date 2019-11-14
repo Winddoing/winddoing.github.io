@@ -6,6 +6,7 @@ tags:
   - 库
 categories:
   - 工具
+abbrlink: 31784
 ---
 
 查询一个库的`位置`

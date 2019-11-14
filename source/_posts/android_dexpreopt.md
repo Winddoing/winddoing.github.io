@@ -1,8 +1,10 @@
 ---
 title: Android ART编译预优化
-date: 2018-02-02 23:07:24
 categories: Android
-tags: [Android]
+tags:
+  - Android
+abbrlink: 40126
+date: 2018-02-02 23:07:24
 ---
 
 ```

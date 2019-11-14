@@ -6,6 +6,7 @@ tags:
   - Shell
 categories:
   - shell
+abbrlink: 56769
 ---
 
 记录软件版本每一个编译的时间和log信息：

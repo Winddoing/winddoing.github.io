@@ -6,6 +6,7 @@ tags:
   - ARM
 categories:
   - 系统应用
+abbrlink: 35642
 ---
 
 支持arm架构CPU的PC或服务器中linux相关系统或软件

@@ -6,6 +6,7 @@ tags:
   - printk
 categories:
   - Linux内核
+abbrlink: 59845
 ---
 
 在Linux内核代码里当需要限制`printk`打印频率时会用到`__ratelimit`或`printk_ratelimit`（封装了__ratelimit）

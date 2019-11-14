@@ -6,6 +6,7 @@ tags:
   - dump
 categories:
   - 系统服务
+abbrlink: 46984
 ---
 
 ABRT (Automated Bug Reporting Tool) Daemon:

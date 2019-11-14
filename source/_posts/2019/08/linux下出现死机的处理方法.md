@@ -6,6 +6,7 @@ tags:
   - 死机
 categories:
   - 工具
+abbrlink: 8229
 ---
 
 服务器中Linux系统出现死机后的处理：查看系统**日志**，定位死机原因

@@ -7,6 +7,7 @@ tags:
 categories:
   - Python
   - 环境
+abbrlink: 65273
 ---
 
 `Anaconda`是Python的包管理器和环境管理器

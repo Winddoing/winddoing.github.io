@@ -1,8 +1,11 @@
 ---
 title: 组播--IGMPv2
-date: 2018-06-25 23:17:24
 categories: 网络
-tags: [IGMP, net]
+tags:
+  - IGMP
+  - net
+abbrlink: 39626
+date: 2018-06-25 23:17:24
 ---
 
 >IGMP 是Internet Group Management Protocol（互联网组管理协议）的简称。它是TCP/IP 协议族中负责IP 组播成员管理的协议，用来在IP 主机和与其直接相邻的组播路由器之间建立、维护组播组成员关系。

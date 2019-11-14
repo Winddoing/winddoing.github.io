@@ -7,6 +7,7 @@ tags:
 categories:
   - 网络
   - WIFI
+abbrlink: 50085
 ---
 
 解析wpa_supplicant的配置文件，一般叫做 `wpa_supplicant.conf`
