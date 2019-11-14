@@ -8,15 +8,14 @@
 
 set -ev
 
-GITWEB_REF="https://github.com/Winddoing/Winddoing.github.io.git"
 CODING_REF="git.coding.net/Winddoing/winddoing.git"
 CUR_TIME=`date`
 
-ls .
+ls -lsh .
 
 cd ./public
 
-ls .
+ls -lsh .
 
 git init 
 
