@@ -7,6 +7,7 @@ tags:
 categories:
   - ARM
   - 汇编
+abbrlink: 5543
 ---
 
 记录常用到的arm64汇编语法，参考[libjpeg-turbo](https://github.com/libjpeg-turbo/libjpeg-turbo/blob/master/simd/arm64/jsimd_neon.S)

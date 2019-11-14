@@ -7,6 +7,7 @@ tags:
 categories:
   - 程序设计
   - 代码风格
+abbrlink: 62371
 ---
 
 `Astyle`是一个用来对C/C++代码进行格式化

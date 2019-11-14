@@ -1,3 +1,6 @@
+---
+abbrlink: 4
+---
 
 # PlantUML
 

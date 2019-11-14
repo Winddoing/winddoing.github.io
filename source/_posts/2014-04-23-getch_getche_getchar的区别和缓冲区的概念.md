@@ -1,10 +1,13 @@
 ---
-date: 2014-04-23
 layout: post
 title: getch、getche、getchar的区别和缓冲区的概念
 thread: 164
 categories: 程序设计
-tags: [ 输入输出, getch]
+tags:
+  - 输入输出
+  - getch
+abbrlink: 26893
+date: 2014-04-23 00:00:00
 ---
 
 ### 输入输出缓冲区的概念（C++用的多一些）

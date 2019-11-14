@@ -6,6 +6,7 @@ categories:
   - 电子电路
 tags:
   - 电路
+abbrlink: 40769
 ---
 
 由电阻R和电容C组成的电路称为阻容电路，简称`RC电路`

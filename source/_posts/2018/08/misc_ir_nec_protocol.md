@@ -1,7 +1,8 @@
 ---
-layout: "post"
+layout: post
 title: NEC红外遥控协议
-date: "2018-08-15 17:38"
+date: '2018-08-15 17:38'
+abbrlink: 34467
 ---
 
 ## NEC

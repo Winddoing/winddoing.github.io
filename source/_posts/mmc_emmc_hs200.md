@@ -1,8 +1,10 @@
 ---
 title: emmc的HS200特性
-date: 2017-10-31 23:07:24
 categories: 设备驱动
-tags: [emmc]
+tags:
+  - emmc
+abbrlink: 34668
+date: 2017-10-31 23:07:24
 ---
 
 

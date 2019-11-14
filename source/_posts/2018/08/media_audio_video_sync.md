@@ -6,6 +6,7 @@ categories:
   - 多媒体
 tags:
   - 视频
+abbrlink: 56216
 ---
 
 音视频同步主要指两类：

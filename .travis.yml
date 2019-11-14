@@ -1,17 +1,15 @@
 language: node_js
 node_js:
-    - "12"  # nodejs的版本
+    - "10"  # nodejs的版本
 branches:
     only:
         - web_source  # 设置自动化部署的源码分支
 
 before_install:
     - export TZ='Asia/Shanghai'  # 设置时区
-    - npm install
-    - npm install hexo -g
     - npm install hexo-cli -g
-    - npm install gulp
     - npm install gulp -g
+    - npm install
 
 before_script:
     - git config --global user.name 'Winddoing' #设置github用户名
@@ -19,27 +17,7 @@ before_script:
     - sed -i'' "/^ *repo/s~github\.com~${REPO_TOKEN}@github.com~" _config.yml
 
 install:
-    - npm install --save hexo-generator-searchdb
-    - npm install --save hexo-generator-feed
-    - npm install --save hexo-generator-index
-    - npm install --save hexo-generator-archive
-    - npm install --save hexo-generator-tag
-    - npm install --save hexo-util
-    - npm install --save hexo-fs
-    - npm install --save hexo-deployer-git@0.3.1
-    #- npm install --save hexo-renderer-ejs@0.3.1
-    - npm install --save hexo-generator-baidu-sitemap
-    - npm install --save hexo-generator-sitemap
-    - npm install --save hexo-filter-flowchart
-    - npm install --save hexo-filter-sequence
-    - npm install --save hexo-autonofollow
-    - npm install --save hexo-abbrlink
-    - npm install --save hexo-wordcount                 #字数统计
-    - npm install --save gulp-minify-css
-    - npm install --save gulp-uglify
-    - npm install --save gulp-htmlmin
-    - npm install --save gulp-htmlclean
-    - npm install --save gulp-imagemin
+    #- npm install --save hexo-generator-searchdb
 
 cache:
     directories:

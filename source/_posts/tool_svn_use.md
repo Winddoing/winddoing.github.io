@@ -1,8 +1,10 @@
 ---
 title: SVN的基础使用
-date: 2018-05-7 23:07:24
 categories: 工具
-tags: [svn]
+tags:
+  - svn
+abbrlink: 56583
+date: 2018-05-07 23:07:24
 ---
 
 svn的基础使用命令：

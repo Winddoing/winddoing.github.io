@@ -7,6 +7,7 @@ tags:
 categories:
   - 程序设计
   - 性能
+abbrlink: 40199
 ---
 
 > 转载于： https://stackoverflow.com/questions/13975546/avx-vmovdqa-slower-than-two-sse-movdqa

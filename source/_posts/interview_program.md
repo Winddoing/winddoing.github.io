@@ -1,8 +1,10 @@
 ---
 title: 面试题
-date: 2016-08-18 23:07:24
 categories: 随笔
-tags: [面试]
+tags:
+  - 面试
+abbrlink: 27055
+date: 2016-08-18 23:07:24
 ---
 
 

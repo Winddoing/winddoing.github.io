@@ -6,6 +6,7 @@ tags:
   - ARM
 categories:
   - ARM
+abbrlink: 7190
 ---
 
 ![armv8-a](/images/2019/02/armv8_a.png)

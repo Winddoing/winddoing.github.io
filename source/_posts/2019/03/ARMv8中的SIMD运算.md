@@ -7,6 +7,7 @@ tags:
 categories:
   - ARM
   - SIMD
+abbrlink: 13631
 ---
 
 `NEON`是一种压缩的SIMD架构，主要是给多媒体使用，结果并行计算的问题。

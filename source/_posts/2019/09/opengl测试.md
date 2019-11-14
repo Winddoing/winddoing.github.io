@@ -6,6 +6,7 @@ tags:
   - OpenGL
 categories:
   - 多媒体
+abbrlink: 42765
 ---
 
 OpenGL API相关测试：

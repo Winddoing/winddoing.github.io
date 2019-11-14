@@ -1,8 +1,10 @@
 ---
 title: H264 ES PS TS流之间的联系
-date: 2018-07-09 8:07:24
 categories: 多媒体
-tags: [H264]
+tags:
+  - H264
+abbrlink: 51817
+date: 2018-07-09 08:07:24
 ---
 
 > `ES流(Elementary Stream)`: 也叫基本码流,包含视频、音频或数据的连续码流.

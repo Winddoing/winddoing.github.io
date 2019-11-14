@@ -6,6 +6,7 @@ tags:
   - log
 categories:
   - 系统服务
+abbrlink: 50280
 ---
 
 `Systemd`统一管理所有linux的启动日志。带来的好处就是，可以只用`journalctl`一个命令，查看所有日志（内核日志和应用日志）。日志的配置文件`/etc/systemd/journald.conf`

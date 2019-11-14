@@ -1,8 +1,10 @@
 ---
 title: UDP调用connect的作用
-date: 2018-06-21 23:57:24
 categories: 网络
-tags: [UDP]
+tags:
+  - UDP
+abbrlink: 33300
+date: 2018-06-21 23:57:24
 ---
 
 > 问： UDP中可以使用`connect`系统调用吗?

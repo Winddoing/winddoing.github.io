@@ -6,6 +6,7 @@ tags:
   - 线程
 categories:
   - 程序设计
+abbrlink: 8868
 ---
 
 Linux系统下的多线程遵循`POSIX线程`接口，称为`pthread`。编写Linux下的多线程程序，需要使用头文件`<pthread.h>`，链接时需要使用库libpthread.so。Linux下pthread的实现是通过系统调用`clone()`来实现的。

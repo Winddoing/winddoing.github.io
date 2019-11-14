@@ -1,8 +1,10 @@
 ---
 title: SMP多核启动
-date: 2018-01-12 23:07:24
 categories: 计算机系统
-tags: [SMP]
+tags:
+  - SMP
+abbrlink: 49009
+date: 2018-01-12 23:07:24
 ---
 
 

@@ -1,7 +1,8 @@
 ---
-layout: "post"
+layout: post
 title: 网络-ping命令
-date: "2018-08-02 15:27"
+date: '2018-08-02 15:27'
+abbrlink: 51638
 ---
 
 判断网络的连通性和延时情况，通常使用`ping`命令。

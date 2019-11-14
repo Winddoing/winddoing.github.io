@@ -1,10 +1,11 @@
 ---
-date: 2015-06-07 10:50
+date: '2015-06-07 10:50'
 layout: post
 title: Linux下字符串操作常用函数
 thread: 166
 categories: 程序设计
 tags: 字符串
+abbrlink: 43508
 ---
 
 ### 字符串长度函数

@@ -1,8 +1,10 @@
 ---
 title: udev的使用
-date: 2018-05-17 23:07:24
 categories: 文件系统
-tags: [udev]
+tags:
+  - udev
+abbrlink: 3820
+date: 2018-05-17 23:07:24
 ---
 
 udev版本：udev-167

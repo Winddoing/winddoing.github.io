@@ -6,6 +6,7 @@ tags:
   - centos
 categories:
   - 系统服务
+abbrlink: 51885
 ---
 
 升级CentOS7中的内核版本：

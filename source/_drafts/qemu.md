@@ -1,8 +1,10 @@
 ---
 title: QEMU的环境搭建
-date: 2018-01-21 23:07:24
 categories: 常用工具
-tags: [qemu]
+tags:
+  - qemu
+abbrlink: 1912
+date: 2018-01-21 23:07:24
 ---
 
 ## 编译

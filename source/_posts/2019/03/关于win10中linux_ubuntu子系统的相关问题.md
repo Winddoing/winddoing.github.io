@@ -7,6 +7,7 @@ tags:
 categories:
   - 工具
   - window
+abbrlink: 41029
 ---
 
 记录window10中Linux子系统使用的相关问题和常见错误。

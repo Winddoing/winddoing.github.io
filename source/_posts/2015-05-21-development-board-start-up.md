@@ -1,10 +1,11 @@
 ---
-date: 2015-05-21 01:49
+date: '2015-05-21 01:49'
 layout: post
 title: Micro2440开发板启动Linux
 thread: 166
 categories: 嵌入式
 tags: ARM
+abbrlink: 32798
 ---
 
 ### 1.Micro2440移植Linux2.6的流程

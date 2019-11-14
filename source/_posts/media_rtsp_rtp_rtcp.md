@@ -1,8 +1,10 @@
 ---
 title: 流媒体之RTSP/RTP/RTCP
-date: 2018-06-23 23:07:24
 categories: 多媒体
-tags: [RTP]
+tags:
+  - RTP
+abbrlink: 34052
+date: 2018-06-23 23:07:24
 ---
 
 ![media_c_s](/images/media/media_C_S.jpg)

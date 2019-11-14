@@ -7,6 +7,7 @@ tags:
 categories:
   - 网络
   - WIFI
+abbrlink: 49326
 ---
 
 WiFi的共存模式：

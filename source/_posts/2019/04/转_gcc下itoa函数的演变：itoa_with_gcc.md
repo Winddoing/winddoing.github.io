@@ -8,6 +8,7 @@ tags:
 categories:
   - 程序设计
   - GCC
+abbrlink: 60077
 ---
 
 转载链接：https://blog.csdn.net/u013074465/article/details/46499959

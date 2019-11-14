@@ -1,8 +1,10 @@
 ---
 title: 状态机
-date: 2017-07-9 23:07:24
 categories: 程序设计
-tags: [FSM]
+tags:
+  - FSM
+abbrlink: 32902
+date: 2017-07-09 23:07:24
 ---
 
 

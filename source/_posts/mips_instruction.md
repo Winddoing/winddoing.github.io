@@ -1,8 +1,11 @@
 ---
 title: mips指令集
-date: 2018-04-18 23:12:24
 categories: MIPS
-tags: [mips, 指令]
+tags:
+  - mips
+  - 指令
+abbrlink: 25760
+date: 2018-04-18 23:12:24
 ---
 
 

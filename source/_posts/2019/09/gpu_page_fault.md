@@ -6,6 +6,7 @@ tags:
   - GPU
 categories:
   - 设备驱动
+abbrlink: 793
 ---
 
 尽管许多GPU都支持页面错误，但并非所有都支持。 一些GPU使用下列方式响应内存错误：

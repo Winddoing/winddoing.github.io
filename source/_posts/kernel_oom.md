@@ -1,8 +1,11 @@
 ---
 title: OOM
-date: 2018-03-08 23:07:24
 categories: Linux内核
-tags: [kernel, OOM]
+tags:
+  - kernel
+  - OOM
+abbrlink: 53957
+date: 2018-03-08 23:07:24
 ---
 
 内核出现OOM的log分析：

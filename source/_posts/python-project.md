@@ -1,8 +1,10 @@
 ---
 title: 【转】python练习项目
-date: 2016-09-10 23:07:24
 categories: Python
-tags: [python]
+tags:
+  - python
+abbrlink: 9636
+date: 2016-09-10 23:07:24
 ---
 
 转载再次，自己实现练习python

@@ -6,6 +6,7 @@ tags:
   - Android
 categories:
   - Android
+abbrlink: 2578
 ---
 
 记录Android开发中遇到的一些方法和问题。

@@ -8,6 +8,7 @@ tags:
   - autogen
 categories:
   - 编译工具
+abbrlink: 31094
 ---
 
 `autotools`根据配置文件(configure.ac)自动生成`makefile`

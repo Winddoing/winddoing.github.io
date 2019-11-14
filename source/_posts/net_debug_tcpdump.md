@@ -1,8 +1,10 @@
 ---
 title: 网络调试--tcpdump
-date: 2018-06-21 23:17:24
 categories: 网络
-tags: [debug]
+tags:
+  - debug
+abbrlink: 18035
+date: 2018-06-21 23:17:24
 ---
 
 网络调试的手段工具：`tcpdump`、`wireshark`

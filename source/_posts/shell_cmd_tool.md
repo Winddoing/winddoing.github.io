@@ -6,6 +6,7 @@ tags:
   - Shell
 categories:
   - shell
+abbrlink: 1644
 ---
 
 常用的shell命令： `find`, `cat`

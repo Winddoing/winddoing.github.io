@@ -1,3 +1,6 @@
+---
+abbrlink: 13
+---
 # 线程
 
 signal(SIGPIPE, SIG_IGN);    

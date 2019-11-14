@@ -1,8 +1,11 @@
 ---
 title: I2C驱动
-date: 2018-03-28 23:07:24
 categories: 设备驱动
-tags: [driver, I2C]
+tags:
+  - driver
+  - I2C
+abbrlink: 28337
+date: 2018-03-28 23:07:24
 ---
 
 ```

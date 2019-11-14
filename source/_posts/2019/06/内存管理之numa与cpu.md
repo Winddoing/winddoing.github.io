@@ -7,6 +7,7 @@ tags:
 categories:
   - Linux内核
   - MMU
+abbrlink: 36923
 ---
 
 NUMA与CPU之间的关系,如系统中有2个CPU（可以超过2个CPU）时， NUMA内存访问模型

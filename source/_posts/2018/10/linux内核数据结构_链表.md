@@ -6,6 +6,7 @@ tags:
   - kernel
 categories:
   - Linux内核
+abbrlink: 58180
 ---
 
 链表操作接口：[include/linux/list.h](https://elixir.bootlin.com/linux/v4.4.1/source/include/linux/list.h)

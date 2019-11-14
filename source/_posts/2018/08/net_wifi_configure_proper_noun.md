@@ -7,6 +7,7 @@ categories:
   - WIFI
 tags:
   - WIFI
+abbrlink: 1797
 ---
 
 AP配置中遇到的相关名词，作用及含义：

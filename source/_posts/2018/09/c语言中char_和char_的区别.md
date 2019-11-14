@@ -6,6 +6,7 @@ categories:
   - 程序设计
 tags:
   - 指针
+abbrlink: 44009
 ---
 
 - `char *c` : char型指针，只表示所指向的内存单元

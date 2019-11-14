@@ -7,6 +7,7 @@ tags:
 categories:
   - 程序设计
   - 性能
+abbrlink: 50180
 ---
 
 > `SSE`的全称是 Sreaming SIMD Extensions， 它是一组Intel CPU指令，用于像信号处理、科学计算或者3D图形计算一样的应用。

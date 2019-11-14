@@ -6,6 +6,7 @@ tags:
   - gcc
 categories:
   - 编译工具
+abbrlink: 37120
 ---
 
 查看GCC编译器内部的预定义宏：

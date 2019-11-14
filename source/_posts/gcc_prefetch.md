@@ -1,8 +1,10 @@
 ---
 title: GCC编译器的优化： fprefetch-loop-arrays
-date: 2018-04-1 23:07:24
 categories: 编译工具
-tags: [gcc]
+tags:
+  - gcc
+abbrlink: 14105
+date: 2018-04-01 23:07:24
 ---
 
 >以MIPS架构为基础进行分析

@@ -1,8 +1,10 @@
 ---
 title: Git操作
-date: 2016-10-7 23:07:24
 categories: 工具
-tags: [Git]
+tags:
+  - Git
+abbrlink: 53101
+date: 2016-10-07 23:07:24
 ---
 
 记录平时对git的使用方法和技巧

@@ -1,8 +1,10 @@
 ---
 title: tmux
-date: 2018-03-21 23:07:24
 categories: 工具
-tags: [tmux]
+tags:
+  - tmux
+abbrlink: 40876
+date: 2018-03-21 23:07:24
 ---
 
 tmux是一个优秀的终端复用软件，split窗口。可以在一个terminal下打开多个终端。

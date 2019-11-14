@@ -1,8 +1,10 @@
 ---
 title: 用户空间的GPIO操作
-date: 2017-11-03 23:07:24
 categories: 系统应用
-tags: [GPIO]
+tags:
+  - GPIO
+abbrlink: 50599
+date: 2017-11-03 23:07:24
 ---
 
 用户空间的GPIO的操作

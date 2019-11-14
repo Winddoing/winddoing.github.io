@@ -1,8 +1,10 @@
 ---
 title: tftp
-date: 2018-05-8 23:07:24
 categories: 工具
-tags: [tftp]
+tags:
+  - tftp
+abbrlink: 3037
+date: 2018-05-08 23:07:24
 ---
 
 tftp:

@@ -1,8 +1,11 @@
 ---
 title: 寄存器和Cache
-date: 2017-12-3 23:07:24
 categories: 计算机系统
-tags: [寄存器, Cache]
+tags:
+  - 寄存器
+  - Cache
+abbrlink: 12702
+date: 2017-12-03 23:07:24
 ---
 
 

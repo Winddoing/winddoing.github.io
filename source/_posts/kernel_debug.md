@@ -1,8 +1,11 @@
 ---
 title: Linux内核调试方法---Debug
-date: 2017-12-15 23:07:24
 categories: Linux内核
-tags: [kernel, Debug]
+tags:
+  - kernel
+  - Debug
+abbrlink: 53462
+date: 2017-12-15 23:07:24
 ---
 
 常用的Linux调试方法：

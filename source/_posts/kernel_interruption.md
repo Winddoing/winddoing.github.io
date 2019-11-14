@@ -1,8 +1,10 @@
 ---
 title: Linux内核--中断
-date: 2018-02-26 23:07:24
 categories: Linux内核
-tags: [中断]
+tags:
+  - 中断
+abbrlink: 21246
+date: 2018-02-26 23:07:24
 ---
 
 中断有两种：

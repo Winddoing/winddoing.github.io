@@ -6,6 +6,7 @@ tags:
   - memset
 categories:
   - 程序设计
+abbrlink: 50726
 ---
 
 在最近的工作中，遇到了一个`memset`的问题，由于比较特殊在此记录一下。

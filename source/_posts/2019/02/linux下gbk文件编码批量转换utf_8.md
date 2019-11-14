@@ -6,6 +6,7 @@ tags:
   - Shell
 categories:
   - shell
+abbrlink: 38869
 ---
 
 Windows默认是`GBK`编码格式，Linux默认是`UTF-8`的格式，不同格式之间的乱码处理。

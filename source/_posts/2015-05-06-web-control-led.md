@@ -1,10 +1,14 @@
 ---
-date: 2015-05-06 07:49
+date: '2015-05-06 07:49'
 layout: post
 title: mini2440基于boa服务器通过WEB控制GPIO
 thread: 166
 categories: 系统应用
-tags: [S3C2440, Boa, Web]
+tags:
+  - S3C2440
+  - Boa
+  - Web
+abbrlink: 63421
 ---
 
 本文是基于BOA服务器，通过CGI（通用网管接口）控制开发板的GPIO。CGI通用网关接口是一个Web服务器主机提供信息服务的标准接口。通过CGI接口，Web服务器就能够获取客户端提交的信息，转交给服务器端的CGI程序进行处理，最后返回结果给客户端。

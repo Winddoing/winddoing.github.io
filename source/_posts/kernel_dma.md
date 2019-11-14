@@ -1,8 +1,11 @@
 ---
 title: Linux内核DMA机制
-date: 2018-04-16 2:07:24
 categories: Linux内核
-tags: [DMA, kernel]
+tags:
+  - DMA
+  - kernel
+abbrlink: 59370
+date: 2018-04-16 02:07:24
 ---
 
 >* DMA的映射机制

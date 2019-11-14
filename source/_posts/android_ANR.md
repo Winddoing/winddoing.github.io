@@ -1,8 +1,10 @@
 ---
 title: Android ANR分析
-date: 2018-02-05 23:07:24
 categories: Android
-tags: [Android]
+tags:
+  - Android
+abbrlink: 35493
+date: 2018-02-05 23:07:24
 ---
 
 >ANR是`Application Not Response`的简写就是应用没有响应。Android应用主线程卡住的时候系统会提示用户是否需要结束掉此App，这是Android系统优化用户体验的一种做法，类似的Windows系统也有类似“程序没有响应”的提示。就是**主线程无法及时响应用户输入**

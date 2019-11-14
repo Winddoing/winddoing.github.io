@@ -1,8 +1,10 @@
 ---
 title: Linux内核中的read_mostly
-date: 2017-10-24 23:07:24
 categories: Linux内核
-tags: [编译]
+tags:
+  - 编译
+abbrlink: 59553
+date: 2017-10-24 23:07:24
 ---
 
 >Linux内核版本: linux4.4.166

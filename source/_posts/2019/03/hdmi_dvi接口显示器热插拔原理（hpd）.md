@@ -6,6 +6,7 @@ tags:
   - HDMI
 categories:
   - 多媒体
+abbrlink: 57591
 ---
 
 ![hdmi_cable_link](/images/2019/03/hdmi_cable_link.png)

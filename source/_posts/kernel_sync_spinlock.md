@@ -1,12 +1,13 @@
 ---
 title: Linux内核同步机制【spin lock】
-date: 2018-03-29T23:07:24.000Z
 categories:
   - Linux内核
   - 同步
 tags:
   - Linux
   - spinlock
+abbrlink: 62201
+date: 2018-03-29 23:07:24
 ---
 
 1. spinlock的使用场景，为什么使用？

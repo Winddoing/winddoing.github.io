@@ -1,8 +1,11 @@
 ---
 title: ASLR
+categories: 计算机系统
+tags:
+  - 进程
+  - ASLR
+abbrlink: 4177
 date: 2018-01-17 23:22:24
-categories:  计算机系统
-tags: [进程, ASLR]
 ---
 
 >`ASLR`（Address space layout randomization）是一种针对缓冲区溢出的安全保护技术，通过对堆、栈、共享库映射等线性区布局的随机化，通过增加攻击者预测目的地址的难度，防止攻击者直接定位攻击代码位置，达到阻止溢出攻击的目的。

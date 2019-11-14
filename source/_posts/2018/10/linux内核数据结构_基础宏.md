@@ -6,6 +6,7 @@ tags:
   - kernel
 categories:
   - Linux内核
+abbrlink: 56380
 ---
 
 在阅读内核源码时,存在一些基础的宏定义和函数,这里主要记录一下`offsetof`和`container_of`

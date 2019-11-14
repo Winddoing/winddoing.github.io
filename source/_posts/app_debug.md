@@ -1,8 +1,11 @@
 ---
 title: Linux应用调试方法---Debug
-date: 2017-12-20 23:07:24
 categories: Linux内核
-tags: [kernel, Debug]
+tags:
+  - kernel
+  - Debug
+abbrlink: 43503
+date: 2017-12-20 23:07:24
 ---
 
 常用的Linux应用调试方法：`GDB`

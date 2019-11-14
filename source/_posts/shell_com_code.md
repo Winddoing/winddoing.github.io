@@ -1,10 +1,11 @@
 ---
 title: shell常用代码
-date: 2018-02-04T23:07:24.000Z
 tags:
   - Shell
 categories:
   - shell
+abbrlink: 3776
+date: 2018-02-04 23:07:24
 ---
 
 {% note info %} shell常用代码： {% endnote %}
