@@ -1,8 +1,12 @@
 ---
 title: VIM绘图--dot、uml
-date: 2018-07-21 8:07:24
 categories: 工具
-tags: [vim, dot, uml]
+tags:
+  - vim
+  - dot
+  - uml
+abbrlink: 44070
+date: 2018-07-21 08:07:24
 ---
 
 在整理软件逻辑和设计思路时，通过VIM进行画图记录。

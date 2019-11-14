@@ -1,8 +1,10 @@
 ---
 title: NTP服务
-date: 2018-05-24 23:07:24
 categories: 系统服务
-tags: [NTP]
+tags:
+  - NTP
+abbrlink: 12403
+date: 2018-05-24 23:07:24
 ---
 
 NTP是网络时间协议(Network Time Protocol)，它是用来同步网络中各个计算机的时间的协议。

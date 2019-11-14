@@ -6,6 +6,7 @@ categories:
   - FFmpeg
 tags:
   - FFmpeg
+abbrlink: 49519
 ---
 
 颜色编码：`YUV`、`RGB`

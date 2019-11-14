@@ -6,6 +6,7 @@ tags:
   - gcc
 categories:
   - 程序设计
+abbrlink: 12087
 ---
 
 ``` C

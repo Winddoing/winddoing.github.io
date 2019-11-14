@@ -1,8 +1,12 @@
 ---
 title: sd卡测速
-date: 2016-10-12 23:07:24
 categories: 设备驱动
-tags: [MMC, SD, dd]
+tags:
+  - MMC
+  - SD
+  - dd
+abbrlink: 11560
+date: 2016-10-12 23:07:24
 ---
 
 测试sd卡的读写速度

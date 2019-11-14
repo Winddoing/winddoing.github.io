@@ -1,8 +1,11 @@
 ---
 title: 【转】网络库libevent、libev、libuv对比
-date: 2018-06-29 8:07:24
 categories: 网络
-tags: [事件, lib]
+tags:
+  - 事件
+  - lib
+abbrlink: 12060
+date: 2018-06-29 08:07:24
 ---
 
 地址：https://blog.csdn.net/lijinqi1987/article/details/71214974

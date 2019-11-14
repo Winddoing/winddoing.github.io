@@ -1,8 +1,11 @@
 ---
 title: 任务调度
-date: 2018-01-29 23:07:24
 categories: 计算机系统
-tags: [task, schedule]
+tags:
+  - task
+  - schedule
+abbrlink: 65317
+date: 2018-01-29 23:07:24
 ---
 
 {% note info %} 调度器 {% endnote %}

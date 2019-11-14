@@ -1,8 +1,11 @@
 ---
 title: IPI通信（SMP）
-date: 2018-01-18 23:17:24
 categories: Linux内核
-tags: [IPI, SMP]
+tags:
+  - IPI
+  - SMP
+abbrlink: 60164
+date: 2018-01-18 23:17:24
 ---
 
 

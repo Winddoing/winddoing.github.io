@@ -1,7 +1,8 @@
 ---
-layout: "post"
+layout: post
 title: 方向
-date: "2018-08-04 14:09"
+date: '2018-08-04 14:09'
+abbrlink: 7367
 ---
 
 ![way](/images/2018/08/way.png)

@@ -6,6 +6,7 @@ categories:
   - shell
 tags:
   - Shell
+abbrlink: 18379
 ---
 
 shell脚本调试：

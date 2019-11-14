@@ -6,6 +6,7 @@ categories:
   - FFmpeg
 tags:
   - FFmpeg
+abbrlink: 24238
 ---
 
 * 本地环境：`ubuntu18.04`

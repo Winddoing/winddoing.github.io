@@ -6,6 +6,7 @@ categories:
   - shell
 tags:
   - Shell
+abbrlink: 35545
 ---
 
 字符串的截取和最后一个字符的删除

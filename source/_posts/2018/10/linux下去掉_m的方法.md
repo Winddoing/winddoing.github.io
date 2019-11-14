@@ -6,6 +6,7 @@ tags:
   - Linux
 categories:
   - 工具
+abbrlink: 18189
 ---
 
 在linux下去掉文件行尾的`^M`

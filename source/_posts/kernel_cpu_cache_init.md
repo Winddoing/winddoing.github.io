@@ -1,8 +1,11 @@
 ---
 title: cpu_cache_init与rixi
-date: 2018-01-14 23:07:24
 categories: Linux内核
-tags: [kernel, cache]
+tags:
+  - kernel
+  - cache
+abbrlink: 30991
+date: 2018-01-14 23:07:24
 ---
 
 `cpu_cache_init`接口：

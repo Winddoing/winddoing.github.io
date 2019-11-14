@@ -1,8 +1,10 @@
 ---
 title: ext4文件系统变为只读
-date: 2018-04-04 12:07:24
 categories: 文件系统
-tags: [ext4]
+tags:
+  - ext4
+abbrlink: 31493
+date: 2018-04-04 12:07:24
 ---
 
 ```

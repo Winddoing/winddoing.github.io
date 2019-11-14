@@ -1,8 +1,10 @@
 ---
 title: Markdown语法
-date: 2016-08-19 22:18:39
 categories: 工具
-tags: [markdown]
+tags:
+  - markdown
+abbrlink: 22648
+date: 2016-08-19 22:18:39
 ---
 
 在这里主要记录makedown的使用语法，以备后续写作时的不时之需。

@@ -7,6 +7,7 @@ tags:
 categories:
   - 多媒体
   - mesa
+abbrlink: 58638
 ---
 
 >`TGSI`	Tungsten Graphics Shader Infrastructure

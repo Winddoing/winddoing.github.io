@@ -4,6 +4,7 @@ title: 多媒体硬件接口-HDMI、VGA
 date: '2018-08-23 16:11'
 categories:
   - 多媒体
+abbrlink: 57610
 ---
 
 常用的多媒体硬件接口的特性和基本数据传输原理

@@ -7,6 +7,7 @@ tags:
 categories:
   - shell
   - 字符串处理
+abbrlink: 63603
 ---
 
 `sed`进行处理多文件中的字符串替换,可以快速的修改函数名或者变量名.

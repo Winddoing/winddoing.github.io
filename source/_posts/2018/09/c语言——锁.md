@@ -6,6 +6,7 @@ tags:
   - lock
 categories:
   - 程序设计
+abbrlink: 37537
 ---
 
 `锁`：原子锁, 线程安全

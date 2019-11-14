@@ -1,8 +1,10 @@
 ---
 title: Smoke Testing（冒烟测试）
-date: 2018-06-28 23:07:24
 categories: 软件测试
-tags: [test]
+tags:
+  - test
+abbrlink: 27818
+date: 2018-06-28 23:07:24
 ---
 
 最近接到测试组的测试报告，写的`冒烟测试`。由于第一次遇到，便百度搜索一番，在这里进行简单记录。

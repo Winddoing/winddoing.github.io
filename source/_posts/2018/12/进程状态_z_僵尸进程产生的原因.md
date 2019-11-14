@@ -7,6 +7,7 @@ tags:
 categories:
   - 进程
   - 进程状态
+abbrlink: 5718
 ---
 
 `Z (zombie)`:僵死状态是一个比较特殊的状态。进程在退出的过程中，处于`TASK_DEAD`状态。

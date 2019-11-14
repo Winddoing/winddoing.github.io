@@ -1,8 +1,11 @@
 ---
 title: double free or corruption (fasttop)
-date: 2018-01-15 23:07:24
 categories: 程序设计
-tags: [app, free]
+tags:
+  - app
+  - free
+abbrlink: 27831
+date: 2018-01-15 23:07:24
 ---
 
 ```

@@ -1,8 +1,11 @@
 ---
 title: 等待队列
-date: 2016-10-20 23:07:24
 categories: Linux内核
-tags: [process, queue]
+tags:
+  - process
+  - queue
+abbrlink: 36894
+date: 2016-10-20 23:07:24
 ---
 
 ### 等待队列

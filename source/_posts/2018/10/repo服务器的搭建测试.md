@@ -6,6 +6,7 @@ tags:
   - repo
 categories:
   - 工具
+abbrlink: 44256
 ---
 
 `repo`的作用就是进行多个git仓库的统一管理，其实repo就是一个python的脚本，这里测试repo服务的搭建和使用

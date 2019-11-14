@@ -7,6 +7,7 @@ tags:
 categories:
   - 网络
   - DHCP
+abbrlink: 18609
 ---
 
 > 动态主机设置协议（英语：Dynamic Host Configuration Protocol，DHCP）是一个局域网的网络协议，使用UDP协议工作，主要有两个用途：

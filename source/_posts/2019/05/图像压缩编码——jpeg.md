@@ -7,6 +7,7 @@ tags:
 categories:
   - 多媒体
   - 编码
+abbrlink: 59613
 ---
 
 ![jpeg_8x8_block](/images/2019/05/jpeg_8x8_block.png)

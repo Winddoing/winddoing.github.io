@@ -1,8 +1,10 @@
 ---
 title: C程序函数调用关系
-date: 2018-07-11 8:07:24
 categories: 工具
-tags: [Callgraph]
+tags:
+  - Callgraph
+abbrlink: 1655
+date: 2018-07-11 08:07:24
 ---
 
 阅读源码

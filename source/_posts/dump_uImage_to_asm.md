@@ -1,8 +1,11 @@
 ---
 title: uImage dump成反汇编
-date: 2017-10-28 23:07:24
 categories: Linux内核
-tags: [umage, 反汇编]
+tags:
+  - umage
+  - 反汇编
+abbrlink: 17694
+date: 2017-10-28 23:07:24
 ---
 
 > 通过Linux调试使用的uImage文件,进行反汇编查看CPU的具体执行指令

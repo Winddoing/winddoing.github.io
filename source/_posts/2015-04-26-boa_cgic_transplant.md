@@ -1,10 +1,13 @@
 ---
-date: 2015-04-26 01:49
+date: '2015-04-26 01:49'
 layout: post
 title: BOA服务器的配置与cgic移植
 thread: 166
 categories: 系统应用
-tags: [Boa, cgic]
+tags:
+  - Boa
+  - cgic
+abbrlink: 54877
 ---
 
 上次在开发板上成功移植完boa服务器，最近使用C语言进行CGI编程，只在宿主机上搭建CGI的测试环境。

@@ -7,6 +7,7 @@ tags:
   - GPU
 categories:
   - 设备驱动
+abbrlink: 56420
 ---
 
 > For containers in virtualized environments, they are working on accelerated OpenGL ES 2.0 support with that being the lowest common denominator for many mobile platforms. This virtual GPU access they are pursuing is making use of Red Hat's work on Virgil3D as the Gallium3D-based solution for graphics pass-through to the host. Then for the kernel bits are VirtIO-GPU and on the host is the Virgl Renderer with QEMU.

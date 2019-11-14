@@ -1,8 +1,12 @@
 ---
 title: Cache
-date: 2018-01-25 23:22:24
 categories: MIPS
-tags: [mips, cache, kernel]
+tags:
+  - mips
+  - cache
+  - kernel
+abbrlink: 50757
+date: 2018-01-25 23:22:24
 ---
 
 

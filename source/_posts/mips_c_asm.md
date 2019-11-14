@@ -1,8 +1,11 @@
 ---
 title: GCC内嵌汇编(mips)
-date: 2018-04-03 23:12:24
 categories: MIPS
-tags: [mips, 汇编]
+tags:
+  - mips
+  - 汇编
+abbrlink: 55412
+date: 2018-04-03 23:12:24
 ---
 
 >以MIPS架构的汇编为主进行说明

@@ -1,8 +1,10 @@
 ---
 title: OSI七层网络模型
-date: 2018-06-23 23:17:24
 categories: 网络
-tags: [net]
+tags:
+  - net
+abbrlink: 51171
+date: 2018-06-23 23:17:24
 ---
 
 一张非常强大的OSI七层模型图解:

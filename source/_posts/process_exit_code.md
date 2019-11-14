@@ -1,8 +1,11 @@
 ---
 title: 进程退出的exitcode
-date: 2017-03-07 23:07:24
 categories: 进程
-tags: [进程, exit_code]
+tags:
+  - 进程
+  - exit_code
+abbrlink: 7653
+date: 2017-03-07 23:07:24
 ---
 
 ## 错误信息

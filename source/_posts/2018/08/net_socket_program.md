@@ -1,7 +1,8 @@
 ---
-layout: "post"
+layout: post
 title: socket编程--网站
-date: "2018-08-09 10:50"
+date: '2018-08-09 10:50'
+abbrlink: 23509
 ---
 
 一个有价值的网络编程的网站： [https://www.winsocketdotnetworkprogramming.com/clientserversocketnetworkcommunication8chap.html](https://www.winsocketdotnetworkprogramming.com/clientserversocketnetworkcommunication8chap.html)
