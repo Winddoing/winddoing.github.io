@@ -30,3 +30,4 @@ script:
 
 after_success:
     - hexo deploy
+    - ./sync_to_coding.sh

@@ -27,3 +27,5 @@ echo "Current time: $xdate"
 sed -i "s/xdate/$xdate/g" `grep -l xdate source/about/index.md`
 
 echo "exit. path: $PWD"
+
+cat package.json
