@@ -204,6 +204,16 @@ git add .
 git commit -m 'update .gitignore'
 ```
 
+## 强制更新代码
+
+```
+git push origin master --force
+```
+- 错误：
+```
+remote: error: denying non-fast-forward refs/heads/master (you should pull first)
+```
+> 该消息表示您不允许进行非快进推送, 远程存储库很可能在其配置中`denyNonFastforwards = true`, 要更改设置，请执行`git config receive.denynonfastforwards false`
 
 
 ## DoTo
