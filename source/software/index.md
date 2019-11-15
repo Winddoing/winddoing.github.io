@@ -22,7 +22,7 @@ comments: false
 |    TrafficMonitor     | [Download](https://github.com/zhongyang219/TrafficMonitor/releases)  | 用于显示当前网速、CPU及内存利用率的桌面悬浮窗软件  |
 |     secureFx_Crt      | [Download](https://coding.net/u/Winddoing/p/software_tools/git/raw/master/secureFx_Crt.tar.xz)       | SecureCRT & SecureFX终端仿真软件 |
 |   BusHound+v6.0.1     | [Download](https://coding.net/u/Winddoing/p/software_tools/git/raw/master/BusHound+v6.0.1.7z)        | USB抓包工具 |
-|   win10专业版激活     | [Download](https://coding.net/u/Winddoing/p/software_tools/git/raw/master/神龙激活工具.rar)          | win10 |
+|   win10专业版激活     | [Download](https://coding.net/u/Winddoing/p/software_tools/git/raw/master/神龙激活工具.rar)          | win10, Microsoft Office |
 |        飞秋           | [Download](https://coding.net/u/Winddoing/p/software_tools/git/raw/master/飞秋FeiQ.exe)              | 局域网通信工具（聊天传文件） |
 |      GifCam           | [Download](https://coding.net/u/Winddoing/p/software_tools/git/raw/master/GifCam.exe)              | 制作gif文件，可以用于录屏 |
 

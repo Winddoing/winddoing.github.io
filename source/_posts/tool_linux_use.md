@@ -223,3 +223,20 @@ sudo apt-get install sqlitebrowser
 > 跨平台局域网传输软件
 
 - https://nitroshare.net/
+
+## 内核升级
+
+- HWE
+> https://www.sysgeek.cn/ubuntu-1804-install-linux-kernel-50/
+
+Ubuntu 18.04.2 版本包含一个新的「硬件启用堆栈」，即 HWE，该堆栈由较新的Linux Kernel、X.org 图形服务器和图形驱动程序等组成。然而毕竟 LTS 长期支持版本主打的是稳定性，用户不一定希望经常有新内核更新，所以 HWE 不会自动安装到现有系统上，以确保不会破坏任何内容。
+
+```
+sudo apt install --install-recommends linux-generic-hwe-18.04 xserver-xorg-hwe-18.04
+```
+
+- 手动升级
+
+> https://kernel.ubuntu.com/~kernel-ppa/mainline/
+
+升级脚本：https://raw.githubusercontent.com/Winddoing/work_env/master/tools/auto-install/upgrade_latest_kernel.sh
