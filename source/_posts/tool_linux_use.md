@@ -240,3 +240,23 @@ sudo apt install --install-recommends linux-generic-hwe-18.04 xserver-xorg-hwe-1
 > https://kernel.ubuntu.com/~kernel-ppa/mainline/
 
 升级脚本：https://raw.githubusercontent.com/Winddoing/work_env/master/tools/auto-install/upgrade_latest_kernel.sh
+
+
+- ubuntu HWE 支持
+
+>1. 获取5.3.0内核版本 sudo apt list | grep linux-generic*
+>2. 能够获取到5.3.0版本之后直接安装 sudo apt install linux-generic-hwe-18.04-edge
+
+```
+$sudo apt list | grep linux-generic*
+
+WARNING: apt does not have a stable CLI interface. Use with caution in scripts.
+
+linux-generic/bionic-updates,bionic-security,now 4.15.0.70.72 amd64 [installed]
+linux-generic-hwe-16.04/bionic-updates,bionic-security 4.15.0.70.72 amd64
+linux-generic-hwe-16.04-edge/bionic-updates,bionic-security 4.15.0.70.72 amd64
+linux-generic-hwe-18.04/bionic-updates,bionic-security 5.0.0.36.94 amd64
+linux-generic-hwe-18.04-edge/bionic-updates,bionic-security,now 5.3.0.23.90 amd64 [installed]
+
+sudo apt install linux-generic-hwe-18.04-edge
+```
