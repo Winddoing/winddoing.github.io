@@ -19,6 +19,7 @@ comments: true
 * 2018.02: 升级主题`next v5.1.4`。
 * 2018.07: 添加[DaoVoice](http://www.daovoice.io)和开通打赏功能.
 * 2018.09: 添加[CNZZ统计](http://www.cnzz.com/stat/website.php?web_id=1254703532)
+* 2019.11: 重写`Travic_ci`自己构建脚本，升级`hexo`与`nodejs`等，为缩短自动构建时间和部分构建错误。同时将网站镜像备份到[https://winddoing.coding.me](https://winddoing.coding.me)
 * 至今依旧： ***使用，简单方便，升级主要是当时博客出现问题。***
 
 - winddoing@sina.cn #【[BOOK](../books)】#【[ANA](../ana)】#【[MUSIC](../music)】#【[阅读排行](../top)】#【[常用软件](../software)】
