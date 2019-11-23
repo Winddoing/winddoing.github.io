@@ -80,7 +80,6 @@ git log -n     #查看前n条日志
 git log --stat  #查看日志的修改情况
 git log -p       #查看日志的具体修改
 git log <filename/dirname>  #查看该文件或目录的修改日志
-git log -S [keyword]  #在提交log中搜索关键词
 ```
 
 ### tig
@@ -221,37 +220,6 @@ remote: error: denying non-fast-forward refs/heads/master (you should pull first
 ```
 > 该消息表示您不允许进行非快进推送, 远程存储库很可能在其配置中`denyNonFastforwards = true`, 要更改设置，请执行`git config receive.denynonfastforwards false`
 
-## 从git中打包代码
-
-- 打包某一个分支
-```
-git archive --format=tar.gz --output "output.tar.gz" master
-```
-- 打包某一个commit
-```
-git archive --format=tar.gz --output "output.tar.gz" ac1c53d
-```
-- 打包某些目录
-```
-git archive --format=tar.gz --output "output.tar.gz" master dir1 dir2
-```
-## 合并代码
-
-- 合并指定分支到当前分支
-```
-git merge [branch_name]
-```
-
-- 选择一个commit，合并到当前分支
-```
-git cherry-pick [branch_name]
-```
-## 查看信息
-
-- 查看指定文件什么人在什么时间修改过
-```
-git blame [filename]
-```
 
 ## DoTo
 
