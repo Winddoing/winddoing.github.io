@@ -26,6 +26,14 @@ OpenGL上下文代表许多东西。上下文存储与此OpenGL实例关联的�
 > [Khronos wiki](https://www.khronos.org/opengl/wiki/OpenGL_Context)
 
 
+## 着色器
+
+### 细分控制着色器（Tessellation Control Shader）
+
+
+### 细分赋值着色器（Tessellation Evaluation Shader）
+
+
 ## 参考
 
 - [OpenGL](http://www.songho.ca/opengl)

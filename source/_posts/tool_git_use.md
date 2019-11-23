@@ -46,6 +46,11 @@ git checkout  branch_name
 ```
 git clone  URL
 ```
+下载较大工程：
+```
+git clone --depth=1 URL
+```
+> depth用于指定克隆深度，为1即表示只克隆最近一次commit.
 
 ## 5. 日志
 ```

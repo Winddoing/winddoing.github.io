@@ -23,7 +23,7 @@ abbrlink: 58638
 ![shader_IRs_2015](/images/2019/09/shader_irs_2015.png)
 ![new_shader_ir](/images/2019/09/new_shader_ir.png)
 
-TGSI是所有驱动程序使用的唯一中间表示形式,这里`特指`的是着色器的中间形式，着色器对驱动而言的所有格式将是TGSI。
+TGSI是Gallium框架中的所有驱动程序使用着色器的唯一中间表示形式,这里`特指`的是`着色器`的中间形式，着色器对驱动而言的所有格式将是TGSI。
 
 ## TGSI中间语言
 
@@ -33,6 +33,52 @@ TGSI是所有驱动程序使用的唯一中间表示形式,这里`特指`的是�
 
 ![shader_gtsi](/images/2019/09/shader_gtsi.png)
 
+## 着色器的编译链接
+
+![glsl_build_link](/images/2019/11/glsl_build_link.png)
+
+>GLSL中则通过两种对象——`着色器对象`和`着色器程序对象`——来分别处理编译过程和连接过程
+
+```
+call glShaderSource(shader=58, count=3, )
+string[0]={#version 140
+#extension GL_ARB_shader_bit_encoding : require
+}
+string[1]={in vec4 in_0;
+in vec4 in_1;
+
+  smooth                     out  vec4 vso_g0A0_f;
+uniform float winsys_adjust_y;
+vec4 temp0[1];
+uniform uvec4 vsconst0[8];
+}
+string[2]={void main(void)
+{
+temp0[0] = vec4((((in_0.xxxx) * uintBitsToFloat(vsconst0[0]))));
+temp0[0] = vec4(((in_0.yyyy) * uintBitsToFloat(vsconst0[1]) +  temp0[0] ));
+temp0[0] = vec4(((in_0.zzzz) * uintBitsToFloat(vsconst0[2]) +  temp0[0] ));
+gl_Position = vec4(((in_0.wwww) * uintBitsToFloat(vsconst0[3]) +  temp0[0] ));
+temp0[0] = vec4((((in_1.xxxx) * uintBitsToFloat(vsconst0[4]))));
+temp0[0] = vec4(((in_1.yyyy) * uintBitsToFloat(vsconst0[5]) +  temp0[0] ));
+temp0[0] = vec4(((in_1.zzzz) * uintBitsToFloat(vsconst0[6]) +  temp0[0] ));
+vso_g0A0_f = vec4(((in_1.wwww) * uintBitsToFloat(vsconst0[7]) +  temp0[0] ));
+gl_Position.y = gl_Position.y * winsys_adjust_y;
+}
+}
+call glCompileShader(58)
+call glGetShaderiv(shader=58, pname=0x8b81, params=1)
+call glCreateProgram(): 60
+call glAttachShader(program=60, shader=58)
+call glAttachShader(program=60, shader=59)
+call glBindAttribLocation(60, 0, in_0)
+call glBindAttribLocation(60, 1, in_1)
+call glLinkProgram(program=60)
+call glGetProgramiv(60, 0x8b82, 833648032)
+call glGetUniformLocation(program=60, name=winsys_adjust_y): val=0
+call glUseProgram(60)
+```
+
+- `glShaderSource`:
 
 ## GLSL使用
 
@@ -97,6 +143,7 @@ static const char fragment_shader[] =
 > `glCompileShader` compiles the source code strings that have been stored in the shader object specified by shader.
 
 在mesa中的函数调用流程：
+
 ```
 _mesa_CompileShader (src/mesa/main/shaderapi.c)
  \->_mesa_compile_shader
@@ -175,6 +222,14 @@ st_link_shader
 \/
 st_link_tgsi
 ```
+## virgl中着色器的转换
+
+amdgpu使用开源驱动
+
+![virgl_shader_switch](/images/2019/11/virgl_shader_switch.png)
+
+
+
 
 ## 参考
 
