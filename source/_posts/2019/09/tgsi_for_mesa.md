@@ -33,6 +33,44 @@ TGSI是Gallium框架中的所有驱动程序使用着色器的唯一中间表示
 
 ![shader_gtsi](/images/2019/09/shader_gtsi.png)
 
+```
+glxgears: shader
+FRAG
+PROPERTY FS_COLOR0_WRITES_ALL_CBUFS 1
+DCL IN[0], COLOR, COLOR
+DCL OUT[0], COLOR
+  0: MOV OUT[0], IN[0]
+  1: END
+
+glxgears: shader
+VERT
+DCL IN[0]
+DCL OUT[0], POSITION
+DCL OUT[1], COLOR
+DCL CONST[0..10]
+DCL TEMP[0..3]
+IMM[0] FLT32 {0x00000000, 0x3f800000, 0x00000000, 0x00000000}
+  0: MUL TEMP[0], IN[0].xxxx, CONST[0]
+  1: MAD TEMP[0], IN[0].yyyy, CONST[1], TEMP[0]
+  2: MAD TEMP[0], IN[0].zzzz, CONST[2], TEMP[0]
+  3: MAD OUT[0], IN[0].wwww, CONST[3], TEMP[0]
+  4: DP3 TEMP[1].x, CONST[4], CONST[4]
+  5: RSQ TEMP[1].x, |TEMP[1]|
+  6: MUL TEMP[0], CONST[4], TEMP[1].xxxx
+  7: MOV TEMP[2], CONST[5]
+  8: MOV_SAT OUT[1], TEMP[2]
+  9: DP3 TEMP[3], TEMP[0], CONST[6]
+ 10: MAX TEMP[1], IMM[0].xxxy, TEMP[3]
+ 11: SLT TEMP[1].z, IMM[0].xxxx, TEMP[3]
+ 12: ADD TEMP[2], CONST[8], TEMP[2]
+ 13: MAD TEMP[2], TEMP[1].yyyy, CONST[9], TEMP[2]
+ 14: MAD_SAT OUT[1].xyz, TEMP[1].zzzz, CONST[10], TEMP[2]
+ 15: END
+```
+> glxgears在渲染中生成的部分TGSI代码
+> - [TGSI specification](https://freedesktop.org/wiki/Software/gallium/tgsi-specification.pdf)
+> - [TGSI Instruction Set](https://gallium.readthedocs.io/en/latest/tgsi.html#instruction-set)
+
 ## 着色器的编译链接
 
 ![glsl_build_link](/images/2019/11/glsl_build_link.png)
@@ -78,7 +116,11 @@ call glGetUniformLocation(program=60, name=winsys_adjust_y): val=0
 call glUseProgram(60)
 ```
 
-- `glShaderSource`:
+- `glShaderSource`: 替换着色器对象中的源代码
+- `glCompileShader`: 编译一个着色器对象
+- `glGetShaderiv`: 从着色器对象返回一个参数
+- `glCreateProgram`: 创建一个空program对象并返回一个可以被引用的非零值（program ID）
+- `glUseProgram`: 安装program对象作为当前渲染状态的一部分
 
 ## GLSL使用
 
@@ -228,14 +270,52 @@ amdgpu使用开源驱动
 
 ![virgl_shader_switch](/images/2019/11/virgl_shader_switch.png)
 
+>Then, 3D commands. These are close to what we can find in a API like Vulkan. We can setup a viewport, scissor state, create a VBO, and draw it. Shaders are also supported, but we first need to translate them to TGSI; an assembly-like representation. Once on the host, they will be re-translated to GLSL and sent to OpenGL.
+>https://studiopixl.com/2017-08-27/3d-acceleration-using-virtio.html
 
+```
+glxgears: shader
+FRAG
+PROPERTY FS_COLOR0_WRITES_ALL_CBUFS 1
+DCL IN[0], COLOR, COLOR
+DCL OUT[0], COLOR
+  0: MOV OUT[0], IN[0]
+  1: END
+
+glxgears: GLSL:glxgears: #version 140
+
+   in  vec4 ex_c0;
+out vec4 fsout_c0;
+out vec4 fsout_c1;
+out vec4 fsout_c2;
+out vec4 fsout_c3;
+out vec4 fsout_c4;
+out vec4 fsout_c5;
+out vec4 fsout_c6;
+out vec4 fsout_c7;
+void main(void)
+{
+fsout_c0 = vec4(((ex_c0)));
+fsout_c1 = fsout_c0;
+fsout_c2 = fsout_c0;
+fsout_c3 = fsout_c0;
+fsout_c4 = fsout_c0;
+fsout_c5 = fsout_c0;
+fsout_c6 = fsout_c0;
+fsout_c7 = fsout_c0;
+}
+glxgears:
+```
+>TGSI转换成GLSL
 
 
 ## 参考
 
 - [TGSI](https://gallium.readthedocs.io/en/latest/tgsi.html)
+- [gallium3d-xds2007](https://freedesktop.org/wiki/Software/gallium/gallium3d-xds2007.pdf)
 - [A beginners guide to TGSI](http://ndesh26.github.io/programming/2016/07/04/A-Beginners-guide-to-TGSI/)
 - [The State of Open Source 3D](http://www.informit.com/articles/article.aspx?p=1554200)
 - [learnopengl--Shaders](https://learnopengl.com/Getting-started/Shaders)|[【CN】](https://learnopengl-cn.github.io/#)
 - [Linux环境下的图形系统和AMD R600显卡编程(11)——R600指令集](https://www.cnblogs.com/shoemaker/p/linux_graphics11.html)
 - [GLSL compiler](https://www.x.org/wiki/Events/XDC2015/Program/turner_glsl_compiler.pdf)
+- [GSoC 2017 - 3D acceleration using VirtIOGPU](https://studiopixl.com/2017-08-27/3d-acceleration-using-virtio.html)

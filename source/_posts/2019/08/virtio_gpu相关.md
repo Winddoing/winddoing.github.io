@@ -66,8 +66,14 @@ EGLBoolean eglBindAPI( 	EGLenum api);
 
 - [Virgil Linux News](https://www.phoronix.com/scan.php?page=search&q=Virgil)
 - [What’s new in the virtual world?(pdf)](https://xdc2018.x.org/slides/Virgl_Presentation.pdf)
+- [GSoC 2018 - Vulkan-ize Virglrenderer](https://studiopixl.com/2018-07-12/vulkan-ize-virgl.html)
+- [GSoC 2017 - 3D acceleration using VirtIOGPU](https://studiopixl.com/2017-08-27/3d-acceleration-using-virtio.html)
 
 ### virgl_protocol
+
+It is composed of several components:
+- a MESA driver, on the guest, which generates `Virgl commands`
+- a lib, on the host, which takes virgl commands and generated OpenGL calls from it.
 
 
 ## GPU Driver
