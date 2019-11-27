@@ -80,3 +80,4 @@ comments: true
 * [SpeedTest](https://www.speedtest.net) —— 测试网速
 * [Google Land Lines](https://lines.chromeexperiments.com/) —— 随便一笔 匹配地球
 * [FakeUpdate.net - Windows Update Prank by fediaFedia【[Mobile](http://fakeupdate.net/mobile/)】](http://fakeupdate.net/) —— 在线模拟各种系统升级过程
+* [Flightradar24](https://www.flightradar24.com/) —— 提供实时的航班信息数据
