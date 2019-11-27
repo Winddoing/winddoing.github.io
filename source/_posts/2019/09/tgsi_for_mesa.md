@@ -31,7 +31,7 @@ TGSI是Gallium框架中的所有驱动程序使用着色器的唯一中间表示
 
 在Mesa上，GLSL首先被编译器翻译成tgsi中间语言，然后显卡特定的驱动将这些tgsi语言的代码编译成GPU指令。
 
-![shader_gtsi](/images/2019/09/shader_gtsi.png)
+![shader_gtsi](/images/2019/09/shader_tgsi.png)
 
 ```
 glxgears: shader
@@ -121,6 +121,8 @@ call glUseProgram(60)
 - `glGetShaderiv`: 从着色器对象返回一个参数
 - `glCreateProgram`: 创建一个空program对象并返回一个可以被引用的非零值（program ID）
 - `glUseProgram`: 安装program对象作为当前渲染状态的一部分
+
+![shader_create_flowchart](/images/2019/11/shader_create_flowchart.png)
 
 ## GLSL使用
 

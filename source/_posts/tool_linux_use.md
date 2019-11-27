@@ -59,9 +59,14 @@ sudo cp mtextra.ttf  symbol.ttf  WEBDINGS.TTF  wingding.ttf  WINGDNG2.ttf  WINGD
 
 - https://github.com/geeeeeeeeek/electronic-wechat/releases/download/V2.0/linux-x64.tar.gz
 
+```
+sudo snap install electronic-wechat
+```
+
 ## 钉钉 for Linux
 
 * [https://github.com/nashaofu/dingtalk](https://github.com/nashaofu/dingtalk)
+
 
 ## Teamviewer
 
