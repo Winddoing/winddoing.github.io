@@ -71,6 +71,12 @@ IMM[0] FLT32 {0x00000000, 0x3f800000, 0x00000000, 0x00000000}
 > - [TGSI specification](https://freedesktop.org/wiki/Software/gallium/tgsi-specification.pdf)
 > - [TGSI Instruction Set](https://gallium.readthedocs.io/en/latest/tgsi.html#instruction-set)
 
+- `FRAG`:fragment片元着色器
+- `VERT`:vertex顶点着色器
+- `DCL`: declaration 申明resources
+- `IMM`: immediate 立即数
+- `PROPERTY` : property 性质
+
 ## 着色器的编译链接
 
 ![glsl_build_link](/images/2019/11/glsl_build_link.png)
@@ -275,6 +281,57 @@ amdgpu使用开源驱动
 >Then, 3D commands. These are close to what we can find in a API like Vulkan. We can setup a viewport, scissor state, create a VBO, and draw it. Shaders are also supported, but we first need to translate them to TGSI; an assembly-like representation. Once on the host, they will be re-translated to GLSL and sent to OpenGL.
 >https://studiopixl.com/2017-08-27/3d-acceleration-using-virtio.html
 
+- 在tgsi的传输中为什么不直接使用tgsi token进行传输，而要转换为text的形式传输？？？
+  - 地址空间的不同是否相关？
+  - tgsi text转换为tgsi token的过程中与当前使用到的纹理数据等其他资源进行关联？
+
+``` C
+struct tgsi_instruction                                             
+{                                                                   
+   unsigned Type       : 4;  /* TGSI_TOKEN_TYPE_INSTRUCTION */      
+   unsigned NrTokens   : 8;  /* UINT */                             
+   unsigned Opcode     : 8;  /* TGSI_OPCODE_ */                     
+   unsigned Saturate   : 1;  /* BOOL */                             
+   unsigned NumDstRegs : 2;  /* UINT */                             
+   unsigned NumSrcRegs : 4;  /* UINT */                             
+   unsigned Label      : 1;                                         
+   unsigned Texture    : 1;                                         
+   unsigned Memory     : 1;                                         
+   unsigned Precise    : 1;                                         
+   unsigned Padding    : 1;                                         
+};                                                                  
+```
+
+``` C
+struct tgsi_instruction_texture                               
+{                                                             
+   unsigned Texture  : 8;    /* TGSI_TEXTURE_ */              
+   unsigned NumOffsets : 4;                                   
+   unsigned ReturnType : 3; /* TGSI_RETURN_TYPE_x */          
+   unsigned Padding : 17;                                     
+};                                                            
+```
+
+```
+/*                                                                            
+ * If tgsi_instruction::Label is TRUE, tgsi_instruction_label follows.        
+ *                                                                            
+ * If tgsi_instruction::Texture is TRUE, tgsi_instruction_texture follows.    
+ *   if texture instruction has a number of offsets,                          
+ *   then tgsi_instruction::Texture::NumOffset of tgsi_texture_offset follow.
+ *                                                                            
+ * Then, tgsi_instruction::NumDstRegs of tgsi_dst_register follow.            
+ *                                                                            
+ * Then, tgsi_instruction::NumSrcRegs of tgsi_src_register follow.            
+ *                                                                            
+ * tgsi_instruction::NrTokens contains the total number of words that make the
+ * instruction, including the instruction word.                               
+ */                                                                           
+```
+>tgsi_instruction_texture:表明存在指令纹理，其与纹理资源数据之间的关系？
+
+
+### 示例
 ```
 glxgears: shader
 FRAG
@@ -310,6 +367,14 @@ glxgears:
 ```
 >TGSI转换成GLSL
 
+## amdgpu中着色器的转换
+
+在radeonsi用户空间驱动中tgsi的使用
+
+```
+Setup actions for TGSI memory opcode, including texture opcodes.
+```
+> TGSI与texture之间在渲染时，之间的联系？？
 
 ## 参考
 
@@ -321,3 +386,6 @@ glxgears:
 - [Linux环境下的图形系统和AMD R600显卡编程(11)——R600指令集](https://www.cnblogs.com/shoemaker/p/linux_graphics11.html)
 - [GLSL compiler](https://www.x.org/wiki/Events/XDC2015/Program/turner_glsl_compiler.pdf)
 - [GSoC 2017 - 3D acceleration using VirtIOGPU](https://studiopixl.com/2017-08-27/3d-acceleration-using-virtio.html)
+- [The Linux Graphics Stack](https://blog.mecheye.net/2012/06/the-linux-graphics-stack/#rendering-stack)
+- [Testing Out Mesa's GLSL-To-TGSI Translator](https://www.phoronix.com/scan.php?page=article&item=glsl_to_tgsi&num=1)
+- [Introduction to GPU Programming with GLSL](https://www.researchgate.net/publication/232626644_Introduction_to_GPU_Programming_with_GLSL)
