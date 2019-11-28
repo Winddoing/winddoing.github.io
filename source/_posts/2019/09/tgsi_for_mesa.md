@@ -286,47 +286,47 @@ amdgpu使用开源驱动
   - tgsi text转换为tgsi token的过程中与当前使用到的纹理数据等其他资源进行关联？
 
 ``` C
-struct tgsi_instruction                                             
-{                                                                   
-   unsigned Type       : 4;  /* TGSI_TOKEN_TYPE_INSTRUCTION */      
-   unsigned NrTokens   : 8;  /* UINT */                             
-   unsigned Opcode     : 8;  /* TGSI_OPCODE_ */                     
-   unsigned Saturate   : 1;  /* BOOL */                             
-   unsigned NumDstRegs : 2;  /* UINT */                             
-   unsigned NumSrcRegs : 4;  /* UINT */                             
-   unsigned Label      : 1;                                         
-   unsigned Texture    : 1;                                         
-   unsigned Memory     : 1;                                         
-   unsigned Precise    : 1;                                         
-   unsigned Padding    : 1;                                         
-};                                                                  
+struct tgsi_instruction
+{
+   unsigned Type       : 4;  /* TGSI_TOKEN_TYPE_INSTRUCTION */
+   unsigned NrTokens   : 8;  /* UINT */
+   unsigned Opcode     : 8;  /* TGSI_OPCODE_ */
+   unsigned Saturate   : 1;  /* BOOL */
+   unsigned NumDstRegs : 2;  /* UINT */
+   unsigned NumSrcRegs : 4;  /* UINT */
+   unsigned Label      : 1;
+   unsigned Texture    : 1;
+   unsigned Memory     : 1;
+   unsigned Precise    : 1;
+   unsigned Padding    : 1;
+};
 ```
 
 ``` C
-struct tgsi_instruction_texture                               
-{                                                             
-   unsigned Texture  : 8;    /* TGSI_TEXTURE_ */              
-   unsigned NumOffsets : 4;                                   
-   unsigned ReturnType : 3; /* TGSI_RETURN_TYPE_x */          
-   unsigned Padding : 17;                                     
-};                                                            
+struct tgsi_instruction_texture
+{
+   unsigned Texture  : 8;    /* TGSI_TEXTURE_ */
+   unsigned NumOffsets : 4;
+   unsigned ReturnType : 3; /* TGSI_RETURN_TYPE_x */
+   unsigned Padding : 17;
+};
 ```
 
 ```
-/*                                                                            
- * If tgsi_instruction::Label is TRUE, tgsi_instruction_label follows.        
- *                                                                            
- * If tgsi_instruction::Texture is TRUE, tgsi_instruction_texture follows.    
- *   if texture instruction has a number of offsets,                          
+/*
+ * If tgsi_instruction::Label is TRUE, tgsi_instruction_label follows.
+ *
+ * If tgsi_instruction::Texture is TRUE, tgsi_instruction_texture follows.
+ *   if texture instruction has a number of offsets,
  *   then tgsi_instruction::Texture::NumOffset of tgsi_texture_offset follow.
- *                                                                            
- * Then, tgsi_instruction::NumDstRegs of tgsi_dst_register follow.            
- *                                                                            
- * Then, tgsi_instruction::NumSrcRegs of tgsi_src_register follow.            
- *                                                                            
+ *
+ * Then, tgsi_instruction::NumDstRegs of tgsi_dst_register follow.
+ *
+ * Then, tgsi_instruction::NumSrcRegs of tgsi_src_register follow.
+ *
  * tgsi_instruction::NrTokens contains the total number of words that make the
- * instruction, including the instruction word.                               
- */                                                                           
+ * instruction, including the instruction word.
+ */
 ```
 >tgsi_instruction_texture:表明存在指令纹理，其与纹理资源数据之间的关系？
 
@@ -375,6 +375,330 @@ glxgears:
 Setup actions for TGSI memory opcode, including texture opcodes.
 ```
 > TGSI与texture之间在渲染时，之间的联系？？
+
+
+## 示例
+
+### GLSL着色器
+
+- vertex shader
+
+```
+//vertex顶点着色器
+varying vec3 lightDir, normal;
+
+void main()
+{
+        lightDir = normalize(vec3(gl_LightSource[0].position));
+        normal = normalize(gl_NormalMatrix * gl_Normal);
+
+        gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;
+}
+```
+
+- fragment shader
+
+```
+//fragment片元着色器
+varying vec3 lightDir, normal;
+
+void main()
+{
+        float intensity;
+        vec3 n;
+        vec4 color;
+
+        n = normalize(normal);
+
+        intensity = max(dot(lightDir,n),0.0);
+        color = vec4(1.0, 0, 1.0, 1) * intensity;
+
+        gl_FragColor = color;
+}
+```
+
+### TGSI text
+
+通过mesa编译后生成的TGSI token进行dump出的text
+
+```
+VIRGL_DEBUG=tgsi ./a.out
+```
+
+- vertex shader
+
+```
+TGSI:
+---8<---
+VERT
+DCL IN[0]
+DCL IN[1]
+DCL OUT[0], POSITION
+DCL OUT[1], GENERIC[9]
+DCL OUT[2].xy, GENERIC[10]
+DCL CONST[0..14]
+DCL TEMP[0..2], LOCAL
+  0: MUL TEMP[0].xyz, CONST[8].xyzz, IN[1].xxxx
+  1: MAD TEMP[0].xyz, CONST[9].xyzz, IN[1].yyyy, TEMP[0].xyzz
+  2: MAD TEMP[0].xyz, CONST[10].xyzz, IN[1].zzzz, TEMP[0].xyzz
+  3: DP3 TEMP[1].x, TEMP[0].xyzz, TEMP[0].xyzz
+  4: RSQ TEMP[1].x, TEMP[1].xxxx
+  5: MUL TEMP[0].xyz, TEMP[0].xyzz, TEMP[1].xxxx
+  6: MUL TEMP[1], CONST[11], IN[0].xxxx
+  7: MAD TEMP[1], CONST[12], IN[0].yyyy, TEMP[1]
+  8: MAD TEMP[1], CONST[13], IN[0].zzzz, TEMP[1]
+  9: MAD TEMP[1], CONST[14], IN[0].wwww, TEMP[1]
+ 10: DP3 TEMP[2].x, CONST[3].xyzz, CONST[3].xyzz
+ 11: RSQ TEMP[2].x, TEMP[2].xxxx
+ 12: MUL TEMP[2].xyz, CONST[3].xyzz, TEMP[2].xxxx
+ 13: MOV TEMP[2].w, TEMP[0].xxxx
+ 14: MOV OUT[2].xy, TEMP[0].yzyy
+ 15: MOV OUT[0], TEMP[1]
+ 16: MOV OUT[1], TEMP[2]
+ 17: END
+
+---8<---
+```
+
+- fragment shader
+
+```
+TGSI:
+---8<---
+FRAG
+PROPERTY FS_COLOR0_WRITES_ALL_CBUFS 1
+DCL IN[0], GENERIC[9], PERSPECTIVE
+DCL IN[1].xy, GENERIC[10], PERSPECTIVE
+DCL OUT[0], COLOR
+DCL TEMP[0..1], LOCAL
+IMM[0] FLT32 {0x3f800000, 0x00000000, 0x00000000, 0x00000000}
+  0: MOV TEMP[0].x, IN[0].wwww
+  1: MOV TEMP[0].yz, IN[1].yxyy
+  2: DP3 TEMP[1].x, TEMP[0].xyzz, TEMP[0].xyzz
+  3: RSQ TEMP[1].x, TEMP[1].xxxx
+  4: MUL TEMP[0].xyz, TEMP[0].xyzz, TEMP[1].xxxx
+  5: DP3 TEMP[0].x, IN[0].xyzz, TEMP[0].xyzz
+  6: MAX TEMP[0].x, TEMP[0].xxxx, IMM[0].yyyy
+  7: MUL TEMP[0], IMM[0].xyxx, TEMP[0].xxxx
+  8: MOV OUT[0], TEMP[0]
+  9: END
+
+---8<---
+```
+
+### TGSI转换GLSL
+
+```
+VREND_DEBUG=shader virgl_test_server
+```
+
+- vertex shader
+
+```
+a.out: shader
+VERT
+DCL IN[0]
+DCL IN[1]
+DCL OUT[0], POSITION
+DCL OUT[1], GENERIC[9]
+DCL OUT[2].xy, GENERIC[10]
+DCL CONST[0..14]
+DCL TEMP[0..2], LOCAL
+  0: MUL TEMP[0].xyz, CONST[8].xyzz, IN[1].xxxx
+  1: MAD TEMP[0].xyz, CONST[9].xyzz, IN[1].yyyy, TEMP[0].xyzz
+  2: MAD TEMP[0].xyz, CONST[10].xyzz, IN[1].zzzz, TEMP[0].xyzz
+  3: DP3 TEMP[1].x, TEMP[0].xyzz, TEMP[0].xyzz
+  4: RSQ TEMP[1].x, TEMP[1].xxxx
+  5: MUL TEMP[0].xyz, TEMP[0].xyzz, TEMP[1].xxxx
+  6: MUL TEMP[1], CONST[11], IN[0].xxxx
+  7: MAD TEMP[1], CONST[12], IN[0].yyyy, TEMP[1]
+  8: MAD TEMP[1], CONST[13], IN[0].zzzz, TEMP[1]
+  9: MAD TEMP[1], CONST[14], IN[0].wwww, TEMP[1]
+ 10: DP3 TEMP[2].x, CONST[3].xyzz, CONST[3].xyzz
+ 11: RSQ TEMP[2].x, TEMP[2].xxxx
+ 12: MUL TEMP[2].xyz, CONST[3].xyzz, TEMP[2].xxxx
+ 13: MOV TEMP[2].w, TEMP[0].xxxx
+ 14: MOV OUT[2].xy, TEMP[0].yzyy
+ 15: MOV OUT[0], TEMP[1]
+ 16: MOV OUT[1], TEMP[2]
+ 17: END
+
+a.out: GLSL:a.out: #version 140
+#extension GL_ARB_shader_bit_encoding : require
+in vec4 in_0;
+in vec4 in_1;
+
+                             out  vec4 vso_g9A0_f;
+
+                             out  vec4 vso_g10A0_f;
+uniform float winsys_adjust_y;
+vec4 temp0[3];
+uniform uvec4 vsconst0[15];
+void main(void)
+{
+temp0[0].xyz = vec3(((uintBitsToFloat(vsconst0[8].xyzz) * (in_1.xxxx))).xyz);
+temp0[0].xyz = vec3((uintBitsToFloat(vsconst0[9].xyzz) * (in_1.yyyy) +  temp0[0].xyzz ).xyz);
+temp0[0].xyz = vec3((uintBitsToFloat(vsconst0[10].xyzz) * (in_1.zzzz) +  temp0[0].xyzz ).xyz);
+temp0[1].x = float(dot(vec3( temp0[0].xyzz ), vec3( temp0[0].xyzz )));
+temp0[1].x = float(inversesqrt( temp0[1].xxxx .x));
+temp0[0].xyz = vec3((( temp0[0].xyzz  *  temp0[1].xxxx )).xyz);
+temp0[1] = vec4(((uintBitsToFloat(vsconst0[11]) * (in_0.xxxx))));
+temp0[1] = vec4((uintBitsToFloat(vsconst0[12]) * (in_0.yyyy) +  temp0[1] ));
+temp0[1] = vec4((uintBitsToFloat(vsconst0[13]) * (in_0.zzzz) +  temp0[1] ));
+temp0[1] = vec4((uintBitsToFloat(vsconst0[14]) * (in_0.wwww) +  temp0[1] ));
+temp0[2].x = float(dot(vec3(uintBitsToFloat(vsconst0[3].xyzz)), vec3(uintBitsToFloat(vsconst0[3].xyzz))));
+temp0[2].x = float(inversesqrt( temp0[2].xxxx .x));
+temp0[2].xyz = vec3(((uintBitsToFloat(vsconst0[3].xyzz) *  temp0[2].xxxx )).xyz);
+temp0[2].w = float(( temp0[0].xxxx .w));
+vso_g10A0_f.xy = vec2(( temp0[0].yzyy .xy));
+gl_Position = vec4(( temp0[1] ));
+vso_g9A0_f = vec4(( temp0[2] ));
+gl_Position.y = gl_Position.y * winsys_adjust_y;
+}
+a.out:
+a.out: GLSL:a.out: #version 140
+
+smooth    in  vec4 vso_g9A0_f;
+
+smooth    in  vec4 vso_g10A0_f;
+out vec4 fsout_c0;
+out vec4 fsout_c1;
+out vec4 fsout_c2;
+out vec4 fsout_c3;
+out vec4 fsout_c4;
+out vec4 fsout_c5;
+out vec4 fsout_c6;
+out vec4 fsout_c7;
+vec4 temp0[2];
+void main(void)
+{
+temp0[0].x = float(((vso_g9A0_f.wwww).x));
+temp0[0].yz = vec2(((vso_g10A0_f.yxyy).yz));
+temp0[1].x = float(dot(vec3( temp0[0].xyzz ), vec3( temp0[0].xyzz )));
+temp0[1].x = float(inversesqrt( temp0[1].xxxx .x));
+temp0[0].xyz = vec3((( temp0[0].xyzz  *  temp0[1].xxxx )).xyz);
+temp0[0].x = float(dot(vec3((vso_g9A0_f.xyzz)), vec3( temp0[0].xyzz )));
+temp0[0].x = float((max( temp0[0].xxxx , (vec4(0,0,0,0)))).x);
+temp0[0] = vec4((((vec4(1,0,1,1)) *  temp0[0].xxxx )));
+fsout_c0 = vec4(( temp0[0] ));
+fsout_c1 = fsout_c0;
+fsout_c2 = fsout_c0;
+fsout_c3 = fsout_c0;
+fsout_c4 = fsout_c0;
+fsout_c5 = fsout_c0;
+fsout_c6 = fsout_c0;
+fsout_c7 = fsout_c0;
+}
+a.out:
+a.out: GLSL:a.out: #version 140
+#extension GL_ARB_shader_bit_encoding : require
+in vec4 in_0;
+in vec4 in_1;
+
+  smooth                     out  vec4 vso_g9A0_f;
+
+  smooth                     out  vec4 vso_g10A0_f;
+uniform float winsys_adjust_y;
+vec4 temp0[3];
+uniform uvec4 vsconst0[15];
+void main(void)
+{
+temp0[0].xyz = vec3(((uintBitsToFloat(vsconst0[8].xyzz) * (in_1.xxxx))).xyz);
+temp0[0].xyz = vec3((uintBitsToFloat(vsconst0[9].xyzz) * (in_1.yyyy) +  temp0[0].xyzz ).xyz);
+temp0[0].xyz = vec3((uintBitsToFloat(vsconst0[10].xyzz) * (in_1.zzzz) +  temp0[0].xyzz ).xyz);
+temp0[1].x = float(dot(vec3( temp0[0].xyzz ), vec3( temp0[0].xyzz )));
+temp0[1].x = float(inversesqrt( temp0[1].xxxx .x));
+temp0[0].xyz = vec3((( temp0[0].xyzz  *  temp0[1].xxxx )).xyz);
+temp0[1] = vec4(((uintBitsToFloat(vsconst0[11]) * (in_0.xxxx))));
+temp0[1] = vec4((uintBitsToFloat(vsconst0[12]) * (in_0.yyyy) +  temp0[1] ));
+temp0[1] = vec4((uintBitsToFloat(vsconst0[13]) * (in_0.zzzz) +  temp0[1] ));
+temp0[1] = vec4((uintBitsToFloat(vsconst0[14]) * (in_0.wwww) +  temp0[1] ));
+temp0[2].x = float(dot(vec3(uintBitsToFloat(vsconst0[3].xyzz)), vec3(uintBitsToFloat(vsconst0[3].xyzz))));
+temp0[2].x = float(inversesqrt( temp0[2].xxxx .x));
+temp0[2].xyz = vec3(((uintBitsToFloat(vsconst0[3].xyzz) *  temp0[2].xxxx )).xyz);
+temp0[2].w = float(( temp0[0].xxxx .w));
+vso_g10A0_f.xy = vec2(( temp0[0].yzyy .xy));
+gl_Position = vec4(( temp0[1] ));
+vso_g9A0_f = vec4(( temp0[2] ));
+gl_Position.y = gl_Position.y * winsys_adjust_y;
+}
+a.out:
+```
+
+- fragment shader
+
+```
+a.out: shader
+FRAG
+PROPERTY FS_COLOR0_WRITES_ALL_CBUFS 1
+DCL IN[0], GENERIC[9], PERSPECTIVE
+DCL IN[1].xy, GENERIC[10], PERSPECTIVE
+DCL OUT[0], COLOR
+DCL TEMP[0..1], LOCAL
+IMM[0] FLT32 {0x3f800000, 0x00000000, 0x00000000, 0x00000000}
+  0: MOV TEMP[0].x, IN[0].wwww
+  1: MOV TEMP[0].yz, IN[1].yxyy
+  2: DP3 TEMP[1].x, TEMP[0].xyzz, TEMP[0].xyzz
+  3: RSQ TEMP[1].x, TEMP[1].xxxx
+  4: MUL TEMP[0].xyz, TEMP[0].xyzz, TEMP[1].xxxx
+  5: DP3 TEMP[0].x, IN[0].xyzz, TEMP[0].xyzz
+  6: MAX TEMP[0].x, TEMP[0].xxxx, IMM[0].yyyy
+  7: MUL TEMP[0], IMM[0].xyxx, TEMP[0].xxxx
+  8: MOV OUT[0], TEMP[0]
+  9: END
+
+a.out: GLSL:a.out: #version 140
+
+smooth    in  vec4 vso_g9A0_f;
+
+smooth    in  vec4 vso_g10A0_f;
+out vec4 fsout_c0;
+out vec4 fsout_c1;
+out vec4 fsout_c2;
+out vec4 fsout_c3;
+out vec4 fsout_c4;
+out vec4 fsout_c5;
+out vec4 fsout_c6;
+out vec4 fsout_c7;
+vec4 temp0[2];
+void main(void)
+{
+temp0[0].x = float(((vso_g9A0_f.wwww).x));
+temp0[0].yz = vec2(((vso_g10A0_f.yxyy).yz));
+temp0[1].x = float(dot(vec3( temp0[0].xyzz ), vec3( temp0[0].xyzz )));
+temp0[1].x = float(inversesqrt( temp0[1].xxxx .x));
+temp0[0].xyz = vec3((( temp0[0].xyzz  *  temp0[1].xxxx )).xyz);
+temp0[0].x = float(dot(vec3((vso_g9A0_f.xyzz)), vec3( temp0[0].xyzz )));
+temp0[0].x = float((max( temp0[0].xxxx , (vec4(0,0,0,0)))).x);
+temp0[0] = vec4((((vec4(1,0,1,1)) *  temp0[0].xxxx )));
+fsout_c0 = vec4(( temp0[0] ));
+fsout_c1 = fsout_c0;
+fsout_c2 = fsout_c0;
+fsout_c3 = fsout_c0;
+fsout_c4 = fsout_c0;
+fsout_c5 = fsout_c0;
+fsout_c6 = fsout_c0;
+fsout_c7 = fsout_c0;
+}
+```
+
+### 其他
+
+- 打印着色器程序相关的所有参数和字段
+```
+ST_DEBUG=mesa ./a.out
+```
+```
+/**
+ * Print all of a program's parameters/fields to stderr.
+ */
+void
+_mesa_print_program_parameters(struct gl_context *ctx, const struct gl_program *prog)
+{
+   _mesa_fprint_program_parameters(stderr, ctx, prog);
+}
+```
+> file: mesa/program/prog_print.c
 
 ## 参考
 
