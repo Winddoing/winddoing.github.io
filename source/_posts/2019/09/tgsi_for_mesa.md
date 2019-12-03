@@ -376,6 +376,43 @@ Setup actions for TGSI memory opcode, including texture opcodes.
 ```
 > TGSI与texture之间在渲染时，之间的联系？？
 
+### radeonsi for shader
+
+目前LLVM是amdgpu的后端编译器，在mesa19.3中使用`ACO`（AMD COmpiler）编译着色器代码
+
+```
+TGSI->LLVM
+```
+
+> It was just two days ago that Valve's performance-focused "ACO" shader compiler was submitted for review to be included in Mesa for the "RADV" Radeon Vulkan driver. Just minutes ago that new shader compiler back-end was merged for Mesa 19.3.
+>
+>ACO, short for the AMD COmpiler, is the effort led by Valve at creating a more performant and optimized shader compiler for the Radeon Linux graphics driver. Besides trying to generate the fastest shaders, ACO also aims to provide speedy shader compilation too, as an alternative to the AMDGPU LLVM shader compiler back-end. Initially ACO is for the RADV Vulkan driver but it may be brought to the RadeonSI OpenGL driver in the future. At the moment ACO is in good shape for Volcanic Islands through Vega while the Navi shader support is in primitive form.
+> - [Valve's ACO Shader Compiler For The Mesa Radeon Vulkan Driver Just Landed](https://www.phoronix.com/scan.php?page=news_item&px=Mesa-19.3-Lands-RADV-ACO)
+
+### ISA Code
+
+Instruction Set Architecture(指令集架构) —— ISA
+
+> The AMDGPU backend provides `ISA code` generation for AMD GPUs, starting with the R600 family up until the current GCN families. It lives in the lib/Target/AMDGPU directory.
+
+> - [User Guide for AMDGPU Backend](https://www.llvm.org/docs/AMDGPUUsage.html#amdgpu-intrinsics)
+
+- [“Vega” Instruction Set Architecture](https://rocm-documentation.readthedocs.io/en/latest/GCN_ISA_Manuals/testdocbook.html#testdocbook)
+- [GCN ISA Manuals](https://rocm-documentation.readthedocs.io/en/latest/GCN_ISA_Manuals/GCN-ISA-Manuals.html)
+
+
+### 着色器形式的转换
+
+```
++-------+     +---------+    +---------+     +------+     +------+    +-------+
+|       |     |         |    |         |     |      |     |      |    |       |
+| GLSL  +-----> GLSL IR +---->   NIR   +-----> TGSI +-----> LLVM +---->  ISA  |
+|       |     |         |    |         |     |      |     |      |    |       |
++--+----+     +---------+    +---------+     +--+---+     +------+    +----+--+
+   |                                            |                          |
+   |                                            |      radeonsi_dri.so     |
+   |                common                      |           amdgpu         |
+```
 
 ## 示例
 
@@ -699,6 +736,7 @@ _mesa_print_program_parameters(struct gl_context *ctx, const struct gl_program *
 }
 ```
 > file: mesa/program/prog_print.c
+
 
 ## 参考
 
