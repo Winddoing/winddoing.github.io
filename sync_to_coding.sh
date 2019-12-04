@@ -8,6 +8,7 @@
 
 set -ev
 
+USER_NAME="winddoing"
 CODING_REF="git.coding.net/Winddoing/winddoing.git"
 CUR_TIME=`date`
 
@@ -25,4 +26,6 @@ git commit -m "backup: $CUR_TIME"
 
 git branch
 
-git push --force --quiet "https://winddoing:${Travis_co_token}@${CODING_REF}" master:master
+git push --force --quiet "https://${USER_NAME}:${Travis_co_token}@${CODING_REF}" master:master
+
+git push --quiet "https://${USER_NAME}:${Travis_co_token}@${CODING_REF}" master:master --tags
