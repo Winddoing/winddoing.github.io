@@ -65,6 +65,13 @@
 {% endif %}
 
 
+{% if page.type === "photos"  %}
+  {% set theme.fancybox = false %}
+{% endif %}
+{% if page.type !== "photos"  %}
+  {% set theme.fancybox = true %}
+{% endif %}
+
 {% if theme.fancybox %}
   {% set fancybox_css_uri = url_for(theme.vendors._internal + '/fancybox/source/jquery.fancybox.css?v=2.1.5') %}
   {% if theme.vendors.fancybox_css %}
