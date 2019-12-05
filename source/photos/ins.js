@@ -116,10 +116,10 @@
                 var data = res.list[j].arr;
                 var liTmpl = "";
                 for (var i = 0, len = data.link.length; i < len; i++) {
-                    /*var minSrc = 'https://dev.tencent.com/u/Winddoing/p/photos/git/raw/master/min_images/' + data.link[i]; */
-                    /*var src = 'https://dev.tencent.com/u/Winddoing/p/photos/git/raw/master/images/' + data.link[i]; */
-                    var minSrc = 'https://dev.tencent.com/u/Winddoing/p/photos/git/raw/coding-pages/min_images/' + data.link[i];
-                    var src = 'https://dev.tencent.com/u/Winddoing/p/photos/git/raw/coding-pages/images/' + data.link[i];
+                    /*var minSrc = 'https://dev.tencent.com/u/Winddoing/p/photos-data/git/raw/master/min_images/' + data.link[i]; */
+                    /*var src = 'https://dev.tencent.com/u/Winddoing/p/photos-data/git/raw/master/images/' + data.link[i]; */
+                    var minSrc = 'https://dev.tencent.com/u/Winddoing/p/photos-data/git/raw/coding-pages/min_images/' + data.link[i];
+                    var src = 'https://dev.tencent.com/u/Winddoing/p/photos-data/git/raw/coding-pages/images/' + data.link[i];
                     var type = data.type[i];
                     var target = src + (type === 'video' ? '.mp4' : '.jpg');
                     src += '';
@@ -171,9 +171,9 @@
             if (!searchData) {
                 var xhr = new XMLHttpRequest();
                 /* xhr.open('GET', './data.json?t=' + +new Date(), true); */
-                /* xhr.open('GET', 'https://coding.net/u/Winddoing/p/photos/git/raw/master/data.json?t=' + +new Date(), true); */
+                /* xhr.open('GET', 'https://coding.net/u/Winddoing/p/photos-data/git/raw/master/data.json?t=' + +new Date(), true); */
                 /* coding 中的photos仓库需要部署*/
-                xhr.open('GET', 'https://winddoing.coding.me/photos/data.json?t=' + +new Date(), true);
+                xhr.open('GET', 'https://winddoing.coding.me/photos-data/data.json?t=' + +new Date(), true);
 
                 xhr.onload = function() {
                     if (this.status >= 200 && this.status < 300) {
