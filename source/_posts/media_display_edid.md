@@ -20,7 +20,7 @@ EDID的大小：`VGA/DVI`=128Byte; `HDMI`=256Byte
 ## get-edid
 
 ```
-sudo apt-get install read-edid
+sudo apt-get install read-edid edid-decode
 ```
 
 ## 获取EDID原始数据并存储到文件
@@ -40,6 +40,16 @@ sudo get-edid > edid.bin
 ```
 parse-edid < edid.bin
 ```
+
+```
+# the integer after -m is the monitor id, starting from zero and incrementing by one.
+sudo get-edid -m 0 > edid.bin
+
+# View the output of this command and verify you have the right monitor.
+# You can tell via the vendor, resolutions, serial number, all that jazz.
+cat edid.bin | edid-decode
+```
+
 
 ### Window： EDID Manager
 
@@ -313,7 +323,7 @@ manufacturer has identified as optimal.
 
 > The first 18 Byte Descriptor Block shall contain the preferred timing mode. The display manufacturer
 defines the “Preferred Timing Mode (PTM)” as the video timing mode that will produce the best quality
-image on the display’s viewing screen. 
+image on the display’s viewing screen.
 
 
 ## 解析工具

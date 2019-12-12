@@ -13,6 +13,72 @@ abbrlink: 1644
 
 <!-- more -->
 
+## tasksel
+
+`tasksel`命令是用来安装“任务”的，任务就是一些软件的组合，比如LAMP这个任务，就是由apache，php，MySQL等软件包组成，tasksel安装任务就是安装一系列的软件包而已。
+
+> 通过tasksel可以直接在server版，进行ubuntu桌面的安装
+
+<!--more-->
+
+### ubuntu Desktop
+
+```
+sudo apt update
+sudo apt upgrade
+sudo tasksel
+```
+> tasksel选择ubuntu Desktop进行安装，等待安装完成
+
+```
+sudo tasksel install ubuntu-desktop
+```
+
+```
+$tasksel --list-tasks
+u kubuntu-live	Kubuntu live CD
+u lubuntu-live-gtk	Lubuntu live CD (GTK part)
+u ubuntu-budgie-live	Ubuntu Budgie live CD
+u ubuntu-live	Ubuntu live CD
+u ubuntu-mate-live	Ubuntu MATE Live CD
+u ubuntustudio-dvd-live	Ubuntu Studio live DVD
+u vanilla-gnome-live	Ubuntu GNOME live CD
+u xubuntu-live	Xubuntu live CD
+u cloud-image	Ubuntu Cloud Image (instance)
+u dns-server	DNS server
+u kubuntu-desktop	Kubuntu desktop
+u kubuntu-full	Kubuntu full
+u lamp-server	LAMP server
+u lubuntu-core	Lubuntu minimal installation
+u lubuntu-desktop	Lubuntu Desktop
+u lubuntu-gtk-core	Lubuntu minimal installation (GTK part)
+u lubuntu-gtk-desktop	Lubuntu Desktop (GTK part)
+u lubuntu-qt-core	Lubuntu minimal installation (Qt part)
+u lubuntu-qt-desktop	Lubuntu Qt Desktop (Qt part)
+i mail-server	Mail server
+u postgresql-server	PostgreSQL database
+i print-server	Print server
+i samba-server	Samba file server
+u ubuntu-budgie-desktop	Ubuntu Budgie desktop
+i ubuntu-desktop	Ubuntu desktop
+u ubuntu-mate-core	Ubuntu MATE minimal
+u ubuntu-mate-desktop	Ubuntu MATE desktop
+u ubuntustudio-audio	Audio recording and editing suite
+u ubuntustudio-desktop	Ubuntu Studio desktop
+u ubuntustudio-desktop-core	Ubuntu Studio minimal DE installation
+u ubuntustudio-fonts	Large selection of font packages
+u ubuntustudio-graphics	2D/3D creation and editing suite
+u ubuntustudio-photography	Photograph touchup and editing suite
+u ubuntustudio-publishing	Publishing applications
+u ubuntustudio-video	Video creation and editing suite
+u vanilla-gnome-desktop	Vanilla GNOME desktop
+u xubuntu-core	Xubuntu minimal installation
+u xubuntu-desktop	Xubuntu desktop
+i openssh-server	OpenSSH server
+u server	Basic Ubuntu server
+```
+
+
 ## find
 
 ``` shell
