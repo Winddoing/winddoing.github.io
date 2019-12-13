@@ -82,3 +82,4 @@ comments: true
 * [FakeUpdate.net - Windows Update Prank by fediaFedia【[Mobile](http://fakeupdate.net/mobile/)】](http://fakeupdate.net/) —— 在线模拟各种系统升级过程
 * [Flightradar24](https://www.flightradar24.com/) —— 提供实时的航班信息数据
 * [Md2All](http://md.aclickall.com/) —— 在线markdown编辑与排版
+* [打字——指法练习](https://www.typingclub.com/da-zi)

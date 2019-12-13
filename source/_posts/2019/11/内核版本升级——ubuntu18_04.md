@@ -50,10 +50,16 @@ linux-generic-hwe-18.04-edge/bionic-updates,bionic-security,now 5.3.0.23.90 amd6
 sudo apt install linux-generic-hwe-18.04-edge
 ```
 
+更新grub启动配置文件：`/boot/grub/grub.cfg`
+```
+sudo update-grub
+```
+> 如果系统没有该命令通过`sudo apt install grub-efi-amd64 grub-efi-amd64-bin`安装
+
 - 下载当前内核源码
 
 ``` shell
-sudo aapt-get source linux-image-$(uname -r)
+sudo apt-get source linux-image-$(uname -r)
 ```
 
 ## 启动模式
