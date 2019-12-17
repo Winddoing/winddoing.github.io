@@ -16,7 +16,34 @@ Anbox 是 “Android in a box” 的缩写。Anbox 是一个基于`容器`的方
 
 <!--more-->
 
-## Download
+## Anbox
+
+
+### Error
+
+ubuntu18.04 for ARM64
+```
+error: ISO C forbids conversion of object pointer to function pointer type [-Werror=pedantic]
+   func = (getauxval_func_t*)dlsym(libc_handle, "getauxval");
+             ^
+cc1: all warnings being treated as errors
+```
+
+> https://stackoverflow.com/questions/31526876/casting-when-using-dlsym
+
+```
+-set(C_AND_CXX_WARNINGS "-pedantic -Wall -Wextra")
++set(C_AND_CXX_WARNINGS "-Wextra")
+```
+删除掉`-Wall`和`-pedantic`这两个编译选项，可以正常编译
+
+- `-Wall`：
+- `-pedantic`:
+
+
+## Android-for-anbox
+
+### Download
 
 ```
 curl https://mirrors.tuna.tsinghua.edu.cn/git/git-repo -o repo
@@ -47,7 +74,7 @@ done
 ```
 > From: .repo/manifests/default.xml
 
-## Build
+### Build
 
 ```
 sudo apt install openjdk-8-jdk
@@ -61,7 +88,7 @@ make -j3
 ```
 
 
-## Error
+### Error
 
 
 #### aidl_language_l
@@ -84,6 +111,8 @@ make: *** [ninja_wrapper] Error 1
 export LC_ALL=C
 ```
 
+
+#### VM
 
 ```
 [ 30% 14248/46548] Building with Jack: out/target/common/obj/JAVA_LIBRARIES/framework_intermediates/with-local/classes.dex
