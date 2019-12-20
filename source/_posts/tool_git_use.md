@@ -253,6 +253,16 @@ git cherry-pick [branch_name]
 git blame [filename]
 ```
 
+## git服务器
+
+```
+git daemon --export-all --verbose --base-path=.
+```
+- `--export-all`: “--base-path”下所有的repo仓库
+- `--base-path=.`: 定义为当前目录
+- `--verbose`: 任何操作都会给当前repo通知
+
+
 ## DoTo
 
 1. [Git 最佳实践：分支管理](http://blog.jobbole.com/109466/)

@@ -52,7 +52,7 @@ export REPO_URL='https://mirrors.tuna.tsinghua.edu.cn/git/git-repo/'
 ```
 
 ```
-repo init -u https://github.com/anbox/platform_manifests.git -b anbox
+repo init -u https://github.com/anbox/platform_manifests.git -b anbox --depth=1
 repo sync -j4
 while [ $? -ne 0 ]
 do
@@ -191,6 +191,13 @@ systemctl | grep "anbox"
 anbox system-info
 ```
 
+## Net
+
+```
+nmcli con add type bridge ifname anbox0 -- connection.id anbox-net ipv4.method shared ipv4.addresses 192.168.250.1/24
+```
+
 ## 参考
 
 - [解决Out of memory error (version 1.2-rc4 'Carnac' (298900 ... by android-jack-team@google.com)).](https://blog.csdn.net/liangtianmeng/article/details/89522092)
+- [Linux Gaming: Anbox - Android In A Box](https://magazine.odroid.com/article/linux-gaming-anbox-android-in-a-box/)

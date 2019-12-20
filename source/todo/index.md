@@ -8,11 +8,13 @@ comments: true
 {% centerquote %} ***工作***：不要老想着写代码，***学习***：学习能力, 方法 {% endcenterquote %}
 
 * [Embedded Linux Experts](http://elixir.free-electrons.com/linux/latest/source) —— 在线查看Linux、busybox、uboot等源码
-* [AndroidXRef](http://androidxref.com/) —— 在线阅读Android源码[aospxref](http://aospxref.com/)
 * [The Linux Kernel’s documentation(4.11)](https://www.kernel.org/doc/html/v4.11/index.html) —— Linux内核文档（`Documentation`目录）
 * [LWN.net](https://lwn.net/) —— linux内核相关文章
 * [man-page](http://man7.org/linux/man-pages/index.html) —— Linux man pages online
 * [轻松认识 Linux kernel](http://www.bricktou.com/) —— linux内核函数接口注解
+* [AndroidXRef](http://androidxref.com/) —— 在线阅读Android源码[aospxref](http://aospxref.com/)
+* [Android社区](https://www.androidos.net.cn/) —— Android相关文章代码
+* [清华大学开源软件镜像站](https://mirrors.tuna.tsinghua.edu.cn/) —— 大部分开源软件代码(android linux)
 * [asciiflow](http://asciiflow.com/) —— ASCII画图
 * [codelf](https://unbug.github.io/codelf/) —— 搜索更好的变量名，函数名
 * ~~[kindle推](http://www.kindlepush.com/main) —— kindle电子书搜索~~
@@ -45,7 +47,6 @@ comments: true
 * [epub电子书在线阅读](http://www.neat-reader.cn/app#/)|[&A](http://www.nicetool.net/embed/epub_reader.html)|
 * [ToDo List](http://www.gxtodo.com/web/#/user/login) —— 任务管理网站
 * [atool](https://atool.vip/) —— 在线工具VIP
-* [清华大学开源软件镜像站](https://mirrors.tuna.tsinghua.edu.cn/) —— 大部分开源软件代码(android linux)
 * [The Linux Command Line 的中文版](https://billie66.github.io/TLCL/index.html) —— linux命令和shell
 * [一个有趣的网站收藏](https://123.kfd.me/)
 * [反向谷歌](https://kfd.me/) —— 可以进行谷歌搜索(2018.11.16)
