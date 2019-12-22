@@ -13,13 +13,40 @@ abbrlink: 1644
 
 <!-- more -->
 
+## apt build-dep
+
+``` shell
+sudo apt-get build-dep mesa
+```
+> build-dep causes apt-get to install/remove packages in an attempt to satisfy the build dependencies for a source package. By default the dependencies are satisfied to build the package natively. If desired a host-architecture can be specified with the `--host-architecture` option instead.
+
+根据源码编译时所需的关系包进行搜索并下载安装.建立要编译软件的环境.
+
+``` shell
+$sudo apt build-dep mesa
+Reading package lists... Done
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+The following NEW packages will be installed:
+  autopoint debhelper dh-autoreconf dh-strip-nondeterminism lib32gcc1 lib32stdc++6 libc6-i386 libclang-9-dev libclang-common-9-dev libclang1-9
+  libclc-dev libfile-stripnondeterminism-perl libglvnd-core-dev libobjc-7-dev libobjc4 libpfm4 libset-scalar-perl libva-dev libva-glx2
+  libvdpau-dev libvulkan-dev llvm-9 llvm-9-dev llvm-9-runtime llvm-9-tools po-debconf python-pygments python-yaml python3-pygments quilt
+The following packages will be upgraded:
+  cpp-7 g++-7 gcc-7 gcc-7-base gcc-8-base libasan4 libatomic1 libcc1-0 libcilkrts5 libgcc-7-dev libgcc1 libgomp1 libitm1 liblsan0 libmpx2
+  libquadmath0 libstdc++-7-dev libstdc++6 libtsan0 libubsan0
+20 upgraded, 30 newly installed, 0 to remove and 44 not upgraded.
+Need to get 101 MB of archives.
+After this operation, 477 MB of additional disk space will be used.
+Do you want to continue? [Y/n]
+```
+
 ## tasksel
 
 `tasksel`命令是用来安装“任务”的，任务就是一些软件的组合，比如LAMP这个任务，就是由apache，php，MySQL等软件包组成，tasksel安装任务就是安装一系列的软件包而已。
 
 > 通过tasksel可以直接在server版，进行ubuntu桌面的安装
 
-<!--more-->
 
 ### ubuntu Desktop
 
