@@ -5,8 +5,9 @@ date: "2019-12-05 19:22"
 tags:
   - OpenGL
 categories:
-  - OpenGL
   - 多媒体
+  - OpenGL
+
 ---
 
 `apitrace`是一套用于调试OpenGL应用程序和驱动程序的工具，其中包括用于生成应用程序进行的所有OpenGL调用的跟踪的工具以及用于在程序执行期间重放这些跟踪并检查渲染和OpenGL状态的工具。
