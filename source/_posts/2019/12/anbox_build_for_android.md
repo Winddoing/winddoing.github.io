@@ -201,3 +201,4 @@ nmcli con add type bridge ifname anbox0 -- connection.id anbox-net ipv4.method s
 
 - [解决Out of memory error (version 1.2-rc4 'Carnac' (298900 ... by android-jack-team@google.com)).](https://blog.csdn.net/liangtianmeng/article/details/89522092)
 - [Linux Gaming: Anbox - Android In A Box](https://magazine.odroid.com/article/linux-gaming-anbox-android-in-a-box/)
+- [ 安卓运行环境Anbox安装/编译说明（20190426） ](https://bbs.deepin.org/forum.php?mod=viewthread&tid=176820)
