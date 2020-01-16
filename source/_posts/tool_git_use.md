@@ -262,6 +262,43 @@ git daemon --export-all --verbose --base-path=.
 - `--base-path=.`: 定义为当前目录
 - `--verbose`: 任何操作都会给当前repo通知
 
+## svn仓库迁移至git
+
+- svn的日志提交者与git相关用户进行绑定
+```
+svn log -q | awk -F '|' '/^r/ {sub("^ ", "", $2); sub(" $", "", $2); print $2" = "$2" <"$2">"}' | sort -u > users.txt
+```
+> `users.txt`的意义仅在于，将svn里面的提交者日志，注意是提交者，不是svn里面所有的用户信息都得关联
+
+```
+aaa = git-aaa <aaa@xx.com> #用户名 邮件地址
+bbb = git-bbb <bbb@xx.com>
+```
+
+- 使用`git-svn`进行下载并提交
+
+```
+sudo apt install git-svn
+```
+
+```
+git svn clone <SVN_URL> --no-metadata --trunk="svnproject" --tags="tags" --branches="svnbranches" --authors-file=users.txt --preserve-empty-dirs project-dir
+```
+
+- `--no-metadata`: 阻止git导出SVN包含的一些无用信息
+- `--trunk="svnproject"`: 指定导出仓库的主干项目路径，默认trunk
+- `--tags="tags"`: 日志标记
+- `--branches="svnbranches"`: 指定svn的分支项目路径
+- `--authors-file=users.txt`: 指定svn帐号在git中的映射
+- `--preserve-empty-dirs`: 保留原SVN项目中的空目录
+
+```
+git remote add origin <GIT-URL>
+```
+
+```
+git push origin master #--all
+```
 
 ## DoTo
 
