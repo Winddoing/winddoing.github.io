@@ -200,6 +200,18 @@ git rm --cached 子模块名称
 git summary
 ```
 
+## git获取最近一次提交的commit-id
+
+- 获取完整commit id
+```
+git rev-parse HEAD
+```
+
+- 获取short commit id
+```
+git rev-parse --short HEAD
+```
+
 ## .git无法忽略target,或者不生效的情况
 
 `.gitignore`未生效，原因是.gitignore只能忽略那些原来没有被track的文件，如果某些文件已经被纳入了版本管理中，则修改.gitignore是无效的。那么解决方法就是先把本地缓存删除（改变成未track状态），然后再提交
@@ -299,6 +311,14 @@ git remote add origin <GIT-URL>
 ```
 git push origin master #--all
 ```
+
+## 命令行工具——tig
+
+- commit操作： `上/下键`可以选择log中的commit
+- 查看修改信息： `j/k`
+- 展示commit-id： `shift+x`
+
+
 
 ## DoTo
 
