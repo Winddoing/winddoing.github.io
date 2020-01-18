@@ -95,7 +95,7 @@ footer:
 # CC licenses are available in 39 languages, you can find the specific and correct abbreviation you need on https://creativecommons.org
 creative_commons:
   license: by-nc-sa
-  sidebar: false
+  sidebar: true
   post: false
   language:
 
@@ -365,11 +365,11 @@ codeblock:
   highlight_theme: normal
   # Add copy button on codeblock
   copy_button:
-    enable: false
+    enable: true
     # Show text copy result.
     show_result: false
     # Available values: default | flat | mac
-    style:
+    style: flat
 
 back2top:
   enable: true
@@ -419,7 +419,7 @@ font:
   enable: false
 
   # Uri of fonts host, e.g. //fonts.googleapis.com (Default).
-  host: https://fonts.cat.net
+  host:
 
   # Font options:
   # `external: true` will load this font family from `host` above.
@@ -430,19 +430,19 @@ font:
   global:
     external: true
     family: Monda
-    size: 14
+    size: 1
 
   # Font settings for site title (.site-title).
   title:
     external: true
     family: Roboto Slab
-    size:
+    size: 1.6
 
   # Font settings for headlines (<h1> to <h6>).
   headings:
     external: true
     family:
-    size:
+    size: 1.4
 
   # Font settings for posts (.post-body).
   posts:
@@ -703,9 +703,9 @@ cnzz_siteid: 1254703532
 # AppID and AppKey are recommended to be the same as valine's for counter compatibility.
 # Do not enable both `valine.visitor` and `leancloud_visitors`.
 leancloud_visitors:
-  enable: false
-  app_id: # <app_id>
-  app_key: # <app_key>
+  enable: true
+  app_id: Q8qpjA3fOO7FEUBqcmcQFptF-gzGzoHsz # <app_id>
+  app_key: tgUTq5bX3fVmn916EMRe65eJ # <app_key>
   # Dependencies: https://github.com/theme-next/hexo-leancloud-counter-security
   # If you don't care about security in leancloud counter and just want to use it directly
   # (without hexo-leancloud-counter-security plugin), set `security` to `false`.
