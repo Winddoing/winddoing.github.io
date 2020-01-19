@@ -7,6 +7,7 @@ tags:
   - Android
 categories:
   - 系统应用
+abbrlink: 22129
 ---
 
 Anbox 是 “Android in a box” 的缩写。Anbox 是一个基于`容器`的方法，可以在普通的GNU/Linux系统上启动完整的Android系统。

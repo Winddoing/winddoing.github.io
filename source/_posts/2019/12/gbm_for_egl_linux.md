@@ -8,6 +8,7 @@ tags:
 categories:
   - 多媒体
   - EGL
+abbrlink: 62365
 ---
 
 > Mesa GBM (`Generic Buffer Manager`) basically provides a EGL native window type (just like Wayland and X11), so one could obtain a real EGL surface and create render target buffers. With that then, GL can be used to render into these buffers, which will be shown to the display by queuing a page flip via KMS/DRM API.

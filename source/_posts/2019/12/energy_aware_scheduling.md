@@ -6,6 +6,7 @@ tags:
   - sched
 categories:
   - Linux内核
+abbrlink: 58199
 ---
 
 `Energy Aware Scheduling(EAS)`,EAS调度器的设计目标是在保证系统性能的前提下尽可能地降低功耗。
