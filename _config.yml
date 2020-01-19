@@ -76,9 +76,8 @@ tag_generator:
 search:
   path: search.xml
   field: post
+  content: true
   format: html
-  limit: 10000
-
 
 # Extensions
 ## Plugins: https://hexo.io/plugins/
