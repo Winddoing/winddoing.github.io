@@ -6,7 +6,7 @@ tags:
   - 内核
 categories:
   - Linux内核
-
+abbrlink: 15332
 ---
 
 linux内核升级笔记：

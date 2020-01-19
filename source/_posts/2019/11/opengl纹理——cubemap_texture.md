@@ -7,6 +7,7 @@ tags:
 categories:
   - 多媒体
   - OpenGL
+abbrlink: 43690
 ---
 
 >A Cubemap Texture is a texture, where each mipmap level consists of six 2D images which must be square. The 6 images represent the faces of a cube. The texture coordinate used to access a cubemap is a 3D direction vector which represents a direction from the center of the cube to the value to be accessed.
