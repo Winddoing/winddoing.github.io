@@ -34,9 +34,9 @@ custom_file_path:
   #style: source/_data/styles.styl
 
 
-# Online contact           
-daovoice: true             
-daovoice_app_id: a28f1641  
+# Online contact
+daovoice: false
+daovoice_app_id: a28f1641
 
 
 # ---------------------------------------------------------------
