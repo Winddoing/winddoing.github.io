@@ -38,6 +38,35 @@ custom_file_path:
 daovoice: false
 daovoice_app_id: a28f1641
 
+# NeedMoreShare2
+# Dependencies: https://github.com/theme-next/theme-next-needmoreshare2
+# For more information: https://github.com/revir/need-more-share2
+# iconStyle: default | box
+# boxForm: horizontal | vertical
+# position: top / middle / bottom + Left / Center / Right
+# networks:
+# Weibo | Wechat | Douban | QQZone | Twitter | Facebook | Linkedin | Mailto | Reddit | Delicious | StumbleUpon | Pinterest
+# GooglePlus | Tumblr | GoogleBookmarks | Newsvine | Evernote | Friendfeed | Vkontakte | Odnoklassniki | Mailru
+needmoreshare:
+  enable: true
+  cdn:
+    js: //cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.js
+    css: //cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.css
+  postbottom:
+    enable: true
+    options:
+      iconStyle: default
+      boxForm: horizontal
+      position: bottomCenter
+      networks: Weibo,Wechat,QQZone,Twitter,Facebook,Evernote
+  float:
+    enable: false
+    options:
+      iconStyle: box
+      boxForm: horizontal
+      position: middleRight
+      networks: Weibo,Wechat,Douban,QQZone,Twitter,Facebook
+
 
 # ---------------------------------------------------------------
 # Site Information Settings
