@@ -210,7 +210,7 @@ links_settings:
   icon: link
   title: Links
   # Available values: block | inline
-  layout: block
+  layout: inline
 
 links:
   #Title: http://example.com/
