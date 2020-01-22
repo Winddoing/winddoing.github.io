@@ -217,7 +217,7 @@ site_state: true
 # Value before `||` delimiter is the target permalink, value after `||` delimiter is the name of Font Awesome icon.
 social:
   GitHub: https://github.com/Winddoing || github
-  Coding: https://coding.net/u/Winddoing || codiepie
+  #Coding: https://coding.net/u/Winddoing || codiepie
   E-Mail: mailto:winddoing@sina.cn || envelope
   #Google: https://plus.google.com/yourname || google
   #Twitter: https://twitter.com/yourname || twitter
