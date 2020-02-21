@@ -333,8 +333,8 @@ related_posts:
 # Post edit
 # Dependencies: https://github.com/hexojs/hexo-deployer-git
 post_edit:
-  enable: true
-  url: https://github.com/Winddoing/Winddoing.github.io/tree/web_source/source # Link for view source
+  enable: false
+  url: https://github.com/Winddoing/Winddoing.github.io/tree/web_source/source/ # Link for view source
   #url: https://github.com/user-name/repo-name/edit/branch-name/subdirectory-name # Link for fork & edit
 
 # Show previous post and next post in post footer if exists
