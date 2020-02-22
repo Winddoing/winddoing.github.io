@@ -79,6 +79,12 @@ search:
   content: true
   format: html
 
+algolia:
+    applicationID: OWFNL0AG1F
+    apiKey: 796a4b50e2653330cac4e0f8b1f8ade4
+    indexName: winddoing
+    chunkSize: 5000
+
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
