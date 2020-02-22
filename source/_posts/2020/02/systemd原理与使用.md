@@ -7,6 +7,7 @@ tags:
   - linux
 categories:
   - 系统服务
+abbrlink: 14807
 ---
 
 `Systemd`（系统管理守护进程）的主要目的就是减少系统引导时间和计算开销。

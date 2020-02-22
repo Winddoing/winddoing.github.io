@@ -778,9 +778,9 @@ algolia_search:
   hits:
     per_page: 10
   labels:
-    input_placeholder: Search for Posts
-    hits_empty: "We didn't find any results for the search: ${query}"
-    hits_stats: "${hits} results found in ${time} ms"
+    input_placeholder: 输入关键词
+    hits_empty: "没有找到与「${query}」相关的内容"
+    hits_stats: "${hits} 条相关记录，共耗时 ${time} ms"
 
 # Local Search
 # Dependencies: https://github.com/theme-next/hexo-generator-searchdb

@@ -25,6 +25,7 @@ cache:
 script:
     - ./auto_init.sh
     - hexo clean
+    - hexo algolia --flush
     - hexo generate
     - gulp
 
