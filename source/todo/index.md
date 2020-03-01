@@ -84,3 +84,5 @@ comments: true
 * [Flightradar24](https://www.flightradar24.com/) —— 提供实时的航班信息数据
 * [Md2All](http://md.aclickall.com/) —— 在线markdown编辑与排版
 * [打字——指法练习](https://www.typingclub.com/da-zi)
+* [GPU Caps Viewer](https://gpu-caps-viewer.en.lo4d.com/windows) —— 显卡OpenGL版本查看测试工具（windows）
+* [GPU-Viewer](https://github.com/arunsivaramanneo/GPU-Viewer) —— linux平台glxinfo前端显示
