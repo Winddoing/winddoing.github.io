@@ -86,3 +86,6 @@ comments: true
 * [打字——指法练习](https://www.typingclub.com/da-zi)
 * [GPU Caps Viewer](https://gpu-caps-viewer.en.lo4d.com/windows) —— 显卡OpenGL版本查看测试工具（windows）
 * [GPU-Viewer](https://github.com/arunsivaramanneo/GPU-Viewer) —— linux平台glxinfo前端显示
+* [临时邮箱](http://24mail.chacuo.net/)
+* [在线短信接收](https://www.materialtools.com) —— 验证码
+* [Firefox Send](https://send.firefox.com/) —— 临时网盘
