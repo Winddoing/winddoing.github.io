@@ -12,6 +12,19 @@ date: 2018-02-04 23:07:24
 
 <!--more-->
 
+## 将逗号分隔的字符串转成换行
+
+``` shell
+OLD_IFS="$IFS"
+IFS=","
+arr=(`cat 1.txt`)
+IFS="$OLD_IFS"
+for s in ${arr[@]}
+do
+    echo $s | tr -d '"'
+done
+```
+
 ## 多线程
 
 ``` shell
@@ -122,11 +135,10 @@ echo "up:$up, down:$down, alive:$alive"
 
 ## 提取本地IP
 
-```
+``` shell
 ip=`ifconfig | grep "inet " | grep -v "127.0.0.1"| awk '{print $2}'`
 ```
 > `-v`: 排除
-
 
 ## 参考
 
