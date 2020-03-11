@@ -207,6 +207,25 @@ ssh -t xx@192.168.1.1 "cd /home/xx/test && bash"
 ```
 - `-t` :标志用于强制分配伪终端
 
+
+### 通过root账户ssh登录
+
+> 在ubuntu系统中默认不能使用root账户进行ssh登录
+
+开启root账户登录ssh，打开`/etc/ssh/sshd_config`配置
+
+```
+PermitRootLogin yes
+```
+> 默认配置`#PermitRootLogin prohibit-password`
+
+重启ssh服务
+``` shell
+sudo systemctl restart sshd.service
+```
+
+
+
 ## tftp
 
 > 开发板（busybox）

@@ -1,0 +1,49 @@
+---
+layout: post
+title: Android模拟器
+date: '2020-03-09 18:08'
+categories:
+  - Android
+tags:
+  - Android
+---
+
+<!--more-->
+
+## 模拟器源码下载
+
+Android 模拟器源码的下载与 Android AOSP 源码库的下载过程类似。
+
+模拟器的分支：在 https://android.googlesource.com/platform/manifest/+refs 可以看到所有可以指定的分支，包括 Android 分支和模拟器分支，其中模拟器分支主要有如下这些：
+
+```
+emu-1.4-release
+emu-1.5-release
+emu-2.0-release
+emu-2.2-release
+emu-2.3-release
+emu-2.4-arc
+emu-2.4-release
+emu-2.5-release
+emu-master-dev
+```
+
+下载最新模拟器代码：
+``` shell
+$ repo init -u https://android.googlesource.com/platform/manifest -b emu-master-dev
+```
+
+> 在国内可以使用清华源更快下载:
+> ``` shell
+> repo init -u https://aosp.tuna.tsinghua.edu.cn/platform/manifest -b emu-master-dev
+> ```
+
+
+## 编译
+
+
+``` shell
+cd external/qemu/android/
+./rebuild.sh --no-tests
+```
+> - `--no-tests`: 告诉编译系统，编译完成之后不要执行测试程序，以节省时间，提高效率
