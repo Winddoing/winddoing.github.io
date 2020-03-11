@@ -78,6 +78,24 @@ sudo apt-get remove teamviewer
 ```
 如果安装失败，可以更新ubuntu的源，参考：[Ubuntu 16.04 安装 TeamViewer 13](https://blog.csdn.net/u011292539/article/details/79249027/)
 
+### 设置开机自启
+
+``` shell
+sudo systemctl enable teamviewerd.service
+```
+
+### ubuntu18.04系统重启后，TeamViewer无法连接
+
+
+修改`/etc/gdm3/custom.conf`文件：
+
+将如下行取消注释
+```
+WaylandEnable=false
+```
+> 使通过TeamViewer进行的远程桌面会话请求由GNOME桌面的xorg处理，来代替Wayland显示管理器。
+
+- https://community.teamviewer.com/t5/Linux/Teamviewer-13-not-connecting-in-Ubuntu-18-04-Login-Screen/td-p/35342
 
 ## 主题
 
