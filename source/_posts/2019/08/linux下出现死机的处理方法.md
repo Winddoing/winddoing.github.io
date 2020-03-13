@@ -358,6 +358,39 @@ $cat ExecutablePath
 enabled=1
 ```
 
+## 定期清理内存 —— 桌面卡死
+
+> 该操作可能导致部分浏览器页面内容丢失
+
+主要用于电脑系统内存、交换分区饱满，导致系统桌面卡死的问题
+
+- 清理脚本
+``` shell
+#!/bin/bash
+used=`free -m | awk 'NR==2' | awk '{print $3}'`
+free=`free -m | awk 'NR==2' | awk '{print $4}'`
+
+echo "===========================" >> /var/log/mem.log
+date >> /var/log/mem.log
+echo "Memory usage | [Use：${used}MB][Free：${free}MB]" >> /var/log/mem.log
+
+if [ $free -le 100 ] ; then
+	sync && echo 1 > /proc/sys/vm/drop_caches
+	sync && echo 2 > /proc/sys/vm/drop_caches
+	sync && echo 3 > /proc/sys/vm/drop_caches
+	echo "OK" >> /var/log/mem.log
+else
+	echo "Not required" >> /var/log/mem.log
+fi
+```
+
+-定期执行脚本
+``` shell
+$crontab -e
+#添加：
+*/10 * * * * /root/freemem.sh
+```
+> 每十分钟执行一次内存清理脚本
 
 
 ## 参考

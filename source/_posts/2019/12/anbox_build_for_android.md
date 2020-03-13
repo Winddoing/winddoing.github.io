@@ -210,3 +210,4 @@ nmcli con add type bridge ifname anbox0 -- connection.id anbox-net ipv4.method s
 - [Linux Gaming: Anbox - Android In A Box](https://magazine.odroid.com/article/linux-gaming-anbox-android-in-a-box/)
 - [安卓运行环境Anbox安装/编译说明（20190426)](https://bbs.deepin.org/forum.php?mod=viewthread&tid=176820)
 - [运行 Anbox](https://www.jianshu.com/p/77e51c6475fc)
+- [robox安卓容器环境搭建指导书](https://portal-www-software.obs.cn-north-1.myhuaweicloud.com/%E8%BD%AF%E4%BB%B6/%E5%9F%BA%E4%BA%8E%E9%B2%B2%E9%B9%8F916%E7%9A%84robox%E5%AE%89%E5%8D%93%E5%AE%B9%E5%99%A8%E7%8E%AF%E5%A2%83%E6%9E%84%E5%BB%BA%E6%8C%87%E5%AF%BC%E4%B9%A6.docx)
