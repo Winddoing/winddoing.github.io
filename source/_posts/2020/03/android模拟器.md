@@ -27,7 +27,16 @@ emu-2.3-release
 emu-2.4-arc
 emu-2.4-release
 emu-2.5-release
+emu-2.6-release
+emu-2.7-release
+emu-2.8-release
+emu-29.0-release
+emu-3.0-release
+emu-3.1-release
+emu-gn-dev
 emu-master-dev
+emu-master-qemu
+emu-master-qemu-release
 ```
 
 下载最新模拟器代码：
