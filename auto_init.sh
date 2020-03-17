@@ -18,8 +18,11 @@ sz=$(($all_sz-$node_modules_sz-$git_sz))
 
 echo "all size: $all_sz, node_modules size: $node_modules_sz, .git size: $git_sz"
 echo "Data size: $sz"
-sed -i "s/xxx/$sz/g" `grep -l xxx source/about/index.md`
+sed -i "s/data_SZ/$sz/g" `grep -l data_SZ source/about/index.md`
 
+push_cnt=`git log | grep -e 'commit [a-zA-Z0-9]*' | wc -l`
+echo "Push count: $push_cnt"
+sed -i "s/build_CN/$push_cnt/g" `grep -l build_CN source/about/index.md`
 
 
 xdate=`date +%Y.%m.%d-%H:%M:%S`

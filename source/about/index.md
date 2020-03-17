@@ -26,7 +26,7 @@ comments: true
 - winddoing@sina.cn #【[BOOK](../books)】#【[ANA](../ana)】#【[MUSIC](../music)】#【[阅读排行](../top)】#【[常用软件](../software)】#【[下载](../downloads)】
 
 {% note success %}
-网站构建，源码数据包大小：`xxx MB`; 最后一次构建时间：`xdate`;
+网站构建，源码大小：`data_SZ MB`, 构建次数：`build_CN`, 最后一次构建时间：`xdate`;
 {% endnote %}
 
 {% tabs First unique name %}
