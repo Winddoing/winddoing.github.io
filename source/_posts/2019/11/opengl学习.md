@@ -76,3 +76,4 @@ OpenGL 4.5版本的图形管线有4个阶段，还有1个通用计算阶段。
 - [Learn OpenGL【中】](https://learnopengl-cn.github.io/)
 - [Learn OpenGL【英】](https://learnopengl.com/)
 - [CHAPTER8 Texture Mapping: The Basics](https://www.scss.tcd.ie/Michael.Manzke/CS7055/Lab2/SuperBible.4th.Ed.Ch8-9.pdf)
+- [OpenGLR©Graphics with the X Window System (Version 1.4)](https://www.khronos.org/registry/OpenGL/specs/gl/glx1.4.pdf)
