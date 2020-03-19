@@ -9,6 +9,8 @@ PWD=`pwd`
 echo "Current path: $PWD"
 echo "Current dirs:"
 
+git branch -a
+
 ls -lha
 
 node_modules_sz=`du -sh ./node_modules | awk '{print int($1)}'`
@@ -17,7 +19,7 @@ all_sz=`du -sh  $SRC_DIR | awk '{print int($1)}'`
 sz=$(($all_sz-$node_modules_sz-$git_sz))
 
 echo "all size: $all_sz, node_modules size: $node_modules_sz, .git size: $git_sz"
-echo "Data size: $sz"
+echo "Data size: $sz MB"
 sed -i "s/data_SZ/$sz/g" `grep -l data_SZ source/about/index.md`
 
 push_cnt=`git log | grep -e 'commit [a-zA-Z0-9]*' | wc -l`
