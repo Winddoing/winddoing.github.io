@@ -90,3 +90,6 @@ comments: true
 * [在线短信接收](https://www.materialtools.com) —— 验证码
 * [Firefox Send](https://send.firefox.com/) —— 临时网盘
 * [cpolar-ssh](https://dashboard.cpolar.com) —— winddoing登录电话
+* [华为开源平台](https://code.opensource.huaweicloud.com)
+* [华为开源镜像站](https://mirrors.huaweicloud.com/) —— atom等工具
+* [SSR免费节点](https://lncn.org/)
