@@ -149,6 +149,15 @@ JACK_SERVER_COMMAND="java -XX:MaxJavaStackTraceDepth=-1 -Djava.io.tmpdir=$TMPDIR
 ./prebuilts/sdk/tools/jack-admin start-server
 ```
 
+## anbox-images
+
+```
+$ cd $HOME/anbox-work/anbox                              
+$ scripts/create-package.sh \                            
+    $PWD/../out/target/product/x86_64/ramdisk.img \      
+    $PWD/../out/target/product/x86_64/system.img         
+```
+
 ## anbox-modules
 
 ```
@@ -157,6 +166,11 @@ git clone https://github.com/anbox/anbox-modules.git
 
 在anbox-modules安装完成后，需要对系统进行reboot，否则无法生成`/dev/binder`节点
 
+
+```
+sudo modprobe binder_linux num_devices=9
+```
+>多容器编译生成binder节点，`/dev/binder[0-9]`
 
 ## Boot
 
@@ -176,7 +190,8 @@ ExecStart=/usr/local/bin/anbox container-manager --daemon --privileged --data-pa
 [Install]
 WantedBy=multi-user.target
 ```
->/lib/systemd/system/anbox-container-manager.service
+> - 服务配置文件： `/lib/systemd/system/anbox-container-manager.service`或`/etc/systemd/system/anbox-container-manager.service`
+> - `anbox-data`为空目录，具体内容容器启动后生成。
 
 ```
 sudo systemctl start anbox-container-manager
@@ -191,6 +206,13 @@ systemctl | grep "anbox"
 
 anbox system-info
 ```
+
+### 设置anbox服务自动运行
+
+```
+sudo systemctl enable anbox-container-manager.service
+```
+
 
 ## 手动启动
 
