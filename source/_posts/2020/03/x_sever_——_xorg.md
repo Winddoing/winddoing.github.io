@@ -7,6 +7,7 @@ tags:
 categories:
   - 系统服务
   - Xorg
+abbrlink: 39845
 ---
 
 Xorg：基于`X11`协议的服务端。管理硬件设备（驱动），键盘鼠标显示器等
