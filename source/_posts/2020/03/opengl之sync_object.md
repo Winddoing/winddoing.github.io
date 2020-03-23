@@ -7,6 +7,7 @@ tags:
 categories:
   - 多媒体
   - OpenGL
+abbrlink: 8528
 ---
 
 > *Sync Objects* are objects that are used to synchronize the activity between the GPU and the application. `glFinish` is a start to synchronization, but sync objects allow for much finer grained control.

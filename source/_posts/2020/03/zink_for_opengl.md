@@ -8,6 +8,7 @@ tags:
 categories:
   - 多媒体
   - OpenGL
+abbrlink: 27461
 ---
 
 `Zink`是Gallium 3D的驱动程序，主要是在vulkan上实现OpenGL API接口
