@@ -7,6 +7,7 @@ tags:
   - 网络
 categories:
   - 工具
+abbrlink: 28389
 ---
 
 `cpolar`工具从家庭或本地网络外部访问内网设备，比如树莓派、群晖等。

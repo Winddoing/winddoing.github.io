@@ -6,6 +6,7 @@ categories:
   - Android
 tags:
   - Android
+abbrlink: 40058
 ---
 
 Android模拟器开发和调试应用肯定比使用真机方便

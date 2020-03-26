@@ -7,6 +7,7 @@ tags:
 categories:
   - 多媒体
   - OpenGL
+abbrlink: 32043
 ---
 
 OpenGL API在不同的版本中的扩展。
