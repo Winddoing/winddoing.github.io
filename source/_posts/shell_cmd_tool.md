@@ -468,9 +468,36 @@ sed -i s/xxxx/yyyy/g ./*.txt
 
 > 用于获得某一个库/模块的所有编译相关的信息
 
-```
+``` shell
 $pkg-config --libs --cflags gl
 -I/usr/include/libdrm -lGL
+```
+
+### pkg-config默认的搜索路径
+
+``` shell
+$pkg-config --variable pc_path pkg-config
+/usr/local/lib/x86_64-linux-gnu/pkgconfig:/usr/local/lib/pkgconfig:/usr/local/share/pkgconfig:/usr/lib/x86_64-linux-gnu/pkgconfig:/usr/lib/pkgconfig:/usr/share/pkgconfig
+```
+### PKG_CONFIG_PATH
+
+配置pkgconfig文件路径
+
+``` shell
+echo $PKG_CONFIG_PATH
+```
+
+## 运行时库的连接
+
+- 在环境变量`LD_LIBRARY_PATH`中指明库的搜索路径。
+- 在`/etc/ld.so.conf`文件中添加库的搜索路径。
+
+### LD_LIBRARY_PATH
+
+配置运行时加载库的路径
+
+``` shell
+echo $LD_LIBRARY_PATH
 ```
 
 ## 命令行直接打开浏览器进入指定网页
