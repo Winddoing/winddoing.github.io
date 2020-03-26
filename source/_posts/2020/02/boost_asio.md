@@ -9,6 +9,7 @@ tags:
   - anbox
 categories:
   - 程序设计
+abbrlink: 31474
 ---
 
 Boost.Asio是用于`网络`和`低层IO`编程的跨平台C++库,为开发者提供了C++环境下稳定的`异步模型`。

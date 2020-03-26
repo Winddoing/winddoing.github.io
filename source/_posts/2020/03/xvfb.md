@@ -7,6 +7,7 @@ tags:
   - x11
 categories:
   - 软件测试
+abbrlink: 64072
 ---
 
 > Xvfb − virtual framebuffer X server for X Version 11
