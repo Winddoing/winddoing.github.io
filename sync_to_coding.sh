@@ -9,7 +9,8 @@
 set -ev
 
 USER_NAME="winddoing"
-CODING_REF="git.coding.net/Winddoing/winddoing.git"
+#CODING_REF="git.coding.net/Winddoing/winddoing.git"
+CODING_REF="gitee.com/winddoing/winddoing.git"
 CUR_TIME=`date`
 
 ls -lsh .
@@ -26,6 +27,8 @@ git commit -m "backup: $CUR_TIME"
 
 git branch
 
-git push --force --quiet "https://${USER_NAME}:${Travis_co_token}@${CODING_REF}" master:master
+#git push --force --quiet "https://${USER_NAME}:${Travis_co_token}@${CODING_REF}" master:master
+git push --force --quiet "https://${USER_NAME}:${Travis_ge_token}@${CODING_REF}" master:master
 
-git push --quiet "https://${USER_NAME}:${Travis_co_token}@${CODING_REF}" master:master --tags
+#git push --quiet "https://${USER_NAME}:${Travis_co_token}@${CODING_REF}" master:master --tags
+git push --quiet "https://${USER_NAME}:${Travis_ge_token}@${CODING_REF}" master:master --tags
