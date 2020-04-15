@@ -93,3 +93,5 @@ comments: true
 * [华为开源平台](https://code.opensource.huaweicloud.com)
 * [华为开源镜像站](https://mirrors.huaweicloud.com/) —— atom等工具
 * [SSR免费节点](https://lncn.org/)
+* [特殊符号](http://cn.piliapp.com/symbol/)
+* [UFO Test: Framerates](https://www.testufo.com) —— 测试屏幕刷新率

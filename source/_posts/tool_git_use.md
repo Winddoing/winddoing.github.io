@@ -346,8 +346,24 @@ git push origin master #--all
 - 查看修改信息： `j/k`
 - 展示commit-id： `shift+x`
 
+## 错误处理
+
+### git clone
+
+```
+fatal: The remote end hung up unexpectedly
+fatal: early EOF
+fatal: index-pack failed
+```
+
+```
+git config --add core.compression -1
+```
+> compression 是压缩的意思，从clone的终端输出就知道，服务器会压缩目标文件，然后传输到客户端，客户端再解压。取值为 [-1, 9]，-1 以 zlib 为默认压缩库，0 表示不进行压缩，1..9 是压缩速度与最终获得文件大小的不同程度的权衡，数字越大，压缩越慢，当然得到的文件会越小。
+
 
 
 ## DoTo
 
 1. [Git 最佳实践：分支管理](http://blog.jobbole.com/109466/)
+2. [git-config(1) Manual Page](https://mirrors.edge.kernel.org/pub/software/scm/git/docs/git-config.html)

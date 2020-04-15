@@ -131,7 +131,7 @@ make: *** [ninja_wrapper] Error 1>
 错误日志里边列出了问题并且已经给出了解决方案 - 增加Java虚拟机的`-Xmx<size>`，即设置一个较大的堆内存上限
 
 
-- 修改Jack的配置文件prebuilts/sdk/tools/jack-admin
+- 修改Jack的配置文件`prebuilts/sdk/tools/jack-admin`
 
 ```
 JACK_SERVER_COMMAND="java -XX:MaxJavaStackTraceDepth=-1 -Djava.io.tmpdir=$TMPDIR $JACK_SERVER_VM_ARGUMENTS -cp $LAUNCHER_JAR $LAUNCHER_NAME"
