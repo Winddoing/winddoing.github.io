@@ -103,6 +103,11 @@ WaylandEnable=false
 sudo apt install gnome-tweak-tool
 ```
 
+### 插件
+
+- `dash-to-panel`： 任务栏合并，类似window
+- `workspace-grid`： 多工作区
+
 ## 邮件
 
 Evolution
@@ -246,3 +251,10 @@ sudo apt-get install sqlitebrowser
 > 跨平台局域网传输软件
 
 - https://nitroshare.net/
+
+
+## Alt+Tab不跨工作区
+
+``` shell
+gsettings set org.gnome.shell.app-switcher current-workspace-only true
+```
