@@ -12,6 +12,28 @@ date: 2018-02-04 23:07:24
 
 <!--more-->
 
+## ${:-}变量的默认值
+
+``` shell
+NUM_THREADS=${NUM_THREADS:-4}
+```
+> 如果NUM_THREADS变量没有被定义，NUM_THREADS值将是`：-`后得默认值；如果NUM_THREADS变量被定义，NUM_THREADS值将定义值
+
+``` shell
+=====>$bash -v aa.sh
+#!/bin/bash
+NUM_THREADS=${NUM_THREADS:-4}
+echo "num-thread=$NUM_THREADS"
+num-thread=4
+
+=====>$bash -v aa.sh
+#!/bin/bash
+NUM_THREADS=8
+NUM_THREADS=${NUM_THREADS:-4}
+echo "num-thread=$NUM_THREADS"
+num-thread=8
+```
+
 ## 将逗号分隔的字符串转成换行
 
 ``` shell
