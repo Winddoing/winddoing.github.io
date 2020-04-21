@@ -15,3 +15,8 @@ void* glMapBuffer(GLenum target, GLenum access);
 ```
 
 > 将当前绑定target的缓存对象的整个数据区域映射到客户端的地址空间中。
+
+
+## 纹理
+
+> `纹理`是由纹素（texel）组成，其中通常包含颜色数据信息。
