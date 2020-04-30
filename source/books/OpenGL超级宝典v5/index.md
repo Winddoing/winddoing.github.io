@@ -13,7 +13,18 @@ comments: false
 `混合（Blending）`：将不同的颜色混合到一起
 
 `视口（ViewPort）`：把绘制坐标映射到窗口坐标
-`图元（Primitives）`：一维或二维的实体或表面，如点、线段、多边形，在2D或3D中绘制一个物体的组成
+`图元（Primitives）`：一维或二维的实体或表面，如点、线段、三角形、多边形，在2D或3D中绘制一个物体的组成
+
+
+## 缓冲区
+
+``` C
+glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+```
+> 颜色缓冲区、深度缓冲区、模板缓冲区
+
+- `颜色缓冲区`： 显示图像在内部存储的地方，如果清除会将屏幕上最后绘制的内容删除
+- `帧缓冲区（FrameBuffer）`： 指所有缓冲区一起串联工作
 
 ## 着色器
 
