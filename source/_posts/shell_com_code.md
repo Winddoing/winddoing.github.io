@@ -25,6 +25,7 @@ fi
 $SUD0 apt update -y
 ```
 > `EUID`: 在shell启动时被初始化的当前用户的有效ID,如果是root用户`EUID=0`
+> > shell命令`id -u`作用相同
 
 ## ${:-}变量的默认值
 
