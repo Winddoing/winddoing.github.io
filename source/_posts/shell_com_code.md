@@ -12,6 +12,20 @@ date: 2018-02-04 23:07:24
 
 <!--more-->
 
+## 判断是否使用sudo
+
+``` shell
+# root or not
+if [[ $EUID -ne 0 ]]; then
+  SUDO='sudo -H'
+else
+  SUDO=''
+fi
+
+$SUD0 apt update -y
+```
+> `EUID`: 在shell启动时被初始化的当前用户的有效ID,如果是root用户`EUID=0`
+
 ## ${:-}变量的默认值
 
 ``` shell
@@ -165,3 +179,4 @@ ip=`ifconfig | grep "inet " | grep -v "127.0.0.1"| awk '{print $2}'`
 ## 参考
 
 1. [shell中各种括号的作用()、(())、[]、[[]]、{}](http://blog.csdn.net/taiyang1987912/article/details/39551385)
+2. [shell变量详解](https://www.cnblogs.com/barrychiao/archive/2012/10/22/2733210.html)
