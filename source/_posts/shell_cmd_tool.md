@@ -13,6 +13,15 @@ abbrlink: 1644
 
 <!-- more -->
 
+
+## nproc
+
+> 获取可用CPU的数量
+
+``` shell
+nproc
+```
+
 ## apt build-dep
 
 ``` shell

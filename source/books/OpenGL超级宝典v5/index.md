@@ -31,13 +31,24 @@ glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 > 在图形硬件上执行的单独程序，用来处理顶点和光栅化任务
 
 着色器使用GLSL（OpenGL Shader Language）语言进行编程，
-着色器传递数据的方法三种：`属性`、`uniform`、`纹理`
+着色器传递数据的方法三种：`属性`、`uniform`、`纹理`,(为着色器程序提供所需的数据)
 
 ### 属性
 
+> 所谓属性就是一个对每个顶点都要做改变的数据元素（只作用于`顶点着色器`）
+
 属性值可以是`整数`、`浮点数`和`布尔类型`。属性总是以`四维向量`的形式进行内部存储的，分别是`x`、`y`、`z`、`w`，OpenGL中会将第4个`w`设置为1
 
-### uniform
+### uniform值
+
+> 对整批次的属性都取统一的单个值时，也就是它不变时，通过uniform变量设置
+
+
+### 示例
+
+```
+PFNGLCREATESHADERPROC
+```
 
 ## 纹理
 
