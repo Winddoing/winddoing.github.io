@@ -42,6 +42,25 @@ cc1: all warnings being treated as errors
 - `-pedantic`:
 
 
+## anbox-modules: binder ashmem
+
+
+### 编译binder
+
+``` shell
+root@server:# dkms install kernel/binder
+Error! DKMS tree already contains: anbox-binder-1
+You cannot add the same module/version combo more than once.
+root@server:# dkms remove anbox-binder/1 --all
+
+------------------------------
+Deleting module version: 1
+completely from the DKMS tree.
+------------------------------
+Done.
+```
+
+
 ## Android-for-anbox
 
 ### Download
