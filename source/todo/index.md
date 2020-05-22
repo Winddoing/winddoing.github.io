@@ -92,6 +92,7 @@ comments: true
 * [cpolar-ssh](https://dashboard.cpolar.com) —— winddoing登录电话
 * [华为开源平台](https://code.opensource.huaweicloud.com)
 * [华为开源镜像站](https://mirrors.huaweicloud.com/) —— atom等工具
+* [淘宝NPM镜像站](https://npm.taobao.org/mirrors) —— npm淘宝镜像（内含atom工具）
 * [SSR免费节点](https://lncn.org/)
 * [特殊符号](http://cn.piliapp.com/symbol/)
 * [UFO Test: Framerates](https://www.testufo.com) —— 测试屏幕刷新率
