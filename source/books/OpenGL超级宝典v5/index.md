@@ -26,6 +26,14 @@ glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 - `颜色缓冲区`： 显示图像在内部存储的地方，如果清除会将屏幕上最后绘制的内容删除
 - `帧缓冲区（FrameBuffer）`： 指所有缓冲区一起串联工作
 
+
+### 混合
+
+通常情况下OpenGL渲染时会把颜色值放到颜色缓冲区，混合发生在颜色缓冲区
+- `glEnable(GL_BLEND)`: 新的颜色会与已经存在的颜色值在颜色缓冲区中进行组合
+- `glDisable(GL_BLEND)`: 新的颜色值会完全覆盖原来的颜色值
+
+
 ## 着色器
 
 > 在图形硬件上执行的单独程序，用来处理顶点和光栅化任务
@@ -49,6 +57,7 @@ glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 ```
 PFNGLCREATESHADERPROC
 ```
+
 
 ## 纹理
 
