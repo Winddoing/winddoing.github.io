@@ -33,6 +33,18 @@ glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 - `glEnable(GL_BLEND)`: 新的颜色会与已经存在的颜色值在颜色缓冲区中进行组合
 - `glDisable(GL_BLEND)`: 新的颜色值会完全覆盖原来的颜色值
 
+颜色的组成由红、绿、蓝和可选的alpha成分，在任意情况下只要我们忽略一个alpha值，OpenGL都会将其设置为`1.0`
+
+``` C
+glBlendFunc(GLenum S, GLenum D)
+```
+> `S`,`D`:枚举值，分别是源和目标混合因子
+
+### 抗锯齿
+
+抗锯齿处理的优点是能够使多边形的边缘更为光滑，使渲染效果显得更为自然和逼真。
+
+- 多重采样
 
 ## 着色器
 
@@ -60,6 +72,8 @@ PFNGLCREATESHADERPROC
 
 
 ## 纹理
+
+### 纹理数据与着色器之间如何关联？
 
 
 ## 光栅化

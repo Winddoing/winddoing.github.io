@@ -182,9 +182,24 @@ Section "Screen"
 	EndSubSection
 EndSection
 ```
+> **注意**：在`xorg.conf`中配置显卡总线地址`BusID`时，必须以`十进制`表示，比如lspci总线地址（以十六进制显示）为`91:00.0`，将其转换为十进制`145:00:0`（16x9+1）配置在xorg.conf中。
 
+- `Driver`的选择必须根据使用的显卡和系统的支持情况配置,在系统不支持的情况下可以使用`modesetting`代替测试，不一定配置成功
+  - centos系统支持的驱动在`/lib64/xorg/modules/drivers/`
+    ``` shell
+    # ls /lib64/xorg/modules/drivers/
+    ati_drv.so  dummy_drv.so  fbdev_drv.so  modesetting_drv.so  nouveau_drv.so  qxl_drv.so  radeon_drv.so  v4l_drv.so
+    ```
+  - ubuntu系统支持的驱动在`/usr/lib/xorg/modules/drivers/`
+    ``` shell
+    ls /usr/lib/xorg/modules/drivers/
+    amdgpu_drv.so  ati_drv.so  fbdev_drv.so  intel_drv.so  modesetting_drv.so  nouveau_drv.so  qxl_drv.so  radeon_drv.so  vesa_drv.so  vmware_drv.so
+    ```
 
 ## 参数
+
+
+
 
 
 ## 应用示例
@@ -254,6 +269,15 @@ Section "Screen"
     EndSection
 ```
 
+## 启动
+
+``` shell
+startx -- -layout seat0 -seat seat0 -novtswitch -sharevts
+```
+> 参数详解： `man Xorg`
+
+- `-novtswitch `: 如果操作系统支持，请禁用自动启动服务器时将X服务器重置和关机自动切换到激活的VT的功能
+- `-sharevts`: 如果操作系统支持，则与另一个X服务器共享虚拟终端。
 
 ## 参考
 

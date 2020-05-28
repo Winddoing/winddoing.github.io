@@ -60,7 +60,13 @@ SUBSYSTEM=="pci", DEVPATH=="/devices/pci0000:00/0000:00:01.0/0000:01:00.0", TAG+
 SUBSYSTEM=="pci", DEVPATH=="/devices/pci0000:00/0000:00:02.0", TAG+="seat-3", TAG+="master-of-seat", ENV{ID_AUTOSEAT}="1", ENV{ID_SEAT}="seat-3"
 ···
 
+``` shell
+udevadm udevadm
+```
 
+``` shell
+sudo loginctl list-seats
+```
 
 
 ## 参考

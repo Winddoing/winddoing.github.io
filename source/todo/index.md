@@ -96,3 +96,4 @@ comments: true
 * [SSR免费节点](https://lncn.org/)
 * [特殊符号](http://cn.piliapp.com/symbol/)
 * [UFO Test: Framerates](https://www.testufo.com) —— 测试屏幕刷新率
+* [geogebra](https://www.geogebra.org/) —— 动态数学软件
