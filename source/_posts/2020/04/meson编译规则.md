@@ -20,15 +20,15 @@ categories:
 ```
 libgl_dep = dependency('GL')
 
-test_sources = [                                        
-   'test.c',                                                         
-   'test.h',                                                                                                                 
+test_sources = [
+   'test.c',
+   'test.h',
 ]
 
-test = executable(                                      
-   'test.out',                                              
-   test_sources,                                        
-   dependencies : [libsdl_dep, libgl_dep],       
-   install : true                                                    
+test = executable(
+   'test.out',
+   test_sources,
+   dependencies : [libsdl_dep, libgl_dep],
+   install : true
 )
 ```
