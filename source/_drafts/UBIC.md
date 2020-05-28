@@ -1,15 +1,12 @@
----
-abbrlink: 1
----
 # 鼠标
 
 ## R
 
 ```
-# ./hid-example 
+# ./hid-example
 Report Descriptor Size: 46
 Report Descriptor:
-5 1 9 2 a1 1 9 1 a1 0 5 9 19 1 29 3 15 0 25 1 95 8 75 1 81 2 5 1 9 30 9 31 9 38 15 81 25 7f 75 8 95 3 81 6 c0 c0 
+5 1 9 2 a1 1 9 1 a1 0 5 9 19 1 29 3 15 0 25 1 95 8 75 1 81 2 5 1 9 30 9 31 9 38 15 81 25 7f 75 8 95 3 81 6 c0 c0
 
 Raw Name: Logitech USB Optical Mouse
 Raw Phys: usb-f9890000.ehci-1.3/input0
@@ -30,18 +27,18 @@ read: Resource temporarily unavailable
 dinfo: bustype:[0x00000003], vendor:[0x046d], product:[0xffffc077]
 ===> func: uibc_get_device_info, line: 146, desc size=46
 ===> func: uibc_get_device_info, line: 155, size=46
-iocgrdesc: 5 1 9 2 a1 1 9 1 a1 0 5 9 19 1 29 3 15 0 25 1 95 8 75 1 81 2 5 1 9 30 9 31 9 38 15 81 25 7f 75 8 95 3 81 6 c0 c0 
+iocgrdesc: 5 1 9 2 a1 1 9 1 a1 0 5 9 19 1 29 3 15 0 25 1 95 8 75 1 81 2 5 1 9 30 9 31 9 38 15 81 25 7f 75 8 95 3 81 6 c0 c0
 
 ```
 
 ## PC
 
 ```
-=====>(master)$sudo ./hid-example 
-[sudo] password for wqshao: 
+=====>(master)$sudo ./hid-example
+[sudo] password for wqshao:
 Report Descriptor Size: 46
 Report Descriptor:
-5 1 9 2 a1 1 9 1 a1 0 5 9 19 1 29 3 15 0 25 1 95 8 75 1 81 2 5 1 9 30 9 31 9 38 15 81 25 7f 75 8 95 3 81 6 c0 c0 
+5 1 9 2 a1 1 9 1 a1 0 5 9 19 1 29 3 15 0 25 1 95 8 75 1 81 2 5 1 9 30 9 31 9 38 15 81 25 7f 75 8 95 3 81 6 c0 c0
 
 Raw Name: Logitech USB Optical Mouse
 Raw Phys: usb-0000:00:14.0-5.4/input0
@@ -68,17 +65,17 @@ usb_composite_probe
 	\->hid_bind
 		\->usb_add_config
 			\->do_config
-		
+
 do_config
 	\->hidg_bind_config
 		\->hidg_bind
-		
+
 hidg_bind
 	\->usb_ep_autoconfig
 		\->usb_ep_autoconfig_ss
 			list_for_each_entry (ep, &gadget->ep_list, ep_list){...}
             遍历ep_list只有一个ep，ep的初始化？？
-        
+
 
 
 ```
@@ -104,9 +101,9 @@ g_hid gadget: high-speed config #1: HID Gadget
 ===> func: uibc_thread, line: 182
 [vx_uibc.c 130] ubic recvfrom data ...
 uibc read socket data[len: 5]: BIT4~BIT0
-                00 fe 06 00 22 
+                00 fe 06 00 22
 rpt data[len: 4]: BIT3~BIT0
-                00 fe 06 00 
+                00 fe 06 00
 g_hid gadget: End Point Request ERROR: -108
 
 #########################################
@@ -119,9 +116,9 @@ g_hid gadget: high-speed config #1: HID Gadget
 ===> func: uibc_thread, line: 182
 [vx_uibc.c 130] ubic recvfrom data ...
 uibc read socket data[len: 5]: BIT4~BIT0
-                00 fc 09 00 22 
+                00 fc 09 00 22
 rpt data[len: 4]: BIT3~BIT0
-                00 fc 09 00 
+                00 fc 09 00
 ```
 
 
@@ -156,7 +153,7 @@ sudo modprobe usbmon
 ## S端USB线断开后再次接入时
 
 ```
-1. 
+1.
 g_hid gadget: End Point Request ERROR: -108
 
 2. ep的disable时，检测到ep的enable寄存器为1
@@ -171,8 +168,8 @@ g_hid gadget: high-speed config #1: HID Gadget
 
 ```
 #####
-static struct usb_gadget_driver composite_driver = {                          
-    .setup      = composite_setup,                                   
+static struct usb_gadget_driver composite_driver = {
+    .setup      = composite_setup,
 }
 dwc_otg_pcd_irq
  \->dwc_otg_pcd_handle_intr
@@ -195,7 +192,7 @@ dwc_otg_pcd_irq
 
 ```
  # ===> func: dwc_otg_pcd_ep_disable, line: 1638, depctl.b.epena=0
-Backtrace: 
+Backtrace:
 [<c0011fdc>] (dump_backtrace+0x0/0x110) from [<c03b2aa4>] (dump_stack+0x18/0x1c)
  r6:c3b03400 r5:c28fd084 r4:c28fd000 r3:c04ea900
 [<c03b2a8c>] (dump_stack+0x0/0x1c) from [<bf4c82f4>] (dwc_otg_pcd_ep_disable+0x11c/0x4e4 [dwc_otg])
@@ -250,6 +247,53 @@ g_hid gadget: high-speed config #1: HID Gadget
 hidg_set_alt: usb_ep_enable
 ```
 
+
+
+```C
++static int usb_ep_enable_done = 0;
++
+ static ssize_t f_hidg_write(struct file *file, const char __user *buffer,
+                            size_t count, loff_t *offp)
+ {
+        struct f_hidg *hidg  = file->private_data;
+        ssize_t status = -ENOMEM;
+
++       if (!usb_ep_enable_done)
++               return -ENODEV;
++
+        if (!access_ok(VERIFY_READ, buffer, count))
+                return -EFAULT;
+
+@@ -427,11 +461,13 @@ static int hidg_set_alt(struct usb_function *f, unsigned intf, unsigned alt)
+                        ERROR(cdev, "config_ep_by_speed FAILED!\n");
+                        goto fail;
+                }
++               printk("%s: usb_ep_enable\n", __func__);
+                status = usb_ep_enable(hidg->in_ep);
+                if (status < 0) {
+                        ERROR(cdev, "Enable endpoint FAILED!\n");
+                        goto fail;
+                }
++               usb_ep_enable_done = 1;
+                hidg->in_ep->driver_data = hidg;
+        }
+ fail:
+@@ -543,7 +579,9 @@ static void hidg_unbind(struct usb_configuration *c, struct usb_function *f)
+        cdev_del(&hidg->cdev);
+
+        /* disable/free request and end point */
++       printk("%s: usb_ep_disable\n", __func__);
+        usb_ep_disable(hidg->in_ep);
++       usb_ep_enable_done = 0;
+        usb_ep_dequeue(hidg->in_ep, hidg->req);
+        kfree(hidg->req->buf);
+        usb_ep_free_request(hidg->in_ep, hidg->req);
+```
+
+> Linux: kernel 3.10
+
+
+
 ## 多次插拔R端USB设备
 
 S端log
@@ -265,17 +309,17 @@ OTG VER PARAM: 0, OTG VER FLAG: 0
 Dedicated Tx FIFOs mode
 dinfo: bustype:[0x00000003], vendor:[0x046d], product:[0xffffc077]
 structure_func_desc report desc report_desc_length=46:
-0x05 0x01 0x09 0x02 0xa1 0x01 0x09 0x01 0xa1 0x00 0x05 0x09 0x19 0x01 0x29 0x03 
-0x15 0x00 0x25 0x01 0x95 0x08 0x75 0x01 0x81 0x02 0x05 0x01 0x09 0x30 0x09 0x31 
-0x09 0x38 0x15 0x81 0x25 0x7f 0x75 0x08 0x95 0x03 0x81 0x06 0xc0 0xc0 
+0x05 0x01 0x09 0x02 0xa1 0x01 0x09 0x01 0xa1 0x00 0x05 0x09 0x19 0x01 0x29 0x03
+0x15 0x00 0x25 0x01 0x95 0x08 0x75 0x01 0x81 0x02 0x05 0x01 0x09 0x30 0x09 0x31
+0x09 0x38 0x15 0x81 0x25 0x7f 0x75 0x08 0x95 0x03 0x81 0x06 0xc0 0xc0
 structure_func_desc: subclass=0, protocol=0, report_length=4, report_desc_length=46
 redefine_dev_id: idVendor=0x046d, idProduct=0xc077
 g_hid gadget: HID Gadget, version: 2010/03/16
 g_hid gadget: g_hid ready
 g_hid gadget: high-speed config #1: HID Gadget
 
-~ # 
-~ # 
+~ #
+~ #
 ~ # ===> func: vx_uibc_device_relese, line: 265, config=bf4fd678, set to NULL
 dwc_otg_ep_deactivate depctl before deactivate 004e8004
 dwc_otg_ep_deactivate depctl after deactivate 000e0004
@@ -284,7 +328,7 @@ WARN::dwc_otg_pcd_ep_dequeue:2364: bad argument
 dwc_otg_driver_cleanup()
 dwc_otg module removed
 
-~ # 
+~ #
 ~ # dwc_otg: version 3.00a 10-AUG-2012
 Core Release: 3.10a
 Setting default values for core params
@@ -295,9 +339,9 @@ OTG VER PARAM: 0, OTG VER FLAG: 0
 Dedicated Tx FIFOs mode
 dinfo: bustype:[0x00000003], vendor:[0x046d], product:[0xffffc077]
 structure_func_desc report desc report_desc_length=46:
-0x05 0x01 0x09 0x02 0xa1 0x01 0x09 0x01 0xa1 0x00 0x05 0x09 0x19 0x01 0x29 0x03 
-0x15 0x00 0x25 0x01 0x95 0x08 0x75 0x01 0x81 0x02 0x05 0x01 0x09 0x30 0x09 0x31 
-0x09 0x38 0x15 0x81 0x25 0x7f 0x75 0x08 0x95 0x03 0x81 0x06 0xc0 0xc0 
+0x05 0x01 0x09 0x02 0xa1 0x01 0x09 0x01 0xa1 0x00 0x05 0x09 0x19 0x01 0x29 0x03
+0x15 0x00 0x25 0x01 0x95 0x08 0x75 0x01 0x81 0x02 0x05 0x01 0x09 0x30 0x09 0x31
+0x09 0x38 0x15 0x81 0x25 0x7f 0x75 0x08 0x95 0x03 0x81 0x06 0xc0 0xc0
 structure_func_desc: subclass=0, protocol=0, report_length=4, report_desc_length=46
 redefine_dev_id: idVendor=0x046d, idProduct=0xc077
 g_hid gadget: HID Gadget, version: 2010/03/16
@@ -422,7 +466,7 @@ df80: b6ea08dc b6ea1538 b6f80870 b6f9a404 00000004 c000e2e8 00000000 c3acdfa8
 dfa0: c000e140 c00945e0 b6ea1538 b6f80870 00000005 b6ea08ed 00000004 00000004
 dfc0: b6ea1538 b6f80870 b6f9a404 00000004 b6ea1040 00800000 00000000 b6ea0eec
 dfe0: 00000002 b6ea0840 b6ea14d0 b6ef2f64 60000010 00000005 ffffffff ffffffff
-Backtrace: 
+Backtrace:
 [<bf517878>] (ep_queue+0x0/0x2e8 [dwc_otg]) from [<bf54b798>] (f_hidg_write+0x198/0x27c [g_hid])
  r9:c3acc000 r8:00000001 r7:c288561c r6:c3acc000 r5:00000000
 r4:c2885600
@@ -431,11 +475,11 @@ r4:c2885600
  r8:00000004 r7:b6ea08ed r6:c29afb80 r5:00000000 r4:00000000
 [<c00945d4>] (sys_write+0x0/0x80) from [<c000e140>] (ret_fast_syscall+0x0/0x30)
  r8:c000e2e8 r7:00000004 r6:b6f9a404 r5:b6f80870 r4:b6ea1538
-Code: e5953000 eaffffa6 e5990000 e1a01006 (e5de2011) 
+Code: e5953000 eaffffa6 e5990000 e1a01006 (e5de2011)
 ---[ end trace 1efce3c99afbee53 ]---
 g_hid gadget: high-speed config #1: HID Gadget
 
-CTRL-A Z for help | 115200 8N1 | NOR | Minicom 2.7.1 | VT102 | Offline | ttyUSB0                                                                                                                                                       
+CTRL-A Z for help | 115200 8N1 | NOR | Minicom 2.7.1 | VT102 | Offline | ttyUSB0
 
 ```
 
@@ -444,7 +488,7 @@ CTRL-A Z for help | 115200 8N1 | NOR | Minicom 2.7.1 | VT102 | Offline | ttyUSB0
 
 
 ```
-0x09 0x38 0x15 0x81 0x25 0x7f 0x75 0x08 0x95 0x03 0x81 0x06 0xc0 0xc0 
+0x09 0x38 0x15 0x81 0x25 0x7f 0x75 0x08 0x95 0x03 0x81 0x06 0xc0 0xc0
 structure_func_desc: subclass=0, protocol=0, report_length=4, report_desc_length=46
 redefine_dev_id: idVendor=0x046d, idProduct=0xc077
 g_hid gadget: HID Gadget, version: 2010/03/16
@@ -467,9 +511,9 @@ OTG VER PARAM: 0, OTG VER FLAG: 0
 Dedicated Tx FIFOs mode
 dinfo: bustype:[0x00000003], vendor:[0x046d], product:[0xffffc077]
 structure_func_desc report desc report_desc_length=46:
-0x05 0x01 0x09 0x02 0xa1 0x01 0x09 0x01 0xa1 0x00 0x05 0x09 0x19 0x01 0x29 0x03 
-0x15 0x00 0x25 0x01 0x95 0x08 0x75 0x01 0x81 0x02 0x05 0x01 0x09 0x30 0x09 0x31 
-0x09 0x38 0x15 0x81 0x25 0x7f 0x75 0x08 0x95 0x03 0x81 0x06 0xc0 0xc0 
+0x05 0x01 0x09 0x02 0xa1 0x01 0x09 0x01 0xa1 0x00 0x05 0x09 0x19 0x01 0x29 0x03
+0x15 0x00 0x25 0x01 0x95 0x08 0x75 0x01 0x81 0x02 0x05 0x01 0x09 0x30 0x09 0x31
+0x09 0x38 0x15 0x81 0x25 0x7f 0x75 0x08 0x95 0x03 0x81 0x06 0xc0 0xc0
 structure_func_desc: subclass=0, protocol=0, report_length=4, report_desc_length=46
 redefine_dev_id: idVendor=0x046d, idProduct=0xc077
 g_hid gadget: HID Gadget, version: 2010/03/16
@@ -492,9 +536,9 @@ OTG VER PARAM: 0, OTG VER FLAG: 0
 Dedicated Tx FIFOs mode
 dinfo: bustype:[0x00000003], vendor:[0x046d], product:[0xffffc077]
 structure_func_desc report desc report_desc_length=46:
-0x05 0x01 0x09 0x02 0xa1 0x01 0x09 0x01 0xa1 0x00 0x05 0x09 0x19 0x01 0x29 0x03 
-0x15 0x00 0x25 0x01 0x95 0x08 0x75 0x01 0x81 0x02 0x05 0x01 0x09 0x30 0x09 0x31 
-0x09 0x38 0x15 0x81 0x25 0x7f 0x75 0x08 0x95 0x03 0x81 0x06 0xc0 0xc0 
+0x05 0x01 0x09 0x02 0xa1 0x01 0x09 0x01 0xa1 0x00 0x05 0x09 0x19 0x01 0x29 0x03
+0x15 0x00 0x25 0x01 0x95 0x08 0x75 0x01 0x81 0x02 0x05 0x01 0x09 0x30 0x09 0x31
+0x09 0x38 0x15 0x81 0x25 0x7f 0x75 0x08 0x95 0x03 0x81 0x06 0xc0 0xc0
 structure_func_desc: subclass=0, protocol=0, report_length=4, report_desc_length=46
 redefine_dev_id: idVendor=0x046d, idProduct=0xc077
 g_hid gadget: HID Gadget, version: 2010/03/16
@@ -691,7 +735,7 @@ df80: b6eb58dc b6eb6538 b6f95870 b6faf404 00000004 c000e2e8 00000000 c293dfa8
 dfa0: c000e140 c00945e0 b6eb6538 b6f95870 00000005 b6eb58ed 00000004 00000004
 dfc0: b6eb6538 b6f95870 b6faf404 00000004 b6eb6040 00800000 00000000 b6eb5eec
 dfe0: 00000002 b6eb5840 b6eb64d0 b6f07f64 60000010 00000005 00000000 00000126
-Backtrace: 
+Backtrace:
 [<bf74e878>] (ep_queue+0x0/0x2e8 [dwc_otg]) from [<bf782798>] (f_hidg_write+0x198/0x27c [g_hid])
  r9:c293c000 r8:00000001 r7:c290741c r6:c293c000 r5:00000000
 r4:c2907400
@@ -700,11 +744,11 @@ r4:c2907400
  r8:00000004 r7:b6eb58ed r6:c28f0080 r5:00000000 r4:00000000
 [<c00945d4>] (sys_write+0x0/0x80) from [<c000e140>] (ret_fast_syscall+0x0/0x30)
  r8:c000e2e8 r7:00000004 r6:b6faf404 r5:b6f95870 r4:b6eb6538
-Code: e5953000 eaffffa6 e5990000 e1a01006 (e5de2011) 
+Code: e5953000 eaffffa6 e5990000 e1a01006 (e5de2011)
 ---[ end trace 4ab9b1fb1790566f ]---
 g_hid gadget: high-speed config #1: HID Gadget
 
-CTRL-A Z for help | 115200 8N1 | NOR | Minicom 2.7.1 | VT102 | Offline | ttyUSB0                                                                                                                                                    
+CTRL-A Z for help | 115200 8N1 | NOR | Minicom 2.7.1 | VT102 | Offline | ttyUSB0
 ```
 
 
@@ -712,28 +756,28 @@ CTRL-A Z for help | 115200 8N1 | NOR | Minicom 2.7.1 | VT102 | Offline | ttyUSB0
 ### WARN::ep_queue:376: bogus device state
 
 ```
-static int ep_queue(struct usb_ep *usb_ep, struct usb_request *usb_req,  
-            gfp_t gfp_flags)                                             
+static int ep_queue(struct usb_ep *usb_ep, struct usb_request *usb_req,
+            gfp_t gfp_flags)
 {
 	...
-	if (!gadget_wrapper->driver ||                                           
-    	gadget_wrapper->gadget.speed == USB_SPEED_UNKNOWN) {                 
-     	DWC_DEBUGPL(DBG_PCDV, "gadget.speed=%d\n",                           
-             	gadget_wrapper->gadget.speed);                               
-     	DWC_WARN("bogus device state\n");                                    
-     	return -ESHUTDOWN;                                                   
+	if (!gadget_wrapper->driver ||
+    	gadget_wrapper->gadget.speed == USB_SPEED_UNKNOWN) {
+     	DWC_DEBUGPL(DBG_PCDV, "gadget.speed=%d\n",
+             	gadget_wrapper->gadget.speed);
+     	DWC_WARN("bogus device state\n");
+     	return -ESHUTDOWN;
  	}
  	...
 }
-.queue = ep_queue, 
+.queue = ep_queue,
  USB的速度没有设置，其设置的位置
- 
- static int _connect(dwc_otg_pcd_t *pcd, int speed)               
-{                                                                
-    gadget_wrapper->gadget.speed = speed;                        
-    return 0;                                                    
-}                                                                
-.connect = _connect,  
+
+ static int _connect(dwc_otg_pcd_t *pcd, int speed)
+{
+    gadget_wrapper->gadget.speed = speed;
+    return 0;
+}
+.connect = _connect,
 二者属于异步操作，启动其执行流程，和可能出现错误的原因
 ```
 
@@ -752,7 +796,7 @@ f_hidg_write -- f_hid.c
 ### 设置speed
 
 ```
-request_irq(_dev->resource[1].start, dwc_otg_pcd_irq,IRQF_SHARED | IRQF_DISABLED, 
+request_irq(_dev->resource[1].start, dwc_otg_pcd_irq,IRQF_SHARED | IRQF_DISABLED,
  \->dwc_otg_pcd_irq
      \->dwc_otg_pcd_handle_intr -- gintr_status.b.enumdone true
          \-> dwc_otg_pcd_handle_enum_done_intr
@@ -780,10 +824,10 @@ f_hidg_write -- f_hid.c
  static struct usb_ep_ops dwc_otg_pcd_ep_ops = {
  	.enable = ep_enable
  }
- 
+
  hidg_set_alt -- ???
   \->usb_ep_enable
-       \->ep->ops->enable(ep, ep->desc); 
+       \->ep->ops->enable(ep, ep->desc);
        	   \->dwc_otg_pcd_ep_enable
        	      \->ep->priv = usb_ep;
 ```
@@ -791,12 +835,12 @@ f_hidg_write -- f_hid.c
 hidg_set_alt
 
 ```
-static struct usb_gadget_driver composite_driver = {                                         
-    .setup      = composite_setup,                                                       
-};                                                                        
+static struct usb_gadget_driver composite_driver = {
+    .setup      = composite_setup,
+};
 composite_setup -- USB_REQ_SET_CONFIGURATION
  \->set_config
-     \->f->set_alt(f, tmp, 0); 
+     \->f->set_alt(f, tmp, 0);
         \->hidg_set_alt
 ```
 
@@ -817,9 +861,9 @@ Dedicated Tx FIFOs mode
 ===> func: gadget_add_eps, line: 1055
 dinfo: bustype:[0x00000003], vendor:[0x046d], product:[0xffffc077]
 structure_func_desc report desc report_desc_length=46:
-0x05 0x01 0x09 0x02 0xa1 0x01 0x09 0x01 0xa1 0x00 0x05 0x09 0x19 0x01 0x29 0x03 
-0x15 0x00 0x25 0x01 0x95 0x08 0x75 0x01 0x81 0x02 0x05 0x01 0x09 0x30 0x09 0x31 
-0x09 0x38 0x15 0x81 0x25 0x7f 0x75 0x08 0x95 0x03 0x81 0x06 0xc0 0xc0 
+0x05 0x01 0x09 0x02 0xa1 0x01 0x09 0x01 0xa1 0x00 0x05 0x09 0x19 0x01 0x29 0x03
+0x15 0x00 0x25 0x01 0x95 0x08 0x75 0x01 0x81 0x02 0x05 0x01 0x09 0x30 0x09 0x31
+0x09 0x38 0x15 0x81 0x25 0x7f 0x75 0x08 0x95 0x03 0x81 0x06 0xc0 0xc0
 structure_func_desc: subclass=0, protocol=0, report_length=4, report_desc_length=46
 redefine_dev_id: idVendor=0x046d, idProduct=0xc077
 g_hid gadget: HID Gadget, version: 2010/03/16
@@ -848,9 +892,9 @@ Dedicated Tx FIFOs mode
 ===> func: gadget_add_eps, line: 1055
 dinfo: bustype:[0x00000003], vendor:[0x046d], product:[0xffffc077]
 structure_func_desc report desc report_desc_length=46:
-0x05 0x01 0x09 0x02 0xa1 0x01 0x09 0x01 0xa1 0x00 0x05 0x09 0x19 0x01 0x29 0x03 
-0x15 0x00 0x25 0x01 0x95 0x08 0x75 0x01 0x81 0x02 0x05 0x01 0x09 0x30 0x09 0x31 
-0x09 0x38 0x15 0x81 0x25 0x7f 0x75 0x08 0x95 0x03 0x81 0x06 0xc0 0xc0 
+0x05 0x01 0x09 0x02 0xa1 0x01 0x09 0x01 0xa1 0x00 0x05 0x09 0x19 0x01 0x29 0x03
+0x15 0x00 0x25 0x01 0x95 0x08 0x75 0x01 0x81 0x02 0x05 0x01 0x09 0x30 0x09 0x31
+0x09 0x38 0x15 0x81 0x25 0x7f 0x75 0x08 0x95 0x03 0x81 0x06 0xc0 0xc0
 structure_func_desc: subclass=0, protocol=0, report_length=4, report_desc_length=46
 redefine_dev_id: idVendor=0x046d, idProduct=0xc077
 g_hid gadget: HID Gadget, version: 2010/03/16
@@ -912,7 +956,7 @@ WARNING: at drivers/usb/gadget/hi_hs_dev/dwc_otg_pcd_linux.c:404 ep_queue+0x16c/
 Modules linked in: g_hid dwc_otg hi_gpio_key(O) hi_gpio_led(O) hi_mipi(O) hi3516a_adec(PO) hi3516a_aenc(PO) hi3516a_ao(PO) hi3516a_ai(PO) hi3516a_aio(PO) acodec(PO) adv76xx piris(O) pwm(O) hi3516a_ive(PO) hi3516a_vda(PO) hi3516a_jpe
 ge(PO) hi3516a_h265e(PO) hi3516a_h264e(PO) hi3516a_chnl(PO) hi3516a_venc(PO) hi3516a_rc(PO) hifb(PO) hi3516a_vou(PO) hi3516a_vpss(PO) hi3516a_viu(PO) hi3516a_isp(PO) hi3516a_vgs(PO) hi3516a_region(PO) hi3516a_tde(PO) hi3516a_sys(PO)
  hi3516a_base(PO) hi_media(O) mmz(O) bcmdhd [last unloaded: dwc_otg]
-Backtrace: 
+Backtrace:
 [<c0011fdc>] (dump_backtrace+0x0/0x110) from [<c03b2aa4>] (dump_stack+0x18/0x1c)
  r6:bf5b9a10 r5:00000009 r4:00000000 r3:c04ea900
 [<c03b2a8c>] (dump_stack+0x0/0x1c) from [<c001c204>] (warn_slowpath_common+0x5c/0x6c)
@@ -1040,18 +1084,18 @@ Stack: (0xc3ad7eb0 to 0xc3ad8000)
 7fa0: c000e140 c00945e0 b6e50538 b6f2f870 00000005 b6e4f8ed 00000004 00000004
 7fc0: b6e50538 b6f2f870 b6f49404 00000004 b6e50040 00800000 00000000 b6e4feec
 7fe0: 00000002 b6e4f850 b6e504d0 b6ea1f64 60000010 00000005 00000000 00000000
-Backtrace: 
+Backtrace:
 [<bf5b98a4>] (ep_queue+0x0/0x374 [dwc_otg]) from [<bf5ed7f0>] (f_hidg_write+0x1ac/0x304 [g_hid])
 [<bf5ed644>] (f_hidg_write+0x0/0x304 [g_hid]) from [<c0094300>] (vfs_write+0xa4/0x150)
 [<c009425c>] (vfs_write+0x0/0x150) from [<c0094614>] (sys_write+0x40/0x80)
  r8:00000004 r7:b6e4f8ed r6:c296a580 r5:00000000 r4:00000000
 [<c00945d4>] (sys_write+0x0/0x80) from [<c000e140>] (ret_fast_syscall+0x0/0x30)
  r8:c000e2e8 r7:00000004 r6:b6f49404 r5:b6f2f870 r4:b6e50538
-Code: eb298a20 e3a0e000 e5990000 e1a01006 (e5de2011) 
+Code: eb298a20 e3a0e000 e5990000 e1a01006 (e5de2011)
 ---[ end trace fee705e27e6703b6 ]---
 [sched_delayed] sched: RT throttling activated
 
-CTRL-A Z for help | 115200 8N1 | NOR | Minicom 2.7.1 | VT102 | Offline | ttyUSB0                                                                                                                                                     
+CTRL-A Z for help | 115200 8N1 | NOR | Minicom 2.7.1 | VT102 | Offline | ttyUSB0
 ```
 
 
@@ -1119,33 +1163,33 @@ CTRL-A Z for help | 115200 8N1 | NOR | Minicom 2.7.1 | VT102 | Offline | ttyUSB0
 # R usb
 
 ```
-#                                                                         
-# USB Host Controller Drivers                                             
-#                                                                         
-# CONFIG_USB_C67X00_HCD is not set                                        
-CONFIG_USB_XHCI_HCD=y                                                     
-CONFIG_USB_XHCI_PCI=y                                                     
-CONFIG_USB_XHCI_PLATFORM=m                                                
-CONFIG_USB_XHCI_HISILICON=m                                               
-CONFIG_USB_EHCI_HCD=y                                                     
-# CONFIG_USB_EHCI_ROOT_HUB_TT is not set                                  
-CONFIG_USB_EHCI_TT_NEWSCHED=y                                             
-CONFIG_USB_EHCI_PCI=y                                                     
-CONFIG_USB_EHCI_HCD_PLATFORM=m                                            
-# CONFIG_USB_OXU210HP_HCD is not set                                      
-# CONFIG_USB_ISP116X_HCD is not set                                       
-# CONFIG_USB_ISP1760_HCD is not set                                       
-# CONFIG_USB_ISP1362_HCD is not set                                       
-# CONFIG_USB_FUSBH200_HCD is not set                                      
-# CONFIG_USB_FOTG210_HCD is not set                                       
-# CONFIG_USB_MAX3421_HCD is not set                                       
-CONFIG_USB_OHCI_HCD=y                                                     
-CONFIG_USB_OHCI_HCD_PCI=y                                                 
-CONFIG_USB_OHCI_HCD_PLATFORM=m                                            
-# CONFIG_USB_UHCI_HCD is not set                                          
-# CONFIG_USB_SL811_HCD is not set                                         
-# CONFIG_USB_R8A66597_HCD is not set                                      
-# CONFIG_USB_HCD_TEST_MODE is not set                                     
+#
+# USB Host Controller Drivers
+#
+# CONFIG_USB_C67X00_HCD is not set
+CONFIG_USB_XHCI_HCD=y
+CONFIG_USB_XHCI_PCI=y
+CONFIG_USB_XHCI_PLATFORM=m
+CONFIG_USB_XHCI_HISILICON=m
+CONFIG_USB_EHCI_HCD=y
+# CONFIG_USB_EHCI_ROOT_HUB_TT is not set
+CONFIG_USB_EHCI_TT_NEWSCHED=y
+CONFIG_USB_EHCI_PCI=y
+CONFIG_USB_EHCI_HCD_PLATFORM=m
+# CONFIG_USB_OXU210HP_HCD is not set
+# CONFIG_USB_ISP116X_HCD is not set
+# CONFIG_USB_ISP1760_HCD is not set
+# CONFIG_USB_ISP1362_HCD is not set
+# CONFIG_USB_FUSBH200_HCD is not set
+# CONFIG_USB_FOTG210_HCD is not set
+# CONFIG_USB_MAX3421_HCD is not set
+CONFIG_USB_OHCI_HCD=y
+CONFIG_USB_OHCI_HCD_PCI=y
+CONFIG_USB_OHCI_HCD_PLATFORM=m
+# CONFIG_USB_UHCI_HCD is not set
+# CONFIG_USB_SL811_HCD is not set
+# CONFIG_USB_R8A66597_HCD is not set
+# CONFIG_USB_HCD_TEST_MODE is not set
 ```
 
 
@@ -1161,18 +1205,18 @@ hi_hs_dev：
 
 
 ```
-/**                                                            
- * States of EP0.                                              
- */                                                            
-typedef enum ep0_state {                                       
-    EP0_DISCONNECT,     /* no host */                          
-    EP0_IDLE,                                                  
-    EP0_IN_DATA_PHASE,                                         
-    EP0_OUT_DATA_PHASE,                                        
-    EP0_IN_STATUS_PHASE,                                       
-    EP0_OUT_STATUS_PHASE,                                      
-    EP0_STALL,                                                 
-} ep0state_e;                                                  
+/**
+ * States of EP0.
+ */
+typedef enum ep0_state {
+    EP0_DISCONNECT,     /* no host */
+    EP0_IDLE,
+    EP0_IN_DATA_PHASE,
+    EP0_OUT_DATA_PHASE,
+    EP0_IN_STATUS_PHASE,
+    EP0_OUT_STATUS_PHASE,
+    EP0_STALL,
+} ep0state_e;
 ```
 
 PC端获取Report Description时，ep0的状态变化：
@@ -1188,10 +1232,10 @@ PC端获取Report Description时，ep0的状态变化：
 HID Gadget: hid_setup crtl_request : bRequestType:0x81 bRequest:0x6 Value:0x2200
 HID Gadget: USB_REQ_GET_DESCRIPTOR: REPORT
 hidg_setup report desc report_desc_length=64:
-0x05 0x01 0x09 0x02 0xa1 0x01 0x09 0x01 0xa1 0x00 0x05 0x09 0x19 0x01 0x29 0x03 
-0x15 0x00 0x25 0x01 0x95 0x03 0x75 0x01 0x81 0x02 0x95 0x01 0x75 0x05 0x81 0x01 
-0x05 0x01 0x09 0x30 0x09 0x31 0x16 0x01 0x80 0x26 0xff 0x7f 0x75 0x10 0x95 0x02 
-0x81 0x06 0x09 0x38 0x15 0x81 0x25 0x7f 0x75 0x08 0x95 0x01 0x81 0x06 0xc0 0xc0 
+0x05 0x01 0x09 0x02 0xa1 0x01 0x09 0x01 0xa1 0x00 0x05 0x09 0x19 0x01 0x29 0x03
+0x15 0x00 0x25 0x01 0x95 0x03 0x75 0x01 0x81 0x02 0x95 0x01 0x75 0x05 0x81 0x01
+0x05 0x01 0x09 0x30 0x09 0x31 0x16 0x01 0x80 0x26 0xff 0x7f 0x75 0x10 0x95 0x02
+0x81 0x06 0x09 0x38 0x15 0x81 0x25 0x7f 0x75 0x08 0x95 0x01 0x81 0x06 0xc0 0xc0
 
 ===> func: ep_queue, line: 420, retval=0
 ===> func: ep_queue, line: 425
@@ -1215,9 +1259,9 @@ hidg_setup report desc report_desc_length=64:
 HID Gadget: hid_setup crtl_request : bRequestType:0x81 bRequest:0x6 Value:0x2200
 HID Gadget: USB_REQ_GET_DESCRIPTOR: REPORT
 hidg_setup report desc report_desc_length=46:
-0x05 0x01 0x09 0x02 0xa1 0x01 0x09 0x01 0xa1 0x00 0x05 0x09 0x19 0x01 0x29 0x03 
-0x15 0x00 0x25 0x01 0x95 0x08 0x75 0x01 0x81 0x02 0x05 0x01 0x09 0x30 0x09 0x31 
-0x09 0x38 0x15 0x81 0x25 0x7f 0x75 0x08 0x95 0x03 0x81 0x06 0xc0 0xc0 
+0x05 0x01 0x09 0x02 0xa1 0x01 0x09 0x01 0xa1 0x00 0x05 0x09 0x19 0x01 0x29 0x03
+0x15 0x00 0x25 0x01 0x95 0x08 0x75 0x01 0x81 0x02 0x05 0x01 0x09 0x30 0x09 0x31
+0x09 0x38 0x15 0x81 0x25 0x7f 0x75 0x08 0x95 0x03 0x81 0x06 0xc0 0xc0
 ===> func: ep_queue, line: 420, retval=0
 ===> func: ep_queue, line: 425
 ===> func: hidg_setup, line: 447, status=0
@@ -1238,24 +1282,24 @@ DATA_IN EP0-IN: type=0, mps=64
 ### dwc中断
 
 ```
- DWC_DEBUGPL(DBG_ANY, "registering handler for irq%d\n", _dev->resource[1].start);           
- retval = request_irq(_dev->resource[1].start, dwc_otg_pcd_irq,                             
-              IRQF_SHARED | IRQF_DISABLED,  
-              gadget_wrapper->gadget.name, otg_dev->pcd);   
+ DWC_DEBUGPL(DBG_ANY, "registering handler for irq%d\n", _dev->resource[1].start);
+ retval = request_irq(_dev->resource[1].start, dwc_otg_pcd_irq,
+              IRQF_SHARED | IRQF_DISABLED,
+              gadget_wrapper->gadget.name, otg_dev->pcd);
 ```
 
 ```
-static irqreturn_t dwc_otg_pcd_irq(int irq, void *dev)                 
-{                                                                      
-    dwc_otg_pcd_t *pcd = dev;                                          
-    int32_t retval = IRQ_NONE;                                         
-                                                                       
-    retval = dwc_otg_pcd_handle_intr(pcd);                             
-    if (retval != 0)                                                   
-        S3C2410X_CLEAR_EINTPEND();                                     
-                                                                       
-    return IRQ_RETVAL(retval);                                         
-}                                                                      
+static irqreturn_t dwc_otg_pcd_irq(int irq, void *dev)
+{
+    dwc_otg_pcd_t *pcd = dev;
+    int32_t retval = IRQ_NONE;
+
+    retval = dwc_otg_pcd_handle_intr(pcd);
+    if (retval != 0)
+        S3C2410X_CLEAR_EINTPEND();
+
+    return IRQ_RETVAL(retval);
+}
 ```
 
 
@@ -1265,22 +1309,22 @@ static irqreturn_t dwc_otg_pcd_irq(int irq, void *dev)
 1. inepint
 
 ```
- if (gintr_status.b.inepint) {                            
-     if (!core_if->multiproc_int_enable)                  
-         retval |= dwc_otg_pcd_handle_in_ep_intr(pcd);    
-                                                          
- }                                                        
+ if (gintr_status.b.inepint) {
+     if (!core_if->multiproc_int_enable)
+         retval |= dwc_otg_pcd_handle_in_ep_intr(pcd);
+
+ }
 ```
 
 2. outepint
 
 ```
-if (gintr_status.b.outepintr) {                                     
-    otg_usbhost_stat = 1;                                           
-    if (!core_if->multiproc_int_enable)                             
-        retval |= dwc_otg_pcd_handle_out_ep_intr(pcd);              
-                                                                    
-}                                                                   
+if (gintr_status.b.outepintr) {
+    otg_usbhost_stat = 1;
+    if (!core_if->multiproc_int_enable)
+        retval |= dwc_otg_pcd_handle_out_ep_intr(pcd);
+
+}
 ```
 
 > thinkpad鼠标无法枚举主要是Device端没有检测到outepint中断
@@ -1308,10 +1352,10 @@ OTG VER PARAM: 0, OTG VER FLAG: 0
 Dedicated Tx FIFOs mode
 dinfo: bustype:[0x00000003], vendor:[0x10c4], product:[0xffff8108]
 structure_func_desc report desc report_desc_length=64:
-0x05 0x01 0x09 0x02 0xa1 0x01 0x09 0x01 0xa1 0x00 0x05 0x09 0x19 0x01 0x29 0x03 
-0x15 0x00 0x25 0x01 0x95 0x03 0x75 0x01 0x81 0x02 0x95 0x01 0x75 0x05 0x81 0x01 
-0x05 0x01 0x09 0x30 0x09 0x31 0x16 0x01 0x80 0x26 0xff 0x7f 0x75 0x10 0x95 0x02 
-0x81 0x06 0x09 0x38 0x15 0x81 0x25 0x7f 0x75 0x08 0x95 0x01 0x81 0x06 0xc0 0xc0 
+0x05 0x01 0x09 0x02 0xa1 0x01 0x09 0x01 0xa1 0x00 0x05 0x09 0x19 0x01 0x29 0x03
+0x15 0x00 0x25 0x01 0x95 0x03 0x75 0x01 0x81 0x02 0x95 0x01 0x75 0x05 0x81 0x01
+0x05 0x01 0x09 0x30 0x09 0x31 0x16 0x01 0x80 0x26 0xff 0x7f 0x75 0x10 0x95 0x02
+0x81 0x06 0x09 0x38 0x15 0x81 0x25 0x7f 0x75 0x08 0x95 0x01 0x81 0x06 0xc0 0xc0
 
 structure_func_desc: subclass=1, protocol=2, report_length=8, report_desc_length=64
 redefine_dev_id: idVendor=0x10c4, idProduct=0x8108
