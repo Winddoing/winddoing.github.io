@@ -13,6 +13,44 @@ abbrlink: 1644
 
 <!-- more -->
 
+## 数据销毁和日志清理
+
+### bleachbit
+
+> bleachbit 是一款开源免费的系统清理工具，功能类似 Windows 平台的 CCleaner
+
+
+### shred
+
+> shred 功能简单的说就是涂鸦，把一个文件用随机的字符码篡改的一塌糊涂。其宗旨就是更安全地帮助删除一个机密文件
+
+### wipe
+
+> 可安全地删除磁存储器中的文件，后续无法恢复已删除文件或目录的内容。
+
+## CPU信息
+
+- lscpu
+- lshw
+
+``` shell
+# lscpu
+...
+Byte Order:            Little Endian
+CPU(s):                256
+On-line CPU(s) list:   0-255
+Thread(s) per core:    4
+Core(s) per socket:    32
+Socket(s):             2
+NUMA node(s):          2
+Model:                 1
+CPU max MHz:           2500.0000
+CPU min MHz:           1000.0000
+BogoMIPS:              400.00
+```
+- `socket`: 主板上插CPU槽的数量
+- `core`: CPU上的核数(物理核)
+- `thread`: core上的硬件线程数(逻辑核)
 
 ## nproc
 
