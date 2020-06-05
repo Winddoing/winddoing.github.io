@@ -284,3 +284,4 @@ startx -- -layout seat0 -seat seat0 -novtswitch -sharevts
 - [X,X11,Xorg,XServer,XClient,Xlib](https://blog.csdn.net/a379039233/article/details/80782351)
 - [Linux学习-X Server 配置文件解析与设定](https://www.cnblogs.com/uetucci/p/7794335.html)
 - [xorg的配置文件](https://blog.csdn.net/seaship/article/details/95481154)
+- [xorg.conf 配置详解](https://blog.csdn.net/ohappytime/article/details/7384001)
