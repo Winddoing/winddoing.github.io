@@ -340,6 +340,23 @@ git remote add origin <GIT-URL>
 git push origin master #--all
 ```
 
+## 修改已提交的用户名和邮箱
+
+``` shell
+git filter-branch --commit-filter '
+if [ "$GIT_AUTHOR_EMAIL" = "old_email@email.com" ];
+then
+    GIT_AUTHOR_NAME="new_name";
+    GIT_AUTHOR_EMAIL="new_email@email.com";
+    git commit-tree "$@";
+else
+    git commit-tree "$@";
+    fi' HEAD
+```
+>**注**:可以修改但是在github中还是可以看到之前的用户名,效果不太好
+
+- [7.6 Git 工具 - 重写历史](https://git-scm.com/book/zh/v2/Git-%E5%B7%A5%E5%85%B7-%E9%87%8D%E5%86%99%E5%8E%86%E5%8F%B2)
+
 ## 命令行工具——tig
 
 - commit操作： `上/下键`可以选择log中的commit
