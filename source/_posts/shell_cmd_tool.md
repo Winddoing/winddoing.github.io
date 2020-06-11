@@ -13,6 +13,27 @@ abbrlink: 1644
 
 <!-- more -->
 
+## iptux--局域网数据传输--飞秋
+
+> Linux中的iptux与window中的飞秋可以相互进行文件传输
+
+``` shell
+sudo apt install iptux
+```
+- 调整防火墙以允许使用TCP/UDP`2425`端口
+```
+sudo ufw allow 2425
+```
+
+- 中文乱码
+设置编码方式: `cp936`
+> 工具栏设置: Tools -> Preferences -> System -> Candidate network conding: `cp936`
+
+- 配置文件
+  - 配置文件: `.iptux/config.json`
+  - 日志: `.config/iptux/`
+
+
 ## 数据销毁和日志清理
 
 ### bleachbit
