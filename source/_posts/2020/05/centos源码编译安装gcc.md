@@ -61,6 +61,31 @@ include ld.so.conf.d/*.conf
 
 > 更新运行库文件的缓存：`ldconfig -v`
 
+## scl软件集
+
+### 安装scl源
+
+``` shell
+yum install centos-release-scl scl-utils-build
+```
+
+### 列出scl有哪些可用软件
+
+``` shell
+yum list all --enablerepo='centos-sclo-rh'
+```
+
+### 安装gcc8
+
+``` shell
+yum install devtoolset-8-gcc.x86_64
+```
+
+### 切换版本
+
+``` shell
+scl enable devtoolset-4 bash
+```
 
 ## 参考
 
