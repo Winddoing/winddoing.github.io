@@ -13,6 +13,12 @@ abbrlink: 1644
 
 <!-- more -->
 
+## 杀死僵尸进程
+
+``` shell
+kill -HUP <PID>
+```
+
 ## iptux--局域网数据传输--飞秋
 
 > Linux中的iptux与window中的飞秋可以相互进行文件传输
@@ -26,7 +32,7 @@ sudo ufw allow 2425
 ```
 
 - 中文乱码
-设置编码方式: `cp936`
+设置编码方式: `cp936`(or `gbk`)
 > 工具栏设置: Tools -> Preferences -> System -> Candidate network conding: `cp936`
 
 - 配置文件
@@ -292,7 +298,13 @@ PermitRootLogin yes
 sudo systemctl restart sshd.service
 ```
 
+### ssh数据的压缩传输
 
+```
+ssh -CX wqshao@192.168.1.1
+```
+- `-C`: 压缩传输模式
+- `-X`: 启用X11转发,远程打开使用图形应用
 
 ## tftp
 
