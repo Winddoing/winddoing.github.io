@@ -1,10 +1,11 @@
 ---
 title: Markdown语法
-categories: 工具
+categories:
+  - 工具
 tags:
   - markdown
 abbrlink: 22648
-date: 2016-08-19 22:18:39
+date: 2016-08-19T22:18:39.000Z
 ---
 
 在这里主要记录makedown的使用语法，以备后续写作时的不时之需。
@@ -17,6 +18,9 @@ date: 2016-08-19 22:18:39
 atom-hexo
 markdown-scroll-sync
 markdown-writer
+```
+```
+apm install tool-bar markdown-writer tool-bar-markdown-writer
 ```
 
 ## Markdown语法
