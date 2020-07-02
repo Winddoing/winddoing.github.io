@@ -97,3 +97,6 @@ comments: true
 * [特殊符号](http://cn.piliapp.com/symbol/)
 * [UFO Test: Framerates](https://www.testufo.com) —— 测试屏幕刷新率
 * [geogebra](https://www.geogebra.org/) —— 动态数学软件
+* [virtualbox](http://download.virtualbox.org/virtualbox/) - virtualbox下载
+* [The OpenGL vs Mesa matrix](https://mesamatrix.net/) - mesa
+* [Rpmfind mirror located at Insa-lyon.fr](http://rpmfind.net/) - rpm
