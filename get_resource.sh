@@ -9,7 +9,8 @@
 PWD=`pwd`
 
 DIR="$PWD/resource"
-SRC_DIR="software_tools blog_docs Own-Treasure-Box photos wiki"
+SRC_DIR="software_tools blog_docs"
+URL="https://gitee.com/winddoing"
 
 if [ ! -d $DIR ]; then
 	mkdir $DIR
@@ -20,8 +21,8 @@ echo "pwd: $PWD, DIR: $DIR"
 for dir in $SRC_DIR
 do
 	if [ ! -d $DIR/$dir ]; then
-		echo "git clone https://git.coding.net/Winddoing/$dir.git $DIR/$dir"
-		git clone https://git.coding.net/Winddoing/$dir.git $DIR/$dir
+		echo "git clone $URL/$dir.git $DIR/$dir"
+		git clone $URL/$dir.git $DIR/$dir
 	fi
 
 	(cd $DIR/$dir; git pull origin master)
