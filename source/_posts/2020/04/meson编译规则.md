@@ -32,3 +32,16 @@ test = executable(
    install : true
 )
 ```
+
+## Built-in options
+
+> https://mesonbuild.com/Builtin-options.html
+
+- `b_vscrt`: 为工程在window下通过mesa使用MSVC进行编译,如`-Db_vscrt=mtd`
+
+### Base options
+
+
+| Option  | Default value  | Possible values                        | Description                              |
+| ------- | -------------- | -------------------------------------- | ---------------------------------------- |
+| b_vscrt | from_buildtype | none, md, mdd, mt, mtd, from_buildtype | VS runtime library to use (since 0.48.0) |
