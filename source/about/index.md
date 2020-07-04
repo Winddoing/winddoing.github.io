@@ -25,6 +25,8 @@ comments: true
 
 - winddoing@sina.cn #【[BOOK](../books)】#【[ANA](../ana)】#【[MUSIC](../music)】#【[阅读排行](../top)】#【[常用软件](../software)】#【[下载](../downloads)】
 
+{% centerquote %} 合抱之木，生于毫末；九层之台，起于累土；千里之行，始于足下。{% endcenterquote %}
+
 {% note success %}
 网站构建，源码大小：`data_SZ MB`, 构建次数：`build_CN`, 最后一次构建时间：`xdate`;
 {% endnote %}
