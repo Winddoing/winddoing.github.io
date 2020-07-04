@@ -119,8 +119,9 @@ Bob-->Alice: I am good thanks!
 
 > https://mermaid-js.github.io/mermaid
 
-``` mermaid
+```mermaid
 graph TD
+
 A[Hard] -->|Text| B(Round)
 B --> C{Decision}
 C -->|One| D[Result 1]
