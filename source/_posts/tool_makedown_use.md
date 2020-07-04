@@ -53,7 +53,7 @@ apm install tool-bar markdown-writer tool-bar-markdown-writer
 
 * 段落缩进 `&ensp;&ensp;`（两个空格）
 
-* 流程图
+## 流程图
 
 | 操作模块   | 说明    |
 | :-------: | :-----: |
@@ -98,7 +98,7 @@ cond(yes)->io->e
 cond(no)->sub1(right)->op1
 ```
 
-* 时序图
+## 时序图
 
 ```
 '''sequence
@@ -112,6 +112,19 @@ Bob-->Alice: I am good thanks!
 Alice->Bob: Hello Bob, how are you?
 Note right of Bob: Bob thinks
 Bob-->Alice: I am good thanks!
+```
+
+
+## mermaid
+
+> https://mermaid-js.github.io/mermaid
+
+``` mermaid
+graph TD
+A[Hard] -->|Text| B(Round)
+B --> C{Decision}
+C -->|One| D[Result 1]
+C -->|Two| E[Result 2]
 ```
 
 
