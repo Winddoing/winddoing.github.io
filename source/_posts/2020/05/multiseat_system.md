@@ -7,6 +7,7 @@ tags:
   - X11
 categories:
   - 工具
+abbrlink: 1458b897
 ---
 
 `Multiseat system`: 可以由多个用户同时共享一个PC的大部分资源使用，比如独立的鼠标键盘、显示器

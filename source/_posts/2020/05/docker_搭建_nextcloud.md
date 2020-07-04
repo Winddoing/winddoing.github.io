@@ -6,6 +6,7 @@ tags:
   - docker
 categories:
   - 系统服务
+abbrlink: efa23dc6
 ---
 
 系统：ubuntu18.04

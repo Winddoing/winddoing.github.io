@@ -7,6 +7,7 @@ tags:
   - server
 categories:
   - 工具
+abbrlink: 9cb9cc51
 ---
 
 前段时间发现之前给老家买的mini主机很久没用了，拿来加了个无线网卡和硬盘通过nextcloud搭建一个私人网盘备份一些文件，在家里也方便手机共享。在wifi的配置时踩过一些坑，在这里简单记录下。

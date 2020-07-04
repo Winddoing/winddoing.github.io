@@ -8,6 +8,7 @@ tags:
   - window
 categories:
   - 工具
+abbrlink: 5c8794fe
 ---
 
 Window下的包管理工具,便于开发环境的搭建和软件安装

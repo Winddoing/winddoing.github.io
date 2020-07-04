@@ -1,12 +1,13 @@
 ---
-layout: "post"
-title: "meson编译规则"
-date: "2020-04-29 15:29"
+layout: post
+title: meson编译规则
+date: '2020-04-29 15:29'
 tags:
   - meson
   - build
 categories:
   - 编译工具
+abbrlink: 434f8def
 ---
 
 在meson编译的项目中添加修改编译规则

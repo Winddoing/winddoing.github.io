@@ -6,6 +6,7 @@ tags:
   - wiki
 categories:
   - 工具
+abbrlink: 8982b524
 ---
 
 Tiddlywiki 的使用方法很简单，先打开 http://tiddlywiki.com 点击「Download Empty」下载一个空文档。然后在浏览器中打开这个文档，之后就可以进行修改标题、输入文字、插入图片和链接等等操作

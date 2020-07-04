@@ -7,6 +7,7 @@ tags:
   - 系统
 categories:
   - 工具
+abbrlink: f6f2a529
 ---
 
 通过`hdparm`、`smartctl`、`badblocks`等命令，获取硬盘详细信息和测试硬盘读取速度等

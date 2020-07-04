@@ -8,6 +8,7 @@ tags:
   - C++
 categories:
   - 编译工具
+abbrlink: 74f3b3c3
 ---
 
 在C代码中引用C++编译的库时，编译错误处理

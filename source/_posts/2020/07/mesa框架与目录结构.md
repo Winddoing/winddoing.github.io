@@ -9,6 +9,7 @@ tags:
 categories:
   - 程序设计
   - 虚拟机
+abbrlink: 39ae47e2
 ---
 
 `mesa`在平台实现OpenGL接口的实现.官网:https://mesa3d.org
