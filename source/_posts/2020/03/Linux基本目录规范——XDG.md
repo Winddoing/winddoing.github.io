@@ -6,6 +6,7 @@ tags:
   - XDG
 categories:
   - 系统应用
+abbrlink: ef694e1f
 ---
 
 `XDG` Base Directory Specification

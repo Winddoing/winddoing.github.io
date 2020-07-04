@@ -7,6 +7,7 @@ tags:
   - centos
 categories:
   - 编译工具
+abbrlink: bb09b834
 ---
 
 升级centos中默认的gcc版本

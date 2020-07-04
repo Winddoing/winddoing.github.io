@@ -8,6 +8,7 @@ tags:
   - 网卡
 categories:
   - 设备驱动
+abbrlink: 7a90000d
 ---
 
 有线网络间隔断开,查看系统日志pcie端口存在错误打印

@@ -8,6 +8,7 @@ tags:
   - 虚拟机
 categories:
   - 虚拟机
+abbrlink: d2c5077b
 ---
 
 Qemu参数配置
