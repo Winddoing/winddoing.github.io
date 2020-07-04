@@ -16,8 +16,20 @@ keywords: "Hexo, NexT, Winddoing,嵌入式,Linux,shell,C语言,网络， 个人�
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
 url: http://winddoing.github.io
 root: /
+
 #permalink: :year/:month/:day/:title/
 permalink: post/:abbrlink.html
+# abbrlink config
+abbrlink:
+  alg: crc32  #support crc16(default) and crc32
+  rep: hex    #support dec(default) and hex
+  drafts: false #(true)Process draft,(false)Do not process draft
+  # Generate categories from directory-tree
+  # depth: the max_depth of directory-tree you want to generate, should > 0
+  auto_category:
+    enable: false
+    depth:
+
 
 # Directory
 source_dir: source
