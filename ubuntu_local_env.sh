@@ -6,6 +6,12 @@
 # Description	:
 ##########################################################
 
-sudo apt install nodejs-dev libssl1.0-dev npm
+set -x
+
+#sudo npm i -g express --registry https://registry.npm.taobao.org
+
+sudo apt install nodejs libssl-dev npm
+
+#npm install --registry=https://registry.npm.taobao.org
 
 npm install
