@@ -10,6 +10,7 @@ tags:
 categories:
   - 工具
   - window
+abbrlink: f9f0e3bd
 ---
 
 在window10中微软开发了`winget`包管理工具,但是由于时间问题可以安装的软件包比较少,以后可能会好些.
