@@ -3,7 +3,8 @@ layout: post
 title: X Sever —— Xorg
 date: '2020-03-20 16:15'
 tags:
-  - Xorg，X11
+  - Xorg
+  - X11
 categories:
   - 系统服务
   - Xorg
@@ -182,7 +183,10 @@ Section "Screen"
 	EndSubSection
 EndSection
 ```
-> **注意**：在`xorg.conf`中配置显卡总线地址`BusID`时，必须以`十进制`表示，比如lspci总线地址（以十六进制显示）为`91:00.0`，将其转换为十进制`145:00:0`（16x9+1）配置在xorg.conf中。
+> **注意**：在`xorg.conf`中配置显卡总线地址`BusID`时，必须以`十进制`表示，比如`lspci`总线地址（以十六进制显示）为`91:00.0`，将其转换为十进制`145:00:0`（16x9+1）配置在xorg.conf中。
+> 细节有两点:
+>   1. 总线地址的进制转换(十六进制转十进制)
+>   2. 总线地址的分隔符,在xorg.conf中,地址均为`:`分隔
 
 - `Driver`的选择必须根据使用的显卡和系统的支持情况配置,在系统不支持的情况下可以使用`modesetting`代替测试，不一定配置成功
   - centos系统支持的驱动在`/lib64/xorg/modules/drivers/`
@@ -279,9 +283,24 @@ startx -- -layout seat0 -seat seat0 -novtswitch -sharevts
 - `-novtswitch `: 如果操作系统支持，请禁用自动启动服务器时将X服务器重置和关机自动切换到激活的VT的功能
 - `-sharevts`: 如果操作系统支持，则与另一个X服务器共享虚拟终端。
 
+## xinitrc
+
+> `$HOME/.xinitrc`指定启动的桌面环境,比如xterm
+
+`~/.xinitrc`由xinit执行，通常通过startx调用。 登录后将执行该程序：首先登录文本控制台，然后使用startx启动GUI。`.xinitrc`的作用是启动会话的GUI部分，通常是通过设置一些与GUI相关的设置，例如键绑定（使用xmodmap或xkbcomp），X资源（使用xrdb）等，以及启动会话管理器或窗口管理器（可能是桌面环境的一部分）。
+
+### 窗口管理器
+
+- fvwm:虚拟窗口管理器,占用资源少
+- twm:(Tab Window Manager for the X Window System)
+
 ## 参考
 
 - [X,X11,Xorg,XServer,XClient,Xlib](https://blog.csdn.net/a379039233/article/details/80782351)
 - [Linux学习-X Server 配置文件解析与设定](https://www.cnblogs.com/uetucci/p/7794335.html)
 - [xorg的配置文件](https://blog.csdn.net/seaship/article/details/95481154)
 - [xorg.conf 配置详解](https://blog.csdn.net/ohappytime/article/details/7384001)
+- [nvidia gpu fan speed control](https://www.cnblogs.com/rickerliang/p/5673015.html)
+- [Appendix D. X Config Options](http://http.download.nvidia.com/XFree86/Linux-x86/1.0-8774/README/appendix-d.html)
+- [xorg.conf](https://www.x.org/releases/current/doc/man/man5/xorg.conf.5.xhtml)
+- [Difference between .xinitrc, .xsession and .xsessionrc](https://unix.stackexchange.com/questions/281858/difference-between-xinitrc-xsession-and-xsessionrc)
