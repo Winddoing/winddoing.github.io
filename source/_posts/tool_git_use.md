@@ -10,7 +10,8 @@ date: 2016-10-07 23:07:24
 记录平时对git的使用方法和技巧
 
 <!--- more --->
-## 1. 创建本地git库
+
+## 创建本地git库
 ```
 mkdir test.git
 ```
@@ -28,7 +29,7 @@ git init --bare --shared
 > git remote add origin hostname@192.168.1.1:/test.git
 > ```
 
-## 2. 创建分支
+## 创建分支
 ```
 git branch branch_name
 ```
@@ -37,12 +38,12 @@ git branch branch_name
 git branch -d branch_name
 ```
 
-## 3. 切换分支
+## 切换分支
 ```
 git checkout  branch_name
 ```
 
-## 4. 下载
+## 下载
 ```
 git clone  URL
 ```
@@ -52,7 +53,16 @@ git clone --depth=1 URL
 ```
 > depth用于指定克隆深度，为1即表示只克隆最近一次commit.
 
-## 5. 日志
+## 创建本地镜像仓库
+```
+git clone --mirror <URL>
+```
+- 更新镜像库
+```
+git remote update
+```
+
+## 日志
 ```
 git commit
 ```
@@ -85,23 +95,23 @@ git commit
 
 subject是 commit 目的的简短描述，不超过50个字符。填写要求：以动词开头
 
-## 6. 提交
+## 提交
 ```
 git push 远程库名  分支名
 ```
 
-## 7. 更新
+## 更新
 ```
 git pull 远程库名  分支名
 ```
 
-## 8.添加代码
+## 添加代码
 ```
 git add <filename>
 git add -A    #添加所有修改
 ```
 
-## 9.查看日志
+## 查看日志
 ```
 git log
 git log -n     #查看前n条日志
@@ -115,11 +125,11 @@ git log -S [keyword]  #在提交log中搜索关键词
 
 > 命令行下查看git历史提交记录的工具
 
-## 10.回退
+## 回退
 ```
 git reset HEAD <filename> #将该文件从缓冲区撤回
 ```
-## 11.查看远程库
+## 查看远程库
 ```
 git remote -v
 ```
@@ -128,24 +138,24 @@ git remote -v
 git remote add <name> <url>
 ```
 
-## 12.获取远程库中的最新版本，但与git pull 不同它不会merge
+## 获取远程库中的最新版本，但与git pull 不同它不会merge
 ```
 git  fetch  远程库名  分支名
 ```
 作用：可以对比远程库与当前本地的差异。
 
-## 13.查看标签
+## 查看标签
 ```
 git tag
 ```
 作用：一个稳定的版本或者完成一个功能，为了发布或者保存而打的标签，主要是发布
 
-## 14.切换标签
+## 切换标签
 ```
 git checkout <Tag>
 ```
 
-## 15.暂存当前改动
+## 暂存当前改动
 
 ```
 git stash
@@ -177,7 +187,7 @@ git stash clear
 ```
 >删除所有存储的进度。
 
-## 16.恢复本地错误操作
+## 恢复本地错误操作
 
 ```
 git reflog
@@ -192,7 +202,7 @@ usage: git reflog [ show | expire | delete ]
 > - `expire`: 删除掉更老的reflog条目
 > - `delete`: 从reflog中删除一个条目
 
-## 17.模块管理
+## 模块管理
 
 1. 添加模块
 ```
@@ -220,7 +230,7 @@ git submodule update
 git rm --cached 子模块名称
 ```
 
-## 18.commit统计
+## commit统计
 
 可以大致了解一下每个人对这个项目提交的commit数量和大致的贡献度
 
