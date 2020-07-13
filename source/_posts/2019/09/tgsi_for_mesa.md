@@ -23,6 +23,9 @@ abbrlink: 58638
 ![shader_IRs_2015](/images/2019/09/shader_irs_2015.png)
 ![new_shader_ir](/images/2019/09/new_shader_ir.png)
 
+![Mesa_layers_of_crap_2016_for_IR](/images/2020/07/mesa_layers_of_crap_2016_for_ir.svg)
+> 来自:[wikipedia mesa](https://en.wikipedia.org/wiki/Mesa_(computer_graphics))
+
 TGSI是Gallium框架中的所有驱动程序使用着色器的唯一中间表示形式,这里`特指`的是`着色器`的中间形式，着色器对驱动而言的所有格式将是TGSI。
 
 ## TGSI中间语言
