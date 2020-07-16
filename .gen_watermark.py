@@ -37,7 +37,7 @@ def add_watermark_text(img):
 
     font_type = ImageFont.truetype("/usr/share/fonts/truetype/freefont/FreeMono.ttf", wm_font_sz)
     draw = ImageDraw.Draw(img)
-    draw.text(xy=(w/4, h/2), text=wm_text, fill=(220,220,220), font=font_type)
+    draw.text(xy=(w/4, h - wm_font_sz - 1), text=wm_text, fill=(220,220,220), font=font_type)
 
 def watermark(images_dir):
     imgs_files = get_imgs_files(images_dir)
