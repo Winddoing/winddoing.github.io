@@ -51,7 +51,7 @@ comments: true
 | 模块  | 图标  |
 |:-----:|:-----:|
 | 本站 | <a href="https://travis-ci.org/Winddoing/Winddoing.github.io"><img src="https://travis-ci.org/Winddoing/Winddoing.github.io.svg?branch=web_source"></a> |
-| 相册 | <a href="https://dev.tencent.com/u/Winddoing/p/photos/git"><img src="https://dev.tencent.com/badges/Winddoing/photos/branch/master/build.svg"></a> |
+| 相册 | <a href="https://winddoing.coding.net/public/photos-data/photos/git/files"><img src="https://winddoing.coding.net/badges/photos-data/job/264981/build.svg"></a> |
 
 <!-- endtab -->
 
