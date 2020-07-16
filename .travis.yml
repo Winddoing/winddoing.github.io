@@ -41,11 +41,10 @@ script:
     - git pull --unshallow
     - ./auto_init.sh
     - hexo clean
-    #- hexo algolia --flush
     - hexo generate
     - gulp
     - python3 .gen_watermark.py
 
 after_success:
     - hexo deploy
-    - ./sync_to_coding.sh
+    #- ./sync_to_coding.sh
