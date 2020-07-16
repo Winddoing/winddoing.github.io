@@ -1,9 +1,23 @@
+dist: bionic
 language: node_js
+
 node_js:
     - "10"  # nodejs的版本
 branches:
     only:
         - web_source  # 设置自动化部署的源码分支
+
+addons:
+    apt:
+        sources:
+            - sourceline: 'ppa:ubuntugis/ppa'
+        packages:
+            - python3
+            - python3-pip
+            - fonts-freefont-ttf
+
+python:
+    - "3.6.9"
 
 before_install:
     - export TZ='Asia/Shanghai'  # 设置时区
@@ -18,6 +32,7 @@ before_script:
 
 install:
     #- npm install --save hexo-generator-searchdb
+    - pip3 install pillow
 
 cache:
     directories:
@@ -29,6 +44,7 @@ script:
     #- hexo algolia --flush
     - hexo generate
     - gulp
+    - python3 .gen_watermark.py
 
 after_success:
     - hexo deploy
