@@ -8,6 +8,9 @@
 
 set -x
 
+PWD=`pwd`
+PATH=$PATH:$PWD/node_modules/hexo/bin
+
 hexo clean
 
 hexo generate
