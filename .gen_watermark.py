@@ -8,8 +8,6 @@ from PIL import Image
 from PIL import ImageDraw
 from PIL import ImageFont
 
-mark_file = ".watermark.file"
-
 def get_imgs_files(file_dir):
     imgs = []
     for root, dirs, files in os.walk(file_dir):
@@ -39,11 +37,21 @@ def add_watermark_text(img):
     draw = ImageDraw.Draw(img)
     draw.text(xy=(w/4, h - wm_font_sz - 1), text=wm_text, fill=(220,220,220), font=font_type)
 
+def retain_file(file):
+    retain_f = ["alipay.jpg", "weixin.jpg", "Winddoing.jpg"]
+    for f in retain_f:
+        if f in file:
+            print("Keep File:", f)
+            return 1
+    return 0
+
 def watermark(images_dir):
     imgs_files = get_imgs_files(images_dir)
 
     for file in imgs_files:
-        #print(file)
+        if retain_file(file):
+            continue
+
         im = Image.open(file)
         if len(im.getbands()) < 3:
             im = im.convert('RGB')
