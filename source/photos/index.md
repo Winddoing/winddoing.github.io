@@ -9,6 +9,9 @@ comments: false
 <link rel="stylesheet" href="./photoswipe.css">
 <link rel="stylesheet" href="./default-skin/default-skin.css">
 
+<script src="./photoswipe.js"></script>
+<script src="./photoswipe-ui-default.js"></script>
+
 <!---
 <div class="photos-btn-wrap">
     <a class="photos-btn active" href="javascript:void(0)">Photos</a>
