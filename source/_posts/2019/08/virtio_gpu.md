@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Virtio-GPU相关
+title: Virtio GPU
 date: '2019-08-18 20:27'
 tags:
   - virtio
@@ -100,6 +100,13 @@ It is composed of several components:
 2018年X.Org开发者大会相关文档和视频（网络原因视频看不了）
 
 - https://www.x.org/wiki/Events/XDC2018/
+
+
+## graphics pipeline
+
+![graphics_pipeline](/images/2020/07/graphics_pipeline.png)
+
+> https://www.seas.upenn.edu/~cis565/LECTURES/Lecture2 New.pdf
 
 
 
