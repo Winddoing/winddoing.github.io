@@ -100,3 +100,4 @@ comments: true
 * [virtualbox](http://download.virtualbox.org/virtualbox/) - virtualbox下载
 * [The OpenGL vs Mesa matrix](https://mesamatrix.net/) - mesa
 * [Rpmfind mirror located at Insa-lyon.fr](http://rpmfind.net/) - rpm
+* [cis565-fall-2017](https://cis565-fall-2017.github.io) --- 计算机与GPU相关课程其中包含大量ppt
