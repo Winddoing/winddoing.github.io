@@ -110,6 +110,7 @@ git clone https://gitlab.freedesktop.org/mesa/mesa.git
       - **virgl** - Driver for Virtio virtual GPU of QEMU.
       - **zink** - Driver that uses Vulkan for rendering.
     - **auxiliary** - Gallium support code
+      - **pipe-loader** - provides device enumeration and creation of winsys/pipe_screen instances. 用于加载driver/winsys
       - **cso_cache** - Constant State Objects Cache. Used to filter out redundant state changes between frontends and drivers.
       - **draw** - Software vertex processing and primitive assembly module. This includes vertex program execution, clipping, culling and optional stages for drawing wide lines, stippled lines, polygon stippling, two-sided lighting, etc. Intended for use by drivers for hardware that does not have vertex shaders. Geometry shaders will also be implemented in this module.
       - **gallivm** - LLVM module for Gallium. For LLVM-based compilation, optimization and code generation for TGSI shaders. Incomplete.
