@@ -46,6 +46,8 @@ def retain_file(file):
     return 0
 
 def watermark(images_dir):
+    print("=====>Entry:", images_dir)
+
     imgs_files = get_imgs_files(images_dir)
 
     for file in imgs_files:
@@ -65,3 +67,4 @@ def watermark(images_dir):
 
 if __name__ == '__main__':
     watermark('public/images/')
+    watermark('public/books')
