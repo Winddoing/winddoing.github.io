@@ -844,7 +844,7 @@ note:
 # Tabs tag
 tabs:
   transition:
-    tabs: false
+    tabs: true
     labels: true
 
 # PDF tag, requires two plugins: pdfObject and pdf.js

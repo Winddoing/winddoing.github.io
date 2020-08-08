@@ -23,9 +23,7 @@ comments: true
 * 2020.01: 升级主题`next v7.7.0`, 为了提高网站的加载速度和构建速度。
 * 至今依旧： ***使用，简单方便，升级主要是当时博客出现问题。***
 
-- winddoing@sina.cn #【[BOOK](../books)】#【[ANA](../ana)】#【[MUSIC](../music)】#【[阅读排行](../top)】#【[常用软件](../software)】#【[下载](../downloads)】
-
-{% centerquote %} 合抱之木，生于毫末；九层之台，起于累土；千里之行，始于足下。{% endcenterquote %}
+其他： {% button ../books,阅读,book fa-fw,books%} {% button ../ana,ANA,book fa-fw,books%} {% button ../music,MUSIC,music fa-fw,books%} {% button ../top,阅读排列,line-chart fa-fw,books%} {% button ../software,常用软件,cogs fa-fw,books%} {% button ../downloads,下载,download fa-fw,books%}
 
 {% note success %}
 网站构建，源码大小：`data_SZ MB`, 构建次数：`build_CN`, 最后一次构建时间：`xdate`;
@@ -37,6 +35,12 @@ comments: true
 * [hexo的next主题个性化教程：打造炫酷网站](https://blog.csdn.net/qq_33699981/article/details/72716951)
 * [DaoVoice](https://dashboard.daovoice.io/app/a28f1641/users?segment=all-users)
 * [小图标](https://fontawesome.com/icons?from=io)
+
+<!-- endtab -->
+
+<!-- tab 联系方式 -->
+
+- 邮箱：winddoing@sina.cn
 
 <!-- endtab -->
 
@@ -56,3 +60,5 @@ comments: true
 <!-- endtab -->
 
 {% endtabs %}
+
+{% centerquote %} 合抱之木，生于毫末；九层之台，起于累土；千里之行，始于足下。{% endcenterquote %}
