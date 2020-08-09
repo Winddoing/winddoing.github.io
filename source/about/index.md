@@ -25,6 +25,8 @@ comments: true
 
 其他： {% button ../books,阅读,book fa-fw,books%} {% button ../ana,ANA,book fa-fw,books%} {% button ../music,MUSIC,music fa-fw,books%} {% button ../top,阅读排列,line-chart fa-fw,books%} {% button ../software,常用软件,cogs fa-fw,books%} {% button ../downloads,下载,download fa-fw,books%}
 
+{% centerquote %} 合抱之木，生于毫末；九层之台，起于累土；千里之行，始于足下。{% endcenterquote %}
+
 {% note success %}
 网站构建，源码大小：`data_SZ MB`, 构建次数：`build_CN`, 最后一次构建时间：`xdate`;
 {% endnote %}
@@ -61,4 +63,23 @@ comments: true
 
 {% endtabs %}
 
-{% centerquote %} 合抱之木，生于毫末；九层之台，起于累土；千里之行，始于足下。{% endcenterquote %}
+>**每日一言**:
+<span id="hitokoto" style="margin-left:7px;"> :D 获取中一言...</span>
+<p align="right" id="afrom"></p>
+<script src="https://cdn.jsdelivr.net/npm/bluebird@3/js/browser/bluebird.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/whatwg-fetch@2.0.3/fetch.min.js"></script>
+<script>
+    fetch('https://v1.hitokoto.cn/?c=d&c=e&c=i&c=k')
+    .then(function (res){
+        return res.json();
+    })
+    .then(function (data) {
+        var hitokoto = document.getElementById('hitokoto');
+        var afrom = document.getElementById('afrom');
+        hitokoto.innerText = data.hitokoto;
+        afrom.innerText =  '——【' + data.from + ' ' + data.from_who + '】';
+    })
+    .catch(function (err) {
+        console.error(err);
+    })
+</script>
