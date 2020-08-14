@@ -118,3 +118,5 @@ It is composed of several components:
 - [GSoC 2017 - 3D acceleration using VirtIOGPU](https://studiopixl.com/2017-08-27/3d-acceleration-using-virtio.html)
 - [GSoC 2018 - Vulkan-ize Virglrenderer](https://studiopixl.com/2018-07-12/vulkan-ize-virgl.html)
 - [The OpenGL vs Mesa matrix](https://mesamatrix.net/)
+- [Virtualizing GPU Access](https://memcpy.io/virtualizing-gpu-access.html)
+- [kraxel's news](https://www.kraxel.org/blog/) --- virgl and qemu
