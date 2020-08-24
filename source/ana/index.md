@@ -75,7 +75,7 @@ comments: false
 {% endcenterquote %}
 
 {% note success %}
-  谁自重，谁就得到尊重；谁放纵，谁就得到伤痛。
+    谁自重，谁就得到尊重；谁放纵，谁就得到伤痛。
 {% endnote %}
 
 {% centerquote %}
@@ -83,5 +83,10 @@ comments: false
 {% endcenterquote %}
 
 {% note info %}
-   使欲望得到升华才能防止欲望的泛滥。  —— 毛姆《月亮与六便士》
+    使欲望得到升华才能防止欲望的泛滥。  —— 毛姆《月亮与六便士》
 {% endnote %}
+
+{% note success %}
+    快就是慢，慢就是快
+{% endnote %}
+
