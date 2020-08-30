@@ -46,6 +46,15 @@ libvirtd服务的配置文件: `/etc/libvirt/libvirtd.conf`
 
 qemu的主配置文件: `/etc/libvirt/qemu.conf`
 
+### libvirtd.conf
+
+- 日志配置
+
+``` conf
+log_filters="1:libvirt 1:util 1:qemu"
+log_outputs="1:file:/var/log/libvirt/libvirtd.log"
+```
+
 # qemu
 
 ## libvirt与qemu如何绑定
@@ -70,9 +79,13 @@ error: internal error: Failed to start QEMU binary /usr/local/bin/qemu-system-x8
 > 在`/etc/apparmor.d/usr.sbin.libvirtd`文件中，添加一行:
 > ``` shell
 > /usr/local/bin/* PUx,
+> ...
+> # force the use of virt-aa-helper 
+> ...
+> /usr/local/bin/* rmix,
 > ```
 >
-> 使能生效：`sudo systemctl reload apparmor`
+> 使能生效：`sudo systemctl reload apparmor`或`sudo systemctl restart apparmor.service`
 
 原因： `libvirtd`应用的权限被`apparmor-profiles`所控制，而`/usr/local/bin`目录下的可执行文件，没有被添加到apparmor-profiles的配置中，因此使用时检测到没有权限。
 
@@ -84,6 +97,26 @@ error: internal error: Failed to start QEMU binary /usr/local/bin/qemu-system-x8
 ```
 sudo apparmor_status
 ```
+
+开启虚拟机时，出现无法执行错误：
+``` shell
+error: internal error: process exited while connecting to monitor: libvirt:  error : cannot execute binary /usr/local/bin/qemu-system-x86_64: Permission denied
+```
+原因：不能在[apparmor禁用](https://blog.csdn.net/iteye_12675/article/details/82519399)`usr.sbin.libvirtd`，`usr.lib.libvirt.virt-aa-helper`,也就是将其生成软连接到`/etc/apparmor.d/disable`.如果要禁掉可能必须重新编译libvirt同时添加`--without-apparmor`选项(未测试)
+
+
+### 其他apparmor权限的问题
+
+在libvirtd中对qemu的运行存在一些权限的设置，为了方便调试，将权限控制禁用。在配置文件`/etc/libvirt/qemu.conf`中添加下行代码：
+```
+security_driver = "none"
+```
+
+重启`libvirtd.service`服务:
+```shell
+sudo systemctl restart libvirtd.service
+```
+
 
 # virsh
 
@@ -109,9 +142,74 @@ $virsh dumpxml ubuntu20.04
 virsh edit ubuntu20.04
 ```
 
+## 常用命令
 
+| 命令                                 | 描述                                                         |
+| ------------------------------------ | ------------------------------------------------------------ |
+| `virsh list`                         | 显示正在运行的虚拟机                                         |
+| `virsh list --all`                   | 显示所有的虚拟机                                             |
+| `virsh start vm-name`                | 启动vm-name虚拟机                                            |
+| `virsh shutdown vm-name`             | 关闭vm-name虚拟机                                            |
+| `virsh destroy vm-name`              | 虚拟机vm-name强制断电                                        |
+| `virsh suspend vm-name`              | 挂起vm-name虚拟机                                            |
+| `virsh define vm-name`               | 将domain注册，但是没有启动,下次启动时生效                    |
+| `virsh undefine vm-name`             | 删除虚拟机，慎用                                             |
+| `virsh dominfo vm-name`              | 查看虚拟机的配置信息                                         |
+| `virsh domiflist`                    | 查看网卡配置信息                                             |
+| `virsh domblklist vm-name`           | 查看该虚拟机的磁盘位置                                       |
+| `virsh edit vm-name`                 | 修改vm-name的xml配置文件                                     |
+| `virsh dumpxml vm-name`              | 查看KVM虚拟机当前配置                                        |
+| `virsh autostart vm-name`            | KVM物理机开机自启动虚拟机，配置后会在此目录生成配置文件/etc/libvirt/qemu/autostart/vm-name.xml |
+| `virsh autostart --disable vm-name`  | 取消开机自启动                                               |
+
+
+# 命令行参数转XML配置文件
+
+
+
+## domxml-from-native
+
+```
+sudo virsh domxml-from-native qemu-argv aa.txt
+```
+
+错误：
+
+```
+error: this function is not supported by the connection driver: virConnectDomainXMLFromNative
+```
+> 最新qemu中删除了该功能，因为在实践中它过于不可靠和不完整而无用
+
+
+# 配置
+
+## 添加显卡显示SDL
+
+```
+<graphics type='sdl' display=':0.0'>
+    <gl enable='yes'/>
+</graphics>
+```
+
+### 权限错误:
+
+```
+error: internal error: cannot load AppArmor profile 'libvirt-39466e8a-545d-420e-ba0f-b942d09a5bdb'
+```
+解决方法：在`/etc/apparmor.d/usr.sbin.libvirtd`配置文件中添加`/usr/local/bin/* rmix,`
+
+
+
+### SDL
+
+```
+Could not initialize SDL(x11 not available) - exiting
+```
 
 # 参考
 
+- [Domain XML format](https://libvirt.org/formatdomain.html)
+- [QEMUSwitchToLibvirt](https://wiki.libvirt.org/page/QEMUSwitchToLibvirt)
 - [libvirt原理](https://www.cnblogs.com/wn1m/p/11280605.html)
 - [Changing libvirt emulator: Permission denied](https://unix.stackexchange.com/questions/471345/changing-libvirt-emulator-permission-denied)
+- [虚拟化技术之kvm管理工具virsh常用基础命令（一）](https://www.cnblogs.com/qiuhom-1874/p/13508231.html)

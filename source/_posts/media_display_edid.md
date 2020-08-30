@@ -42,6 +42,36 @@ parse-edid < edid.bin
 ```
 
 ```
+$parse-edid < edid.bin 
+Checksum Correct
+
+Section "Monitor"
+	Identifier "PHL 237E7"
+	ModelName "PHL 237E7"
+	VendorName "PHL"
+	# Monitor Manufactured week 24 of 2016
+	# EDID version 1.3
+	# Analog Display
+	Option "SyncOnGreen" "true"
+	DisplaySize 510 290
+	Gamma 2.20
+	Option "DPMS" "true"
+	Horizsync 30-83
+	VertRefresh 56-76
+	# Maximum pixel clock is 170MHz
+	#Not giving standard mode: 1920x1080, 60Hz
+	#Not giving standard mode: 1440x900, 60Hz
+	#Not giving standard mode: 1440x900, 75Hz
+	#Not giving standard mode: 1680x1050, 60Hz
+	#Not giving standard mode: 1280x720, 60Hz
+	#Not giving standard mode: 1280x1024, 60Hz
+	#Not giving standard mode: 1280x960, 60Hz
+	Modeline 	"Mode 0" 148.50 1920 2008 2052 2200 1080 1084 1089 1125 +hsync +vsync 
+EndSection
+```
+
+
+```
 # the integer after -m is the monitor id, starting from zero and incrementing by one.
 sudo get-edid -m 0 > edid.bin
 
