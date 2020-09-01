@@ -13,6 +13,28 @@ abbrlink: 1644
 
 <!-- more -->
 
+## 判断进程在哪个CPU核运行的方法
+
+### ps
+
+``` shell
+ps -o pid,psr,cmd -p <pid>
+```
+> `PSR`: 进程分配的CPU id
+
+### top
+
+`top`命令也可以显示CPU被分配给哪个进程
+
+- 进入`top`后，按`f`键，出现Fields Management管理界面，(空格键选中)选择`P`选项(P = Last Used Cpu (SMP))
+- top界面中目前使用的CPU将出现在"P"（或“PSR”）列下
+
+
+``` shell
+top -p <pid>
+```
+> 查看单独一个进程的信息
+
 ## 杀死僵尸进程
 
 ``` shell
