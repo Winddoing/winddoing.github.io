@@ -103,3 +103,4 @@ comments: true
 * [cis565-fall-2017](https://cis565-fall-2017.github.io) --- 计算机与GPU相关课程其中包含大量ppt
 * [VisuAlgo](https://visualgo.net/zh) —— 数据结构和算法动态可视化
 * [Data Structure Visualization](https://www.cs.usfca.edu/~galles/visualization/Algorithms.html) —— 数据结构可视化
+* [Y2Mate IO](https://y2mate.guru/en7/) —— YouTube视频下载
