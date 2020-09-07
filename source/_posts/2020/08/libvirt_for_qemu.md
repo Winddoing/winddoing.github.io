@@ -15,13 +15,13 @@ categories:
 <!--more-->
 
 ``` shell
-yum install -y qemu-kvm qemu-kvm-tools libvirt virt-install 
+yum install -y qemu-kvm qemu-kvm-tools libvirt virt-install
 ```
 
 # libvirtd
 
 ``` shell
-systemctl status libvirtd.service 
+systemctl status libvirtd.service
 ● libvirtd.service - Virtualization daemon
      Loaded: loaded (/lib/systemd/system/libvirtd.service; enabled; vendor preset: enabled)
      Active: active (running) since Mon 2020-08-24 09:22:15 CST; 7h ago
@@ -80,7 +80,7 @@ error: internal error: Failed to start QEMU binary /usr/local/bin/qemu-system-x8
 > ``` shell
 > /usr/local/bin/* PUx,
 > ...
-> # force the use of virt-aa-helper 
+> # force the use of virt-aa-helper
 > ...
 > /usr/local/bin/* rmix,
 > ```
@@ -91,7 +91,7 @@ error: internal error: Failed to start QEMU binary /usr/local/bin/qemu-system-x8
 
 - AppArmor 是一款与SeLinux类似的安全框架/工具，其主要作用是控制应用程序的各种权限，例如对某个目录/文件的读/写，对网络端口的打开/读/写等
 - Ubuntu的默认选择
-- 在centos中如果出现该错误，可以通过临时禁用SELinux进行测试: `setenforce 0`
+- 在`centos`中如果出现该错误，可以通过临时禁用SELinux进行测试: `setenforce 0`
 
 `apparmor-profiles`的状态：
 ```
@@ -186,10 +186,11 @@ error: this function is not supported by the connection driver: virConnectDomain
 ## 添加显卡显示SDL
 
 ```
-<graphics type='sdl' display=':0.0'>
+<graphics type='sdl' display=':0.0' xauth='/root/.Xauthority'>
     <gl enable='yes'/>
 </graphics>
 ```
+> **以上配置在`Xfce`桌面环境下可以生效**
 
 ### 权限错误:
 
@@ -205,6 +206,16 @@ error: internal error: cannot load AppArmor profile 'libvirt-39466e8a-545d-420e-
 ```
 Could not initialize SDL(x11 not available) - exiting
 ```
+原因：未找到
+解决方法：安装xfce桌面环境
+  ``` shell
+  yum groups install Xfce
+  ```
+  > for centos7.8
+
+## 编译使能SDL
+
+在配置中使能SDL：`--enable-sdl`
 
 # 参考
 
@@ -213,3 +224,4 @@ Could not initialize SDL(x11 not available) - exiting
 - [libvirt原理](https://www.cnblogs.com/wn1m/p/11280605.html)
 - [Changing libvirt emulator: Permission denied](https://unix.stackexchange.com/questions/471345/changing-libvirt-emulator-permission-denied)
 - [虚拟化技术之kvm管理工具virsh常用基础命令（一）](https://www.cnblogs.com/qiuhom-1874/p/13508231.html)
+- [编译qemu和libvirt使支持SDL](https://blog.csdn.net/jiuzuidongpo/article/details/44342509)
