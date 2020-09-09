@@ -80,12 +80,12 @@ Systemd 默认从目录`/etc/systemd/system/`读取配置文件。但是，里�
 Description=Anbox Container Manager
 After=network.target
 Wants=network.target
-ConditionPathExists=/home/wqshao/work1/android-for-anbox/android_x86.img
+ConditionPathExists=/home/xxx/work1/android-for-anbox/android_x86.img
 
 [Service]
 ExecStartPre=/sbin/modprobe ashmem_linux
 ExecStartPre=/sbin/modprobe binder_linux
-ExecStart=/usr/local/bin/anbox container-manager --daemon --privileged --data-path=/home/wqshao/work1/android-for-anbox/anbox-data/ --android-image=/home/wqshao/work1/android-for-anbox/android_x86.img --use-rootfs-overlay
+ExecStart=/usr/local/bin/anbox container-manager --daemon --privileged --data-path=/home/xxx/work1/android-for-anbox/anbox-data/ --android-image=/home/xxx/work1/android-for-anbox/android_x86.img --use-rootfs-overlay
 
 [Install]
 WantedBy=multi-user.target

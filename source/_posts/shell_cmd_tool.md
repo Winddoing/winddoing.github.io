@@ -323,7 +323,7 @@ sudo systemctl restart sshd.service
 ### ssh数据的压缩传输
 
 ```
-ssh -CX wqshao@192.168.1.1
+ssh -CX xxx@192.168.1.1
 ```
 - `-C`: 压缩传输模式
 - `-X`: 启用X11转发,远程打开使用图形应用
