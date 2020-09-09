@@ -65,7 +65,7 @@ positional arguments:
     clean        Remove unused packages and caches.
     config       Modify configuration values in .condarc. This is modeled
                  after the git config command. Writes to the user .condarc
-                 file (/home/wqshao/.condarc) by default.
+                 file (/home/xxx/.condarc) by default.
     create       Create a new conda environment from a list of specified
                  packages.
     help         Displays a list of available conda commands and their help

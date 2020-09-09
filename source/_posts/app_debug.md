@@ -385,9 +385,9 @@ Restarting Visual Studio Code may be required to apply color and file icon theme
             "name": "(gdb) Launch",
             "type": "cppdbg",
             "request": "launch",
-            "program": "/home/wqshao/work/jpeg/jpeg_vgtp_tuning/build/bin/tunning_vgtp_codec",
+            "program": "/home/xxx/work/jpeg/jpeg_vgtp_tuning/build/bin/tunning_vgtp_codec",
             "args": [
-                "-a", "-f", "/home/wqshao/Pictures/test_yuv/app_JDshopping_1080p_30fps_444_295.yuv",
+                "-a", "-f", "/home/xxx/Pictures/test_yuv/app_JDshopping_1080p_30fps_444_295.yuv",
                 "-r", "1920x1080", "-c", "20", "-s", "0", "-m", "0"
             ],
             "stopAtEntry": true,

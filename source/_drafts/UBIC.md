@@ -35,7 +35,7 @@ iocgrdesc: 5 1 9 2 a1 1 9 1 a1 0 5 9 19 1 29 3 15 0 25 1 95 8 75 1 81 2 5 1 9 30
 
 ```
 =====>(master)$sudo ./hid-example
-[sudo] password for wqshao:
+[sudo] password for xxx:
 Report Descriptor Size: 46
 Report Descriptor:
 5 1 9 2 a1 1 9 1 a1 0 5 9 19 1 29 3 15 0 25 1 95 8 75 1 81 2 5 1 9 30 9 31 9 38 15 81 25 7f 75 8 95 3 81 6 c0 c0
