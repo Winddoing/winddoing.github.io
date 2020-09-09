@@ -217,6 +217,11 @@ Could not initialize SDL(x11 not available) - exiting
 
 在配置中使能SDL：`--enable-sdl`
 
+
+# 实例
+
+虚拟机配置文件：[ubuntu20.04](/src/ubuntu20.04.xml)
+
 # 参考
 
 - [Domain XML format](https://libvirt.org/formatdomain.html)
