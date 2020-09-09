@@ -8,7 +8,7 @@ comments: false
 ## ARM
 * [Programmer’s Guide for ARMv8-A](/downloads/arm/DEN0024A_v8_architecture_PG.pdf)
 * [ARM Technical Support Knowledge Articles](http://infocenter.arm.com/help/basic/help.jsp?topic=/com.arm.doc.dui0204ic/CJAJIIGG.html) --- ARM相关手册
-* **[ARMv8®体系结构参考手册](https://dev.tencent.com/u/Winddoing/p/blog_docs/git/raw/master/DDI0487D_a_armv8_arm.pdf)** --- DDI0487D_a_armv8_arm.pdf
+* **[ARMv8®体系结构参考手册](https://gitee.com/winddoing/docs/raw/master/arch/arm/DDI0487D_a_armv8_arm.pdf)** --- DDI0487D_a_armv8_arm.pdf
 
 ## uboot
 * [uboot启动流程.pdf](/downloads/uboot/uboot启动流程.pdf)
@@ -65,6 +65,8 @@ comments: false
 ## 多媒体
 * [JPEG-图像压缩编码](/downloads/jpeg/itu-t81.pdf)
 
+## 云计算
+* [Nutanix圣经](https://gitee.com/winddoing/docs/raw/master/clouds/nutanix/nutanix-bible-cn.pdf)
 
 ## 应用工具
 

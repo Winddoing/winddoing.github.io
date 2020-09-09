@@ -9,7 +9,7 @@
 PWD=`pwd`
 
 DIR="$PWD/resource"
-SRC_DIR="software_tools blog_docs"
+SRC_DIR="tools docs"
 URL="https://gitee.com/winddoing"
 
 if [ ! -d $DIR ]; then
