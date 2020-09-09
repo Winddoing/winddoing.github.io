@@ -16,6 +16,7 @@ comments: false
 ## Kernel
 * [sk_buff详解.pdf](/downloads/kernel/sk_buff详解.pdf)
 * [spin lock(Ticket lock: A fair lock)](/downloads/kernel/spinlock/mcs.pdf)
+* [Linux 内核揭秘](https://xinqiu.gitbooks.io/linux-insides-cn/content/index.html)
 
 ## Linux
 * [LTP使用说明](/downloads/linux/LTP使用说明.doc)
@@ -57,6 +58,8 @@ comments: false
 ## 书
 * [Linux Device Drivers, 2nd Edition](https://www.xml.com/ldd/chapter/book)
 * [Linux Device Drivers, 3nd Edition](https://lwn.net/Kernel/LDD3/)
+* [LDD-LinuxDeviceDrivers](https://github.com/gatieme/LDD-LinuxDeviceDrivers)
+* [编程之法：面试和算法心得](https://github.com/julycoding/The-Art-Of-Programming-By-July/blob/master/ebook/zh/Readme.md)
 
 ## Code
 * [保证嵌入式系统的代码质量](http://www-01.ibm.com/software/cn/rational/events/download/pdf/1123SH_3.pdf)|[local](docs/保证嵌入式系统的代码质量.pdf)|
@@ -71,3 +74,7 @@ comments: false
 ## 应用工具
 
 * [DisplayX显示器测试](tools/exe/DisplayX显示器测试.exe)
+
+
+## 其他
+* [免费的编程中文书籍索引](https://github.com/justjavac/free-programming-books-zh_CN)
