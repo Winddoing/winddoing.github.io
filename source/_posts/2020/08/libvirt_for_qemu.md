@@ -199,8 +199,6 @@ error: internal error: cannot load AppArmor profile 'libvirt-39466e8a-545d-420e-
 ```
 解决方法：在`/etc/apparmor.d/usr.sbin.libvirtd`配置文件中添加`/usr/local/bin/* rmix,`
 
-
-
 ### SDL
 
 ```
@@ -217,6 +215,13 @@ Could not initialize SDL(x11 not available) - exiting
 
 在配置中使能SDL：`--enable-sdl`
 
+## 异常错误
+
+### mlock
+
+```
+qemu-system-x86_64: -realtime mlock=off: warning: '-realtime mlock=...' is deprecated, please use '-overcommit mem-lock=...' instead
+```
 
 # 实例
 
@@ -267,3 +272,4 @@ rm page.txt fff.txt -rf
 - [Changing libvirt emulator: Permission denied](https://unix.stackexchange.com/questions/471345/changing-libvirt-emulator-permission-denied)
 - [虚拟化技术之kvm管理工具virsh常用基础命令（一）](https://www.cnblogs.com/qiuhom-1874/p/13508231.html)
 - [编译qemu和libvirt使支持SDL](https://blog.csdn.net/jiuzuidongpo/article/details/44342509)
+- [Virtualization - libvirt](https://discourse.ubuntu.com/t/virtualization-libvirt/11522/1)
