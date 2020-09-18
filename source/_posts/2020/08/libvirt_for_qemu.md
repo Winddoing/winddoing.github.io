@@ -38,6 +38,14 @@ TriggeredBy: ● libvirtd-admin.socket
              ├─1412 /usr/sbin/dnsmasq --conf-file=/var/lib/libvirt/dnsmasq/default.conf --leasefile-ro --dhcp-script=/usr/lib/libvirt/libvirt_leaseshelper
              └─1413 /usr/sbin/dnsmasq --conf-file=/var/lib/libvirt/dnsmasq/default.conf --leasefile-ro --dhcp-script=/usr/lib/libvirt/libvirt_leaseshelper
 ```
+
+主要提供的功能包括：
+- 虚拟机生命周期管理：包括不同的领域生命周期操作，比如：启动、停止、暂停、保存、恢复和迁移。支持多种设备类型的热插拔操作，包括：磁盘、网卡、内存和CPU。
+- 本地&&远程访问：通过在本地运行libvirt daemon,本机和远程机器，都可以访问并使用libvirt的功能。远程一般通过简单配置SSH即可。
+- 存储管理：除了虚拟机管理，任何运行了libvirt daemon的主机都可以用来管理不同类型的存储：创建不同格式的文件镜像（qcow2、vmdk、raw等）、挂接NFS共享、列出现有的LVM卷组、创建新的LVM卷组和逻辑卷、对未处理过的磁盘设备分区、挂接iSCSI共享等。
+- 虚拟网络管理：可以用来管理和创建虚拟网络，管理物理和逻辑的网络接口。
+
+
 ## 配置文件
 
 libvirtd服务的配置文件: `/etc/libvirt/libvirtd.conf`
@@ -226,6 +234,10 @@ qemu-system-x86_64: -realtime mlock=off: warning: '-realtime mlock=...' is depre
 # 实例
 
 虚拟机配置文件：[ubuntu20.04](/src/ubuntu20.04.xml)
+
+## 域——domain
+
+
 
 
 # 升级libvirt

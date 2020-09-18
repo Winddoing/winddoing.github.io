@@ -94,7 +94,7 @@ virsh命令与代码结构之间的关系：
 | virsh-snapshot.c       | snapshotCmds          | virsh snapshot-XX    |
 | virsh-volume.c         | storageVolCmds        | virsh vol-XX         |
 
-有了上面的表格我们就能够根据使用的**virsh命令**找到对应文件的对应**vshCmdDef变量**，在virsh中相关命令实现与具体API的调用文件相对于`tools/virsh-domain.c` <--> `src/libvirt-domain.c`
+有了上面的表格我们就能够根据使用的**virsh命令**找到对应文件的对应**vshCmdDef变量**，在virsh中相关命令实现与具体API的调用文件相对于`tools/virsh-domain.c` <=> `src/libvirt-domain.c`
 
 > 一个`vshCmdDef`结构对应一个`virsh`命令，其中`vshCmdOptDef`定义了命令的参数，`vshCmdInfo`定义了命令的帮助信息，`bool (*handler) (vshControl *, const vshCmd *)`定义了命令的处理函数。
 
