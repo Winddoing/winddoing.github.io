@@ -70,6 +70,7 @@ comments: false
 
 ## 云计算
 * [Nutanix圣经](https://gitee.com/winddoing/docs/raw/master/clouds/nutanix/nutanix-bible-cn.pdf)
+* [Libvirt Qemu KVM 教程大全](https://gitee.com/winddoing/docs/raw/master/libvirt/LibvirtQemuKVM.pdf)<sup>[pptx](files.cnblogs.com/popsuper1982/LibvirtQemuKVM.pptx)</sup>
 
 ## 应用工具
 
