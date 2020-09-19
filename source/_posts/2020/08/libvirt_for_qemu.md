@@ -237,7 +237,7 @@ qemu-system-x86_64: -realtime mlock=off: warning: '-realtime mlock=...' is depre
 
 ## 域——domain
 
-
+## 池——pool
 
 
 # 升级libvirt
