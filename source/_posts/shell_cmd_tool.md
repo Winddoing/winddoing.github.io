@@ -13,6 +13,12 @@ abbrlink: 1644
 
 <!-- more -->
 
+## 删除所有文件行尾空格
+
+``` shell
+find source/_posts/ -name "*.md" | xargs sed -i 's/[ ]*$//g'
+```
+
 ## 判断进程在哪个CPU核运行的方法
 
 ### ps
