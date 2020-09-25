@@ -21,7 +21,7 @@ abbrlink: 50889
 
 ## ticket spinlocks
 
-> ARM平台为例，Linux4.4  
+> ARM平台为例，Linux4.4
 
 一个自旋锁变成了`32位`数，分成两个部分：
 
@@ -58,11 +58,11 @@ typedef struct {
 |:--:|:--|:--|
 | prfm  | Prefetch Memory (register)预取  |   |
 | stxr | 赋值存储，并保存存储状态  | STXR <Ws>, <Wt>, [Xn{,#0}]，将Wt写入Xn中，并保存写入状态到Ws    |
-| cbnz  | 不等于0  |   |  
+| cbnz  | 不等于0  |   |
 | cbz  | 等于0  |   |
 | sevl  | Send Event Local是一个提示指令，它使事件在本地发出信号，而不需要将事件通知多处理器系统中的其他PE。 它可以启动一个以WFE指令开始的等待循环。 |   |
 | ldaxrh   |Load-Acquire Exclusive Register Halfword, 从存储器加载半字，对其进行零扩展并将其写入寄存器, | LDAXRH <Wt>, [Xn{,#0}], 将Xn赋值给Wt   |
-| staddlh  | Atomic add on halfword in memory  | STADDH <Ws>, [Xn]，Xn加Ws并保存到Xn  |  
+| staddlh  | Atomic add on halfword in memory  | STADDH <Ws>, [Xn]，Xn加Ws并保存到Xn  |
 | ldadda   | Atomic add on word or doubleword in memory  |   |   |
 
 

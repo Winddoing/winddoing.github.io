@@ -38,5 +38,5 @@ sed -i 's/sockhandle/sock/g' aa.c
 grep "sockhandle" . -rl | xargs sed -i 's/sockhandle/sock/g'
 ```
 > `-rl`: 列出文件内容符合指定的范本样式的文件名称
-> 
+>
 > `-rn`: 在显示符合范本样式的那一列之前，标示出该列的列数编号

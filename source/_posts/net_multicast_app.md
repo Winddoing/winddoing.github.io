@@ -176,21 +176,21 @@ ret = connect(fd, (const struct sockaddr *)&remoteAddr, sizeof(remoteAddr));
 ``` C
 struct sockaddr_in remoteAddr;
 
-memset(remoteAddr.sin_zero, 0, sizeof(remoteAddr.sin_zero));                                                             
-remoteAddr.sin_family = AF_INET;  /* 建立新的连接 */     
-//remoteAddr.sin_family = AF_INET;  /* 断开旧的连接 */                                                                     
-inet_pton(AF_INET,player->rtpUdp.rip, &remoteAddr.sin_addr);                                                             
-remoteAddr.sin_port = htons(player->rtpUdp.rport);   //port: 0                                                                    
-do {                                                                                                                     
-    ret = connect(player->rtpUdp.fd,(struct sockaddr *)&remoteAddr,remoteAddrLen);                                       
-} while(ret == -1 && errno == EINTR);  
+memset(remoteAddr.sin_zero, 0, sizeof(remoteAddr.sin_zero));
+remoteAddr.sin_family = AF_INET;  /* 建立新的连接 */
+//remoteAddr.sin_family = AF_INET;  /* 断开旧的连接 */
+inet_pton(AF_INET,player->rtpUdp.rip, &remoteAddr.sin_addr);
+remoteAddr.sin_port = htons(player->rtpUdp.rport);   //port: 0
+do {
+    ret = connect(player->rtpUdp.fd,(struct sockaddr *)&remoteAddr,remoteAddrLen);
+} while(ret == -1 && errno == EINTR);
 ```
 
 
 ```
 # netstat -n
 Active Internet connections (w/o servers)
-Proto Recv-Q Send-Q Local Address           Foreign Address         State       
+Proto Recv-Q Send-Q Local Address           Foreign Address         State
 tcp        0      0 192.168.100.3:40964     192.168.100.2:7236      ESTABLISHED
 udp        0      0 239.0.0.11:15550        192.168.100.2:*         ESTABLISHED   #Foreign port: 0
 udp        0      0 239.0.0.11:15551        192.168.100.2:1         ESTABLISHED
@@ -211,7 +211,7 @@ udp        0      0 239.0.0.11:15551        192.168.100.2:1         ESTABLISHED
 
 ``` shell
 # ifconfig
-wlan0     Link encap:Ethernet  HWaddr 04:E6:76:C3:63:DC  
+wlan0     Link encap:Ethernet  HWaddr 04:E6:76:C3:63:DC
           inet addr:192.168.100.2  Bcast:192.168.100.255  Mask:255.255.255.0
           UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
           RX packets:1413 errors:0 dropped:0 overruns:0 frame:0

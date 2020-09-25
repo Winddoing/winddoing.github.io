@@ -130,14 +130,14 @@ GRUB_DISABLE_RECOVERY="true"
 
 > 在Linux4.15中使用`crashkernel=auto`，内核将通过`memblock_find_in_range`自动计算小内核的内存大小和起始位置，但是有些内核可能不支持，需要手动指定大小
 > ``` C
->  if (!high)                                                             
-     crash_base = memblock_find_in_range(CRASH_ALIGN,                   
-                 CRASH_ADDR_LOW_MAX,                                    
-                 crash_size, CRASH_ALIGN);                              
- if (!crash_base)                                                       
-     crash_base = memblock_find_in_range(CRASH_ALIGN,                   
-                 CRASH_ADDR_HIGH_MAX,                                   
-                 crash_size, CRASH_ALIGN);                              
+>  if (!high)
+     crash_base = memblock_find_in_range(CRASH_ALIGN,
+                 CRASH_ADDR_LOW_MAX,
+                 crash_size, CRASH_ALIGN);
+ if (!crash_base)
+     crash_base = memblock_find_in_range(CRASH_ALIGN,
+                 CRASH_ADDR_HIGH_MAX,
+                 crash_size, CRASH_ALIGN);
 > ```
 > file：arch/x86/kernel/setup.c
 

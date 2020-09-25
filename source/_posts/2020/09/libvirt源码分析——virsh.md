@@ -101,20 +101,20 @@ virsh命令与代码结构之间的关系：
 ### domManagementCmds
 
 ``` C
-const vshCmdDef domManagementCmds[] = {             
-    {.name = "attach-device",                       
-     .handler = cmdAttachDevice,                    
-     .opts = opts_attach_device,                    
-     .info = info_attach_device,                    
-     .flags = 0                                     
-    },                                              
+const vshCmdDef domManagementCmds[] = {
+    {.name = "attach-device",
+     .handler = cmdAttachDevice,
+     .opts = opts_attach_device,
+     .info = info_attach_device,
+     .flags = 0
+    },
     ...
-    {.name = "start",                   
-     .handler = cmdStart,               
-     .opts = opts_start,                
-     .info = info_start,                
-     .flags = 0                         
-    },                                  
+    {.name = "start",
+     .handler = cmdStart,
+     .opts = opts_start,
+     .info = info_start,
+     .flags = 0
+    },
     ...
 ```
 > file: tools/virsh-domain.c
@@ -126,14 +126,14 @@ virst start vm-name
 start命令的处理流程是`cmdStart`
 
 ``` C
-static bool                                       
-cmdStart(vshControl *ctl, const vshCmd *cmd)      
-{                                                 
+static bool
+cmdStart(vshControl *ctl, const vshCmd *cmd)
+{
     ...
-    if ((nfds ?                                               
-         virDomainCreateWithFiles(dom, nfds, fds, flags) :    
-         virDomainCreateWithFlags(dom, flags)) == 0)          
-        goto started;                                         
+    if ((nfds ?
+         virDomainCreateWithFiles(dom, nfds, fds, flags) :
+         virDomainCreateWithFlags(dom, flags)) == 0)
+        goto started;
     ...
 }
 ```
@@ -177,9 +177,9 @@ virDomainCreateWithFlags
 ```
 或
 ``` xml
-<qemu:commandline xmlns:qemu='http://libvirt.org/schemas/domain/qemu/1.0'>     
-  <qemu:arg value='ARGUMENT'/>                                                 
-</qemu:commandline>                                                            
+<qemu:commandline xmlns:qemu='http://libvirt.org/schemas/domain/qemu/1.0'>
+  <qemu:arg value='ARGUMENT'/>
+</qemu:commandline>
 ```
 
 在xml配置文件中必须指定`<domain type='kvm' xmlns:qemu='http://libvirt.org/schemas/domain/qemu/1.0'>`,因为默认的`<domain type='kvm'>`不支持`qemu:commandline`的标签

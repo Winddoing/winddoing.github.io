@@ -33,7 +33,7 @@ date: 2018-03-08 23:07:24
 [  128.660245] [<800d9358>] handle_mm_fault+0xdc/0x11c
 [  128.667406] [<800298d8>] do_page_fault+0x158/0x480
 [  128.674477] [<8001a784>] resume_userspace_check+0x0/0x10
-[  128.684178] 
+[  128.684178]
 [  128.687833] Mem-Info:
 [  128.692287] Normal per-cpu:
 [  128.699351] CPU    0: hi:   90, btch:  15 usd:  32

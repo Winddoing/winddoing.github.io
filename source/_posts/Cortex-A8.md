@@ -39,7 +39,7 @@ date: 2016-09-11 23:07:24
 #!/bin/bash
 MY_PWD=`pwd`
 
-PATH=$PATH:$MY_PWD/gcc-arm-none-eabi-5_4-2016q2/bin          
+PATH=$PATH:$MY_PWD/gcc-arm-none-eabi-5_4-2016q2/bin
 CROSS_COMPILE=arm-none-eabi-
 
 export PATH CROSS_COMPILE

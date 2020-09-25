@@ -47,15 +47,15 @@ unzip cpolar-stable-linux-amd64.zip
 ```
 
 ```
-cpolar by @bestexpresser                                                          
+cpolar by @bestexpresser
 
-Tunnel Status                 online                                              
-Account                       xxx (Plan: Free)                              
-Version                       2.62/2.58                                           
-Web Interface                 127.0.0.1:4040                                      
-Forwarding                    tcp://1.tcp.cpolar.io:1111 -> tcp://127.0.0.1:22   
-# Conn                        0                                                   
-Avg Conn Time                 0.00ms                                              
+Tunnel Status                 online
+Account                       xxx (Plan: Free)
+Version                       2.62/2.58
+Web Interface                 127.0.0.1:4040
+Forwarding                    tcp://1.tcp.cpolar.io:1111 -> tcp://127.0.0.1:22
+# Conn                        0
+Avg Conn Time                 0.00ms
 ```
 
 ### 远程连接访问

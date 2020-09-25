@@ -35,8 +35,8 @@ PKG_CHECK_MODULES([SDL2], [sdl2])
 
 执行`autogen.sh`生成configure和config.log等，在`config.log`中将生成：
 ```
-SDL2_CFLAGS='-D_REENTRANT -I/usr/include/SDL2'     
-SDL2_LIBS='-lSDL2'                                 
+SDL2_CFLAGS='-D_REENTRANT -I/usr/include/SDL2'
+SDL2_LIBS='-lSDL2'
 ```
 ### 编辑Makefile.am
 

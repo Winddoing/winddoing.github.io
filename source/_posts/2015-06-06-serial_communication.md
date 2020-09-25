@@ -35,143 +35,143 @@ abbrlink: 15606
 ### 串口的参数配置
 
 ```
-        int set_opt(int fd, int nSpeed, int nBits, char nEvent, int nStop)  
-        {  
-            struct termios newtio;  
-            struct termios oldtio;  
+        int set_opt(int fd, int nSpeed, int nBits, char nEvent, int nStop)
+        {
+            struct termios newtio;
+            struct termios oldtio;
 
-            if(tcgetattr(fd,&oldtio) != 0)  
-            {  
-                perror("SetupSerial 2");  
-                return -1;  
-            }  
+            if(tcgetattr(fd,&oldtio) != 0)
+            {
+                perror("SetupSerial 2");
+                return -1;
+            }
 
-            bzero(&newtio,sizeof(newtio));  
-            newtio.c_cflag |= CLOCAL |CREAD;  
-            newtio.c_cflag &= ~CSIZE;  
+            bzero(&newtio,sizeof(newtio));
+            newtio.c_cflag |= CLOCAL |CREAD;
+            newtio.c_cflag &= ~CSIZE;
 
-            switch(nBits)  
-            {  
-                case 7:  
-                    newtio.c_cflag |= CS7;  
-                    break;  
-                case 8:  
-                    newtio.c_cflag |= CS8;  
-                    break;      
-            }  
+            switch(nBits)
+            {
+                case 7:
+                    newtio.c_cflag |= CS7;
+                    break;
+                case 8:
+                    newtio.c_cflag |= CS8;
+                    break;
+            }
 
-            switch(nEvent)  
-            {  
-                case 'O':  
-                    newtio.c_cflag |= PARENB;  
-                    newtio.c_cflag |= PARODD;  
-                    newtio.c_iflag |= (INPCK | ISTRIP);  
-                    break;  
-                case 'E':  
-                    newtio.c_iflag |= (INPCK |ISTRIP);  
-                    newtio.c_cflag |= PARENB;  
-                    newtio.c_cflag &= ~PARODD;  
-                    break;  
-                case 'N':  
-                    newtio.c_cflag &= ~PARENB;  
-                    break;  
-            }  
+            switch(nEvent)
+            {
+                case 'O':
+                    newtio.c_cflag |= PARENB;
+                    newtio.c_cflag |= PARODD;
+                    newtio.c_iflag |= (INPCK | ISTRIP);
+                    break;
+                case 'E':
+                    newtio.c_iflag |= (INPCK |ISTRIP);
+                    newtio.c_cflag |= PARENB;
+                    newtio.c_cflag &= ~PARODD;
+                    break;
+                case 'N':
+                    newtio.c_cflag &= ~PARENB;
+                    break;
+            }
 
-            switch(nSpeed)  
-            {  
-                case 2400:  
-                    cfsetispeed(&newtio,B2400);  
-                    cfsetospeed(&newtio,B2400);  
-                    break;  
-                case 4800:  
-                    cfsetispeed(&newtio,B4800);  
-                    cfsetospeed(&newtio,B4800);  
-                    break;  
-                case 9600:  
-                    cfsetispeed(&newtio,B9600);  
-                    cfsetospeed(&newtio,B9600);  
-                    break;  
-                case 115200:  
-                    cfsetispeed(&newtio,B115200);  
-                    cfsetospeed(&newtio,B115200);  
-                    break;  
-                case 460800:  
-                    cfsetispeed(&newtio,B460800);  
-                    cfsetospeed(&newtio,B460800);  
-                    break;            
-                default:  
-                    cfsetispeed(&newtio,B9600);  
-                    cfsetospeed(&newtio,B9600);  
-                    break;  
-            }  
+            switch(nSpeed)
+            {
+                case 2400:
+                    cfsetispeed(&newtio,B2400);
+                    cfsetospeed(&newtio,B2400);
+                    break;
+                case 4800:
+                    cfsetispeed(&newtio,B4800);
+                    cfsetospeed(&newtio,B4800);
+                    break;
+                case 9600:
+                    cfsetispeed(&newtio,B9600);
+                    cfsetospeed(&newtio,B9600);
+                    break;
+                case 115200:
+                    cfsetispeed(&newtio,B115200);
+                    cfsetospeed(&newtio,B115200);
+                    break;
+                case 460800:
+                    cfsetispeed(&newtio,B460800);
+                    cfsetospeed(&newtio,B460800);
+                    break;
+                default:
+                    cfsetispeed(&newtio,B9600);
+                    cfsetospeed(&newtio,B9600);
+                    break;
+            }
 
-            if(nStop == 1){  
-                newtio.c_cflag &= ~CSTOPB;  
-            }  
-            else if(nStop ==2){  
-                newtio.c_cflag |= CSTOPB;  
-            }  
-            newtio.c_cc[VTIME] = 0;  
-            newtio.c_cc[VMIN] = 0;  
+            if(nStop == 1){
+                newtio.c_cflag &= ~CSTOPB;
+            }
+            else if(nStop ==2){
+                newtio.c_cflag |= CSTOPB;
+            }
+            newtio.c_cc[VTIME] = 0;
+            newtio.c_cc[VMIN] = 0;
 
-            tcflush(fd,TCIFLUSH);  
-            if((tcsetattr(fd,TCSANOW,&newtio)) != 0)  
-            {  
-                perror("com set error");  
-                return -1;  
-            }  
-            printf("set done!\n");  
-            return 0;  
-        }  
+            tcflush(fd,TCIFLUSH);
+            if((tcsetattr(fd,TCSANOW,&newtio)) != 0)
+            {
+                perror("com set error");
+                return -1;
+            }
+            printf("set done!\n");
+            return 0;
+        }
 
-        int open_port(int fd,int comport)  
-        {  
-            char *dev[]={"/dev/ttySAC0","/dev/ttySAC1","/dev/ttySAC2"};  
-            long vdisable;  
-            if(comport == 1)  
-            {  
-                fd = open("/dev/ttySAC0",O_RDWR|O_NOCTTY|O_NDELAY);  
-                if(fd == -1){  
-                    perror("Can't Open Serial Port");  
-                    return -1;  
-                }  
-            }  
+        int open_port(int fd,int comport)
+        {
+            char *dev[]={"/dev/ttySAC0","/dev/ttySAC1","/dev/ttySAC2"};
+            long vdisable;
+            if(comport == 1)
+            {
+                fd = open("/dev/ttySAC0",O_RDWR|O_NOCTTY|O_NDELAY);
+                if(fd == -1){
+                    perror("Can't Open Serial Port");
+                    return -1;
+                }
+            }
 
-            else if(comport == 2)  
-            {  
-                fd = open("/dev/ttySAC1",O_RDWR|O_NOCTTY|O_NDELAY);  
-                if(fd == -1){  
-                    perror("Can't Open Serial Port");  
-                    return -1;  
-                }  
-            }  
+            else if(comport == 2)
+            {
+                fd = open("/dev/ttySAC1",O_RDWR|O_NOCTTY|O_NDELAY);
+                if(fd == -1){
+                    perror("Can't Open Serial Port");
+                    return -1;
+                }
+            }
 
-            else if(comport == 3)  
-            {  
-                fd = open("/dev/ttySAC2",O_RDWR|O_NOCTTY|O_NDELAY);  
-                if(fd == -1){  
-                    perror("Can't Open Serial Port");  
-                    return -1;  
-                }  
-            }  
+            else if(comport == 3)
+            {
+                fd = open("/dev/ttySAC2",O_RDWR|O_NOCTTY|O_NDELAY);
+                if(fd == -1){
+                    perror("Can't Open Serial Port");
+                    return -1;
+                }
+            }
 
-            if(fcntl(fd,F_SETFL,0) < 0){  
-                printf("fcntl failed\n");  
-            }  
-            else{  
-                printf("fcntl=%d\n",fcntl(fd,F_SETFL,0));  
-            }  
+            if(fcntl(fd,F_SETFL,0) < 0){
+                printf("fcntl failed\n");
+            }
+            else{
+                printf("fcntl=%d\n",fcntl(fd,F_SETFL,0));
+            }
 
-            if(isatty(STDIN_FILENO) == 0){  
-                printf("standard input is not a terminal device\n");  
-            }  
-            else{  
-                printf("isatty sucess!\n");  
-            }  
+            if(isatty(STDIN_FILENO) == 0){
+                printf("standard input is not a terminal device\n");
+            }
+            else{
+                printf("isatty sucess!\n");
+            }
 
-            printf("fd-open=%d\n",fd);  
-            return fd;  
-        }  
+            printf("fd-open=%d\n",fd);
+            return fd;
+        }
 ```
 
 ###接收串口数据
@@ -180,7 +180,7 @@ abbrlink: 15606
 
 ### 发送串口数据
 
-    nwrite = write(fd,buff,length);  
+    nwrite = write(fd,buff,length);
 
 ### 实际应用
 上面两个程序可以完成数据的收发，在具体的项目中在串口的数据传输中多种数据的传输时，会涉及到一些简单的数据处理，需要自定义一些协议。这时串口数据的收发必须精确的每个字符，不能多一个也不能少一个。
@@ -191,32 +191,32 @@ read、write函数，它们读写的字符必须精准，在write时写入数据
 
 ```
         char Speaker(char CMD,char par,char * pString)
-        {  
-            char headOfFrame[5];  
-            char length;         //定义字符串长度  
-            char ecc = 0;        //定义校验字节  
-            int i = 0;   
-            if (pString == NULL) //空字符串   
-                return 1;        
-            headOfFrame[0]=0XFD;       //构造帧头FD  
+        {
+            char headOfFrame[5];
+            char length;         //定义字符串长度
+            char ecc = 0;        //定义校验字节
+            int i = 0;
+            if (pString == NULL) //空字符串
+                return 1;
+            headOfFrame[0]=0XFD;       //构造帧头FD
             headOfFrame[1]=0X00;       //构造数据区长度的高字节
-            length = strlen(pString);  //需要发送文本的长度  
-            headOfFrame[2]=length+3;   //构造数据区长度的低字节  
-            headOfFrame[3]=CMD;        //构造命令字：合成播放命令  
-            headOfFrame[4]=par;        //构造命令参数：编码格式为GB2312   
-            for(i=0;i<5;i++)           //依次发送构造好的5个帧头字节  
-            {    
-                ecc=ecc^(headOfFrame[i]); //对发送的字节进行异或校验     
-                write(fd,&headOfFrame[i],1);  
-            }
-            for(i=0;i<length;i++)         //依次发送待合成的文本数据   
+            length = strlen(pString);  //需要发送文本的长度
+            headOfFrame[2]=length+3;   //构造数据区长度的低字节
+            headOfFrame[3]=CMD;        //构造命令字：合成播放命令
+            headOfFrame[4]=par;        //构造命令参数：编码格式为GB2312
+            for(i=0;i<5;i++)           //依次发送构造好的5个帧头字节
             {
-                ecc=ecc^(*pString);   
+                ecc=ecc^(headOfFrame[i]); //对发送的字节进行异或校验
+                write(fd,&headOfFrame[i],1);
+            }
+            for(i=0;i<length;i++)         //依次发送待合成的文本数据
+            {
+                ecc=ecc^(*pString);
                 write(fd,pString,1);
-                pString ++;   
+                pString ++;
             }
 
             write(fd,&ecc,1);    //最后发送校验和
             return 0; //成功返回0
-        }  
+        }
 ```

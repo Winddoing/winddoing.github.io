@@ -93,10 +93,10 @@ sudo udevadm trigger
 
 ``` shell
 sudo loginctl list-seats
-SEAT            
-seat-1          
-seat-2                   
-seat0           
+SEAT
+seat-1
+seat-2
+seat0
 
 3 seats listed.
 ```

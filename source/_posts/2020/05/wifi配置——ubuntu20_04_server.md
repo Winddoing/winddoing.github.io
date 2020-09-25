@@ -61,7 +61,7 @@ graphical.target reached after 2min 14.410s in userspace
 ```
 
 ``` shell
-$systemd-analyze blame   
+$systemd-analyze blame
 2min 213ms systemd-networkd-wait-online.service
     7.145s docker.service
 ```
@@ -81,35 +81,35 @@ TimeoutStartSec=30
 通过系统启动日志，发现网络配置存在异常，可能是导致IPv6网络配置失败的原因
 
 ```
-May 24 22:36:39 ubuntu NetworkManager[874]: <warn>  [1590330999.7653] device (wlp3s0): re-acquiring supplicant interface (#1).                    
-May 24 22:36:39 ubuntu systemd-networkd[816]: wlp3s0: Lost carrier                                                                                
-May 24 22:36:39 ubuntu systemd-networkd[816]: wlp3s0: Gained carrier                                                                              
-May 24 22:36:39 ubuntu systemd[1]: NetworkManager-dispatcher.service: Succeeded.                                                                  
-May 24 22:36:39 ubuntu wpa_supplicant[897]: ctrl_iface exists and seems to be in use - cannot override it                                         
-May 24 22:36:39 ubuntu wpa_supplicant[897]: Delete '/run/wpa_supplicant/wlp3s0' manually if it is not used anymore                                
-May 24 22:36:39 ubuntu wpa_supplicant[897]: Failed to initialize control interface '/run/wpa_supplicant'.                                         
-                                            You may have another wpa_supplicant process already running or the file was                           
-                                            left by an unclean termination of wpa_supplicant in which case you will need                          
-                                            to manually remove this file before starting wpa_supplicant again.                                    
-May 24 22:36:39 ubuntu systemd-networkd[816]: wlp3s0: Lost carrier                                                                                
-May 24 22:36:39 ubuntu systemd-networkd[816]: wlp3s0: Gained carrier                                                                              
-May 24 22:36:39 ubuntu wpa_supplicant[897]: nl80211: deinit ifname=wlp3s0 disabled_11b_rates=0                                                    
-May 24 22:36:39 ubuntu NetworkManager[874]: <error> [1590330999.9224] sup-iface[0x558f502f31f0,wlp3s0]: error adding interface: wpa_supplicant    
-couldn't grab this interface.                                                                                                                     
-May 24 22:36:39 ubuntu NetworkManager[874]: <info>  [1590330999.9225] device (wlp3s0): supplicant interface state: starting -> down               
-May 24 22:36:42 ubuntu snapd[891]: stateengine.go:150: state ensure error: decode new commands catalog: net/http: request canceled (Client.       
-Timeout exceeded while reading body)                                                                                                              
-May 24 22:36:49 ubuntu NetworkManager[874]: <warn>  [1590331009.7629] device (wlp3s0): re-acquiring supplicant interface (#2).                    
-May 24 22:36:49 ubuntu systemd-networkd[816]: wlp3s0: Lost carrier                                                                                
-May 24 22:36:49 ubuntu systemd-networkd[816]: wlp3s0: Gained carrier                                                                              
-May 24 22:36:49 ubuntu wpa_supplicant[897]: ctrl_iface exists and seems to be in use - cannot override it                                         
-May 24 22:36:49 ubuntu wpa_supplicant[897]: Delete '/run/wpa_supplicant/wlp3s0' manually if it is not used anymore                                
-May 24 22:36:49 ubuntu wpa_supplicant[897]: Failed to initialize control interface '/run/wpa_supplicant'.                                         
-                                            You may have another wpa_supplicant process already running or the file was                           
-                                            left by an unclean termination of wpa_supplicant in which case you will need                          
-                                            to manually remove this file before starting wpa_supplicant again.                                    
-May 24 22:36:49 ubuntu systemd-networkd[816]: wlp3s0: Lost carrier                                                                                
-May 24 22:36:49 ubuntu systemd-networkd[816]: wlp3s0: Gained carrier                                                                              
+May 24 22:36:39 ubuntu NetworkManager[874]: <warn>  [1590330999.7653] device (wlp3s0): re-acquiring supplicant interface (#1).
+May 24 22:36:39 ubuntu systemd-networkd[816]: wlp3s0: Lost carrier
+May 24 22:36:39 ubuntu systemd-networkd[816]: wlp3s0: Gained carrier
+May 24 22:36:39 ubuntu systemd[1]: NetworkManager-dispatcher.service: Succeeded.
+May 24 22:36:39 ubuntu wpa_supplicant[897]: ctrl_iface exists and seems to be in use - cannot override it
+May 24 22:36:39 ubuntu wpa_supplicant[897]: Delete '/run/wpa_supplicant/wlp3s0' manually if it is not used anymore
+May 24 22:36:39 ubuntu wpa_supplicant[897]: Failed to initialize control interface '/run/wpa_supplicant'.
+                                            You may have another wpa_supplicant process already running or the file was
+                                            left by an unclean termination of wpa_supplicant in which case you will need
+                                            to manually remove this file before starting wpa_supplicant again.
+May 24 22:36:39 ubuntu systemd-networkd[816]: wlp3s0: Lost carrier
+May 24 22:36:39 ubuntu systemd-networkd[816]: wlp3s0: Gained carrier
+May 24 22:36:39 ubuntu wpa_supplicant[897]: nl80211: deinit ifname=wlp3s0 disabled_11b_rates=0
+May 24 22:36:39 ubuntu NetworkManager[874]: <error> [1590330999.9224] sup-iface[0x558f502f31f0,wlp3s0]: error adding interface: wpa_supplicant
+couldn't grab this interface.
+May 24 22:36:39 ubuntu NetworkManager[874]: <info>  [1590330999.9225] device (wlp3s0): supplicant interface state: starting -> down
+May 24 22:36:42 ubuntu snapd[891]: stateengine.go:150: state ensure error: decode new commands catalog: net/http: request canceled (Client.
+Timeout exceeded while reading body)
+May 24 22:36:49 ubuntu NetworkManager[874]: <warn>  [1590331009.7629] device (wlp3s0): re-acquiring supplicant interface (#2).
+May 24 22:36:49 ubuntu systemd-networkd[816]: wlp3s0: Lost carrier
+May 24 22:36:49 ubuntu systemd-networkd[816]: wlp3s0: Gained carrier
+May 24 22:36:49 ubuntu wpa_supplicant[897]: ctrl_iface exists and seems to be in use - cannot override it
+May 24 22:36:49 ubuntu wpa_supplicant[897]: Delete '/run/wpa_supplicant/wlp3s0' manually if it is not used anymore
+May 24 22:36:49 ubuntu wpa_supplicant[897]: Failed to initialize control interface '/run/wpa_supplicant'.
+                                            You may have another wpa_supplicant process already running or the file was
+                                            left by an unclean termination of wpa_supplicant in which case you will need
+                                            to manually remove this file before starting wpa_supplicant again.
+May 24 22:36:49 ubuntu systemd-networkd[816]: wlp3s0: Lost carrier
+May 24 22:36:49 ubuntu systemd-networkd[816]: wlp3s0: Gained carrier
 ```
 
 在系统的启动日志里，WiFi的配置被进行了两次，在第一次配置中日志显示ipv6地址获取成功，可能是第二次失败导致ipv6地址无法获取。
@@ -137,14 +137,14 @@ sudo systemctl disable NetworkManager.service
 在netplan的配置文件中有一个`renderer`字段将其指定为`networkd`，或许也可以解决上面的问题，没有进行验证，不过netplan手册说其是默认值。
 
 ```
-renderer (scalar)                                                                                                                              
-       Use  the  given  networking backend for this definition.  Currently supported are networkd and NetworkManager.  This property can be    
-       specified globally in networks:, for a device type (in e.  g.  ethernets:) or for a particular device definition.  Default  is  net‐    
-       workd.                                                                                                                                  
+renderer (scalar)
+       Use  the  given  networking backend for this definition.  Currently supported are networkd and NetworkManager.  This property can be
+       specified globally in networks:, for a device type (in e.  g.  ethernets:) or for a particular device definition.  Default  is  net‐
+       workd.
 
-       The renderer property has one additional acceptable value for vlan objects (i.  e.  defined in vlans:): sriov.  If a vlan is defined    
-       with the sriov renderer for an SR-IOV Virtual Function interface, this causes netplan to set up  a  hardware  VLAN  filter  for  it.    
-       There can be only one defined per VF.                                                                                                   
+       The renderer property has one additional acceptable value for vlan objects (i.  e.  defined in vlans:): sriov.  If a vlan is defined
+       with the sriov renderer for an SR-IOV Virtual Function interface, this causes netplan to set up  a  hardware  VLAN  filter  for  it.
+       There can be only one defined per VF.
 ```
 
 ## 参考

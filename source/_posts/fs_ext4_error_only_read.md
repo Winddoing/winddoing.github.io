@@ -23,13 +23,13 @@ Author: Vegard Nossum <vegard.nossum@oracle.com>
 Date:   Thu Jul 14 23:21:35 2016 -0400
 
     ext4: short-cut orphan cleanup on error
-    
+
     commit c65d5c6c81a1f27dec5f627f67840726fcd146de upstream.
-    
+
     If we encounter a filesystem error during orphan cleanup, we should stop.
     Otherwise, we may end up in an infinite loop where the same inode is
     processed again and again.
-    
+
         EXT4-fs (loop0): warning: checktime reached, running e2fsck is recommended
         EXT4-fs error (device loop0): ext4_mb_generate_buddy:758: group 2, block bitmap and bg descriptor inconsistent: 6117 vs 0 free clusters
         Aborting journal on device loop0-8.
@@ -47,7 +47,7 @@ Date:   Thu Jul 14 23:21:35 2016 -0400
         [...]
         EXT4-fs (loop0): Inode 16 (0000000061819bf0): orphan list check failed!
         [...]
-    
+
     See-also: c9eb13a9105 ("ext4: fix hang when processing corrupted orphaned inode list")
     Cc: Jan Kara <jack@suse.cz>
     Signed-off-by: Vegard Nossum <vegard.nossum@oracle.com>

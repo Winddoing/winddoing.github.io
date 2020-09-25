@@ -79,7 +79,7 @@ exit 0
 追加IP配置信息：
 ```
 interface eth0
-static ip_address=172.16.xx.xx/24       #配置IP地址  
+static ip_address=172.16.xx.xx/24       #配置IP地址
 static routers=172.16.xx.xx             #网关
 static domain_name_servers=172.16.xx.xx #DNS
 ```

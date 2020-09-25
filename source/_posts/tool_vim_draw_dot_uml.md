@@ -28,26 +28,26 @@ vi aaa.dot
 
 `graph`（无向图）或者`digraph`（无向图）表示图，然后`{}`中的内容是对图的描述，注释风格和C类似（“`//`”用于单行注释，`/**/`用于多行注释）。如一个无向图：
 ```
-//usr/bin/dot                                                                  
-graph graph1 {                                          
-    label = "this is a graph";                                                 
-    aa; bb;                                                                    
-    a -- b;                                     
+//usr/bin/dot
+graph graph1 {
+    label = "this is a graph";
+    aa; bb;
+    a -- b;
 
-    {p, q} -- {x, y};                                                          
+    {p, q} -- {x, y};
 
-    {c, d} -- o;                                                               
+    {c, d} -- o;
 
-    o -- end [style = dotted, color = red];                                    
+    o -- end [style = dotted, color = red];
 
-    subgraph subgraph1 {                                                       
-        label = "This is subgraph";                                            
-        bgcolor = greenyellow;                                                 
-        cc; dd;                                                                
-    }                                                                          
+    subgraph subgraph1 {
+        label = "This is subgraph";
+        bgcolor = greenyellow;
+        cc; dd;
+    }
 
-    ccc -- ddd [label = "test"]                                                
-}                                                                              
+    ccc -- ddd [label = "test"]
+}
 ```
 
 > * [Dot脚本语言语法整理](https://blog.csdn.net/jy692405180/article/details/52077979)
@@ -74,18 +74,18 @@ vi aaa.uml
 +-------+--------+
 ```
 
-* 绘图--操作                                                          
->:DIstart   -- 启动（默认虚线----）                                  
->:DIstop    -- 停止                                                  
->:DIdbl     -- 双实线(════)                                          
->:DInrml    -- 单虚线(----)                                          
->:DIsngl    -- 单实现(────)                                          
+* 绘图--操作
+>:DIstart   -- 启动（默认虚线----）
+>:DIstop    -- 停止
+>:DIdbl     -- 双实线(════)
+>:DInrml    -- 单虚线(----)
+>:DIsngl    -- 单实现(────)
 
 * 划线：
->方向键（直线）；Page up、Page Down（斜线）                   
+>方向键（直线）；Page up、Page Down（斜线）
 
 * 箭头：
-><、>、^、v                                                   
+><、>、^、v
 
 * 擦除：
->空格切换                                                      
+>空格切换

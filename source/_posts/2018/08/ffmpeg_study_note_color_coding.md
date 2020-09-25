@@ -83,9 +83,9 @@ start + 0:    Y'00    Y'01    Y'02    Y'03
 start + 4:    Y'10    Y'11    Y'12    Y'13
 start + 8:    Y'20    Y'21    Y'22    Y'23
 start +12:    Y'30    Y'31    Y'32    Y'33
-start +16:    Cr00    Cr01          
-start +18:    Cr10    Cr11          
-start +20:    Cb00    Cb01          
+start +16:    Cr00    Cr01
+start +18:    Cr10    Cr11
+start +20:    Cb00    Cb01
 start +22:    Cb10    Cb11
 ```
 

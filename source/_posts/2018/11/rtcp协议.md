@@ -116,13 +116,13 @@ static void RequestLostPacket(rtp_t *rtp, unsigned int rtpSsrc, int seqNo)
     FB_msg_packet[3] = 3;         //length = 3
 
     // SSRC of packet sender
-    FB_msg_packet[4] = 0xde;      
+    FB_msg_packet[4] = 0xde;
     FB_msg_packet[5] = 0xad;
     FB_msg_packet[6] = 0xbe;
     FB_msg_packet[7] = 0xef;
 
     //SSRC of media source
-    FB_msg_packet[8] = (srcId >> 24) & 0xff;      
+    FB_msg_packet[8] = (srcId >> 24) & 0xff;
     FB_msg_packet[9] = (srcId >> 16) & 0xff;
     FB_msg_packet[10] = (srcId >> 8) & 0xff;
     FB_msg_packet[11] = (srcId & 0xff);
@@ -132,7 +132,7 @@ static void RequestLostPacket(rtp_t *rtp, unsigned int rtpSsrc, int seqNo)
     FB_msg_packet[13] = (seqNo & 0xff);
 
     //BLP
-    FB_msg_packet[14] = (blp >> 8) & 0xff;        
+    FB_msg_packet[14] = (blp >> 8) & 0xff;
     FB_msg_packet[15] = (blp & 0xff);
 
     net_session_write(&rtp->rtcp_net, FB_msg_packet, 16);

@@ -17,7 +17,7 @@ abbrlink: 7a90000d
 kernel: pcieport 0000:00:1c.0: AER: Multiple Corrected error received: 0000:00:1c.0
 kernel: pcieport 0000:00:1c.0: AER: PCIe Bus Error: severity=Corrected, type=Data Link Layer, (Transmitter ID)
 kernel: pcieport 0000:00:1c.0: AER:   device [8086:a115] error status/mask=00001000/00002000
-kernel: pcieport 0000:00:1c.0: AER:    [12] Timeout               
+kernel: pcieport 0000:00:1c.0: AER:    [12] Timeout
 ```
 
 <!--more-->
@@ -87,7 +87,7 @@ pci的树状接口图，这里可以看到`1c.0`接到`02`设备
 
 ``` shell
 $sudo lshw -C network
-  *-network                 
+  *-network
        description: Ethernet interface
        product: RTL8111/8168/8411 PCI Express Gigabit Ethernet Controller
        vendor: Realtek Semiconductor Co., Ltd.

@@ -31,14 +31,14 @@ date: 2018-06-21 23:57:24
 ``` C
 struct sockaddr_in remoteAddr;
 
-memset(remoteAddr.sin_zero, 0, sizeof(remoteAddr.sin_zero));                                                             
-remoteAddr.sin_family = AF_INET;  /* 建立新的连接 */     
-//remoteAddr.sin_family = AF_INET;  /* 断开旧的连接 */                                                                     
-inet_pton(AF_INET,player->rtpUdp.rip, &remoteAddr.sin_addr);                                                             
-remoteAddr.sin_port = htons(player->rtpUdp.rport);                                                                       
-do {                                                                                                                     
-    ret = connect(player->rtpUdp.fd,(struct sockaddr *)&remoteAddr,remoteAddrLen);                                       
-} while(ret == -1 && errno == EINTR);                                                                                    
+memset(remoteAddr.sin_zero, 0, sizeof(remoteAddr.sin_zero));
+remoteAddr.sin_family = AF_INET;  /* 建立新的连接 */
+//remoteAddr.sin_family = AF_INET;  /* 断开旧的连接 */
+inet_pton(AF_INET,player->rtpUdp.rip, &remoteAddr.sin_addr);
+remoteAddr.sin_port = htons(player->rtpUdp.rport);
+do {
+    ret = connect(player->rtpUdp.fd,(struct sockaddr *)&remoteAddr,remoteAddrLen);
+} while(ret == -1 && errno == EINTR);
 ```
 
 ## UDP中使用connect可以提高效率原因

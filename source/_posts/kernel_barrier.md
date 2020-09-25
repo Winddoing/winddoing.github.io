@@ -21,16 +21,16 @@ Linux kernel doc: [memory-barriers](https://www.kernel.org/doc/Documentation/mem
 
 
 ``` C
-#define wmb()       fast_wmb() 
-#define rmb()       fast_rmb() 
-#define mb()        fast_mb()  
-#define iob()       fast_iob() 
+#define wmb()       fast_wmb()
+#define rmb()       fast_rmb()
+#define mb()        fast_mb()
+#define iob()       fast_iob()
 
-#  define smp_mb()  __asm__ __volatile__("sync" : : :"memory")    
-#  define smp_rmb() __asm__ __volatile__("sync" : : :"memory")    
-#  define smp_wmb() __asm__ __volatile__("sync" : : :"memory")    
+#  define smp_mb()  __asm__ __volatile__("sync" : : :"memory")
+#  define smp_rmb() __asm__ __volatile__("sync" : : :"memory")
+#  define smp_wmb() __asm__ __volatile__("sync" : : :"memory")
 ```
-> [MIPS] file: arch/mips/include/asm/barrier.h 
+> [MIPS] file: arch/mips/include/asm/barrier.h
 
 <!--more-->
 

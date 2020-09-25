@@ -108,7 +108,7 @@ SMART support is: Enabled
 ``` shell
 $sudo badblocks -s -v /dev/sdb
 Checking blocks 0 to 976762583
-Checking for bad blocks (read-only test): done                                                 
+Checking for bad blocks (read-only test): done
 Pass completed, 0 bad blocks found. (0/0/0 errors)
 ```
 - `-s`: 在检查时显示进度

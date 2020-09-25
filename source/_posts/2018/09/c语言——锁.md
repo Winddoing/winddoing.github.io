@@ -160,7 +160,7 @@ int main(int argc, const char* argv[])
 {
 	pthread_t tManagementID;
 	int i=0;
-	struct timeval start, end;  
+	struct timeval start, end;
 
 	gettimeofday(&start, NULL);
 	pthread_create (&tManagementID, NULL, thr_management, NULL);

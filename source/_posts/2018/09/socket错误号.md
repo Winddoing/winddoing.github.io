@@ -264,31 +264,31 @@ int connect_timeout(int fd, struct sockaddr_in *addr, unsigned int wait_seconds)
 	return ret;
 }
 
-int net_set_nonblocking(int sock)                      
-{                                                      
-    int flags, res;                                    
+int net_set_nonblocking(int sock)
+{
+    int flags, res;
 
-    flags = fcntl(sock, F_GETFL, 0);                   
-    if (flags < 0) {                                   
-        flags = 0;                                     
-    }                                                  
+    flags = fcntl(sock, F_GETFL, 0);
+    if (flags < 0) {
+        flags = 0;
+    }
 
-    res = fcntl(sock, F_SETFL, flags | O_NONBLOCK);    
-    if (res < 0) {                                     
-        printf("fcntl return err:%d!\n", res);         
-        return -1;                                     
-    }                                                  
+    res = fcntl(sock, F_SETFL, flags | O_NONBLOCK);
+    if (res < 0) {
+        printf("fcntl return err:%d!\n", res);
+        return -1;
+    }
 
-    return 0;                                          
-}                                                      
+    return 0;
+}
 ```
 
 
 ### 4: EINTR
 
 ``` C
-do {            
-    n = recv(new_fd, buff, 500, 0);       
+do {
+    n = recv(new_fd, buff, 500, 0);
 } while (n < 0 && errno == EINTR);
 ```
 

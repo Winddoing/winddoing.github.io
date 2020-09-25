@@ -25,10 +25,10 @@ wfd_mode_tcp  =true
 
 过滤脚本：
 ``` shell
-CFGD_CONF="${OSDRV_DIR}/conf/db/cfgd.conf"                                                                   
-software_version=`grep "software_version" ${VANXUM_CFGD_CONF} | awk '{sub(/.$/,"")}1' | awk '{print $3}'`                  
+CFGD_CONF="${OSDRV_DIR}/conf/db/cfgd.conf"
+software_version=`grep "software_version" ${VANXUM_CFGD_CONF} | awk '{sub(/.$/,"")}1' | awk '{print $3}'`
 
-echo "current software_version: [${software_version}]"                                                                     
+echo "current software_version: [${software_version}]"
 ```
 
 * `awk '{sub(/.$/,"")}1'`: 去掉最后一个字符
