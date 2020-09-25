@@ -23,7 +23,7 @@ date: 2017-03-07 23:07:24
 ``` C
  panic("Attempted to kill init! exitcode=0x%08x\n",
      father->signal->group_exit_code ?:
-         father->exit_code);                                 
+         father->exit_code);
 ```
 > kernel/exit.c
 
@@ -55,7 +55,7 @@ exit_notify
 **由于在用户空间引起的内核错误,因此只能通过系统调用产生**
 
 ``` C
-SYSCALL_DEFINE1(exit, int, error_code)                 
+SYSCALL_DEFINE1(exit, int, error_code)
 {
     do_exit((error_code&0xff)<<8);
 }
@@ -105,7 +105,7 @@ int main(void)
     }
 
     return 0;
-}                                                                                                                                 
+}
 ```
 正常退出结果：
 ``` shell

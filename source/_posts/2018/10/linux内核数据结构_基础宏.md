@@ -78,9 +78,9 @@ TYPE是结构体，它代表"整体"；而MEMBER是成员，它是整体中的�
 
 根据"结构体(type)变量"中的"域成员变量(member)的指针(ptr)"来获取指向整个结构体变量的指针。
 ``` C
-#define container_of(ptr, type, member) ({          \             
+#define container_of(ptr, type, member) ({          \
         const typeof( ((type *)0)->member ) *__mptr = (ptr);    \
-        (type *)( (char *)__mptr - offsetof(type,member) );})    
+        (type *)( (char *)__mptr - offsetof(type,member) );})
 ```
 >From file:[include/linux/kernel.h](https://elixir.bootlin.com/linux/v4.4.1/source/include/linux/kernel.h#L812)
 

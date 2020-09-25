@@ -42,7 +42,7 @@ parse-edid < edid.bin
 ```
 
 ```
-$parse-edid < edid.bin 
+$parse-edid < edid.bin
 Checksum Correct
 
 Section "Monitor"
@@ -66,7 +66,7 @@ Section "Monitor"
 	#Not giving standard mode: 1280x720, 60Hz
 	#Not giving standard mode: 1280x1024, 60Hz
 	#Not giving standard mode: 1280x960, 60Hz
-	Modeline 	"Mode 0" 148.50 1920 2008 2052 2200 1080 1084 1089 1125 +hsync +vsync 
+	Modeline 	"Mode 0" 148.50 1920 2008 2052 2200 1080 1084 1089 1125 +hsync +vsync
 EndSection
 ```
 

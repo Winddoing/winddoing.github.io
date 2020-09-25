@@ -8,13 +8,13 @@ date: 2018-02-02 23:07:24
 ---
 
 ```
-# Enable dex-preoptimization to speed up the first boot sequence               
-# of an SDK AVD. Note that this operation only works on Linux for now          
-ifeq ($(HOST_OS),linux)                                                        
-	ifeq ($(WITH_DEXPREOPT),)                                                    
-		WITH_DEXPREOPT := true                                                     
-	endif                                                                        
-endif                                                                          
+# Enable dex-preoptimization to speed up the first boot sequence
+# of an SDK AVD. Note that this operation only works on Linux for now
+ifeq ($(HOST_OS),linux)
+	ifeq ($(WITH_DEXPREOPT),)
+		WITH_DEXPREOPT := true
+	endif
+endif
 ```
 >device/xxx/xxx/BoardConfig.mk
 

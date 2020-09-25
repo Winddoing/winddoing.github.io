@@ -35,7 +35,7 @@ bash Anaconda3-5.3.0-Linux-x86_64.sh
 - 打开vi ~/.bashrc
 - 添加anaconda的路径下的bin路径到`PATH`
 ```
-export PATH=$PATH:$HOME/.tools/x86:$HOME/anaconda3/bin/  
+export PATH=$PATH:$HOME/.tools/x86:$HOME/anaconda3/bin/
 ```
 
 **安装完成后,需要重启终端或者`source ~/.bashrc`**

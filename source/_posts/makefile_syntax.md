@@ -28,7 +28,7 @@ y = $(x) bar
 x = xyz
 
 all:
-    echo "==: $y" 
+    echo "==: $y"
 ```
 >结果==: xyz bar
 

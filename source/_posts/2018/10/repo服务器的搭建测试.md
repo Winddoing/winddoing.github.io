@@ -173,9 +173,9 @@ From /home/xxx/test/repo-test/server/git-repo-core
  * [new tag]         v1.9.5     -> v1.9.5
  * [new tag]         v1.9.6     -> v1.9.6
 Get /home/xxx/test/repo-test/server/repos/manifest.git
-remote: Counting objects: 9, done.        
-remote: Compressing objects: 100% (6/6), done.        
-remote: Total 9 (delta 2), reused 0 (delta 0)        
+remote: Counting objects: 9, done.
+remote: Compressing objects: 100% (6/6), done.
+remote: Total 9 (delta 2), reused 0 (delta 0)
 From /home/xxx/test/repo-test/server/repos/manifest
  * [new branch]      master     -> origin/master
 
@@ -189,13 +189,13 @@ repo has been initialized in /home/xxx/test/repo-test/client
 ``` shell
 $./repo sync
 Fetching project test2
-remote: Counting objects: 3, done.        
-remote: Total 3 (delta 0), reused 0 (delta 0)        
+remote: Counting objects: 3, done.
+remote: Total 3 (delta 0), reused 0 (delta 0)
 From /home/xxx/test/repo-test/server/repos/test2
  * [new branch]      master     -> origin/master
 Fetching project test1
-remote: Counting objects: 3, done.        
-remote: Total 3 (delta 0), reused 0 (delta 0)        
+remote: Counting objects: 3, done.
+remote: Total 3 (delta 0), reused 0 (delta 0)
 From /home/xxx/test/repo-test/server/repos/test1
  * [new branch]      master     -> origin/master
 ```

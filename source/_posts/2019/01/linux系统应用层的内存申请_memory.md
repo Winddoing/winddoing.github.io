@@ -50,7 +50,7 @@ void bzero (PTR, size_t);
 PTR
 calloc (size_t nelem, size_t elsize)
 {
-  register PTR ptr;  
+  register PTR ptr;
   if (nelem == 0 || elsize == 0)
     nelem = elsize = 1;
 

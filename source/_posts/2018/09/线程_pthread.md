@@ -121,16 +121,16 @@ extern int pthread_detach (pthread_t __th) __THROW;
 ### pthread_self
 
 ``` C
-/* Obtain the identifier of the current thread.  */                             
-extern pthread_t pthread_self (void) __THROW __attribute__ ((__const__));       
+/* Obtain the identifier of the current thread.  */
+extern pthread_t pthread_self (void) __THROW __attribute__ ((__const__));
 ```
 获取线程自身的ID，该id由线程库维护，其id空间是各个进程独立的（即不同进程中的线程可能有相同的id）。
 
 - 比较两个线程ID
 ``` C
-/* Compare two thread identifiers.  */                                  
-extern int pthread_equal (pthread_t __thread1, pthread_t __thread2)     
-  __THROW __attribute__ ((__const__));                                  
+/* Compare two thread identifiers.  */
+extern int pthread_equal (pthread_t __thread1, pthread_t __thread2)
+  __THROW __attribute__ ((__const__));
 ```
 
 ### 线程属性
@@ -154,24 +154,24 @@ typedef struct{
 - 操作接口函数：
 
 ``` C
-/* Initialize thread attribute *ATTR with default attributes                          
-   (detachstate is PTHREAD_JOINABLE, scheduling policy is SCHED_OTHER,                
-    no user-provided stack).  */                                                      
-extern int pthread_attr_init (pthread_attr_t *__attr) __THROW __nonnull ((1));        
+/* Initialize thread attribute *ATTR with default attributes
+   (detachstate is PTHREAD_JOINABLE, scheduling policy is SCHED_OTHER,
+    no user-provided stack).  */
+extern int pthread_attr_init (pthread_attr_t *__attr) __THROW __nonnull ((1));
 
-/* Destroy thread attribute *ATTR.  */                                                
-extern int pthread_attr_destroy (pthread_attr_t *__attr)                              
-     __THROW __nonnull ((1));                                                         
+/* Destroy thread attribute *ATTR.  */
+extern int pthread_attr_destroy (pthread_attr_t *__attr)
+     __THROW __nonnull ((1));
 
-/* Get detach state attribute.  */                                                    
-extern int pthread_attr_getdetachstate (const pthread_attr_t *__attr,                 
-                    int *__detachstate)                                               
-     __THROW __nonnull ((1, 2));                                                      
+/* Get detach state attribute.  */
+extern int pthread_attr_getdetachstate (const pthread_attr_t *__attr,
+                    int *__detachstate)
+     __THROW __nonnull ((1, 2));
 
-/* Set detach state attribute.  */                                                    
-extern int pthread_attr_setdetachstate (pthread_attr_t *__attr,                       
-                    int __detachstate)                                                
-     __THROW __nonnull ((1));                                                         
+/* Set detach state attribute.  */
+extern int pthread_attr_setdetachstate (pthread_attr_t *__attr,
+                    int __detachstate)
+     __THROW __nonnull ((1));
 ```
 
 ### 线程之间互斥
@@ -282,20 +282,20 @@ int pthread_cond_broadcast (pthread_cond_t *__cond)
 线程同步，`pthread_barrier_*`其实只做且只能做一件事，就是充当栏杆（barrier意为栏杆)。形象的说就是把先后到达的多个线程挡在同一栏杆前，直到所有线程到齐，然后撤下栏杆同时放行。
 
 ``` C
-/* Initialize BARRIER with the attributes in ATTR.  The barrier is        
-   opened when COUNT waiters arrived.  */                                 
+/* Initialize BARRIER with the attributes in ATTR.  The barrier is
+   opened when COUNT waiters arrived.  */
 extern int pthread_barrier_init (pthread_barrier_t *__restrict __barrier,
-                 const pthread_barrierattr_t *__restrict                  
-                 __attr, unsigned int __count)                            
-     __THROW __nonnull ((1));                                             
+                 const pthread_barrierattr_t *__restrict
+                 __attr, unsigned int __count)
+     __THROW __nonnull ((1));
 
-/* Destroy a previously dynamically initialized barrier BARRIER.  */      
-extern int pthread_barrier_destroy (pthread_barrier_t *__barrier)         
-     __THROW __nonnull ((1));                                             
+/* Destroy a previously dynamically initialized barrier BARRIER.  */
+extern int pthread_barrier_destroy (pthread_barrier_t *__barrier)
+     __THROW __nonnull ((1));
 
-/* Wait on barrier BARRIER.  */                                           
-extern int pthread_barrier_wait (pthread_barrier_t *__barrier)            
-     __THROWNL __nonnull ((1));                                           
+/* Wait on barrier BARRIER.  */
+extern int pthread_barrier_wait (pthread_barrier_t *__barrier)
+     __THROWNL __nonnull ((1));
 ```
 1. init函数负责指定要等待的线程个数
 2. wait()函数由每个线程主动调用，它告诉栏杆“我到起跑线前了”。
@@ -311,13 +311,13 @@ extern int pthread_barrier_wait (pthread_barrier_t *__barrier)
 
 ``` C
 /* Guarantee that the initialization function INIT_ROUTINE will be called
-   only once, even if pthread_once is executed several times with the     
-   same ONCE_CONTROL argument. ONCE_CONTROL must point to a static or     
-   extern variable initialized to PTHREAD_ONCE_INIT.                      
+   only once, even if pthread_once is executed several times with the
+   same ONCE_CONTROL argument. ONCE_CONTROL must point to a static or
+   extern variable initialized to PTHREAD_ONCE_INIT.
 
-   The initialization functions might throw exception which is why        
-   this function is not marked with __THROW.  */                          
-extern int pthread_once (pthread_once_t *__once_control,                  
+   The initialization functions might throw exception which is why
+   this function is not marked with __THROW.  */
+extern int pthread_once (pthread_once_t *__once_control,
              void (*__init_routine) (void)) __nonnull ((1, 2));
 ```
 
@@ -338,26 +338,26 @@ pthread_once_t once=PTHREAD_ONCE_INIT;
 在单线程程序中，我们经常使用 “全局变量” 以实现多个函数间共享数据，在多线程环境下，由于数据空间是共享的，因此全局变量也为所有线程所共享。但有时应用程序设计中有必要提供`线程私有的全局变量`，仅在某个线程中有效，但却可以跨多个函数访问
 
 ``` C
-/* Functions for handling thread-specific data.  */                             
+/* Functions for handling thread-specific data.  */
 
-/* Create a key value identifying a location in the thread-specific             
-   data area.  Each thread maintains a distinct thread-specific data            
-   area.  DESTR_FUNCTION, if non-NULL, is called with the value                 
-   associated to that key when the key is destroyed.                            
-   DESTR_FUNCTION is not called if the value associated is NULL when            
-   the key is destroyed.  */                                                    
-extern int pthread_key_create (pthread_key_t *__key,                            
-                   void (*__destr_function) (void *))                           
-     __THROW __nonnull ((1));                                                   
+/* Create a key value identifying a location in the thread-specific
+   data area.  Each thread maintains a distinct thread-specific data
+   area.  DESTR_FUNCTION, if non-NULL, is called with the value
+   associated to that key when the key is destroyed.
+   DESTR_FUNCTION is not called if the value associated is NULL when
+   the key is destroyed.  */
+extern int pthread_key_create (pthread_key_t *__key,
+                   void (*__destr_function) (void *))
+     __THROW __nonnull ((1));
 
-/* Destroy KEY.  */                                                             
-extern int pthread_key_delete (pthread_key_t __key) __THROW;                    
+/* Destroy KEY.  */
+extern int pthread_key_delete (pthread_key_t __key) __THROW;
 
 /* Return current value of the thread-specific data slot identified by KEY.  */
-extern void *pthread_getspecific (pthread_key_t __key) __THROW;                 
+extern void *pthread_getspecific (pthread_key_t __key) __THROW;
 
-/* Store POINTER in the thread-specific data slot identified by KEY. */         
-extern int pthread_setspecific (pthread_key_t __key,                            
+/* Store POINTER in the thread-specific data slot identified by KEY. */
+extern int pthread_setspecific (pthread_key_t __key,
                 const void *__pointer) __THROW ;
 ```
 
@@ -367,43 +367,43 @@ extern int pthread_setspecific (pthread_key_t __key,
 > /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h
 
 ``` C
-/* Thread identifiers.  The structure of the attribute type is not             
-   exposed on purpose.  */                                                     
-typedef unsigned long int pthread_t;                                           
+/* Thread identifiers.  The structure of the attribute type is not
+   exposed on purpose.  */
+typedef unsigned long int pthread_t;
 
 
-/* Keys for thread-specific data */                                            
-typedef unsigned int pthread_key_t;                                            
+/* Keys for thread-specific data */
+typedef unsigned int pthread_key_t;
 
 
-/* Once-only execution */                                                      
-typedef int __ONCE_ALIGNMENT pthread_once_t;                                   
+/* Once-only execution */
+typedef int __ONCE_ALIGNMENT pthread_once_t;
 
-union pthread_attr_t                            
-{                                               
-  char __size[__SIZEOF_PTHREAD_ATTR_T];         
-  long int __align;                             
-};                                              
-#ifndef __have_pthread_attr_t                   
-typedef union pthread_attr_t pthread_attr_t;    
-# define __have_pthread_attr_t 1                
-#endif                                          
-
-
-typedef union                                   
-{                                               
-  struct __pthread_mutex_s __data;              
-  char __size[__SIZEOF_PTHREAD_MUTEX_T];        
-  long int __align;                             
-} pthread_mutex_t;                              
+union pthread_attr_t
+{
+  char __size[__SIZEOF_PTHREAD_ATTR_T];
+  long int __align;
+};
+#ifndef __have_pthread_attr_t
+typedef union pthread_attr_t pthread_attr_t;
+# define __have_pthread_attr_t 1
+#endif
 
 
-typedef union                                   
-{                                               
-  struct __pthread_cond_s __data;               
-  char __size[__SIZEOF_PTHREAD_COND_T];         
-  __extension__ long long int __align;          
-} pthread_cond_t;                               
+typedef union
+{
+  struct __pthread_mutex_s __data;
+  char __size[__SIZEOF_PTHREAD_MUTEX_T];
+  long int __align;
+} pthread_mutex_t;
+
+
+typedef union
+{
+  struct __pthread_cond_s __data;
+  char __size[__SIZEOF_PTHREAD_COND_T];
+  __extension__ long long int __align;
+} pthread_cond_t;
 ```
 
 ## 示例

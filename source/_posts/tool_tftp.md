@@ -63,7 +63,7 @@ Received 8 bytes in 0.0 seconds
 下载：
 
 ```
-tftp –gr 源文件名  服务器地址  
+tftp –gr 源文件名  服务器地址
 ```
 
 上传：

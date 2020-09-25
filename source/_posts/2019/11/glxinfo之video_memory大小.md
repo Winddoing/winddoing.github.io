@@ -42,12 +42,12 @@ git clone https://gitlab.freedesktop.org/mesa/demos.git
 
 获取显存大小：`queryInteger(GLX_RENDERER_VIDEO_MEMORY_MESA, v)`
 ```
-queryInteger(GLX_RENDERER_ACCELERATED_MESA, v);                              
-printf("    Accelerated: %s\n", *v ? "yes" : "no");                          
-queryInteger(GLX_RENDERER_VIDEO_MEMORY_MESA, v);                             
-printf("    Video memory: %dMB\n", *v);                                      
-queryInteger(GLX_RENDERER_UNIFIED_MEMORY_ARCHITECTURE_MESA, v);              
-printf("    Unified memory: %s\n", *v ? "yes" : "no");                        
+queryInteger(GLX_RENDERER_ACCELERATED_MESA, v);
+printf("    Accelerated: %s\n", *v ? "yes" : "no");
+queryInteger(GLX_RENDERER_VIDEO_MEMORY_MESA, v);
+printf("    Video memory: %dMB\n", *v);
+queryInteger(GLX_RENDERER_UNIFIED_MEMORY_ARCHITECTURE_MESA, v);
+printf("    Unified memory: %s\n", *v ? "yes" : "no");
 ```
 > file: glxinfo.c
 
@@ -64,12 +64,12 @@ glXQueryCurrentRendererIntegerMESA
 
 - dri3
 ``` C
-static const struct glx_screen_vtable dri3_screen_vtable = {           
-   .create_context         = dri3_create_context,                      
-   .create_context_attribs = dri3_create_context_attribs,              
-   .query_renderer_integer = dri3_query_renderer_integer,              
-   .query_renderer_string  = dri3_query_renderer_string,               
-};                                                                     
+static const struct glx_screen_vtable dri3_screen_vtable = {
+   .create_context         = dri3_create_context,
+   .create_context_attribs = dri3_create_context_attribs,
+   .query_renderer_integer = dri3_query_renderer_integer,
+   .query_renderer_string  = dri3_query_renderer_string,
+};
 ```
 
 ```
@@ -81,12 +81,12 @@ dri3_query_renderer_integer
 ```
 
 ``` C
-const __DRI2rendererQueryExtension dri2RendererQueryExtension = {               
-    .base = { __DRI2_RENDERER_QUERY, 1 },                                       
+const __DRI2rendererQueryExtension dri2RendererQueryExtension = {
+    .base = { __DRI2_RENDERER_QUERY, 1 },
 
-    .queryInteger         = dri2_query_renderer_integer,                        
-    .queryString          = dri2_query_renderer_string                          
-};                                                                              
+    .queryInteger         = dri2_query_renderer_integer,
+    .queryString          = dri2_query_renderer_string
+};
 ```
 > fire: src/gallium/state_trackers/dri/dri_query_renderer.c
 
@@ -100,14 +100,14 @@ dri2_query_renderer_integer
 ### virgl
 
 ``` C
-struct pipe_screen *                                              
-virgl_create_screen(struct virgl_winsys *vws)                     
-{                                                                 
-   struct virgl_screen *screen = CALLOC_STRUCT(virgl_screen);     
+struct pipe_screen *
+virgl_create_screen(struct virgl_winsys *vws)
+{
+   struct virgl_screen *screen = CALLOC_STRUCT(virgl_screen);
 
-   screen->base.get_name = virgl_get_name;        
-   screen->base.get_vendor = virgl_get_vendor;    
-   screen->base.get_param = virgl_get_param;      
+   screen->base.get_name = virgl_get_name;
+   screen->base.get_vendor = virgl_get_vendor;
+   screen->base.get_param = virgl_get_param;
    ...
 }
 ```
@@ -117,7 +117,7 @@ virgl_get_param <- PIPE_CAP_VIDEO_MEMORY
 \-> {
       ...
       case PIPE_CAP_VIDEO_MEMORY:
-      return 0;               
+      return 0;
     }
 ```
 > **在virgl中没有实现显存接口，默认为0，无法通过glxinfo获取**
@@ -131,10 +131,10 @@ virgl_get_param <- PIPE_CAP_VIDEO_MEMORY
 ``` C
 void si_init_screen_get_functions(struct si_screen *sscreen)
 {
-  sscreen->b.get_name = si_get_name;                                
-  sscreen->b.get_vendor = si_get_vendor;                            
-  sscreen->b.get_device_vendor = si_get_device_vendor;              
-  sscreen->b.get_param = si_get_param;                              
+  sscreen->b.get_name = si_get_name;
+  sscreen->b.get_vendor = si_get_vendor;
+  sscreen->b.get_device_vendor = si_get_device_vendor;
+  sscreen->b.get_param = si_get_param;
   ...
 }
 ```
@@ -143,8 +143,8 @@ void si_init_screen_get_functions(struct si_screen *sscreen)
 static int si_get_param(struct pipe_screen *pscreen, enum pipe_cap param)
 {
   switch (param) {
-    case PIPE_CAP_VIDEO_MEMORY:              
-      return sscreen->info.vram_size >> 20;   
+    case PIPE_CAP_VIDEO_MEMORY:
+      return sscreen->info.vram_size >> 20;
   }
   ...
 }
@@ -152,7 +152,7 @@ static int si_get_param(struct pipe_screen *pscreen, enum pipe_cap param)
 
 在Radeon驱动中通过`drmCommandWriteRead`接口获取`DRM_RADEON_GEM_INFO`中的配置参数
 ```
-/* Get GEM info. */                                         
-retval = drmCommandWriteRead(ws->fd, DRM_RADEON_GEM_INFO,   
-        &gem_info, sizeof(gem_info));                       
+/* Get GEM info. */
+retval = drmCommandWriteRead(ws->fd, DRM_RADEON_GEM_INFO,
+        &gem_info, sizeof(gem_info));
 ```

@@ -37,8 +37,8 @@ dmesg | grep -e DMAR -e IOMMU
 
 系统重启后，查看支持IOMMU的设备：
 ```shell
-# find /sys/kernel/iommu_groups/ -type l                                                                                                                                       
-/sys/kernel/iommu_groups/0/devices/0000:00:00.0                                                                                                                                               
+# find /sys/kernel/iommu_groups/ -type l
+/sys/kernel/iommu_groups/0/devices/0000:00:00.0
 /sys/kernel/iommu_groups/1/devices/0000:00:04.0
 ...
 ```
@@ -128,8 +128,8 @@ Please ensure all devices within the iommu_group are bound to their vfio bus dri
 为了以后处理方便将host端的配置进行脚本处理
 
 ``` shell
-#/bin/bash                                                                              
-#set -x                                                                                 
+#/bin/bash
+#set -x
 
 PCI_ADDR="18:00.1"
 

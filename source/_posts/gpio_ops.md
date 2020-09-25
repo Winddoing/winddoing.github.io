@@ -15,7 +15,7 @@ date: 2017-11-03 23:07:24
 # cd sys/class/gpio/
 # ls
 export      gpiochip0   gpiochip32  gpiochip64  gpiochip96  unexport
-# echo 33 > export 
+# echo 33 > export
 # ls
 export      gpiochip0   gpiochip64  unexport
 gpio33      gpiochip32  gpiochip96
@@ -35,7 +35,7 @@ echo "in" > direction
 
 ## GPIO中断
 
-> support "both" or "none", "rising", "falling" edge trigger" 
+> support "both" or "none", "rising", "falling" edge trigger"
 
 上升沿中断
 

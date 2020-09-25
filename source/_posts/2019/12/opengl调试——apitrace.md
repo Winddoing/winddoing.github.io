@@ -50,11 +50,11 @@ $apitrace trace glxgears
 
 - 输出结果
 ```
-# call no gpu_start gpu_dura cpu_start cpu_dura vsize_start vsize_dura rss_start rss_dura pixels program name         
-call 741 0 0 15358963 4741 0 0 0 0 -1 0 glViewport                                                                    
-call 742 0 0 15389926 2370 0 0 0 0 -1 0 glScissor                                                                     
-call 2903 0 0 125774519 8000 0 0 0 0 -1 0 glViewport                                                                  
-call 2904 0 0 125802222 6223 0 0 0 0 -1 0 glScissor                                                                   
+# call no gpu_start gpu_dura cpu_start cpu_dura vsize_start vsize_dura rss_start rss_dura pixels program name
+call 741 0 0 15358963 4741 0 0 0 0 -1 0 glViewport
+call 742 0 0 15389926 2370 0 0 0 0 -1 0 glScissor
+call 2903 0 0 125774519 8000 0 0 0 0 -1 0 glViewport
+call 2904 0 0 125802222 6223 0 0 0 0 -1 0 glScissor
 ```
 
 ### 图形 —— qapitrace

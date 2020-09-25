@@ -22,9 +22,9 @@ Mesa: User error: GL_INVALID_ENUM in glSamplerParameteri(pname=GL_TEXTURE_CUBE_M
 ```
 - 错误打印
 ``` C
-case INVALID_PNAME:                                                 
+case INVALID_PNAME:
 _mesa_error(ctx, GL_INVALID_ENUM, "glSamplerParameteri(pname=%s)\n",
-        _mesa_enum_to_string(pname));                               
+        _mesa_enum_to_string(pname));
 ```
 >mesa:src/mesa/main/samplerobj.c
 
@@ -36,9 +36,9 @@ glSamplerParameteri(state->ids[i], GL_TEXTURE_CUBE_MAP_SEAMLESS, templ->seamless
 
 ## GL_TEXTURE_CUBE_MAP_SEAMLESS
 
-``` C                                   
+``` C
 glEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS);
-```                                     
+```
 
 
 立方体贴图的边界利用相邻面线性差值,消除立方体边缘的缝隙

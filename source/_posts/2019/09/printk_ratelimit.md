@@ -23,15 +23,15 @@ $cat /proc/sys/kernel/printk_ratelimit_burst
 ```
 
 ``` C
-if (printk_ratelimit()) {                                                        
-    dev_err(adev->dev, "GPU fault detected: %d 0x%08x\n",                        
-        entry->src_id, entry->src_data[0]);                                      
-    dev_err(adev->dev, "  VM_CONTEXT1_PROTECTION_FAULT_ADDR   0x%08X\n",         
-        addr);                                                                   
-    dev_err(adev->dev, "  VM_CONTEXT1_PROTECTION_FAULT_STATUS 0x%08X\n",         
-        status);                                                                 
-    gmc_v8_0_vm_decode_fault(adev, status, addr, mc_client);                     
-}                                                                                
+if (printk_ratelimit()) {
+    dev_err(adev->dev, "GPU fault detected: %d 0x%08x\n",
+        entry->src_id, entry->src_data[0]);
+    dev_err(adev->dev, "  VM_CONTEXT1_PROTECTION_FAULT_ADDR   0x%08X\n",
+        addr);
+    dev_err(adev->dev, "  VM_CONTEXT1_PROTECTION_FAULT_STATUS 0x%08X\n",
+        status);
+    gmc_v8_0_vm_decode_fault(adev, status, addr, mc_client);
+}
 ```
 
 ## 参考

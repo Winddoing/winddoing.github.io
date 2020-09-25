@@ -171,10 +171,10 @@ JACK_SERVER_COMMAND="java -XX:MaxJavaStackTraceDepth=-1 -Djava.io.tmpdir=$TMPDIR
 ## anbox-images
 
 ```
-$ cd $HOME/anbox-work/anbox                              
-$ scripts/create-package.sh \                            
-    $PWD/../out/target/product/x86_64/ramdisk.img \      
-    $PWD/../out/target/product/x86_64/system.img         
+$ cd $HOME/anbox-work/anbox
+$ scripts/create-package.sh \
+    $PWD/../out/target/product/x86_64/ramdisk.img \
+    $PWD/../out/target/product/x86_64/system.img
 ```
 
 ## anbox-modules

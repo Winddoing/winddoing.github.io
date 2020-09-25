@@ -36,7 +36,7 @@ date: 2017-07-09 23:07:24
 
 ``` C
 #include <stdio.h>
-#include <unistd.h>  
+#include <unistd.h>
 
 //比如我们定义了小明一天的状态如下
 enum
@@ -121,7 +121,7 @@ void FSM_EventHandle(FSM_t* pFsm, int event)
 	/*获取当前动作函数*/
 	for (i = 0; i<g_max_num; i++) {
 		//当且仅当当前状态下来个指定的事件，我才执行它
-		if (event == pActTable[i].event && 
+		if (event == pActTable[i].event &&
 				CurState == pActTable[i].CurState) {
 			flag = 1;
 			eventActFun = pActTable[i].eventActFun;
@@ -176,13 +176,13 @@ int main()
 {
 	FSM_t fsm;
 	InitFsm(&fsm);
-	int event = EVENT1; 
+	int event = EVENT1;
 	//小明的一天,周而复始的一天又一天，进行着相同的活动
 	while (1) {
 		printf("event %d is coming...\n", event);
 		FSM_EventHandle(&fsm, event);
 		printf("fsm current state %d\n", fsm.curState);
-		test(&event); 
+		test(&event);
 		sleep(1);  //休眠1秒，方便观察
 	}
 

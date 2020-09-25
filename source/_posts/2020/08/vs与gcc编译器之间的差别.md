@@ -21,14 +21,14 @@ void shuffle(void *arr, size_t n, size_t size)
 {
     ...
     memcpy(arr+(i*size), swp,  size);
-    ...  
+    ...
 }
 ```
 
 > `void *`执行指针算术运算，因为void没有定义大小，进行偏移操作无法确定偏移的单位，因此出现错误提示
 
 ``` C
-memcpy((char*)arr+(i*size), swp,  size); 
+memcpy((char*)arr+(i*size), swp,  size);
 ```
 
 **注**：这种修改解决了编译报错的问题，但是与gcc的编译不兼容
@@ -45,7 +45,7 @@ memcpy((char*)arr+(i*size), swp,  size);
 ```
 
 解决方法：
-1. 将`samll`的定义去掉：`#undef small` 
+1. 将`samll`的定义去掉：`#undef small`
 2. 修改代码`small`变量名
 
 

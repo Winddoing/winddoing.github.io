@@ -18,7 +18,7 @@ abbrlink: 2578
 
 1. 查看挂载点
 ```
-# cat /proc/mounts                                             
+# cat /proc/mounts
 rootfs / rootfs ro,relatime 0 0
 tmpfs /dev tmpfs rw,nosuid,relatime,mode=755 0 0
 devpts /dev/pts devpts rw,relatime,mode=600,ptmxmode=000 0 0

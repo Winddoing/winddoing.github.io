@@ -23,12 +23,12 @@ abbrlink: 44009
 
 int main()
 {
-    int int_a;                                                                 
-    int* int_a_p;                                                              
-    char char_b;                                                               
-    char* char_b_p;                                                            
-    printf("\tSystem Data Width:\n");                                          
-    printf("sizeof int(%ld), int*(%ld), char(%ld), char*(%ld)\n",              
+    int int_a;
+    int* int_a_p;
+    char char_b;
+    char* char_b_p;
+    printf("\tSystem Data Width:\n");
+    printf("sizeof int(%ld), int*(%ld), char(%ld), char*(%ld)\n",
             sizeof(int_a), sizeof(int_a_p), sizeof(char_b), sizeof(char_b_p));
 
 	char *c1 = "a b c d";
@@ -54,10 +54,10 @@ int main()
 		char a;
 		char b[];
 	};
-    struct sc2_1 {                
-    char a;                   
-    char b[0];                
-    };                            
+    struct sc2_1 {
+    char a;
+    char b[0];
+    };
 	printf("sc1: sizeof-char*  = %ld\n", sizeof(struct sc1)); //8 + 8
 	printf("sc2: sizeof-char[] = %ld\n", sizeof(struct sc2)); //1
     printf("sc2_1: packed sizeof-char[0] = %ld\n", sizeof(struct sc2_1)); //1
@@ -96,16 +96,16 @@ sc4: packed sizeof-char[] = 1
 ## 内存地址对比
 
 ``` C
-struct sc1 sc1_a;                                    
-printf("\tsc1_a addr: %p\n", &sc1_a);                
-printf("\tsc1_a.a addr: %p\n", &sc1_a.a);            
-printf("\tsc1_a.b addr: %p\n", &sc1_a.b);            
+struct sc1 sc1_a;
+printf("\tsc1_a addr: %p\n", &sc1_a);
+printf("\tsc1_a.a addr: %p\n", &sc1_a.a);
+printf("\tsc1_a.b addr: %p\n", &sc1_a.b);
 
-struct sc2 sc2_a, sc2_b;                             
-printf("\tsc2_a addr: %p\n", &sc2_a);                
-printf("\tsc2_a.a addr: %p\n", &sc2_a.a);            
-printf("\tsc2_a.b addr: %p\n", &sc2_a.b);            
-printf("\tsc2_b addr: %p\n", &sc2_b);                
+struct sc2 sc2_a, sc2_b;
+printf("\tsc2_a addr: %p\n", &sc2_a);
+printf("\tsc2_a.a addr: %p\n", &sc2_a.a);
+printf("\tsc2_a.b addr: %p\n", &sc2_a.b);
+printf("\tsc2_b addr: %p\n", &sc2_b);
 ```
 * 运行结果：
 ```

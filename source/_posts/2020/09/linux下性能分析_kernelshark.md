@@ -35,7 +35,7 @@ git clone https://git.kernel.org/pub/scm/linux/kernel/git/rostedt/trace-cmd.git
 ``` shell
 $sudo trace-cmd record -e 'sched_wakeup*' -e sched_switch -e 'sched_migrate*'
 Hit Ctrl^C to stop recording
-^C      
+^C
 CPU0 data recorded at offset=0x6ea000
     2752512 bytes in size
 CPU1 data recorded at offset=0x98a000

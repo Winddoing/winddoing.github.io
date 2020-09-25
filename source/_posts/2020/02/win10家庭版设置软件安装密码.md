@@ -21,11 +21,11 @@ win10版本：`家庭版`
 
 设置方法通过`gpedit.msc`本地组策略，但是win10家庭版中找不到gpedit.msc，需要手动添加网上找的脚本（测试有效）
 ```
-@echo off  
-pushd "%~dp0"  
-dir /b C:\Windows\servicing\Packages\Microsoft-Windows-GroupPolicy-ClientExtensions-Package~3*.mum >List.txt  
-dir /b C:\Windows\servicing\Packages\Microsoft-Windows-GroupPolicy-ClientTools-Package~3*.mum >>List.txt  
-for /f %%i in ('findstr /i . List.txt 2^>nul') do dism /online /norestart /add-package:"C:\Windows\servicing\Packages\%%i"  
+@echo off
+pushd "%~dp0"
+dir /b C:\Windows\servicing\Packages\Microsoft-Windows-GroupPolicy-ClientExtensions-Package~3*.mum >List.txt
+dir /b C:\Windows\servicing\Packages\Microsoft-Windows-GroupPolicy-ClientTools-Package~3*.mum >>List.txt
+for /f %%i in ('findstr /i . List.txt 2^>nul') do dism /online /norestart /add-package:"C:\Windows\servicing\Packages\%%i"
 pause
 ```
 

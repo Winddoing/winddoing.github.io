@@ -32,8 +32,8 @@ fi
 #!/bin/bash
 
 PRG=$0
-ls=`ls -ld "$PRG"`                       
-link=`expr "$ls" : '.*-> \(.*\)$'`       
+ls=`ls -ld "$PRG"`
+link=`expr "$ls" : '.*-> \(.*\)$'`
 
 echo "Current script PRG: $PRG"
 echo "Soft connection path link: $link"
@@ -41,11 +41,11 @@ echo "Soft connection path link: $link"
 echo "Get the current path: `dirname "$PRG"`"
 
 # 判断软连接是否在当前目录下
-if expr "$link" : '/.*' > /dev/null; then        
-    PRG="$link"                                  
-else                                             
-    PRG="`dirname "$PRG"`/$link"                 
-fi                                               
+if expr "$link" : '/.*' > /dev/null; then
+    PRG="$link"
+else
+    PRG="`dirname "$PRG"`/$link"
+fi
 
 echo "Soft connection path link: $link"
 echo "Actual script path PRG: $PRG"

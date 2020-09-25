@@ -76,12 +76,12 @@ glFenceSync创建一个新的fence同步对象，将fence命令插入GL命令流
 
 ``` C
 ...
-GLsync sync = glFenceSync(GL_SYNC_GPU_COMMANDS_COMPLETE, 0);  
+GLsync sync = glFenceSync(GL_SYNC_GPU_COMMANDS_COMPLETE, 0);
 
 ...
 
-glWaitSync(sync, 0, GL_TIMEOUT_IGNORED);                      
-glDeleteSync(sync);                                           
+glWaitSync(sync, 0, GL_TIMEOUT_IGNORED);
+glDeleteSync(sync);
 ...
 ```
 

@@ -49,52 +49,52 @@ date: 2018-05-15 23:07:24
 ```
 HID Descriptor
 Offset Field Size Value Description
-0 bLength 1 09h  
+0 bLength 1 09h
 1 bDescriptorType 1 21h HID
 2 bcdHID 2 0111h 1.11
-4 bCountryCode 1 00h  
-5 bNumDescriptors 1 01h  
+4 bCountryCode 1 00h
+5 bNumDescriptors 1 01h
 6 bDescriptorType 1 22h Report
 7 wDescriptorLength 2 002Eh 46 bytes  <-------描述符大小
 
 Endpoint Descriptor 81 1 In, Interrupt, 10 ms
 Offset Field Size Value Description
-0 bLength 1 07h  
+0 bLength 1 07h
 1 bDescriptorType 1 05h Endpoint
 2 bEndpointAddress 1 81h 1 In
 3 bmAttributes 1 03h Interrupt
  1..0: Transfer Type  ......11  Interrupt
- 7..2: Reserved  000000..   
+ 7..2: Reserved  000000..
 4 wMaxPacketSize 2 0004h 4 bytes  <-----------包数据宽度
 6 bInterval 1 0Ah 10 ms
 
 Interface 0 HID Report Descriptor Mouse
 Item Tag (Value) Raw Data
-Usage Page (Generic Desktop) 05 01  
-Usage (Mouse) 09 02  
-Collection (Application) A1 01  
-    Usage (Pointer) 09 01  
-    Collection (Physical) A1 00  
-        Usage Page (Button) 05 09  
-        Usage Minimum (Button 1) 19 01  
-        Usage Maximum (Button 3) 29 03  
-        Logical Minimum (0) 15 00  
-        Logical Maximum (1) 25 01  
-        Report Count (8) 95 08  
-        Report Size (1) 75 01  
+Usage Page (Generic Desktop) 05 01
+Usage (Mouse) 09 02
+Collection (Application) A1 01
+    Usage (Pointer) 09 01
+    Collection (Physical) A1 00
+        Usage Page (Button) 05 09
+        Usage Minimum (Button 1) 19 01
+        Usage Maximum (Button 3) 29 03
+        Logical Minimum (0) 15 00
+        Logical Maximum (1) 25 01
+        Report Count (8) 95 08
+        Report Size (1) 75 01
         Input (Data,Var,Abs,NWrp,Lin,Pref,NNul,Bit) 81 02
 
-        Usage Page (Generic Desktop) 05 01  
-        Usage (X) 09 30  
-        Usage (Y) 09 31  
-        Usage (Wheel) 09 38  
-        Logical Minimum (-127) 15 81  
-        Logical Maximum (127) 25 7F  
-        Report Size (8) 75 08  
-        Report Count (3) 95 03  
-        Input (Data,Var,Rel,NWrp,Lin,Pref,NNul,Bit) 81 06  
-    End Collection C0  
-End Collection C0  
+        Usage Page (Generic Desktop) 05 01
+        Usage (X) 09 30
+        Usage (Y) 09 31
+        Usage (Wheel) 09 38
+        Logical Minimum (-127) 15 81
+        Logical Maximum (127) 25 7F
+        Report Size (8) 75 08
+        Report Count (3) 95 03
+        Input (Data,Var,Rel,NWrp,Lin,Pref,NNul,Bit) 81 06
+    End Collection C0
+End Collection C0
 ```
 
 ### 获取数据格式--Input
@@ -189,44 +189,44 @@ End Collection
 
 >头文件：`#include <linux/hidraw.h>`
 ``` c
-#ifndef _HIDRAW_H                                                           
-#define _HIDRAW_H                                                           
+#ifndef _HIDRAW_H
+#define _HIDRAW_H
 
 
 
-#include <linux/hid.h>                                                      
-#include <linux/types.h>                                                    
+#include <linux/hid.h>
+#include <linux/types.h>
 
-struct hidraw_report_descriptor {                                           
-    __u32 size;                                                             
-    __u8 value[HID_MAX_DESCRIPTOR_SIZE];                                    
-};                                                                          
+struct hidraw_report_descriptor {
+    __u32 size;
+    __u8 value[HID_MAX_DESCRIPTOR_SIZE];
+};
 
-struct hidraw_devinfo {                                                     
-    __u32 bustype;                                                          
-    __s16 vendor;                                                           
-    __s16 product;                                                          
-};                                                                          
+struct hidraw_devinfo {
+    __u32 bustype;
+    __s16 vendor;
+    __s16 product;
+};
 
-/* ioctl interface */                                                       
-#define HIDIOCGRDESCSIZE    _IOR('H', 0x01, int)                            
+/* ioctl interface */
+#define HIDIOCGRDESCSIZE    _IOR('H', 0x01, int)
 #define HIDIOCGRDESC        _IOR('H', 0x02, struct hidraw_report_descriptor)
-#define HIDIOCGRAWINFO      _IOR('H', 0x03, struct hidraw_devinfo)          
-#define HIDIOCGRAWNAME(len)     _IOC(_IOC_READ, 'H', 0x04, len)             
-#define HIDIOCGRAWPHYS(len)     _IOC(_IOC_READ, 'H', 0x05, len)             
-/* The first byte of SFEATURE and GFEATURE is the report number */          
-#define HIDIOCSFEATURE(len)    _IOC(_IOC_WRITE|_IOC_READ, 'H', 0x06, len)   
-#define HIDIOCGFEATURE(len)    _IOC(_IOC_WRITE|_IOC_READ, 'H', 0x07, len)   
+#define HIDIOCGRAWINFO      _IOR('H', 0x03, struct hidraw_devinfo)
+#define HIDIOCGRAWNAME(len)     _IOC(_IOC_READ, 'H', 0x04, len)
+#define HIDIOCGRAWPHYS(len)     _IOC(_IOC_READ, 'H', 0x05, len)
+/* The first byte of SFEATURE and GFEATURE is the report number */
+#define HIDIOCSFEATURE(len)    _IOC(_IOC_WRITE|_IOC_READ, 'H', 0x06, len)
+#define HIDIOCGFEATURE(len)    _IOC(_IOC_WRITE|_IOC_READ, 'H', 0x07, len)
 
-#define HIDRAW_FIRST_MINOR 0                                                
-#define HIDRAW_MAX_DEVICES 64                                               
-/* number of reports to buffer */                                           
-#define HIDRAW_BUFFER_SIZE 64                                               
+#define HIDRAW_FIRST_MINOR 0
+#define HIDRAW_MAX_DEVICES 64
+/* number of reports to buffer */
+#define HIDRAW_BUFFER_SIZE 64
 
 
-/* kernel-only API declarations */                                          
+/* kernel-only API declarations */
 
-#endif /* _HIDRAW_H */                                                      
+#endif /* _HIDRAW_H */
 ```
 
 ## 相关文件

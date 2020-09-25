@@ -23,16 +23,16 @@ abbrlink: 63421
 
         <html xmlns="http://www.w3.org/1999/xhtml">
         <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />    
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>web控制mini2440开发板led</title>
         </head>
         <body>
         <h1 align="center">基于mini2440的web控制GPIO口</h1>
-        <form action="/cgi-bin/cgi_led.cgi" method="get">   
+        <form action="/cgi-bin/cgi_led.cgi" method="get">
         <p align="center">led的测试工作</p>
         <p align="center">请输入需要控制的led <input type="text" name="led_control"/></p>
         <p align="center">请输入控制led的动作 <input type="text" name="led_state"/></p>
-        <p align="center"><input type="submit" value="sure"/>        
+        <p align="center"><input type="submit" value="sure"/>
         <input type="reset" value="back"/>
         </p>
         </form>
