@@ -16,6 +16,8 @@ categories:
 
 <!--more-->
 
+![qemu_net_passthrough](/images/2020/09/qemu_net_passthrough.png)
+
 
 ## 查看是否开启IOMMU
 

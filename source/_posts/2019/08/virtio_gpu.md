@@ -120,3 +120,4 @@ It is composed of several components:
 - [The OpenGL vs Mesa matrix](https://mesamatrix.net/)
 - [Virtualizing GPU Access](https://memcpy.io/virtualizing-gpu-access.html)
 - [kraxel's news](https://www.kraxel.org/blog/) --- virgl and qemu
+- [VirtIO GPU基本原理](https://blog.csdn.net/huang987246510/article/details/107729881)
