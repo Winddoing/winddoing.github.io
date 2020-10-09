@@ -12,6 +12,26 @@ date: 2018-02-04 23:07:24
 
 <!--more-->
 
+## 打开多个窗口并登录ssh执行命令
+
+``` shell
+#!/bin/bash
+
+run_cmd_shell=$(tempfile)
+cat > $run_cmd_shell << EOF
+#!/bin/bash
+
+ssh root@192.168.101.55 'pwd; ls; sleep 10'
+EOF
+echo "Run cmd shell: $run_cmd_shell"
+
+for win in {1..5}
+do
+    gnome-terminal -t "win-$win" --window -e \
+        "bash ${run_cmd_shell}"
+done
+```
+
 ## 判断是否使用sudo
 
 ``` shell
