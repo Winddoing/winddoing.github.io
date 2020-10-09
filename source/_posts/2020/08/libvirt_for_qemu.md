@@ -285,3 +285,4 @@ rm page.txt fff.txt -rf
 - [虚拟化技术之kvm管理工具virsh常用基础命令（一）](https://www.cnblogs.com/qiuhom-1874/p/13508231.html)
 - [编译qemu和libvirt使支持SDL](https://blog.csdn.net/jiuzuidongpo/article/details/44342509)
 - [Virtualization - libvirt](https://discourse.ubuntu.com/t/virtualization-libvirt/11522/1)
+- [KVM 虚拟机 XML 配置文件详解](https://blog.51cto.com/4746316/2336524)
