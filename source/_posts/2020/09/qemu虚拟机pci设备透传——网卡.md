@@ -8,6 +8,7 @@ tags:
   - 网卡
 categories:
   - 虚拟机
+abbrlink: b3396e6f
 ---
 
 在qemu虚拟机中为了提高网络的性能，将本地host端的多余网卡透传到虚拟机中使用。

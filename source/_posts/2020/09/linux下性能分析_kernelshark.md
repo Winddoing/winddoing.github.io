@@ -1,12 +1,13 @@
 ---
-layout: "post"
-title: "linux下性能分析---kernelshark"
-date: "2020-09-05 11:44"
+layout: post
+title: linux下性能分析---kernelshark
+date: '2020-09-05 11:44'
 categories:
   - 工具
 tags:
   - kernelshark
   - 性能
+abbrlink: 321101fe
 ---
 
 Kernelshark作为trace-cmd的前端，借助图形化，灵活的filter，缩放功能，能更有效的帮助分析，高效的得到结果。它包含Ftrace以进行内部Linux内核跟踪，以分析内核中正在发生的事情。

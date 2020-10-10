@@ -8,6 +8,7 @@ tags:
 categories:
   - 虚拟机
   - qemu
+abbrlink: de22fd34
 ---
 
 > `libvirt`是目前使用最为广泛的针对KVM虚拟机进行管理的工具和API。`libvirtd`是一个daemon进程，可以被本地和远程的virsh(命令行工具)调用，Libvirtd通过调用qemu-kvm操作管理虚拟机。libvirt 由应用程序编程接口 (API) 库、一个守护进程 (libvirtd)，和默认命令行实用工具`(virsh)`等部分组成

@@ -1,7 +1,7 @@
 ---
-layout: "post"
-title: "WebVirtMgr for Qemu"
-date: "2020-09-19 23:06"
+layout: post
+title: WebVirtMgr for Qemu
+date: '2020-09-19 23:06'
 tags:
   - qemu
   - libvirt
@@ -9,6 +9,7 @@ tags:
 categories:
   - 虚拟机
   - libvirt
+abbrlink: 32f26c86
 ---
 
 `WebVirtMgr`采用几乎纯Python开发，其前端是基于Python的Django，后端是基于Libvirt的Python接口，将日常kvm的管理操作变的更加的可视化。

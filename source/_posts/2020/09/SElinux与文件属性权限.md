@@ -7,6 +7,7 @@ tags:
   - SElinux
 categories:
   - 文件系统
+abbrlink: 38ee39e7
 ---
 
 文件属性与权限的相关记录：

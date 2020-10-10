@@ -7,6 +7,7 @@ tags:
   - 配置文件
 categories:
   - 工具
+abbrlink: 865ecfcc
 ---
 
 `YAML`是"YAML Ain't a Markup Language"（YAML不是一种标记语言）的递归缩写。在开发的这种语言时，YAML 的意思其实是："Yet Another Markup Language"（仍是一种标记语言），但为了强调这种语言以数据做为中心，而不是以标记语言为重点，而用反向缩略语重命名。
