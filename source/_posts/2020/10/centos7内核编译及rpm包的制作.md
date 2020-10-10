@@ -8,6 +8,7 @@ tags:
   - rpm
 categories:
   - Linux内核
+abbrlink: cb2d9d77
 ---
 
 特定内核的编译安装
@@ -42,9 +43,9 @@ make install
 通过以上命令可以完成内核的编译。
 
 >Use the INSTALL_MOD_STRIP option for removing debugging symbols:
-> ```shell
-> make INSTALL_MOD_STRIP=1 modules_install
-> ```
+>```shell
+make INSTALL_MOD_STRIP=1 modules_install
+```
 
 ## 打包——RPM
 
@@ -56,17 +57,17 @@ make install
 make rpm -j32
 ```
 编译完成在`~/rpmbuild/RPMS/x86_64/`目录下生成rpm安装包：
-··· shell
+``` shell
 ls -lh ~/rpmbuild/RPMS/x86_64/
 -rw-r--r-- 1 root root 515M 10月 10 06:28 /root/rpmbuild/RPMS/x86_64/kernel-4.14.105-1.x86_64.rpm
 -rw-r--r-- 1 root root 135M 10月 10 06:30 /root/rpmbuild/RPMS/x86_64/kernel-devel-4.14.105-1.x86_64.rpm
 -rw-r--r-- 1 root root 1.2M 10月 10 06:28 /root/rpmbuild/RPMS/x86_64/kernel-headers-4.14.105-1.x86_64.rpm
-···
+```
 > 为啥rpm包这么大，官方rpm包一般五六十兆大小？？？
 >>主要是编译生成的`ko`文件增大所致，应该包含了debug信息和符号表
 >>```shell
->>make INSTALL_MOD_STRIP=1 rpm
->>```
+make INSTALL_MOD_STRIP=1 rpm
+```
 
 ### 安装
 

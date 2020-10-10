@@ -1,13 +1,14 @@
 ---
-layout: "post"
-title: "libvirt透传qemu参数"
-date: "2020-09-19 22:40"
+layout: post
+title: libvirt透传qemu参数
+date: '2020-09-19 22:40'
 tags:
   - qemu
   - libvirt
 categories:
   - 虚拟机
   - libvirt
+abbrlink: 549bb2ea
 ---
 
 在使用virsh通过libvirt接口创建虚拟机时，存在一些qemu的启动参数或者系统环境变量而libvirt接口不支持，因此需要将参数直接透传到qemu的启动命令。

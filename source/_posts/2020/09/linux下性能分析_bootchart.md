@@ -7,6 +7,7 @@ categories:
 tags:
   - bootchart
   - 性能
+abbrlink: 5f89ded7
 ---
 
 > `BootChart`是一个用于linux启动过程性能分析的开源软件工具，它可以在内核装载后就开始运行，记录各个程序启动占用的时间、CPU以及硬盘读写，直到系统启动完成为止。进入系统后，bootchart可以将启动时记录下的内容生成多种格式（PNG，SVG或者EPS）的图形报表，以便分析。

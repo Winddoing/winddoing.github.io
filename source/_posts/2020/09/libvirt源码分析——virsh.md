@@ -1,13 +1,14 @@
 ---
-layout: "post"
-title: "libvirt源码分析——virsh"
-date: "2020-09-17 11:49"
+layout: post
+title: libvirt源码分析——virsh
+date: '2020-09-17 11:49'
 tags:
   - virsh
   - libvirt
 categories:
   - 虚拟机
   - libvirt
+abbrlink: dec26e6d
 ---
 
 libvirt是用来管理虚拟机或虚拟化功能的软件集合，主要包括：`libvirt API`，`libvirtd进程`和`virsh`工具集三部分。最初的目的是为不同的hypervisor提供统一的管理接口
