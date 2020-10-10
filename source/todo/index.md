@@ -105,3 +105,5 @@ comments: true
 * [Data Structure Visualization](https://www.cs.usfca.edu/~galles/visualization/Algorithms.html) —— 数据结构可视化
 * [Y2Mate IO](https://y2mate.guru/en7/) —— YouTube视频下载
 * [华为开源镜像站](https://mirrors.huaweicloud.com/os/image) —— 下载centos ubuntu等操作系统
+* [archive.kernel.org](https://archive.kernel.org/) —— 内核存档，包含各个系统
+* [pkgs.org/](https://pkgs.org/) —— linux系统安装包搜索
