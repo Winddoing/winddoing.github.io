@@ -19,6 +19,7 @@ abbrlink: cb2d9d77
 
 ``` shell
 yum -y groups install "Development Tools"
+yum install ncurses-devel make gcc bc openssl-devel
 
 wget https://mirrors.edge.kernel.org/pub/linux/kernel/v4.x/linux-4.14.105.tar.gz
 
@@ -28,16 +29,16 @@ cp /boot/config-`uname -r` ./linux-4.14.105/.config
 
 cd linux-4.14.105
 
-make menuconfig
+make menuconfig  #进入后直接保存保存配置
 make oldconfig
 
 make kernelversion
-make -j32 all
+make INSTALL_MOD_STRIP=1 all -j32
 
-make modules_install
+make INSTALL_MOD_STRIP=1 modules_install
 # ls -lh /lib/modules
 
-make install
+make INSTALL_MOD_STRIP=1 install
 # ls -lh /boot
 ```
 通过以上命令可以完成内核的编译。
@@ -51,10 +52,14 @@ make INSTALL_MOD_STRIP=1 modules_install
 
 在源码编译的基础上进行rpm包的制作，主要是利用在源码编译阶段生成对内核的配置`.config`文件后，不进行安装而是直接打包。
 
-安装rpm包制作工具：`yum -y install rpmdevtools`
+安装rpm包制作工具：
 
 ``` shell
-make rpm -j32
+yum -y install rpm-build
+```
+
+``` shell
+make rpm-pkg -j32
 ```
 编译完成在`~/rpmbuild/RPMS/x86_64/`目录下生成rpm安装包：
 ``` shell
@@ -66,13 +71,13 @@ ls -lh ~/rpmbuild/RPMS/x86_64/
 > 为啥rpm包这么大，官方rpm包一般五六十兆大小？？？
 >>主要是编译生成的`ko`文件增大所致，应该包含了debug信息和符号表
 >>```shell
-make INSTALL_MOD_STRIP=1 rpm
+make INSTALL_MOD_STRIP=1 rpm-pkg
 ```
 
 ### 安装
 
 ``` shell
-yum localinstall kernel-*.rpm
+rpm -iUv ~/rpmbuild/RPMS/x86_64/kernel-*.rpm
 ```
 或
 ``` shell
