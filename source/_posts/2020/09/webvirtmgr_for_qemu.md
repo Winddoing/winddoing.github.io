@@ -7,7 +7,7 @@ tags:
   - libvirt
   - WebVirtMgr
 categories:
-  - 虚拟机
+  - 虚拟化
   - libvirt
 abbrlink: 32f26c86
 ---

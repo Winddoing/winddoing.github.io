@@ -6,7 +6,7 @@ tags:
   - qemu
   - libvirt
 categories:
-  - 虚拟机
+  - 虚拟化
   - qemu
 abbrlink: de22fd34
 ---

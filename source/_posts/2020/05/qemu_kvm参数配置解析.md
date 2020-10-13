@@ -7,7 +7,7 @@ tags:
   - kvm
   - 虚拟机
 categories:
-  - 虚拟机
+  - 虚拟化
 abbrlink: d2c5077b
 ---
 

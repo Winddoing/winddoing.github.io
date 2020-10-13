@@ -6,7 +6,7 @@ tags:
   - virsh
   - libvirt
 categories:
-  - 虚拟机
+  - 虚拟化
   - libvirt
 abbrlink: dec26e6d
 ---
