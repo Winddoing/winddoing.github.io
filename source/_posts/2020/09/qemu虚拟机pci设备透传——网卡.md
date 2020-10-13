@@ -7,7 +7,7 @@ tags:
   - PCI
   - 网卡
 categories:
-  - 虚拟机
+  - 虚拟化
 abbrlink: b3396e6f
 ---
 

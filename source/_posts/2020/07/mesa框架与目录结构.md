@@ -7,8 +7,9 @@ tags:
   - OpenGL
   - GPU
 categories:
-  - 程序设计
-  - 虚拟机
+  - 多媒体
+  - mesa
+
 abbrlink: 39ae47e2
 ---
 

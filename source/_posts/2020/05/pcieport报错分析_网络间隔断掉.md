@@ -115,3 +115,22 @@ tar zxvf r8168-8.048.02.tar.gz && r8168-8.048.02
 sudo ./autorun.sh
 ```
 > 更新完设备驱动后,网络连接正常,系统日志不再出现pcie错误打印
+
+
+## r8169驱动模块加入黑名单
+
+在`/etc/modprobe.d/`下添加文件`blacklist-r8169.conf`内容：
+
+```
+blacklist r8169
+```
+
+- 备份当前initrd文件
+``` shell
+sudo cp /boot/initrd.img-`uname -r` /boot/initrd.img-`uname -r`.bak
+```
+
+- 重新生成initrd文件,根据`/etc/modprobe.d/`下的文件规则
+``` shell
+sudo update-initramfs -u
+```
