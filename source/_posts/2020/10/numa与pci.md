@@ -50,6 +50,12 @@ sudo yum install hwloc-gui
 ![lstopo test](/images/2020/10/lstopo_test2.png)
 
 
+## 虚拟机中资源的最佳分布
+
+> 虚拟机所使用的到的所有硬件资源尽可能的分布在同一个node节点之上，这样将提高设备的利用率和虚拟机性能
+
+![VM Resources Mapping](/images/2020/10/vm_resources_mapping.png)
+
 ## CPU与内存吞吐量测试
 
 > Intel处理器测试工具:[Processor Counter Monitor](https://github.com/opcm/pcm)
@@ -165,3 +171,4 @@ LLCRDMISSLAT: average latency of last level cache miss for reads and prefetches 
 - [NUMA Node to PCI Slot Mapping in Red Hat Enterpise Linux](https://fatmin.com/2016/06/10/numa-node-to-pci-slot-mapping-in-red-hat-enterpise-linux/)
 - [虚拟化调试和优化指南](https://access.redhat.com/documentation/zh-cn/red_hat_enterprise_linux/7/html-single/virtualization_tuning_and_optimization_guide/index#sect-Virtualization_Tuning_Optimization_Guide-NUMA-Auto_NUMA_Balancing)
 - [Notes and tools for measuring CPU-to-memory throughput in Linux](https://github.com/LucaCanali/Miscellaneous/blob/master/Spark_Notes/Tools_Linux_Memory_Perf_Measure.md)
+- [Machine Learning Workload and GPGPU NUMA Node Locality](https://frankdenneman.nl/2020/01/30/machine-learning-workload-and-gpgpu-numa-node-locality/)

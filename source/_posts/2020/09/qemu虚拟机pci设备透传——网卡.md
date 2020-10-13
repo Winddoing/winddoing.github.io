@@ -167,6 +167,54 @@ done
 ls /dev/vfio/
 ```
 
+## virsh命令解除绑定
+
+> Host端的设备解除绑定（就是不被host系统所管理使用）后，通过给guest系统使用前的必备操作
+
+- 列出设备ID
+``` shell
+# virsh nodedev-list | grep pci   | grep 18
+pci_0000_18_00_0
+pci_0000_18_00_1
+```
+
+- 查询当前使用的驱动程序
+``` shell
+# virsh nodedev-dumpxml pci_0000_18_00_0
+<device>
+  <name>pci_0000_18_00_0</name>
+  <path>/sys/devices/pci0000:17/0000:17:03.0/0000:18:00.0</path>
+  <parent>pci_0000_17_03_0</parent>
+  <driver>
+    <name>vfio-pci</name>
+  </driver>
+  <capability type='pci'>
+    <domain>0</domain>
+    <bus>24</bus>
+    <slot>0</slot>
+    <function>0</function>
+    <product id='0x165f'>NetXtreme BCM5720 2-port Gigabit Ethernet PCIe</product>
+    <vendor id='0x14e4'>Broadcom Inc. and subsidiaries</vendor>
+    <iommuGroup number='26'>
+      <address domain='0x0000' bus='0x18' slot='0x00' function='0x0'/>
+      <address domain='0x0000' bus='0x18' slot='0x00' function='0x1'/>
+    </iommuGroup>
+    <numa node='0'/>
+    <pci-express>
+      <link validity='cap' port='0' speed='5' width='2'/>
+      <link validity='sta' speed='5' width='1'/>
+    </pci-express>
+  </capability>
+</device>
+```
+> 这是设备手动解除绑定后dump出的详细信息，如果没有解除绑定数据可能不同
+
+- 解绑当前设备
+``` shell
+# virsh nodedev-detach pci_0000_18_00_0
+# virsh nodedev-detach pci_0000_18_00_1
+```
+
 ## 参考
 
 - https://www.kernel.org/doc/Documentation/vfio.txt
