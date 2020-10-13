@@ -43,8 +43,32 @@ net.ipv4.tcp_syncookies = 0
 
 ## 返回值: n==0
 
+> When a stream socket peer has performed an orderly shutdown, the return value will be 0 (the traditional "end-of-file" return).
+> Datagram sockets in various domains (e.g., the UNIX and Internet domains) permit zero-length datagrams.  When such a datagram is received, the return value is 0.
+>> form `man recv`
+
+- 产生的原因：
+对端socket关闭，但是在实际的使用中对端的socket没有进行close的情况下有时也会返回`0`，这个可能就是数据传输中对端发送了长度为`0`的数据
+
+- 解决方法：
+在实际应用开发中我们需要进行错误处理时，将返回值小于等于0的状态进行统一处理。也就是在`accept`建立一个新的连接后，创建一个独立的线程进行数据的收发，如果在收发的过程中返回值出现错误时，关闭该socket和线程进入主进程重新建立一个连接继续进行数据收发（注意C/S端均得进行这样的处理）
+
+![Socket TCP](/images/2020/10/socket_tcp.png)
+
+> 在Server端其实存在两socket连接，listen监听的是主的socket描述符，而当每一次accept时将会重新创建一个新的socket描述符用于数据的收发
 
 ## TCP_NODELAY
+
+> socket编程中，`TCP_NODELAY`选项是用来控制是否开启`Nagle算法`，该算法是为了提高较慢的广域网传输效率，减小小分组的报文个数
+
+在TCP数据传输中，如果需要提高数据的实时性需要将`Nagle算法`关闭
+
+``` C
+static void _set_tcp_nodelay(int fd) {
+    int enable = 1;
+    setsockopt(fd, IPPROTO_TCP, TCP_NODELAY, (void*)&enable, sizeof(enable));
+}
+```
 
 
 ## 参考
