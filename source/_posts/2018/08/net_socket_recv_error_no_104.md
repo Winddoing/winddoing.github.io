@@ -55,7 +55,87 @@ net.ipv4.tcp_syncookies = 0
 
 ![Socket TCP](/images/2020/10/socket_tcp.png)
 
-> 在Server端其实存在两socket连接，listen监听的是主的socket描述符，而当每一次accept时将会重新创建一个新的socket描述符用于数据的收发
+> 在Server端其实存在两socket连接，listen监听的是主的socket描述符(一直存在直到主动关闭)，而当每一次accept时将会重新创建一个新的socket描述符用于数据的收发
+
+- client端创建一个单独的线程进行数据处理，比如进行数据读取，`connect`建立连接后，通过`recvfrom`进行读取，如果在读取数据正常没有出现任何异常时，利用`recvfrom`函数的阻塞功能将该线程阻塞住直到对端再一次发送数据，但是如果出现任何异常（函数返回值<=0）时,退出重新与对端建立新的连接后，继续数据读取
+``` C
+static ssize_t do_readn_sync(int fd, void *buffer, size_t n, int flags)
+{
+    ssize_t numRead;   /* # of bytes fetched by last read() */
+    size_t totRead;    /* Total # of bytes read so far */
+    char *buf;
+
+    buf = buffer;
+    for(totRead = 0; totRead < n;) {
+        numRead = recvfrom(fd, buf, n - totRead, flags, NULL, 0);
+
+        if(numRead == 0)        /* EOF */
+            return totRead;
+
+        if(numRead == -1) {
+            if(errno == EINTR)
+                continue;       /* Interrupted -- restart read() */
+            else
+                return -1;      /* Other error */
+        }
+
+        totRead += numRead;
+        buf += numRead;
+    }
+
+    return totRead;             /* Must be 'n' bytes if we get here */
+}
+//Returns number of bytes read, 0 on EOF, or -1 on error
+ssize_t readn_sync(int fd, void *buffer, size_t n)
+{
+    return do_readn_sync(fd, buffer, n, 0);
+}
+static void _do_data_read()
+{
+    #业务数据判断满足的读取条件
+:next
+    fd = socket();
+    connect()
+
+    do {
+      ret = readn(vm_input_fd, (void *)buff, datalen);
+    } while(ret>0);
+
+    if (fd) {
+      close(fd);
+      fd = -1;
+    }
+    goto next;
+}
+```
+
+- server端： 在`accept`建立一个新的连接后，创建一个独立的线程进行数据的收发，如果在收发的过程中返回值出现错误时，关闭该socket和线程进入主进程重新建立一个连接继续进行数据收发
+``` C
+# 伪代码
+static void _do_data_write(void *arg)
+{
+    ret = send()
+    if (ret <= 0) {
+      close(arg)
+    }
+}
+void main()
+{
+    fd = socket();
+    bind();
+    listen();
+
+    while (1) {
+        new_fd = accept();
+
+        #也可以fork出一个进程进行处理
+        pthread_create(&tid, &attr, _do_data_write, (void *)new_fd);
+        pthread_attr_destroy(&attr);
+
+        continue;
+    }
+}
+```
 
 ## TCP_NODELAY
 
@@ -64,9 +144,19 @@ net.ipv4.tcp_syncookies = 0
 在TCP数据传输中，如果需要提高数据的实时性需要将`Nagle算法`关闭
 
 ``` C
-static void _set_tcp_nodelay(int fd) {
-    int enable = 1;
-    setsockopt(fd, IPPROTO_TCP, TCP_NODELAY, (void*)&enable, sizeof(enable));
+/* Disable Nagle */
+int disable_nagle;
+int nagleopt_len = 4;
+if(0 != getsockopt(sockfd, IPPROTO_TCP, TCP_NODELAY, &disable_nagle, &nagleopt_len)) {
+    printf("getsockopt TCP_NODELAY fail: %s\n", strerror(errno));
+} else {
+    //printf("old TCP_NODELAY: %d\n", disable_nagle);
+}
+disable_nagle = 1;
+if(0 != setsockopt(sockfd, IPPROTO_TCP, TCP_NODELAY, &disable_nagle, 4)) {
+    printf("setsockopt TCP_NODELAY fail: %s\n", strerror(errno));
+} else {
+    //printf("new TCP_NODELAY: %d\n", disable_nagle);
 }
 ```
 
