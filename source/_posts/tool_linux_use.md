@@ -47,27 +47,6 @@ unzip wps_symbol_fonts.zip
 sudo cp mtextra.ttf  symbol.ttf  WEBDINGS.TTF  wingding.ttf  WINGDNG2.ttf  WINGDNG3.ttf  /usr/share/fonts
 ```
 
-## 福昕阅读
-
-- [https://www.foxitsoftware.cn/downloads/](https://www.foxitsoftware.cn/downloads/)
-
-## 搜狗输入法
-
-- [https://pinyin.sogou.com/linux/?r=pinyin](https://pinyin.sogou.com/linux/?r=pinyin)
-
-## 微信
-
-- https://github.com/geeeeeeeeek/electronic-wechat/releases/download/V2.0/linux-x64.tar.gz
-
-```
-sudo snap install electronic-wechat
-```
-
-## 钉钉 for Linux
-
-* [https://github.com/nashaofu/dingtalk](https://github.com/nashaofu/dingtalk)
-
-
 ## Teamviewer
 
 * [下载](https://www.teamviewer.com/zhcn/download/linux/)
@@ -168,27 +147,6 @@ vooya – Raw YUV/RGB Video Player
 - [http://www.offminor.de/downloads.html](http://www.offminor.de/downloads.html)
 
 
-### 中文输入法
-
-1. 修改/usr/share/applications/dia.desktop文件
-> 把`Exec=dia %F`改成`Exec=env GTK_IM_MODULE=xim dia %F`
-
-
-2. 在终端启动时增加启动设置
-> 设置别名alias，执行命令`alias dia="env GTK_IM_MODULE=xim dia"`
-
-3. 文字输入框右键
-> 选择输入文字模式—>在文字输入框右键—>输入法(Input Methods)—>X输入法
-
-
-
-## 实时显示上下行网速、CPU及内存使用率
-
-```
-sudo add-apt-repository ppa:fossfreedom/indicator-sysmonitor
-sudo apt-get install indicator-sysmonitor
-```
-
 ## gedit汉字乱码
 
 ```
@@ -224,27 +182,6 @@ sudo apt-get install sqlitebrowser
 
 - 官网：[http://datahammer.de](http://datahammer.de/)
 
-## Motirx
-
-[Motirx](https://github.com/agalwood/Motrix)是一款全能的下载工具，支持下载 HTTP、FTP、BT、磁力链、百度网盘（百度云）等资源
-
-- 官网： [https://motrix.app](https://motrix.app)
-
-
-## Deepin-Wine
-
-> 安装deepin_QQ、deepin_微信、deepin_迅雷和deepin_百度网盘
-
-- https://github.com/wszqkzqk/deepin-wine-ubuntu
-
-## VS Code
-
-
-## franz
-
->即时通讯聚合一一Franz：微信、钉钉、QQ
-
-- https://meetfranz.com/#download
 
 ## Nitroshare
 
