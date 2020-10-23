@@ -37,7 +37,7 @@ BlackList = nspluginwrapper, valgrind, strace, mono-core
 
 # Process crashes in executables which do not belong to any package?
 #
-ProcessUnpackaged = yes #
+ProcessUnpackaged = yes #保存捕获程序异常的core文件
 
 # Blacklisted executable paths (shell patterns)
 #
@@ -64,6 +64,10 @@ service abrtd status
 
 ```
 sysctl -a | grep core_pattern
+```
+
+``` shell
+sed -i 's/ProcessUnpackaged = no/ProcessUnpackaged = yes/g' /etc/abrt/abrt-action-save-package-data.conf&& service abrtd restart
 ```
 
 ## 操作命令
