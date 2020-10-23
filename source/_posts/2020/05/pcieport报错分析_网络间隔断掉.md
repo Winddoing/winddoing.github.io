@@ -109,6 +109,14 @@ $sudo lshw -C network
 
 ## 更换网卡驱动
 
+### apt安装
+
+``` shell
+sudo apt install r8168-dkms
+```
+
+### 源码手动安装
+
 ``` shell
 wget https://codeload.github.com/mtorromeo/r8168/tar.gz/8.048.02
 tar zxvf r8168-8.048.02.tar.gz && r8168-8.048.02

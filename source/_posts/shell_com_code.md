@@ -12,6 +12,26 @@ date: 2018-02-04 23:07:24
 
 <!--more-->
 
+## 递归便利整个目录及子目录
+
+``` shell
+function getdir(){
+    echo $1
+    for file in $1/*
+    do
+        if test -f $file
+        then
+            echo $file
+            arr=(${arr[*]} $file)
+        else
+            getdir $file
+        fi
+    done
+}
+getdir ./src
+#echo ${arr[@]}
+```
+
 ## 打开多个窗口并登录ssh执行命令
 
 ``` shell
