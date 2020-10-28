@@ -15,12 +15,7 @@ date: 2016-08-19T22:18:39.000Z
 ## Atom 插件
 
 ```
-atom-hexo
-markdown-scroll-sync
-markdown-writer
-```
-```
-apm install tool-bar markdown-writer tool-bar-markdown-writer
+apm install tool-bar markdown-writer tool-bar-markdown-writer markdown-scroll-sync
 ```
 
 ## Markdown语法
