@@ -108,5 +108,8 @@ seat0
 ## 参考
 
 - [multiseat](https://www.freedesktop.org/wiki/Software/systemd/multiseat/)
+- [Multiseat](https://www.x.org/wiki/Development/Documentation/Multiseat/)
+- [Xorg multiseat](https://wiki.archlinux.org/index.php/Xorg_multiseat)
 - [How to configure a Multiseat system](https://samuloop.github.io/linux/multiseat.html#create_seat)
 - [Autostart all LightDM seats and show one as default](https://unix.stackexchange.com/questions/87169/autostart-all-lightdm-seats-and-show-one-as-default)
+- [Debugging multiseat: How to run two X server layouts together without display manager?](https://unix.stackexchange.com/questions/167709/debugging-multiseat-how-to-run-two-x-server-layouts-together-without-display-ma)

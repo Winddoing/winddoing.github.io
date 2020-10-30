@@ -289,6 +289,11 @@ startx -- -layout seat0 -seat seat0 -novtswitch -sharevts
 
 `~/.xinitrc`由xinit执行，通常通过startx调用。 登录后将执行该程序：首先登录文本控制台，然后使用startx启动GUI。`.xinitrc`的作用是启动会话的GUI部分，通常是通过设置一些与GUI相关的设置，例如键绑定（使用xmodmap或xkbcomp），X资源（使用xrdb）等，以及启动会话管理器或窗口管理器（可能是桌面环境的一部分）。
 
+``` shell
+# xinit /etc/X11/xinitrc -- /usr/bin/X :1 -config /etc/X11/xorg.conf.new -novtswitch -sharevts vt2 -keeptty -listen tcp
+# X :1 -config /etc/X11/xorg.conf.new -novtswitch -sharevts vt2 -keeptty -listen tcp
+```
+
 ### 窗口管理器
 
 - fvwm:虚拟窗口管理器,占用资源少
