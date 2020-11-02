@@ -373,6 +373,26 @@ else
 - 查看修改信息： `j/k`
 - 展示commit-id： `shift+x`
 
+## 删除已删除文件或目录的所以历史记录
+
+- 删除文件
+``` shell
+git filter-branch --force --index-filter 'git rm --cached --ignore-unmatch pom.xml' --prune-empty --tag-name-filter cat -- --all
+```
+
+- 删除目录
+``` shell
+git filter-branch --force --index-filter 'git rm --cached -r --ignore-unmatch qemu/qemu-4.2.0/' --prune-empty --tag-name-filter cat -- --all
+```
+
+- 删除回收
+```
+rm -rf .git/refs/original/
+git reflog expire --expire=now --all
+git gc --prune=now
+git gc --aggressive --prune=now
+```
+
 ## 错误处理
 
 ### git clone
