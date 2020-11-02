@@ -29,9 +29,25 @@ abbrlink: 62149
 $rpcgen --version
 rpcgen (Ubuntu GLIBC 2.27-3ubuntu1) 2.27
 ```
+## rpcinfo
+
+> report RPC information
+
+## Q&A
+
+### Cannot register service: RPC: Unable to receive; errno = Connection refused
+
+`portmap`是为RPC程序服务的。每一个RPC server程序启动的时候要向portmap程序注册。这样portmap程序就知道这些RPC server监听在哪个端口。 而RPC client在发起连接向portmap发起查询，知道了想要查询的RPC server的监听端口后再去连接server
+
+``` shell
+sudo apt install portmap rpcbind
+sudo systemctl status portmap.service
+```
 
 ## 參考
 
 - [C/C++ RPC Tutorial for Linux [closed]](https://stackoverflow.com/questions/2526227/c-c-rpc-tutorial-for-linux)
 - [Linux下C语言RPC（远程过程调用）编程实例](https://blog.csdn.net/iw1210/article/details/41051779)
 - [rpcgen Programming Guide](https://docs.freebsd.org/44doc/psd/22.rpcgen/paper.pdf)
+- [Writing Remote Procedural Calls (RPCs) in C](https://www.cprogramming.com/tutorial/rpc/remote_procedure_call_start.html)
+- [Passing character pointers from client to server in RPCGen](https://stackoverflow.com/questions/28822436/passing-character-pointers-from-client-to-server-in-rpcgen)

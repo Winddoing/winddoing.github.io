@@ -202,8 +202,21 @@ EndSection
 
 ## 参数
 
+```
+$man Xorg
+$man xorg.conf
+$man Xserver
+$man modesetting
+$man fbdevhw
+$man Xwrapper.config
 
+$man Xephyr
+$man exa
+$man cvt
+$man gtf
+```
 
+- `Xephyr`: X服务器输出到预先存在的X显示器上的窗口
 
 
 ## 应用示例
