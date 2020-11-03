@@ -44,10 +44,59 @@ sudo apt install portmap rpcbind
 sudo systemctl status portmap.service
 ```
 
+## 示例
+
+``` shell
+$find /usr/include/ -name "*.x"
+/usr/include/rpcsvc/key_prot.x
+/usr/include/rpcsvc/bootparam_prot.x
+/usr/include/rpcsvc/sm_inter.x
+/usr/include/rpcsvc/klm_prot.x
+...
+```
+
+### 结构体
+
+```
+program YPPASSWDPROG {
+        version YPPASSWDVERS {
+                /*
+                 * Update my passwd entry
+                 */
+                int
+                YPPASSWDPROC_UPDATE(yppasswd) = 1;
+        } = 1;
+} = 100009;
+
+
+struct passwd {
+        string pw_name<>;       /* username */
+        string pw_passwd<>;     /* encrypted password */
+        int pw_uid;             /* user id */
+        int pw_gid;             /* group id */
+        string pw_gecos<>;      /* in real life name */
+        string pw_dir<>;        /* home directory */
+        string pw_shell<>;      /* default shell */
+};
+
+struct yppasswd {
+        string oldpass<>;       /* unencrypted old password */
+        passwd newpw;           /* new passwd entry */
+};
+```
+> https://unix.stackexchange.com/questions/344015/what-are-the-x-files-in-usr-include
+
+### 函数指针
+
+
+
+
 ## 參考
 
+- [Remote Procedure Calls](https://www.linuxjournal.com/article/2204)
 - [C/C++ RPC Tutorial for Linux [closed]](https://stackoverflow.com/questions/2526227/c-c-rpc-tutorial-for-linux)
 - [Linux下C语言RPC（远程过程调用）编程实例](https://blog.csdn.net/iw1210/article/details/41051779)
 - [rpcgen Programming Guide](https://docs.freebsd.org/44doc/psd/22.rpcgen/paper.pdf)
 - [Writing Remote Procedural Calls (RPCs) in C](https://www.cprogramming.com/tutorial/rpc/remote_procedure_call_start.html)
 - [Passing character pointers from client to server in RPCGen](https://stackoverflow.com/questions/28822436/passing-character-pointers-from-client-to-server-in-rpcgen)
+- [Writing RPC Applications with the rpcgen Protocol Compiler](http://neo.dmcs.pl/rso/du/onc-rpc3.html)
