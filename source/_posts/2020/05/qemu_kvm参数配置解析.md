@@ -13,6 +13,8 @@ abbrlink: d2c5077b
 
 Qemu参数配置
 
+> [QEMU System Emulation User’s Guide](https://www.qemu.org/docs/master/system/index.html#)
+
 <!--more-->
 ## 网络
 
