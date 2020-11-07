@@ -16,6 +16,8 @@ comments: false
 `图元（Primitives）`：一维或二维的实体或表面，如点、线段、三角形、多边形，在2D或3D中绘制一个物体的组成
 
 
+# 第一部分：基本概念
+
 ## 缓冲区
 
 ``` C
@@ -85,3 +87,28 @@ PFNGLCREATESHADERPROC
 
 - 光线追踪器
 - 离线渲染器
+
+
+# 第二部分：深入探索
+
+## 缓冲区对象
+
+缓冲区对象实现了对像素的实际控制，在无需CPU介入的情况下，可以将GPU中的像素数据移动到合适的位置。
+
+用途：保存顶点数据、像素数据、纹理数据、着色器处理的输入、或者不同着色器阶段的输出
+
+```C
+void glGenBuffers( 	GLsizei n,
+  	GLuint * buffers);
+```
+- `n`：指定要生成的缓冲区对象名称的数量。
+- `buffers`：指定一个数组，在其中存储生成的缓冲区对象名称。
+
+``` C
+GLuint vbo;
+glGenObject(1,&vbo);
+GLuint vbo[3];
+glGenObject(3,vbo);
+```
+
+### 像素缓冲区对象——PBO
