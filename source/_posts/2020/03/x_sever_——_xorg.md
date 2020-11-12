@@ -20,9 +20,9 @@ Xorg：基于`X11`协议的服务端。管理硬件设备（驱动），键盘�
 
 生成配置文件
 ``` shell
-# Xorg -configure :2
+# Xorg -configure :0
 ```
-> `:2`显示窗口，在Xorg启动的情况下，无法获取当前的Xorg配置文件
+> `:0`显示窗口，在Xorg启动的情况下，无法获取当前的Xorg配置文件，可以随意指定数字
 
 
 ### xorg.conf
@@ -311,6 +311,23 @@ startx -- -layout seat0 -seat seat0 -novtswitch -sharevts
 
 - fvwm:虚拟窗口管理器,占用资源少
 - twm:(Tab Window Manager for the X Window System)
+
+## 驱动模块——Driver
+
+``` shell
+$ls /usr/lib/xorg/modules/drivers/
+amdgpu_drv.so  ati_drv.so  fbdev_drv.so  intel_drv.so  modesetting_drv.so  nouveau_drv.so  qxl_drv.so  radeon_drv.so  vesa_drv.so  vmware_drv.so
+```
+
+每一个驱动模块的详细信息，可以通过`man`手册进行查看，比如`man modesetting`、`man intel`、`man amdgpu`等
+
+### modesetting
+
+> `modesetting` is an Xorg driver for KMS devices.
+
+The modesetting driver supports all hardware where a KMS driver is available. modesetting uses the Linux DRM KMS ioctls and dumb object create/map.
+
+
 
 ## 参考
 

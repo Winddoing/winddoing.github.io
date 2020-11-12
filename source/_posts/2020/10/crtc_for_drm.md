@@ -36,3 +36,5 @@ CRTC模块产生vbank信号进行场同步刷新
 - [DRM Driver Development For Embedded Systems](https://elinux.org/images/7/71/Elce11_dae.pdf)
 - [Linux DRM（二）基本概念和特性](https://blog.csdn.net/dearsq/article/details/78394388)
 - [linux drm 架构及linux drm 架构 之代码分析](https://blog.csdn.net/boyemachao/article/details/83576684)
+- [关于 DRM 中 DUMB 和 PRIME 名字的由来](https://blog.csdn.net/hexiaolong2009/article/details/105961192)
+- [DRM 驱动程序开发（开篇）](https://blog.csdn.net/hexiaolong2009/article/details/89810355)
