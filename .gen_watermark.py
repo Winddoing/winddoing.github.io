@@ -38,7 +38,8 @@ def add_watermark_text(img):
     draw.text(xy=(w/4, h - wm_font_sz - 1), text=wm_text, fill=(220,220,220), font=font_type)
 
 def retain_file(file):
-    retain_f = ["alipay.jpg", "weixin.jpg", "Winddoing.jpg"]
+    retain_f = ["alipay.jpg", "weixin.jpg", "Winddoing.jpg", "apple-touch-icon-next.png", \
+            "favicon-16x16-next.png", "favicon-32x32-next.png"]
     for f in retain_f:
         if f in file:
             print("Keep File:", f)
