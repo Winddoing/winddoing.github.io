@@ -38,3 +38,4 @@ CRTC模块产生vbank信号进行场同步刷新
 - [linux drm 架构及linux drm 架构 之代码分析](https://blog.csdn.net/boyemachao/article/details/83576684)
 - [关于 DRM 中 DUMB 和 PRIME 名字的由来](https://blog.csdn.net/hexiaolong2009/article/details/105961192)
 - [DRM 驱动程序开发（开篇）](https://blog.csdn.net/hexiaolong2009/article/details/89810355)
+- [Linux 图形栈一览：基于 DRM 和 Wayland](http://tinylab.org/linux-graphics-stack-overview#%E8%83%8C%E6%99%AFdrm--buffer-managementframe-buffer--planekernel-mode-setting)

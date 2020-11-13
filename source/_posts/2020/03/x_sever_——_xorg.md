@@ -327,6 +327,65 @@ amdgpu_drv.so  ati_drv.so  fbdev_drv.so  intel_drv.so  modesetting_drv.so  nouve
 
 The modesetting driver supports all hardware where a KMS driver is available. modesetting uses the Linux DRM KMS ioctls and dumb object create/map.
 
+modesetting是KMS设备的Xorg驱动程序。 该驱动程序支持在帧缓冲区深度为15、16、24和30的TrueColor视觉效果。multi-head配置支持RandR 1.2。 对于至少支持OpenGL ES 2.0或OpenGL 2.1的设备，可以通过glamor进行加速。 如果未启用魅力，则根据KMS驱动程序的偏好配置阴影帧缓冲区（除非帧缓冲区为每像素24位，在这种情况下始终使用阴影帧缓冲区）。
+
+
+### vesa
+
+`vesa`是用于通用VESA视频卡的Xorg驱动程序。 它可以驱动大多数与VESA兼容的视频卡，但仅使用这些卡通用的基本标准VESA内核。驱动程序支持深度8、15、16和24。
+
+### Driver配置的缺失
+
+如果在xorg.conf的配置中将Driver字段的配置缺失，系统会默认选择加载`modeseting`、`fbdev`、`vesa`驱动。
+
+``` conf
+Section "Device"
+  Identifier "devname"
+  #Driver "modesetting" #将该字段注释掉，Xorg将自动进行加载
+  BusID  "pci:bus:dev:func"
+  ...
+EndSection
+```
+
+```
+...
+(II) xfree86: Adding drm device (/dev/dri/card2)
+(II) Platform probe for /sys/devices/pci0000:ae/0000:ae:00.0/0000:af:00.0/0000:b0:10.0/0000:bb:00.0/0000:bc:01.0/0000:bd:00.0/drm/card2
+(II) "glx" will be loaded. This was enabled by default and also specified in the config file.
+(II) LoadModule: "glx"
+(II) Loading /usr/lib64/xorg/modules/extensions/libglx.so
+(II) Module glx: vendor="X.Org Foundation"
+   compiled for 1.20.4, module version = 1.0.0
+   ABI class: X.Org Server Extension, version 10.0
+
+(==) Matched modesetting as autoconfigured driver 0
+(==) Matched fbdev as autoconfigured driver 1
+(==) Matched vesa as autoconfigured driver 2
+(==) Assigned the driver to the xf86ConfigLayout
+
+(II) LoadModule: "modesetting"
+(II) Loading /usr/lib64/xorg/modules/drivers/modesetting_drv.so
+(II) Module modesetting: vendor="X.Org Foundation"
+   compiled for 1.20.4, module version = 1.20.4
+   Module class: X.Org Video Driver
+   ABI class: X.Org Video Driver, version 24.0
+(II) LoadModule: "fbdev"
+(II) Loading /usr/lib64/xorg/modules/drivers/fbdev_drv.so
+(II) Module fbdev: vendor="X.Org Foundation"
+   compiled for 1.20.1, module version = 0.5.0
+   Module class: X.Org Video Driver
+   ABI class: X.Org Video Driver, version 24.0
+(II) LoadModule: "vesa"
+(II) Loading /usr/lib64/xorg/modules/drivers/vesa_drv.so
+(II) Module vesa: vendor="X.Org Foundation"
+   compiled for 1.20.1, module version = 2.4.0
+   Module class: X.Org Video Driver
+   ABI class: X.Org Video Driver, version 24.0
+(II) modesetting: Driver for Modesetting Kernel Drivers: kms
+(II) FBDEV: driver for framebuffer: fbdev
+(II) VESA: driver for VESA chipsets: vesa
+(II) modeset(0): using drv /dev/dri/card2
+```
 
 
 ## 参考
