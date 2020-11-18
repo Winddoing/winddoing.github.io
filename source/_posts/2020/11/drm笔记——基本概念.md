@@ -1,12 +1,13 @@
 ---
-layout: "post"
-title: "DRM笔记——基本概念"
-date: "2020-11-13 11:20"
+layout: post
+title: DRM笔记——基本概念
+date: '2020-11-13 11:20'
 tags:
   - GPU
   - DRM
 categories:
   - 设备驱动
+abbrlink: 195f15d1
 ---
 
 `DRM`（Direct Rendering Manager）是linux中主流的图形显示框架，它将GPU的管理驱动和Display驱动，使得软件架构更为统一，方便管理和维护

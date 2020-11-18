@@ -7,6 +7,7 @@ tags:
   - pci
 categories:
   - Linux内核
+abbrlink: 13d4e2a6
 ---
 
 ![NUMA PCI mapping](/images/2020/10/numa_pci_mapping.png)

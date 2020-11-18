@@ -1,12 +1,13 @@
 ---
-layout: "post"
-title: "「译」Linux DRM开发人员指南"
-date: "2020-11-13 17:05"
+layout: post
+title: 「译」Linux DRM开发人员指南
+date: '2020-11-13 17:05'
 tags:
   - GPU
   - DRM
 categories:
   - 设备驱动
+abbrlink: 3ac13ea3
 ---
 
 最近在看DRM驱动相关的代码，但是总有一种盲人摸象的感觉，今天看到[Linux DRM Developer's Guide](http://www.landley.net/kdocs/htmldocs/drm.html)文档，在这里简单翻译一下,可以对DRM驱动有一个整体的认识。
