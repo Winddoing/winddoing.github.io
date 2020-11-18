@@ -7,6 +7,7 @@ tags:
   - qemu
 categories:
   - 虚拟化
+abbrlink: 7b57e643
 ---
 
 虚拟机性能优化

@@ -7,6 +7,7 @@ tags:
   - linux
 categories:
   - Linux内核
+abbrlink: b4e9a1bb
 ---
 
 > The kernels at [www.kernel.org](https://www.kernel.org) are vanilla kernels.
