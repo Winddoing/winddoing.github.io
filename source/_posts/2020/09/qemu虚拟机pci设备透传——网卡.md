@@ -4,7 +4,7 @@ title: Qemu虚拟机pci设备透传——网卡
 date: '2020-09-24 16:58'
 tags:
   - qemu
-  - PCI
+  - pci
   - 网卡
 categories:
   - 虚拟化

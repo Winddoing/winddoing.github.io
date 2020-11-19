@@ -2,7 +2,7 @@
 title: C代码片段
 categories: 程序设计
 tags:
-  - C
+  - c
 abbrlink: 16839
 date: 2018-06-19 12:07:24
 ---

@@ -3,10 +3,10 @@ layout: post
 title: OpenGL调试——apitrace
 date: '2019-12-05 19:22'
 tags:
-  - OpenGL
+  - opengl
 categories:
   - 多媒体
-  - OpenGL
+  - opengl
 abbrlink: 65255
 ---
 

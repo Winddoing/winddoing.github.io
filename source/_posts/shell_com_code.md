@@ -1,7 +1,7 @@
 ---
 title: shell常用代码
 tags:
-  - Shell
+  - shell
 categories:
   - shell
 abbrlink: 3776

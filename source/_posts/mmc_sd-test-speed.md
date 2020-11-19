@@ -2,8 +2,8 @@
 title: sd卡测速
 categories: 设备驱动
 tags:
-  - MMC
-  - SD
+  - mmc
+  - sd
   - dd
 abbrlink: 11560
 date: 2016-10-12 23:07:24

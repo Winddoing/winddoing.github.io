@@ -3,7 +3,7 @@ layout: post
 title: X86平台下的SIMD运算
 date: '2019-04-30 17:52'
 tags:
-  - SIMD
+  - simd
 categories:
   - 程序设计
   - 性能

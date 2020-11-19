@@ -3,7 +3,7 @@ layout: post
 title: HDMI/DVI接口显示器热插拔原理（HPD）
 date: '2019-03-19 16:16'
 tags:
-  - HDMI
+  - hdmi
 categories:
   - 多媒体
 abbrlink: 57591

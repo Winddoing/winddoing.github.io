@@ -5,7 +5,7 @@ date: '2020-11-17 14:12'
 tags:
   - linux
 categories:
-  - Linux内核
+  - linux内核
 abbrlink: e5599899
 ---
 

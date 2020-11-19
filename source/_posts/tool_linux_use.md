@@ -2,7 +2,7 @@
 title: Linux下常用工具
 categories: 工具
 tags:
-  - Linux
+  - linux
 abbrlink: 36295
 date: 2018-05-13 23:37:24
 ---

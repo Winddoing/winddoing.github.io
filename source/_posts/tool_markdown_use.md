@@ -5,7 +5,7 @@ categories:
 tags:
   - markdown
 abbrlink: 22648
-date: 2016-08-19T22:18:39.000Z
+date: 2016-08-19t22:18:39.000z
 ---
 
 在这里主要记录makedown的使用语法，以备后续写作时的不时之需。

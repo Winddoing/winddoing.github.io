@@ -2,8 +2,8 @@
 title: Cgroup框架的实现
 categories: Linux内核
 tags:
-  - Linux
-  - Cgroup
+  - linux
+  - cgroup
 abbrlink: 3438
 date: 2018-03-30 23:07:24
 ---

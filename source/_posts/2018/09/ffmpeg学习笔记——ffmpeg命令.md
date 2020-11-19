@@ -3,9 +3,9 @@ layout: post
 title: FFmpeg学习笔记——ffmpeg命令
 date: '2018-09-05 15:49'
 tags:
-  - FFmpeg
+  - ffmpeg
 categories:
-  - FFmpeg
+  - ffmpeg
 abbrlink: 41754
 ---
 

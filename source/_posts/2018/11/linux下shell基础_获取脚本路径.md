@@ -3,7 +3,7 @@ layout: post
 title: linux下shell基础--获取脚本路径
 date: '2018-11-24 14:21'
 tags:
-  - Shell
+  - shell
 categories:
   - shell
 abbrlink: 12156

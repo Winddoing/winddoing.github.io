@@ -3,7 +3,7 @@ layout: post
 title: 图像压缩编码——JPEG
 date: '2019-05-08 11:23'
 tags:
-  - JPEG
+  - jpeg
 categories:
   - 多媒体
   - 编码

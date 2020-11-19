@@ -3,7 +3,7 @@ layout: post
 title: AVX VMOVDQA slower than two SSE MOVDQA?
 date: '2019-05-21 17:11'
 tags:
-  - SIMD
+  - simd
 categories:
   - 程序设计
   - 性能

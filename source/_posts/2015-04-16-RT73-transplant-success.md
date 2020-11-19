@@ -1,12 +1,12 @@
 ---
 date: '2015-04-16 01:49'
 layout: post
-title: RT73网卡的移植
+title: rt73网卡的移植
 thread: 164
 categories: 系统应用
 tags:
-  - RT73
-  - ARM
+  - rt73
+  - arm
   - 网卡
 abbrlink: 58471
 ---

@@ -3,7 +3,7 @@ layout: post
 title: linux下shell基础--软连接处理
 date: '2018-12-21 17:14'
 tags:
-  - Shell
+  - shell
 categories:
   - shell
 abbrlink: 55887

@@ -3,7 +3,7 @@ layout: post
 title: CPU流水线
 date: '2019-05-21 20:24'
 tags:
-  - CPU
+  - cpu
 categories:
   - 计算机系统
 abbrlink: 34653

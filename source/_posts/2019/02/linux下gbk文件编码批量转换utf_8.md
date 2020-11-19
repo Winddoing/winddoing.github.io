@@ -3,7 +3,7 @@ layout: post
 title: Linux下GBK文件编码批量转换UTF-8
 date: '2019-02-18 19:46'
 tags:
-  - Shell
+  - shell
 categories:
   - shell
 abbrlink: 38869

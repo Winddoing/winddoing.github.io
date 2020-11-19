@@ -3,8 +3,8 @@ layout: post
 title: DRM笔记——基本概念
 date: '2020-11-13 11:20'
 tags:
-  - GPU
-  - DRM
+  - gpu
+  - drm
 categories:
   - 设备驱动
 abbrlink: 195f15d1

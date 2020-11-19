@@ -3,10 +3,10 @@ layout: post
 title: ARM--GCC内嵌汇编
 date: '2018-12-14 10:02'
 tags:
-  - ARM
+  - arm
   - 汇编
 categories:
-  - ARM
+  - arm
   - 汇编
 abbrlink: 4526
 ---

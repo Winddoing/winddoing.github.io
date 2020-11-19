@@ -2,7 +2,7 @@
 title: 组播--IGMPv2
 categories: 网络
 tags:
-  - IGMP
+  - igmp
   - net
 abbrlink: 39626
 date: 2018-06-25 23:17:24

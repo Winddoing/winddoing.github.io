@@ -4,8 +4,8 @@ title: C与C++混合编译
 date: '2020-04-29 09:45'
 tags:
   - 编译
-  - C
-  - C++
+  - c
+  - c++
 categories:
   - 编译工具
 abbrlink: 74f3b3c3

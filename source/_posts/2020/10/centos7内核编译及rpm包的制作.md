@@ -4,7 +4,7 @@ title: Centos7内核编译及RPM包的制作
 date: '2020-10-10 14:18'
 tags:
   - centos
-  - Kernel
+  - kernel
   - rpm
 categories:
   - Linux内核

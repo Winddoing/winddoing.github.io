@@ -5,7 +5,7 @@ date: '2019-04-20 13:49'
 tags:
   - spinlock
 categories:
-  - Linux内核
+  - linux内核
   - 同步
 abbrlink: 12400
 ---

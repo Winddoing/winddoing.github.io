@@ -3,7 +3,7 @@ title: ASLR
 categories: 计算机系统
 tags:
   - 进程
-  - ASLR
+  - aslr
 abbrlink: 4177
 date: 2018-01-17 23:22:24
 ---

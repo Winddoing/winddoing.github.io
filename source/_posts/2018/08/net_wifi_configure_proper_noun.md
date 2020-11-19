@@ -4,9 +4,9 @@ title: WIFI配置中涉及到的相关名词
 date: '2018-08-07 18:02'
 categories:
   - 网络
-  - WIFI
+  - wifi
 tags:
-  - WIFI
+  - wifi
 abbrlink: 1797
 ---
 

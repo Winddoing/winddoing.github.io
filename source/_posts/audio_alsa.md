@@ -2,7 +2,7 @@
 title: Audio驱动总结--ALSA
 categories: 设备驱动
 tags:
-  - Audio
+  - audio
   - alsa
   - 驱动
 abbrlink: 50356

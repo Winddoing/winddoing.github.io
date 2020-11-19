@@ -3,7 +3,7 @@ layout: post
 title: DRM
 date: '2019-09-20 23:40'
 tags:
-  - DRM
+  - drm
 categories:
   - 设备驱动
 abbrlink: 16573

@@ -3,10 +3,10 @@ layout: post
 title: DHCP之udhcpc
 date: '2018-11-20 16:05'
 tags:
-  - DHCP
+  - dhcp
 categories:
   - 网络
-  - DHCP
+  - dhcp
 abbrlink: 18609
 ---
 

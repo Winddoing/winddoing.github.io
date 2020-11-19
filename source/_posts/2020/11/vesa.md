@@ -3,7 +3,7 @@ layout: post
 title: VESA
 date: '2020-11-09 10:10'
 tags:
-  - VESA
+  - vesa
   - edid
 categories:
   - 多媒体

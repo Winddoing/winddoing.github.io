@@ -3,9 +3,9 @@ layout: post
 title: Android and Linux
 date: '2019-12-15 20:59'
 tags:
-  - Android
+  - android
 categories:
-  - Android
+  - android
 abbrlink: 38002
 ---
 

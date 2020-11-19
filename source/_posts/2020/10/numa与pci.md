@@ -6,7 +6,7 @@ tags:
   - numa
   - pci
 categories:
-  - Linux内核
+  - linux内核
 abbrlink: 13d4e2a6
 ---
 

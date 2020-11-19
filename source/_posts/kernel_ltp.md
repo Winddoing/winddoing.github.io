@@ -2,7 +2,7 @@
 title: LTP测试
 categories: 计算机系统
 tags:
-  - LTP
+  - ltp
   - kernel
 abbrlink: 39613
 date: 2017-12-21 23:07:24

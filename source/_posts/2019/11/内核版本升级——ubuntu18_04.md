@@ -5,7 +5,7 @@ date: '2019-11-23 12:01'
 tags:
   - 内核
 categories:
-  - Linux内核
+  - linux内核
 abbrlink: 15332
 ---
 

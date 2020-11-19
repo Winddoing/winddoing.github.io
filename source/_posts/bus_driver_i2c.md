@@ -3,7 +3,7 @@ title: I2C驱动
 categories: 设备驱动
 tags:
   - driver
-  - I2C
+  - i2c
 abbrlink: 28337
 date: 2018-03-28 23:07:24
 ---

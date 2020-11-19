@@ -3,9 +3,9 @@ layout: post
 title: Linux内核工具--Sparse
 date: '2018-12-05 16:22'
 tags:
-  - Linux
+  - linux
 categories:
-  - Linux内核
+  - linux内核
   - 工具
 abbrlink: 22743
 ---

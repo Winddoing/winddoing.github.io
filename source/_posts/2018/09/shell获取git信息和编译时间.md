@@ -3,7 +3,7 @@ layout: post
 title: Shell获取git信息和编译时间
 date: '2018-09-18 15:25'
 tags:
-  - Shell
+  - shell
 categories:
   - shell
 abbrlink: 56769

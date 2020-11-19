@@ -5,7 +5,7 @@ date: '2018-11-17 15:13'
 tags:
   - python
 categories:
-  - Python
+  - python
   - 环境
 abbrlink: 65273
 ---

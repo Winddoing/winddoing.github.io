@@ -2,8 +2,8 @@
 title: 音频接口I2S
 categories: 设备驱动
 tags:
-  - Audio
-  - I2S
+  - audio
+  - i2s
 abbrlink: 25782
 date: 2017-03-05 23:07:24
 ---

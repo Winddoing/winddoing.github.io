@@ -3,7 +3,7 @@ layout: post
 title: OpenGL测试
 date: '2019-09-12 18:33'
 tags:
-  - OpenGL
+  - opengl
 categories:
   - 多媒体
 abbrlink: 42765

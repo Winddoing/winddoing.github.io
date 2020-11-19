@@ -2,8 +2,8 @@
 title: Example
 categories: 随笔
 tags:
-  - Travis-CI
-  - Test
+  - travis-ci
+  - test
 abbrlink: 10323
 date: 2016-08-18 08:07:24
 ---

@@ -2,7 +2,7 @@
 title: 用户空间的GPIO操作
 categories: 系统应用
 tags:
-  - GPIO
+  - gpio
 abbrlink: 50599
 date: 2017-11-03 23:07:24
 ---

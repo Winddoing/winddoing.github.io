@@ -2,7 +2,7 @@
 title: HID设备--开发板模拟鼠标
 categories: 设备驱动
 tags:
-  - HID
+  - hid
   - 驱动
 abbrlink: 5098
 date: 2018-05-08 23:17:24
