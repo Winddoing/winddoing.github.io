@@ -3,9 +3,9 @@ layout: post
 title: CRTC for drm
 date: '2020-10-28 10:23'
 tags:
-  - GPU
-  - DRM
-  - CRTC
+  - gpu
+  - drm
+  - crtc
 categories:
   - 设备驱动
 abbrlink: e15c0180

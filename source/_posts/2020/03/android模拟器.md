@@ -3,9 +3,9 @@ layout: post
 title: Android模拟器
 date: '2020-03-09 18:08'
 categories:
-  - Android
+  - android
 tags:
-  - Android
+  - android
 abbrlink: 40058
 ---
 

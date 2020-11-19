@@ -3,9 +3,9 @@ layout: post
 title: Android开发相关记录
 date: '2018-10-09 17:21'
 tags:
-  - Android
+  - android
 categories:
-  - Android
+  - android
 abbrlink: 2578
 ---
 

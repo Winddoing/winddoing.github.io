@@ -3,7 +3,7 @@ layout: post
 title: WiFi配置——ubuntu20.04 server
 date: '2020-05-31 17:52'
 tags:
-  - WiFi
+  - wifi
   - server
 categories:
   - 工具

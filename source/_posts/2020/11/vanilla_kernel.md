@@ -6,7 +6,7 @@ tags:
   - kernel
   - linux
 categories:
-  - Linux内核
+  - linux内核
 abbrlink: b4e9a1bb
 ---
 

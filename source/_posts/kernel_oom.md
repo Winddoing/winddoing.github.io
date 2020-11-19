@@ -3,7 +3,7 @@ title: OOM
 categories: Linux内核
 tags:
   - kernel
-  - OOM
+  - oom
 abbrlink: 53957
 date: 2018-03-08 23:07:24
 ---

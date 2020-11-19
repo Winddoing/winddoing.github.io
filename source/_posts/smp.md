@@ -2,8 +2,8 @@
 title: SMP--对称多处理器
 categories: 计算机系统
 tags:
-  - CPU
-  - SMP
+  - cpu
+  - smp
 abbrlink: 14018
 date: 2017-11-18 23:07:24
 ---

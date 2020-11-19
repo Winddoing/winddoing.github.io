@@ -2,8 +2,8 @@
 title: setup_per_cpu_areas
 categories: Linux内核
 tags:
-  - MMU
-  - Linux
+  - mmu
+  - linux
 abbrlink: 23122
 date: 2018-01-25 23:07:24
 ---

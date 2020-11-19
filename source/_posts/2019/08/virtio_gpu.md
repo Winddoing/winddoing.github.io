@@ -4,7 +4,7 @@ title: Virtio GPU
 date: '2019-08-18 20:27'
 tags:
   - virtio
-  - GPU
+  - gpu
 categories:
   - 设备驱动
 abbrlink: 56420

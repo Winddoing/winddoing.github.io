@@ -1,10 +1,10 @@
 ---
 title: Linux内核同步机制【rwlock】
 categories:
-  - Linux内核
+  - linux内核
   - 同步
 tags:
-  - Linux
+  - linux
   - rwlock
 abbrlink: 42371
 date: 2018-04-03 12:07:24

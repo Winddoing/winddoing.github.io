@@ -3,7 +3,7 @@ title: Linux内核调试方法---Debug
 categories: Linux内核
 tags:
   - kernel
-  - Debug
+  - debug
 abbrlink: 53462
 date: 2017-12-15 23:07:24
 ---

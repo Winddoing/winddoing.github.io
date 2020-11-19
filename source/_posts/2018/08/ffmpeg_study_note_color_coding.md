@@ -3,9 +3,9 @@ layout: post
 title: FFmpeg学习笔记——颜色编码
 date: '2018-08-30 11:53'
 categories:
-  - FFmpeg
+  - ffmpeg
 tags:
-  - FFmpeg
+  - ffmpeg
 abbrlink: 49519
 ---
 

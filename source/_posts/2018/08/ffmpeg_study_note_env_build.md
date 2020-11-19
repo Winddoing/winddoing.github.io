@@ -3,9 +3,9 @@ layout: post
 title: FFmpeg学习笔记——环境搭建
 date: '2018-08-29 11:00'
 categories:
-  - FFmpeg
+  - ffmpeg
 tags:
-  - FFmpeg
+  - ffmpeg
 abbrlink: 24238
 ---
 

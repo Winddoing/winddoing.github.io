@@ -1,10 +1,10 @@
 ---
 title: Linux内核同步机制【spin lock】
 categories:
-  - Linux内核
+  - linux内核
   - 同步
 tags:
-  - Linux
+  - linux
   - spinlock
 abbrlink: 62201
 date: 2018-03-29 23:07:24

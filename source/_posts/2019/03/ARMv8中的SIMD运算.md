@@ -3,10 +3,10 @@ layout: post
 title: ARMv8中的SIMD运算
 date: '2019-03-01 11:18'
 tags:
-  - SIMD
+  - simd
 categories:
-  - ARM
-  - SIMD
+  - arm
+  - simd
 abbrlink: 13631
 ---
 

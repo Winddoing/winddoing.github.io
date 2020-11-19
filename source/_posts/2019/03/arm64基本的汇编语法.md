@@ -3,9 +3,9 @@ layout: post
 title: ARM64基本的汇编语法
 date: '2019-03-13 14:27'
 tags:
-  - ARM
+  - arm
 categories:
-  - ARM
+  - arm
   - 汇编
 abbrlink: 5543
 ---

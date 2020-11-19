@@ -2,7 +2,7 @@
 title: 内核常见问题
 categories: Linux内核
 tags:
-  - Linux
+  - linux
 abbrlink: 57226
 date: 2017-11-18 23:07:24
 ---

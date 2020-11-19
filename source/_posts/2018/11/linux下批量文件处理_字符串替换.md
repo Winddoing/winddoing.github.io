@@ -3,7 +3,7 @@ layout: post
 title: linux下批量文件处理-字符串替换
 date: '2018-11-10 14:09'
 tags:
-  - Linux shell
+  - linux shell
 categories:
   - shell
   - 字符串处理

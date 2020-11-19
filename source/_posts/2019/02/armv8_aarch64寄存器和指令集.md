@@ -3,9 +3,9 @@ layout: post
 title: ARMv8-aarch64寄存器和指令集
 date: '2019-02-26 14:01'
 tags:
-  - ARM
+  - arm
 categories:
-  - ARM
+  - arm
 abbrlink: 7190
 ---
 

@@ -1,11 +1,11 @@
 ---
 date: '2015-04-26 01:49'
 layout: post
-title: BOA服务器的配置与cgic移植
+title: boa服务器的配置与cgic移植
 thread: 166
 categories: 系统应用
 tags:
-  - Boa
+  - boa
   - cgic
 abbrlink: 54877
 ---

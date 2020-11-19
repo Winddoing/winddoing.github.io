@@ -3,8 +3,8 @@ layout: post
 title: X Sever —— Xorg
 date: '2020-03-20 16:15'
 tags:
-  - Xorg
-  - X11
+  - xorg
+  - x11
 categories:
   - 系统服务
   - Xorg

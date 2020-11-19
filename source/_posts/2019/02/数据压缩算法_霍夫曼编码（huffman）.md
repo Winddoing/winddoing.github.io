@@ -3,7 +3,7 @@ layout: post
 title: 数据压缩算法---霍夫曼编码（Huffman）
 date: '2019-02-23 15:34'
 tags:
-  - Huffman
+  - huffman
 categories:
   - 多媒体
   - 编码

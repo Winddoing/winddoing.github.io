@@ -3,7 +3,7 @@ layout: post
 title: Linux for ARM
 date: '2019-09-10 23:35'
 tags:
-  - ARM
+  - arm
 categories:
   - 系统应用
 abbrlink: 35642

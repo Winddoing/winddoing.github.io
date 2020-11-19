@@ -2,7 +2,7 @@
 title: Audio ALSA数据传输
 categories: 设备驱动
 tags:
-  - Audio
+  - audio
   - alsa
   - 驱动
 abbrlink: 6516

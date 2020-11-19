@@ -4,7 +4,7 @@ title: SElinux与文件属性权限
 date: '2020-09-22 17:20'
 tags:
   - 权限
-  - SElinux
+  - selinux
 categories:
   - 文件系统
 abbrlink: 38ee39e7

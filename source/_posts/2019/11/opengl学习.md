@@ -3,10 +3,10 @@ layout: post
 title: OpenGL学习
 date: '2019-11-08 14:17'
 tags:
-  - OpenGL
+  - opengl
 categories:
   - 多媒体
-  - OpenGL
+  - opengl
 abbrlink: 36394
 ---
 

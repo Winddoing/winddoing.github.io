@@ -4,8 +4,8 @@ title: mesa调试——运行时函数栈的打印
 date: '2020-07-23 17:03'
 tags:
   - mesa
-  - OpenGL
-  - GPU
+  - opengl
+  - gpu
   - debug
 categories:
   - 多媒体

@@ -2,11 +2,11 @@
 title: Cortex-A8平台实验
 categories: Cortex-A8
 tags:
-  - Cortex-A8
+  - cortex-a8
   - uboot
-  - Linux
+  - linux
   - bulidroot
-  - ARM
+  - arm
 abbrlink: 36419
 date: 2016-09-11 23:07:24
 ---

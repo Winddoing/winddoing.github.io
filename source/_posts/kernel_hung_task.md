@@ -2,7 +2,7 @@
 title: Hung Task
 categories: Linux内核
 tags:
-  - Task
+  - task
 abbrlink: 16306
 date: 2018-03-15 23:07:24
 ---

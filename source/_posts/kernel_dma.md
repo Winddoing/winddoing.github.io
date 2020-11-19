@@ -2,7 +2,7 @@
 title: Linux内核DMA机制
 categories: Linux内核
 tags:
-  - DMA
+  - dma
   - kernel
 abbrlink: 59370
 date: 2018-04-16 02:07:24

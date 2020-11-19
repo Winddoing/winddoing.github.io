@@ -2,7 +2,7 @@
 title: C程序函数调用关系
 categories: 工具
 tags:
-  - Callgraph
+  - callgraph
 abbrlink: 1655
 date: 2018-07-11 08:07:24
 ---

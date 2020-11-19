@@ -3,10 +3,10 @@ layout: post
 title: OpenGL历史与API变化
 date: '2020-03-06 09:52'
 tags:
-  - OpenGL
+  - opengl
 categories:
   - 多媒体
-  - OpenGL
+  - opengl
 abbrlink: 32043
 ---
 

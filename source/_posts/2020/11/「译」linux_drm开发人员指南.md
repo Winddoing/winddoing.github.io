@@ -3,8 +3,8 @@ layout: post
 title: 「译」Linux DRM开发人员指南
 date: '2020-11-13 17:05'
 tags:
-  - GPU
-  - DRM
+  - gpu
+  - drm
 categories:
   - 设备驱动
 abbrlink: 3ac13ea3

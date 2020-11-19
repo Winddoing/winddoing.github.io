@@ -5,7 +5,7 @@ date: '2020-09-19 23:06'
 tags:
   - qemu
   - libvirt
-  - WebVirtMgr
+  - webvirtmgr
 categories:
   - 虚拟化
   - libvirt

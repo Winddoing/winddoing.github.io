@@ -3,7 +3,7 @@ layout: post
 title: Zink for OpenGL
 date: '2020-03-18 14:41'
 tags:
-  - Zink
+  - zink
   - mesa
 categories:
   - 多媒体

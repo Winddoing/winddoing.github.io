@@ -3,7 +3,7 @@ layout: post
 title: cmake
 date: '2019-05-21 11:19'
 tags:
-  - Makefile
+  - makefile
 categories:
   - 编译工具
 abbrlink: 24934

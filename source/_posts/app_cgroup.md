@@ -2,8 +2,8 @@
 title: Cgroup
 categories: 进程
 tags:
-  - Linux
-  - Cgroup
+  - linux
+  - cgroup
 abbrlink: 10807
 date: 2018-02-28 23:07:24
 ---

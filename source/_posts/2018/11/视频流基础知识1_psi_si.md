@@ -3,7 +3,7 @@ layout: post
 title: 视频流基础知识1-PSI/SI
 date: '2018-11-15 10:50'
 tags:
-  - 视频 PSI
+  - 视频 psi
 categories:
   - 多媒体
   - 视频

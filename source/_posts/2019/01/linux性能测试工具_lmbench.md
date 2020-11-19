@@ -3,7 +3,7 @@ layout: post
 title: Linux性能测试工具---Lmbench
 date: '2019-01-19 14:37'
 tags:
-  - Lmbench
+  - lmbench
 categories:
   - 工具
   - 性能测试

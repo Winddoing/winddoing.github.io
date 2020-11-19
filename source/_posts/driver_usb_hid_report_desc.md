@@ -2,7 +2,7 @@
 title: USB HID Report描述符
 categories: 设备驱动
 tags:
-  - HID
+  - hid
   - 驱动
 abbrlink: 40274
 date: 2018-05-15 23:07:24

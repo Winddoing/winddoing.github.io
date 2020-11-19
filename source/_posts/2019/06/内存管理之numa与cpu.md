@@ -5,8 +5,8 @@ date: '2019-06-16 12:37'
 tags:
   - 内存
 categories:
-  - Linux内核
-  - MMU
+  - linux内核
+  - mmu
 abbrlink: 36923
 ---
 

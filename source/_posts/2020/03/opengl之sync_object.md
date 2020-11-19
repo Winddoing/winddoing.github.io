@@ -3,10 +3,10 @@ layout: post
 title: OpenGL之Sync Object
 date: '2020-03-04 14:44'
 tags:
-  - OpenGL
+  - opengl
 categories:
   - 多媒体
-  - OpenGL
+  - opengl
 abbrlink: 8528
 ---
 

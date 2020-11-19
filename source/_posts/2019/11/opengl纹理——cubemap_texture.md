@@ -3,10 +3,10 @@ layout: post
 title: OpenGL纹理——Cubemap Texture
 date: '2019-11-29 16:04'
 tags:
-  - OpenGL
+  - opengl
 categories:
   - 多媒体
-  - OpenGL
+  - opengl
 abbrlink: 43690
 ---
 

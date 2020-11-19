@@ -5,7 +5,7 @@ date: '2018-07-31 09:45'
 categories:
   - shell
 tags:
-  - Shell
+  - shell
 abbrlink: 35545
 ---
 

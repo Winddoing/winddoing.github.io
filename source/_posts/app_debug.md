@@ -3,7 +3,7 @@ title: Linux应用调试方法---Debug
 categories: Linux内核
 tags:
   - kernel
-  - Debug
+  - debug
 abbrlink: 43503
 date: 2017-12-20 23:07:24
 ---

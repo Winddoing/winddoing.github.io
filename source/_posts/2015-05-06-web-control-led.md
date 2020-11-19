@@ -1,12 +1,12 @@
 ---
 date: '2015-05-06 07:49'
 layout: post
-title: mini2440基于boa服务器通过WEB控制GPIO
+title: mini2440基于boa服务器通过web控制gpio
 thread: 166
 categories: 系统应用
 tags:
-  - S3C2440
-  - Boa
+  - s3c2440
+  - boa
   - Web
 abbrlink: 63421
 ---

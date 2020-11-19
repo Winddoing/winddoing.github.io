@@ -5,7 +5,7 @@ date: '2019-04-21 14:27'
 tags:
   - spinlock
 categories:
-  - Linux内核
+  - linux内核
   - 同步
 abbrlink: 50889
 ---

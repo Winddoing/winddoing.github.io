@@ -3,7 +3,7 @@ layout: post
 title: Linux基本目录规范——XDG
 date: '2020-03-27 16:34'
 tags:
-  - XDG
+  - xdg
 categories:
   - 系统应用
 abbrlink: ef694e1f

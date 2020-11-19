@@ -3,10 +3,10 @@ layout: post
 title: ARM处理器寄存器和汇编指令
 date: '2018-12-18 09:40'
 tags:
-  - ARM
+  - arm
   - 寄存器
 categories:
-  - ARM
+  - arm
   - 汇编
 abbrlink: 25025
 ---

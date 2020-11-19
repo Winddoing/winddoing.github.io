@@ -2,7 +2,7 @@
 title: 状态机
 categories: 程序设计
 tags:
-  - FSM
+  - fsm
 abbrlink: 32902
 date: 2017-07-09 23:07:24
 ---

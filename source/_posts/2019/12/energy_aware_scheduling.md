@@ -5,7 +5,7 @@ date: '2019-12-15 19:15'
 tags:
   - sched
 categories:
-  - Linux内核
+  - linux内核
 abbrlink: 58199
 ---
 

@@ -4,8 +4,8 @@ title: mesa框架与目录结构
 date: '2020-07-03 21:53'
 tags:
   - mesa
-  - OpenGL
-  - GPU
+  - opengl
+  - gpu
 categories:
   - 多媒体
   - mesa

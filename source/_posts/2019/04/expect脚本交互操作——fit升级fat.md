@@ -4,7 +4,7 @@ title: expect脚本交互操作——FIT升级FAT
 date: '2019-04-13 14:12'
 tags:
   - expect
-  - AP
+  - ap
 categories:
   - 工具
 abbrlink: 20230

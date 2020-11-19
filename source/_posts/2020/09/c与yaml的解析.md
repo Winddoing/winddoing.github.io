@@ -3,7 +3,7 @@ layout: post
 title: C与YAML的解析
 date: '2020-09-13 22:49'
 tags:
-  - YAML
+  - yaml
   - 配置文件
 categories:
   - 工具

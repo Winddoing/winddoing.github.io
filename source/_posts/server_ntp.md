@@ -2,7 +2,7 @@
 title: NTP服务
 categories: 系统服务
 tags:
-  - NTP
+  - ntp
 abbrlink: 12403
 date: 2018-05-24 23:07:24
 ---

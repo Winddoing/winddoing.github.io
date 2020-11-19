@@ -4,7 +4,7 @@ title: Multiseat System
 date: '2020-05-23 15:31'
 tags:
   - seat
-  - X11
+  - x11
 categories:
   - 工具
 abbrlink: 1458b897

@@ -5,7 +5,7 @@ title: 移植mjpg-streamer
 thread: 166
 categories: 嵌入式
 tags:
-  - ARM
+  - arm
   - mjpg-streamer
 abbrlink: 50611
 ---

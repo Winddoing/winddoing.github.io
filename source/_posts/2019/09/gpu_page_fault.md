@@ -3,7 +3,7 @@ layout: post
 title: GPU page fault
 date: '2019-09-21 22:53'
 tags:
-  - GPU
+  - gpu
 categories:
   - 设备驱动
 abbrlink: 793

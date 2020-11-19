@@ -4,7 +4,7 @@ title: anbox_build_for_android
 date: '2019-12-11 16:36'
 tags:
   - anbox
-  - Android
+  - android
 categories:
   - 系统应用
 abbrlink: 22129

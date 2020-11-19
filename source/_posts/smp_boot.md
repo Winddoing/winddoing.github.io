@@ -2,7 +2,7 @@
 title: SMP多核启动
 categories: 计算机系统
 tags:
-  - SMP
+  - smp
 abbrlink: 49009
 date: 2018-01-12 23:07:24
 ---
