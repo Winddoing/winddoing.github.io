@@ -5,6 +5,8 @@ date: '2020-11-13 11:20'
 tags:
   - gpu
   - drm
+  - driver
+  - kernel
 categories:
   - 设备驱动
 abbrlink: 195f15d1
