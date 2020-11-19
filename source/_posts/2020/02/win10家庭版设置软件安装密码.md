@@ -4,9 +4,10 @@ title: win10家庭版设置软件安装密码——本地组策略编辑器
 date: '2020-02-08 20:16'
 tags:
   - win10
-  - window
+  - windows
 categories:
   - 工具
+  - windows
 abbrlink: 40085
 ---
 

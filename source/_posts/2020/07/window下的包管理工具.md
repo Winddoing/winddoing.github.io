@@ -5,11 +5,10 @@ date: '2020-07-04 22:19'
 tags:
   - choco
   - scoop
-  - window
-  - 包
+  - windows
 categories:
   - 工具
-  - window
+  - windows
 abbrlink: f9f0e3bd
 ---
 

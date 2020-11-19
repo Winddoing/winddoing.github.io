@@ -4,11 +4,10 @@ title: scoop for window
 date: '2020-07-01 22:56'
 tags:
   - scoop
-  - 包
-  - window
+  - windows
 categories:
   - 工具
-  - window
+  - windows
 abbrlink: 5c8794fe
 ---
 
