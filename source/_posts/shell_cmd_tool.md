@@ -13,6 +13,12 @@ abbrlink: 1644
 
 <!-- more -->
 
+## 文件指定行数的字符大写转小写
+
+``` shell
+find -name "*.md" | xargs sed -i '4,9s/.*/\L&/'
+```
+
 ## 删除所有文件行尾空格
 
 ``` shell
