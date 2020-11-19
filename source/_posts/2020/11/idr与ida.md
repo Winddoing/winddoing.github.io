@@ -4,6 +4,7 @@ title: idr与ida
 date: '2020-11-17 14:12'
 tags:
   - linux
+  - kernel
 categories:
   - linux内核
 abbrlink: e5599899

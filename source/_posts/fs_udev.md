@@ -2,6 +2,7 @@
 title: udev的使用
 categories: 文件系统
 tags:
+  - linux
   - udev
 abbrlink: 3820
 date: 2018-05-17 23:07:24

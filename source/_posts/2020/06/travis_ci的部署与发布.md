@@ -3,7 +3,7 @@ layout: post
 title: Travis CI的部署与发布
 date: '2020-06-15 23:25'
 tags:
-  - travis
+  - travis-ci
   - github
 categories:
   - 工具
