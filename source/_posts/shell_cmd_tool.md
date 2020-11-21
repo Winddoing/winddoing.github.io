@@ -13,6 +13,12 @@ abbrlink: 1644
 
 <!-- more -->
 
+## 查看当前CPU运行频率
+
+``` shell
+watch -n 0.1 "cat /proc/cpuinfo | grep \"^[c]pu MHz\""
+```
+
 ## 文件指定行数的字符大写转小写
 
 ``` shell
