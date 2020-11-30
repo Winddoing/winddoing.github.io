@@ -47,7 +47,9 @@ ubuntu20.04在使用过程中桌面出现莫名其妙的卡死现象，但是系
 17:02:34 QTM4600-pc systemd[1]: Started Getty on tty4.
 ```
 
-1. 初步怀疑与gdm3有关，将其换为`lightdm`看是否会出现卡死现象
+初步怀疑与gdm3有关，将其换为`lightdm`看是否会出现卡死现象
 ``` shell
 sudo apt install lightdm
 ```
+
+**后来又出现了一次界面卡死现象，不过每一次的卡死界面都是在firefox浏览器，后面改用chrome浏览器后情况好了点，暂时没有出现卡死现象**
