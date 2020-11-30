@@ -28,7 +28,7 @@ before_install:
 before_script:
     - git config --global user.name 'Winddoing' #设置github用户名
     - git config --global user.email 'winddoing@sina.cn' #设置github用户邮箱
-    - sed -i'' "/^ *repo/s~github\.com~${REPO_TOKEN}@github.com~" _config.yml
+    - sed -i "/^ *repo/s~github\.com~${REPO_TOKEN}@github.com~" _config.yml
 
 install:
     #- npm install --save hexo-generator-searchdb
