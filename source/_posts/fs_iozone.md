@@ -122,7 +122,7 @@ File stride size set to 17 * record size.
 
 ## 导出Excel表格
 
-```
+``` shell
 iozone -i 0 -i 1 -s 8m   -f /testfile -y 2k -q 8m -Rab /iozone_test.xls
 ```
 
@@ -130,7 +130,14 @@ iozone -i 0 -i 1 -s 8m   -f /testfile -y 2k -q 8m -Rab /iozone_test.xls
 
 ## 测试
 
-```
+``` shell
 ./iozone -s 100M -ac -S 512k 2>&1 | tee test.log
+```
+
+
+### 只测试读写模式，测试文件4g
+
+``` shell
+iozone -Rab -g 4g -i 0 -i 1  output.xls
 ```
 
