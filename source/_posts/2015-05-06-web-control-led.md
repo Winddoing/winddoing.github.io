@@ -7,7 +7,7 @@ categories: 系统应用
 tags:
   - s3c2440
   - boa
-  - Web
+  - web
 abbrlink: 63421
 ---
 
