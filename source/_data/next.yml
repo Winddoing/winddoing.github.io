@@ -819,7 +819,7 @@ chatra:
 # See: https://www.tidiochat.com
 # Dashboard: https://www.tidiochat.com/panel/dashboard
 tidio:
-  enable: false
+  enable: true
   key: cplpkwr9o7xrystu5jnasyygclahnuoj # Public Key, get it from dashboard. See: https://www.tidiochat.com/panel/settings/developer
 
 
