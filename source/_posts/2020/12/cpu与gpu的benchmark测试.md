@@ -8,6 +8,7 @@ tags:
   - benchmark
 categories:
   - 软件测试
+abbrlink: 30b31d51
 ---
 
 测试CPU与GPU性能的测试工具
