@@ -8,6 +8,7 @@ tags:
   - 测试
 categories:
   - 软件测试
+abbrlink: 2b439260
 ---
 
 > 官网： http://appium.io
