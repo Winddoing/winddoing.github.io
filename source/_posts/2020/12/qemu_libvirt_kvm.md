@@ -15,4 +15,4 @@ Qemu Libvirt & KVM
 
 <!--more-->
 
-{% pdf https://gitee.com/winddoing/docs/raw/master/libvirt/LibvirtQemuKVM.pdf %}
+{% pdf https://winddoing.gitee.io/docs/libvirt/LibvirtQemuKVM.pdf %}
