@@ -26,3 +26,5 @@ function setzero(i){
 show_date_time();
 </script>
 
+
+<script type="text/javascript" src="//rf.revolvermaps.com/0/0/5.js?i=5bivipiu0pu&amp;m=8&amp;c=ff0000&amp;cr1=ffffff" async="async"></script>
