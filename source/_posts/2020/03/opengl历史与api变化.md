@@ -6,7 +6,7 @@ tags:
   - opengl
 categories:
   - 多媒体
-  - opengl
+  - OpenGL
 abbrlink: 32043
 ---
 
