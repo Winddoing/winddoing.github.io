@@ -59,3 +59,58 @@ cd external/qemu/android/
 ./rebuild.sh --no-tests
 ```
 > - `--no-tests`: 告诉编译系统，编译完成之后不要执行测试程序，以节省时间，提高效率
+
+
+## Android Hardware OpenGLES emulation design overview
+
+> path: `external/qemu/android/android-emugl/DESIGN`
+
+```
+_________            __________          __________
+|         |          |          |        |          |
+|EMULATION|          |EMULATION |        |EMULATION |     GUEST
+|   EGL   |          | GLES 1.1 |        | GLES 2.0 |     SYSTEM
+|_________|          |__________|        |__________|     LIBRARIES
+    ^                    ^                    ^
+    |                    |                    |
+- - | - - - - - - - - -  | - - - - - - - - -  | - - - - -
+    |                    |                    |
+____v____________________v____________________v____      GUEST
+|                                                   |     KERNEL
+|                       QEMU PIPE                   |
+|___________________________________________________|
+                        ^
+                        |
+ - - - - - - - - - - - -|- - - - - - - - - - - - - - - -
+                        |
+                        |    PROTOCOL BYTE STREAM
+                   _____v_____
+                  |           |
+                  |  EMULATOR |
+                  |___________|
+                        ^
+                        |   UNMODIFIED PROTOCOL BYTE STREAM
+                   _____v_____
+                  |           |
+                  |  RENDERER |
+                  |___________|
+                      ^ ^  ^
+                      | |  |
+    +-----------------+ |  +-----------------+
+    |                   |                    |
+____v____            ___v______          ____v_____
+|         |          |          |        |          |
+|TRANSLATOR          |TRANSLATOR|        |TRANSLATOR|     HOST
+|   EGL   |          | GLES 1.1 |        | GLES 2.0 |     TRANSLATOR
+|_________|          |__________|        |__________|     LIBRARIES
+    ^                    ^                    ^
+    |                    |                    |
+- - | - - - - - - - - -  | - - - - - - - - -  | - - - - -
+    |                    |                    |
+____v____            ____v_____          _____v____      HOST
+|         |          |          |        |          |     SYSTEM
+|   GLX   |          |  GL 2.0  |        |  GL 2.0  |     LIBRARIES
+|_________|          |__________|        |__________|
+
+(NOTE: 'GLX' is for Linux only, replace 'AGL' on OS X, and 'WGL' on Windows).
+```
