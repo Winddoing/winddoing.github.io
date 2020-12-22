@@ -9,7 +9,7 @@ tags:
   - 脚本
 categories:
   - 工具
-  - winodws
+  - windows
 abbrlink: 29269ff3
 ---
 

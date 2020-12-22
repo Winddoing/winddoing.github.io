@@ -3,10 +3,10 @@ layout: post
 title: 关于Win10中Linux Ubuntu子系统的相关问题
 date: '2019-03-28 22:59'
 tags:
-  - window
+  - windows
 categories:
   - 工具
-  - window
+  - windows
 abbrlink: 41029
 ---
 

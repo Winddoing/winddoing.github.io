@@ -1,7 +1,7 @@
 ---
 title: Linux内核同步机制【spin lock】
 categories:
-  - linux内核
+  - Linux内核
   - 同步
 tags:
   - linux

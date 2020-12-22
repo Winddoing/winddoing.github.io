@@ -6,7 +6,7 @@ tags:
   - linux
   - kernel
 categories:
-  - linux内核
+  - Linux内核
 abbrlink: e5599899
 ---
 
