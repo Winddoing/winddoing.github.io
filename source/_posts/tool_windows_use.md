@@ -2,7 +2,7 @@
 title: Windows常用工具
 categories:
   - 工具
-  - window
+  - windows
 tags:
   - windows
 abbrlink: 14436

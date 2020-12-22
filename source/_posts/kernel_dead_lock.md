@@ -1,7 +1,7 @@
 ---
 title: 死锁
 categories:
-  - linux内核
+  - Linux内核
   - 同步
 tags:
   - spinlock

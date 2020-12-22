@@ -5,7 +5,7 @@ date: '2018-12-05 16:22'
 tags:
   - linux
 categories:
-  - linux内核
+  - Linux内核
   - 工具
 abbrlink: 22743
 ---

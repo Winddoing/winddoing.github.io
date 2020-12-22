@@ -5,7 +5,7 @@ date: '2019-09-06 10:15'
 tags:
   - printk
 categories:
-  - linux内核
+  - Linux内核
 abbrlink: 59845
 ---
 

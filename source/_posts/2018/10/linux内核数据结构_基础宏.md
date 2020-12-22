@@ -5,7 +5,7 @@ date: '2018-10-19 15:53'
 tags:
   - kernel
 categories:
-  - linux内核
+  - Linux内核
 abbrlink: 56380
 ---
 
