@@ -398,3 +398,4 @@ EndSection
 - [Appendix D. X Config Options](http://http.download.nvidia.com/XFree86/Linux-x86/1.0-8774/README/appendix-d.html)
 - [xorg.conf](https://www.x.org/releases/current/doc/man/man5/xorg.conf.5.xhtml)
 - [Difference between .xinitrc, .xsession and .xsessionrc](https://unix.stackexchange.com/questions/281858/difference-between-xinitrc-xsession-and-xsessionrc)
+- [Chapter 13. Configuring Multiple Display Devices on One X Screen](https://download.nvidia.com/XFree86/Linux-x86_64/304.137/README/configtwinview.html)
