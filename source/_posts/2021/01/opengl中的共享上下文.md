@@ -27,10 +27,10 @@ OpenGL的绘制命令都是作用在当前的Context上，这个Current Context�
 ## EGL Context
 
 ``` C
-EGLContext eglCreateContext( 	EGLDisplay display,
-  	                          EGLConfig config,
-  	                          EGLContext share_context,
-  	                          EGLint const * attrib_list);
+EGLContext eglCreateContext(EGLDisplay display,
+  	                        EGLConfig config,
+  	                        EGLContext share_context,
+  	                        EGLint const * attrib_list);
 ```
 
 
@@ -41,10 +41,10 @@ EGLContext eglCreateContext( 	EGLDisplay display,
 ## GLX Context
 
 ``` C
-GLXContext glXCreateContext(	Display * dpy,
- 	                            XVisualInfo * vis,
- 	                            GLXContext shareList,
- 	                            Bool direct);
+GLXContext glXCreateContext(Display * dpy,
+ 	                        XVisualInfo * vis,
+ 	                        GLXContext shareList,
+ 	                        Bool direct);
 ```
 
 
@@ -55,10 +55,10 @@ GLXContext glXCreateContext(	Display * dpy,
 ### EGL
 
 ``` C
-EGLBoolean eglMakeCurrent( 	EGLDisplay display,
-  	                        EGLSurface draw,
-  	                        EGLSurface read,
-  	                        EGLContext context);
+EGLBoolean eglMakeCurrent(EGLDisplay display,
+  	                      EGLSurface draw,
+  	                      EGLSurface read,
+  	                      EGLContext context);
 ```
 
 ``` C
@@ -68,9 +68,9 @@ eglMakeCurrent(display, EGL_NO_SURFACE, EGL_NO_SURFACE, context);
 ### GLX
 
 ``` C
-Bool glXMakeCurrent(	Display * dpy,
- 	                    GLXDrawable drawable,
- 	                    GLXContext ctx);
+Bool glXMakeCurrent(Display * dpy,
+ 	                GLXDrawable drawable,
+ 	                GLXContext ctx);
 ```
 
 
@@ -87,3 +87,5 @@ Bool glXMakeCurrent(	Display * dpy,
 - https://www.khronos.org/registry/EGL/sdk/docs/man/html/eglMakeCurrent.xhtml
 - https://www.khronos.org/registry/OpenGL-Refpages/gl2.1/xhtml/glXMakeCurrent.xml
 - [OpenGL中的上下文 理解整理](https://blog.csdn.net/shenyi0_0/article/details/109382509)
+- [GLX Reference Pages](https://www.khronos.org/registry/OpenGL-Refpages/gl2.1/)
+- [EGL Reference Pages](https://www.khronos.org/registry/EGL/sdk/docs/man/)
