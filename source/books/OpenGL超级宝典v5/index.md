@@ -124,3 +124,9 @@ glGenObject(3,vbo);
 
 
 ### 渲染缓冲区对象——RBO
+
+
+
+# 特定平台应用
+
+## Linux上的OpenGL
