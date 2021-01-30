@@ -73,3 +73,29 @@ $sudo perf record -g -p <pid>
 #回放
 $sudo perf report
 ```
+
+
+### KVM
+
+``` shell
+# perf kvm stat record -a sleep 100
+# perf kvm stat report
+
+Analyze events for all VMs, all VCPUs:
+
+             VM-EXIT    Samples  Samples%     Time%    Min Time    Max Time         Avg time
+
+           MSR_WRITE      42521    53.32%     0.06%      0.50us     52.94us      1.71us ( +-   0.48% )
+                 HLT      15885    19.92%    99.89%      0.63us  17539.26us   8224.34us ( +-   0.61% )
+      IO_INSTRUCTION      10892    13.66%     0.03%      2.14us     47.60us      3.02us ( +-   0.48% )
+          APIC_WRITE       6226     7.81%     0.02%      0.52us     41.71us      3.88us ( +-   0.94% )
+  EXTERNAL_INTERRUPT       1965     2.46%     0.00%      0.42us     42.59us      1.46us ( +-   2.38% )
+    PREEMPTION_TIMER       1805     2.26%     0.00%      0.54us     16.87us      2.13us ( +-   1.59% )
+       EPT_MISCONFIG        302     0.38%     0.00%      0.76us    171.85us     16.38us ( +-   7.97% )
+            MSR_READ        132     0.17%     0.00%      0.74us      3.52us      1.56us ( +-   4.86% )
+   PAUSE_INSTRUCTION         16     0.02%     0.00%      0.45us      0.87us      0.66us ( +-   4.89% )
+
+Total Samples:79744, Total events handled time:130785328.50us.
+```
+
+- `HLT`: (halt)是由于CPU进入idle状态时，就会调用该指令把CPU挂起。这样虚拟CPU挂起后就能出让物理CPU给其它进程使用。
