@@ -22,20 +22,26 @@ Android性能分析工具
 ## 获取systrace日志并转换为html
 
 ``` shell
+#!/bin/bash
 ip="127.0.0.1"
 port="5555"
 
+TRACE_BUFFER_SZ_KB=16384 #16MB
 TRACE_FILE="/data/local/tmp/trace_$port.log"
-# adb shell atrace --list_categories
-# adb root
 
+# adb shell atrace --list_categories
+tracedump=$(echo `adb shell atrace --list_categories | awk '{print $1}'` | sed 's/\n//g')
+
+adb root
 adb disconnect
 adb connect $ip:$port
 
-adb shell "atrace -b 16384 -t 60 -z gfx input view webview wm am sm audio video camera hal bionic power irq sync workq > $TRACE_FILE"
+sleep 1
+
+adb shell "atrace -b $TRACE_BUFFER_SZ_KB -t 30 -z $tracedump > $TRACE_FILE"
 adb pull $TRACE_FILE
 
-python platform-tools/systrace/systrace.py --from-file trace_$port.log -o trace_$port.html
+python platform-tools/systrace/systrace.py  -b $TRACE_BUFFER_SZ_KB --from-file trace_$port.log -o trace_$port.html
 ```
 
 ## 查看trace文件的快捷键
