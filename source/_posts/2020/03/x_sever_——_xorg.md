@@ -387,6 +387,19 @@ EndSection
 (II) modeset(0): using drv /dev/dri/card2
 ```
 
+## DISPLAY环境变量
+
+``` shell
+export DISPLAY=:0
+export DISPLAY=192.168.1.1:0
+```
+``` shell
+export DISPLAY=[hostname][:number[.screen_number]]
+```
+- `hostname`: 指定物理连接显示器的主机的名称, 主机名后加上单冒号（:)或双冒号（::)。
+- `number`: 指定该主机上Xserver的编号,在此显示编号后加上句点(.),一个CPU可以有多个显示器, 多个显示通常从零开始编号。
+- `screen_number`: 指定要在该服务器上使用的屏幕, 单个Xserver可以控制多个屏幕, screen_number设置一个内部变量，如果使用的是C以外的语言，则可以使用`DefaultScreen()`宏或`XDefaultScreen()`函数进行访问（请参见“(Display Macros)[https://tronche.com/gui/x/xlib/display/information.html#display]”）。
+
 
 ## 参考
 
@@ -399,3 +412,4 @@ EndSection
 - [xorg.conf](https://www.x.org/releases/current/doc/man/man5/xorg.conf.5.xhtml)
 - [Difference between .xinitrc, .xsession and .xsessionrc](https://unix.stackexchange.com/questions/281858/difference-between-xinitrc-xsession-and-xsessionrc)
 - [Chapter 13. Configuring Multiple Display Devices on One X Screen](https://download.nvidia.com/XFree86/Linux-x86_64/304.137/README/configtwinview.html)
+- [Opening the Display](https://tronche.com/gui/x/xlib/display/opening.html)
