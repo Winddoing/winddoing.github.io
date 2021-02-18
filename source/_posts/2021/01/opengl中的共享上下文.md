@@ -9,6 +9,7 @@ tags:
 categories:
   - 多媒体
   - OpenGL
+abbrlink: 44245d70
 ---
 
 OpenGL渲染中有一个`线程相关`的上下文(Context), OpenGL所创建的资源, 其实对程序员可见的仅仅是`上下文ID`而已, 其内容依赖于这个上下文, 有时候为了方便起见, 在某个线程中创建了上下文之后, 所有的OpenGL操作都转到此线程来调用. 这样在简单的2d/3d 渲染中尚可, 但是如果涉及复杂的OpenGL渲染时, 这样就未必足够， 事实上OpenGL已经考虑到这一点， `上下文是可以在多个线程间共享的`，在使用`glXCreateContext`或`eglCreateContext`时， 可以传入一个已创建成功的上下文， 这样就可以得到一个共享的上下文(Shared Context).

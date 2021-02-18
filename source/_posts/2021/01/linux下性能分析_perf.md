@@ -7,6 +7,7 @@ tags:
   - 性能
 categories:
   - 工具
+abbrlink: d5a39290
 ---
 
 `perf`是Linux kernel自带的系统性能优化工具
