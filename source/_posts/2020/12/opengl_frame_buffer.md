@@ -7,6 +7,7 @@ tags:
 categories:
   - 多媒体
   - OpenGL
+abbrlink: 302c8d9a
 ---
 
 OpenGL中`Frame Buffer`包含多种不同类型的buffer,主要有`ColorBuffers`,`Z buffer`, `double-buffer`
