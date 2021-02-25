@@ -108,3 +108,4 @@ comments: true
 * [archive.kernel.org](https://archive.kernel.org/) —— 内核存档，包含各个系统
 * [pkgs.org/](https://pkgs.org/) —— linux系统安装包搜索
 * [Xiph.org Test Media](https://media.xiph.org/) —— 测试媒体文件（yuv，H264等）
+* [dpilove](https://dpi.lv/) —— 测试显示器DPI
