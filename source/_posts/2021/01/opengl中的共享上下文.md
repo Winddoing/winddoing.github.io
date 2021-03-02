@@ -48,6 +48,40 @@ GLXContext glXCreateContext(Display * dpy,
  	                        Bool direct);
 ```
 
+GLX创建共享上下文：
+``` C
+GLXContext currctx = glXGetCurrentContext();
+GLXFBConfig* fb_config;
+int fb_config_id;
+int nelements;
+int res;
+
+XInitThreads();
+
+Display* dpy = XOpenDisplay(NULL);
+assert(dpy != NULL)
+
+res = glXQueryContext(dpy, currctx, GLX_FBCONFIG_ID, &fb_config_id);
+assert(res);
+
+int visual_attribs[] = {
+    GLX_FBCONFIG_ID, fb_config_id,
+    None
+};
+fb_config = glXChooseFBConfig(dpy, DefaultScreen(dpy), visual_attribs, &nelements);
+assert(fb_config);
+
+int context_attribs[] = {
+    GLX_CONTEXT_MAJOR_VERSION_ARB, 4,
+    GLX_CONTEXT_MINOR_VERSION_ARB, 0,
+    GLX_CONTEXT_PROFILE_MASK_ARB, GLX_CONTEXT_CORE_PROFILE_BIT_ARB,
+    None
+};
+GLXContext glx_share_context = glXCreateContextAttribsARB(dpy, fb_config[0], currctx,
+        True, context_attribs);
+assert(glx_share_context);
+```
+
 
 ## 上下文切换
 
