@@ -178,6 +178,14 @@ gcc main.c `pkg-config --libs --cflags egl gbm gl`
 - 创建一个计算着色器程序
 - 调度计算着色器
 
+
+## GBM+EGL+OPENGL+render
+
+利用GBM进行图像的离屏渲染
+
+> https://raw.githubusercontent.com/Winddoing/CodeWheel/master/egl/egl_gbm_render.c
+
+
 ## 参考
 
 - [MESA_platform_gbm](https://www.khronos.org/registry/EGL/extensions/MESA/EGL_MESA_platform_gbm.txt)
