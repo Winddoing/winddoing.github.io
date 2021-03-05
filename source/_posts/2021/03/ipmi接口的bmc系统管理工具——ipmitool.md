@@ -50,6 +50,16 @@ IPMI Version              : 2.0
 # ipmitool lan set 1 defgw ipaddr 192.168.1.1
 ```
 
+## 重置BMC（包括BIOS）
+
+``` shell
+# ipmitool raw 0x32 0x66
+```
+
+![ipmitool_restore_bmc](/images/2021/03/ipmitool_restore_bmc.png)
+> 来源：[IPMI Commands](http://www.staroceans.org/e-book/S2B%20IPMI%20Commands.pdf)
+
+
 ## 查看主机传感器信息
 
 ``` shell
@@ -69,14 +79,13 @@ EV CPU1VR Temp   | 37.000     | degrees C  | ok    | na        | 5.000     | 10.
 
 ## 常用的基本命令
 
-|           命令            |                                                    描述                                                     |
-|:-------------------------:|:-----------------------------------------------------------------------------------------------------------:|
-|    `ipmitool sel list`    |                                                  打印日志                                                   |
-|     `ipmitool sensor`     | 获取传感器中的各种监测值和该值的监测阈值，包括（CPU温度，电压，风扇转速，电源调制模块温度，电源电压等信息） |
-| `ipmitool chassis status` |                            查看底盘状态，其中包括了底盘电源信息，底盘工作状态等                             |
-|  `ipmitool user list 1`   |                                              查询当前BMC的用户                                              |
-|      `ipmitool sdr`       |                                             查看SDR Sensor信息                                              |
-
+| 命令                      | 描述                                                                                                        |
+|:--------------------------|:------------------------------------------------------------------------------------------------------------|
+| `ipmitool sel list`       | 打印日志                                                                                                    |
+| `ipmitool sensor`         | 获取传感器中的各种监测值和该值的监测阈值，包括（CPU温度，电压，风扇转速，电源调制模块温度，电源电压等信息） |
+| `ipmitool chassis status` | 查看底盘状态，其中包括了底盘电源信息，底盘工作状态等                                                        |
+| `ipmitool user list 1`    | 查询当前BMC的用户                                                                                           |
+| `ipmitool sdr`            | 查看SDR Sensor信息                                                                                          |
 
 ## 参考
 
