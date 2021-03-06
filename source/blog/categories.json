@@ -3,6 +3,7 @@
     "Android",
     "Cortex-A",
     "ARM",
+    "GPU",
     "MIPS",
     "Makefile",
     "Python",

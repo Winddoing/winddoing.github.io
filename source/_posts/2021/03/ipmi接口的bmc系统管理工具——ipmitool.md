@@ -77,6 +77,41 @@ Mem 2 VRD Temp   | 25.000     | degrees C  | ok    | na        | 5.000     | 10.
 EV CPU1VR Temp   | 37.000     | degrees C  | ok    | na        | 5.000     | 10.000    | 110.000   | 115.000   | na             
 ```
 
+## 配置用户名密码
+
+``` shell
+#配置channel3通过dhcp获取ip
+ipmitool lan set 3 ipsrc dhcp
+
+#查看channel3的ip
+ipmitool lan print 3
+
+#获取ip后查看channel3的用户信息
+ipmitool user list 3
+ID  Name	     Callin  Link Auth	IPMI Msg   Channel Priv Limit
+1                    true    false      false      NO ACCESS
+2                    true    false      false      NO ACCESS
+3   test             true    false      false      NO ACCESS
+4                    true    false      false      NO ACCESS
+...
+
+#选择用户ID 3，配置用户名密码
+ipmitool user set name 3 test
+ipmitool user set password 3 123456@abc#ABC
+ipmitool channel setaccess 1 3 callin=on ipmi=on link=on privilege=4
+
+#设置用户3的访问权限
+ipmitool user priv 3 0x4 3
+ipmitool user list 3
+ID  Name	     Callin  Link Auth	IPMI Msg   Channel Priv Limit
+1                    true    false      false      NO ACCESS
+2                    true    false      false      NO ACCESS
+3   test             true    false      false      ADMINISTRATOR
+4                    true    false      false      NO ACCESS
+...
+```
+> 注： channel的选择以接入的网口所属channel为主，配置用户名和密码是用户ID和channel id选择一致
+
 ## 常用的基本命令
 
 | 命令                      | 描述                                                                                                        |

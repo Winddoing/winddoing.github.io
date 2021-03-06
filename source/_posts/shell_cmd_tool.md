@@ -13,6 +13,12 @@ abbrlink: 1644
 
 <!-- more -->
 
+## 内存读写速度测试
+
+``` shell
+dd if=/dev/zero of=/dev/null bs=1M count=1024
+```
+
 ## 查看当前CPU运行频率
 
 ``` shell
