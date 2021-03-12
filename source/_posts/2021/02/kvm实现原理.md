@@ -15,6 +15,10 @@ X86架构下的KVM实现，分为AMD的虚拟化技术AMD-V（`svm`）,Intel的�
 
 <!--more-->
 
+KVM主要分：CPU虚拟化、CPU调度原理、KVM内存管理、KVM存储管理、KVM设备管理
+
+
+
 ## CPU虚拟化
 
 

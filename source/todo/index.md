@@ -109,3 +109,4 @@ comments: true
 * [pkgs.org/](https://pkgs.org/) —— linux系统安装包搜索
 * [Xiph.org Test Media](https://media.xiph.org/) —— 测试媒体文件（yuv，H264等）
 * [dpilove](https://dpi.lv/) —— 测试显示器DPI
+* [parsec](https://support.parsec.app/hc/en-us) —— 远程控制、屏幕分享

@@ -13,6 +13,12 @@ abbrlink: 1644
 
 <!-- more -->
 
+## 查看中断与CPU的绑定关系
+
+``` shell
+cat /proc/interrupts | grep intel | cut -d: -f1 | while read i; do echo -ne irq":$i\t bind_cpu: "; cat /proc/irq/$i/smp_affinity_list; done | sort -n -t' ' -k3
+```
+
 ## 内存读写速度测试
 
 ``` shell
