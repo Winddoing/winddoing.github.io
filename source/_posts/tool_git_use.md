@@ -393,6 +393,81 @@ git gc --prune=now
 git gc --aggressive --prune=now
 ```
 
+## rebase方式合并分支，分支在一条线
+
+1. checkout到需要合并的分支feature
+``` shell
+git checkout feature
+```
+2. 在feature分支上合并master分支的修改，生成一个新的分支版本
+``` shell
+git rebase master
+```
+3. 如果存在冲突解决冲突
+``` shell
+git mergetool
+git rebase —continue
+```
+4. checkout到master分支
+``` shell
+git checkout master
+```
+5. 合并新的feature分支到master分支
+``` shell
+git merge feature
+```
+6. 合并完毕，可以删除feature分支
+``` shell
+git branch --delete feature
+```
+7. 提交更新
+``` shell
+git push origin master --force
+```
+
+## 删除已提交的commit
+
+``` shell
+git rebase -i [commit-id]
+```
+> commit-id: 为要删除的commit的下一个commit号
+
+示例：
+``` shell
+pick 1821834 add gnuplot test
+pick 5522ce1 add gnuplot test shell
+
+# Rebase e6fcac3..5522ce1 onto e6fcac3 (2 commands)
+#
+# Commands:
+# p, pick <commit> = use commit
+# r, reword <commit> = use commit, but edit the commit message
+# e, edit <commit> = use commit, but stop for amending
+# s, squash <commit> = use commit, but meld into previous commit
+# f, fixup <commit> = like "squash", but discard this commit's log message
+# x, exec <command> = run command (the rest of the line) using shell
+# b, break = stop here (continue rebase later with 'git rebase --continue')
+# d, drop <commit> = remove commit
+# l, label <label> = label current HEAD with a name
+# t, reset <label> = reset HEAD to a label
+# m, merge [-C <commit> | -c <commit>] <label> [# <oneline>]
+# .       create a merge commit using the original merge commit's
+# .       message (or the oneline, if no original merge commit was
+# .       specified). Use -c <commit> to reword the commit message.
+#
+# These lines can be re-ordered; they are executed from top to bottom.
+#
+# If you remove a line here THAT COMMIT WILL BE LOST.
+#
+# However, if you remove everything, the rebase will be aborted.
+#
+# Note that empty commits are commented out
+```
+> 将需要删除的commit前面的`pick`改写为`drop`后，保存退出
+
+- 退出后，可能存在冲突通过`git mergetool`解决掉冲突后，使用`git rebase —continue`继续直到解决完所有冲突提示rebase成功，删除完成。
+- 如果中途不想删除后，可以通过`git rebase --abort`终止删除动作
+
 ## 错误处理
 
 ### git clone
