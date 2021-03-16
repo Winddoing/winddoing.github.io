@@ -12,6 +12,8 @@ categories:
 
 Linux下查看系统状态的一些命令`mpstat`，`vmstat`，`iostat`，`sar`，`top`
 
+![Linux Performance Tools](/images/2021/03/linux_observability_tools.png)
+
 <!--more-->
 
 ## 衡量CPU性能的指标
@@ -44,3 +46,4 @@ Linux下查看系统状态的一些命令`mpstat`，`vmstat`，`iostat`，`sar`�
 ## 参考
 
 - [linux CPU性能及工作状态查看指令](https://blog.csdn.net/z1134145881/article/details/52089698)
+- [Linux Performance](http://www.brendangregg.com/linuxperf.html)
