@@ -30,14 +30,14 @@ port="5555"
 TRACE_BUFFER_SZ_KB=16384 #16MB
 TRACE_FILE="/data/local/tmp/trace_$port.log"
 
-# adb shell atrace --list_categories
-tracedump=$(echo `adb shell atrace --list_categories | awk '{print $1}'` | sed 's/\n//g')
-
-adb root
 adb disconnect
 adb connect $ip:$port
+adb root
 
 sleep 1
+
+# adb shell atrace --list_categories
+tracedump=$(echo `adb shell atrace --list_categories | awk '{print $1}'` | sed 's/\n//g')
 
 adb shell "atrace -b $TRACE_BUFFER_SZ_KB -t 30 -z $tracedump > $TRACE_FILE"
 adb pull $TRACE_FILE
