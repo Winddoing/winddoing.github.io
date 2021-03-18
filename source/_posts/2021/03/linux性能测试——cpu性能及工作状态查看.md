@@ -10,7 +10,7 @@ categories:
   - 性能测试
 ---
 
-Linux下查看系统状态的一些命令`mpstat`，`vmstat`，`iostat`，`sar`，`top`,`pidstat`
+Linux下查看系统状态的一些命令`mpstat`、`vmstat`、`iostat`、`sar`、`top`、`pidstat`、`pstack`
 
 ![Linux Performance Tools](/images/2021/03/linux_observability_tools.png)
 
@@ -41,7 +41,8 @@ Linux下查看系统状态的一些命令`mpstat`，`vmstat`，`iostat`，`sar`�
 - `iostat`: 只能查看所有CPU的平均信息。
 - `sar`： 与mpstat 一样，不但能查看CPU的平均信息，还能查看指定CPU的信息。
 - `top`：显示的信息同ps接近，但是top可以了解到CPU消耗，可以根据用户指定的时间来更新显示。
-- `pidstat`:用于监控全部或指定进程的cpu、内存、线程、设备IO等系统资源的占用情况,`-w`可以查看每个进程的上下文切换情况
+- `pidstat`:用于监控全部或指定进程的cpu、内存、线程、设备IO等系统资源的占用情况,`-w`可以查看每个进程的上下文切换情况。
+- `pstack`：显示每个进程的栈跟踪，可以确定进程挂起的位置。此命令允许使用的唯一选项是要检查的进程的PID。
 
 
 ## 参考
