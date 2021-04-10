@@ -468,6 +468,15 @@ pick 5522ce1 add gnuplot test shell
 - 退出后，可能存在冲突通过`git mergetool`解决掉冲突后，使用`git rebase —continue`继续直到解决完所有冲突提示rebase成功，删除完成。
 - 如果中途不想删除后，可以通过`git rebase --abort`终止删除动作
 
+## 仓库地址为http时,用户名密码保存
+
+``` shell
+git config --global credential.helper store
+```
+> 需要在第一次使用该仓库时,输入用户名密码后,会以配置文件(.git-credentials)保存到本地,后期使用不再需要输入用户名密码
+
+删除保存的用户名密码配置文件:`rm ~/.git-credentials`
+
 ## 错误处理
 
 ### git clone
