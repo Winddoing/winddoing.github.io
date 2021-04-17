@@ -174,6 +174,12 @@ $journalctl /bin/bash
 $journalctl -t sshd
 ```
 
+### 查看指定进程的日志
+
+``` shell
+$journalctl _PID=1234
+```
+
 ## 维护
 
 ### 查看当前日志占用磁盘的空间的总大小
