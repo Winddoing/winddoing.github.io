@@ -45,3 +45,13 @@ choco list -lo
 ## scoop
 
 > [scoop for window](https://winddoing.github.io/post/5c8794fe.html)
+
+
+## 系统激活
+
+bat脚本,自动激活
+```
+slmgr /skms kms.03k.org
+slmgr /ato
+```
+> window10测试有效
