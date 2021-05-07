@@ -53,6 +53,33 @@ pcspk       PC speaker
 
 - PCI声卡:`ac97`,`hda`,`es1370`
 
+### 虚拟GPU
+
+详细的配置参数
+``` shell
+$qemu-system-x86_64 -device help | grep gpu
+name "vhost-user-gpu", bus virtio-bus
+name "vhost-user-gpu-pci", bus PCI
+name "virtio-gpu-device", bus virtio-bus
+name "virtio-gpu-pci", bus PCI, alias "virtio-gpu"
+$qemu-system-x86_64 -device virtio-gpu-device,help
+virtio-gpu-device options:
+  indirect_desc=<bool>   - on/off
+  yres=<uint32>
+  iommu_platform=<bool>  - on/off
+  stats=<bool>           - on/off
+  event_idx=<bool>       - on/off
+  edid=<bool>            - on/off
+  any_layout=<bool>      - on/off
+  max_hostmem=<size>
+  notify_on_empty=<bool> - on/off
+  use-started=<bool>
+  packed=<bool>          - on/off
+  virgl=<bool>           - on/off
+  max_outputs=<uint32>
+  xres=<uint32>
+```
+
 ## 参考
 
 - [qemu-kvm 参数设置（多屏显示、图像压缩、声音压缩、USB重定向、添加agent）](https://blog.csdn.net/wangyezi19930928/article/details/53156057)
