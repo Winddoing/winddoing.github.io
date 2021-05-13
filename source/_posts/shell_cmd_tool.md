@@ -43,6 +43,12 @@ find -name "*.md" | xargs sed -i '4,9s/.*/\L&/'
 find source/_posts/ -name "*.md" | xargs sed -i 's/[ ]*$//g'
 ```
 
+## 进程CPU占有率排序
+
+``` shell
+ps H -eo user,pid,ppid,tid,time,%cpu,cmd --sort=%cpu
+```
+
 ## 判断进程在哪个CPU核运行的方法
 
 ### ps
