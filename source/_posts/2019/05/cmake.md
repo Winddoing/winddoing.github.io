@@ -49,3 +49,96 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
 ```
 将在编译目录下生成`compile_commands.json`文件
+
+## 添加版本及git信息
+
+```
+execute_process(
+    COMMAND git rev-parse --short HEAD
+    OUTPUT_VARIABLE COMMIT_HASH
+    OUTPUT_STRIP_TRAILING_WHITESPACE
+    ERROR_QUIET
+    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+)
+add_definitions( -DCOMMIT_HASH=\"${COMMIT_HASH}\")
+
+execute_process(
+    COMMAND git symbolic-ref --short -q HEAD
+    OUTPUT_VARIABLE BRANCH_NAME
+    OUTPUT_STRIP_TRAILING_WHITESPACE
+    ERROR_QUIET
+    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+)
+add_definitions( -DBRANCH_NAME=\"${BRANCH_NAME}\")
+
+# 当前编译时间
+string(TIMESTAMP COMPILE_TIME %Y%m%d_%H%M%S)
+```
+
+## cpack打包
+
+### 打包rpm
+
+- 组件打包
+  ```
+  cpack_add_component
+  ```
+```
+# 设置每个分组打包成一个 rpm 包
+set(CPACK_COMPONENTS_GROUPING ONE_PER_GROUP)
+# 设置支持 COMPONENT
+set(CPACK_RPM_COMPONENT_INSTALL ON)
+
+include(CPack)
+
+# 添加一个名为 AComponent 的 component
+cpack_add_component(AComponent
+    DISPLAY_NAME  "A program"
+    DESCRIPTION   "The program for test"
+    GROUP Aprogram)
+# 添加一个名为 BComponent 的 component
+cpack_add_component(BComponent
+    DISPLAY_NAME  "B program"
+    DESCRIPTION   "The program for test"
+    GROUP Bprogram)
+# 添加一个名为 Aprogram 的 group, 这个名字会作为 rpm 包名字的一部分
+cpack_add_component_group(Aprogram)
+# 添加一个名为 Bprogram 的 group
+cpack_add_component_group(Bprogram)
+
+set(CPACK_RPM_Aprogram_PACKAGE_SUMMARY "Aprogram. Build: git-${BRANCH_NAME}-${COMMIT_HASH}")
+set(CPACK_RPM_Bprogram_PACKAGE_SUMMARY "Bprogram. Build: git-${BRANCH_NAME}-${COMMIT_HASH}")
+
+# 组件Bprogram安装之后执行的脚本
+set(CPACK_RPM_Bprogram_POST_INSTALL_SCRIPT_FILE "${CMAKE_CURRENT_SOURCE_DIR}/script/postinst.sh")
+```
+
+### 安装前后的动作
+
+```
+# 设置安装前执行的脚本文件 preinst
+set(CPACK_RPM_PRE_INSTALL_SCRIPT_FILE "${CMAKE_CURRENT_SOURCE_DIR}/scripts/preinst.sh")
+# 设置卸载前执行的脚本文件 prerm
+set(CPACK_RPM_PRE_UNINSTALL_SCRIPT_FILE "${CMAKE_CURRENT_SOURCE_DIR}/scripts/prerm.sh")
+# 设置安装后执行的脚本文件 postinst
+set(CPACK_RPM_POST_INSTALL_SCRIPT_FILE "${CMAKE_CURRENT_SOURCE_DIR}/scripts/postinst.sh")
+# 设置卸载后执行的脚本文件 postrm
+set(CPACK_RPM_POST_UNINSTALL_SCRIPT_FILE “${CMAKE_CURRENT_SOURCE_DIR}/scripts/postrm.sh")
+```
+> 如果执行脚本出现权限问题,不要使用chmod u+x来赋权限,最好使用chmod 0777
+
+## rpm包的安装
+
+```
+rpm -ivh --nodeps --replacefiles test.rpm
+```
+> - `--nodeps`: 忽略依赖软件包
+> - `--replacefiles`: 替换包或文件 用于替换原有包，覆盖安装
+> - `--force`: 忽略冲突，强行安装
+> - `--test`: 测试安装，但不真正执行安装，即dry run模式
+
+## 参考
+
+- [CPackRPM](https://www.w3cschool.cn/doc_cmake_3_8/cmake_3_8-module-cpackrpm.html)
+- [cmake的使用-if-else的逻辑流程详解](https://blog.csdn.net/andrewgithub/article/details/108249065)
+- [Cmake获取编译时间添加版本信息](https://blog.csdn.net/JCYAO_/article/details/115179015)
