@@ -137,6 +137,25 @@ rpm -ivh --nodeps --replacefiles test.rpm
 > - `--force`: 忽略冲突，强行安装
 > - `--test`: 测试安装，但不真正执行安装，即dry run模式
 
+## 常见问题
+
+### 安装rpm包时出现filesystem-3.2-25.el7.x86_64冲突
+
+```
+file /home from install of example-1.0.0-1.x86_64 conflicts with file from package filesystem-3.2-25.el7.x86_64
+```
+- 原因：
+  1. 打包时存在新建目录
+  2. 打包时将home目录也打包其中
+
+- 解决方法：
+  1. 针对第一种，最好不要新建目录，如果是必须的在安装时强制安装
+  2. 针对第二种，添加如下配置
+  ```
+  set(CPACK_RPM_EXCLUDE_FROM_AUTO_FILELIST_ADDITION "/home")
+  list(APPEND CPACK_RPM_EXCLUDE_FROM_AUTO_FILELIST_ADDITION "/home/xxx")
+  ```
+
 ## 参考
 
 - [CPackRPM](https://www.w3cschool.cn/doc_cmake_3_8/cmake_3_8-module-cpackrpm.html)
