@@ -43,6 +43,14 @@ Environment="MY_ENV=123"
 
 `EnvironmentFile`关键字是在环境变量配置较多的情况下，可以编辑到一个文件通过该变量一次性导入，编辑文件的一行为一个环境变量的定义。
 
+## 命令执行
+
+- `ExecStart=`： 启动服务时执行的命令
+- `ExecStartPre=, ExecStartPost=`： 启动服务之前与之后执行的命令
+
+在启动服务前执行的相关命令中，如果存在权限问题可以在执行命令前加`+`，如`ExecStartPre=+/bin/mkdir test`
+> https://www.freedesktop.org/software/systemd/man/systemd.service.html#ExecStart=
+
 ## Unit模板
 
 模板文件的主要特点是，文件名以`@`符号结尾，而启动的时候指定的Unit名称为模板名称附加一个参数字符串,比如`test@.service`, 在服务启动时可以在`@`后面放置一个用于区分服务实例的附加字符串参数,这样在参数将会传入到服务启动文件，在文件内部可以通过占位符`%i`获取服务启动是传入的参数，从而达到启动多个服务实例的目的。
@@ -77,3 +85,4 @@ WantedBy=multi-user.target
 
 - [可能是史上最全面易懂的 Systemd 服务管理教程！( 强烈建议收藏 )](https://cloud.tencent.com/developer/article/1516125)
 - [How to set environment variable in systemd service?](https://serverfault.com/questions/413397/how-to-set-environment-variable-in-systemd-service)
+- [systemd.service 中文手册](http://www.jinbuguo.com/systemd/systemd.service.html)

@@ -75,6 +75,18 @@ add_definitions( -DBRANCH_NAME=\"${BRANCH_NAME}\")
 string(TIMESTAMP COMPILE_TIME %Y%m%d_%H%M%S)
 ```
 
+## install命令
+
+install用于指定在安装时运行的规则。它可以用来安装很多内容，可以包括目标二进制、动态库、静态库以及文件、目录、脚本等
+```
+install(TARGETS <target>... [...])
+install({FILES | PROGRAMS} <file>... [...])
+install(DIRECTORY <dir>... [...])
+install(SCRIPT <file> [...])
+install(CODE <code> [...])
+install(EXPORT <export-name> [...])
+```
+
 ## cpack打包
 
 ### 打包rpm
@@ -161,3 +173,4 @@ file /home from install of example-1.0.0-1.x86_64 conflicts with file from packa
 - [CPackRPM](https://www.w3cschool.cn/doc_cmake_3_8/cmake_3_8-module-cpackrpm.html)
 - [cmake的使用-if-else的逻辑流程详解](https://blog.csdn.net/andrewgithub/article/details/108249065)
 - [Cmake获取编译时间添加版本信息](https://blog.csdn.net/JCYAO_/article/details/115179015)
+- [【CMake】cmake的install指令](https://blog.csdn.net/qq_38410730/article/details/102837401)
