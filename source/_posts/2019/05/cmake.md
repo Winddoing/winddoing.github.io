@@ -39,6 +39,21 @@ cd Debug
 cmake -DCMAKE_BUILD_TYPE=Debug ..
 ```
 
+## 常见常量
+
+### PROJECT_SOURCE_DIR与CMAKE_SOURCE_DIR
+
+- 这两个变量所指的路径是一样的，编译时的顶层路径
+- CMAKE_SOURCE_DIR确实引用了定义顶级CMakeLists.txt的文件夹。 但是，PROJECT_SOURCE_DIR引用包含最新`project()`命令的CMakeLists.txt文件夹。
+- CMAKE_SOURCE_DIR: 真对于“主”目录
+- PROJECT_SOURCE_DIR： 针对于“子”目录
+- [Are CMAKE_SOURCE_DIR and PROJECT_SOURCE_DIR the same in CMake?](https://stackoverflow.com/questions/32028667/are-cmake-source-dir-and-project-source-dir-the-same-in-cmake#:~:text=CMAKE_SOURCE_DIR%20does%20indeed%20refer%20to%20the%20folder%20where,a%20subdirectory%20with%20its%20own%20project%20called%20Inner.)
+
+### PROJECT_BINARY_DIR与PROJECT_SOURCE_DIR
+
+- 这两个变量所指路径也是一样的，都表示编译时生成的结果和中间文件存放位置
+- 与上面类似
+
 ## 生成编译命令文件 - compile_commands.json
 
 ```
@@ -174,3 +189,4 @@ file /home from install of example-1.0.0-1.x86_64 conflicts with file from packa
 - [cmake的使用-if-else的逻辑流程详解](https://blog.csdn.net/andrewgithub/article/details/108249065)
 - [Cmake获取编译时间添加版本信息](https://blog.csdn.net/JCYAO_/article/details/115179015)
 - [【CMake】cmake的install指令](https://blog.csdn.net/qq_38410730/article/details/102837401)
+- [CMake 基本常用语法 CMakeLists.txt](https://blog.csdn.net/q345911572/article/details/105250633)
