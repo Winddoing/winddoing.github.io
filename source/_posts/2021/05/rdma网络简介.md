@@ -216,6 +216,35 @@ HW Counters Description:
 
 > 插件源码：https://github.com/netdata/netdata/blob/master/collectors/proc.plugin/sys_class_infiniband.c
 
+## 网卡工作模式
+
+``` shell
+# ibstatus
+Infiniband device 'mlx5_0' port 1 status:
+	default gid:	 fe80:0000:0000:0000:0e42:a1ff:fe41:2d36
+	base lid:	 0x0
+	sm lid:		 0x0
+	state:		 4: ACTIVE
+	phys state:	 5: LinkUp
+	rate:		 25 Gb/sec (1X EDR)
+	link_layer:	 Ethernet
+
+Infiniband device 'mlx5_1' port 1 status:
+	default gid:	 fe80:0000:0000:0000:0e42:a1ff:fe41:2d37
+	base lid:	 0x0
+	sm lid:		 0x0
+	state:		 4: ACTIVE
+	phys state:	 5: LinkUp
+	rate:		 25 Gb/sec (1X EDR)
+	link_layer:	 Ethernet
+```
+- `link_layer`： 工作模式，Ethernet为IP模式，还有IB（infiniband）模式。
+- 工作模式切换：[HowTo Change Port Type in Mellanox ConnectX-3 Adapter](https://community.mellanox.com/s/article/howto-change-port-type-in-mellanox-connectx-3-adapter)
+
+## 常用命令
+
+- `ibstat`: 查询InfiniBand设备的基本状态
+
 ## 参考
 
 - [infiniband带宽测试方法1 ib_read/write_bw/lat](https://blog.csdn.net/xztjhs/article/details/51487467)
@@ -223,3 +252,4 @@ HW Counters Description:
 - [ibverbs文档翻译](https://blog.csdn.net/QiangLi_strong/article/details/81021193)
 - [Introduction to Programming Infiniband RDMA](https://insujang.github.io/2020-02-09/introduction-to-programming-infiniband/)
 - [NFSv4 RDMA and Session Extensions](https://datatracker.ietf.org/doc/html/draft-talpey-nfsv4-rdma-sess-00)
+- [RDMA_Aware_Programming_user_manual.pdf](https://www.mellanox.com/related-docs/prod_software/RDMA_Aware_Programming_user_manual.pdf)
