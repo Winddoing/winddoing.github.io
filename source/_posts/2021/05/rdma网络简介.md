@@ -66,6 +66,16 @@ ib_write_bw -a -d mlx5_0 192.168.2.1(server端ip)
 > port_rcv_data: (RO) Total number of data octets, divided by 4 (lanes), received on all VLs. This is 64 bit counter.
 > > 来自： `Documentation/ABI/stable/sysfs-class-infiniband`
 
+``` C
+pma_cnt_ext->port_xmit_data =
+    cpu_to_be64(MLX5_SUM_CNT(out, transmitted_ib_unicast.octets,
+                 transmitted_ib_multicast.octets) >> 2);
+pma_cnt_ext->port_rcv_data =
+    cpu_to_be64(MLX5_SUM_CNT(out, received_ib_unicast.octets,
+                 received_ib_multicast.octets) >> 2);
+```
+> file: drivers/infiniband/hw/mlx5/mad.c
+
 ## mlx5计数器和状态参数
 
 在sysfs文件系统可以查看`/sys/class/infiniband/`
