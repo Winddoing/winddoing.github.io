@@ -154,6 +154,21 @@ set(CPACK_RPM_POST_UNINSTALL_SCRIPT_FILE “${CMAKE_CURRENT_SOURCE_DIR}/scripts/
 ```
 > 如果执行脚本出现权限问题,不要使用chmod u+x来赋权限,最好使用chmod 0777
 
+### 取消yum自动依赖关系
+
+```
+set(CPACK_RPM_PACKAGE_AUTOREQPROV " no")
+```
+> 在`no`前面（或后面）需要**添加空格**才能使其工作。 cpack的RPM模块似乎有一个错误，这使得它不会让您将某些变量设置为短于3个字符的任何长度。
+
+参考：https://stackoverflow.com/questions/14658034/how-do-you-make-it-so-that-cpack-doesnt-add-required-libraries-to-an-rpm
+
+手动设置必要软件依赖：
+
+```
+set(CPACK_RPM_PACKAGE_REQUIRES "python >= 2.5.0, cmake >= 2.8")
+```
+
 ## rpm包的安装
 
 ```
