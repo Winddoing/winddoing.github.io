@@ -69,10 +69,53 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -D_GNU_SOURCE")
 
 > https://gcc.gnu.org/onlinedocs/gcc-11.1.0/gnat_ugn/Optimization-Levels.html#Optimization-Levels
 
+### 优化参数的具体优化范围
+
+通过`gcc -Q --help=optimizers`命令可以查询优化等级的具体做了哪些优化
+
+``` shell
+# gcc -Q --help=optimizers -O3
+The following options control optimizations:
+  -O<number>                  		
+  -Ofast                      		
+  -Og                         		
+  -Os                         		
+  -faggressive-loop-optimizations 	[enabled]
+  -falign-functions           		[enabled]
+  -falign-jumps               		[enabled]
+  -falign-labels              		[enabled]
+  -falign-loops               		[enabled]
+  -fasynchronous-unwind-tables 		[enabled]
+  -fbranch-count-reg          		[enabled]
+  -fbranch-probabilities      		[disabled]
+  -fbranch-target-load-optimize 	[disabled]
+  -fbranch-target-load-optimize2 	[disabled]
+  -fbtr-bb-exclusive          		[disabled]
+  -fcaller-saves              		[enabled]
+  -fcombine-stack-adjustments 		[enabled]
+  -fcommon                    		[enabled]
+  -fcompare-elim              		[enabled]
+  -fconserve-stack            		[disabled]
+  -fcprop-registers           		[enabled]
+  -fcrossjumping              		[enabled]
+  -fcse-follow-jumps          		[enabled]
+  -fcx-fortran-rules          		[disabled]
+  -fcx-limited-range          		[disabled]
+  -fdata-sections             		[disabled]
+  -fdce                       		[enabled]
+  -fdefer-pop                 		[enabled]
+  -fdelayed-branch            		[disabled]
+  -fdelete-null-pointer-checks 		[enabled]
+  ...
+```
+有关gcc优化的更多详细信息，请参考gcc的官方文档:
+> https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html#Optimize-Options
+
 ## Compiler Switches
 
 > https://gcc.gnu.org/onlinedocs/gcc-11.1.0/gnat_ugn/Alphabetical-List-of-All-Switches.html#Alphabetical-List-of-All-Switches
 
 ## 参考
 
+- [Using the GNU Compiler Collection (GCC)](https://gcc.gnu.org/onlinedocs/gcc/index.html#SEC_Contents)---gcc在线文档
 - [GNAT User’s Guide for Native Platforms](https://gcc.gnu.org/onlinedocs/gcc-9.4.0/gnat_ugn.pdf) --- gcc编译参数
