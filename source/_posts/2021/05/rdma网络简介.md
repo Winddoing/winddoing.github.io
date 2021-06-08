@@ -76,6 +76,47 @@ pma_cnt_ext->port_rcv_data =
 ```
 > file: drivers/infiniband/hw/mlx5/mad.c
 
+## 网络联通性测试
+
+由于当前网卡只支持`Ethernet`模式，因此只能使用`ibv_rc_pingpong`进行ping测试。
+
+- https://community.mellanox.com/s/article/RoCE-Debug-Flow-for-Linux
+
+### Server
+
+``` shell
+# ibdev2netdev
+mlx4_0 port 1 ==> enp1s0 (Down)
+mlx5_0 port 1 ==> ens2f0 (Up)
+mlx5_1 port 1 ==> ens2f1 (Up)
+```
+
+``` shell
+# ibv_rc_pingpong -d mlx5_0 -g 0
+  local address:  LID 0x0000, QPN 0x00011a, PSN 0xd775ee, GID fe80::e42:a1ff:fe41:2d36
+  remote address: LID 0x0000, QPN 0x0009df, PSN 0xa7f02f, GID fe80::1e34:daff:fe79:c0d
+8192000 bytes in 0.01 seconds = 5126.01 Mbit/sec
+1000 iters in 0.01 seconds = 12.78 usec/iter
+```
+
+### Client
+
+``` shell
+# ibdev2netdev
+mlx5_0 port 1 ==> p5p1 (Down)
+mlx5_1 port 1 ==> p5p2 (Up)
+mlx5_2 port 1 ==> p4p1 (Down)
+mlx5_3 port 1 ==> p4p2 (Down)
+```
+
+``` shell
+# ibv_rc_pingpong -d mlx5_1 -g 0 192.168.2.4
+  local address:  LID 0x0000, QPN 0x0009df, PSN 0xa7f02f, GID fe80::1e34:daff:fe79:c0d
+  remote address: LID 0x0000, QPN 0x00011a, PSN 0xd775ee, GID fe80::e42:a1ff:fe41:2d36
+8192000 bytes in 0.01 seconds = 5376.21 Mbit/sec
+1000 iters in 0.01 seconds = 12.19 usec/iter
+```
+
 ## mlx5计数器和状态参数
 
 在sysfs文件系统可以查看`/sys/class/infiniband/`
@@ -244,75 +285,14 @@ Infiniband device 'mlx5_1' port 1 status:
 ## 常用命令
 
 - `ibstat`: 查询InfiniBand设备的基本状态
-- `ibstatus`
-- `ibv_devinfo`
-- `ibv_devices`	#查看本主机的infiniband设备
-- `ibnodes`	#查看网络中的infiniband设备
+- `ibstatus`： 网卡信息
+- `ibv_devinfo`：网卡设备信息（ibv_devinfo -d mlx5_0 -v）
+- `ibv_devices`：查看本主机的infiniband设备
+- `ibnodes`：查看网络中的infiniband设备
+- `show_gids`：看看网卡支持的roce版本
+- `show_counters`:网卡端口统计数据，比如发送接受数据大小
+- `mlxconfig`: 网卡配置（mlxconfig -d mlx5_1 q查询网卡配置信息）
 
-## 更换网卡工作模式
-
-通过`ibstatus`命令可以查看当前网卡的工作模式
-
-``` shell
-Infiniband device 'mlx5_1' port 1 status:
-	default gid:	 fe80:0000:0000:0000:0e42:a1ff:fe41:2d37
-	base lid:	 0x0
-	sm lid:		 0x0
-	state:		 4: ACTIVE
-	phys state:	 5: LinkUp
-	rate:		 25 Gb/sec (1X EDR)
-	link_layer:	 Ethernet    （工作模式：IP模式）
-```
-> 网卡现在处于`Ethernet`的工作模式，如果想要切换成`infiniband`模式
-
-参考：https://community.mellanox.com/s/article/howto-change-port-type-in-mellanox-connectx-3-adapter
-
-ConnectX®-4/ConnectX®-5 端口可以单独配置为用作`InfiniBand`或`Ethernet`端口，使用命令`mlxconfig`
-
-### 启动mst工具
-需要安装官方驱动，以下配置用于ConnectX-4网卡。
-
-``` shell
-systemctl start mst
-```
-查看mst设备
-``` shell
-# mst status
-MST modules:
-------------
-    MST PCI module is not loaded
-    MST PCI configuration module loaded
-
-MST devices:
-------------
-/dev/mst/mt4117_pciconf0         - PCI configuration cycles access.
-                                   domain:bus:dev.fn=0000:f7:00.0 addr.reg=88 data.reg=92 cr_bar.gw_offset=-1
-                                   Chip revision is: 00
-```
-> MST devices: /dev/mst/mt4117_pciconf0
-
-### 查看网卡的配置信息
-
-``` shell
-# mlxconfig -d /dev/mst/mt4117_pciconf0 q | grep "LINK"
-         KEEP_ETH_LINK_UP_P1                 True(1)         
-         KEEP_IB_LINK_UP_P1                  False(0)        
-         KEEP_LINK_UP_ON_BOOT_P1             False(0)        
-         KEEP_LINK_UP_ON_STANDBY_P1          False(0)        
-         AUTO_POWER_SAVE_LINK_DOWN_P1        False(0)        
-         KEEP_ETH_LINK_UP_P2                 True(1)         
-         KEEP_IB_LINK_UP_P2                  False(0)        
-         KEEP_LINK_UP_ON_BOOT_P2             False(0)        
-         KEEP_LINK_UP_ON_STANDBY_P2          False(0)        
-         AUTO_POWER_SAVE_LINK_DOWN_P2        False(0)  
-```
-
-### ConnectX-5网卡
-
-> 注： 以下命令适用于`ConnectX-5`
-
-- Ethernet模式： `mlxconfig -d /dev/mst/mt4119_pciconf0 set LINK_TYPE_P1=2`
-- IB模式： `mlxconfig -d /dev/mst/mt4119_pciconf0 set LINK_TYPE_P1=1`
 
 ## 双网口作用
 
