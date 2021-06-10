@@ -90,6 +90,41 @@ add_definitions( -DBRANCH_NAME=\"${BRANCH_NAME}\")
 string(TIMESTAMP COMPILE_TIME %Y%m%d_%H%M%S)
 ```
 
+## 引入外部项目
+
+### 子模块
+
+```
+add_subdirectory(xxx)
+```
+
+### 编译时下载项目并引入
+
+```
+include(ExternalProject)
+
+set(SPDLOG_ROOT ${CMAKE_BINARY_DIR}/thirdparty/SPDLOG)
+set(SPDLOG_GIT_TAG  v1.4.1)  # 指定版本
+set(SPDLOG_GIT_URL      https://github.com/gabime/spdlog.git)  # 指定git仓库地址
+set(SPDLOG_CONFIGURE    cd ${SPDLOG_ROOT}/src/SPDLOG && cmake -D CMAKE_INSTALL_PREFIX=${SPDLOG_ROOT} .)  # 指定配置指令（注意此处修改了安装目录，否则默认情况下回安装到系统目录）
+set(SPDLOG_MAKE         cd ${SPDLOG_ROOT}/src/SPDLOG && make)  # 指定编译指令（需要覆盖默认指令，进入我们指定的SPDLOG_ROOT目录下）
+set(SPDLOG_INSTALL      cd ${SPDLOG_ROOT}/src/SPDLOG && make install)  # 指定安装指令（需要覆盖默认指令，进入我们指定的SPDLOG_ROOT目录下）
+
+ExternalProject_Add(SPDLOG
+        PREFIX            ${SPDLOG_ROOT}
+        GIT_REPOSITORY    ${SPDLOG_GIT_URL}
+        GIT_TAG           ${SPDLOG_GIT_TAG}
+        CONFIGURE_COMMAND ${SPDLOG_CONFIGURE}
+        BUILD_COMMAND     ${SPDLOG_MAKE}
+        INSTALL_COMMAND   ${SPDLOG_INSTALL}
+)
+
+# 指定编译好的静态库文件的路径
+set(SPDLOG_LIB       ${SPDLOG_ROOT}/lib/spdlog/libspdlog.a)
+# 指定头文件所在的目录
+set(SPDLOG_INCLUDE_DIR   ${SPDLOG_ROOT}/include)
+```
+
 ## install命令
 
 install用于指定在安装时运行的规则。它可以用来安装很多内容，可以包括目标二进制、动态库、静态库以及文件、目录、脚本等
@@ -205,3 +240,4 @@ file /home from install of example-1.0.0-1.x86_64 conflicts with file from packa
 - [Cmake获取编译时间添加版本信息](https://blog.csdn.net/JCYAO_/article/details/115179015)
 - [【CMake】cmake的install指令](https://blog.csdn.net/qq_38410730/article/details/102837401)
 - [CMake 基本常用语法 CMakeLists.txt](https://blog.csdn.net/q345911572/article/details/105250633)
+- [CMake之引入外部项目的三种方法](https://zhuanlan.zhihu.com/p/102050750)
