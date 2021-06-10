@@ -41,6 +41,7 @@ iWARP 是基于 TCP/IP 协议、面向连接的 RDMA 传输。由 IEFT 在 2007 
 
 ### RoCEv2 vs RoCEv1
 
+![RDMA_rocev1_vs_rocev2](/images/2021/06/rdma_rocev1_vs_rocev2.png)
 路由：RoCE v1只能在广播域内通信，RoCE v2支持L3路由。
 
 ### iWARP vs RoCEv2
@@ -82,6 +83,7 @@ CA 'mlx4_0'
   - ConnectX-4 Lx EN （Ethernet）提供 1、10、25、40 和50GbE带宽、`亚微秒级延迟`
   - ConnectX-5 具备 Virtual Protocol Interconnect®,支持具有 100Gb/s InfiniBand 和以太网连接、小于`600纳秒的延迟`
 - InfiniBand采用Cut-Through转发模式，减少转发时延，基于Credit流控机制，保证无丢包。RoCE性能与IB网络相当，DCB特性保证无丢包，需要网络支持DCB特性，但时延比IB交换机时延稍高一些
+- Ethernet模式可能存在丢包，而导致数据重传的延时
 
 
 ## InfiniBand与Ethernet链路层切换
@@ -175,3 +177,4 @@ MST devices:
 - [RDMA over Converged Ethernet (RoCE)](https://docs.mellanox.com/pages/viewpage.action?pageId=39284930)
 - [RDMA/RoCE Solutions](https://community.mellanox.com/s/article/rdma-roce-solutions)
 - [Recommended Network Configuration Examples for RoCE Deployment](https://community.mellanox.com/s/article/recommended-network-configuration-examples-for-roce-deployment)
+- [Mellanox ConnectX-4 Adapters](https://lenovopress.com/lp0098.pdf)
