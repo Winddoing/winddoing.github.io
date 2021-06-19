@@ -84,3 +84,4 @@ virtio-gpu-device options:
 
 - [qemu-kvm 参数设置（多屏显示、图像压缩、声音压缩、USB重定向、添加agent）](https://blog.csdn.net/wangyezi19930928/article/details/53156057)
 - [QEMU version 4.2.0 User Documentation](https://qemu.weilnetz.de/doc/qemu-doc.html)
+- [qemu-system-x86_64命令总结](http://blog.leanote.com/post/7wlnk13/%E5%88%9B%E5%BB%BAKVM%E8%99%9A%E6%8B%9F%E6%9C%BA)
