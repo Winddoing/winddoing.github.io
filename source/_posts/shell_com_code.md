@@ -71,6 +71,10 @@ $SUD0 apt update -y
 (( EUID != 0 )) && exec sudo -E -- "$0" "$@"
 ```
 
+``` shell
+ [ ${UID} -ne 0 ] && echo "Please run with sudo" && exit -1
+```
+
 ## ${:-}变量的默认值
 
 ``` shell
