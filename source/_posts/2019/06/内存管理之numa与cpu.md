@@ -67,6 +67,27 @@ start_kernel
 ## 物理内存与node之间的关系
 
 
+## numa编码
+
+将当前进程绑定到node0或node1,及在当前node上的CPU运行与申请内存
+
+``` C
+static int set_numa_node(int node)
+{
+    struct bitmask *bit;
+
+    bit = numa_bitmask_alloc(1);
+    numa_bitmask_clearall(bit);
+    numa_bitmask_setbit(bit, node);
+    numa_bind(bit); //将当前任务及其子任务绑定到nodemask中指定的节点。它们只会在指定节点的CPU上运行，并且只能从它们分配内存。
+    numa_bitmask_free(bit);
+
+    return 0;
+}
+```
+
+> `numa_bind()` binds the current task and its children to the nodes specified in nodemask. They will only run on the CPUs of the specified nodes and only be able to allocate memory from them. This function is equivalent to calling numa_run_on_node_mask(nodemask) followed by numa_set_membind(nodemask). If tasks should be bound to individual CPUs inside nodes consider using numa_node_to_cpus and the sched_setaffinity(2) syscall.
+
 ## 参考
 
 * [NUMA的取舍与优化设置](https://www.cnblogs.com/xueqiuqiu/articles/9282903.html)
