@@ -754,3 +754,5 @@ _mesa_print_program_parameters(struct gl_context *ctx, const struct gl_program *
 - [The Linux Graphics Stack](https://blog.mecheye.net/2012/06/the-linux-graphics-stack/#rendering-stack)
 - [Testing Out Mesa's GLSL-To-TGSI Translator](https://www.phoronix.com/scan.php?page=article&item=glsl_to_tgsi&num=1)
 - [Introduction to GPU Programming with GLSL](https://www.researchgate.net/publication/232626644_Introduction_to_GPU_Programming_with_GLSL)
+- [A beginners guide to TGSI](https://ndesh26.github.io/programming/2016/07/04/A-Beginners-guide-to-TGSI/)
+- [Implementing Bicubic Scaling in TGSI](https://ndesh26.github.io/programming/2016/09/26/Implementing-Bicubic-Scaling-in-TGSI/)
