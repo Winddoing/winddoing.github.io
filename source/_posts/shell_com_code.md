@@ -1,5 +1,4 @@
----
-title: shell常用代码
+itle: shell常用代码
 tags:
   - shell
 categories:
@@ -11,6 +10,60 @@ date: 2018-02-04 23:07:24
 {% note info %} shell常用代码： {% endnote %}
 
 <!--more-->
+
+## 检测IP地址格式是否有效
+
+``` shell
+function check_ip()
+{
+    local ip=$1
+    info "Check ip: $ip"
+    local valid_check=$(echo $ip | awk -F. '$1<=255&&$2<=255&&$3<=255&&$4<=255{print "yes"}')
+    if echo $ip | grep -E "^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$">/dev/null; then
+        if [ ${valid_check:-no} == "yes" ]; then
+            echo "IP $ip available."
+        else
+            error "IP $ip not available!"
+            return 311
+        fi
+    else
+        error "IP format error!"
+        return 312
+    fi
+}
+```
+
+## if条件中使用正则表达式
+
+> The =~ Regular Expression match operator no longer requires quoting of the pattern within [[ … ]].
+
+示例：
+``` shell
+newip="192.168.1.1"
+if [[ "$newip" =~ ^([0-9]{1,3}.){3}[0-9]{1,3}$ ]];then
+    echo "找到了ip地址"
+fi
+
+#or
+
+if [[ "$tag_version" =~ ^v[0-9].[0-9].[*] ]]; then
+    echo "$tag_version format error. example: v0.0.1 or v0.0.1a"
+    exit 1
+fi
+```
+**注**： 正则表达式正在[[...]]中不能使用双引号
+
+## sed修改配置文件
+
+`"/^BOOTPROTO/c BOOTPROTO=static"`： 查找出首字符是`BOOTPROTO`的行，并将其替换为`BOOTPROTO=static`
+
+``` shell
+sed -i "/^BOOTPROTO/c BOOTPROTO=static" /etc/sysconfig/network-scripts/ifcfg-eno1
+sed -i "/^ONBOOT/c ONBOOT=yes" /etc/sysconfig/network-scripts/ifcfg-eno1
+sed -i "/^IPADDR/c IPADDR=192.168.1.11" /etc/sysconfig/network-scripts/ifcfg-eno1
+sed -i '$a NETMASK=255.255.255.0' /etc/sysconfig/network-scripts/ifcfg-eno1
+```
+> 配置IP地址
 
 ## 递归便利整个目录及子目录
 
