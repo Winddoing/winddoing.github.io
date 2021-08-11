@@ -46,7 +46,9 @@ fi
 
 #or
 
-if [[ "$tag_version" =~ ^v[0-9].[0-9].[*] ]]; then
+if [[ "$tag_version" =~ ^v[0-9].[0-9].[0-9] ]]; then
+    echo "$tag_version format is valid."
+else
     echo "$tag_version format error. example: v0.0.1 or v0.0.1a"
     exit 1
 fi
