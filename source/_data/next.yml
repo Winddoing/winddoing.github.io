@@ -228,7 +228,7 @@ social:
   #YouTube: https://youtube.com/yourname || youtube
   #Instagram: https://instagram.com/yourname || instagram
   #Skype: skype:yourname?call|chat || skype
-  Travis CI: https://travis-ci.com/Winddoing/Winddoing.github.io || terminal
+  Travis CI: https://app.travis-ci.com/github/Winddoing/winddoing.github.io || terminal
 
 social_icons:
   enable: true
