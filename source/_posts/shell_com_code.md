@@ -11,6 +11,15 @@ date: 2018-02-04 23:07:24
 
 <!--more-->
 
+## 获取centos发行版本
+
+``` shell
+rpm --query centos-release
+#或
+rpm -q centos-release --qf 'centos %{v}-%{r}\n'
+```
+> https://unix.stackexchange.com/questions/417656/bash-command-to-get-distribution-and-version-only
+
 ## 检测IP地址格式是否有效
 
 ``` shell

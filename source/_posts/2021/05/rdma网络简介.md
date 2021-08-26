@@ -25,6 +25,23 @@ mlx5_1 port 1 ==> ens2f1 (Down) #表示该网口没有插网线
 ```
 > `ibdev2netdev`命令输出以上类似信息表明网卡驱动安装成功
 
+### CentOS7开源驱动安装与卸载
+
+- 安装：
+``` shell
+yum -y groupinstall "Infiniband Support"
+yum -y install infiniband-diags perftest gperf
+```
+- 卸载：
+``` shell
+yum -y groupremove "Infiniband Support"
+```
+- 开启RDMA服务
+``` shell
+systemctl start rdma
+systemctl enable rdma
+```
+
 ## 吞吐量测试
 
 ### 写吞吐量
