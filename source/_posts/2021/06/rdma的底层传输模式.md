@@ -146,16 +146,16 @@ MST devices:
 
 ``` shell
 # mlxconfig -d /dev/mst/mt4117_pciconf0 q | grep "LINK"
-         KEEP_ETH_LINK_UP_P1                 True(1)         
-         KEEP_IB_LINK_UP_P1                  False(0)        
-         KEEP_LINK_UP_ON_BOOT_P1             False(0)        
-         KEEP_LINK_UP_ON_STANDBY_P1          False(0)        
-         AUTO_POWER_SAVE_LINK_DOWN_P1        False(0)        
-         KEEP_ETH_LINK_UP_P2                 True(1)         
-         KEEP_IB_LINK_UP_P2                  False(0)        
-         KEEP_LINK_UP_ON_BOOT_P2             False(0)        
-         KEEP_LINK_UP_ON_STANDBY_P2          False(0)        
-         AUTO_POWER_SAVE_LINK_DOWN_P2        False(0)  
+         KEEP_ETH_LINK_UP_P1                 True(1)
+         KEEP_IB_LINK_UP_P1                  False(0)
+         KEEP_LINK_UP_ON_BOOT_P1             False(0)
+         KEEP_LINK_UP_ON_STANDBY_P1          False(0)
+         AUTO_POWER_SAVE_LINK_DOWN_P1        False(0)
+         KEEP_ETH_LINK_UP_P2                 True(1)
+         KEEP_IB_LINK_UP_P2                  False(0)
+         KEEP_LINK_UP_ON_BOOT_P2             False(0)
+         KEEP_LINK_UP_ON_STANDBY_P2          False(0)
+         AUTO_POWER_SAVE_LINK_DOWN_P2        False(0)
 ```
 
 ### ConnectX-5网卡
