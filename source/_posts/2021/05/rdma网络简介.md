@@ -27,10 +27,13 @@ mlx5_1 port 1 ==> ens2f1 (Down) #表示该网口没有插网线
 
 ### CentOS7开源驱动安装与卸载
 
+> [Working with RDMA in RedHat/CentOS 7.*](https://www.rdmamojo.com/2014/10/11/working-rdma-redhatcentos-7/#:~:text=yum%20allows%20installation%20of%20multiple%20packages%20according%20to,packages%20are%20part%20of%20the%20group%20%22Infiniband%20Support%22%3A)
+
 - 安装：
 ``` shell
-yum -y groupinstall "Infiniband Support"
-yum -y install infiniband-diags perftest gperf
+yum groupinfo "Infiniband Support"
+yum groupinstall "Infiniband Support"
+yum --setopt=group_package_types=optional groupinstall "Infiniband Support"
 ```
 - 卸载：
 ``` shell
@@ -323,6 +326,8 @@ Infiniband device 'mlx5_1' port 1 status:
 
 ## 参考
 
+- [How to install support for Mellanox Infiniband hardware on RHEL6](https://access.redhat.com/solutions/301643)
+- [Mellanox Technologies Ltd. Public Repository](https://www.mellanox.com/support/mlnx-ofed-public-repository)
 - [infiniband带宽测试方法1 ib_read/write_bw/lat](https://blog.csdn.net/xztjhs/article/details/51487467)
 - [ib_write_bw 和 ib_read_bw 测试 RDMA 的读写处理确定带宽](https://blog.csdn.net/ljlfather/article/details/102925954)
 - [ibverbs文档翻译](https://blog.csdn.net/QiangLi_strong/article/details/81021193)
