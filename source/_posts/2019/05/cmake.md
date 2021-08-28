@@ -229,7 +229,12 @@ file /home from install of example-1.0.0-1.x86_64 conflicts with file from packa
   1. 针对第一种，最好不要新建目录，如果是必须的在安装时强制安装
   2. 针对第二种，添加如下配置
   ```
-  set(CPACK_RPM_EXCLUDE_FROM_AUTO_FILELIST_ADDITION "/home")
+  list(APPEND CPACK_RPM_EXCLUDE_FROM_AUTO_FILELIST_ADDITION "/usr/local")         
+  list(APPEND CPACK_RPM_EXCLUDE_FROM_AUTO_FILELIST_ADDITION "/usr/local/lib")     
+  list(APPEND CPACK_RPM_EXCLUDE_FROM_AUTO_FILELIST_ADDITION "/usr/local/bin")     
+  list(APPEND CPACK_RPM_EXCLUDE_FROM_AUTO_FILELIST_ADDITION "/usr/lib/systemd")   
+  list(APPEND CPACK_RPM_EXCLUDE_FROM_AUTO_FILELIST_ADDITION "/usr/lib/systemd/system")
+  list(APPEND CPACK_RPM_EXCLUDE_FROM_AUTO_FILELIST_ADDITION "/etc/ld.so.conf.d")
   list(APPEND CPACK_RPM_EXCLUDE_FROM_AUTO_FILELIST_ADDITION "/home/xxx")
   ```
 
