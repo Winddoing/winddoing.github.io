@@ -156,7 +156,6 @@ MST devices:
          KEEP_LINK_UP_ON_BOOT_P2             False(0)
          KEEP_LINK_UP_ON_STANDBY_P2          False(0)
          AUTO_POWER_SAVE_LINK_DOWN_P2        False(0)
-
 ```
 
 ### ConnectX-5网卡
