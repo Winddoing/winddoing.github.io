@@ -19,6 +19,8 @@ abbrlink: 35642
 ### IOS镜像下载
 
 - http://isoredirect.centos.org/altarch/7/isos/aarch64/
+- https://vault.centos.org/altarch/7.8.2003/isos/
+- https://vault.centos.org/centos/7.8.2003/isos/
 
 
 ### 软件包
