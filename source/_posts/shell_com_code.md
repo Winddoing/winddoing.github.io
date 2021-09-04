@@ -20,6 +20,13 @@ rpm -q centos-release --qf 'centos %{v}-%{r}\n'
 ```
 > https://unix.stackexchange.com/questions/417656/bash-command-to-get-distribution-and-version-only
 
+``` shell
+OS_VERSION_ID=$(grep "VERSION_ID=" /etc/*-release | awk -F "=" '{print $2}')
+OS_VERSION_ID=$(echo $OS_VERSION_ID | sed 's/\"//g')
+
+echo "Current OS CentOS $OS_VERSION_ID"
+```
+
 ## 检测IP地址格式是否有效
 
 ``` shell
