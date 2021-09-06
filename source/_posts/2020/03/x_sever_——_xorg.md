@@ -398,8 +398,55 @@ export DISPLAY=[hostname][:number[.screen_number]]
 ```
 - `hostname`: 指定物理连接显示器的主机的名称, 主机名后加上单冒号（:)或双冒号（::)。
 - `number`: 指定该主机上Xserver的编号,在此显示编号后加上句点(.),一个CPU可以有多个显示器, 多个显示通常从零开始编号。
-- `screen_number`: 指定要在该服务器上使用的屏幕, 单个Xserver可以控制多个屏幕, screen_number设置一个内部变量，如果使用的是C以外的语言，则可以使用`DefaultScreen()`宏或`XDefaultScreen()`函数进行访问（请参见“(Display Macros)[https://tronche.com/gui/x/xlib/display/information.html#display]”）。
+- `screen_number`: 指定要在该服务器上使用的屏幕，单个Xserver可以控制多个屏幕，screen_number设置一个内部变量，如果使用的是C以外的语言，则可以使用`DefaultScreen()`宏或`XDefaultScreen()`函数进行访问（请参见“(Display Macros)[https://tronche.com/gui/x/xlib/display/information.html#display]”）。
 
+
+## 无显示器启动X Server
+
+安装Nvidia驱动后，如果没有接显示器，那么X Server在启动的时候会报错：
+
+```
+NVIDIA(0): Failed to assign any connected display devices to X screen 0. Set AllowEmptyInitialConfiguration if you want the server to start anyway
+```
+
+重新生产`xorg.conf`配置文件
+``` shell
+sudo nvidia-xconfig --allow-empty-initial-configuration
+```
+
+```
+Section "Screen"
+    Identifier     "Screen0"
+    Device         "Device0"
+    Monitor        "Monitor0"
+    DefaultDepth    24
+    Option         "AllowEmptyInitialConfiguration" "True"
+    SubSection     "Display"
+        Depth       24
+    EndSubSection
+EndSection
+```
+> 主要添加配置：`Option "AllowEmptyInitialConfiguration" "True"`
+
+
+## Nvidia显卡启动Xorg使用虚拟设备连接
+
+```
+Section "Device"
+	Identifier  "Card0"
+	Driver      "nvidia"
+	BusID       "PCI:26:0:0"
+  #for NVIDIA Xorg configure
+	Option      "ConnectedMonitor"  "DFP-0"
+	Option      "MetaModes"         "DFP-0: 1920x1080"
+	Option      "HorizSync"         "DFP-0: 40-70"
+	Option      "VertRefresh"       "DFP-0: 60"
+	Option      "ConnectToAcpid"    "false"
+	Option      "UseEDID"           "false"
+	Option      "UseEDIDDpi"        "false"
+	Option      "ModeValidation"    "NoEdidModes"
+EndSection
+```
 
 ## 参考
 
