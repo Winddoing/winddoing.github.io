@@ -409,6 +409,8 @@ export DISPLAY=[hostname][:number[.screen_number]]
 NVIDIA(0): Failed to assign any connected display devices to X screen 0. Set AllowEmptyInitialConfiguration if you want the server to start anyway
 ```
 
+### 方法一：
+
 重新生产`xorg.conf`配置文件
 ``` shell
 sudo nvidia-xconfig --allow-empty-initial-configuration
@@ -429,7 +431,7 @@ EndSection
 > 主要添加配置：`Option "AllowEmptyInitialConfiguration" "True"`
 
 
-## Nvidia显卡启动Xorg使用虚拟设备连接
+### 方法二： Nvidia显卡启动Xorg使用虚拟设备连接
 
 ```
 Section "Device"
@@ -448,6 +450,44 @@ Section "Device"
 EndSection
 ```
 
+### 方法三：
+
+```
+Section "Device"
+	Identifier  "Card0"
+	Driver      "nvidia"
+	BusID       "PCI:59:0:0"
+  Option "UseDisplayDevice" "none"
+EndSection
+```
+> Option "UseDisplayDevice" "string"
+>
+>  The "UseDisplayDevice" X configuration option is a list of one or more display devices, which limits the display devices the NVIDIA X driver will consider for an X screen. The display device names used in the option may be either specific (with a numeric suffix; e.g., "DFP-1") or general (without a numeric suffix; e.g., "DFP").
+>
+>   When assigning display devices to X screens, the NVIDIA X driver walks through the list of all (not already assigned) display devices detected as connected. When the "UseDisplayDevice" X configuration option is specified, the X driver will only consider connected display devices which are also included in the "UseDisplayDevice" list. This can be thought of as a "mask" against the connected (and not already assigned) display devices.
+>
+>   Note the subtle difference between this option and the "ConnectedMonitor" option: the "ConnectedMonitor" option overrides which display devices are actually detected, while the "UseDisplayDevice" option controls which of the detected display devices will be used on this X screen.
+>
+>   Of the list of display devices considered for this X screen (either all connected display devices, or a subset limited by the "UseDisplayDevice" option), the NVIDIA X driver first looks at CRTs, then at DFPs. For example, if both a CRT and a DFP are connected, by default the X driver would assign the CRT to this X screen. However, by specifying:
+>
+>       Option "UseDisplayDevice" "DFP"
+>   the X screen would use the DFP instead. Or, if CRT-0, DFP-0, and DFP-1 are connected, the X driver would assign CRT-0 and DFP-0 to the X screen. However, by specifying:
+>
+>       Option "UseDisplayDevice" "CRT-0, DFP-1"
+>   the X screen would use CRT-0 and DFP-1 instead.
+>
+>   Additionally, the special value "none" can be specified for the "UseDisplayDevice" option. When this value is given, any programming of the display hardware is disabled. The NVIDIA driver will not perform any mode validation or mode setting for this X screen. This is intended for use in conjunction with CUDA or in remote graphics solutions such as VNC or Hewlett Packard's Remote Graphics Software (RGS).
+>
+>   "UseDisplayDevice" defaults to "none" on GPUs that have no display capabilities, such as some Tesla GPUs and some mobile GPUs used in Optimus notebook configurations.
+>
+>   Note the following restrictions for setting the "UseDisplayDevice" to "none":
+>
+>   OpenGL SyncToVBlank will have no effect.
+>
+>   None of Stereo, Overlay, CIOverlay, or SLI are allowed when "UseDisplayDevice" is set to "none".
+>
+> > http://http.download.nvidia.com/XFree86/Linux-x86/390.144/README/xconfigoptions.html
+
 ## 参考
 
 - [X,X11,Xorg,XServer,XClient,Xlib](https://blog.csdn.net/a379039233/article/details/80782351)
@@ -455,8 +495,10 @@ EndSection
 - [xorg的配置文件](https://blog.csdn.net/seaship/article/details/95481154)
 - [xorg.conf 配置详解](https://blog.csdn.net/ohappytime/article/details/7384001)
 - [nvidia gpu fan speed control](https://www.cnblogs.com/rickerliang/p/5673015.html)
-- [Appendix D. X Config Options](http://http.download.nvidia.com/XFree86/Linux-x86/1.0-8774/README/appendix-d.html)
+- [Nvidia-Appendix D. X Config Options](http://http.download.nvidia.com/XFree86/Linux-x86/1.0-8774/README/appendix-d.html)
+- [Nvidia-Appendix B. X Config Options Part II. Appendices](http://http.download.nvidia.com/XFree86/Linux-x86/390.144/README/xconfigoptions.html) --  驱动版本390.144
 - [xorg.conf](https://www.x.org/releases/current/doc/man/man5/xorg.conf.5.xhtml)
 - [Difference between .xinitrc, .xsession and .xsessionrc](https://unix.stackexchange.com/questions/281858/difference-between-xinitrc-xsession-and-xsessionrc)
 - [Chapter 13. Configuring Multiple Display Devices on One X Screen](https://download.nvidia.com/XFree86/Linux-x86_64/304.137/README/configtwinview.html)
 - [Opening the Display](https://tronche.com/gui/x/xlib/display/opening.html)
+- [How do I get X to start without a monitor attached while using NVIDIA drivers?](https://unix.stackexchange.com/questions/211637/how-do-i-get-x-to-start-without-a-monitor-attached-while-using-nvidia-drivers)
