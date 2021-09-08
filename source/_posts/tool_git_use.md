@@ -477,6 +477,18 @@ git config --global credential.helper store
 
 删除保存的用户名密码配置文件:`rm ~/.git-credentials`
 
+## 当前仓库信息
+
+``` shell
+remote=$(git remote -v | grep fetch | awk '{print $2}')
+branch=$(git symbolic-ref --short -q HEAD)
+tag=$(git log -1 --decorate=short --oneline|grep -Eo 'tag: (.*)[,)]+'|awk '{print $2}'|sed 's/)//g'|sed 's/,//g')
+commit=$(git rev-parse --short HEAD)
+mesg=$(git log -1 --pretty=format:%B)
+
+echo "$lib info: branch=$branch, tag=$tag, commit=$commit, mesg=$mesg"
+```
+
 ## 错误处理
 
 ### git clone
