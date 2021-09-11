@@ -32,14 +32,6 @@ comments: true
 {% endnote %}
 
 {% tabs First unique name %}
-<!-- tab 网站配置 -->
-
-* [hexo的next主题个性化教程：打造炫酷网站](https://blog.csdn.net/qq_33699981/article/details/72716951)
-* [DaoVoice](https://dashboard.daovoice.io/app/a28f1641/users?segment=all-users)
-* [小图标](https://fontawesome.com/icons?from=io)
-
-<!-- endtab -->
-
 <!-- tab 联系方式 -->
 
 - 邮箱：winddoing<at>sina.cn
@@ -61,6 +53,13 @@ comments: true
 
 <!-- endtab -->
 
+<!-- tab 网站配置 -->
+
+* [hexo的next主题个性化教程：打造炫酷网站](https://blog.csdn.net/qq_33699981/article/details/72716951)
+* [DaoVoice](https://dashboard.daovoice.io/app/a28f1641/users?segment=all-users)
+* [小图标](https://fontawesome.com/icons?from=io)
+
+<!-- endtab -->
 {% endtabs %}
 
 >**每日一言**:
