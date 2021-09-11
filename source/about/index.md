@@ -42,7 +42,7 @@ comments: true
 
 <!-- tab 联系方式 -->
 
-- 邮箱：winddoing@sina.cn
+- 邮箱：winddoing<at>sina.cn
 
 <!-- endtab -->
 
