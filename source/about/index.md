@@ -34,7 +34,8 @@ comments: true
 {% tabs First unique name %}
 <!-- tab 联系方式 -->
 
-- 邮箱：winddoing<at>sina.cn
+- 邮箱：winddoing￥sina.cn
+> 邮箱地址，`￥`使用`@`替代
 
 <!-- endtab -->
 
