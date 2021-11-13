@@ -21,9 +21,39 @@ date: 2017-07-10 23:07:24
 * Frame：帧，构成一个声音单元，Frame = Sample * channel, sample*channel/8 Byte。
 * Rate：又称Sample rate，采样率，即每秒的采样次数，针对帧而言。
 * Interleaved：交错模式，一种音频数据的记录方式，在交错模式下，数据以连续桢的形式存放，即首先记录完桢1的左声道样本和右声道样本（假设为立体声），再开始桢2的记录。而在非交错模式下，首先记录的是一个周期内所有桢的左声道样本，再记录右声道样本，数据是以连续通道的方式存储。多数情况下使用交错模式。
-* Period size：周期，每次硬件中断处理音频数据的帧数，对于音频设备的数据读写，以此为单位。
-* Buffer size：数据缓冲区大小，这里特指runtime的buffer size，而不是snd_pcm_hardware定义的buffer_bytes_max。
+* Period size：周期，每次硬件中断处理音频数据的帧数，对于音频设备的数据读写，以frame为单位。
+* Buffer size：数据缓冲区大小，这里特指runtime的buffer size，而不是snd_pcm_hardware定义的buffer_bytes_max。一般来说Buffer size = period_size * period_count，period_count相当于处理完一个buffer数据所需的硬件中断次数。单位也是frame
 * 码率: (编码速率), 码率 = 采样频率 * 位宽 * 声道个数
+
+
+```
+│                                                                   │
+├────────────────────────────── Buffer  ────────────────────────────┤
+│                                                                   │
+├───────────┬──────────┬───────────┬──────────┬──────────┬──────────┤
+│           │          │           │          │          │          │
+│   perid   │  perid   │  perid    │  perid   │  perid   │  perid   │   6 perids
+│           │          │           │          │          │          │
+└───────────┴──────────┼───────────┼──────────┴──────────┴──────────┘
+                       │           │
+            ┌──────────┘           └────────────────────┐
+            │                                           │
+            ├───────┬────────┬────────┬────────┬────────┤
+            │ frame │ frame  │ frame  │ frame  │ frame  │  perid = 5 frames
+            └───────┴────────┼────────┼────────┴────────┘
+                             │        │
+                          ┌──┘        └──┐
+                          │              │
+                          ├──────┬───────┤
+                          │ left │ right │  frame = 2 sample (2channel)
+                          └──────┴───────┘
+```
+> 一个buffer由若干个period组成, 一个period由若干个frame组成
+
+这个buffer中有6个period，每当DMA搬运完一个period的数据就会产生一次中断，因此搬运这个buffer中的数据将产生6次中断。
+ALSA为什么这样做？因为数据缓存区可能很大，一次传输可能会导致不可接受的延迟；为了解决这个问题，alsa把缓存区拆分成多个周期，以周期为单元传输数据
+
+
 
 ***采样率和实际的分频误差在5%左右***
 
@@ -52,7 +82,7 @@ date: 2017-07-10 23:07:24
 >A frame is equivalent of one sample being played, irrespective of the number of channels or the number of bits. e.g.
 >  * 1 frame of a Stereo 48khz 16bit PCM stream is 4 bytes.
 >  * 1 frame of a 5.1 48khz 16bit PCM stream is 12 bytes.
->A period is the number of frames in between each hardware interrupt. The poll() will return once a period.
+>`A period is the number of frames in between each hardware interrupt`. The poll() will return once a period.
 >The buffer is a ring buffer. The buffer size always has to be greater than one period size. Commonly this is 2*period size, but some hardware can do 8 periods per buffer. It is also possible for the buffer size to not be an integer multiple of the period size.
 >Now, if the hardware has been set to 48000Hz , 2 periods, of 1024 frames each, making a buffer size of 2048 frames. The hardware will interrupt 2 times per buffer. ALSA will endeavor to keep the buffer as full as possible. Once the first period of samples has
 >been played, the third period of samples is transfered into the space the first one occupied while the second period of samples is being played. (normal ring buffer behaviour).
@@ -63,11 +93,12 @@ date: 2017-07-10 23:07:24
 >Here is an alternative example for the above discussion.
 >Say we want to work with a stereo, 16-bit, 44.1 KHz stream, one-way (meaning, either in playback or in capture direction). Then we have:
 >  * 'stereo' = number of channels: 2
->  * 1 analog sample is represented with 16 bits = 2 bytes
->  * 1 frame represents 1 analog sample from all channels; here we have 2 channels, and so:
->      * 1 frame = (num_channels) * (1 sample in bytes) = (2 channels) * (2 bytes (16 bits) per sample) = 4 bytes (32 bits)
->  * To sustain 2x 44.1 KHz analog rate - the system must be capable of data transfer rate, in Bytes/sec:
->      * Bps_rate = (num_channels) * (1 sample in bytes) * (analog_rate) = (1 frame) * (analog_rate) = ( 2 channels ) * (2 bytes/sample) * (44100 samples/sec) = 2*2*44100 = 176400 Bytes/sec
+>  * `1 analog sample` is represented with 16 bits = 2 bytes
+>  * `1 frame` represents 1 analog sample from all channels; here we have 2 channels, and so:
+>      * `1 frame` = (num_channels) * (1 sample in bytes) = (2 channels) * (2 bytes (16 bits) per sample) = 4 bytes (32 bits)
+>  * To sustain 2x 44.1 KHz `analog rate` - the system must be capable of `data transfer rate`, in Bytes/sec:
+>      * `Bps_rate` = (num_channels) * (1 sample in bytes) * (analog_rate) = (1 frame) * (analog_rate) = ( 2 channels ) * (2 bytes/sample) * (44100 samples/sec) = 2*2*44100 = 176400 Bytes/sec
+> ![audio_pcm_bps_rate](/images/2021/11/audio_pcm_bps_rate.png)
 >Now, if ALSA would interrupt each second, asking for bytes - we'd need to have 176400 bytes ready for it (at end of each second), in order to sustain analog 16-bit stereo @ 44.1Khz.
 >  * If it would interrupt each half a second, correspondingly for the same stream we'd need 176400/2 = 88200 bytes ready, at each interrupt;
 >  * if the interrupt hits each 100 ms, we'd need to have 176400*(0.1/1) = 17640 bytes ready, at each interrupt.
@@ -99,7 +130,70 @@ date: 2017-07-10 23:07:24
 >On some hardwares, the irq is controlled on the basis of a timer.  In this case, the period is defined as the timer frequency to invoke an irq.
 >
 >来自：http://alsa-project.org/main/index.php/FramesPeriods
->
+
+- [[alsa-devel] Questions about writing a new ALSA driver for a very limitted device](https://mailman.alsa-project.org/pipermail/alsa-devel/2007-April/000474.html)
+
+
+
+
+### snd_pcm_lib_buffer_bytes(substream)与snd_pcm_lib_period_bytes(substream)
+
+在驱动中进行dma数据传输时，需要通过`snd_pcm_lib_buffer_bytes(substream)`获取传输数据的buffer大小和`snd_pcm_lib_period_bytes(substream)`每次dma传输的数据大小
+
+``` C
+/**                                                                                             
+ * snd_pcm_lib_buffer_bytes - Get the buffer size of the current PCM in bytes                   
+ * @substream: PCM substream                                                                    
+ */                                                                                             
+static inline size_t snd_pcm_lib_buffer_bytes(struct snd_pcm_substream *substream)              
+{                                                                                               
+    struct snd_pcm_runtime *runtime = substream->runtime;                                       
+    return frames_to_bytes(runtime, runtime->buffer_size);                                      
+}                                                                                               
+
+/**                                                                                             
+ * snd_pcm_lib_period_bytes - Get the period size of the current PCM in bytes                   
+ * @substream: PCM substream                                                                    
+ */                                                                                             
+static inline size_t snd_pcm_lib_period_bytes(struct snd_pcm_substream *substream)              
+{                                                                                               
+    struct snd_pcm_runtime *runtime = substream->runtime;                                       
+    return frames_to_bytes(runtime, runtime->period_size);                                      
+}                                                                                               
+```
+- period_size可以控制pcm中断的产生，也就是period_size大小的数据传输完需要一个dma中断。
+- buffer_size,period_size的计算？
+
+在驱动里，我们会设置
+
+```
+period_bytes_min = 1024 * 4 = 4096,
+period_bytes_max = 1024 *16,
+```
+alsa会根据上面的最大最小值算出一个合适的值作为runtime->period_size。
+
+在`sound/core/pcm_native.c`中的`snd_pcm_hw_constraints_init`函数实现了计算各种alsa定义的一些参数规则，其中包含了`buffer_size`， `period_size`
+
+``` C
+err = snd_pcm_hw_rule_add(runtime, 0, SNDRV_PCM_HW_PARAM_PERIOD_SIZE,                 
+              snd_pcm_hw_rule_div, NULL,                                              
+              SNDRV_PCM_HW_PARAM_BUFFER_SIZE, SNDRV_PCM_HW_PARAM_PERIODS, -1);        
+if (err < 0)                                                                          
+    return err;                                                                       
+err = snd_pcm_hw_rule_add(runtime, 0, SNDRV_PCM_HW_PARAM_PERIOD_SIZE,                 
+              snd_pcm_hw_rule_mulkdiv, (void*) 8,                                     
+              SNDRV_PCM_HW_PARAM_PERIOD_BYTES, SNDRV_PCM_HW_PARAM_FRAME_BITS, -1);    
+if (err < 0)                                                                          
+    return err;                                                                       
+err = snd_pcm_hw_rule_add(runtime, 0, SNDRV_PCM_HW_PARAM_PERIOD_SIZE,                 
+              snd_pcm_hw_rule_muldivk, (void*) 1000000,                               
+              SNDRV_PCM_HW_PARAM_PERIOD_TIME, SNDRV_PCM_HW_PARAM_RATE, -1);           
+if (err < 0)                                                                          
+    return err;                                                                       
+```
+
+参考： [Alsa period_size/periods/buffer_size计算逻辑](https://blog.csdn.net/u012769691/article/details/46727543)
+
 
 ## 音频处理软件
 

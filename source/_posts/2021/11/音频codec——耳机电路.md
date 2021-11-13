@@ -62,6 +62,10 @@ abbrlink: 86a98cff
 
 `HOOK`的作用是由上层负责，底层只需要确保上报了对应的`HOOK event`事件给上层应用
 
+## ALSA中耳机检测 —— ASoC jack detection
+
+https://www.kernel.org/doc/html/v4.16/sound/soc/jack.html
+
 ## 参考
 
 - [手机耳机接线图的工作原理，各种耳机插头接线图](http://www.elecfans.com/baike/waijiepeijian/erji/20190522940004.html)
