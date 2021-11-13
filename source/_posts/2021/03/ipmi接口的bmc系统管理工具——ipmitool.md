@@ -7,6 +7,7 @@ tags:
   - ipmitool
 categories:
   - 工具
+abbrlink: c41b411e
 ---
 
 `ipmitool`是一种可用在 Linux/Unix 系统下的基于命令行方式的 ipmi 平台管理工具。它支持 ipmi 1.5 和ipmi 2.0 规范（最新的规范为 ipmi 2.0）。利用它可以实现获取传感器的信息、显示系统日志内容、网络远程开关机等功能。其主要功能包括读取和显示传感器数据（SDR），显示System Evernt Log（SEL）的内容，显示打印Field Replaceable Unit（FRU）信息，`读取和设置BMC模块`的LAN配置，远程控制服务器主机的电源。

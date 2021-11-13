@@ -7,6 +7,7 @@ tags:
   - syscall
 categories:
   - 程序设计
+abbrlink: f04c402b
 ---
 
 `vsyscall`和`vDSO`段是用于加速Linux中某些系统调用的两种机制。

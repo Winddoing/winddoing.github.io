@@ -8,6 +8,7 @@ tags:
   - 音频
 categories:
   - 电子电路
+abbrlink: 86a98cff
 ---
 
 ![耳机接头](/images/2021/11/耳机接头.png)

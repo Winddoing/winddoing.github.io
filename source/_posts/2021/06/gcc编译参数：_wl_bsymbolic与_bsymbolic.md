@@ -7,6 +7,7 @@ tags:
   - bsymbolic
 categories:
   - 编译工具
+abbrlink: 2a74814
 ---
 
 在实际应用中，编译C++代码时使用了`-Wl,-Bsymbolic`参数编译后生成的动态库文件，在被加载使用时出现错误

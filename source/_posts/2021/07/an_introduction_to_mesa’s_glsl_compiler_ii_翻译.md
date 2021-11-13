@@ -1,13 +1,14 @@
 ---
-layout: "post"
-title: "[转]An introduction to Mesa’s GLSL compiler (II)[翻译]"
-date: "2021-07-20 19:34"
+layout: post
+title: '[转]An introduction to Mesa’s GLSL compiler (II)[翻译]'
+date: '2021-07-20 19:34'
 tags:
   - mesa
   - glsl
   - opengl
 categories:
   - 多媒体
+abbrlink: 1e9ef115
 ---
 
 原文： https://blogs.igalia.com/itoral/2015/03/06/an-introduction-to-mesas-glsl-compiler-ii/

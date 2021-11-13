@@ -8,6 +8,7 @@ tags:
   - kernel
 categories:
   - Linux内核
+abbrlink: 4a7ca2c
 ---
 
 CPU电源状态：`C-state`(CPU Power states）)

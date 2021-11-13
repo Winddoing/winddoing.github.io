@@ -7,6 +7,7 @@ tags:
   - wait
 categories:
   - 进程
+abbrlink: 647daf2a
 ---
 
 子进程退出状态

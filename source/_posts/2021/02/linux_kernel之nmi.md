@@ -7,6 +7,7 @@ tags:
   - nmi
 categories:
   - Linux内核
+abbrlink: 98e04b95
 ---
 
 `NMI`(non-maskable interrupt)，即非可屏蔽中断。即使在内核代码中设置了屏蔽所有中断的时候，NMI也是不可以被屏蔽的。根据Intel的Software Developer手册Volume 3，NMI可由以下两种方式触发：

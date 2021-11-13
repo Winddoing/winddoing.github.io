@@ -8,6 +8,7 @@ tags:
   - opengl
 categories:
   - 多媒体
+abbrlink: af8dbdc1
 ---
 
 原文：https://blogs.igalia.com/itoral/2015/03/03/an-introduction-to-mesas-glsl-compiler-i/
