@@ -8,6 +8,7 @@ tags:
   - 聚合
 categories:
   - 网络
+abbrlink: c9919005
 ---
 
 `bonding`是一个linux kernel的driver，加载了它以后，linux支持将多个物理网卡捆绑成一个虚拟的bond网卡

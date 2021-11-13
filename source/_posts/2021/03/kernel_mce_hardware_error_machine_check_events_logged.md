@@ -8,6 +8,7 @@ tags:
   - linux
 categories:
   - 系统服务
+abbrlink: 3ae1a27e
 ---
 
 ```

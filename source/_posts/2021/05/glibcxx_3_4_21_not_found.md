@@ -6,6 +6,7 @@ tags:
   - gcc
 categories:
   - 编译工具
+abbrlink: 851846f4
 ---
 
 ``` shell

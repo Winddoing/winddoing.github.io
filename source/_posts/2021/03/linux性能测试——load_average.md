@@ -1,13 +1,14 @@
 ---
-layout: "post"
-title: "linux性能测试——load average"
-date: "2021-03-16 09:52"
+layout: post
+title: linux性能测试——load average
+date: '2021-03-16 09:52'
 tags:
   - linux
   - cpu
 categories:
   - 工具
   - 性能测试
+abbrlink: 4d1d787a
 ---
 
 `uptime`和`top`等命令都可以看到`load average`指标，从左至右三个数字分别表示`1分钟`、`5分钟`、`15分钟`的load average：

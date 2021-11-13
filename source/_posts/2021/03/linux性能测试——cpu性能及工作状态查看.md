@@ -8,6 +8,7 @@ tags:
 categories:
   - 工具
   - 性能测试
+abbrlink: e3720616
 ---
 
 Linux下查看系统状态的一些命令`mpstat`、`vmstat`、`iostat`、`sar`、`top`、`pidstat`、`pstack`

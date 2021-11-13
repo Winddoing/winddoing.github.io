@@ -7,6 +7,7 @@ tags:
   - 网络
 categories:
   - 网络
+abbrlink: 53570e5e
 ---
 
 ![rdma_protocol](/images/2021/06/rdma_protocol.png)

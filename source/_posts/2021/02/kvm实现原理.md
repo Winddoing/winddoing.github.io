@@ -7,6 +7,7 @@ tags:
   - qemu
 categories:
   - 虚拟化
+abbrlink: 633d906
 ---
 
 KVM是一个基于Linux内核的虚拟机，它属于完全虚拟化范畴.

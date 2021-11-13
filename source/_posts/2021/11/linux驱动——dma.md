@@ -6,6 +6,7 @@ tags:
   - dma
 categories:
   - 设备驱动
+abbrlink: 2cf26afe
 ---
 
 `DMA`（Direct Memory Access），直接内存访问，这里的直接是和需要CPU参与的内存访问相对的概念。

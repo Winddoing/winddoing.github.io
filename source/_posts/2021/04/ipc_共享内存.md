@@ -8,6 +8,7 @@ tags:
   - 共享内存
 categories:
   - 程序设计
+abbrlink: a83ba476
 ---
 
 进程间通信的一种方式，多个进程共享一段内存，即“`共享内存`”。与其他的ipc方式（如：pipe，fifo，messages）相比少copy一次内存
