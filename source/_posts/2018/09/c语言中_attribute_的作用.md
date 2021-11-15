@@ -124,6 +124,15 @@ int  __attribute__((weak))  func(...)
 
 > weak属性只会在静态库(.o .a )中生效，动态库(.so)中不会生效。
 
+
+## 内存地址对齐
+
+```
+#define _ALIGH(x, align) (((x) + (align - 1)) & (~(align - 1)))
+
+d_p = (d_t *)_ALIGH((unsigned int)d , 64); //将地址d按64bit进行对其后赋值给d_p指针
+```
+
 ## 参考
 
 * [#define PACK_STRUCT _attribute_ ((_packed_))编译器按字独立分配](https://blog.csdn.net/wangzhaotongalex/article/details/22729215)
