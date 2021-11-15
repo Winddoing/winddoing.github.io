@@ -49,8 +49,8 @@ simple-audio-card,hp-det-gpio： 对连接耳机时发出信号的GPIO检测，�
 simple-audio-card,mic-det-gpio： 对连接麦克风时发出信号的GPIO检测
 simple-audio-card,widgets：主要指定音频非编解码器 DAPM 小部件。
                 每个条目都是DT中的一对字符串："template-wname", "user-supplied-wname"。
-                “template-wname”是模板小部件名称，目前包括："Microphone", "Line",
-                "Headphone" and "Speaker"。“user-supplied-wname”是用户指定的小部件名称。
+                “template-wname”是模板小部件名称，目前包括："Microphone", "Line","Headphone" and "Speaker"。
+                “user-supplied-wname”是用户指定的小部件名称。
 simple-audio-card,routing： 音频组件之间的连接列表。每个条目都是一对字符串，第一个是连接的接收器，第二个是连接的源。
 simple-audio-card,cpu {
       sound-dai: soc端的dai配置，i2s接口的配置；
