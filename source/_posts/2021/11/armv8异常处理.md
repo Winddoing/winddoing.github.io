@@ -173,6 +173,8 @@ Err:          0
 #
 ```
 
+GIC-V2中SPI中断不支持多核迁移，GIC-V3中SPI中断支持多核迁移
+
 ## GIC设备树
 
 > [Documentation/devicetree/bindings/interrupt-controller/arm,gic.yaml](https://elixir.bootlin.com/linux/v5.4.110/source/Documentation/devicetree/bindings/interrupt-controller/arm,gic.yaml)
