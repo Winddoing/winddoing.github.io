@@ -120,7 +120,7 @@ Dump of assembler code for function dwc_descriptor_complete:
    0xffffffc01040f6d0 <+12>:	stp	x21, x22, [sp, #32]
    0xffffffc01040f6d4 <+16>:	str	x23, [sp, #48]
    0xffffffc01040f6d8 <+20>:	xpaclri
-   0xffffffc01040f6dc <+24>:	mov	x19, x1     //第二个入参被转存到x19  <------------------ <6>
+   0xffffffc01040f6dc <+24>:	mov	x19, x1     //第二个入参被转存到x19  <------------------ [6]
    0xffffffc01040f6e0 <+28>:	mov	x20, x0
    0xffffffc01040f6e4 <+32>:	and	w23, w2, #0xff
    0xffffffc01040f6e8 <+36>:	mov	x0, x30
@@ -133,7 +133,7 @@ Dump of assembler code for function dwc_descriptor_complete:
    0xffffffc01040f704 <+64>:	mov	x0, x22
    0xffffffc01040f708 <+68>:	bl	0xffffffc01093b10c <_raw_spin_lock_irqsave>
    0xffffffc01040f70c <+72>:	mov	x21, x0
-   0xffffffc01040f710 <+76>:	ldr	w0, [x19, #64]   // 第二个入参的第一次使用 ( dma_cookie_complete(txd);) <------- <7>
+   0xffffffc01040f710 <+76>:	ldr	w0, [x19, #64]   // 第二个入参的第一次使用 ( dma_cookie_complete(txd);) <------- [7]
    0xffffffc01040f714 <+80>:	add	x3, x19, #0x40   //x3=x19+0x40, 0xffffffc010ed6460+0x40=0xffffffc010ed64a0
    0xffffffc01040f718 <+84>:	cmp	w0, #0x0         
    0xffffffc01040f71c <+88>:	b.gt	0xffffffc01040f724 <dwc_descriptor_complete+96>  //判断w0大于0时，进行跳转
@@ -148,12 +148,12 @@ Dump of assembler code for function dwc_descriptor_complete:
    0xffffffc01040f740 <+124>:	str	x0, [sp, #88]
    0xffffffc01040f744 <+128>:	ldr	x0, [x3, #56]
    0xffffffc01040f748 <+132>:	str	x0, [sp, #96]
-   0xffffffc01040f74c <+136>:	mov	x0, x19          //将x19赋值到x0    <---------------- <5>
-   0xffffffc01040f750 <+140>:	ldr	x2, [x0, #48]!   //x2=*(x0 + 0x30),读取内存地址的值赋值x2  <-------------- <4>
-   0xffffffc01040f754 <+144>:	sub	x2, x2, #0x20    //x2第一次处理，x2减0x20 （&desc->tx_list） <------------- <3>
+   0xffffffc01040f74c <+136>:	mov	x0, x19          //将x19赋值到x0    <---------------- [5]
+   0xffffffc01040f750 <+140>:	ldr	x2, [x0, #48]!   //x2=*(x0 + 0x30),读取内存地址的值赋值x2  <-------------- [4]
+   0xffffffc01040f754 <+144>:	sub	x2, x2, #0x20    //x2第一次处理，x2减0x20 （&desc->tx_list） <------------- [3]
    0xffffffc01040f758 <+148>:	add	x1, x2, #0x20    //x1是在x2基础上又加了0x20,因此变成了全F
    0xffffffc01040f75c <+152>:	cmp	x1, x0
-   0xffffffc01040f760 <+156>:	b.ne	0xffffffc01040f7c8 <dwc_descriptor_complete+260>  // b.any x1不对于x0时，跳转执行 <----------- <2>
+   0xffffffc01040f760 <+156>:	b.ne	0xffffffc01040f7c8 <dwc_descriptor_complete+260>  // b.any x1不对于x0时，跳转执行 <----------- [2]
    0xffffffc01040f764 <+160>:	ldr	w0, [x3, #4]
    0xffffffc01040f768 <+164>:	mov	x1, x19
 
@@ -165,27 +165,27 @@ Dump of assembler code for function dwc_descriptor_complete:
    0xffffffc01040f7bc <+248>:	stp	xzr, xzr, [sp, #80]
    0xffffffc01040f7c0 <+252>:	str	xzr, [sp, #96]
    0xffffffc01040f7c4 <+256>:	b	0xffffffc01040f74c <dwc_descriptor_complete+136>
-   0xffffffc01040f7c8 <+260>:	ldr	w1, [x2, #68]  // 出错指令 w1=*(x2 + 0x44) <----------- <1>
+   0xffffffc01040f7c8 <+260>:	ldr	w1, [x2, #68]  // 出错指令 w1=*(x2 + 0x44) <----------- [1]
    0xffffffc01040f7cc <+264>:	orr	w1, w1, #0x2
    0xffffffc01040f7d0 <+268>:	str	w1, [x2, #68]
    0xffffffc01040f7d4 <+272>:	ldr	x2, [x2, #32]
    ....
 ```
 
-- <1>: 此处为具体出错指令，意思是将寄存器X2中的值加上68后作为内存地址，并将该内存地址的数据取出，存到w1寄存器中。非法内存地址也就是X2加68（0x44）得到的，根据crash dump出的寄存器值此时`X2=ffffffffffffffdf`，0xffffffffffffffdf+0x44=`0x0000000000000023`刚好是非法内存地址，也就是说出错的因为`x2`寄存器的值保存错了。
-- <2>: 此处跳转到<1>处执行时出错，也就是在此之前`x2`寄存器的赋值出错了
-- <3>: `x2`是由`x2`减去0x20后得到的，也就是原来的`x2`应该是0xffffffffffffffdf+0x20=0xFFFFFFFFFFFFFFFF
-- <4>: `x2`（FFFFFFFFFFFFFFFF）是通过`x0`寄存器的值加48后的这个内存地址中读取出的。
-- <5>: `x0`来自于`x19`(ffffffc010ed6460)
-- <6>: `x19`来自于`x1`,而x1是`dwc_descriptor_complete`接口函数的第二个参数
+- [1]: 此处为具体出错指令，意思是将寄存器X2中的值加上68后作为内存地址，并将该内存地址的数据取出，存到w1寄存器中。非法内存地址也就是X2加68（0x44）得到的，根据crash dump出的寄存器值此时`X2=ffffffffffffffdf`，0xffffffffffffffdf+0x44=`0x0000000000000023`刚好是非法内存地址，也就是说出错的因为`x2`寄存器的值保存错了。
+- [2]: 此处跳转到[1]处执行时出错，也就是在此之前`x2`寄存器的赋值出错了
+- [3]: `x2`是由`x2`减去0x20后得到的，也就是原来的`x2`应该是0xffffffffffffffdf+0x20=0xFFFFFFFFFFFFFFFF
+- [4]: `x2`（FFFFFFFFFFFFFFFF）是通过`x0`寄存器的值加48后的这个内存地址中读取出的。
+- [5]: `x0`来自于`x19`(ffffffc010ed6460)
+- [6]: `x19`来自于`x1`,而x1是`dwc_descriptor_complete`接口函数的第二个参数
 
 以上流程中表明`x2`寄存器出现`FFFFFFFFFFFFFFFF`的可能性存在两种：
 
-1. dwc_descriptor_complete接口函数传参时，第二个参数是个错误的指针。这样就会使`x0`寄存器错误导致在<4>时，通过内存地址读取数据赋值该`x2`时，出现全F的值（一个错误的指针指向了错误的内存区域所致）。
-   - 由于在<7>处对第二个参数已经使用过（读写），因此可以证明传入的第二个参数指针是正确的。如果错误应该会在<7>处直接报错。
-2. dwc_descriptor_complete接口函数传参时，第二个参数是正确的。但是在<4>时，通过内存地址读取数据赋值给`x2`时，原来正确的数据被别的程序覆盖掉了（踩内存）
+1. dwc_descriptor_complete接口函数传参时，第二个参数是个错误的指针。这样就会使`x0`寄存器错误导致在[4]时，通过内存地址读取数据赋值该`x2`时，出现全F的值（一个错误的指针指向了错误的内存区域所致）。
+   - 由于在[7]处对第二个参数已经使用过（读写），因此可以证明传入的第二个参数指针是正确的。如果错误应该会在[7]处直接报错。
+2. dwc_descriptor_complete接口函数传参时，第二个参数是正确的。但是在[4]时，通过内存地址读取数据赋值给`x2`时，原来正确的数据被别的程序覆盖掉了（踩内存）
 
-** 通过以上流程的分析我认为是在<4>处，读取相关内存地址中的数据时，原有的正确数据被错误数据覆盖 **
+** 通过以上流程的分析我认为是在[4]处，读取相关内存地址中的数据时，原有的正确数据被错误数据覆盖 **
 
 C源码：
 ``` C
@@ -224,7 +224,7 @@ C源码：
 300
 ```
 
-通过对以上汇编代码的分析出错的原因主要是`<4>`,读取内存数据（ldr	x2, [x0, #48]!）时出错。该指令对应的C代码实现主要在`list_for_each_entry(child, &desc->tx_list, desc_node)`接口
+通过对以上汇编代码的分析出错的原因主要是`[4]`,读取内存数据（ldr	x2, [x0, #48]!）时出错。该指令对应的C代码实现主要在`list_for_each_entry(child, &desc->tx_list, desc_node)`接口
 
 这样结合之前分析的出错原因，可能是别的程序写内存时覆盖了tx_list链表数据（踩内存）；不过还存在一种可能就是tx_list的操作出错了，由dma驱动代码本身所造成的bug。
 
