@@ -128,9 +128,9 @@ int  __attribute__((weak))  func(...)
 ## 内存地址对齐
 
 ```
-#define _ALIGH(x, align) (((x) + (align - 1)) & (~(align - 1)))
+#define _ALIGN(x, align) (((x) + (align - 1)) & (~(align - 1)))
 
-d_p = (d_t *)_ALIGH((unsigned int)d , 64); //将地址d按64bit进行对其后赋值给d_p指针
+d_p = (d_t *)_ALIGN((unsigned int)d , 64); //将地址d按64bit进行对其后赋值给d_p指针
 ```
 
 ## 参考
