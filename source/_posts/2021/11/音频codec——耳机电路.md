@@ -18,7 +18,9 @@ abbrlink: 86a98cff
 ## 耳机接口原理图
 
 ![耳机接口原理图](/images/2021/11/耳机接口原理图.png)
-> 美标耳机插座
+> 该原理图为`国标`耳机插座
+>
+> 四段式耳机插头: `第1节——1pin`：接地，`第2节——2、5pin`：接MIC，`第3节——3、6pin`：接右声道，`第4节——4、7pin`：接左声道
 
 - `MIC_IN1P`： Single-end input for microphone 1（麦克风单端输入 1）
 - `MICBIAS1`： Bias voltage output for microphone（麦克风偏置电压输出）
