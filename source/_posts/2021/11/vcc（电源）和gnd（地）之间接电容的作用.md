@@ -7,6 +7,7 @@ tags:
   - 电容
 categories:
   - 电子电路
+abbrlink: 5a220639
 ---
 
 ![VCC_and_GND](/images/2021/11/vcc_and_gnd.png)

@@ -1,13 +1,14 @@
 ---
-layout: "post"
-title: "Audio驱动——设备树"
-date: "2021-11-13 15:44"
+layout: post
+title: Audio驱动——设备树
+date: '2021-11-13 15:44'
 categories: 设备驱动
 tags:
   - audio
   - alsa
   - 驱动
   - 设备树
+abbrlink: a482f327
 ---
 
 ```

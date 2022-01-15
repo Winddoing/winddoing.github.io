@@ -8,6 +8,7 @@ tags:
   - 死锁
 categories:
   - Linux内核
+abbrlink: 3099dbdc
 ---
 
 ``` shell
