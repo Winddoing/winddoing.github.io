@@ -7,6 +7,7 @@ tags:
   - mmu
 categories:
   - 计算机系统
+abbrlink: 53c48127
 ---
 
 CPU通过地址来访问内存中的单元，地址有`虚拟地址`和`物理地址`之分，如果CPU没有`MMU`（Memory Management Unit，内存管理单元），或者有MMU但没有启用，CPU核在取指令或访问内存时发出的地址将直接传到CPU芯片的外部地址引脚上，直接被内存芯片（以下称为物理内存，以便与虚拟内存区分）接收，这称为物理地址（Physical Address，以下简称PA）

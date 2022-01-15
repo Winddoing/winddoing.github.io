@@ -8,6 +8,7 @@ tags:
   - 音频
 categories:
   - 设备驱动
+abbrlink: 1e1fc3f4
 ---
 
 DAPM(Dynamic Audio Power Management):动态音频电源管理旨在允许便携式Linux设备始终使用音频子系统内的最低电量。它独立于其他内核PM，因此可以轻松与其他PM系统共存。

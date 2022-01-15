@@ -173,7 +173,8 @@
                 /* xhr.open('GET', './data.json?t=' + +new Date(), true); */
                 /* xhr.open('GET', 'https://coding.net/u/Winddoing/p/photos-data/git/raw/master/data.json?t=' + +new Date(), true); */
                 /* coding 中的photos仓库需要部署*/
-                xhr.open('GET', 'https://qekve9.coding-pages.com/data.json?t=' + +new Date(), true);
+                /* xhr.open('GET', 'https://qekve9.coding-pages.com/data.json?t=' + +new Date(), true); */
+                xhr.open('GET', 'https://winddoing.github.io/photos-data/data.json?t=' + +new Date(), true);
 
                 xhr.onload = function() {
                     if (this.status >= 200 && this.status < 300) {
