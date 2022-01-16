@@ -5,7 +5,7 @@ comments: false
 ---
 
 # **Windows**(64Bit)
-> 存放地址：[Coding](https://winddoing.coding.net/public/blog/tools/git/files)
+> 存放地址：[https://winddoing.coding.net/public/blog/tools/git/files](https://winddoing.coding.net/public/blog/tools/git/files)
 
 
 |       软件名称        | 下载地址                                                                                             | 备注                         |
