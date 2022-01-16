@@ -8,7 +8,7 @@ comments: false
 ## ARM
 * [Programmer’s Guide for ARMv8-A](/downloads/arm/DEN0024A_v8_architecture_PG.pdf)
 * [ARM Technical Support Knowledge Articles](http://infocenter.arm.com/help/basic/help.jsp?topic=/com.arm.doc.dui0204ic/CJAJIIGG.html) --- ARM相关手册
-* **[ARMv8®体系结构参考手册](https://gitee.com/winddoing/docs/raw/master/arch/arm/DDI0487D_a_armv8_arm.pdf)** --- DDI0487D_a_armv8_arm.pdf
+* **[ARMv8®体系结构参考手册](https://winddoing.coding.net/p/blog/d/docs/git/raw/master/arch/arm/DDI0487D_a_armv8_arm.pdf)** --- DDI0487D_a_armv8_arm.pdf
 
 ## uboot
 * [uboot启动流程.pdf](/downloads/uboot/uboot启动流程.pdf)
@@ -25,6 +25,11 @@ comments: false
 * [Linux 4.0 IO协议栈框架图](/downloads/linux/Linux-storage-stack-diagram_v4.0.png)【[html](https://www.thomas-krenn.com/de/wikiDE/images/b/ba/Linux-storage-stack-diagram_v4.0.png)】
 * [Mastering the DMA and IOMMU APIs](/downloads/linux/DMA_and_IOMMU.pdf)
 * [内存---jemalloc](linux/jemalloc.pdf)
+
+
+## 内存管理
+- [DDR内存讲解.pdf](https://winddoing.coding.net/p/blog/d/docs/git/raw/master/mmu/DDR内存讲解.pdf)
+- [内存的原理和时序(SDRAM、DDR、DDR-Ⅱ、Rambus_DRAM).pdf](https://winddoing.coding.net/p/blog/d/docs/git/raw/master/mmu/内存的原理和时序.pdf)
 
 ## 驱动
 * [belloni-alsa-asoc](/downloads/driver/alsa/belloni-alsa-asoc_0.pdf)
@@ -69,11 +74,10 @@ comments: false
 * [JPEG-图像压缩编码](/downloads/jpeg/itu-t81.pdf)
 
 ## 云计算
-* [Nutanix圣经](https://gitee.com/winddoing/docs/raw/master/clouds/nutanix/nutanix-bible-cn.pdf)
-* [Libvirt Qemu KVM 教程大全](https://gitee.com/winddoing/docs/raw/master/libvirt/LibvirtQemuKVM.pdf)<sup>[pptx](files.cnblogs.com/popsuper1982/LibvirtQemuKVM.pptx)</sup>
+* [Nutanix圣经](https://winddoing.coding.net/p/blog/d/docs/git/raw/master/clouds/nutanix/nutanix-bible-cn.pdf)
+* [Libvirt Qemu KVM 教程大全](https://winddoing.coding.net/p/blog/d/docs/git/raw/master/libvirt/LibvirtQemuKVM.pdf)<sup>[pptx](files.cnblogs.com/popsuper1982/LibvirtQemuKVM.pptx)</sup>
 
 ## 应用工具
-
 * [DisplayX显示器测试](tools/exe/DisplayX显示器测试.exe)
 
 
