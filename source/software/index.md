@@ -7,7 +7,6 @@ comments: false
 # **Windows**(64Bit)
 > 存放地址：[Coding](https://winddoing.coding.net/public/blog/tools/git/files)
 
-https://winddoing.coding.net/p/blog/d/tools/git/raw/master/BusHound%2Bv6.0.1.7z
 
 |       软件名称        | 下载地址                                                                                             | 备注                         |
 |:---------------------:|:-----------------------------------------------------------------------------------------------------|:-----------------------------|
