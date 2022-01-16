@@ -10,7 +10,7 @@ PWD=`pwd`
 
 DIR="$PWD/resource"
 SRC_DIR="tools docs"
-URL="https://gitee.com/winddoing"
+URL="https://e.coding.net/Winddoing/blog/"
 
 if [ ! -d $DIR ]; then
 	mkdir $DIR
