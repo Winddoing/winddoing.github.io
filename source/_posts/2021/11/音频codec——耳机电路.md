@@ -24,6 +24,7 @@ abbrlink: 86a98cff
 
 - `MIC_IN1P`： Single-end input for microphone 1（麦克风单端输入 1）
 - `MICBIAS1`： Bias voltage output for microphone（麦克风偏置电压输出）
+- 耳机插座说明，原理图中带箭头的表示开关，默认耳机没有插入时处理连接状态（比如pin2和pin5），但是一旦耳机插入后会将其断开。
 
 ## Single-ended输入模式
 
