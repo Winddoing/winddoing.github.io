@@ -82,6 +82,13 @@ abbrlink: 774c4289
 ```
 > 该问题初步分析是进行DMA传输时，可能将函数调用栈信息冲掉所致
 
+## dump信息说明
+
+- `pc`：（Program Counter）pc指针，记录当前执行哪一条指令；存储当前CPU正在执行指令的地址
+- `lr`：（Link Register）`x30`寄存器，保存函数返回地址
+- `sp`：（Stack Pointer）栈指针
+- `fp`：（Frame Pointer）`x29`寄存器
+
 ## 根据dump出的函数调用定位具体出错的代码
 
 最终出错代码
