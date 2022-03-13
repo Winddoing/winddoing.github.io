@@ -1,12 +1,13 @@
 ---
-layout: "post"
+layout: post
 title: ASOC之DAPM
 categories: 设备驱动
 tags:
   - audio
   - alsa
   - dapm
-date: "2022-02-10 19:52"
+date: '2022-02-10 19:52'
+abbrlink: 53bf4a8e
 ---
 
 动态音频电源管理 (DAPM-Dynamic Audio Power Management) 旨在让便携式Linux设备始终使用音频子系统内的最低电量。 它独立于其他内核PM，因此可以轻松地与其他PM系统共存。
