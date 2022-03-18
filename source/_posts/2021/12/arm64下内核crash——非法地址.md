@@ -284,6 +284,73 @@ do_page_fault
     See ISS encoding for an exception from a Data Abort.
 ```
 
+## gdb调试vmlinux技巧
+
+### 查看特定位置的代码
+
+```
+(gdb) list * [函数名]或[函数名+函数内偏移]
+```
+
+命令： `list`或`l` 列出指定的函数或行
+格式：
+```
+list [FUNCTION/*ADDRESS]
+```
+- `LINENUM`，在当前文件中围绕该行列出，
+- `FILE:LINENUM`，列出该文件中的该行，
+- `FUNCTION`，列出该函数的开头，
+- `FILE:FUNCTION`，用于区分同名的静态函数。
+- `*ADDRESS`，在包含该地址的行周围列出。
+
+### 查看特定函数的汇编实现
+
+```
+disassemble [函数名]
+```
+
+命令： `disassemble` 反汇编内存地址部分（也可以用函数名）
+格式：
+```
+disassemble[/m|/r|/s] START [, END]
+```
+- `/m`: 被弃用了推荐使用`/s`
+- `/r`: 包含十六进制的原始指令。
+- `/s`: 包括源代码行（如果可用）。 在此模式下，输出按PC地址顺序显示，并显示所有相关源文件的文件名和内容。
+
+### 查看特定地址信息
+
+```
+(gdb) x [内存地址]
+```
+
+命令：`x` 查看内存地址中的值
+格式：
+```
+x /<n/f/u>  <addr>
+```
+- `n` 是正整数，表示需要显示的内存单元的个数，即从当前地址向后显示n个内存单元的内容，一个内存单元的大小由第三个参数u定义。
+- `f` 表示addr指向的内存内容的输出格式，s对应输出字符串，此处需特别注意输出整型数据的格式：
+- `x` 按十六进制格式显示变量。
+- `d` 按十进制格式显示变量。
+- `u` 按十六进制格式显示无符号整型。
+- `o` 按八进制格式显示变量。
+- `t` 按二进制格式显示变量。
+- `a` 按十六进制格式显示变量。
+- `c` 按字符格式显示变量。
+- `f` 按浮点数格式显示变量。
+- `i` instruction以汇编指令显示。
+- `u`:就是指以多少个字节作为一个内存单元-unit,默认为4。当然u还可以用被一些字符表示，如b=1 byte, h=2 bytes,w=4 bytes,g=8 bytes.
+- `<addr>` 表示内存地址。
+
+```
+(gdb) x 0xffffffc01041b1cc  #当前地址数据，表示机器码
+0xffffffc01041b1cc <dwc_desc_get+108>:	0xf0ffffe0
+
+(gdb) x /i 0xffffffc01041b1cc #将机器码以汇编代码形式输出
+0xffffffc01041b1cc <dwc_desc_get+108>:	adrp	x0, 0xffffffc01041a000 <dmatest_func+1252>
+```
+
 
 ## 参考
 
