@@ -114,3 +114,4 @@ comments: true
 * [docs.GL](http://docs.gl/) —— OpenGL API Documentation
 * [ARMv8 A64 Quick Reference](https://courses.cs.washington.edu/courses/cse469/20wi/arm64.pdf) —— ARM64汇编指令
 * [Audio Samples](https://docs.espressif.com/projects/esp-adf/en/latest/design-guide/audio-samples.html) —— 音频测试文件下载
+* [Latest10](https://latest10.win/) —— 获取最新的系统镜像win10、win11
