@@ -243,7 +243,8 @@ links_settings:
 
 links:
   #Title: http://example.com/
-  嵌入式相关: https://winddoing.gitbooks.io/embedded_notes/content/
+  #嵌入式相关: https://winddoing.gitbooks.io/embedded_notes/content/
+  嵌入式相关: https://winddoing.gitbook.io/embedded_linux_notes/
   CSDN: http://blog.csdn.net/sdreamq
   蜗窝科技: http://www.wowotech.net/
   xiongxianze: https://blog.csdn.net/xiongxianze
