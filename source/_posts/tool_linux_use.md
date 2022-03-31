@@ -194,8 +194,17 @@ sudo apt-get install sqlitebrowser
 - https://nitroshare.net/
 
 
-## Alt+Tab不跨工作区
+## ubuntu工作区配置
+
+### Alt+Tab不跨工作区
 
 ``` shell
 gsettings set org.gnome.shell.app-switcher current-workspace-only true
 ```
+
+### Ubuntu Dock不跨工作区
+
+``` shell
+gsettings set org.gnome.shell.extensions.dash-to-dock isolate-workspaces true
+```
+> https://askubuntu.com/questions/992558/how-can-i-configure-the-ubuntu-dock-to-show-windows-only-from-the-current-worksp

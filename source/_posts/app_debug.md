@@ -462,6 +462,12 @@ Restarting Visual Studio Code may be required to apply color and file icon theme
 }
 ```
 
+## gdb-dashboard
+
+> https://github.com/cyrus-and/gdb-dashboard
+
+![gdb-dashboard Screenshot](https://raw.githubusercontent.com/wiki/cyrus-and/gdb-dashboard/Screenshot.png)
+
 ## 参考
 
 * [Visual Studio Code （VSCode） 之 C/C++ 调试配置详解](https://blog.csdn.net/zcshoucsdn/article/details/60466707)
