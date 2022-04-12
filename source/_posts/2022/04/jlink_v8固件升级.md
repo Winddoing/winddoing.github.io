@@ -15,13 +15,14 @@ categories:
 <!--more-->
 
 > 丢失固件的表现：Jlink的指示灯不亮
+> **在linux下使用Jlink时，遇到提示固件升级的情况，建议不进行升级，因为Linux系统下由于USB相关驱动的问题，可能导致升级失败，原固件丢失变“砖头”**
 
 ## 我的Jlink v8
 
 ![jlink_v8](/images/2022/04/jlink_v8.jpg)
 
 - 主芯片：`AT91SAM7S64`
-- ERASE: 查处旧的固件
+- ERASE: 删除旧的固件
 - TST: 使其进入可编程模式
 
 
