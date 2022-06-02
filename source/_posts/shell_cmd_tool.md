@@ -425,16 +425,17 @@ do
 done
 ```
 
-* 串口输出增加时间戳：
+### 串口输出增加时间戳：
 ```
 Ctrl + a ; n
 ```
 
-* 串口打印内存信息：
+### 串口打印内存信息：
 ```
 Ctrl + a; f; m
 ```
 >`Ctrl + a; f`(send break)进行发送命令，`m`查看当前内存状态的命令
+> 类似与：`echo m > /proc/sysrq-trigger `
 
 | break signal | |
 | :----------: | :----: |
@@ -501,6 +502,25 @@ static struct sysrq_key_op *sysrq_key_table[36] = {
 	&sysrq_ftrace_dump_op,		/* z */
 };
  ```
+
+#### enable the magic SysRq key
+
+> https://www.kernel.org/doc/html/latest/admin-guide/sysrq.html
+
+配置内核时，您需要对'Magic Sysrq键（CONFIG_MAGIC_SYSRQ=y)。在运行使用SYSRQ的内核时，`/proc/sys/kernel/sysrq`控制通过SYSRQ键调用允许的函数。该文件中的默认值由CONFIG_MAGIC_SYSRQ_DEFAULT_ENABLE设置，该值默认为1。
+
+`/proc/proc/sys/kernel/sysrq`中可能值的列表：
+- 0 - disable sysrq completely
+- 1 - enable all functions of sysrq
+
+* 参考配置
+
+```
+CONFIG_MAGIC_SYSRQ=y
+CONFIG_MAGIC_SYSRQ_DEFAULT_ENABLE=0x1
+CONFIG_MAGIC_SYSRQ_SERIAL=y
+```
+
 
 ## sshfs
 
