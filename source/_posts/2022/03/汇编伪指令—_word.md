@@ -7,6 +7,7 @@ tags:
   - 汇编
 categories:
   - 计算机系统
+abbrlink: 16d994f4
 ---
 
 ```
