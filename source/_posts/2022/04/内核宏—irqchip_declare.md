@@ -8,6 +8,7 @@ tags:
   - linux
 categories:
   - Linux内核
+abbrlink: c27adb68
 ---
 
 ``` C
