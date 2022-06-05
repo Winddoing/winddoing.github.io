@@ -1,54 +1,36 @@
 // Menu
 // --------------------------------------------------
-.site-brand-container {
-  flex-shrink: 0;
-}
-
-.site-nav-toggle {
-  float: right;
-  position: static;
-  top: 10px;
-}
-
 .site-nav {
   flex-grow: 1;
 
   +mobile() {
-    transform: translateY(10px);
+    padding: 0 10px 0;
   }
 }
 
-.menu-item-active a {
-  background: $gray-lighter;
+.main-menu {
+  +mobile() {
+    padding-top: 10px;
+  }
 }
 
 .menu {
-  margin: 0;
-
-  +mobile() {
-    margin: 10px 0;
-    padding: 0;
-  }
+  padding: 0;
 
   .menu-item {
     margin: 0;
 
     +mobile() {
-      display: block;
       margin-top: 5px;
     }
 
-    a, span.exturl {
+    a {
       border-radius: 2px;
       padding: 0 10px;
       transition-property: background;
 
       +mobile() {
         text-align: left;
-      }
-
-      &:hover {
-        @extend .menu-item-active a;
       }
     }
 

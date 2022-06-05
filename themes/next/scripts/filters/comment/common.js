@@ -1,7 +1,7 @@
 'use strict';
 
 function capitalize(input) {
-  return input.toString().charAt(0).toUpperCase() + input.toString().substr(1);
+  return input.toString().charAt(0).toUpperCase() + input.toString().substring(1);
 }
 
 module.exports = {
@@ -11,7 +11,7 @@ module.exports = {
     }
     return `
       <span class="post-meta-item-icon">
-        <i class="fa fa-${icon}"></i>
+        <i class="${icon}"></i>
       </span>
       {%- set post_meta_comment = __('post.comments.${key}') %}
       {%- if post_meta_comment == 'post.comments.${key}' %}

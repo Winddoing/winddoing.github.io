@@ -4,7 +4,7 @@ date: 2016-08-18 23:07:24
 comments: true
 ---
 
-{% centerquote %} *** 涸辙遗鲋，旦暮成枯；人而无志，与彼何殊 *** {% endcenterquote %}
+{% centerquote %} ***涸辙遗鲋，旦暮成枯；人而无志，与彼何殊*** {% endcenterquote %}
 
 {% centerquote %} 自由之地，书我所想，记我所需 {% endcenterquote %}
 
@@ -21,6 +21,7 @@ comments: true
 * 2018.09: 添加[CNZZ统计](http://www.cnzz.com/stat/website.php?web_id=1254703532)
 * 2019.11: 重写`Travic_ci`自动构建脚本，升级`hexo`与`nodejs`等，为缩短自动构建时间和部分构建错误。同时将网站镜像备份到[https://winddoing.gitee.io](https://winddoing.gitee.io)
 * 2020.01: 升级主题`next v7.7.0`, 为了提高网站的加载速度和构建速度。
+* 2022.06: 升级主题`next v8.12.1`, 解决加载空白页的问题， jsdelivr DNS加速器关闭。
 * 至今依旧： ***使用，简单方便，升级主要是当时博客出现问题。***
 
 其他： {% button ../books,阅读,book fa-fw,books%} {% button ../ana,ANA,book fa-fw,books%} {% button ../top,阅读排列,line-chart fa-fw,books%} {% button ../software,常用软件,cogs fa-fw,books%} {% button ../downloads,下载,download fa-fw,books%}
@@ -62,24 +63,3 @@ comments: true
 
 <!-- endtab -->
 {% endtabs %}
-
->**每日一言**:
-<span id="hitokoto" style="margin-left:7px;"> :D 获取中一言...</span>
-<p align="right" id="afrom"></p>
-<script src="https://cdn.jsdelivr.net/npm/bluebird@3/js/browser/bluebird.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/whatwg-fetch@2.0.3/fetch.min.js"></script>
-<script>
-    fetch('https://v1.hitokoto.cn/?c=d&c=e&c=i&c=k')
-    .then(function (res){
-        return res.json();
-    })
-    .then(function (data) {
-        var hitokoto = document.getElementById('hitokoto');
-        var afrom = document.getElementById('afrom');
-        hitokoto.innerText = data.hitokoto;
-        afrom.innerText =  '——【' + data.from + ' ' + data.from_who + '】';
-    })
-    .catch(function (err) {
-        console.error(err);
-    })
-</script>

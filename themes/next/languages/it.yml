@@ -1,4 +1,5 @@
 ---
+name: Italiano
 title:
   archive: Archivio
   category: Categoria
@@ -24,7 +25,6 @@ post:
   modified: Post modificato
   edit: Edit this post
   in: In
-  more: espandi
   read_more: Leggi di più
   untitled: Senza titolo
   sticky: Sticky
@@ -33,11 +33,12 @@ post:
   copyright:
     author: Autore
     link: Link
+    post_author: Written by
+    post_link: This article originally appeared on
     license_title: Copyright
     license_content: "Tutti gli articoli in questo sito sono sotto licenza %s salvo disposizione contraria."
 footer:
   powered: "Powered by %s"
-  theme: Tema
   total_views: Total Views
   total_visitors: Total Visitors
 counter:
@@ -59,6 +60,9 @@ state:
   categories: categorie
 search:
   placeholder: Cerca...
+  empty: "We didn't find any results for the search: %s"
+  hits_time: "%s results found in %s ms"
+  hits: "%s results found"
 cheers:
   um: Mh..
   ok: OK
@@ -75,11 +79,16 @@ reward:
   donate: Dona
   wechatpay: WeChat Pay
   alipay: Alipay
+  paypal: PayPal
   bitcoin: Bitcoin
+follow_me:
+  welcome: Welcome to my other publishing channels
 accessibility:
   nav_toggle: Toggle navigation bar
   prev_page: Pagina precedente
   next_page: Pagina successiva
+  back_to_top: Back to top
+  select_lang: Select language
 symbols_count_time:
   count: Symbols count in article
   count_total: Symbols count total
