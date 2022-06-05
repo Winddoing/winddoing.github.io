@@ -2,7 +2,7 @@ dist: focal
 language: node_js
 
 node_js:
-    - "10"  # nodejs的版本
+    - "14"  # nodejs的版本
 branches:
     only:
         - web_source  # 设置自动化部署的源码分支

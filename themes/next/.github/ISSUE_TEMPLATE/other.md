@@ -1,23 +1,22 @@
 ---
 name: Other
-about: Not a question, feature request or bug report
+about: Not a feature request or bug report
 title: ''
-labels: ''
+labels: Question
 assignees: ''
 
 ---
 
-If you delete this template, we may close your issue without conducting an investigation.
-如果您删除此模版，我们可能会在不进行调查的情况下关闭您的 Issue。
-
-Please check if your Issue fulfills the following requirements. This will guide you to resolve the issue quickly.
-请务必确认您在提交此 Issue 前已经查看并完成了下列检查单中的所有事项。这会指导您快速地解决问题。
+Please follow this Issue template to provide relevant information, such as source code repository, website URL and screenshots, which will help us investigate.
+请按照此 Issue 模版提供相关信息，例如源码仓库、网站链接和屏幕截图，这将有助于我们进行调查。
 
 ## Issue Checklist <!-- 我确认我已经查看了 -->
 <!-- Change [ ] to [x] to select (将 [ ] 换成 [x] 来选择) -->
 
-- [ ] I am using [the latest](https://github.com/theme-next/hexo-theme-next/releases/latest) version of NexT.
-- [ ] I have reviewed [guidelines for NexT](https://github.com/theme-next/hexo-theme-next/blob/master/.github/CONTRIBUTING.md), especially the [Before Submitting An Issue](https://github.com/theme-next/hexo-theme-next/blob/master/.github/CONTRIBUTING.md#before-submitting-an-issue) part.
-- [ ] I have reviewed the latest Roadmap on GitHub and searched for current [issues](https://github.com/theme-next/hexo-theme-next/issues?utf8=%E2%9C%93&q=is%3Aissue), which does not help me.
+- [ ] I am using NexT version 8.0 or later.
+- [ ] I have already read the relevant documents of [Hexo](https://hexo.io/docs/) and [NexT](https://theme-next.js.org/docs/).
+- [ ] I have already searched for current [issues](https://github.com/next-theme/hexo-theme-next/issues), which does not help me.
 
 ***
+
+## Other Information <!-- e.g. Browser, System -->

@@ -15,4 +15,5 @@ hexo clean
 
 hexo generate
 
-hexo server --debug
+#hexo server --debug
+hexo server
