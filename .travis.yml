@@ -35,10 +35,10 @@ install:
 cache:
     directories:
         - node_modules
+        - public
 script:
     - git pull --unshallow
     - ./auto_init.sh
-    - hexo clean
     - hexo generate
     - gulp
     - python3 .gen_watermark.py
