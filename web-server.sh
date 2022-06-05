@@ -9,11 +9,13 @@
 set -x
 
 PWD=`pwd`
-PATH=$PATH:$PWD/node_modules/hexo/bin
+PATH=$PATH:$PWD/node_modules/.bin
 
 hexo clean
 
 hexo generate
+
+#gulp
 
 #hexo server --debug
 hexo server

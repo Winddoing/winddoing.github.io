@@ -13,10 +13,9 @@
   },
   "dependencies": {
     "gulp": "^4.0.2",
-    "gulp-htmlclean": "^2.7.22",
-    "gulp-htmlmin": "^5.0.1",
-    "gulp-imagemin": "^8.0.0",
+    "gulp-imagemin": "^7.0.1",
     "gulp-minify-css": "^1.2.4",
+    "gulp-minify-html": "^1.0.6",
     "gulp-uglify": "^3.0.2",
     "hexo": "^6.2.0",
     "hexo-abbrlink": "^2.2.1",
@@ -37,8 +36,8 @@
     "hexo-renderer-stylus": "^2.1.0",
     "hexo-server": "^3.0.0",
     "hexo-symbols-count-time": "^0.7.1",
-    "hexo-theme-landscape": "^0.0.3",
     "hexo-wordcount": "^6.0.1",
+    "imagemin-pngquant": "^9.0.2",
     "npm-check-updates": "^13.1.1"
   },
   "description": "> 个人笔记",
