@@ -11,7 +11,7 @@ set -x
 PWD=`pwd`
 PATH=$PATH:$PWD/node_modules/.bin
 
-hexo clean
+#hexo clean
 
 hexo generate
 
