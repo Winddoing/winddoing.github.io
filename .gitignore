@@ -4,5 +4,6 @@
 db.json
 node_modules/
 public/
+package-lock.json
 
 *.log

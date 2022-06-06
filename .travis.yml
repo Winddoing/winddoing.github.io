@@ -33,10 +33,8 @@ install:
     - pip3 install pillow
 
 cache:
-    bundler: true
     directories:
         - node_modules
-        - public
 script:
     - git pull --unshallow
     - ./auto_init.sh
