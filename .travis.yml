@@ -33,6 +33,7 @@ install:
     - pip3 install pillow
 
 cache:
+    bundler: true
     directories:
         - node_modules
         - public
