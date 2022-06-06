@@ -9,7 +9,8 @@
 set -x
 
 PWD=`pwd`
-PATH=$PATH:$PWD/node_modules/.bin
+
+export PATH=$PATH:$PWD/node_modules/.bin
 
 #hexo clean
 
