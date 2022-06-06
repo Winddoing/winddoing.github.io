@@ -35,13 +35,12 @@ install:
 cache:
     directories:
         - node_modules
-        - images-cache
 script:
     - git pull --unshallow
     - ./auto_init.sh
     - hexo generate
     - gulp
-    #- python3 .gen_watermark.py
+    - python3 .gen_watermark.py
 
 after_success:
     - hexo deploy
