@@ -45,4 +45,4 @@ gulp.task('images', function() {
 });
 
 //默认任务
-gulp.task('default',gulp.series(['html', 'css', 'js', 'images']));
+gulp.task('default',gulp.series(['html', 'css', 'js']));
