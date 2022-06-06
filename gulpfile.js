@@ -4,6 +4,7 @@ var uglify     = require('gulp-uglify');//js压缩
 var minifyCss  = require("gulp-minify-css");//压缩CSS
 var minifyHtml = require("gulp-minify-html");//压缩html
 var imagemin   = require('gulp-imagemin');
+var cache      = require('gulp-cache');
 
 //压缩html文件
 gulp.task('html',function(){
@@ -30,15 +31,16 @@ gulp.task('js',function(){
 
 //压缩public/demo目录内图片
 gulp.task('images', function() {
+	new cache.Cache({ cacheDirName: './images-cache' })
 	return gulp.src('./public/images/**/*.*')
-		.pipe(imagemin([
+		.pipe(cache(imagemin([
 			imagemin.gifsicle({'optimizationLevel': 3}),
 			imagemin.mozjpeg({'progressive': true}),
 			imagemin.optipng({'optimizationLevel': 7}), 
 			imagemin.svgo()
 		], 
 			{'verbose': true}
-		))
+		)))
 		.pipe(gulp.dest('./public/images/'));
 });
 
