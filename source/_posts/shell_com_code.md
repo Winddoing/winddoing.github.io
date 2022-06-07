@@ -11,6 +11,24 @@ date: 2018-02-04 23:07:24
 
 <!--more-->
 
+
+## sh下获取一个随机数
+
+``` shell
+#!/bin/sh
+
+rand()
+{
+	min=$1
+	max=$(($2-$min+1))
+	num=$(cat /dev/urandom | head -n 10 | cksum | awk -F ' ' '{print $1}')
+	echo $(($num % $max + $min))
+}
+
+rnd=$(rand 100 500)
+echo $rnd
+```
+
 ## bash调试命令
 
 Shell本身提供一些调试方法选项：
