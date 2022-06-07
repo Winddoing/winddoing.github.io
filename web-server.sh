@@ -14,7 +14,7 @@ set -x
 #hexo clean
 
 # 图片压缩
-gulp images
+#gulp images
 
 hexo generate
 

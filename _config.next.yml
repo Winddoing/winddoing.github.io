@@ -165,7 +165,7 @@ social:
   #YouTube: https://youtube.com/yourname || fab fa-youtube
   #Instagram: https://instagram.com/yourname || fab fa-instagram
   #Skype: skype:yourname?call|chat || fab fa-skype
-  Travis CI: https://app.travis-ci.com/github/Winddoing/winddoing.github.io || fab fa-terminal
+  Travis CI: https://app.travis-ci.com/github/Winddoing/winddoing.github.io || fas fa-terminal
 
 social_icons:
   enable: true
