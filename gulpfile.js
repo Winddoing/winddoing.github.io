@@ -29,19 +29,18 @@ gulp.task('js',function(){
 		.pipe(gulp.dest('./public'));
 })
 
-//压缩public/demo目录内图片
+//压缩source/images目录内图片
 gulp.task('images', function() {
-	new cache.Cache({ cacheDirName: './images-cache' })
-	return gulp.src('./public/images/**/*.*')
+	return gulp.src('./source/images/**/*.*')
 		.pipe(cache(imagemin([
 			imagemin.gifsicle({'optimizationLevel': 3}),
-			imagemin.mozjpeg({'progressive': true}),
+/*			imagemin.mozjpeg({'progressive': true}), */
 			imagemin.optipng({'optimizationLevel': 7}), 
 			imagemin.svgo()
 		], 
 			{'verbose': true}
 		)))
-		.pipe(gulp.dest('./public/images/'));
+		.pipe(gulp.dest('./source/images/'));
 });
 
 //默认任务

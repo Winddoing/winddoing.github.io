@@ -6,17 +6,17 @@
 # Description	:
 ##########################################################
 
-set -x
-
 PWD=`pwd`
-
 export PATH=$PATH:$PWD/node_modules/.bin
+
+set -x
 
 #hexo clean
 
-hexo generate
+# 图片压缩
+gulp images
 
-#gulp
+hexo generate
 
 #hexo server --debug
 hexo server
