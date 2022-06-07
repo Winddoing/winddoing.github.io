@@ -17,6 +17,8 @@ fi
 
 sudo apt install nodejs libssl-dev npm
 
-#npm install --registry=https://registry.npm.taobao.org
+npm cache clean -f
+
+npm install --registry=https://registry.npm.taobao.org
 
 npm install
