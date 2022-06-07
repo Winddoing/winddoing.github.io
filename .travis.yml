@@ -37,11 +37,11 @@ cache:
         - node_modules
 script:
     - git pull --unshallow
-    - ./auto_init.sh
+    - ./tools/auto_init.sh
     - hexo generate
     - gulp
-    - python3 .gen_watermark.py
+    - python3 ./tools/gen_watermark.py
 
 after_success:
     - hexo deploy
-    #- ./sync_to_coding.sh
+    #- ./tools/sync_to_coding.sh
