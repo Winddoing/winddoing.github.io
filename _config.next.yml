@@ -625,7 +625,7 @@ changyan:
 # Gitalk
 # For more information: https://gitalk.github.io
 gitalk:
-  enable: true
+  enable: false
   github_id: Winddoing # GitHub repo owner
   repo: winddoing.github.io # Repository name to store issues
   client_id: ae0a5036265d3914987a # GitHub Application Client ID
