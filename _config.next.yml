@@ -117,8 +117,8 @@ menu_settings:
 
 sidebar:
   # Sidebar Position.
-  position: left
-  #position: right
+  #position: left
+  position: right
 
   # Manual define the sidebar width. If commented, will be default for:
   # Muse | Mist: 320
@@ -645,7 +645,7 @@ utterances:
   enable: true
   repo: Winddoing/winddoing.github.io # Github repository owner and name
   # Available values: pathname | url | title | og:title
-  issue_term: title
+  issue_term: pathname
   # Available values: github-light | github-dark | preferred-color-scheme | github-dark-orange | icy-dark | dark-blue | photon-dark | boxy-light
   theme: github-light
 
