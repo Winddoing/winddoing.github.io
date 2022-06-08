@@ -579,7 +579,7 @@ comments:
   style: tabs
   # Choose a comment system to be displayed by default.
   # Available values: disqus | disqusjs | changyan | livere | gitalk | utterances
-  active:
+  active: utterances
   # Setting `true` means remembering the comment system selected by the visitor.
   storage: true
   # Lazyload all comment systems.
@@ -645,7 +645,7 @@ utterances:
   enable: true
   repo: Winddoing/winddoing.github.io # Github repository owner and name
   # Available values: pathname | url | title | og:title
-  issue_term: pathname
+  issue_term: title
   # Available values: github-light | github-dark | preferred-color-scheme | github-dark-orange | icy-dark | dark-blue | photon-dark | boxy-light
   theme: github-light
 
