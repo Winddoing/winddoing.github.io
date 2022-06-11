@@ -11,7 +11,7 @@ export PATH=$PATH:$PWD/node_modules/.bin
 
 set -x
 
-#hexo clean
+hexo clean
 
 # 图片压缩
 #gulp images

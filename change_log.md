@@ -3,6 +3,10 @@
 
 升级next及其所有组件
 
+```
+git clone --branch v8.12.1 https://github.com/next-theme/hexo-theme-next themes/next
+```
+
 
 # 2020/07/18
 
