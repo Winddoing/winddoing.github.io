@@ -476,10 +476,10 @@ font:
 
 # If true, site-subtitle will be added to index page.
 # Remember to set up your site-subtitle in Hexo `_config.yml` (e.g. subtitle: Subtitle)
-index_with_subtitle: false
+index_with_subtitle: true
 
 # Automatically add external URL with Base64 encrypt & decrypt.
-exturl: false
+exturl: true
 # If true, an icon will be attached to each external URL
 exturl_icon: true
 
@@ -686,7 +686,7 @@ google_analytics:
 
 # Baidu Analytics
 # See: https://tongji.baidu.com
-baidu_analytics: 38fa95924670925239ef842cb0c8722b # <app_id>
+baidu_analytics: b96a560ce0a6bfbeaaddc59dc5888b75 # <app_id>
 
 # Growingio Analytics
 # See: https://www.growingio.com
