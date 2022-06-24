@@ -1,4 +1,6 @@
-itle: shell常用代码
+---
+layout: post
+title: shell常用代码
 tags:
   - shell
 categories:
@@ -10,6 +12,26 @@ date: 2018-02-04 23:07:24
 {% note info %} shell常用代码： {% endnote %}
 
 <!--more-->
+
+## wait
+
+`wait`是用来阻塞当前进程的执行，直至指定的子进程执行结束后，才继续执行。
+
+``` shell
+#!/bin/bash
+tst()
+{
+  while [ 1 ]
+	do
+		sleep 1
+		echo "Test wait ..."
+	done
+}
+
+tst &
+
+wait
+```
 
 
 ## sh下获取一个随机数
