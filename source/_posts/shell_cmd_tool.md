@@ -13,6 +13,15 @@ abbrlink: 1644
 
 <!-- more -->
 
+## 字符串转二进制
+
+``` shell
+echo 001122334455 | xxd -r -ps > test            // 6 个字节
+```
+- `xxd` :用于用二进制或十六进制显示文件的内容
+- `-r`  :把xxd的十六进制输出内容转换回原文件的二进制内容
+- `-ps` :以postscript的连续十六进制转储输出，这也叫做纯十六进制转储
+
 ## 查看中断与CPU的绑定关系
 
 ``` shell
@@ -521,6 +530,35 @@ CONFIG_MAGIC_SYSRQ_DEFAULT_ENABLE=0x1
 CONFIG_MAGIC_SYSRQ_SERIAL=y
 ```
 
+### kermit文件传输
+
+- 安装ckermit
+
+```
+sudo apt install ckermit
+```
+> 注：ubuntu20.04没有ckermit，可以手动下载ubuntu18.04的版本安装，自测可用。
+
+- 配置kermit
+
+在配置文件`/etc/kermit/kermrc`中追加以下配置：
+```
+set line          /dev/ttyUSB0
+set speed         115200
+set carrier-watch off
+set handshake     none
+set flow-control none
+robust
+set file type     bin
+set file name     lit
+set rec pack      1000
+set send pack     1000
+set window        5
+```
+
+- 文件发送
+
+快捷键：`Ctrl + a + s`，选择`kermit`
 
 ## sshfs
 
