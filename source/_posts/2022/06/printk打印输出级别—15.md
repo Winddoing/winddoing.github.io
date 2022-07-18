@@ -6,7 +6,7 @@ tags:
   - printk
   - linux
 categories:
-  - Linux内核平日你痛苦
+  - Linux内核
 ---
 
 ```
