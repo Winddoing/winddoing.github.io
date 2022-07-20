@@ -274,8 +274,8 @@ tag_icon: true
 # Front-matter variable (nonsupport animation).
 reward_settings:
   # If true, a donate button will be displayed in every article by default.
-  enable: true
-  animation: true
+  enable: false
+  animation: false
   #comment: Buy me a coffee
 
 reward:
