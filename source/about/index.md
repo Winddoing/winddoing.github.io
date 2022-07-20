@@ -40,12 +40,6 @@ comments: true
 
 <!-- endtab -->
 
-<!-- tab 捐助 -->
-
-![alipay](/images/alipay.jpg)
-
-<!-- endtab -->
-
 <!-- tab 自动构建 -->
 
 | 模块  | 图标  |
