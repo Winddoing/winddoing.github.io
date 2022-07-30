@@ -13,6 +13,53 @@ date: 2018-02-04 23:07:24
 
 <!--more-->
 
+## 参数组合执行
+
+``` shell
+set -- $(getopt -q dbc "$@")
+while [ -n "$1" ]
+do
+        case "$1" in
+            -d) echo "Deploy ..."
+
+                shift ;;
+            -b) echo "Build  ..."
+
+                shift ;;
+            -c) echo "Clean  ..."
+
+                shift ;;
+            --) shift
+                break ;;
+            -*) echo "Nothing to do";;
+        esac
+done
+```
+以上参数可以单独传递执行，也可以组合一起执行。
+例如：
+
+``` shell
+$./m.sh -d
+Deploy ...
+
+$./m.sh -c
+Clean  ...
+
+$./m.sh -db
+Deploy ...
+Build  ...
+
+$./m.sh -d -b
+Deploy ...
+Build  ...
+
+$./m.sh -dbc
+Deploy ...
+Build  ...
+Clean  ...
+```
+
+
 ## 调试技巧
 
 ``` shell
