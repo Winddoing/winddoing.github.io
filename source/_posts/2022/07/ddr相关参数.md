@@ -7,6 +7,7 @@ tags:
 categories:
   - 设备驱动
   - 内存
+abbrlink: df3d18b7
 ---
 
 记录DDR使用中的相关参数，比如位宽、带宽等
