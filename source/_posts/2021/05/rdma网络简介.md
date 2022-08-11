@@ -138,6 +138,10 @@ mlx5_3 port 1 ==> p4p2 (Down)
 1000 iters in 0.01 seconds = 12.19 usec/iter
 ```
 
+## ibping
+
+测试ib模式下网络的连通性。
+
 ## mlx5计数器和状态参数
 
 在sysfs文件系统可以查看`/sys/class/infiniband/`
