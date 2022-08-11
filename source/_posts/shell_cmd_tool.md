@@ -434,6 +434,15 @@ do
 done
 ```
 
+### ttyUSB0权限问题
+
+每次使用串口工具时，需要sudo权限，为了普通用户方便可以通过以下命令解决：
+
+```
+sudo usermod -a -G dialout ${USER}
+```
+> 设置后需要重启电脑，使用minicom时不用sudo
+
 ### 串口输出增加时间戳：
 ```
 Ctrl + a ; n

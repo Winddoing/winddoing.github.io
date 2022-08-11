@@ -203,6 +203,13 @@ EndSection
     amdgpu_drv.so  ati_drv.so  fbdev_drv.so  intel_drv.so  modesetting_drv.so  nouveau_drv.so  qxl_drv.so  radeon_drv.so  vesa_drv.so  vmware_drv.so
     ```
 
+> 在用户空间驱动不在系统默认路径下时，可以通过`Section "Files"`的`ModulePath`参数指定
+> ```
+> Section "Files"
+>    ModulePath "/usr/local/lib/xorg/modules/"
+> EndSection
+> ```
+
 ## 参数
 
 ```
@@ -505,3 +512,4 @@ EndSection
 - [Chapter 13. Configuring Multiple Display Devices on One X Screen](https://download.nvidia.com/XFree86/Linux-x86_64/304.137/README/configtwinview.html)
 - [Opening the Display](https://tronche.com/gui/x/xlib/display/opening.html)
 - [How do I get X to start without a monitor attached while using NVIDIA drivers?](https://unix.stackexchange.com/questions/211637/how-do-i-get-x-to-start-without-a-monitor-attached-while-using-nvidia-drivers)
+- [How to tell intel graphics to use my custom EDID file?](https://unix.stackexchange.com/questions/295784/how-to-tell-intel-graphics-to-use-my-custom-edid-file)
