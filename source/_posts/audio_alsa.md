@@ -1,6 +1,8 @@
 ---
 title: Audio驱动总结--ALSA
-categories: 设备驱动
+categories:
+  - 设备驱动
+  - 音频
 tags:
   - audio
   - alsa

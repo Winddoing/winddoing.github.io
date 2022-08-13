@@ -7,7 +7,8 @@ tags:
   - i2s
   - 音频
 categories:
-  - 电子电路
+  - 设备驱动
+  - 音频
 abbrlink: 86a98cff
 ---
 

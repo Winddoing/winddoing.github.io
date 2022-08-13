@@ -1,6 +1,8 @@
 ---
 title: Audio ALSA数据传输
-categories: 设备驱动
+categories:
+  - 设备驱动
+  - 音频
 tags:
   - audio
   - alsa

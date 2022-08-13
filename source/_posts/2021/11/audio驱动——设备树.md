@@ -2,7 +2,9 @@
 layout: post
 title: Audio驱动——设备树
 date: '2021-11-13 15:44'
-categories: 设备驱动
+categories:
+  - 设备驱动
+  - 音频
 tags:
   - audio
   - alsa
