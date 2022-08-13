@@ -17,6 +17,8 @@ date: 2016-08-19t22:18:39.000z
 ```
 apm install tool-bar markdown-writer tool-bar-markdown-writer markdown-scroll-sync
 ```
+侧边栏目录树打开关闭快捷键： `Ctrl + k + b`
+
 
 ## Markdown语法
 

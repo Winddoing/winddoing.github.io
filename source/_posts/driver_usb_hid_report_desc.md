@@ -1,6 +1,8 @@
 ---
 title: USB HID Report描述符
-categories: 设备驱动
+categories:
+  - 设备驱动
+  - USB
 tags:
   - hid
   - 驱动

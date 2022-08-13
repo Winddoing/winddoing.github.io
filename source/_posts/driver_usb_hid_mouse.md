@@ -1,6 +1,8 @@
 ---
 title: HID设备--开发板模拟鼠标
-categories: 设备驱动
+categories:
+  - 设备驱动
+  - USB
 tags:
   - hid
   - 驱动

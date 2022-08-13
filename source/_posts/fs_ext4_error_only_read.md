@@ -80,5 +80,3 @@ index 089821b..7fca76b 100644
 [linux v4.x ChangeLog-4.6.7](https://mirrors.edge.kernel.org/pub/linux/kernel/v4.x/ChangeLog-4.6.7)
 
 ## 产生的原因：
-
-
