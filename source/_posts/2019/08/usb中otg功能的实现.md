@@ -3,6 +3,12 @@ layout: post
 title: USB中OTG功能的实现
 date: '2019-08-01 14:49'
 abbrlink: 1467
+tags:
+  - usb
+  - otg
+categories:
+  - 设备驱动
+  - USB
 ---
 
 >usb otg(on-the-go)标准在完全兼容usb2.0标准的基础上，增添了电源管理（节省功耗）功能，它允许设备既可作为主机，也可作为外设操作（两用otg）。otg两用设备完全符合usb2.0标准，并可提供一定的主机检测能力，支持主机通令协议（hnp）和对话请求协议（srp）。在otg中，初始主机设备称为a设备，外设称为b设备。可用电缆的连接方式(id pin)来决定初始角色

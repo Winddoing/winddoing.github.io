@@ -140,4 +140,3 @@ iozone -i 0 -i 1 -s 8m   -f /testfile -y 2k -q 8m -Rab /iozone_test.xls
 ``` shell
 iozone -Rab -g 4g -i 0 -i 1  output.xls
 ```
-
