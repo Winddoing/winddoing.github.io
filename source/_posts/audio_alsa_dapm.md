@@ -1,4 +1,4 @@
-
+---
 title: ALSA-DAPM
 categories:
   - 设备驱动
@@ -7,6 +7,7 @@ tags:
   - audio
   - alsa
   - 驱动
+abbrlink: 69425dfa
 date: 2017-07-12 23:07:24
 ---
 

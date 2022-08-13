@@ -7,6 +7,7 @@ tags:
   - audio
   - alsa
   - 驱动
+abbrlink: 8df01b06
 date: 2017-07-13 23:07:24
 ---
 
