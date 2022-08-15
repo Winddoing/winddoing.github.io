@@ -124,6 +124,7 @@ B --> C{Decision}
 C -->|One| D[Result 1]
 C -->|Two| E[Result 2]
 ```
+- [Markdown(四)——绘图工具mermaid之状态图stateDiagram](https://blog.csdn.net/qq_36749906/article/details/107462149)
 
 
 ## Atom和Makedown预览
