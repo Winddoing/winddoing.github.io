@@ -30,7 +30,7 @@ Linux进程一共有`6`种状态，分别是：`R`、`S`、`D`、`T`、`Z`、`X`
 所有S状态的进行，将被放入对应事件的`等待队列`（等待队列可能存在很多,因为CPU是有限的，因此系统中的大多数进程处于睡眠状态，被放入相应的等待队列）中，当这些事件发生（由外部中断触发或其他进程触发）时，对应的等待队列中的一个或多个进程将被唤醒。
 
 
-### D：不可中断的睡眠状态（Disk sleep）—— TASK_UNINTERRUPTIBLE
+### D:不可中断的睡眠状态（Disk sleep）—— TASK_UNINTERRUPTIBLE
 
 与`S状态`类似，进程处于睡眠状态，但是此时进程是`不可中断的`。
 
@@ -59,7 +59,7 @@ xx    396038  0.0  0.0   2364   508 pts/1    S+   17:10   0:00 ./a.out
 ```
 
 
-### T：暂停或跟踪状态（stopped）—— TASK_STOPPED/TASK_TRACED
+### T:暂停或跟踪状态（stopped）—— TASK_STOPPED/TASK_TRACED
 
 向进程发送一个`SIGSTOP`信号，它就会因响应该信号而进入`TASK_STOPPED`状态（除非该进程本身处于`TASK_UNINTERRUPTIBLE`状态而不响应信号）。（SIGSTOP与SIGKILL信号一样，是强制的。不允许用户进程通过signal系列的系统调用重新设置对应的信号处理函数。）
 
@@ -70,7 +70,7 @@ xx    396038  0.0  0.0   2364   508 pts/1    S+   17:10   0:00 ./a.out
 对于进程本身来说，`TASK_STOPPED`和`TASK_TRACED`状态很类似，都是表示进程暂停下来。而`TASK_TRACED`状态相当于在`TASK_STOPPED`之上多了一层保护，处于`TASK_TRACED`状态的进程不能响应SIGCONT信号而被唤醒。只能等到调试进程通过`ptrace`系统调用执行PTRACE_CONT、PTRACE_DETACH等操作（通过ptrace系统调用的参数指定操作），或调试进程退出，被调试的进程才能恢复`TASK_RUNNING`状态。
 
 
-### Z：僵尸状态（Zombies）—— TASK_DEAD-EXIT_ZOMBIE
+### Z:僵尸状态（Zombies）—— TASK_DEAD-EXIT_ZOMBIE
 
 进程在退出的过程中，处于`TASK_DEAD`状态。
 
