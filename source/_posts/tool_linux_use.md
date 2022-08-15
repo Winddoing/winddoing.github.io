@@ -105,6 +105,14 @@ sudo apt-get install  kolourpaint4
 
 VirtualBox
 
+
+### 无缝模式
+
+快捷键： Host + l
+
+
+
+
 ## 音视频文件分析工具 -- MediaInfo
 
 ```
