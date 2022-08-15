@@ -3,11 +3,12 @@ date: 2014-5-10
 layout: post
 title: '正则表达式(regular expression) [^,*]与[^,]*区别'
 thread: 166
-categories: 正则表达式
+categories:
+  - shell
+  - 正则表达式
 tags: shell
 abbrlink: 10189
 ---
-
 
 ### 正则表达式(Regular Expression) [^,*]与[^,]*区别：
   1. $ sed 's/[^,]*/{&}/' example.txt

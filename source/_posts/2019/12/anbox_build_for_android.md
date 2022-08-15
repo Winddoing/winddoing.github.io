@@ -6,7 +6,7 @@ tags:
   - anbox
   - android
 categories:
-  - 系统应用
+  - Android
 abbrlink: 22129
 ---
 
