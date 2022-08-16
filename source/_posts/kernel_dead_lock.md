@@ -1,5 +1,5 @@
 ---
-title: 死锁
+title: 多核互锁
 categories:
   - Linux内核
   - 同步
