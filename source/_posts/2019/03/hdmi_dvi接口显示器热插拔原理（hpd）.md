@@ -6,6 +6,7 @@ tags:
   - hdmi
 categories:
   - 多媒体
+  - HDMI
 abbrlink: 57591
 ---
 

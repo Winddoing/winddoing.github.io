@@ -8,6 +8,7 @@ tags:
   - 死锁
 categories:
   - Linux内核
+  - 同步
 abbrlink: 3099dbdc
 ---
 

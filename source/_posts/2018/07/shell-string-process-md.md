@@ -4,6 +4,7 @@ title: Shell字符串处理——配置文件获取版本号
 date: '2018-07-31 09:45'
 categories:
   - shell
+  - 字符串处理
 tags:
   - shell
 abbrlink: 35545
@@ -26,7 +27,7 @@ wfd_mode_tcp  =true
 过滤脚本：
 ``` shell
 CFGD_CONF="${OSDRV_DIR}/conf/db/cfgd.conf"
-software_version=`grep "software_version" ${VANXUM_CFGD_CONF} | awk '{sub(/.$/,"")}1' | awk '{print $3}'`
+software_version=`grep "software_version" ${CFGD_CONF} | awk '{sub(/.$/,"")}1' | awk '{print $3}'`
 
 echo "current software_version: [${software_version}]"
 ```
