@@ -7,6 +7,7 @@ tags:
   - uboot
 categories:
   - uboot
+abbrlink: 3f3c28cc
 ---
 
 arm64平台中spl+uboot的内存布局，比如代码段、堆栈等的位置。
@@ -15,6 +16,10 @@ arm64平台中spl+uboot的内存布局，比如代码段、堆栈等的位置。
 - 代码重定位？
 
 <!--more-->
+
+环境：
+  - CPU： `arm64`（cortex-a53）
+  - uboot版本： `U-Boot 2021.01`
 
 ## 物理SRAM空间
 
@@ -28,10 +33,18 @@ arm64平台中spl+uboot的内存布局，比如代码段、堆栈等的位置。
 
 通用链接文件：`SPL_LDSCRIPT=arch/arm/cpu/u-boot-spl.lds`
 
-链接文件的处理：
+链接文件的处理命令：
 
 ```
-aarch64-none-linux-gnu-gcc -E -Wp,-MD,spl/.u-boot-spl.lds.d -D__KERNEL__ -D__UBOOT__  -DCONFIG_SPL_BUILD  -D__ARM__          -mstrict-align  -ffunction-sections -fdata-sections -fno-common -ffixed-r9     -fno-common -ffixed-x18 -pipe -march=armv8-a -D__LINUX_ARM_ARCH__=8  -I./arch/arm/mach-vanxum/include -Ispl/include -Iinclude   -I./arch/arm/include -include ./include/linux/kconfig.h  -nostdinc -isystem /home/wqshao/work/Tequila/tools/prebuilts/aarch64-none-linux-gnu/bin/../lib/gcc/aarch64-none-linux-gnu/10.2.1/include -include ./include/u-boot/u-boot.lds.h -include ./include/config.h -DCPUDIR=arch/arm/cpu/armv8  -DIMAGE_MAX_SIZE="(SZ_64K + SZ_32K + SZ_16K -SZ_4K)" -DIMAGE_TEXT_BASE=0xFF781000 -ansi -D__ASSEMBLY__ -x assembler-with-cpp -std=c99 -P -o spl/u-boot-spl.lds arch/arm/cpu/armv8/u-boot-spl.lds
+aarch64-none-linux-gnu-gcc -E -Wp,-MD,spl/.u-boot-spl.lds.d -D__KERNEL__ -D__UBOOT__  -DCONFIG_SPL_BUILD  -D__ARM__          
+-mstrict-align  -ffunction-sections -fdata-sections -fno-common -ffixed-r9     
+-fno-common -ffixed-x18 -pipe -march=armv8-a -D__LINUX_ARM_ARCH__=8  
+-I./arch/arm/mach-vanxum/include -Ispl/include -Iinclude   -I./arch/arm/include -include ./include/linux/kconfig.h  
+-nostdinc -isystem /home/xx/tools/prebuilts/aarch64-none-linux-gnu/bin/../lib/gcc/aarch64-none-linux-gnu/10.2.1/include
+-include ./include/u-boot/u-boot.lds.h -include ./include/config.h -DCPUDIR=arch/arm/cpu/armv8  
+-DIMAGE_MAX_SIZE="(SZ_64K + SZ_32K + SZ_16K -SZ_4K)" -DIMAGE_TEXT_BASE=0xFF781000
+-ansi -D__ASSEMBLY__ -x assembler-with-cpp -std=c99 -P
+-o spl/u-boot-spl.lds arch/arm/cpu/armv8/u-boot-spl.lds
 ```
 
 编译后生产当前CPU的lds链接文件：
@@ -139,7 +152,7 @@ CONFIG_SPL_SYS_MALLOC_F_LEN=0x3000  #12KB
 - `CONFIG_SYS_SPL_MALLOC_SIZE`： 配置SPL中malloc池的大小。
 
 
-### SARM的内存分布
+### SARM的内存布局
 
 ![uboot SPL SRAM 布局](/images/2022/08/uboot_spl_sram_布局.svg)
 >空间大了，分配起来就是任性！
@@ -356,10 +369,137 @@ int main(int argc, char *argv[])
 - 初始化DDR，使用SRAM的小空间换去DDR的大空间。
 - 加载uboot或kernel到DDR（大空间），并运行。
 
+为了进行DDR的初始化，就需要进行`时钟`的初始化，以及`串口`（为了调试信息输出）
+
 
 ## uboot
 
+进入uboot后就可以使用整个DDR空间。
+
+### u-boot.lds
+
 通用链接文件：`arch/arm/cpu/u-boot.lds`
+
+链接文件的处理命令：
+```
+aarch64-none-linux-gnu-gcc -E -Wp,-MD,./.u-boot.lds.d -D__KERNEL__ -D__UBOOT__   -D__ARM__           
+-fno-pic  -mstrict-align  -ffunction-sections -fdata-sections -fno-common -ffixed-r9     
+-fno-common -ffixed-x18 -pipe -march=armv8-a -D__LINUX_ARM_ARCH__=8  
+-I./arch/arm/mach-vanxum/include -Iinclude   -I./arch/arm/include -include ./include/linux/kconfig.h  
+-nostdinc -isystem /home/xx/tools/prebuilts/aarch64-none-linux-gnu/bin/../lib/gcc/aarch64-none-linux-gnu/10.2.1/include
+-ansi -include ./include/u-boot/u-boot.lds.h
+-DCPUDIR=arch/arm/cpu/armv8  -D__ASSEMBLY__ -x assembler-with-cpp -std=c99 -P
+-o u-boot.lds arch/arm/cpu/armv8/u-boot.lds
+```
+
+编译后生成的特有链接文件：
+```
+OUTPUT_FORMAT("elf64-littleaarch64", "elf64-littleaarch64", "elf64-littleaarch64")
+OUTPUT_ARCH(aarch64)
+ENTRY(_start)
+SECTIONS
+{
+ . = 0x00000000;
+ . = ALIGN(8);
+ .text :
+ {
+  *(.__image_copy_start)
+  arch/arm/cpu/armv8/start.o (.text*)
+ }
+ .efi_runtime : {
+                __efi_runtime_start = .;
+  *(.text.efi_runtime*)
+  *(.rodata.efi_runtime*)
+  *(.data.efi_runtime*)
+                __efi_runtime_stop = .;
+ }
+ .text_rest :
+ {
+  *(.text*)
+ }
+ . = ALIGN(8);
+ .rodata : { *(SORT_BY_ALIGNMENT(SORT_BY_NAME(.rodata*))) }
+ . = ALIGN(8);
+ .data : {
+  *(.data*)
+ }
+ . = ALIGN(8);
+ . = .;
+ . = ALIGN(8);
+ .u_boot_list : {
+  KEEP(*(SORT(.u_boot_list*)));
+ }
+ . = ALIGN(8);
+ .efi_runtime_rel : {
+                __efi_runtime_rel_start = .;
+  *(.rel*.efi_runtime)
+  *(.rel*.efi_runtime.*)
+                __efi_runtime_rel_stop = .;
+ }
+ . = ALIGN(8);
+ .image_copy_end :
+ {
+  *(.__image_copy_end)
+ }
+ . = ALIGN(8);
+ .rel_dyn_start :
+ {
+  *(.__rel_dyn_start)
+ }
+ .rela.dyn : {
+  *(.rela*)
+ }
+ .rel_dyn_end :
+ {
+  *(.__rel_dyn_end)
+ }
+ _end = .;
+ . = ALIGN(8);
+ .bss_start : {
+  KEEP(*(.__bss_start));
+ }
+ .bss : {
+  *(.bss*)
+   . = ALIGN(8);
+ }
+ .bss_end : {
+  KEEP(*(.__bss_end));
+ }
+ /DISCARD/ : { *(.dynsym) }
+ /DISCARD/ : { *(.dynstr*) }
+ /DISCARD/ : { *(.dynamic*) }
+ /DISCARD/ : { *(.plt*) }
+ /DISCARD/ : { *(.interp*) }
+ /DISCARD/ : { *(.gnu*) }
+}
+```
+- 链接文件的开始地址为啥是`. = 0x00000000`？？？
+- 地址是虚拟地址还是物理地址？？？
+
+
+### MMU
+
+
+### Cache
+
+
+### 虚拟物理地址映射
+
+
+
+### 配置参数
+
+- `CONFIG_SYS_TEXT_BASE`=0x00200000
+
+  代码段基址
+
+-
+
+
+### DDR的内存布局
+
+
+
 
 
 ## 其他
@@ -369,7 +509,11 @@ int main(int argc, char *argv[])
 在make后追加`V=1`
 
 ```
-make V=1 spl/u-boot-spl.bin
+$make V=1 spl/u-boot-spl.bin
+```
+
+```
+$make V=1 u-boot.lds
 ```
 
 ### asm-offset
