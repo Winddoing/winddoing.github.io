@@ -1,0 +1,411 @@
+---
+layout: post
+title: uboot中的内存布局
+date: '2022-08-16 14:47'
+tags:
+  - 内存
+  - uboot
+categories:
+  - uboot
+---
+
+arm64平台中spl+uboot的内存布局，比如代码段、堆栈等的位置。
+
+- spl的大小限制，与堆栈大小的关系？
+- 代码重定位？
+
+<!--more-->
+
+## 物理SRAM空间
+
+总大小`256KB`，地址范围`0xFF78 0000～0xFF7B FFFF`
+
+## SPL
+
+在uboot代码中，通过宏`CONFIG_SPL_XXX`来区分SPL。
+
+### u-boot-spl.lds
+
+通用链接文件：`SPL_LDSCRIPT=arch/arm/cpu/u-boot-spl.lds`
+
+链接文件的处理：
+
+```
+aarch64-none-linux-gnu-gcc -E -Wp,-MD,spl/.u-boot-spl.lds.d -D__KERNEL__ -D__UBOOT__  -DCONFIG_SPL_BUILD  -D__ARM__          -mstrict-align  -ffunction-sections -fdata-sections -fno-common -ffixed-r9     -fno-common -ffixed-x18 -pipe -march=armv8-a -D__LINUX_ARM_ARCH__=8  -I./arch/arm/mach-vanxum/include -Ispl/include -Iinclude   -I./arch/arm/include -include ./include/linux/kconfig.h  -nostdinc -isystem /home/wqshao/work/Tequila/tools/prebuilts/aarch64-none-linux-gnu/bin/../lib/gcc/aarch64-none-linux-gnu/10.2.1/include -include ./include/u-boot/u-boot.lds.h -include ./include/config.h -DCPUDIR=arch/arm/cpu/armv8  -DIMAGE_MAX_SIZE="(SZ_64K + SZ_32K + SZ_16K -SZ_4K)" -DIMAGE_TEXT_BASE=0xFF781000 -ansi -D__ASSEMBLY__ -x assembler-with-cpp -std=c99 -P -o spl/u-boot-spl.lds arch/arm/cpu/armv8/u-boot-spl.lds
+```
+
+编译后生产当前CPU的lds链接文件：
+```
+MEMORY { .sram : ORIGIN = 0xFF781000,
+  LENGTH = (0x00010000 + 0x00008000 + 0x00004000 -0x00001000) }
+MEMORY { .sdram : ORIGIN = (0xFF780000 + 0x00020000 ),
+  LENGTH = 0x00008000 }
+OUTPUT_FORMAT("elf64-littleaarch64", "elf64-littleaarch64", "elf64-littleaarch64")
+OUTPUT_ARCH(aarch64)
+ENTRY(_start)
+SECTIONS
+{
+ .text : {
+  . = ALIGN(8);
+  *(.__image_copy_start)
+  arch/arm/cpu/armv8/start.o (.text*)
+  *(.text*)
+ } >.sram
+ .rodata : {
+  . = ALIGN(8);
+  *(SORT_BY_ALIGNMENT(SORT_BY_NAME(.rodata*)))
+ } >.sram
+ .data : {
+  . = ALIGN(8);
+  *(.data*)
+ } >.sram
+ .u_boot_list : {
+  . = ALIGN(8);
+  KEEP(*(SORT(.u_boot_list*)));
+ } >.sram
+ .image_copy_end : {
+  . = ALIGN(8);
+  *(.__image_copy_end)
+ } >.sram
+ .end : {
+  . = ALIGN(8);
+  *(.__end)
+ } >.sram
+ _image_binary_end = .;
+ .bss_start (NOLOAD) : {
+  . = ALIGN(8);
+  KEEP(*(.__bss_start));
+ } >.sdram
+ .bss (NOLOAD) : {
+  *(.bss*)
+   . = ALIGN(8);
+ } >.sdram
+ .bss_end (NOLOAD) : {
+  KEEP(*(.__bss_end));
+ } >.sdram
+ /DISCARD/ : { *(.dynsym) }
+ /DISCARD/ : { *(.dynstr*) }
+ /DISCARD/ : { *(.dynamic*) }
+ /DISCARD/ : { *(.plt*) }
+ /DISCARD/ : { *(.interp*) }
+ /DISCARD/ : { *(.gnu*) }
+}
+```
+
+### 自定义参数配置
+
+spl编译生成后的大小限制，在menuconfig中进行配置：
+
+```
+CONFIG_SPL_SIZE_LIMIT=0x20000       #128KB
+
+CONFIG_SPL_TEXT_BASE=0xFF781000
+
+CONFIG_SPL_SYS_MALLOC_F_LEN=0x3000  #12KB
+```
+也就是说当前uboot中编译生成的spl大小不能超过128KB，如果超过时uboot会在编译过程中警告提示。
+
+- `CONFIG_SPL_TEXT_BASE`: SPL中定义代码段基址
+- `CONFIG_SPL_SIZE_LIMIT`: SPL中定义镜像大小的最大值
+- `CONFIG_SPL_SYS_MALLOC_F_LEN`： SPL中定义堆栈空间的大小
+
+
+代码段与栈大小配置：
+
+```
+/* Physical memory map */
+#define CONFIG_IRAM_BASE            0xFF780000                    #spl代码中无用，只在当前配置文件中使用
+
+#define CONFIG_SPL_MAX_SIZE         (SZ_128K - SZ_16K - SZ_4K)    #减4K ???，应该是想除去bootrom预留的4K
+#define SPL_STACK_BSS_ADDRESS       (CONFIG_IRAM_BASE + SZ_128K )
+#define CONFIG_SPL_BSS_MAX_SIZE     SZ_32K
+
+#define CONFIG_SPL_STACK            (SPL_STACK_BSS_ADDRESS-16)    #栈地址减16(0x10)？？？
+
+/*  BSS setup */
+#define CONFIG_SPL_BSS_START_ADDR   SPL_STACK_BSS_ADDRESS
+```
+> uboot中的配置文件（include/configs/目录下）定义
+
+- `CONFIG_SPL_MAX_SIZE`: spl镜像的最大大小，包括text, data, rodata, and linker lists sections，但是不包括BBS段
+- `CONFIG_SPL_STACK`: spl栈的起始地址，**栈的增长方向：由高地址到低地址**
+- `CONFIG_SPL_BSS_START_ADDR`: spl的BBS链接地址
+- `CONFIG_SPL_BSS_MAX_SIZE`: 分配给spl BBS的内存最大值
+
+### 未使用参数配置
+
+- `CONFIG_SPL_MAX_FOOTPRINT`： 分配给SPL的最大内存大小，包括BSS。SPL链接器检查从`_start`到`__bss_end`使用的实际内存不超过它。`CONFIG_SPL_MAX_FOOTPRINT`和`CONFIG_SPL_BSS_MAX_SIZE`不能同时定义。
+- `CONFIG_SYS_SPL_MALLOC_START`： SPL中使用的`malloc池`的起始地址。 当设置此选项时，在SPL中使用完整的malloc，在spl_init()函数之前，因为由它配置malloc池，如果定义了CONFIG_SYS_MALLOC_F，则可以使用简单的malloc()。
+- `CONFIG_SYS_SPL_MALLOC_SIZE`： 配置SPL中malloc池的大小。
+
+
+### SARM的内存分布
+
+![uboot SPL SRAM 布局](/images/2022/08/uboot_spl_sram_布局.svg)
+>空间大了，分配起来就是任性！
+
+- BBS段定义的过大，实际`2K`应该就差不多了。
+- 栈空间只指定了起始地址，为啥没有定义其大小？？
+- malloc的地址范围？？？—— 当前SPL中没有配置这部分空间，因此也就无法使用malloc。
+
+
+实际spl中各段的地址与大小：
+```
+$aarch64-none-linux-gnu-readelf -S spl/u-boot-spl
+There are 21 section headers, starting at offset 0x1e7790:
+
+Section Headers:
+  [Nr] Name              Type             Address           Offset
+       Size              EntSize          Flags  Link  Info  Align
+  [ 0]                   NULL             0000000000000000  00000000
+       0000000000000000  0000000000000000           0     0     0
+  [ 1] .text             PROGBITS         00000000ff781000  00001000
+       00000000000153b4  0000000000000000  AX       0     0     8
+  [ 2] .rodata           PROGBITS         00000000ff7963b8  000163b8
+       0000000000003f46  0000000000000000   A       0     0     8
+  [ 3] .data             PROGBITS         00000000ff79a300  0001a300
+       000000000000031c  0000000000000000  WA       0     0     8
+  [ 4] .u_boot_list      PROGBITS         00000000ff79a620  0001a620
+       0000000000000fd8  0000000000000000  WA       0     0     8
+  [ 5] .image_copy_end   PROGBITS         00000000ff79b5f8  0001b5f8
+       0000000000000000  0000000000000000   W       0     0     1
+  [ 6] .end              PROGBITS         00000000ff79b5f8  0001b5f8
+       0000000000000000  0000000000000000  WA       0     0     1
+  [ 7] .bss_start        NOBITS           00000000ff7a0000  00020000
+       0000000000000000  0000000000000000  WA       0     0     1
+  [ 8] .bss              NOBITS           00000000ff7a0000  00020000
+       00000000000003c0  0000000000000000  WA       0     0     64
+  [ 9] .bss_end          NOBITS           00000000ff7a03c0  00020000
+       0000000000000000  0000000000000000  WA       0     0     1
+  [10] .debug_line       PROGBITS         0000000000000000  0001b5f8
+       0000000000037991  0000000000000000           0     0     1
+  [11] .debug_info       PROGBITS         0000000000000000  00052f89
+       00000000000acbaa  0000000000000000           0     0     1
+  [12] .debug_abbrev     PROGBITS         0000000000000000  000ffb33
+       0000000000019c78  0000000000000000           0     0     1
+  [13] .debug_aranges    PROGBITS         0000000000000000  001197b0
+       0000000000006580  0000000000000000           0     0     16
+  [14] .debug_str        PROGBITS         0000000000000000  0011fd30
+       000000000001021b  0000000000000001  MS       0     0     1
+  [15] .comment          PROGBITS         0000000000000000  0012ff4b
+       000000000000005d  0000000000000001  MS       0     0     1
+  [16] .debug_loc        PROGBITS         0000000000000000  0012ffa8
+       000000000009a9f1  0000000000000000           0     0     1
+  [17] .debug_ranges     PROGBITS         0000000000000000  001ca9a0
+       0000000000010850  0000000000000000           0     0     16
+  [18] .symtab           SYMTAB           0000000000000000  001db1f0
+       0000000000008eb0  0000000000000018          19   1051     8
+  [19] .strtab           STRTAB           0000000000000000  001e40a0
+       000000000000361d  0000000000000000           0     0     1
+  [20] .shstrtab         STRTAB           0000000000000000  001e76bd
+       00000000000000cc  0000000000000000           0     0     1
+Key to Flags:
+  W (write), A (alloc), X (execute), M (merge), S (strings), I (info),
+  L (link order), O (extra OS processing required), G (group), T (TLS),
+  C (compressed), x (unknown), o (OS specific), E (exclude),
+  p (processor specific)
+```
+
+
+### 实际BBS段大小
+
+在spl的配置中，我们已经定义了BBS段的最大值，而是实际编译后的spl镜像中bbs段的实际大小是多少？
+
+将spl镜像进行反汇编：
+``` shell
+$ aarch64-none-linux-gnu-objdump -D spl/u-boot-spl > a.s
+```
+
+清除BBS段内存：
+```
+/*
+ * Clear BSS section
+ */
+    ldr x0, =__bss_start        /* this is auto-relocated! */
+    ldr x1, =__bss_end          /* this is auto-relocated! */
+clear_loop:
+    str xzr, [x0], #8
+    cmp x0, x1
+    b.lo    clear_loop
+
+    /* call board_init_r(gd_t *id, ulong dest_addr) */
+    mov x0, x18             /* gd_t */
+    ldr x1, [x18, #GD_RELOCADDR]    /* dest_addr */
+    b   board_init_r            /* PC relative jump */
+```
+> file: /arch/arm/lib/crt0_64.S
+
+其中`__bss_start`和`__bss_end`表示BBS段的起始和结束地址，这两个地址在lds链接文件中定义，实际编译时进行赋值。
+
+反汇编后的实际结果：
+```
+00000000ff781708 <_main>:
+    ff781708:   58000300    ldr x0, ff781768 <clear_loop+0x18>
+    ff78170c:   927cec1f    and sp, x0, #0xfffffffffffffff0
+    ff781710:   910003e0    mov x0, sp
+    ...
+    ff781744:   9100001f    mov sp, x0
+    ff781748:   58000140    ldr x0, ff781770 <clear_loop+0x20>    #ldr x0, =__bss_start
+    ff78174c:   58000161    ldr x1, ff781778 <clear_loop+0x28>    #ldr x1, =__bss_end
+
+00000000ff781750 <clear_loop>:
+    ...
+    ff781768:   ff79fff0    .inst   0xff79fff0 ; undefined        #SPL栈的起始地址
+    ff78176c:   00000000    udf #0
+    ff781770:   ff7a0000    .inst   0xff7a0000 ; undefined        #BBS段的起始地址
+    ff781774:   00000000    udf #0
+    ff781778:   ff7a03c0    .inst   0xff7a03c0 ; undefined        #BBS段的结束地址
+    ff78177c:   00000000    udf #0
+```
+BBS段的实际大小：0xff7a03c0 - 0xff7a0000 = 0x3c0 = `960Byte`
+
+- bbs段的大小检测：
+  ```
+  #if defined(CONFIG_SPL_BSS_MAX_SIZE)
+  ASSERT(__bss_end - __bss_start <= (CONFIG_SPL_BSS_MAX_SIZE), \
+      "SPL image BSS too big");
+  #endif
+  ```
+  > file: arch/arm/cpu/u-boot-spl.lds
+
+### 栈空间的大小
+
+```
+#define CONFIG_SPL_STACK            (SPL_STACK_BSS_ADDRESS-16)    #栈地址减16(0x10)？？？
+```
+`CONFIG_SPL_STACK`指定栈的起始地址时减去了16Byte，是为了防止栈地址在进行`16Byte对齐`时越界。
+
+spl的`_main`函数部分：
+```
+ENTRY(_main)
+  ldr x0, =(CONFIG_SPL_STACK)
+
+  bic sp, x0, #0xf    /* 16-byte alignment for ABI compliance */
+  mov x0, sp
+  bl  board_init_f_alloc_reserve
+  mov sp, x0
+  /* set up gd here, outside any C code */
+  mov x18, x0
+  bl  board_init_f_init_reserve
+
+  mov x0, #0
+  bl  board_init_f
+
+  ...
+```
+> file: arch/arm/lib/crt0_64.S
+
+
+在SPL为啥没有指定栈空间大小，难道不担心栈溢出或覆盖吗？？？
+
+```
+CONFIG_SPL_SYS_MALLOC_F_LEN=0x3000  #12KB
+```
+当前配置中由于没有定义`CONFIG_SYS_SPL_MALLOC_START`指定堆空间的位置和大小，因此`CONFIG_SPL_SYS_MALLOC_F_LEN`指定的`12KB`全为栈空间大小。
+
+而指定`CONFIG_SPL_SYS_MALLOC_F_LEN`的目的是为了在uboot将spl编译完后进行空间大小限制计算，防止运行过程中栈信息将代码段覆盖。
+
+
+### SPL镜像的大小限制计算
+
+在spl编译阶段会根据以上定义的相关配置，计算spl的大小与实际SARM空间之间的限制，如果超过SARM时将会报出警告。
+
+```
+ifneq ($(CONFIG_SPL_SIZE_LIMIT),0x0)
+SPL_SIZE_CHECK = @$(call size_check,$@,$$(tools/spl_size_limit))
+else
+SPL_SIZE_CHECK =
+endif
+```
+> file: Makefile
+
+在Makefile进行spl实际大小与配置的限制大小的检测，如果不符合限制要求，将报警告提示。而最终的限制大小是由`spl_size_limit`程序计算而来。
+
+```
+int main(int argc, char *argv[])
+{
+    int spl_size_limit = 0;
+
+#ifdef CONFIG_SPL_SIZE_LIMIT
+    spl_size_limit = CONFIG_SPL_SIZE_LIMIT;
+
+#ifdef CONFIG_SPL_SIZE_LIMIT_SUBTRACT_GD
+    spl_size_limit -= GENERATED_GBL_DATA_SIZE;
+#endif
+#ifdef CONFIG_SPL_SIZE_LIMIT_SUBTRACT_MALLOC
+    spl_size_limit -= CONFIG_SPL_SYS_MALLOC_F_LEN;
+#endif
+#ifdef CONFIG_SPL_SIZE_LIMIT_PROVIDE_STACK
+    spl_size_limit -= CONFIG_SPL_SIZE_LIMIT_PROVIDE_STACK;
+#endif
+#endif
+
+    printf("%d", spl_size_limit);
+    return 0;
+}
+```
+> file: tools/spl_size_limit.c
+
+`CONFIG_SPL_SIZE_LIMIT`所限制的SPL大小，包含了堆栈空间的大小。
+
+但是我认为在上面程序中应该减去BBS段的大小，这样剩余的空间就可以是代码段的大小，不然有可能spl过大导致代码段占用BBS段的空间，而使运行时出现异常。
+
+
+### SPL的目的
+
+- 初始化DDR，使用SRAM的小空间换去DDR的大空间。
+- 加载uboot或kernel到DDR（大空间），并运行。
+
+
+## uboot
+
+通用链接文件：`arch/arm/cpu/u-boot.lds`
+
+
+## 其他
+
+### 编译步骤详细信息
+
+在make后追加`V=1`
+
+```
+make V=1 spl/u-boot-spl.bin
+```
+
+### asm-offset
+
+```
+int main(void)
+{
+    /* Round up to make sure size gives nice stack alignment */
+    DEFINE(GENERATED_GBL_DATA_SIZE,
+        (sizeof(struct global_data) + 15) & ~15);
+
+    DEFINE(GENERATED_BD_INFO_SIZE,
+        (sizeof(struct bd_info) + 15) & ~15);
+
+    DEFINE(GD_SIZE, sizeof(struct global_data));
+
+    DEFINE(GD_BD, offsetof(struct global_data, bd));
+#if CONFIG_VAL(SYS_MALLOC_F_LEN)
+    DEFINE(GD_MALLOC_BASE, offsetof(struct global_data, malloc_base));
+#endif
+
+    DEFINE(GD_RELOCADDR, offsetof(struct global_data, relocaddr));
+
+    DEFINE(GD_RELOC_OFF, offsetof(struct global_data, reloc_off));
+
+    DEFINE(GD_START_ADDR_SP, offsetof(struct global_data, start_addr_sp));
+
+    DEFINE(GD_NEW_GD, offsetof(struct global_data, new_gd));
+
+    return 0;
+}
+```
+> file: lib/asm-offsets.c
+
+
+## 参考
+
+- [uboot启动流程——MIPS](https://winddoing.github.io/post/47503.html)
+- [【u-boot-2018.11】make工具之fixdep](https://blog.csdn.net/linuxweiyh/article/details/100179968)

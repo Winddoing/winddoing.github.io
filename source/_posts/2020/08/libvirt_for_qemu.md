@@ -291,3 +291,4 @@ rm page.txt fff.txt -rf
 - [Virtualization - libvirt](https://discourse.ubuntu.com/t/virtualization-libvirt/11522/1)
 - [KVM 虚拟机 XML 配置文件详解](https://blog.51cto.com/4746316/2336524)
 - [虚拟化调试和优化指南](https://access.redhat.com/documentation/zh-cn/red_hat_enterprise_linux/7/html-single/virtualization_tuning_and_optimization_guide/index#sect-Virtualization_Tuning_Optimization_Guide-NUMA-Auto_NUMA_Balancing)
+- [Windows 10 Virtualization with KVM](https://www.funtoo.org/Windows_10_Virtualization_with_KVM)

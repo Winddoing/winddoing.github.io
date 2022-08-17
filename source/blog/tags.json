@@ -13,7 +13,7 @@
 	"debug",
 	"emmc",
 	"fsm",
-    "ffmpeg",
+	"ffmpeg",
 	"gpio",
 	"git",
 	"h264",

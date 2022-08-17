@@ -31,7 +31,7 @@ abbrlink: 774c4289
 [  220.672360] Internal error: Oops: 96000006 [#1] SMP
 [  220.677359] Modules linked in:
 [  220.680627] CPU: 0 PID: 0 Comm: swapper/0 Not tainted 5.4.110-00126-gad9975d0488d-dirty #1
-[  220.689008] Hardware name: vanxum,tequila (DT)
+[  220.689008] Hardware name: van_xum,tequila (DT)
 [  220.693614] pstate: 20000085 (nzCv daIf -PAN -UAO)
 [  220.698626] pc : dwc_descriptor_complete+0x104/0x140
 [  220.703775] lr : dwc_descriptor_complete+0x48/0x140
