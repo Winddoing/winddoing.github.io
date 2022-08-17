@@ -1,5 +1,5 @@
 ---
-title: uboot
+title: uboot启动流程——MIPS
 categories: uboot
 tags:
   - uboot

@@ -86,7 +86,7 @@ Linux 提供了检测死锁的机制，主要分为`D状态死锁`和`R状态死
 
 - R状态死锁
 
-  进程长时间（系统默认配置 60 秒）处于TASK_RUNNING状态垄断CPU而不发生切换，一般情况下是进程关抢占或关中断后长时候执行任务、死循环，此时往往会导致多CPU间互锁，整个系统无法正常调度，导致喂狗线程无法执行，无法喂狗而最终看门狗复位的重启。该问题多为原子操作，spinlock等CPU间并发操作处理不当造成。
+  进程长时间（系统默认配置 60 秒）处于TASK_RUNNING状态垄断CPU而不发生切换，一般情况下是进程`关抢占`或`关中断`后长时候执行任务、死循环，此时往往会导致多CPU间互锁，整个系统无法正常调度，导致喂狗线程无法执行，无法喂狗而最终看门狗复位的重启。该问题多为原子操作，spinlock等CPU间并发操作处理不当造成。
 
   内核R状态死锁检测机制就是`lockdep机制`，入口即是lockup_detector_init函数
 
@@ -173,7 +173,7 @@ Recording WAVE '/tmp/aaa.wav' : Signed 16 bit Little Endian, Rate 48000 Hz, Ster
 [   42.006636]
 [   42.006636] stack backtrace:
 [   42.010996] CPU: 0 PID: 0 Comm: swapper/0 Not tainted 5.4.197-00339-g5ce0e26a142d-dirty #80
-[   42.019343] Hardware name: Vanxum Tequila Evaluation Board (DT)
+[   42.019343] Hardware name: Van_xum Tequila Evaluation Board (DT)
 [   42.025261] Call trace:
 [   42.027714]  dump_backtrace+0x0/0x164
 [   42.031377]  show_stack+0x28/0x34
