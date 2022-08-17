@@ -6,6 +6,7 @@ tags:
   - uboot
 categories:
   - uboot
+abbrlink: c90e9769
 ---
 
 在linux系统下修改uboot环境变量，uboot自带工具`fw_printenv`
