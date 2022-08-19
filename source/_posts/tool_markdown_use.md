@@ -12,13 +12,35 @@ date: 2016-08-19t22:18:39.000z
 
 <!--more-->
 
-## Atom 插件
+## Atom
 
-```
+软件下载地址（国内）：https://npm.taobao.org/mirrors/atom/
+> https://registry.npmmirror.com/-/binary/atom/v1.60.0/atom-amd64.deb
+
+- 插件
+``` shell
 apm install tool-bar markdown-writer tool-bar-markdown-writer markdown-scroll-sync
+apm install minimap  #右边的代码缩略图
 ```
-侧边栏目录树打开关闭快捷键： `Ctrl + k + b`
+侧边栏目录树打开关闭快捷键： `Ctrl + \`
 
+
+正常使用以上命令进行下载过于缓慢，因此可以切换atom源：
+```
+apm config set registry https://registry.npm.taobao.org
+apm config list       #列出当前配置
+apm install --check   #检查是否成功
+```
+
+- 关闭启动欢迎页：File -> Setting -> Packages -> 搜索welcome，点击Disable
+- 关闭拼写检查：File -> Setting -> Packages -> 搜索spell-check，点击Disable
+
+如果插件无法下载，可以在github相应的仓库中单独下载解压到`$HOME.atom/packages`目录下。
+```
+~/.atom/packages
+↪ =>$ls
+markdown-scroll-sync  markdown-writer  minimap  tool-bar  tool-bar-markdown-writer
+```
 
 ## Markdown语法
 
