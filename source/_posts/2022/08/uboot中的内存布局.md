@@ -26,7 +26,7 @@ arm64平台中spl+uboot的内存布局，比如代码段、堆栈等的位置。
 
 在uboot代码中，通过宏`CONFIG_SPL_XXX`来区分SPL。
 
-### 物理SRAM空间
+### SRAM空间
 
 SRAM是spl代码段、数据段的存储空间和运行空间，也就是所有的可操作的地址范围均在SRAM内，spl直接访问总线地址（物理地址）。
 
