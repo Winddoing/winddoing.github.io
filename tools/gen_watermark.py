@@ -30,11 +30,11 @@ def add_watermark_text(img):
 
     w = img.size[0]
     h = img.size[1]
-    wm_font_sz = max(16, int(w/30))
     wm_text_len = len(wm_text)
 
+    wm_font_sz = 16
+    wm_font_color = (220,220,220)
     font_type = ImageFont.truetype("/usr/share/fonts/truetype/freefont/FreeMono.ttf", wm_font_sz)
-    font_color = (220,220,220)
     draw = ImageDraw.Draw(img)
 
     #print("wm_font_sz =",wm_font_sz, " wm_text_lent =", wm_text_len)
@@ -44,13 +44,13 @@ def add_watermark_text(img):
     ww = 0
     for hh in range(1, h):
         if hh % h_step == 0:
-            draw.text(xy=(ww, hh), text=wm_text, fill=font_color, font=font_type)
+            draw.text(xy=(ww, hh), text=wm_text, fill=wm_font_color, font=font_type)
             ww += w_step
             if ww + wm_text_len >= w:
                 ww = 0
 
     if ww == 0:
-        draw.text(xy=(w/4, h - wm_font_sz - 1), text=wm_text, fill=font_color, font=font_type)
+        draw.text(xy=(w/4, h - wm_font_sz - 1), text=wm_text, fill=wm_font_color, font=font_type)
 
 def retain_file(file):
     retain_f = ["alipay.jpg", "weixin.jpg", "Winddoing.jpg", "apple-touch-icon-next.png", \
