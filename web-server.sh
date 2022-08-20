@@ -18,5 +18,8 @@ hexo clean
 
 hexo generate
 
+# 添加水印
+#./tools/gen_watermark.py
+
 #hexo server --debug
 hexo server
