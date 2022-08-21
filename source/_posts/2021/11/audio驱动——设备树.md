@@ -14,25 +14,25 @@ abbrlink: a482f327
 ---
 
 ```
-sound {                                       
-    compatible = "simple-audio-card";         
-    ...                                       
-    simple-audio-card,widgets =               
-        "Headphone", "Headphone Jack";        
-    simple-audio-card,routing =               
-        "Headphone Jack", "HPLEFT",           
-        "Headphone Jack", "HPRIGHT",          
-        "LEFTIN", "HPL",                      
-        "RIGHTIN", "HPR";                     
-    simple-audio-card,aux-devs = <&amp>;      
-    simple-audio-card,cpu {                   
-        sound-dai = <&ssi2>;                  
-    };                                        
-    simple-audio-card,codec {                 
-        sound-dai = <&codec>;                 
-        clocks = ...                          
-    };                                        
-};                                            
+sound {
+    compatible = "simple-audio-card";
+    ...
+    simple-audio-card,widgets =
+        "Headphone", "Headphone Jack";
+    simple-audio-card,routing =
+        "Headphone Jack", "HPLEFT",
+        "Headphone Jack", "HPRIGHT",
+        "LEFTIN", "HPL",
+        "RIGHTIN", "HPR";
+    simple-audio-card,aux-devs = <&amp>;
+    simple-audio-card,cpu {
+        sound-dai = <&ssi2>;
+    };
+    simple-audio-card,codec {
+        sound-dai = <&codec>;
+        clocks = ...
+    };
+};
 ```
 > From： Documentation/devicetree/bindings/sound/simple-card.txt
 

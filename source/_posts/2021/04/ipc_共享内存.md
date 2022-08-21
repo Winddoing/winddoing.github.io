@@ -22,8 +22,8 @@ abbrlink: a83ba476
 创建新的，或者获取已有的共享内存
 
 ``` C
-#include <sys/ipc.h>                           
-#include <sys/shm.h>                           
+#include <sys/ipc.h>
+#include <sys/shm.h>
 
 int shmget(key_t key, size_t size, int shmflg);
 ```
@@ -37,12 +37,12 @@ int shmget(key_t key, size_t size, int shmflg);
 将shmid所指向的共享内存空间映射到进程空间（虚拟内存空间），并返回影射后的起始地址（虚拟地址）。有了这个地址后，就可以通过这个地址对共享内存进行读写操作。
 
 ``` C
-#include <sys/types.h>                                         
-#include <sys/shm.h>                                           
+#include <sys/types.h>
+#include <sys/shm.h>
 
-void *shmat(int shmid, const void *shmaddr, int shmflg);       
+void *shmat(int shmid, const void *shmaddr, int shmflg);
 
-int shmdt(const void *shmaddr);                                
+int shmdt(const void *shmaddr);
 ```
 
 ### shmctl
@@ -50,10 +50,10 @@ int shmdt(const void *shmaddr);
 取消建立的映射
 
 ``` C
-#include <sys/ipc.h>                                      
-#include <sys/shm.h>                                      
+#include <sys/ipc.h>
+#include <sys/shm.h>
 
-int shmctl(int shmid, int cmd, struct shmid_ds *buf);     
+int shmctl(int shmid, int cmd, struct shmid_ds *buf);
 ```
 
 ## 共享内存的使用步骤

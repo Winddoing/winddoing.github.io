@@ -76,10 +76,10 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -D_GNU_SOURCE")
 ``` shell
 # gcc -Q --help=optimizers -O3
 The following options control optimizations:
-  -O<number>                  		
-  -Ofast                      		
-  -Og                         		
-  -Os                         		
+  -O<number>
+  -Ofast
+  -Og
+  -Os
   -faggressive-loop-optimizations 	[enabled]
   -falign-functions           		[enabled]
   -falign-jumps               		[enabled]

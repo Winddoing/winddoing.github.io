@@ -20,19 +20,19 @@ abbrlink: 1a6384db
 ```
 Kernel hacking  --->
   Lock Debugging (spinlocks, mutexes, etc...)  --->
-    [*] Lock debugging: prove locking correctness              
-    [ ] Lock usage statistics                                  
-    -*- RT Mutex debugging, deadlock detection                 
-    -*- Spinlock and rw-lock debugging: basic checks           
-    -*- Mutex debugging: basic checks                          
-    -*- Wait/wound mutex debugging: Slowpath testing           
-    -*- RW Semaphore debugging: basic checks                   
+    [*] Lock debugging: prove locking correctness
+    [ ] Lock usage statistics
+    -*- RT Mutex debugging, deadlock detection
+    -*- Spinlock and rw-lock debugging: basic checks
+    -*- Mutex debugging: basic checks
+    -*- Wait/wound mutex debugging: Slowpath testing
+    -*- RW Semaphore debugging: basic checks
     -*- Lock debugging: detect incorrect freeing of live locks
-    [*] Lock dependency engine debugging                       
-    [ ] Sleep inside atomic section checking                   
-    [ ] Locking API boot-time self-tests                       
-    < > torture tests for locking                              
-    < > Wait/wound mutex selftests                             
+    [*] Lock dependency engine debugging
+    [ ] Sleep inside atomic section checking
+    [ ] Locking API boot-time self-tests
+    < > torture tests for locking
+    < > Wait/wound mutex selftests
 ```
 
 <!--more-->

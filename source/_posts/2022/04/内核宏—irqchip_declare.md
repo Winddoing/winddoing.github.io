@@ -27,19 +27,19 @@ IRQCHIP_DECLARE(gic_400, "arm,gic-400", gic_of_init);
 ```
 
 ``` C
-/* include/linux/of.h */                          
-#define _OF_DECLARE(table, name, compat, fn, fn_type)           \            
-    static const struct of_device_id __of_table_##name      \                
-        __used __section(__##table##_of_table)          \                    
-        __aligned(__alignof__(struct of_device_id))     \                    
-         = { .compatible = compat,              \                            
-             .data = (fn == (fn_type)NULL) ? fn : fn  }                                                                                    
+/* include/linux/of.h */
+#define _OF_DECLARE(table, name, compat, fn, fn_type)           \
+    static const struct of_device_id __of_table_##name      \
+        __used __section(__##table##_of_table)          \
+        __aligned(__alignof__(struct of_device_id))     \
+         = { .compatible = compat,              \
+             .data = (fn == (fn_type)NULL) ? fn : fn  }
 
-typedef int (*of_init_fn_2)(struct device_node *, struct device_node *);     
+typedef int (*of_init_fn_2)(struct device_node *, struct device_node *);
 
 
-#define OF_DECLARE_2(table, name, compat, fn) \                              
-        _OF_DECLARE(table, name, compat, fn, of_init_fn_2)                   
+#define OF_DECLARE_2(table, name, compat, fn) \
+        _OF_DECLARE(table, name, compat, fn, of_init_fn_2)
 ```
 
 `IRQCHIP_DECLARE`宏展开后
@@ -60,33 +60,33 @@ static const struct of_device_id __of_table_gic_400
 
 ``` asm
 /* arch/arm64/kernel/vmlinux.lds.S */
-.init.data : {                                               
-    INIT_DATA       //添加init section                                         
-    INIT_SETUP(16)                                           
-    INIT_CALLS                                               
-    CON_INITCALL                                             
-    INIT_RAM_FS                                              
-    *(.init.rodata.* .init.bss) /* from the EFI stub */      
-}                                                            
+.init.data : {
+    INIT_DATA       //添加init section
+    INIT_SETUP(16)
+    INIT_CALLS
+    CON_INITCALL
+    INIT_RAM_FS
+    *(.init.rodata.* .init.bss) /* from the EFI stub */
+}
 ```
 
 ``` C
 /* include/asm-generic/vmlinux.lds.h */
-/* init and exit section handling */                                
-#define INIT_DATA                           \                       
+/* init and exit section handling */
+#define INIT_DATA                           \
     ...
-    IRQCHIP_OF_MATCH_TABLE()                    \                   
+    IRQCHIP_OF_MATCH_TABLE()                    \
     ...
 
-#define ___OF_TABLE(cfg, name)  _OF_TABLE_##cfg(name)   
-#define __OF_TABLE(cfg, name)   ___OF_TABLE(cfg, name)  
+#define ___OF_TABLE(cfg, name)  _OF_TABLE_##cfg(name)
+#define __OF_TABLE(cfg, name)   ___OF_TABLE(cfg, name)
 #define OF_TABLE(cfg, name) __OF_TABLE(IS_ENABLED(cfg), name)
-#define _OF_TABLE_0(name)                                
-#define _OF_TABLE_1(name)                       \        
-    . = ALIGN(8);                           \            
-    __##name##_of_table = .;                    \        
-    KEEP(*(__##name##_of_table))                    \    
-    KEEP(*(__##name##_of_table_end))                     
+#define _OF_TABLE_0(name)
+#define _OF_TABLE_1(name)                       \
+    . = ALIGN(8);                           \
+    __##name##_of_table = .;                    \
+    KEEP(*(__##name##_of_table))                    \
+    KEEP(*(__##name##_of_table_end))
 
 #define IRQCHIP_OF_MATCH_TABLE() OF_TABLE(CONFIG_IRQCHIP, irqchip)  //CONFIG_IRQCHIP=y
 ```
@@ -117,11 +117,11 @@ start_kernel
 
 ``` C
 /* drivers/irqchip/irqchip.c */
-void __init irqchip_init(void)        
-{                                     
-    of_irq_init(__irqchip_of_table);  
+void __init irqchip_init(void)
+{
+    of_irq_init(__irqchip_of_table);
     acpi_probe_device_table(irqchip);
-}                                     
+}
 ```
 
 ``` C
@@ -129,28 +129,28 @@ void __init irqchip_init(void)
 
 /* of_irq_init - Scan and init matching interrupt controllers in DT */
 void __init of_irq_init(const struct of_device_id *matches)
-{                                                          
+{
 
   /* 扫描并初始化of_intc_desc结构体 */
-  for_each_matching_node_and_match(np, matches, &match) {               
-    ...              
-    desc->irq_init_cb = match->data;                                  
-    desc->dev = of_node_get(np);                                      
-    desc->interrupt_parent = of_irq_find_parent(np);                  
-    if (desc->interrupt_parent == np)                                 
-        desc->interrupt_parent = NULL;                                
-    list_add_tail(&desc->list, &intc_desc_list);                      
-  }       
+  for_each_matching_node_and_match(np, matches, &match) {
+    ...
+    desc->irq_init_cb = match->data;
+    desc->dev = of_node_get(np);
+    desc->interrupt_parent = of_irq_find_parent(np);
+    if (desc->interrupt_parent == np)
+        desc->interrupt_parent = NULL;
+    list_add_tail(&desc->list, &intc_desc_list);
+  }
 
   /* 回调初始化接口，data成员的定义 */
-  while (!list_empty(&intc_desc_list)) {                                                                                                          
-    list_for_each_entry_safe(desc, temp_desc, &intc_desc_list, list) {      
-        ...                 
-        ret = desc->irq_init_cb(desc->dev,                                  
-                    desc->interrupt_parent);                                
-        ...                                  
-        list_add_tail(&desc->list, &intc_parent_list);                      
-    }                                                                       
-  }                                                          
+  while (!list_empty(&intc_desc_list)) {
+    list_for_each_entry_safe(desc, temp_desc, &intc_desc_list, list) {
+        ...
+        ret = desc->irq_init_cb(desc->dev,
+                    desc->interrupt_parent);
+        ...
+        list_add_tail(&desc->list, &intc_parent_list);
+    }
+  }
 }
 ```

@@ -23,13 +23,13 @@ abbrlink: aabf231e
 ## printk级别
 
 ```
-int console_printk[4] = {                                        
-    CONSOLE_LOGLEVEL_DEFAULT,   /* console_loglevel */           
-    MESSAGE_LOGLEVEL_DEFAULT,   /* default_message_loglevel */   
-    CONSOLE_LOGLEVEL_MIN,       /* minimum_console_loglevel */   
-    CONSOLE_LOGLEVEL_DEFAULT,   /* default_console_loglevel */   
-};                                                               
-EXPORT_SYMBOL_GPL(console_printk);                               
+int console_printk[4] = {
+    CONSOLE_LOGLEVEL_DEFAULT,   /* console_loglevel */
+    MESSAGE_LOGLEVEL_DEFAULT,   /* default_message_loglevel */
+    CONSOLE_LOGLEVEL_MIN,       /* minimum_console_loglevel */
+    CONSOLE_LOGLEVEL_DEFAULT,   /* default_console_loglevel */
+};
+EXPORT_SYMBOL_GPL(console_printk);
 ```
 > kernel/printk/printk.c
 
@@ -44,18 +44,18 @@ CONFIG_CONSOLE_LOGLEVEL_DEFAULT=7 //内核配置
 kernel日志等级：
 
 ```
-/* integer equivalents of KERN_<LEVEL> */                                
-#define LOGLEVEL_SCHED      -2  /* Deferred messages from sched code     
-                     * are set to this special level */                  
-#define LOGLEVEL_DEFAULT    -1  /* default (or last) loglevel */         
-#define LOGLEVEL_EMERG      0   /* system is unusable */                 
-#define LOGLEVEL_ALERT      1   /* action must be taken immediately */   
-#define LOGLEVEL_CRIT       2   /* critical conditions */                
-#define LOGLEVEL_ERR        3   /* error conditions */                   
-#define LOGLEVEL_WARNING    4   /* warning conditions */                 
-#define LOGLEVEL_NOTICE     5   /* normal but significant condition */   
-#define LOGLEVEL_INFO       6   /* informational */                      
-#define LOGLEVEL_DEBUG      7   /* debug-level messages */               
+/* integer equivalents of KERN_<LEVEL> */
+#define LOGLEVEL_SCHED      -2  /* Deferred messages from sched code
+                     * are set to this special level */
+#define LOGLEVEL_DEFAULT    -1  /* default (or last) loglevel */
+#define LOGLEVEL_EMERG      0   /* system is unusable */
+#define LOGLEVEL_ALERT      1   /* action must be taken immediately */
+#define LOGLEVEL_CRIT       2   /* critical conditions */
+#define LOGLEVEL_ERR        3   /* error conditions */
+#define LOGLEVEL_WARNING    4   /* warning conditions */
+#define LOGLEVEL_NOTICE     5   /* normal but significant condition */
+#define LOGLEVEL_INFO       6   /* informational */
+#define LOGLEVEL_DEBUG      7   /* debug-level messages */
 ```
 > include/linux/kern_levels.h
 
@@ -72,11 +72,11 @@ kernel日志等级：
 #define CONSOLE_LOGLEVEL_MOTORMOUTH 15  /* You can't shut this one up */
 
 
-static inline void console_verbose(void)                  
-{                                                         
-    if (console_loglevel)                                 
-        console_loglevel = CONSOLE_LOGLEVEL_MOTORMOUTH;   
-}                                                         
+static inline void console_verbose(void)
+{
+    if (console_loglevel)
+        console_loglevel = CONSOLE_LOGLEVEL_MOTORMOUTH;
+}
 ```
 > include/linux/printk.h
 

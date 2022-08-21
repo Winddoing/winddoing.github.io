@@ -19,16 +19,16 @@ date: 2017-07-11 23:07:24
 ## 数据类型
 
 ``` C
-/*                                                                                         
- * info for buffer allocation                                                              
- */                                                                                        
-struct snd_dma_buffer {                                                                    
-    struct snd_dma_device dev;  /* device type */                                          
-    unsigned char *area;    /* virtual pointer */                                          
-    dma_addr_t addr;    /* physical address */                                             
-    size_t bytes;       /* buffer size in bytes */                                         
-    void *private_data; /* private for allocator; don't touch */                           
-};                                                                                         
+/*
+ * info for buffer allocation
+ */
+struct snd_dma_buffer {
+    struct snd_dma_device dev;  /* device type */
+    unsigned char *area;    /* virtual pointer */
+    dma_addr_t addr;    /* physical address */
+    size_t bytes;       /* buffer size in bytes */
+    void *private_data; /* private for allocator; don't touch */
+};
 ```
 
 ## 申请
@@ -38,8 +38,8 @@ struct snd_dma_buffer {
 ### 申请当前的stream支持的最大的DMA buffer内存空间.
 
 ``` C
-snd_pcm_lib_preallocate_pages_for_all(pcm, SNDRV_DMA_TYPE_DEV,       
-    card->dev, buffer_size, buffer_bytes_max);                       
+snd_pcm_lib_preallocate_pages_for_all(pcm, SNDRV_DMA_TYPE_DEV,
+    card->dev, buffer_size, buffer_bytes_max);
 ```
 >dma buffer获得后，即是获得了dma操作的源地址，那么目的地址在哪里？
 
@@ -63,8 +63,8 @@ snd_pcm_lib_malloc_pages(substream, params_buffer_bytes(params));
 
 大小:
 ``` C
-runtime->period_size = params_period_size(params);    
-runtime->periods = params_periods(params);            
+runtime->period_size = params_period_size(params);
+runtime->periods = params_periods(params);
 runtime->buffer_size = params_buffer_size(params);
 ```
 
@@ -130,13 +130,13 @@ runtime->buffer_size = params_buffer_size(params);
 ### 数据结构
 
 ```
-struct snd_interval {                      
-    unsigned int min, max;  //最小,最大值               
-    unsigned int openmin:1, //最小值的开区间,使能,默认闭区间               
-             openmax:1,                    
-             integer:1,     //使能后取范围内的整数               
-             empty:1;                      
-};                                         
+struct snd_interval {
+    unsigned int min, max;  //最小,最大值
+    unsigned int openmin:1, //最小值的开区间,使能,默认闭区间
+             openmax:1,
+             integer:1,     //使能后取范围内的整数
+             empty:1;
+};
 ```
 
 ### 实现
@@ -144,66 +144,66 @@ struct snd_interval {
 int xxx_open()
 {
 
- ret = snd_pcm_hw_constraint_integer(runtime, SNDRV_PCM_HW_PARAM_PERIOD_BYTES);                
- if (ret < 0)                                                                                  
-     return ret;                                                                               
+ ret = snd_pcm_hw_constraint_integer(runtime, SNDRV_PCM_HW_PARAM_PERIOD_BYTES);
+ if (ret < 0)
+     return ret;
 
- if (as_dma->dma_fth_quirk) {                                                                  
-     snd_pcm_hw_rule_add(substream->runtime, 0,                                                
-             SNDRV_PCM_HW_PARAM_PERIOD_BYTES,                                                  
-             ingenic_as_dma_period_bytes_quirk,                                                
-             NULL,                                                                             
-             SNDRV_PCM_HW_PARAM_FRAME_BITS,                                                    
-             SNDRV_PCM_HW_PARAM_PERIOD_BYTES,                                                  
-             -1);                                                                              
+ if (as_dma->dma_fth_quirk) {
+     snd_pcm_hw_rule_add(substream->runtime, 0,
+             SNDRV_PCM_HW_PARAM_PERIOD_BYTES,
+             ingenic_as_dma_period_bytes_quirk,
+             NULL,
+             SNDRV_PCM_HW_PARAM_FRAME_BITS,
+             SNDRV_PCM_HW_PARAM_PERIOD_BYTES,
+             -1);
  }
-}                                                                                             
+}
 ```
 
 ```
-static int ingenic_as_dma_period_bytes_quirk(struct snd_pcm_hw_params *params,                               
-        struct snd_pcm_hw_rule *rule)                                                                        
-{                                                                                                            
-    struct snd_interval *iperiod_bytes = hw_param_interval(params,                                           
-            SNDRV_PCM_HW_PARAM_PERIOD_BYTES);                                                                
-    struct snd_interval *iframe_bits = hw_param_interval(params,                                             
-            SNDRV_PCM_HW_PARAM_FRAME_BITS);                                                                  
-    int align_bytes = DCM_TSZ_MAX_WORD << 2; //32 world                                                                
-    int min_frame_bytes = iframe_bits->min >> 3;                                                             
-    int max_frame_bytes = iframe_bits->max >> 3;                                                             
-    int min_period_bytes = iperiod_bytes->min;                                                               
-    int max_period_bytes = iperiod_bytes->max;                                                               
-    int min_align_bytes, max_align_bytes;                                                                    
-    struct snd_interval nperiod_bytes;                                                                       
+static int ingenic_as_dma_period_bytes_quirk(struct snd_pcm_hw_params *params,
+        struct snd_pcm_hw_rule *rule)
+{
+    struct snd_interval *iperiod_bytes = hw_param_interval(params,
+            SNDRV_PCM_HW_PARAM_PERIOD_BYTES);
+    struct snd_interval *iframe_bits = hw_param_interval(params,
+            SNDRV_PCM_HW_PARAM_FRAME_BITS);
+    int align_bytes = DCM_TSZ_MAX_WORD << 2; //32 world
+    int min_frame_bytes = iframe_bits->min >> 3;
+    int max_frame_bytes = iframe_bits->max >> 3;
+    int min_period_bytes = iperiod_bytes->min;
+    int max_period_bytes = iperiod_bytes->max;
+    int min_align_bytes, max_align_bytes;
+    struct snd_interval nperiod_bytes;
 
-    snd_interval_any(&nperiod_bytes);                                                                        
-    min_align_bytes = lcm(align_bytes, min_frame_bytes);                                                     
-    min_period_bytes = (min_period_bytes + min_align_bytes - 1) / min_align_bytes;                           
-    nperiod_bytes.min = min_period_bytes * min_align_bytes;                                                  
+    snd_interval_any(&nperiod_bytes);
+    min_align_bytes = lcm(align_bytes, min_frame_bytes);
+    min_period_bytes = (min_period_bytes + min_align_bytes - 1) / min_align_bytes;
+    nperiod_bytes.min = min_period_bytes * min_align_bytes;
 
-    max_align_bytes = lcm(align_bytes, max_frame_bytes);                                                     
-    max_period_bytes = max_period_bytes / max_align_bytes;                                                   
-    nperiod_bytes.max = max_period_bytes * max_align_bytes;                                                  
+    max_align_bytes = lcm(align_bytes, max_frame_bytes);
+    max_period_bytes = max_period_bytes / max_align_bytes;
+    nperiod_bytes.max = max_period_bytes * max_align_bytes;
 
-    DMA_DEBUG_MSG("==> %s %d : align_bytes = %d \n\                                                          
-            frame_bytes.min (%d)\t\tframe_bytes.max (%d) \n\                                                 
-            period_bytes.min  [%d]\tperiod_bytes.max  [%d] \n\                                               
-            nperiod_bytes.min [%d]\tnperiod_bytes.max [%d]\n",                                               
-            __func__, __LINE__, align_bytes,                                                                 
-            min_frame_bytes, max_frame_bytes, iperiod_bytes->min,                                            
-            iperiod_bytes->max, nperiod_bytes.min, nperiod_bytes.max);                                       
-    return snd_interval_refine(iperiod_bytes, &nperiod_bytes);                                               
-}                                                                                                            
+    DMA_DEBUG_MSG("==> %s %d : align_bytes = %d \n\
+            frame_bytes.min (%d)\t\tframe_bytes.max (%d) \n\
+            period_bytes.min  [%d]\tperiod_bytes.max  [%d] \n\
+            nperiod_bytes.min [%d]\tnperiod_bytes.max [%d]\n",
+            __func__, __LINE__, align_bytes,
+            min_frame_bytes, max_frame_bytes, iperiod_bytes->min,
+            iperiod_bytes->max, nperiod_bytes.min, nperiod_bytes.max);
+    return snd_interval_refine(iperiod_bytes, &nperiod_bytes);
+}
 ```
 
 ### 调用过程
 
 ```
-int snd_pcm_hw_refine(struct snd_pcm_substream *substream,                
-              struct snd_pcm_hw_params *params)                           
-{                                                                         
+int snd_pcm_hw_refine(struct snd_pcm_substream *substream,
+              struct snd_pcm_hw_params *params)
+{
     ...
-    changed = r->func(params, r);        
+    changed = r->func(params, r);
     ...
 }
 ```
