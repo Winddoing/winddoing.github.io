@@ -86,13 +86,13 @@ CONFIG_SPL_SYS_MALLOC_F_LEN=0x3000  #12KB
 
 链接文件的处理命令：
 
-```
-aarch64-none-linux-gnu-gcc -E -Wp,-MD,spl/.u-boot-spl.lds.d -D__KERNEL__ -D__UBOOT__  -DCONFIG_SPL_BUILD  -D__ARM__          
--mstrict-align  -ffunction-sections -fdata-sections -fno-common -ffixed-r9     
--fno-common -ffixed-x18 -pipe -march=armv8-a -D__LINUX_ARM_ARCH__=8  
--I./arch/arm/mach-vanxum/include -Ispl/include -Iinclude   -I./arch/arm/include -include ./include/linux/kconfig.h  
+``` shell
+aarch64-none-linux-gnu-gcc -E -Wp,-MD,spl/.u-boot-spl.lds.d -D__KERNEL__ -D__UBOOT__  -DCONFIG_SPL_BUILD  -D__ARM__
+-mstrict-align  -ffunction-sections -fdata-sections -fno-common -ffixed-r9
+-fno-common -ffixed-x18 -pipe -march=armv8-a -D__LINUX_ARM_ARCH__=8
+-I./arch/arm/mach-vanxum/include -Ispl/include -Iinclude   -I./arch/arm/include -include ./include/linux/kconfig.h
 -nostdinc -isystem /home/xx/tools/prebuilts/aarch64-none-linux-gnu/bin/../lib/gcc/aarch64-none-linux-gnu/10.2.1/include
--include ./include/u-boot/u-boot.lds.h -include ./include/config.h -DCPUDIR=arch/arm/cpu/armv8  
+-include ./include/u-boot/u-boot.lds.h -include ./include/config.h -DCPUDIR=arch/arm/cpu/armv8
 -DIMAGE_MAX_SIZE="(SZ_64K + SZ_32K + SZ_16K -SZ_4K)" -DIMAGE_TEXT_BASE=0xFF781000
 -ansi -D__ASSEMBLY__ -x assembler-with-cpp -std=c99 -P
 -o spl/u-boot-spl.lds arch/arm/cpu/armv8/u-boot-spl.lds
@@ -235,7 +235,7 @@ $ aarch64-none-linux-gnu-objdump -D spl/u-boot-spl > a.s
 ```
 
 清除BBS段内存：
-```
+``` arm
 /*
  * Clear BSS section
  */
@@ -294,7 +294,7 @@ BBS段的实际大小：0xff7a03c0 - 0xff7a0000 = 0x3c0 = `960Byte`
 `CONFIG_SPL_STACK`指定栈的起始地址时减去了16Byte，是为了防止栈地址在进行`16Byte对齐`时越界。
 
 spl的`_main`函数部分：
-```
+``` arm
 ENTRY(_main)
   ldr x0, =(CONFIG_SPL_STACK)
 
@@ -317,17 +317,17 @@ ENTRY(_main)
 在SPL为啥没有指定栈空间大小，难道不担心栈溢出或覆盖吗？？？
 
 ``` C
-ulong board_init_f_alloc_reserve(ulong top)                                       
-{                                                                               
-    /* Reserve early malloc arena */                                            
-#if CONFIG_VAL(SYS_MALLOC_F_LEN)                                                
-    top -= CONFIG_VAL(SYS_MALLOC_F_LEN);                                        
-#endif                                                                          
-    /* LAST : reserve GD (rounded up to a multiple of 16 bytes) */              
-    top = rounddown(top-sizeof(struct global_data), 16);                        
+ulong board_init_f_alloc_reserve(ulong top)
+{
+    /*Reserve early malloc arena*/
+#if CONFIG_VAL(SYS_MALLOC_F_LEN)
+    top -= CONFIG_VAL(SYS_MALLOC_F_LEN);
+#endif
+    /*LAST : reserve GD (rounded up to a multiple of 16 bytes)*/
+    top = rounddown(top-sizeof(struct global_data), 16);
 
-    return top;                                                                 
-}                                                                               
+    return top;
+}
 ```
 
 ```
@@ -346,13 +346,13 @@ CONFIG_SPL_SYS_MALLOC_F_LEN=0x3000  #12KB
 #### early malloc arena
 
 ``` C
-void board_init_f_init_reserve(ulong base)    
-{    
-  ...                                         
-  #if CONFIG_VAL(SYS_MALLOC_F_LEN)                    
-    /* go down one 'early malloc arena' */          
-    gd->malloc_base = base;                         
-  #endif                                              
+void board_init_f_init_reserve(ulong base)
+{
+  ...
+  #if CONFIG_VAL(SYS_MALLOC_F_LEN)
+    /*go down one 'early malloc arena'*/
+    gd->malloc_base = base;
+  #endif
   ...
 }
 ```
@@ -455,12 +455,12 @@ CONFIG_SYS_MALLOC_F_LEN=0x3000  #12KB
 
 配置文件中定义的配置参数：
 ```
-#define CONFIG_SYS_SDRAM_BASE       0x00000000       
+#define CONFIG_SYS_SDRAM_BASE       0x00000000
 
-#define CONFIG_SYS_INIT_SP_ADDR     0x00300000       
-#define CONFIG_SYS_MALLOC_LEN       SZ_32M                                                                
+#define CONFIG_SYS_INIT_SP_ADDR     0x00300000
+#define CONFIG_SYS_MALLOC_LEN       SZ_32M
 
-#define CONFIG_SYS_LOAD_ADDR        0x00880000     
+#define CONFIG_SYS_LOAD_ADDR        0x00880000
 #define CONFIG_SYS_BOOTM_LEN        SZ_64M
 ```
 - `CONFIG_SYS_SDRAM_BASE`: 指定SDRAM的物理起始地址, **这里必须是0**
@@ -477,10 +477,10 @@ CONFIG_SYS_MALLOC_F_LEN=0x3000  #12KB
 
 链接文件的处理命令：
 ```
-aarch64-none-linux-gnu-gcc -E -Wp,-MD,./.u-boot.lds.d -D__KERNEL__ -D__UBOOT__   -D__ARM__           
--fno-pic  -mstrict-align  -ffunction-sections -fdata-sections -fno-common -ffixed-r9     
--fno-common -ffixed-x18 -pipe -march=armv8-a -D__LINUX_ARM_ARCH__=8  
--I./arch/arm/mach-vanxum/include -Iinclude   -I./arch/arm/include -include ./include/linux/kconfig.h  
+aarch64-none-linux-gnu-gcc -E -Wp,-MD,./.u-boot.lds.d -D__KERNEL__ -D__UBOOT__   -D__ARM__
+-fno-pic  -mstrict-align  -ffunction-sections -fdata-sections -fno-common -ffixed-r9
+-fno-common -ffixed-x18 -pipe -march=armv8-a -D__LINUX_ARM_ARCH__=8
+-I./arch/arm/mach-vanxum/include -Iinclude   -I./arch/arm/include -include ./include/linux/kconfig.h
 -nostdinc -isystem /home/xx/tools/prebuilts/aarch64-none-linux-gnu/bin/../lib/gcc/aarch64-none-linux-gnu/10.2.1/include
 -ansi -include ./include/u-boot/u-boot.lds.h
 -DCPUDIR=arch/arm/cpu/armv8  -D__ASSEMBLY__ -x assembler-with-cpp -std=c99 -P
@@ -646,24 +646,24 @@ Key to Flags:
 BBS段在编辑阶段根据实际使用的大小确定，只是在uboot启动阶段将其对应的地址位置清除一下(与SPL中操作一样)。
 
 ```
-000000000020180c <relocation_return>:                                          
-  20180c:   97fffa3d    bl  200100 <c_runtime_cpu_setup>                       
-  201810:   58000140    ldr x0, 201838 <clear_loop+0x20>                       
-  201814:   58000161    ldr x1, 201840 <clear_loop+0x28>                       
+000000000020180c <relocation_return>:
+  20180c:   97fffa3d    bl  200100 <c_runtime_cpu_setup>
+  201810:   58000140    ldr x0, 201838 <clear_loop+0x20>
+  201814:   58000161    ldr x1, 201840 <clear_loop+0x28>
 
-0000000000201818 <clear_loop>:                                                 
-  201818:   f800841f    str xzr, [x0], #8                                      
-  20181c:   eb01001f    cmp x0, x1                                             
-  201820:   54ffffc3    b.cc    201818 <clear_loop>  // b.lo, b.ul, b.last     
-  201824:   aa1203e0    mov x0, x18                                            
-  201828:   f9403a41    ldr x1, [x18, #112]                                    
-  20182c:   14005304    b   21643c <board_init_r>                              
-  201830:   00300000    .inst   0x00300000 ; NYI                               
-  201834:   00000000    udf #0                                                 
-  201838:   00286d10    .inst   0x00286d10 ; NYI       #__bss_start                        
-  20183c:   00000000    udf #0                                                 
-  201840:   002966c8    .inst   0x002966c8 ; NYI       #__bss_end                        
-  201844:   00000000    udf #0                                                 
+0000000000201818 <clear_loop>:
+  201818:   f800841f    str xzr, [x0], #8
+  20181c:   eb01001f    cmp x0, x1
+  201820:   54ffffc3    b.cc    201818 <clear_loop>  // b.lo, b.ul, b.last
+  201824:   aa1203e0    mov x0, x18
+  201828:   f9403a41    ldr x1, [x18, #112]
+  20182c:   14005304    b   21643c <board_init_r>
+  201830:   00300000    .inst   0x00300000 ; NYI
+  201834:   00000000    udf #0
+  201838:   00286d10    .inst   0x00286d10 ; NYI       #__bss_start
+  20183c:   00000000    udf #0
+  201840:   002966c8    .inst   0x002966c8 ; NYI       #__bss_end
+  201844:   00000000    udf #0
 ```
 
 ### 堆栈空间大小
@@ -671,17 +671,17 @@ BBS段在编辑阶段根据实际使用的大小确定，只是在uboot启动阶
 栈空间的设置与SPL代码复用，只是配置参数不同，当前配置的栈大小相同，均为`12KB`
 
 ``` C
-ulong board_init_f_alloc_reserve(ulong top)                               
-{                                                                         
-    /* Reserve early malloc arena */                                      
-#if CONFIG_VAL(SYS_MALLOC_F_LEN)                                          
-    top -= CONFIG_VAL(SYS_MALLOC_F_LEN);                                  
-#endif                                                                    
-    /* LAST : reserve GD (rounded up to a multiple of 16 bytes) */        
-    top = rounddown(top-sizeof(struct global_data), 16);                  
+ulong board_init_f_alloc_reserve(ulong top)
+{
+    /* Reserve early malloc arena */
+#if CONFIG_VAL(SYS_MALLOC_F_LEN)
+    top -= CONFIG_VAL(SYS_MALLOC_F_LEN);
+#endif
+    /* LAST : reserve GD (rounded up to a multiple of 16 bytes) */
+    top = rounddown(top-sizeof(struct global_data), 16);
 
-    return top;                                                           
-}                                                                         
+    return top;
+}
 ```
 > file: common/init/board_init.c
 
@@ -702,19 +702,19 @@ CONFIG_SYS_MALLOC_F_LEN=0x3000  #12KB
 在配置文件中定义了malloc的空间大小`CONFIG_SYS_MALLOC_LEN=SZ_32M`，那其地址范围是？？？，也就是堆的起始地址。
 
 ``` C
-/*                                                                              
- * If the environment is in RAM, allocate extra space for it in the malloc      
- * region.                                                                      
- */                                                                             
-#if defined(CONFIG_ENV_IS_EMBEDDED)                                             
-#define TOTAL_MALLOC_LEN    CONFIG_SYS_MALLOC_LEN                               
-#elif (CONFIG_ENV_ADDR + CONFIG_ENV_SIZE < CONFIG_SYS_MONITOR_BASE) || \        
+/*
+ * If the environment is in RAM, allocate extra space for it in the malloc
+ * region.
+ */
+#if defined(CONFIG_ENV_IS_EMBEDDED)
+#define TOTAL_MALLOC_LEN    CONFIG_SYS_MALLOC_LEN
+#elif (CONFIG_ENV_ADDR + CONFIG_ENV_SIZE < CONFIG_SYS_MONITOR_BASE) || \
       (CONFIG_ENV_ADDR >= CONFIG_SYS_MONITOR_BASE + CONFIG_SYS_MONITOR_LEN) || \
-      defined(CONFIG_ENV_IS_IN_NVRAM)                                           
-#define TOTAL_MALLOC_LEN    (CONFIG_SYS_MALLOC_LEN + CONFIG_ENV_SIZE)           
-#else                                                                           
-#define TOTAL_MALLOC_LEN    CONFIG_SYS_MALLOC_LEN                                     
-#endif                                                                          
+      defined(CONFIG_ENV_IS_IN_NVRAM)
+#define TOTAL_MALLOC_LEN    (CONFIG_SYS_MALLOC_LEN + CONFIG_ENV_SIZE)
+#else
+#define TOTAL_MALLOC_LEN    CONFIG_SYS_MALLOC_LEN
+#endif
 ```
 > file: include/env_internal.h
 
@@ -724,25 +724,25 @@ CONFIG_SYS_MALLOC_F_LEN=0x3000  #12KB
 static int initr_malloc(void)
 {
   ...
-  malloc_start = gd->relocaddr - TOTAL_MALLOC_LEN;                                                                                                                                                                                      
-     mem_malloc_init((ulong)map_sysmem(malloc_start, TOTAL_MALLOC_LEN),          
-             TOTAL_MALLOC_LEN);       
-  ...                                 
+  malloc_start = gd->relocaddr - TOTAL_MALLOC_LEN;
+     mem_malloc_init((ulong)map_sysmem(malloc_start, TOTAL_MALLOC_LEN),
+             TOTAL_MALLOC_LEN);
+  ...
 }
 ```
 在`initr_malloc`函数中对malloc进行初始化，此时可以其确定malloc的起始地址与`gd->relocaddr`相关。
 
 ``` C
-static int setup_dest_addr(void)     
-{                                    
+static int setup_dest_addr(void)
+{
   ...
-#ifdef CONFIG_SYS_SDRAM_BASE                              
-  gd->ram_base = CONFIG_SYS_SDRAM_BASE;                 
-#endif                                                    
+#ifdef CONFIG_SYS_SDRAM_BASE
+  gd->ram_base = CONFIG_SYS_SDRAM_BASE;
+#endif
   gd->ram_top = gd->ram_base + get_effective_memsize();
-  gd->ram_top = board_get_usable_ram_top(gd->mon_len);  
-  gd->relocaddr = gd->ram_top;                          
-  debug("Ram top: %08lX\n", (ulong)gd->ram_top);        
+  gd->ram_top = board_get_usable_ram_top(gd->mon_len);
+  gd->relocaddr = gd->ram_top;
+  debug("Ram top: %08lX\n", (ulong)gd->ram_top);
 
   ...
 }
@@ -752,10 +752,10 @@ static int setup_dest_addr(void)
 get_effective_memsize获取有效的内存大小`gd->ram_size`, 而ram_size是解析设备树中的`memory`节点获取。
 
 ```
-memory@00000000 {                  
+memory@00000000 {
     reg = <0x0 0x0 0x0 0x78000000>;
-    device_type = "memory";        
-};                                 
+    device_type = "memory";
+};
 ```
 ram_size = 0x78000000 = 1920MB = 1.9GB
 
