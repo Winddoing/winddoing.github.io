@@ -143,25 +143,25 @@ ALSA为什么这样做？因为数据缓存区可能很大，一次传输可能�
 在驱动中进行dma数据传输时，需要通过`snd_pcm_lib_buffer_bytes(substream)`获取传输数据的buffer大小和`snd_pcm_lib_period_bytes(substream)`每次dma传输的数据大小
 
 ``` C
-/**                                                                                             
- * snd_pcm_lib_buffer_bytes - Get the buffer size of the current PCM in bytes                   
- * @substream: PCM substream                                                                    
- */                                                                                             
-static inline size_t snd_pcm_lib_buffer_bytes(struct snd_pcm_substream *substream)              
-{                                                                                               
-    struct snd_pcm_runtime *runtime = substream->runtime;                                       
-    return frames_to_bytes(runtime, runtime->buffer_size);                                      
-}                                                                                               
+/**
+ * snd_pcm_lib_buffer_bytes - Get the buffer size of the current PCM in bytes
+ * @substream: PCM substream
+ */
+static inline size_t snd_pcm_lib_buffer_bytes(struct snd_pcm_substream *substream)
+{
+    struct snd_pcm_runtime *runtime = substream->runtime;
+    return frames_to_bytes(runtime, runtime->buffer_size);
+}
 
-/**                                                                                             
- * snd_pcm_lib_period_bytes - Get the period size of the current PCM in bytes                   
- * @substream: PCM substream                                                                    
- */                                                                                             
-static inline size_t snd_pcm_lib_period_bytes(struct snd_pcm_substream *substream)              
-{                                                                                               
-    struct snd_pcm_runtime *runtime = substream->runtime;                                       
-    return frames_to_bytes(runtime, runtime->period_size);                                      
-}                                                                                               
+/**
+ * snd_pcm_lib_period_bytes - Get the period size of the current PCM in bytes
+ * @substream: PCM substream
+ */
+static inline size_t snd_pcm_lib_period_bytes(struct snd_pcm_substream *substream)
+{
+    struct snd_pcm_runtime *runtime = substream->runtime;
+    return frames_to_bytes(runtime, runtime->period_size);
+}
 ```
 - period_size可以控制pcm中断的产生，也就是period_size大小的数据传输完需要一个dma中断。
 - buffer_size,period_size的计算？
@@ -177,21 +177,21 @@ alsa会根据上面的最大最小值算出一个合适的值作为runtime->peri
 在`sound/core/pcm_native.c`中的`snd_pcm_hw_constraints_init`函数实现了计算各种alsa定义的一些参数规则，其中包含了`buffer_size`， `period_size`
 
 ``` C
-err = snd_pcm_hw_rule_add(runtime, 0, SNDRV_PCM_HW_PARAM_PERIOD_SIZE,                 
-              snd_pcm_hw_rule_div, NULL,                                              
-              SNDRV_PCM_HW_PARAM_BUFFER_SIZE, SNDRV_PCM_HW_PARAM_PERIODS, -1);        
-if (err < 0)                                                                          
-    return err;                                                                       
-err = snd_pcm_hw_rule_add(runtime, 0, SNDRV_PCM_HW_PARAM_PERIOD_SIZE,                 
-              snd_pcm_hw_rule_mulkdiv, (void*) 8,                                     
-              SNDRV_PCM_HW_PARAM_PERIOD_BYTES, SNDRV_PCM_HW_PARAM_FRAME_BITS, -1);    
-if (err < 0)                                                                          
-    return err;                                                                       
-err = snd_pcm_hw_rule_add(runtime, 0, SNDRV_PCM_HW_PARAM_PERIOD_SIZE,                 
-              snd_pcm_hw_rule_muldivk, (void*) 1000000,                               
-              SNDRV_PCM_HW_PARAM_PERIOD_TIME, SNDRV_PCM_HW_PARAM_RATE, -1);           
-if (err < 0)                                                                          
-    return err;                                                                       
+err = snd_pcm_hw_rule_add(runtime, 0, SNDRV_PCM_HW_PARAM_PERIOD_SIZE,
+              snd_pcm_hw_rule_div, NULL,
+              SNDRV_PCM_HW_PARAM_BUFFER_SIZE, SNDRV_PCM_HW_PARAM_PERIODS, -1);
+if (err < 0)
+    return err;
+err = snd_pcm_hw_rule_add(runtime, 0, SNDRV_PCM_HW_PARAM_PERIOD_SIZE,
+              snd_pcm_hw_rule_mulkdiv, (void*) 8,
+              SNDRV_PCM_HW_PARAM_PERIOD_BYTES, SNDRV_PCM_HW_PARAM_FRAME_BITS, -1);
+if (err < 0)
+    return err;
+err = snd_pcm_hw_rule_add(runtime, 0, SNDRV_PCM_HW_PARAM_PERIOD_SIZE,
+              snd_pcm_hw_rule_muldivk, (void*) 1000000,
+              SNDRV_PCM_HW_PARAM_PERIOD_TIME, SNDRV_PCM_HW_PARAM_RATE, -1);
+if (err < 0)
+    return err;
 ```
 
 参考： [Alsa period_size/periods/buffer_size计算逻辑](https://blog.csdn.net/u012769691/article/details/46727543)

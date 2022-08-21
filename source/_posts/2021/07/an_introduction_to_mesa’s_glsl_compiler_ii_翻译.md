@@ -216,8 +216,8 @@ Original IR:
 
 ```
 [prev inst] -> mod -> [next inst]
-              /   \            
-           op0     op1  
+              /   \
+           op0     op1
 ```
 
 Lowered IR:

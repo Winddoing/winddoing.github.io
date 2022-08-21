@@ -65,17 +65,17 @@ IPMI Version              : 2.0
 
 ``` shell
 # ipmitool sensor | grep "Temp "
-BB Inlet Temp    | 25.000     | degrees C  | ok    | na        | 5.000     | 10.000    | 60.000    | 65.000    | na        
-BB BMC Temp      | 36.000     | degrees C  | ok    | na        | 5.000     | 10.000    | 85.000    | 90.000    | na        
-BB CPU1 VR Temp  | 47.000     | degrees C  | ok    | na        | 5.000     | 10.000    | 110.000   | 115.000   | na        
-BB CPU2 VR Temp  | 37.000     | degrees C  | ok    | na        | 5.000     | 10.000    | 110.000   | 115.000   | na        
-BB MISC VR Temp  | 49.000     | degrees C  | ok    | na        | 5.000     | 10.000    | 110.000   | 115.000   | na        
-BB Outlet Temp   | 46.000     | degrees C  | ok    | na        | 5.000     | 10.000    | 110.000   | 115.000   | na        
-SSB Temp         | 42.000     | degrees C  | ok    | na        | 5.000     | 10.000    | 98.000    | 103.000   | na        
-LAN NIC Temp     | 56.000     | degrees C  | ok    | na        | 5.000     | 10.000    | 115.000   | 120.000   | na        
-Mem 1 VRD Temp   | 39.000     | degrees C  | ok    | na        | 5.000     | 10.000    | 110.000   | 115.000   | na        
-Mem 2 VRD Temp   | 25.000     | degrees C  | ok    | na        | 5.000     | 10.000    | 110.000   | 115.000   | na        
-EV CPU1VR Temp   | 37.000     | degrees C  | ok    | na        | 5.000     | 10.000    | 110.000   | 115.000   | na             
+BB Inlet Temp    | 25.000     | degrees C  | ok    | na        | 5.000     | 10.000    | 60.000    | 65.000    | na
+BB BMC Temp      | 36.000     | degrees C  | ok    | na        | 5.000     | 10.000    | 85.000    | 90.000    | na
+BB CPU1 VR Temp  | 47.000     | degrees C  | ok    | na        | 5.000     | 10.000    | 110.000   | 115.000   | na
+BB CPU2 VR Temp  | 37.000     | degrees C  | ok    | na        | 5.000     | 10.000    | 110.000   | 115.000   | na
+BB MISC VR Temp  | 49.000     | degrees C  | ok    | na        | 5.000     | 10.000    | 110.000   | 115.000   | na
+BB Outlet Temp   | 46.000     | degrees C  | ok    | na        | 5.000     | 10.000    | 110.000   | 115.000   | na
+SSB Temp         | 42.000     | degrees C  | ok    | na        | 5.000     | 10.000    | 98.000    | 103.000   | na
+LAN NIC Temp     | 56.000     | degrees C  | ok    | na        | 5.000     | 10.000    | 115.000   | 120.000   | na
+Mem 1 VRD Temp   | 39.000     | degrees C  | ok    | na        | 5.000     | 10.000    | 110.000   | 115.000   | na
+Mem 2 VRD Temp   | 25.000     | degrees C  | ok    | na        | 5.000     | 10.000    | 110.000   | 115.000   | na
+EV CPU1VR Temp   | 37.000     | degrees C  | ok    | na        | 5.000     | 10.000    | 110.000   | 115.000   | na
 ```
 
 ## 配置用户名密码

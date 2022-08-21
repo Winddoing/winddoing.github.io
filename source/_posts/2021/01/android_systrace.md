@@ -49,10 +49,10 @@ python platform-tools/systrace/systrace.py  -b $TRACE_BUFFER_SZ_KB --from-file t
 
 | 快捷键 | 描述 |
 |:------:|:----:|
-|   w    | 放大 |  
-|   s    | 缩小 |  
-|   a    | 左移 |  
-|   e    | 右移 |  
+|   w    | 放大 |
+|   s    | 缩小 |
+|   a    | 左移 |
+|   e    | 右移 |
 
 ## 使用Systrace 检测卡顿丢帧问题
 

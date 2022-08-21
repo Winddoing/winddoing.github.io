@@ -143,7 +143,7 @@ Dump of assembler code for function dwc_descriptor_complete:
    0xffffffc01040f70c <+72>:	mov	x21, x0
    0xffffffc01040f710 <+76>:	ldr	w0, [x19, #64]   // 第二个入参的第一次使用 ( dma_cookie_complete(txd);) <------- [7]
    0xffffffc01040f714 <+80>:	add	x3, x19, #0x40   //x3=x19+0x40, 0xffffffc010ed6460+0x40=0xffffffc010ed64a0
-   0xffffffc01040f718 <+84>:	cmp	w0, #0x0         
+   0xffffffc01040f718 <+84>:	cmp	w0, #0x0
    0xffffffc01040f71c <+88>:	b.gt	0xffffffc01040f724 <dwc_descriptor_complete+96>  //判断w0大于0时，进行跳转
    0xffffffc01040f720 <+92>:	brk	#0x800
    0xffffffc01040f724 <+96>:	ldr	x1, [x3, #16]
