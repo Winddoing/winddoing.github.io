@@ -10,16 +10,16 @@ comments: false
 
 - 静态RAM（SRAM）
 
-![SRAM](images/sram.JPG)
+![SRAM](/books/深入理解计算机系统/images/sram.JPG)
 
 - 动态RAM（DRAM）
 
-![DRAM](images/dram.JPG)
+![DRAM](/books/深入理解计算机系统/images/dram.JPG)
 
 - `闪存`(flash memory):一类非易失性存储器,基于`EEPROM`(电子可擦除PROM(Electrically Erasable PROM))
 - `固件`(firmware): 存储在ROM(Read-Only Memory)设备中的程序
 
-![CPU MEM BUS](images/cpu_mem_bus.JPG)
+![CPU MEM BUS](/books/深入理解计算机系统/images/cpu_mem_bus.JPG)
 
 * I/O桥的作用---`翻译`
 > I/O桥将系统总线（system bus）的电子信号翻译成存储器总线（memory bus）的电子信号
@@ -37,7 +37,7 @@ movl A %eax
 
 ## 磁盘存储
 
-![CPU MEM DISK](images/cpu_mem_disk.JPG)
+![CPU MEM DISK](/books/深入理解计算机系统/images/cpu_mem_disk.JPG)
 
 读磁盘操作：
 - CPU通过命令、逻辑块号和目的存储器地址写到与磁盘相关的存储器映射地址，发起一个磁盘读操作
@@ -56,7 +56,7 @@ movl A %eax
 
 ## 存储器层次结构
 
-![存储器层次结构](images/存储器层次结构.JPG)
+![存储器层次结构](/books/深入理解计算机系统/images/存储器层次结构.JPG)
 
 ### 缓存
 
@@ -92,7 +92,7 @@ movl A %eax
 
 ## 高速缓存存储器
 
-![高速缓存总线架构](images/高速缓存总线架构.JPG)
+![高速缓存总线架构](/books/深入理解计算机系统/images/高速缓存总线架构.JPG)
 
 ### 通用的高速缓存存储器结构
 
@@ -101,7 +101,7 @@ movl A %eax
 高速缓存主要是将主存中的数据以一定的方式或者策略映射其中，以提高CPU的读写速度，减少数据访问周期。而映射到在Cache中的数据可以被CPU访问同样是通过地址检索，为了提高CPU检索的速度，将地址进行了划分，分成不同的组（Cache set），每个组分成不同行（Cache line）， 每个行分成不同的数据块（block）来提高访问速度。
 
 地址划分如下：
-![Cache内存地址划分](images/cache_mem_addr_layout.png)
+![Cache内存地址划分](/books/深入理解计算机系统/images/cache_mem_addr_layout.png)
 
 |      类型      | 位宽 |                        含义                         |
 |:--------------:|:----:|:---------------------------------------------------|
@@ -111,7 +111,7 @@ movl A %eax
 > 注： m = t + s + b
 
 不同的分类将Cache组织起来，高速缓存（S，E, B, m）的通用组织：
-![高速缓存通用组织](images/cache_layout_struct.png)
+![高速缓存通用组织](/books/深入理解计算机系统/images/cache_layout_struct.png)
 高速缓存是一个高速缓存组（Cache set）的数组，每一个组包含一个或多个行，每个行包含一个有效位、一些标记位、以及一个数据块
 > 高速缓存的大小：`C = S x E x B`
 
@@ -138,7 +138,7 @@ movl A %eax
 #### 为什么用中间的位做索引？
 
 如果使用高位做索引，那么一些连续的存储器块就会映射到相同的高速缓存块中
-![组索引](images/cache_set_index.JPG)
+![组索引](/books/深入理解计算机系统/images/cache_set_index.JPG)
 
 ### 直接映射高速缓存（direct-mapped cache）
 
@@ -186,7 +186,7 @@ movl A %eax
 
 > CPU架构：Open SPARC T1
 
-![SPARC core](images/sparc_cpu_core.JPG)
+![SPARC core](/books/深入理解计算机系统/images/sparc_cpu_core.JPG)
 
 引入Write Buffer，其优点在于当D-Cache的脏行被替换，数据写回时，此时Cache无需等待可以继续工作，即：其认为数据回写入 Write Buffer即认为此回写操作已完成，无需等待下一级存储器的缓慢响应。Write-through之Cache亦是如此。
 
