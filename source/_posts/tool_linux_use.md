@@ -11,6 +11,16 @@ Linux下常用工具：
 
 <!--more-->
 
+## Zeal
+
+各种语言的离线开发文档
+
+https://zealdocs.org/
+
+``` shell
+sudo apt install zeal
+```
+
 ## yuv rgba player
 
 - https://github.com/IENT/YUView

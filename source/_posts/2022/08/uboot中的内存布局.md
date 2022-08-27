@@ -29,9 +29,7 @@ arm64平台中spl+uboot的内存布局，比如代码段、堆栈等的位置。
 ### SRAM空间
 
 SRAM是spl代码段、数据段的存储空间和运行空间，也就是所有的可操作的地址范围均在SRAM内，spl直接访问总线地址（物理地址）。
-
 总大小`256KB`，地址范围`0xFF78 0000～0xFF7B FFFF`
-
 bootrom将spl外部存储介质拷贝到SRAM中特定地址（SPL代码段基址），并从该该地址跳转执行spl代码。
 
 ### 自定义参数配置
@@ -160,12 +158,12 @@ SECTIONS
 
 ![uboot SPL SRAM 布局](/images/2022/08/uboot_spl_sram_布局.png)
 >空间大了，分配起来就是任性！
-> 为了使SPL可用镜像尽可能的大，spl可以利用bootrom的堆栈空间，这样编译生成的spl镜像最大就可以到188KB
+> ~为了使SPL可用镜像尽可能的大，spl可以利用bootrom的堆栈空间，这样编译生成的spl镜像最大就可以到188KB，将BBS和栈空间移至最顶部bootrom使用的bbs和栈空间处。~
+> SRAM的后半部分空间（0xff7a2000～0Xff7bffff）,大小0x1E000=`120KB`，是为ATF阶段的bl31运行预留，这样上图中配置的32KB大小的BBS段，使用可用空间也只有`8KB`。
 
 - BBS段定义的过大，实际`2K`应该就差不多了。
 - 栈空间只指定了起始地址，为啥没有定义其大小？？
 - malloc的地址范围？？？—— 当前SPL中没有配置这部分空间，因此也就无法使用malloc。
-
 
 实际spl中各段的地址与大小：
 ```
@@ -419,9 +417,50 @@ spl在内存初始化完成后，将uboot从外部存储介质拷贝到DDR中的
 spl确定uboot代码段基址的方法，先读取1个block的头部信息，并解析出其中uboot的加载地址（代码段基址）。
 
 
+## ATF
+
+- ATF阶段的代码是否存放DDR？？？
+- ATF运行阶段的运行栈空间？？？
+- 进入内核阶段后ATF内存空间如何被保护？？？
+
+
+### bl31
+
+``` arm
+00000000ff7a2000 <bl31_entrypoint>:
+    ff7a2000:	aa0003f4 	mov	x20, x0
+    ff7a2004:	aa0103f5 	mov	x21, x1
+    ff7a2008:	aa0203f6 	mov	x22, x2
+    ff7a200c:	aa0303f7 	mov	x23, x3
+    ff7a2010:	10023f80 	adr	x0, ff7a6800 <sync_exception_sp_el0>
+    ff7a2014:	d51ec000 	msr	vbar_el3, x0
+    ff7a2018:	d5033fdf 	isb
+    ff7a201c:	940002d7 	bl	ff7a2b78 <reset_handler>
+```
+bl31的代码段和运行时的栈空间都在SRAM中。
+
+
+```
+atf {
+    description = "ARM Trusted Firmware";
+    data = /incbin/("bl31.bin");
+    type = "firmware";
+    os = "arm-trusted-firmware";
+    arch = "arm64";
+    compression = "none";
+    load = <0xff7a2000>;
+    entry = <0xff7a2000>;
+};
+```
+> FIT格式的配置文件u-boot.its
+
+
 ## uboot
 
 uboot的运行空间在DDR中，因此编译生成的镜像是对DDR地址空间的划分。
+
+uboot阶段包含atf和实际uboot程序。
+
 
 ### DDR
 
