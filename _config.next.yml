@@ -443,8 +443,8 @@ font:
   # Global font settings used for all elements inside <body>.
   global:
     external: true
-    family: Noto Serif SC
-    size:
+    family: Microsoft YaHei
+    size: 0.9
 
   # Font settings for site title (.site-title).
   title:
