@@ -13,6 +13,26 @@ date: 2018-02-04 23:07:24
 
 <!--more-->
 
+## for循环拼接字符串
+
+```
+# 在当前目录下创建文本文件temp，如果文件存在则清空文件
+$(> temp)
+# for 循环将参数追加到当前目录的temp文件，逗号分隔，echo -n 不换行
+for i in $*;do
+	((n++))
+	# 从第四个开始拼接
+	if [[ n -gt 3 ]];then
+		echo -n ${i}, >> temp
+	fi
+done
+# h2取tempfile文本里的字符串
+h2=$(cat temp)
+# 将字符串最后的一个逗号去掉
+h2=${h2%*,}
+echo $h2
+```
+
 ## 参数组合执行
 
 ``` shell

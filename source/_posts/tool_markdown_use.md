@@ -21,6 +21,7 @@ date: 2016-08-19t22:18:39.000z
 ``` shell
 apm install tool-bar markdown-writer tool-bar-markdown-writer markdown-scroll-sync
 apm install minimap  #右边的代码缩略图
+apm install vim-mode-plus #vim操作模式,依赖npm install underscore-plus
 ```
 侧边栏目录树打开关闭快捷键： `Ctrl + \`
 
