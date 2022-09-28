@@ -90,6 +90,25 @@ sudo apt install virturlbox virtualbox-ext-pack
 快捷键： `Host + l`
 
 
+### win7虚拟机启动时异常终止
+
+版本：6.1
+
+virtualbox升级后造成的现象，错误码：NS_ERROR_FAILURE (0x80004005)
+
+解决方法：
+
+关闭`USB控制器`或将其切换到USB1.1上，虚拟机就可以正常启动。
+
+根本原因是virtualbox升级后Extension Pack没有跟着升级所致。
+
+重新执行以下命令即可：
+```
+sudo apt update
+sudo apt install virtualbox virtualbox-ext-pack
+```
+
+
 ## 音视频文件分析工具 -- MediaInfo
 
 ``` shell
