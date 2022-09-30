@@ -8,24 +8,25 @@ comments: false
 > 存放地址：[https://winddoing.coding.net/public/blog/tools/git/files](https://winddoing.coding.net/public/blog/tools/git/files)
 
 
-|       软件名称        | 下载地址                                                                                             | 备注                         |
-|:---------------------:|:-----------------------------------------------------------------------------------------------------|:-----------------------------|
-|     OnlyStopWatch     | [Download](https://winddoing.coding.net/p/blog/d/tools/git/raw/master/OnlyStopWatch.exe)         | 秒表，毫秒级                 |
-|    Putty0.70-64bit    | [Download](https://winddoing.coding.net/p/blog/d/tools/git/raw/master/putty.exe)                 | ssh                          |
-|        tftpd32        | [Download](https://winddoing.coding.net/p/blog/d/tools/git/raw/master/tftpd32.exe)               | 搭建Window下tftp服务         |
-| ElecardStreamEyeTools | [Download](https://winddoing.coding.net/p/blog/d/tools/git/raw/master/ElecardStreamEyeTools.rar) | 编码视频的可视化(解析es流)   |
-|     edid_manager      | [Download](https://winddoing.coding.net/p/blog/d/tools/git/raw/master/edid_managerv1x0.zip)      | 显示器edid的获取和解析工具   |
-|        EEditZ         | [Download](https://winddoing.coding.net/p/blog/d/tools/git/raw/master/setup_EEditZ-0p96.zip)     | EDID解析编辑工具             |
-|        gvim81         | [Download](https://winddoing.coding.net/p/blog/d/tools/git/raw/master/gvim81.exe)                | gvim81（网速不好时下载方便） |
-|   Git-2.21.0-64-bit   | [Download](https://winddoing.coding.net/p/blog/d/tools/git/raw/master/Git-2.21.0-64-bit.exe)     | git(网速不好时下载方便)      |
-| Beyond Compare 3.3.4  | [Download](https://winddoing.coding.net/p/blog/d/tools/git/raw/master/beyondcompare3.3.4.zip)    | 文件对比，内含注册码         |
-|     typora(64bit)     | [Download](https://winddoing.coding.net/p/blog/d/tools/git/raw/master/typora-setup-x64.exe)      | Markdown编辑器               |
-|    TrafficMonitor     | [Download](https://github.com/zhongyang219/TrafficMonitor/releases)  | 用于显示当前网速、CPU及内存利用率的桌面悬浮窗软件  |
-|     secureFx_Crt      | [Download](https://winddoing.coding.net/p/blog/d/tools/git/raw/master/secureFx_Crt.tar.xz)       | SecureCRT & SecureFX终端仿真软件 |
-|   BusHound+v6.0.1     | [Download](https://winddoing.coding.net/p/blog/d/tools/git/raw/master/BusHound+v6.0.1.7z)        | USB抓包工具 |
-|   win10专业版激活     | [Download](https://winddoing.coding.net/p/blog/d/tools/git/raw/master/神龙激活工具.rar)          | win10, Microsoft Office |
-|        飞秋           | [Download](https://winddoing.coding.net/p/blog/d/tools/git/raw/master/飞秋FeiQ.exe)              | 局域网通信工具（聊天传文件） |
-|      GifCam           | [Download](https://winddoing.coding.net/p/blog/d/tools/git/raw/master/GifCam.exe)              | 制作gif文件，可以用于录屏 |
+|       软件名称        | 下载地址                                                                                         | 备注                                               |
+|:---------------------:|:-------------------------------------------------------------------------------------------------|:---------------------------------------------------|
+|     OnlyStopWatch     | [Download](https://winddoing.coding.net/p/blog/d/tools/git/raw/master/OnlyStopWatch.exe)         | 秒表，毫秒级                                       |
+|    Putty0.70-64bit    | [Download](https://winddoing.coding.net/p/blog/d/tools/git/raw/master/putty.exe)                 | ssh                                                |
+|     secureFx_Crt      | [Download](https://winddoing.coding.net/p/blog/d/tools/git/raw/master/secureFx_Crt.tar.xz)       | SecureCRT & SecureFX终端仿真软件                   |
+|       MobaXterm       | [Download](https://mobaxterm.mobatek.net/download.html)                                          | 全能终端,ssh、串口，可以代替上面两种                         |
+|        tftpd32        | [Download](https://winddoing.coding.net/p/blog/d/tools/git/raw/master/tftpd32.exe)               | 搭建Window下tftp服务                               |
+| ElecardStreamEyeTools | [Download](https://winddoing.coding.net/p/blog/d/tools/git/raw/master/ElecardStreamEyeTools.rar) | 编码视频的可视化(解析es流)                         |
+|     edid_manager      | [Download](https://winddoing.coding.net/p/blog/d/tools/git/raw/master/edid_managerv1x0.zip)      | 显示器edid的获取和解析工具                         |
+|        EEditZ         | [Download](https://winddoing.coding.net/p/blog/d/tools/git/raw/master/setup_EEditZ-0p96.zip)     | EDID解析编辑工具                                   |
+|        gvim81         | [Download](https://winddoing.coding.net/p/blog/d/tools/git/raw/master/gvim81.exe)                | gvim81（网速不好时下载方便）                       |
+|   Git-2.21.0-64-bit   | [Download](https://winddoing.coding.net/p/blog/d/tools/git/raw/master/Git-2.21.0-64-bit.exe)     | git(网速不好时下载方便)                            |
+| Beyond Compare 3.3.4  | [Download](https://winddoing.coding.net/p/blog/d/tools/git/raw/master/beyondcompare3.3.4.zip)    | 文件对比，内含注册码                               |
+|     typora(64bit)     | [Download](https://winddoing.coding.net/p/blog/d/tools/git/raw/master/typora-setup-x64.exe)      | Markdown编辑器                                     |
+|    TrafficMonitor     | [Download](https://github.com/zhongyang219/TrafficMonitor/releases)                              | 用于显示当前网速、CPU及内存利用率的桌面悬浮窗软件  |
+|   BusHound+v6.0.1     | [Download](https://winddoing.coding.net/p/blog/d/tools/git/raw/master/BusHound+v6.0.1.7z)        | USB抓包工具                                        |
+|   win10专业版激活     | [Download](https://winddoing.coding.net/p/blog/d/tools/git/raw/master/神龙激活工具.rar)          | win10, Microsoft Office                            |
+|         飞秋          | [Download](https://winddoing.coding.net/p/blog/d/tools/git/raw/master/飞秋FeiQ.exe)              | 局域网通信工具（聊天传文件）                       |
+|        GifCam         | [Download](https://winddoing.coding.net/p/blog/d/tools/git/raw/master/GifCam.exe)                | 制作gif文件，可以用于录屏                          |
 
 > 注: 所有工具均为互联网下载，暂存这里只为下次使用方便
 

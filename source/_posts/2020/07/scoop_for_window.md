@@ -49,6 +49,17 @@ Invoke-Expression (New-Object System.Net.WebClient).DownloadString('https://get.
 
   > https://github.com/lukesampson/scoop-extras
 
+### 官方bucket的国内镜像
+
+```
+scoop bucket rm main
+scoop bucket add main https://mirror.nju.edu.cn/git/scoop-main.git
+scoop bucket add extras https://mirror.nju.edu.cn/git/scoop-extras.git
+
+scoop update
+```
+
+
 ## 帮助文档
 
 ```powershaell
@@ -112,3 +123,6 @@ scoop update * && scoop cleanup *
 ## 参考
 
 - [Scoop](https://scoop.sh/)
+- [scoop-bucket, gitee](https://gitee.com/scoop-bucket)
+- [国内安装scoop的保姆教程](https://blog.csdn.net/sinshine86/article/details/126786780)
+- [#Scoop windows下的包管理器](https://blog.csdn.net/qq_40302536/article/details/116097541)
