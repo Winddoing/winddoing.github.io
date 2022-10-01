@@ -3,7 +3,7 @@ layout: post
 title: Energy Aware Scheduling
 date: '2019-12-15 19:15'
 tags:
-  - sched
+  - schedule
 categories:
   - Linux内核
 abbrlink: 58199

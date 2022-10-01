@@ -3,7 +3,7 @@ title: 【转】网络库libevent、libev、libuv对比
 categories: 网络
 tags:
   - 事件
-  - lib
+  - event
 abbrlink: 12060
 date: 2018-06-29 08:07:24
 ---

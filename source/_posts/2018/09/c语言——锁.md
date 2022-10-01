@@ -3,7 +3,8 @@ layout: post
 title: C语言——锁
 date: '2018-09-19 15:49'
 tags:
-  - lock
+  - c
+  - sync
 categories:
   - 程序设计
 abbrlink: 37537

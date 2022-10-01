@@ -3,6 +3,7 @@ layout: post
 title: Ticket spinlocks
 date: '2019-04-21 14:27'
 tags:
+  - sync
   - spinlock
 categories:
   - Linux内核
