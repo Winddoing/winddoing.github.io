@@ -4,6 +4,7 @@ title: linux内核spinlock死锁——两核互锁
 date: '2021-11-15 09:18'
 tags:
   - linux
+  - sync
   - spinlock
   - 死锁
 categories:

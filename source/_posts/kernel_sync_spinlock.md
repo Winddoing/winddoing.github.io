@@ -5,6 +5,7 @@ categories:
   - 同步
 tags:
   - linux
+  - sync
   - spinlock
 abbrlink: 62201
 date: 2018-03-29 23:07:24

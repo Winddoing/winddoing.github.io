@@ -4,6 +4,7 @@ categories:
   - Linux内核
   - 同步
 tags:
+  - sync
   - spinlock
   - 死锁
 abbrlink: 28384

@@ -3,6 +3,7 @@ layout: post
 title: '[译]MCS locks and qspinlocks'
 date: '2019-04-20 13:49'
 tags:
+  - sync
   - spinlock
 categories:
   - Linux内核

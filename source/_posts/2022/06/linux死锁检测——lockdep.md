@@ -4,7 +4,7 @@ title: Linux死锁检测——Lockdep
 date: '2022-06-21 17:05'
 tags:
   - linux
-  - lock
+  - sync
   - 死锁
   - 进程
 categories:

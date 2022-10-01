@@ -2,7 +2,7 @@
 title: double free or corruption (fasttop)
 categories: 程序设计
 tags:
-  - app
+  - c
   - free
 abbrlink: 27831
 date: 2018-01-15 23:07:24
