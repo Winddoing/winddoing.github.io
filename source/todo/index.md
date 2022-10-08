@@ -15,7 +15,8 @@ comments: true
 * [AndroidXRef](http://androidxref.com/) —— 在线阅读Android源码[aospxref](http://aospxref.com/)
 * [Android社区](https://www.androidos.net.cn/) —— Android相关文章代码
 * [清华大学开源软件镜像站](https://mirrors.tuna.tsinghua.edu.cn/) —— 大部分开源软件代码(android linux)
-* [asciiflow](http://asciiflow.com/) —— ASCII画图
+* [asciiflow](http://asciiflow.com/) —— ASCII画图，无法输入中文
+* [asciiflow中文](http://asciiflow.cn/) —— ASCII画图，可以输入中文
 * [codelf](https://unbug.github.io/codelf/) —— 搜索更好的变量名，函数名
 * ~~[kindle推](http://www.kindlepush.com/main) —— kindle电子书搜索~~
 * [dirtysalt's homepage](https://dirtysalt.github.io/html/index.html) —— 一个有阅读价值的博客
