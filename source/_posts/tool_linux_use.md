@@ -1,6 +1,8 @@
 ---
 title: Linux下常用工具
-categories: 工具
+categories:
+  - 工具
+  - linux
 tags:
   - linux
 abbrlink: 36295
@@ -90,7 +92,7 @@ sudo apt install virturlbox virtualbox-ext-pack
 快捷键： `Host + l`
 
 
-### win7虚拟机启动时异常终止
+### 虚拟机启动时异常终止
 
 版本：6.1
 
@@ -107,6 +109,16 @@ virtualbox升级后造成的现象，错误码：NS_ERROR_FAILURE (0x80004005)
 sudo apt update
 sudo apt install virtualbox virtualbox-ext-pack
 ```
+
+### ubuntu虚拟机中访问共享文件夹，无权限
+
+解决权限不足问题的方法就是将自己登录的用户，添加到vboxsf组中
+
+```
+sudo usermod -aG vboxsf $(whoami)
+sudo reboot
+```
+> 说明：`usermod -aG <group> <user>`将用户加入到（追加到）组中，其中选项[-aG]是追加到组的意思
 
 
 ## 音视频文件分析工具 -- MediaInfo
@@ -125,6 +137,17 @@ sudo apt-get install mediainfo mediainfo-gui
 - **draw.io**: [draw.io](https://www.draw.io/) —— 在线开源免费的画流程图，思维导图，界面设计等
 
   - 桌面版： https://github.com/jgraph/drawio-desktop
+
+
+## ASCII流程图
+
+官网：https://asciiflow.com
+Github：https://github.com/lewish/asciiflow
+
+默认官网可以使用但是无法输入中文，因此可以使用下面这个链接
+
+- https://asciiflow.cn
+
 
 ## 思维导图 —— XMind
 
