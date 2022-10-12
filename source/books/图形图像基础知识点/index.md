@@ -18,3 +18,16 @@ comments: true
     - `B帧`：
     - [视频I帧/P帧/B帧](http://www.voidcn.com/article/p-tzrfgaot-bcg.html)
 * 宏块：
+
+
+## 编码
+
+### RLE
+
+`行程编码`（Run Length Encoding，RLE), 又称`游程编码`、行程长度编码、变动长度编码 等，是一种统计编码。主要技术是检测重复的比特或字符序列，并用它们的出现次数取而代之。比较适合于二值图像的编码，但是不适用于连续色调阁像的压缩，例如日常生活中的照 片。为了达到较好的压缩效果，有时行程编码和其他一些编码方法混合使用。
+
+
+行程编码（Run-length Coding)是相对简单的编码技术，主要思路是将一个相同值 的连续串用一个代表值和串长来代替。例如，有一个字符串“aaabccddddd”，经过行程 编码后可以用“3a1b2c5d”来表示。
+
+> https://github.com/clibs/rle.git
+> https://github.com/powturbo/TurboRLE.git
