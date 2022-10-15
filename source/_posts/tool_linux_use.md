@@ -75,6 +75,15 @@ sudo apt install gnome-tweak-tool
 - `workspace-grid`： 多工作区
 
 
+## 下载器
+
+### Free Download Manager
+
+可以快速下载，相同的下载链接比浏览器下载速度快。
+
+> https://www.freedownloadmanager.org/zh/
+
+
 ## 画图
 
 ``` shell
