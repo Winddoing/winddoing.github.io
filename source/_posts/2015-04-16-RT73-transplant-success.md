@@ -3,7 +3,8 @@ date: '2015-04-16 01:49'
 layout: post
 title: rt73网卡的移植
 thread: 164
-categories: 系统应用
+categories:
+  - 系统应用
 tags:
   - rt73
   - arm

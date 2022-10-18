@@ -1,6 +1,7 @@
 ---
 title: 【转】网络库libevent、libev、libuv对比
-categories: 网络
+categories:
+  - 网络
 tags:
   - 事件
   - event

@@ -1,6 +1,7 @@
 ---
 title: IPI通信（SMP）
-categories: Linux内核
+categories:
+  - Linux内核
 tags:
   - ipi
   - smp

@@ -1,6 +1,7 @@
 ---
 title: 流媒体之RTSP/RTP/RTCP
-categories: 多媒体
+categories:
+  - 多媒体
 tags:
   - rtp
 abbrlink: 34052

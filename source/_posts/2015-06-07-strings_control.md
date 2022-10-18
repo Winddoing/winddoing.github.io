@@ -3,8 +3,10 @@ date: '2015-06-07 10:50'
 layout: post
 title: linux下字符串操作常用函数
 thread: 166
-categories: 程序设计
-tags: 字符串
+categories:
+  - 程序设计
+tags:
+  - 字符串
 abbrlink: 43508
 ---
 

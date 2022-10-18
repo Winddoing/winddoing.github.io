@@ -7,16 +7,16 @@ tags:
   - h265
 categories:
   - 多媒体
+abbrlink: 5b258677
 ---
 
 视频编解码分析工具，主要针对AVC/HEVC码流的分析
 
 <!--more-->
 
-
 ## Elecard StreamEye Demo
 
-该软件可以对`AVC`和`HEVC`码流进行解析，但是付费软件，可以免费试用30天。
+该软件可以对`AVC`和`HEVC`码流进行解析，但是付费软件，可以免费试用30天。如果超过30天后，将无法正常显示解码后的图像。
 
 官网：https://www.elecard.com/software
 

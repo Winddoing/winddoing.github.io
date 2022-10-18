@@ -1,6 +1,7 @@
 ---
 title: 【转】python练习项目
-categories: Python
+categories:
+  - Python
 tags:
   - python
 abbrlink: 9636

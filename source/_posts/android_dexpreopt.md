@@ -1,6 +1,7 @@
 ---
 title: Android ART编译预优化
-categories: Android
+categories:
+  - Android
 tags:
   - android
 abbrlink: 40126

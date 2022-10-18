@@ -6,7 +6,7 @@ tags:
   - arm
   - 寄存器
 categories:
-  - arm
+  - ARM
   - 汇编
 abbrlink: 25025
 ---

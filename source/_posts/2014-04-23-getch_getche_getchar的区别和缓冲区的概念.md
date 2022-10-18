@@ -2,7 +2,8 @@
 layout: post
 title: getch、getche、getchar的区别和缓冲区的概念
 thread: 164
-categories: 程序设计
+categories:
+  - 程序设计
 tags:
   - 输入输出
   - getch

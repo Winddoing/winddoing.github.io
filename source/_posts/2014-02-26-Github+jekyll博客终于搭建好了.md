@@ -2,8 +2,10 @@
 layout: post
 title: Github搭建博客的简单记录
 thread: 146
-categories: 工具
-tags: git
+categories:
+  - 工具
+tags:
+  - git
 abbrlink: 32555
 date: 2014-02-26 00:00:00
 ---

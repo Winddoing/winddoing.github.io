@@ -1,6 +1,7 @@
 ---
 title: uboot启动流程——MIPS
-categories: uboot
+categories:
+  - uboot
 tags:
   - uboot
 abbrlink: 47503

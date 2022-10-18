@@ -1,6 +1,7 @@
 ---
 title: arm交叉编译工具
-categories: 编译工具
+categories:
+  - 编译工具
 tags:
   - arm
   - 交叉编译工具

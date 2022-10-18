@@ -1,6 +1,7 @@
 ---
 title: sd卡测速
-categories: 设备驱动
+categories:
+  - 设备驱动
 tags:
   - mmc
   - sd

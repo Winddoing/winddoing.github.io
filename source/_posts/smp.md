@@ -1,6 +1,7 @@
 ---
 title: SMP--对称多处理器
-categories: 计算机系统
+categories:
+  - 计算机系统
 tags:
   - cpu
   - smp

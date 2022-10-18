@@ -1,6 +1,7 @@
 ---
 title: cpu_cache_init与rixi
-categories: Linux内核
+categories:
+  - Linux内核
 tags:
   - kernel
   - cache

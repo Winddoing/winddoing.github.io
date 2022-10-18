@@ -34,3 +34,7 @@ sed -i "s/xdate/$xdate/g" `grep -l xdate source/about/index.md`
 echo "exit. path: $PWD"
 
 cat package.json
+
+
+echo "========== Update tag and categories ==========="
+./source/blog/update_tags_and_categories.sh

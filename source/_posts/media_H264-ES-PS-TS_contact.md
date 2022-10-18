@@ -1,6 +1,7 @@
 ---
 title: H264 ES PS TS流之间的联系
-categories: 多媒体
+categories:
+  - 多媒体
 tags:
   - h264
 abbrlink: 51817

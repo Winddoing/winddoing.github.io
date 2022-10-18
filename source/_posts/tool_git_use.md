@@ -1,6 +1,7 @@
 ---
 title: Git操作
-categories: 工具
+categories:
+  - 工具
 tags:
   - git
 abbrlink: 53101

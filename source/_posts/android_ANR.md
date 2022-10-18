@@ -1,6 +1,7 @@
 ---
 title: Android ANR分析
-categories: Android
+categories:
+  - Android
 tags:
   - android
 abbrlink: 35493

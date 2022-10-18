@@ -6,7 +6,7 @@ tags:
   - arm64
   - cache
 categories:
-  - arm
+  - ARM
 abbrlink: 223c631e
 ---
 

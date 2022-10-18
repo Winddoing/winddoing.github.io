@@ -1,6 +1,7 @@
 ---
 title: 一行代码的作用
-categories: 随笔
+categories:
+  - 随笔
 tags:
   - code
 abbrlink: c6279e60

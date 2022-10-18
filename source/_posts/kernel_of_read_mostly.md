@@ -1,6 +1,7 @@
 ---
 title: Linux内核中的read_mostly
-categories: Linux内核
+categories:
+  - Linux内核
 tags:
   - 编译
 abbrlink: 59553

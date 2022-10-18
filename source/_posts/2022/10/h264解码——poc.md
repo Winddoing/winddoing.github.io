@@ -86,24 +86,24 @@ Picture Order Count，即图像顺序号，主要用于标识图象的播放顺�
 计算方法：直接通过frame_num推导，应用在没有连续的非参考帧的情况下（即一个间隔最多只能包含一个非参考帧）。
 
 ```
-int iFrameNumOffset;                                                          
-uint32_t uMaxFrameNum = 1 << (pSlice->pSPS->log2_max_frame_num_minus4 + 4);   
+int iFrameNumOffset;
+uint32_t uMaxFrameNum = 1 << (pSlice->pSPS->log2_max_frame_num_minus4 + 4);
 
-if(bIsIDR)                                                                    
-  iFrameNumOffset = 0;                                                        
-else if(pCtx->iPrevFrameNum > pSlice->frame_num)                              
-  iFrameNumOffset = pCtx->iPrevFrameNumOffset + uMaxFrameNum;                 
-else                                                                          
-  iFrameNumOffset = pCtx->iPrevFrameNumOffset;                                
+if(bIsIDR)
+  iFrameNumOffset = 0;
+else if(pCtx->iPrevFrameNum > pSlice->frame_num)
+  iFrameNumOffset = pCtx->iPrevFrameNumOffset + uMaxFrameNum;
+else
+  iFrameNumOffset = pCtx->iPrevFrameNumOffset;
 
-int iTempPicOrderCnt;                                                     
+int iTempPicOrderCnt;
 
-if(bIsIDR)                                                                
-  iTempPicOrderCnt = 0;                                                   
-else if(!pSlice->nal_ref_idc)                                             
-  iTempPicOrderCnt = 2 * (iFrameNumOffset + pSlice->frame_num) - 1;       
-else                                                                      
-  iTempPicOrderCnt = 2 * (iFrameNumOffset + pSlice->frame_num);           
+if(bIsIDR)
+  iTempPicOrderCnt = 0;
+else if(!pSlice->nal_ref_idc)
+  iTempPicOrderCnt = 2 * (iFrameNumOffset + pSlice->frame_num) - 1;
+else
+  iTempPicOrderCnt = 2 * (iFrameNumOffset + pSlice->frame_num);
 ```
 > H264中pic_order_cnt_type=2时对POC的计算
 

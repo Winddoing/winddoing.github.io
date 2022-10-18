@@ -1,6 +1,7 @@
 ---
 title: Cache
-categories: MIPS
+categories:
+  - MIPS
 tags:
   - mips
   - cache

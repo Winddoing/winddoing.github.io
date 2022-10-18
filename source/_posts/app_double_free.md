@@ -1,6 +1,7 @@
 ---
 title: double free or corruption (fasttop)
-categories: 程序设计
+categories:
+  - 程序设计
 tags:
   - c
   - free

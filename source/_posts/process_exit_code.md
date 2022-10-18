@@ -1,6 +1,7 @@
 ---
 title: 进程退出的exitcode
-categories: 进程
+categories:
+  - 进程
 tags:
   - 进程
   - exit_code

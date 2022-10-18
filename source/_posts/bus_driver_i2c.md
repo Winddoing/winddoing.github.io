@@ -1,6 +1,7 @@
 ---
 title: I2C驱动
-categories: 设备驱动
+categories:
+  - 设备驱动
 tags:
   - driver
   - i2c

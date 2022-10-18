@@ -1,6 +1,7 @@
 ---
 title: tmux
-categories: 工具
+categories:
+  - 工具
 tags:
   - tmux
 abbrlink: 40876

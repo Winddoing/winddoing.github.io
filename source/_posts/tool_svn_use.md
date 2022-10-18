@@ -1,6 +1,7 @@
 ---
 title: SVN的基础使用
-categories: 工具
+categories:
+  - 工具
 tags:
   - svn
 abbrlink: 56583

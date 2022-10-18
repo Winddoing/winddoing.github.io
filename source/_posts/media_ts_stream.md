@@ -1,6 +1,7 @@
 ---
 title: TS流
-categories: 多媒体
+categories:
+  - 多媒体
 tags:
   - ts
 abbrlink: 36727

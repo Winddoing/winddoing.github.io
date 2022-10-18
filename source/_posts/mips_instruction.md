@@ -1,6 +1,7 @@
 ---
 title: mips指令集
-categories: MIPS
+categories:
+  - MIPS
 tags:
   - mips
   - 指令

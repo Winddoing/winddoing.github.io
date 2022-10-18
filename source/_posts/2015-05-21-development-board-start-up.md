@@ -3,8 +3,10 @@ date: '2015-05-21 01:49'
 layout: post
 title: micro2440开发板启动linux
 thread: 166
-categories: 嵌入式
-tags: arm
+categories:
+  - 嵌入式
+tags:
+  - arm
 abbrlink: 32798
 ---
 

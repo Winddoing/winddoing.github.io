@@ -1,12 +1,13 @@
 ---
-layout: "post"
-title: "H264编码——DPB"
-date: "2022-10-13 16:04"
+layout: post
+title: H264编码——DPB
+date: '2022-10-13 16:04'
 tags:
   - h264
 categories:
   - 多媒体
   - H264
+abbrlink: 6766163f
 ---
 
 `DPB`全称 Decoded Picture Buffer，即解码图片缓存区。

@@ -1,6 +1,7 @@
 ---
 title: 常用网站
-categories: 工具
+categories:
+  - 工具
 tags:
   - 网站
 abbrlink: 20962

@@ -1,6 +1,7 @@
 ---
 title: C程序函数调用关系
-categories: 工具
+categories:
+  - 工具
 tags:
   - callgraph
 abbrlink: 1655

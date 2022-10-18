@@ -1,6 +1,7 @@
 ---
 title: Cgroup
-categories: 进程
+categories:
+  - 进程
 tags:
   - linux
   - cgroup

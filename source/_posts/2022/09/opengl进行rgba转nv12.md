@@ -29,7 +29,7 @@ RGBA RGBA RGBA RGBA RGBA RGBA
 RGBA RGBA RGBA RGBA RGBA RGBA
 RGBA RGBA RGBA RGBA RGBA RGBA
 RGBA RGBA RGBA RGBA RGBA RGBA
-          - RGBA -  
+          - RGBA -
 ```
 内存空间大小：6x4x(8x4)=768bit
 
@@ -46,7 +46,7 @@ Y Y Y Y Y Y
 Y Y Y Y Y Y
 U V U V U V
 U V U V U V
- - NV12 -  
+ - NV12 -
 ```
 内存空间大小：6x(4+4/2)x8=288bit
 

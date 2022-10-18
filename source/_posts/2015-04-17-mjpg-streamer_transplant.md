@@ -3,7 +3,8 @@ date: '2015-04-17 03:49'
 layout: post
 title: 移植mjpg-streamer
 thread: 166
-categories: 嵌入式
+categories:
+  - 嵌入式
 tags:
   - arm
   - mjpg-streamer

@@ -1,6 +1,7 @@
 ---
 title: emmc的HS200特性
-categories: 设备驱动
+categories:
+  - 设备驱动
 tags:
   - emmc
 abbrlink: 34668

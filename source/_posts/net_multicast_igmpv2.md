@@ -1,6 +1,7 @@
 ---
 title: 组播--IGMPv2
-categories: 网络
+categories:
+  - 网络
 tags:
   - igmp
   - network
