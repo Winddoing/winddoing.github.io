@@ -1,6 +1,7 @@
 ---
 title: 组播（多播）
-categories: 网络
+categories:
+  - 网络
 tags:
   - 组播
 abbrlink: 18736

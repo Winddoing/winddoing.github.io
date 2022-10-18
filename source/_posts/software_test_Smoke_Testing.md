@@ -1,6 +1,7 @@
 ---
 title: Smoke Testing（冒烟测试）
-categories: 软件测试
+categories:
+  - 软件测试
 tags:
   - test
 abbrlink: 27818

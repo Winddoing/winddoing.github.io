@@ -1,6 +1,7 @@
 ---
 title: UDP调用connect的作用
-categories: 网络
+categories:
+  - 网络
 tags:
   - udp
 abbrlink: 33300

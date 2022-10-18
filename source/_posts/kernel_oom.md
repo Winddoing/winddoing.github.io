@@ -1,6 +1,7 @@
 ---
 title: OOM
-categories: Linux内核
+categories:
+  - Linux内核
 tags:
   - kernel
   - oom

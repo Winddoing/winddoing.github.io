@@ -1,6 +1,7 @@
 ---
 title: OSI七层网络模型
-categories: 网络
+categories:
+  - 网络
 tags:
   - network
 abbrlink: 51171

@@ -1,6 +1,7 @@
 ---
 title: tftp
-categories: 工具
+categories:
+  - 工具
 tags:
   - tftp
 abbrlink: 3037

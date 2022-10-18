@@ -1,6 +1,7 @@
 ---
 title: 动态指令
-categories: 程序设计
+categories:
+  - 程序设计
 tags:
   - 指令
 abbrlink: 40422

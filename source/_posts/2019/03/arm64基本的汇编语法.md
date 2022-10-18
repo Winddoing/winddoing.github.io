@@ -5,7 +5,7 @@ date: '2019-03-13 14:27'
 tags:
   - arm
 categories:
-  - arm
+  - ARM
   - 汇编
 abbrlink: 5543
 ---

@@ -1,6 +1,7 @@
 ---
 title: eMMC中的HPI
-categories: 设备驱动
+categories:
+  - 设备驱动
 tags:
   - emmc
 abbrlink: 14442

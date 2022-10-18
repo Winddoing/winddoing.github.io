@@ -1,6 +1,7 @@
 ---
 title: MIPS架构下的中断处理
-categories: Linux内核
+categories:
+  - Linux内核
 tags:
   - 中断
 abbrlink: 61535

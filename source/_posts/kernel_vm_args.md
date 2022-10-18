@@ -1,6 +1,7 @@
 ---
 title: Linux内存的VM参数
-categories: Linux内核
+categories:
+  - Linux内核
 tags:
   - kernel
   - vm

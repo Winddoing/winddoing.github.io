@@ -1,6 +1,7 @@
 ---
 title: 任务调度
-categories: 计算机系统
+categories:
+  - 计算机系统
 tags:
   - task
   - schedule

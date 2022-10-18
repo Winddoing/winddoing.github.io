@@ -2,7 +2,7 @@
 title: GCC
 categories:
   - 编译工具
-  - gcc
+  - GCC
 tags:
   - builtin_xxx
   - gcc

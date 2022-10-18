@@ -1,6 +1,7 @@
 ---
 title: 高端内存
-categories: Linux内核
+categories:
+  - Linux内核
 tags:
   - 内存
 abbrlink: 19487

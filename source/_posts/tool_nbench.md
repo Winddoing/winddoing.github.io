@@ -1,6 +1,7 @@
 ---
 title: nbench
-categories: 工具
+categories:
+  - 工具
 tags:
   - nbench
 abbrlink: 18855

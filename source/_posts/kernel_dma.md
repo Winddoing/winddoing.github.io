@@ -1,6 +1,7 @@
 ---
 title: Linux内核DMA机制
-categories: Linux内核
+categories:
+  - Linux内核
 tags:
   - dma
   - kernel

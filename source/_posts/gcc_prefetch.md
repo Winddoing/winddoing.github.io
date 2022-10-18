@@ -1,6 +1,7 @@
 ---
 title: GCC编译器的优化： fprefetch-loop-arrays
-categories: 编译工具
+categories:
+  - 编译工具
 tags:
   - gcc
 abbrlink: 14105

@@ -1,6 +1,7 @@
 ---
 title: ext4文件系统扩容
-categories: 文件系统
+categories:
+  - 文件系统
 tags:
   - 文件系统
   - ext4

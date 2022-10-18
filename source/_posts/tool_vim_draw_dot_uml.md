@@ -1,6 +1,7 @@
 ---
 title: VIM绘图--dot、uml
-categories: 工具
+categories:
+  - 工具
 tags:
   - vim
   - dot

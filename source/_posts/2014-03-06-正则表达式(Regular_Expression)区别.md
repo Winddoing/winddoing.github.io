@@ -6,7 +6,8 @@ thread: 166
 categories:
   - shell
   - 正则表达式
-tags: shell
+tags:
+  - shell
 abbrlink: 10189
 ---
 

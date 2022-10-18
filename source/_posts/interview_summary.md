@@ -1,6 +1,7 @@
 ---
 title: 面试总结
-categories: 随笔
+categories:
+  - 随笔
 tags:
   - 面试
 password: xiaomi

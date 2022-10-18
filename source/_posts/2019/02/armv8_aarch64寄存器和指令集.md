@@ -5,7 +5,7 @@ date: '2019-02-26 14:01'
 tags:
   - arm64
 categories:
-  - arm
+  - ARM
 abbrlink: 7190
 ---
 

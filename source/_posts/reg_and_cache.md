@@ -1,6 +1,7 @@
 ---
 title: 寄存器和Cache
-categories: 计算机系统
+categories:
+  - 计算机系统
 tags:
   - 寄存器
   - cache

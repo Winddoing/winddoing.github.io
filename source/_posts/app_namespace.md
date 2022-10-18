@@ -1,6 +1,7 @@
 ---
 title: Namespace
-categories: 进程
+categories:
+  - 进程
 tags:
   - namespace
   - 进程

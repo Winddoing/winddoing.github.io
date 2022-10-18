@@ -1,6 +1,7 @@
 ---
 title: 内存屏障
-categories: Linux内核
+categories:
+  - Linux内核
 tags:
   - mem
   - barrier

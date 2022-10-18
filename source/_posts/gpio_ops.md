@@ -1,6 +1,7 @@
 ---
 title: 用户空间的GPIO操作
-categories: 系统应用
+categories:
+  - 系统应用
 tags:
   - gpio
 abbrlink: 50599

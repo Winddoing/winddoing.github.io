@@ -1,6 +1,7 @@
 ---
 title: 阻塞，非阻塞
-categories: 进程
+categories:
+  - 进程
 tags:
   - 阻塞io
 abbrlink: 63673

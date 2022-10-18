@@ -1,6 +1,7 @@
 ---
 title: EDID
-categories: 多媒体
+categories:
+  - 多媒体
 tags:
   - edid
 abbrlink: 47714

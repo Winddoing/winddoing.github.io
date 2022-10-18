@@ -1,6 +1,7 @@
 ---
 title: 状态机
-categories: 程序设计
+categories:
+  - 程序设计
 tags:
   - fsm
 abbrlink: 32902

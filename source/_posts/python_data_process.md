@@ -1,6 +1,7 @@
 ---
 title: python数据处理
-categories: Python
+categories:
+  - Python
 tags:
   - python
 abbrlink: 60233

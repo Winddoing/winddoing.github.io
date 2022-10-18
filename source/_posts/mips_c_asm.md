@@ -1,6 +1,7 @@
 ---
 title: GCC内嵌汇编(mips)
-categories: MIPS
+categories:
+  - MIPS
 tags:
   - mips
   - 汇编

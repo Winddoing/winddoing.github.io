@@ -1,6 +1,7 @@
 ---
 title: uImage dump成反汇编
-categories: Linux内核
+categories:
+  - Linux内核
 tags:
   - umage
   - 反汇编

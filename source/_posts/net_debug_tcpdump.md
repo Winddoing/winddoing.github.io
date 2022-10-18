@@ -1,6 +1,7 @@
 ---
 title: 网络调试--tcpdump
-categories: 网络
+categories:
+  - 网络
 tags:
   - debug
 abbrlink: 18035

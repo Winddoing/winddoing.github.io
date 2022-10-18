@@ -1,6 +1,7 @@
 ---
 title: ASLR
-categories: 计算机系统
+categories:
+  - 计算机系统
 tags:
   - 进程
   - aslr

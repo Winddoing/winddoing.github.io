@@ -6,7 +6,7 @@ tags:
   - arm
   - 汇编
 categories:
-  - arm
+  - ARM
   - 汇编
 abbrlink: 4526
 ---

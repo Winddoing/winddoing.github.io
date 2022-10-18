@@ -1,6 +1,7 @@
 ---
 title: Cortex-A8平台实验
-categories: Cortex-A8
+categories:
+  - Cortex-A8
 tags:
   - cortex-a8
   - uboot

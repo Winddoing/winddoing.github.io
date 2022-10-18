@@ -1,6 +1,7 @@
 ---
 title: ext4文件系统变为只读
-categories: 文件系统
+categories:
+  - 文件系统
 tags:
   - ext4
 abbrlink: 31493

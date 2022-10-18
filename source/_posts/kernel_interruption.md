@@ -1,6 +1,7 @@
 ---
 title: Linux内核--中断
-categories: Linux内核
+categories:
+  - Linux内核
 tags:
   - 中断
 abbrlink: 21246

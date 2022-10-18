@@ -1,6 +1,7 @@
 ---
 title: van_xum
-categories: 随笔
+categories:
+  - 随笔
 tags:
   - 随笔
 password: vanxum

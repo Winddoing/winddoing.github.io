@@ -1,6 +1,7 @@
 ---
 title: 等待队列
-categories: Linux内核
+categories:
+  - Linux内核
 tags:
   - process
   - queue

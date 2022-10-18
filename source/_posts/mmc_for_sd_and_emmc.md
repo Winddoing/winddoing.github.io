@@ -1,6 +1,7 @@
 ---
 title: MMC子系统
-categories: 设备驱动
+categories:
+  - 设备驱动
 tags:
   - 驱动
   - mmc

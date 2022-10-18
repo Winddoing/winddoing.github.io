@@ -1,6 +1,7 @@
 ---
 title: Linux应用调试方法---Debug
-categories: Linux内核
+categories:
+  - Linux内核
 tags:
   - kernel
   - debug

@@ -1,6 +1,7 @@
 ---
 title: setup_per_cpu_areas
-categories: Linux内核
+categories:
+  - Linux内核
 tags:
   - mmu
   - linux

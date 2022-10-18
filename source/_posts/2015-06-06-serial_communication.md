@@ -3,7 +3,8 @@ date: '2015-06-06 19:41'
 layout: post
 title: micro2440数据传输--串口通信
 thread: 166
-categories: 嵌入式
+categories:
+  - 嵌入式
 tags:
   - 数据传输
   - 串口

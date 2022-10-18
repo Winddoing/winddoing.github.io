@@ -1,6 +1,7 @@
 ---
 title: Example
-categories: 随笔
+categories:
+  - 随笔
 tags:
   - travis-ci
   - test

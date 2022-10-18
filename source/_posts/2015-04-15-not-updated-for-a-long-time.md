@@ -3,8 +3,10 @@ date: '2015-04-15 17:09'
 layout: post
 title: 很久没有更新过了
 thread: 166
-categories: 随笔
-tags: 随笔
+categories:
+  - 随笔
+tags:
+  - 随笔
 abbrlink: 20021
 ---
 

@@ -1,6 +1,7 @@
 ---
 title: udev的使用
-categories: 文件系统
+categories:
+  - 文件系统
 tags:
   - linux
   - udev

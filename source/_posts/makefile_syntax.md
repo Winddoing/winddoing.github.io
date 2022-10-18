@@ -1,6 +1,7 @@
 ---
 title: Makefile基础语法
-categories: Makefile
+categories:
+  - Makefile
 tags:
   - makefile
 abbrlink: 21058

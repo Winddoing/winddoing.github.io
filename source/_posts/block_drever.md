@@ -1,6 +1,7 @@
 ---
 title: 块设备驱动
-categories: 设备驱动
+categories:
+  - 设备驱动
 tags:
   - 驱动
   - 块设备
