@@ -25,3 +25,11 @@ abbrlink: 5b258677
 
 
 > https://en.freedownloadmanager.org/Windows-PC/Elecard-StreamEye.html （旧版本，可以免费使用）
+
+
+## 视频格式转换——在线文件转换器
+
+> https://convertio.co
+
+- WMV转换成MJPEG： https://convertio.co/zh/wmv-mjpeg/
+- MP4转换成MJPEG： https://convertio.co/zh/mp4-mjpeg/
