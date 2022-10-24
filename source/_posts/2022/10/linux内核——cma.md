@@ -42,6 +42,11 @@ https://zhuanlan.zhihu.com/p/139790210
 
 ## 原理
 
+CMA通过在启动阶段预先保留内存。这些内存叫做CMA区域，稍后返回给伙伴系统从而可以被用作正常申请。如果要保留内存，则需要恰好在底层`MEMBLOCK`分配器初始化之后，及大量内存被占用之前调用，并在伙伴系统建立之前调用。
+
+> 页迁移：
+> 当从伙伴系统申请内存的时候，需要提供一个gfp_mask参数。不管其他事情，这个参数指定了要申请内存的迁移类型。迁移类型是MIGRATE_MOVABLE，它背后的意思是在可移动页面上的数据可以被迁移（或者移动，因此而命名），这对于磁盘缓存或者进程页面来说很有效。为了使相同迁移类型的页面在一起，伙伴系统把页面组成 “页面块 (pageblock)”，每组都有一个指定的迁移类型。分配器根据请求的类型在不同的页面块上分配页。如果尝试失败，分配器会在其它页面块上分配并甚至修改页面块的迁移类型。这意味着一个不可移动的页可能分配自一个MIGRATE_MOVABLE页面块，并导致该页面块的迁移类型改变。这不是CMA想要的，所以它引入了一个MIGRATE_CMA类型，该类型又一个重要的属性: **只有可移动页可以从MIGRATE_CMA页面块种分配**。那么，在启动期间，当dma_congiguous_reserve()和dma_declare_contiguous()方法被调用的时候，CMA在memblock中预留一部分RAM，并在随后将其返还给伙伴系统，仅将其页面块的迁移类型置为MIGRATE_CMA. 最终的结果是所有预留的页都在伙伴系统里，所以它们都可以用于可移动页的分配。
+
 
 
 ## 应用
@@ -97,14 +102,14 @@ start_kernel
 首先，确定`Reserved 1280 MiB`日志输出的位置，再找到其调用关系及cma预留大小的定义。
 
 ``` C
-int __init cma_declare_contiguous(phys_addr_t base,             
-            phys_addr_t size, phys_addr_t limit,                
-            phys_addr_t alignment, unsigned int order_per_bit,  
+int __init cma_declare_contiguous(phys_addr_t base,
+            phys_addr_t size, phys_addr_t limit,
+            phys_addr_t alignment, unsigned int order_per_bit,
             bool fixed, const char *name, struct cma **res_cma)
-{                                                               
+{
   ...
   pr_info("Reserved %ld MiB at %pa\n", (unsigned long)size / SZ_1M,
-    &base);                                                      
+    &base);
   return 0
 }
 ```
@@ -113,66 +118,68 @@ int __init cma_declare_contiguous(phys_addr_t base,
 在`dma_contiguous_reserve`接口中指定需要预留的内存大小
 
 ``` C
-void __init dma_contiguous_reserve(phys_addr_t limit)                                                   
-{                                                                               
+void __init dma_contiguous_reserve(phys_addr_t limit)
+{
     ...
-    } else {                                                                    
-#ifdef CONFIG_CMA_SIZE_SEL_MBYTES                                               
-        selected_size = size_bytes;                                             
-#elif defined(CONFIG_CMA_SIZE_SEL_PERCENTAGE)                                   
-        selected_size = cma_early_percent_memory();                             
-#elif defined(CONFIG_CMA_SIZE_SEL_MIN)                                          
-        selected_size = min(size_bytes, cma_early_percent_memory());            
-#elif defined(CONFIG_CMA_SIZE_SEL_MAX)                                          
-        selected_size = max(size_bytes, cma_early_percent_memory());            
-#endif                                                                          
-    }                                                                           
+    } else {
+#ifdef CONFIG_CMA_SIZE_SEL_MBYTES
+        selected_size = size_bytes;
+#elif defined(CONFIG_CMA_SIZE_SEL_PERCENTAGE)
+        selected_size = cma_early_percent_memory();
+#elif defined(CONFIG_CMA_SIZE_SEL_MIN)
+        selected_size = min(size_bytes, cma_early_percent_memory());
+#elif defined(CONFIG_CMA_SIZE_SEL_MAX)
+        selected_size = max(size_bytes, cma_early_percent_memory());
+#endif
+    }
 
-    if (selected_size && !dma_contiguous_default_area) {                        
-        pr_debug("%s: reserving %ld MiB for global area\n", __func__,           
-             (unsigned long)selected_size / SZ_1M);                             
+    if (selected_size && !dma_contiguous_default_area) {
+        pr_debug("%s: reserving %ld MiB for global area\n", __func__,
+             (unsigned long)selected_size / SZ_1M);
 
-        dma_contiguous_reserve_area(selected_size, selected_base,               
-                        selected_limit,                                         
-                        &dma_contiguous_default_area,                           
-                        fixed);                                                 
-    }                                                                           
-}                                                                               
+        dma_contiguous_reserve_area(selected_size, selected_base,
+                        selected_limit,
+                        &dma_contiguous_default_area,
+                        fixed);
+    }
+}
 ```
 
 menuconfig中指定了`CONFIG_CMA_SIZE_SEL_MBYTES`，因此CMA预留内存大小为`size_bytes`
-```
-#ifdef CONFIG_CMA_SIZE_MBYTES                   
-#define CMA_SIZE_MBYTES CONFIG_CMA_SIZE_MBYTES  
-#else                                           
-#define CMA_SIZE_MBYTES 0                       
-#endif                                          
+``` C
+#ifdef CONFIG_CMA_SIZE_MBYTES
+#define CMA_SIZE_MBYTES CONFIG_CMA_SIZE_MBYTES
+#else
+#define CMA_SIZE_MBYTES 0
+#endif
 
-/*                                                                            
- * Default global CMA area size can be defined in kernel's .config.           
- * This is useful mainly for distro maintainers to create a kernel            
- * that works correctly for most supported systems.                           
- * The size can be set in bytes or as a percentage of the total memory        
- * in the system.                                                             
- *                                                                            
- * Users, who want to set the size of global CMA area for their system        
- * should use cma= kernel parameter.                                          
- */                                                                           
+/*
+ * Default global CMA area size can be defined in kernel's .config.
+ * This is useful mainly for distro maintainers to create a kernel
+ * that works correctly for most supported systems.
+ * The size can be set in bytes or as a percentage of the total memory
+ * in the system.
+ *
+ * Users, who want to set the size of global CMA area for their system
+ * should use cma= kernel parameter.
+ */
 static const phys_addr_t size_bytes = (phys_addr_t)CMA_SIZE_MBYTES * SZ_1M;
 ```
 
 实际预留大小在menuconfig中进行配置：
 ```
-#                                                   
-# Default contiguous memory area size:              
-#                                                   
-CONFIG_CMA_SIZE_MBYTES=1280                         
-CONFIG_CMA_SIZE_SEL_MBYTES=y                        
-# CONFIG_CMA_SIZE_SEL_PERCENTAGE is not set         
-# CONFIG_CMA_SIZE_SEL_MIN is not set                
-# CONFIG_CMA_SIZE_SEL_MAX is not set                
-CONFIG_CMA_ALIGNMENT=8                              
+#
+# Default contiguous memory area size:
+#
+CONFIG_CMA_SIZE_MBYTES=1280
+CONFIG_CMA_SIZE_SEL_MBYTES=y
+# CONFIG_CMA_SIZE_SEL_PERCENTAGE is not set
+# CONFIG_CMA_SIZE_SEL_MIN is not set
+# CONFIG_CMA_SIZE_SEL_MAX is not set
+CONFIG_CMA_ALIGNMENT=8
 ```
+
+在`cma_declare_contiguous`函数中的memblock_phys_alloc_range接口申请了CMA内存区域。
 
 ```
          + <--------------------------+ 物理内存总大小1920MB +-------------------------> +
@@ -185,20 +192,109 @@ CONFIG_CMA_ALIGNMENT=8
                                                            cma base
 ```
 
-### CMA预留内存与系统内存关系
+CMA base地址如何确定：随机还是指定？
+- cmdline方式中可以指定CMA区域的base地址和大小
+- menuconfig方式中指定指定CMA区域的大小，base地址随机指定符合要求的区域。
+
+在`cma_declare_contiguous`函数中，通过`memblock_phys_alloc_range`接口申请完了CMA区域的内存后，紧接着使用`cma_init_reserved_mem`接口将其进行初始化。
+
+初始化的目的指定CMA相应区域的参数，比如基址、大小等
+
+CMA区域的个数可以进行配置，内核默认最多`8`个，因为`CONFIG_CMA_AREAS`默认值为7
+``` C
+struct cma cma_areas[MAX_CMA_AREAS];
+unsigned cma_area_count;             
+
+//MAX_CMA_AREAS定义：
+
+/*                                                             
+ * There is always at least global CMA area and a few optional
+ * areas configured in kernel .config.                         
+ */                                                            
+#ifdef CONFIG_CMA_AREAS                                        
+#define MAX_CMA_AREAS   (1 + CONFIG_CMA_AREAS)                 
+```
+
+每个CMA区域将一定大小的内存申请后将通过`cma_init_reserved_mem`进行初始化，并将参数信息保存到`cma_areas`数组中。
+
+使用memconfig进行CMA预留区域的指定，只会使用一个`cma_areas`数组项，而设计多个的目的是在设备树中可以指定多个不同的CMA预留区域。
+
+``` C
+/**
+ * cma_init_reserved_mem() - create custom contiguous area from reserved memory
+ * @base: Base address of the reserved area
+ * @size: Size of the reserved area (in bytes),
+ * @order_per_bit: Order of pages represented by one bit on bitmap.
+ * @name: The name of the area. If this parameter is NULL, the name of
+ *        the area will be set to "cmaN", where N is a running counter of
+ *        used areas.
+ * @res_cma: Pointer to store the created cma region.
+ *
+ * This function creates custom contiguous area from already reserved memory.
+ */
+int __init cma_init_reserved_mem(phys_addr_t base, phys_addr_t size,
+                 unsigned int order_per_bit,
+                 const char *name,
+                 struct cma **res_cma)
+{
+  ...
+  cma = &cma_areas[cma_area_count];
+  if (name) {
+      cma->name = name;
+  } else {
+      cma->name = kasprintf(GFP_KERNEL, "cma%d\n", cma_area_count);
+      if (!cma->name)
+          return -ENOMEM;
+  }
+  cma->base_pfn = PFN_DOWN(base);
+  cma->count = size >> PAGE_SHIFT;
+  cma->order_per_bit = order_per_bit;
+  *res_cma = cma;
+  cma_area_count++;
+  totalcma_pages += (size / PAGE_SIZE);
+
+  return 0;
+}
+```
+
+各个CMA预留区域的内存页初始化：
+
+系统启动初期根据各种参数，预留CMA区域的物理内存，将其基地址和大小进行确认，并检查其合法性；系统启动过程中，调用`cma_init_reserved_areas`接口对个CMA区域内存进行初始化后， CMA就可用供其他模块、设备和子系统使用。
+
+```
+core_initcall(cma_init_reserved_areas)
+  cma_init_reserved_areas
+    \-> 遍历cma_areas数组进行初始化
+    |-> cma_activate_area
+      \-> cma->bitmap = bitmap_zalloc(cma_bitmap_maxno(cma), GFP_KERNEL)
+      |-> init_cma_reserved_pageblock
+        \-> set_pageblock_migratetype(page, MIGRATE_CMA);
+        |-> __free_pages
+        |-> adjust_managed_page_count
+```
+`init_cma_reserved_pageblock`接口将释放整个页面块并将其迁移类型设置为`MIGRATE_CMA`。
+
+内核初始化过程中，通过core_initcall()函数将该 section 内的初始化 函数遍历执行，其中包括 CMA 的激活入口 cma_init_reserved_areas() 函数， 该函数遍历 CMA 分配的所有 CMA 分区并激活每一个 CMA 分区。在该函数中， 函数首先调用kzalloc()函数为CMA分区的bitmap所需的内存，然后调用`init_cma_reserved_pageblock()`函数，在该函数中，内核将CMA区块内的**所有物理页都清除RESERVED标志，引用计数设置为0**，接着按pageblock的方式设置区域内的页组迁移类型都是`MIGRATE_CMA`。函数继续调用set_page_refcounted()函数将引用计数设置为1以及调用`__free_pages()`函数将所有的页从CMA分配器中释放并归还给buddy管理器。最后调用`adjust_managed_page_count()`更新系统可用物理页总数。至此系统的其他部分可以开始使用CMA分配器分配的连续物理内存。
 
 
 ### 系统free是否统计CMA内存
 
-CMA区域内存既是reserved又是memory的，但更像是一段普通的memory。
-
 > 结论：free会统计CMA区域内存。
 
-在`cma_declare_contiguous`函数中，通过memblock_phys_alloc_range获取内存
+因为CMA区域中的page被设置为`MIGRATE_CMA`,然后放入`伙伴系统`中，等待用户使用（NOTE：MIGRATE_CMA是伙伴系统中页属性的概念,所以CMA区也只是伙伴系统中的一个概念，不是一个ZONE）,这样进行初始化后，free统计时也会将CMA区域的内存统计进去。
 
-```
 
-```
+### CMA预留内存与系统内存关系
+
+> 结论：CMA区域的内存即是预留内存（reserved），也是系统内存（memory）；也就是说CMA区域这部分内存除了设备驱动申请DMA内存使用外，在系统内存不足时可以使用，
+
+系统中何时使用CMA区域内存：
+- 设备驱动中主动申请DMA内存时使用，这个每个驱动实现不同由驱动工程师自主控制。
+- 系统应用程序的使用，也就是申请内存时如何使用MIGRATE_CMA page？
+
+
+
+
 
 
 
@@ -208,3 +304,4 @@ CMA区域内存既是reserved又是memory的，但更像是一段普通的memory
 ## 参考
 
 - [The Contiguous Memory Allocator](https://lwn.net/Articles/396657/)
+- [CMA](https://biscuitos.github.io/blog/CMA/#A000)
