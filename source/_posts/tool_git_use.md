@@ -490,6 +490,18 @@ mesg=$(git log -1 --pretty=format:%B)
 echo "$lib info: branch=$branch, tag=$tag, commit=$commit, mesg=$mesg"
 ```
 
+## git show/diff tab显示宽度
+
+设置Tab显示为4个字符的宽度
+```
+git config --global core.pager 'less -x1,5'
+```
+
+设置Tab显示为8个字符的宽度（默认）
+```
+git config --global core.pager 'less'
+```
+
 ## 错误处理
 
 ### git clone
