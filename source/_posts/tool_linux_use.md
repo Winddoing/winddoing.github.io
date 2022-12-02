@@ -22,6 +22,8 @@ https://zealdocs.org/
 ``` shell
 sudo apt install zeal
 ```
+文档下载：`tools/script/zeal_download_url.sh`
+
 
 ## yuv rgba player
 
@@ -46,9 +48,7 @@ sudo apt -f install
 wget http://ftp.cn.debian.org/debian/pool/main/libp/libpng/libpng12-0_1.2.49-1+deb7u2_amd64.deb
 
 sudo dpkg -i libpng12-0_1.2.49-1+deb7u2_amd64.deb
-
 sudo dpkg -i wps-office_10.1.0.5672~a21_amd64.deb
-
 sudo dpkg -i wps-office-fonts_1.0_all.deb
 ```
 
@@ -75,9 +75,7 @@ sudo apt install gnome-tweak-tool
 - `workspace-grid`： 多工作区
 
 
-## 下载器
-
-### Free Download Manager
+## Free Download Manager
 
 可以快速下载，相同的下载链接比浏览器下载速度快。
 
@@ -87,7 +85,7 @@ sudo apt install gnome-tweak-tool
 ## 画图
 
 ``` shell
-sudo apt-get install  kolourpaint4
+sudo apt-get install kolourpaint4
 ```
 
 ## 虚拟机 —— VirtualBox
@@ -215,8 +213,18 @@ sudo apt-get install sqlitebrowser
 - 支持 RDP、VNC、NX、XDMCP 和 SSH
 
 ``` shell
-sudo apt install remmina
+sudo apt install remmina remmina-plugin-spice
 ```
+
+## 截图
+
+``` shell
+sudo apt inatsll flameshot
+```
+
+- 添加快捷键`Ctrl + Alt a`，执行命令`flameshot gui`
+- 软件配置界面，可以在状态栏点击打开，如果配置为不在状态栏显示；则可以通过`flameshot config`打开进行设置
+
 
 ## ubuntu工作区配置
 
