@@ -11,6 +11,7 @@ comments: true
 * [The Linux Kernel’s documentation(4.11)](https://www.kernel.org/doc/html/v4.11/index.html) —— Linux内核文档（`Documentation`目录）
 * [LWN.net](https://lwn.net/) —— linux内核相关文章
 * [Kernelnewbies](https://kernelnewbies.org/) —— linux内核版本发布信息
+  - [LinuxVersions](https://kernelnewbies.org/LinuxVersions)
   - [linux6.1版本更新信息](https://kernelnewbies.org/Linux_6.1)
 * [man-page](http://man7.org/linux/man-pages/index.html) —— Linux man pages online
 * [轻松认识 Linux kernel](http://www.bricktou.com/) —— linux内核函数接口注解
