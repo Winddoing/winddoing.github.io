@@ -13,9 +13,19 @@ date: 2018-02-04 23:07:24
 
 <!--more-->
 
+## 去掉字符串中双引号
+
+``` shell
+echo \"hello\" | sed 's/\"//g'
+#or
+echo \"hello\" | sed 's:\"::g'
+#or
+echo \"hello\" | sed 's:"::g'
+```
+
 ## for循环拼接字符串
 
-```
+``` shell
 # 在当前目录下创建文本文件temp，如果文件存在则清空文件
 $(> temp)
 # for 循环将参数追加到当前目录的temp文件，逗号分隔，echo -n 不换行
