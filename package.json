@@ -20,6 +20,7 @@
     "gulp-uglify": "^3.0.2",
     "hexo": "^6.2.0",
     "hexo-abbrlink": "^2.2.1",
+    "hexo-auto-category": "^0.2.1",
     "hexo-blog-encrypt": "^3.1.6",
     "hexo-deployer-git": "^3.0.0",
     "hexo-filter-flowchart": "^1.0.4",
