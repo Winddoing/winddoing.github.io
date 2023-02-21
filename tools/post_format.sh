@@ -44,6 +44,14 @@ del_end_of_line_space()
 	fi
 }
 
+# 文件类型转为unix
+file_dos_convert_unix()
+{
+	local file=$1
+
+	dos2unix $file
+}
+
 #遍历当前目录(包括子目录)下所有文件
 lookup_dir()
 {
@@ -55,6 +63,7 @@ lookup_dir()
         else
             echo $1"/"$file   #在此处处理文件即可
 			del_end_of_line_space $1"/"$file
+			file_dos_convert_unix $1"/"$file
         fi
     done
 }

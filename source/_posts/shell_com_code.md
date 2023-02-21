@@ -16,34 +16,34 @@ date: 2018-02-04 23:07:24
 ## 记录所有登录用户操作命令
 
 ``` shell
-PS1="`whoami`@`hostname`:"'[$PWD]'                                           
+PS1="`whoami`@`hostname`:"'[$PWD]'
 
-history                                                                      
+history
 
-USER_IP=`who -u am i 2>/dev/null| awk '{print $NF}'|sed -e 's/[()]//g'`      
-if [ "$USER_IP" = "" ]; then                                                 
-    USER_IP=`hostname`                                                       
-fi                                                                           
+USER_IP=`who -u am i 2>/dev/null| awk '{print $NF}'|sed -e 's/[()]//g'`
+if [ "$USER_IP" = "" ]; then
+    USER_IP=`hostname`
+fi
 
-if [ ! -d /tmp/dbasky ]; then                                                
-    mkdir /tmp/dbasky                                                        
-    chmod 777 /tmp/dbasky                                                    
-fi                                                                           
+if [ ! -d /tmp/dbasky ]; then
+    mkdir /tmp/dbasky
+    chmod 777 /tmp/dbasky
+fi
 
-if [ ! -d /tmp/dbasky/${LOGNAME} ]; then                                     
-    mkdir /tmp/dbasky/${LOGNAME}                                             
-    chmod 300 /tmp/dbasky/${LOGNAME}                                         
-fi                                                                           
+if [ ! -d /tmp/dbasky/${LOGNAME} ]; then
+    mkdir /tmp/dbasky/${LOGNAME}
+    chmod 300 /tmp/dbasky/${LOGNAME}
+fi
 
-export HISTSIZE=4096                                                         
+export HISTSIZE=4096
 
-DT=`date "+%Y-%m-%d_%H:%M:%S"`                                               
+DT=`date "+%Y-%m-%d_%H:%M:%S"`
 
-export HISTFILE="/tmp/dbasky/${LOGNAME}/${USER_IP} dbasky.$DT"               
+export HISTFILE="/tmp/dbasky/${LOGNAME}/${USER_IP} dbasky.$DT"
 
-chmod 600 /tmp/dbasky/${LOGNAME}/*dbasky* 2>/dev/null                        
+chmod 600 /tmp/dbasky/${LOGNAME}/*dbasky* 2>/dev/null
 ```
-将以上代码添加到`/etc/profile`中，在系统的/tmp新建个dbasky目录，记录所有登陆过系统的用户和IP地址（文件名），每当用户登录/退出会创建相应的文件，该文件保存这段用户登录时期内操作历史。 
+将以上代码添加到`/etc/profile`中，在系统的/tmp新建个dbasky目录，记录所有登陆过系统的用户和IP地址（文件名），每当用户登录/退出会创建相应的文件，该文件保存这段用户登录时期内操作历史。
 
 ## 去掉字符串中双引号
 

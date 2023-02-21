@@ -92,16 +92,16 @@ bool get_mutex(mutex_handle mutex)
 ### 释放锁
 
 ``` C
-bool release_mutex(mutex_handle mutex)                            
-{                                                                 
-  if(!mutex)                                                      
-    return false;                                                 
+bool release_mutex(mutex_handle mutex)
+{
+  if(!mutex)
+    return false;
 
-  if((pthread_mutex_unlock((pthread_mutex_t*)mutex)) < 0)         
-    return false;                                                 
+  if((pthread_mutex_unlock((pthread_mutex_t*)mutex)) < 0)
+    return false;
 
-  return true;                                                    
-}                                                                 
+  return true;
+}
 ```
 
 ## 锁的属性
@@ -122,24 +122,24 @@ pthread_mutexattr_getshared(pthread_mutexattr_t *mattr,int *pshared)
 ### 锁的类型
 
 ``` C
-enum                                                                           
-{                                                                              
-  PTHREAD_MUTEX_TIMED_NP,                                                      
-  PTHREAD_MUTEX_RECURSIVE_NP,                                                  
-  PTHREAD_MUTEX_ERRORCHECK_NP,                                                 
-  PTHREAD_MUTEX_ADAPTIVE_NP                                                    
-#if defined __USE_UNIX98 || defined __USE_XOPEN2K8                             
-  ,                                                                            
-  PTHREAD_MUTEX_NORMAL = PTHREAD_MUTEX_TIMED_NP,                               
-  PTHREAD_MUTEX_RECURSIVE = PTHREAD_MUTEX_RECURSIVE_NP,                        
-  PTHREAD_MUTEX_ERRORCHECK = PTHREAD_MUTEX_ERRORCHECK_NP,                      
-  PTHREAD_MUTEX_DEFAULT = PTHREAD_MUTEX_NORMAL                                 
-#endif                                                                         
-#ifdef __USE_GNU                                                               
-  /* For compatibility.  */                                                    
-  , PTHREAD_MUTEX_FAST_NP = PTHREAD_MUTEX_TIMED_NP                             
-#endif                                                                         
-};                                                                             
+enum
+{
+  PTHREAD_MUTEX_TIMED_NP,
+  PTHREAD_MUTEX_RECURSIVE_NP,
+  PTHREAD_MUTEX_ERRORCHECK_NP,
+  PTHREAD_MUTEX_ADAPTIVE_NP
+#if defined __USE_UNIX98 || defined __USE_XOPEN2K8
+  ,
+  PTHREAD_MUTEX_NORMAL = PTHREAD_MUTEX_TIMED_NP,
+  PTHREAD_MUTEX_RECURSIVE = PTHREAD_MUTEX_RECURSIVE_NP,
+  PTHREAD_MUTEX_ERRORCHECK = PTHREAD_MUTEX_ERRORCHECK_NP,
+  PTHREAD_MUTEX_DEFAULT = PTHREAD_MUTEX_NORMAL
+#endif
+#ifdef __USE_GNU
+  /* For compatibility.  */
+  , PTHREAD_MUTEX_FAST_NP = PTHREAD_MUTEX_TIMED_NP
+#endif
+};
 ```
 
 - `PTHREAD_MUTEX_TIMED_NP`，这是缺省值，也就是普通锁。当一个线程加锁以后，其余请求锁的线程将形成一个等待队列，并在解锁后按优先级获得锁。这种锁策略保证了资源分配的公平性。
