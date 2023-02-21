@@ -52,6 +52,31 @@ file_dos_convert_unix()
 	dos2unix $file
 }
 
+# 将文章分类改为目录结构形式
+adjust_categories()
+{
+	echo "----------------adjust_categories--------------------"
+	local file=$1
+
+	echo "===>file: $file"
+
+	local cgs=$(head -n 12 $file | grep "categories:" -A 3 | grep -v "categories" | grep -v "tags" | grep -v "abbrlink" | grep -v "\-\-\-" | awk '{print $2}')
+	local dir=$(echo $cgs | sed 's# #/#g')
+
+	echo "cgs:[$cgs]  ->  dir:[$dir]"
+	[ ! $dir ] && dir="tmp"
+	local post_path="./source/_posts/$dir"
+
+	echo "post_path=$post_path"
+
+	set -x
+	mkdir -p $post_path
+	mv $file $post_path
+	set +x
+
+	echo "-----------------------------------------------------"
+}
+
 #遍历当前目录(包括子目录)下所有文件
 lookup_dir()
 {
@@ -64,6 +89,7 @@ lookup_dir()
             echo $1"/"$file   #在此处处理文件即可
 			del_end_of_line_space $1"/"$file
 			file_dos_convert_unix $1"/"$file
+			adjust_categories $1"/"$file
         fi
     done
 }
