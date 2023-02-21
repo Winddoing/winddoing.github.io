@@ -14,6 +14,26 @@ GCC的使用和相关特性。
 
 <!--more-->
 
+## API接口导出
+
+```
+__attribute__((visibility("default")))
+```
+
+``` C
+#if __GNUC__ >= 4                                                   
+#define TST_DLL_IMPORT __attribute__((visibility("default")))      
+#define TST_DLL_EXPORT __attribute__((visibility("default")))      
+#else                                                               
+#define TST_DLL_IMPORT                                             
+#define TST_DLL_EXPORT                                             
+#endif
+
+#define TST_API        TST_DLL_EXPORT
+#define TST_API_IMPORT TST_DLL_IMPORT                                                              
+```
+
+
 ## 内置函数
 
 ``` C
