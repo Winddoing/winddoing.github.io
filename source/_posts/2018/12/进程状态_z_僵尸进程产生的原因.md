@@ -76,17 +76,17 @@ abbrlink: 5718
 - 方法2：借助`prctl`函数中的`PR_GET_PDEATHSIG`参数, 在子进程中添加`prctl(PR_SET_PDEATHSIG,SIGKILL);`，这样父进程退出时，子进程将会收到SIGKILL信号，而进程收到该信号的默认动作则是退出。
 
 ```
-PR_SET_PDEATHSIG (since Linux 2.1.57)                                    
+PR_SET_PDEATHSIG (since Linux 2.1.57)
        Set the parent-death signal of the calling process to arg2 (either a signal value in the range 1..maxsig, or 0 to clear).  This is the signal that the calling process will get when its parent dies.
 
        Warning:  the  "parent"  in this case is considered to be the thread that created this process.  In other words, the signal will be sent when that thread terminates (via, for example, pthread_exit(3)), rather than
-       after all of the threads in the parent process terminate.         
+       after all of the threads in the parent process terminate.
 
        The parent-death signal is sent upon subsequent termination of the parent thread and also upon termination of each subreaper process (see the description of PR_SET_CHILD_SUBREAPER above) to  which  the  caller  is
-       subsequently reparented.  If the parent thread and all ancestor subreapers have already terminated by the time of the PR_SET_PDEATHSIG operation, then no parent-death signal is sent to the caller.                     
+       subsequently reparented.  If the parent thread and all ancestor subreapers have already terminated by the time of the PR_SET_PDEATHSIG operation, then no parent-death signal is sent to the caller.
 
        The  parent-death  signal is process-directed (see signal(7)) and, if the child installs a handler using the sigaction(2) SA_SIGINFO flag, the si_pid field of the siginfo_t argument of the handler contains the PID
-       of the terminating parent process.                                
+       of the terminating parent process.
 
        The parent-death signal setting is cleared for the child of a fork(2).  It is also (since Linux 2.4.36 / 2.6.23) cleared when executing a set-user-ID or set-group-ID binary, or a binary that has  associated  capa‐
        bilities (see capabilities(7)); otherwise, this value is preserved across execve(2).
