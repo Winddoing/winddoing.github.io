@@ -1,0 +1,15 @@
+{
+  "userIgnoreFilters": [
+    "_data/",
+    "blog/",
+    "categories/",
+    "photos/",
+    "tags/"
+  ],
+  "newFileLocation": "current",
+  "newLinkFormat": "relative",
+  "attachmentFolderPath": "images",
+  "readableLineLength": false,
+  "useMarkdownLinks": true,
+  "showUnsupportedFiles": true
+}
