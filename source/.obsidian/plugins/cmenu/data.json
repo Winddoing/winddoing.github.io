@@ -1,0 +1,88 @@
+{
+  "aestheticStyle": "default",
+  "menuCommands": [
+    {
+      "id": "cmenu-plugin:editor:toggle-bold",
+      "name": "cMenu: Toggle bold",
+      "icon": "bold-glyph"
+    },
+    {
+      "id": "cmenu-plugin:editor:toggle-italics",
+      "name": "cMenu: Toggle italics",
+      "icon": "italic-glyph"
+    },
+    {
+      "id": "cmenu-plugin:editor:toggle-strikethrough",
+      "name": "cMenu: Toggle strikethrough",
+      "icon": "strikethrough-glyph"
+    },
+    {
+      "id": "cmenu-plugin:underline",
+      "name": "cMenu: Toggle underline",
+      "icon": "underline-glyph"
+    },
+    {
+      "id": "cmenu-plugin:superscript",
+      "name": "cMenu: Toggle superscript",
+      "icon": "superscript-glyph"
+    },
+    {
+      "id": "cmenu-plugin:subscript",
+      "name": "cMenu: Toggle subscript",
+      "icon": "subscript-glyph"
+    },
+    {
+      "id": "cmenu-plugin:editor:toggle-code",
+      "name": "cMenu: Toggle code",
+      "icon": "code-glyph"
+    },
+    {
+      "id": "cmenu-plugin:codeblock",
+      "name": "cMenu: Toggle codeblock",
+      "icon": "codeblock-glyph"
+    },
+    {
+      "id": "cmenu-plugin:editor:toggle-bullet-list",
+      "name": "cMenu: Toggle bullet",
+      "icon": "bullet-list-glyph"
+    },
+    {
+      "id": "cmenu-plugin:editor:toggle-numbered-list",
+      "name": "cMenu: Toggle numbered list",
+      "icon": "number-list-glyph"
+    },
+    {
+      "id": "editor:toggle-checklist-status",
+      "name": "切换待办事项状态",
+      "icon": "lucide-check-square",
+      "hotkeys": [
+        {
+          "modifiers": [
+            "Mod"
+          ],
+          "key": "l"
+        }
+      ]
+    },
+    {
+      "id": "highlightr-plugin:Red",
+      "name": "Highlightr: Red",
+      "icon": "highlightr-pen-red"
+    },
+    {
+      "id": "highlightr-plugin:unhighlight",
+      "name": "Highlightr: Remove highlight",
+      "icon": "highlightr-eraser"
+    },
+    {
+      "id": "open-with-default-app:open",
+      "name": "使用默认应用打开",
+      "icon": "lucide-arrow-up-right"
+    }
+  ],
+  "appendMethod": "workspace",
+  "shouldShowMenuOnSelect": false,
+  "cMenuVisibility": true,
+  "cMenuBottomValue": 4.25,
+  "cMenuNumRows": 15
+}
