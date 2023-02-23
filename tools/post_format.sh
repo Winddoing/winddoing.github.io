@@ -36,6 +36,8 @@ del_end_of_line_space()
 {
 	local file=$1
 
+	echo "del_end_of_line_space:"
+
 	is_suffix ${file} "md"
 	ret=$?
 
@@ -48,6 +50,8 @@ del_end_of_line_space()
 file_dos_convert_unix()
 {
 	local file=$1
+
+	echo "file_dos_convert_unix:"
 
 	dos2unix $file
 }
@@ -77,6 +81,22 @@ adjust_categories()
 	echo "-----------------------------------------------------"
 }
 
+# 删除文件名前面的日期
+# 如：2015-05-21-development-board-start-up.md
+del_filename_prefix_date()
+{
+	local file=$1
+
+	echo "del_filename_prefix_date:"
+
+	local ret=$(echo $file | grep "[0-9][0-9][0-9][0-9]-[0-9][0-9]")
+	if [ x$ret != x"" ]; then
+		local new_filename=$(echo $file | sed "s:[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]-::g")
+		echo "$file --> $new_filename"
+		mv $file $new_filename
+	fi
+}
+
 #遍历当前目录(包括子目录)下所有文件
 lookup_dir()
 {
@@ -86,10 +106,11 @@ lookup_dir()
         then
             lookup_dir $1"/"$file
         else
-            echo $1"/"$file   #在此处处理文件即可
+            echo "----> $1/$file"   #在此处处理文件即可
 			del_end_of_line_space $1"/"$file
 			file_dos_convert_unix $1"/"$file
-			adjust_categories $1"/"$file
+			#adjust_categories $1"/"$file
+			del_filename_prefix_date $1"/"$file
         fi
     done
 }
