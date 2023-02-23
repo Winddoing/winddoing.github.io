@@ -4,7 +4,8 @@
     "blog/",
     "categories/",
     "photos/",
-    "tags/"
+    "tags/",
+    "*.html"
   ],
   "newFileLocation": "current",
   "newLinkFormat": "relative",
