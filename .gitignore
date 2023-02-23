@@ -7,4 +7,4 @@ public/
 
 *.log
 
-workspace.json
+source/.obsidian/workspace*
