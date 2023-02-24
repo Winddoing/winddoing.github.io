@@ -1,49 +1,40 @@
-name: Deployment
+name: Deploy
 
-on:
-  push:
-    branches: web_source
+on: [push]
 
 jobs:
-  hexo-deployment:
-  runs-on: ubuntu-18.04
-  env:
-    TZ: Asia/Shanghai
-
-  steps:
-  - name: Checkout source
-    uses: actions/checkout@v2
-
-  - name: Setup Node.js
-    uses: actions/setup-node@v1
-    with:
-        node-version: '14'
-
-  - name: Config git info
-    env:
-        GH_TOKEN: ${{ secrets.GH_TOKEN }}
-    run: |
-        git config --global user.name 'Winddoing' #设置github用户名
-        git config --global user.email 'winddoing@sina.cn' #设置github用户邮箱
-        sed -i "/^ *repo/s~github\.com~${GH_TOKEN}@github.com~" _config.yml
-
-  - name: Install dependencies
-    run: |
-        node -v
-        npm install
-        pip3 install pillow
-        hexo clean
-        hexo g
-
-  - name: Generate static files
-    run: |
-        hexo clean
-        git pull --unshallow
-        ./tools/auto_init.sh
-        hexo generate
-        gulp
-        python3 ./tools/gen_watermark.py
-
-  - name: Deploy to Github Pages
-    run: |
-        hexo deploy
+  build:
+    runs-on: ubuntu-latest
+    name: A job to deploy blog.
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+      with:
+        submodules: true # Checkout private submodules(themes or something else).
+    
+    # Caching dependencies to speed up workflows. (GitHub will remove any cache entries that have not been accessed in over 7 days.)
+    - name: Cache node modules
+      uses: actions/cache@v1
+      id: cache
+      with:
+        path: node_modules
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-
+    - name: Install Dependencies
+      if: steps.cache.outputs.cache-hit != 'true'
+      run: npm ci
+    
+    # Deploy hexo blog website.
+    - name: Deploy
+      id: deploy
+      uses: sma11black/hexo-action@v1.0.3
+      with:
+        deploy_key: ${{ secrets.DEPLOY_KEY }}
+        user_name: your github username  # (or delete this input setting to use bot account)
+        user_email: your github useremail  # (or delete this input setting to use bot account)
+        commit_msg: ${{ github.event.head_commit.message }}  # (or delete this input setting to use hexo default settings)
+    # Use the output from the `deploy` step(use for test action)
+    - name: Get the output
+      run: |
+        echo "${{ steps.deploy.outputs.notify }}"
