@@ -11,39 +11,39 @@ jobs:
         TZ: Asia/Shanghai
 
     steps:
-      - name: Checkout source
-        uses: actions/checkout@v2
+        - name: Checkout source
+          uses: actions/checkout@v2
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v1
-        with:
-          node-version: '14.x'
+        - name: Setup Node.js
+          uses: actions/setup-node@v1
+          with:
+              node-version: '14'
 
-      - name: Config git info
-        env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
-        run: |
-          git config --global user.name 'Winddoing' #设置github用户名
-          git config --global user.email 'winddoing@sina.cn' #设置github用户邮箱
-          sed -i "/^ *repo/s~github\.com~${GH_TOKEN}@github.com~" _config.yml
+        - name: Config git info
+          env:
+              GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          run: |
+              git config --global user.name 'Winddoing' #设置github用户名
+              git config --global user.email 'winddoing@sina.cn' #设置github用户邮箱
+              sed -i "/^ *repo/s~github\.com~${GH_TOKEN}@github.com~" _config.yml
 
-      - name: Install dependencies
-        run: |
-          node -v
-          npm install
-          pip3 install pillow
-          hexo clean
-          hexo g
+        - name: Install dependencies
+          run: |
+              node -v
+              npm install
+              pip3 install pillow
+              hexo clean
+              hexo g
 
-      - name: Generate static files
-        run: |
-          hexo clean
-          git pull --unshallow
-          ./tools/auto_init.sh
-          hexo generate
-          gulp
-          python3 ./tools/gen_watermark.py
+        - name: Generate static files
+          run: |
+              hexo clean
+              git pull --unshallow
+              ./tools/auto_init.sh
+              hexo generate
+              gulp
+              python3 ./tools/gen_watermark.py
 
-      - name: Deploy to Github Pages
-        run: |
-          hexo deploy
+        - name: Deploy to Github Pages
+          run: |
+              hexo deploy
