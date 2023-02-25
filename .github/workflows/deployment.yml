@@ -25,6 +25,9 @@ jobs:
         node -v
         npm ci
         pip3 install pillow
+        pwd
+        ls
+        ls node_modules/.bin/
 
     - name: Config git info
       env:
