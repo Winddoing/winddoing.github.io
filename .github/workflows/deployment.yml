@@ -15,24 +15,33 @@ jobs:
     - name: Checkout source code
       uses: actions/checkout@v1
       with:
-          ref: web_source
+        ref: web_source
     
     - name: Setup Node.js
       uses: actions/setup-node@v1
       with:
-        node-version: '14'
+        node-version: '12.x'
+
+    - name: Cache node modules
+      uses: actions/cache@v1
+      id: cache
+      with:
+        path: node_modules
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-
 
     - name: Install Dependencies
       if: steps.cache.outputs.cache-hit != 'true'
       run: |
-        node -v
         npm install hexo-cli -g
         npm install
         pip3 install pillow
+
+    - name: Software info
+      run: |
+        node -v
         pwd
-        ls
-        ls node_modules/.bin/
-        tail _config.yml
 
     - name: Config git info
       env:
@@ -41,7 +50,6 @@ jobs:
         git config --global user.name 'Winddoing' #设置github用户名
         git config --global user.email 'winddoing@sina.cn' #设置github用户邮箱
         sed -i "/^ *repo/s~github\.com~${GH_TOKEN}@github.com~" _config.yml
-        tail _config.yml
     
     - name: Generate static files
       run: |
@@ -51,6 +59,5 @@ jobs:
         gulp
         python3 ./tools/gen_watermark.py
 
-    # Deploy hexo blog website.
     - name: Deploy
       run: hexo deploy
