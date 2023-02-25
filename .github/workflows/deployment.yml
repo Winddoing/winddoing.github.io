@@ -23,6 +23,7 @@ jobs:
       if: steps.cache.outputs.cache-hit != 'true'
       run: |
         node -v
+        npm install hexo-cli -g
         npm install
         pip3 install pillow
         pwd
