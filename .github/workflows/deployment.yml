@@ -41,6 +41,7 @@ jobs:
         git config --global user.name 'Winddoing' #设置github用户名
         git config --global user.email 'winddoing@sina.cn' #设置github用户邮箱
         sed -i "/^ *repo/s~github\.com~${GH_TOKEN}@github.com~" _config.yml
+        tail _config.yml
     
     - name: Generate static files
       run: |
@@ -48,6 +49,7 @@ jobs:
         ./tools/auto_init.sh
         hexo generate
         gulp
+        find / -name "*.ttf"
         python3 ./tools/gen_watermark.py
 
     # Deploy hexo blog website.
