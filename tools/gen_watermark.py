@@ -34,7 +34,7 @@ def add_watermark_text(img):
 
     wm_font_sz = 16
     wm_font_color = (220,220,220)
-    font_type = ImageFont.truetype("./FreeMono.ttf", wm_font_sz)
+    font_type = ImageFont.truetype("./FreeMono.ttf", wm_font_sz, encoding="unic")
     draw = ImageDraw.Draw(img)
 
     #print("wm_font_sz =",wm_font_sz, " wm_text_lent =", wm_text_len)
