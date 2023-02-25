@@ -4,12 +4,15 @@ on:
   push:
     branches: web_source
 
+env:
+  TZ: Asia/Shanghai
+
 jobs:
   build:
     runs-on: ubuntu-20.04
     name: A job to deploy blog.
     steps:
-    - name: Checkout source
+    - name: Checkout source code
       uses: actions/checkout@v1
       with:
           ref: web_source
@@ -29,6 +32,7 @@ jobs:
         pwd
         ls
         ls node_modules/.bin/
+        tail _config.yml
 
     - name: Config git info
       env:
