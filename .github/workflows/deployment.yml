@@ -41,7 +41,6 @@ jobs:
     - name: Generate static files
       run: |
         hexo clean
-        git pull --unshallow
         ./tools/auto_init.sh
         hexo generate
         gulp
