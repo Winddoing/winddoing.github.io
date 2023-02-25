@@ -1,16 +1,16 @@
 name: Deploy
 
-on: [push]
+on:
+  push:
+    branches: web_source
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     name: A job to deploy blog.
     steps:
     - name: Checkout
       uses: actions/checkout@v1
-      with:
-        submodules: true # Checkout private submodules(themes or something else).
     
     # Caching dependencies to speed up workflows. (GitHub will remove any cache entries that have not been accessed in over 7 days.)
     - name: Cache node modules
