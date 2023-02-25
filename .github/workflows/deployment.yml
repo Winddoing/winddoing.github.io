@@ -49,7 +49,6 @@ jobs:
         ./tools/auto_init.sh
         hexo generate
         gulp
-        find / -name "*.ttf"
         python3 ./tools/gen_watermark.py
 
     # Deploy hexo blog website.
