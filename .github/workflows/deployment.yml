@@ -14,14 +14,10 @@ jobs:
       with:
           ref: web_source
     
-    - name: Cache node modules
-      uses: actions/cache@v1
-      id: cache
+    - name: Setup Node.js
+      uses: actions/setup-node@v1
       with:
-        path: node_modules
-        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-        restore-keys: |
-          ${{ runner.os }}-node-
+        node-version: '14'
 
     - name: Install Dependencies
       if: steps.cache.outputs.cache-hit != 'true'
