@@ -10,9 +10,8 @@ jobs:
     name: A job to deploy blog.
     steps:
     - name: Checkout
-      uses: actions/checkout@v1
+      uses: actions/checkout@web_source
     
-    # Caching dependencies to speed up workflows. (GitHub will remove any cache entries that have not been accessed in over 7 days.)
     - name: Cache node modules
       uses: actions/cache@v1
       id: cache
@@ -24,7 +23,18 @@ jobs:
 
     - name: Install Dependencies
       if: steps.cache.outputs.cache-hit != 'true'
-      run: npm ci
+      run: |
+        node -v
+        npm ci
+        pip3 install pillow
+
+    - name: Config git info
+      env:
+        GH_TOKEN: ${{ secrets.GH_TOKEN }}
+      run: |
+        git config --global user.name 'Winddoing' #设置github用户名
+        git config --global user.email 'winddoing@sina.cn' #设置github用户邮箱
+        sed -i "/^ *repo/s~github\.com~${GH_TOKEN}@github.com~" _config.yml
     
     - name: Generate static files
       run: |
