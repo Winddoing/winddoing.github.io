@@ -22,6 +22,11 @@ jobs:
       with:
         node-version: '12.x'
 
+    - name: Install hexo and tools
+      run: |
+        npm install hexo-cli -g
+        pip3 install pillow
+
     - name: Cache node modules
       uses: actions/cache@v1
       id: cache
@@ -34,9 +39,7 @@ jobs:
     - name: Install Dependencies
       if: steps.cache.outputs.cache-hit != 'true'
       run: |
-        npm install hexo-cli -g
         npm install
-        pip3 install pillow
 
     - name: Software info
       run: |
