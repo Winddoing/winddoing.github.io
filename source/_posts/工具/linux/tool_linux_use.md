@@ -63,16 +63,6 @@ unzip wps_symbol_fonts.zip
 sudo cp mtextra.ttf  symbol.ttf  WEBDINGS.TTF  wingding.ttf  WINGDNG2.ttf  WINGDNG3.ttf  /usr/share/fonts
 ```
 
-## 主题
-
-``` shell
-sudo apt install gnome-tweak-tool
-```
-
-### 插件
-
-- `dash-to-panel`： 任务栏合并，类似window
-- `workspace-grid`： 多工作区
 
 
 ## Free Download Manager
@@ -250,3 +240,27 @@ gsettings set org.gnome.shell.extensions.dash-to-dock isolate-workspaces true
 export LANG=en_US
 xdg-user-dirs-gtk-update
 ```
+
+
+
+## 主题
+
+``` shell
+sudo apt install gnome-tweak-tool
+```
+
+### 插件
+
+- `dash-to-panel`： 任务栏合并，类似window
+- `workspace-grid`： 多工作区
+
+
+### WhiteSur主题
+
+```
+git clone https://github.com/vinceliuice/WhiteSur-gtk-theme.git
+git clone https://github.com/vinceliuice/WhiteSur-icon-theme.git
+git clone https://github.com/vinceliuice/WhiteSur-cursors.git
+```
+
+- [5 个简单步骤使你的 Ubuntu 看起来像 macOS](https://linux.cn/article-12361-1.html)
