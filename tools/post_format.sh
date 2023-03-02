@@ -10,7 +10,7 @@
 set -eu
 
 # 获取文件后缀名
-file_suffix() 
+file_suffix()
 {
     local filename="$1"
 
@@ -20,11 +20,11 @@ file_suffix()
 }
 
 # 判断文件后缀是否是指定后缀
-is_suffix() 
+is_suffix()
 {
     local filename="$1"
     local suffix="$2"
-    if [ "$(file_suffix ${filename})" = "$suffix" ]; then
+    if [ "$(file_suffix "${filename}")" = "$suffix" ]; then
         return 0
     else
         return 1
@@ -36,13 +36,13 @@ del_end_of_line_space()
 {
 	local file=$1
 
-	echo "del_end_of_line_space:"
+	echo "del_end_of_line_space: $file"
 
-	is_suffix ${file} "md"
+	is_suffix "${file}" "md"
 	ret=$?
 
-	if [ $ret -eq 0 ]; then 
-		sed -i 's/[\t ]\+$//' ${file}
+	if [ $ret -eq 0 ]; then
+		sed -i 's/[\t ]\+$//' "${file}"
 	fi
 }
 
@@ -51,9 +51,9 @@ file_dos_convert_unix()
 {
 	local file=$1
 
-	echo "file_dos_convert_unix:"
+	echo "file_dos_convert_unix: $file"
 
-	dos2unix $file
+	dos2unix "$file"
 }
 
 # 将文章分类改为目录结构形式
@@ -97,22 +97,45 @@ del_filename_prefix_date()
 	fi
 }
 
+# 将文件名中的空格替换为下划线
+replace_space_with_underline()
+{
+    echo "Replace the path with an underscore: $file"
+
+	local file=$1
+
+	if [[ "$file" != "${file%[[:space:]]*}" ]]
+	then
+		echo "did contain space or single quote"
+		na=$(echo $file | tr ' ' '_')
+		echo "rename: "$file" -> $na"
+		mv "$file" $na
+	fi
+}
+
+
 #遍历当前目录(包括子目录)下所有文件
 lookup_dir()
 {
-    for file in `ls $1`       #注意此处这是两个反引号，表示运行系统命令
-    do
-        if [ -d $1"/"$file ]  #注意此处之间一定要加上空格，否则会报错
-        then
-            lookup_dir $1"/"$file
-        else
-            echo "----> $1/$file"   #在此处处理文件即可
-			del_end_of_line_space $1"/"$file
-			file_dos_convert_unix $1"/"$file
-			#adjust_categories $1"/"$file
-			del_filename_prefix_date $1"/"$file
-        fi
-    done
+	local dir=$1
+
+	find $dir -name "*.md" |
+		while read file
+		do
+			echo "--start--> $file"   #在此处处理文件即可
+			del_end_of_line_space "$file"
+			file_dos_convert_unix "$file"
+			#adjust_categories "$file"
+			del_filename_prefix_date "$file"
+
+			# 修改文件名，必需最后一个执行
+			replace_space_with_underline "$file"
+			echo "--end--> $file"
+		done
+
+	echo "******************************************"
+	echo -e "\e[32m\tCompletion of processing.\e[0m"
+	echo "******************************************"
 }
 
 

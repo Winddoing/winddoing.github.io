@@ -1,8 +1,11 @@
 ---
 title: clash for linux
-date: 2023-03-02
 tags:
   - 科学上网
+categories:
+  - 工具
+abbrlink: '9992854'
+date: 2023-03-02 00:00:00
 ---
 
 Clash 是一个使用 Go 语言编写，基于规则的跨平台代理软件核心程序。
@@ -26,8 +29,8 @@ wget https://github.com/Dreamacro/clash/releases/download/v1.13.0/clash-linux-am
 gzip -d clash-linux-amd64-v1.13.0.gz
 chmod +x clash-linux-amd64-v1.13.0
 ./clash-linux-amd64-v1.13.0
-INFO[0000] Can't find config, create a initial config file 
-INFO[0000] Can't find MMDB, start download 
+INFO[0000] Can't find config, create a initial config file
+INFO[0000] Can't find MMDB, start download
 ```
 
 为了后期管理方便，可以之间将解压后的clash拷贝到`~/.config/clash`目录下，并重命名为clash
@@ -52,15 +55,15 @@ wget -O config.yaml "https://xxxxxxxxxxxxxxxxxx06d2739906177ad22&flag=clash"
 
 执行`./clash`，将会下载`Country.mmdb`
 ``` shell
-./clash 
-WARN[0000] MMDB invalid, remove and download 
+./clash
+WARN[0000] MMDB invalid, remove and download
 ```
 
 如果下载失败进行手动下载
 ``` shell
-$./clash 
-WARN[0000] MMDB invalid, remove and download            
-FATA[0030] Initial configuration directory error: can't initial MMDB: can't download MMDB: Get "https://cdn.jsdelivr.net/gh/Dreamacro/maxmind-geoip@release/Country.mmdb": dial tcp 146.75.113.229:443: i/o timeout 
+$./clash
+WARN[0000] MMDB invalid, remove and download
+FATA[0030] Initial configuration directory error: can't initial MMDB: can't download MMDB: Get "https://cdn.jsdelivr.net/gh/Dreamacro/maxmind-geoip@release/Country.mmdb": dial tcp 146.75.113.229:443: i/o timeout
 ```
 
 ``` shell
@@ -74,14 +77,14 @@ wget -O Country.mmdb https://www.sub-speeder.com/client-download/Country.mmdb
 ```
 ~/.config/clash
 ↪ =>$ls
-clash  config.yaml  Country.mmdb 
+clash  config.yaml  Country.mmdb
 
-↪ =>$./clash 
-INFO[0000] Start initial compatible provider 故障转移       
-INFO[0000] Start initial compatible provider 自动选择       
-INFO[0000] Start initial compatible provider 一元机场       
-INFO[0000] RESTful API listening at: 127.0.0.1:9090     
-INFO[0000] Mixed(http+socks) proxy listening at: [::]:7890 
+↪ =>$./clash
+INFO[0000] Start initial compatible provider 故障转移
+INFO[0000] Start initial compatible provider 自动选择
+INFO[0000] Start initial compatible provider 一元机场
+INFO[0000] RESTful API listening at: 127.0.0.1:9090
+INFO[0000] Mixed(http+socks) proxy listening at: [::]:7890
 ```
 
 在`clash`启动后用浏览器访问网址`http://clash.razord.top/` ，在这里修改配置信息
@@ -133,7 +136,7 @@ PING www.google.com (199.59.149.201) 56(84) bytes of data.
 
 查找`libproxychains.so.3`位置
 ```
-whereis libproxychains.so.3 
+whereis libproxychains.so.3
 libproxychains.so: /usr/lib/x86_64-linux-gnu/libproxychains.so.3
 ```
 
@@ -172,16 +175,16 @@ nohup $HOME/.config/clash/clash -d $HOME/.config/clash/ > /dev/null 2>&1 &
 sudo vim /usr/lib/systemd/system/clash.service
 
 cat /usr/lib/systemd/system/clash.service
-[Unit]                                                                    
-Description=clash linux                                                   
-After=network-online.target                                               
-                                                                          
+[Unit]
+Description=clash linux
+After=network-online.target
+
 [Service]
 Type=simple
 ExecStart=/opt/clash/clash -d /opt/clash
-Restart=always                                                            
-                                                                          
-[Install]                                                                 
+Restart=always
+
+[Install]
 WantedBy=multi-user.target
 ```
 >根据实际配置路径进行修改
@@ -193,9 +196,9 @@ sudo systemctl daemon-reload
 # 设置开机自启
 sudo systemctl enable clash
 
-service clash start   # 启动  
-service clash stop    # 停止  
-service clash restart # 重启  
+service clash start   # 启动
+service clash stop    # 停止
+service clash restart # 重启
 service clash status  # 状态
 ```
 
