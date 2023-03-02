@@ -12,5 +12,7 @@
   "attachmentFolderPath": "images",
   "readableLineLength": false,
   "useMarkdownLinks": true,
-  "showUnsupportedFiles": true
+  "showUnsupportedFiles": true,
+  "showFrontmatter": true,
+  "alwaysUpdateLinks": true
 }
