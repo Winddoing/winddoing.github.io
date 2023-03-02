@@ -1,8 +1,12 @@
 ---
 title: Cmake中Build生成可执行文件与Install后可执行文件不是同一个文件
-date: 2023-03-01
 tags:
   - cmake
+categories:
+  - 编译工具
+  - cmake
+abbrlink: 331f1334
+date: 2023-03-01 00:00:00
 ---
 
 
@@ -59,18 +63,18 @@ set(CMAKE_INSTALL_RPATH_USE_LINK_PATH FALSE)      # 安装的执行文件不加�
 >  1.  Any directories specified by -rpath-link options.
 >
     2.  Any directories specified by -rpath options.  The difference between -rpath and -rpath-link is that directories specified by -rpath options are included in the executable and used at runtime, whereas the -rpath-link option is only effective at link time. Searching -rpath in this way is only supported by native linkers and cross linkers which have been configured with the --with-sysroot option.
->    
+>
 > 3.  On an ELF system, for native linkers, if the -rpath and -rpath-link options were not used, search the contents of the environment variable "LD_RUN_PATH".
->  
+>
 > 4.  On SunOS, if the -rpath option was not used, search any directories specified using -L options.
->  
+>
 > 5.  For a native linker, search the contents of the environment variable "LD_LIBRARY_PATH".
->  
+>
 > 6.  For a native ELF linker, the directories in "DT_RUNPATH" or "DT_RPATH" of a shared library are searched for shared libraries needed by it. The "DT_RPATH" entries are ignored if "DT_RUNPATH" entries exist.
->  
+>
 > 7.  The default directories, normally /lib and /usr/lib.
->  
+>
 > 8.  For a native linker on an ELF system, if the file /etc/ld.so.conf exists, the list of directories found in that file.
->  
+>
 >  If the required shared library is not found, the linker will issue a warning and continue with the link.
 
