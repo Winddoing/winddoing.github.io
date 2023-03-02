@@ -16,7 +16,7 @@ date: 2018-02-04 23:07:24
 ## 文件匹配行前/后插入新行
 
 ``` shell
-#匹配行前加  
+#匹配行前加
 sed -i '/searchtext/iNew Line' file.txt
 
 #匹配行前后
