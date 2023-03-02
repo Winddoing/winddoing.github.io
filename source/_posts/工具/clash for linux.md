@@ -5,7 +5,7 @@ tags:
   - 科学上网
 ---
 
-
+Clash 是一个使用 Go 语言编写，基于规则的跨平台代理软件核心程序。
 
 <!--more-->
 
@@ -34,8 +34,6 @@ INFO[0000] Can't find MMDB, start download
 
 ``` shell
 cp ./clash-linux-amd64-v1.13.0 ~/.config/clash/clash
-
-
 
 $ls ~/.config/clash/
 clash  config.yaml
@@ -123,6 +121,7 @@ socks5 127.0.0.1 7890   # 配置为混合端口，因此不需要区分
 ```
 
 - 测试
+
 ```
 proxychains ping www.google.com
 ProxyChains-3.1 (http://proxychains.sf.net)
