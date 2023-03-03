@@ -224,3 +224,4 @@ service cron restart # 修改完都需要重启服务，不然不能生效
 ## 参考
 
 - [如何在Linux中使用Clash](https://zhuanlan.zhihu.com/p/366589407)
+- [CLash for Linux 安装配置](https://www.alvinkwok.cn/2022/01/29/2022/01/Clash%20For%20Linux%20Install%20Guide/)
