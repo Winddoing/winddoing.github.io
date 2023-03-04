@@ -377,6 +377,15 @@ else
 
 ## 删除已删除文件或目录的所以历史记录
 
+- 查找大文件
+``` shell
+# 列出前5个大文件
+git verify-pack -v .git/objects/pack/pack-*.idx | sort -k 3 -g | tail -5
+
+# 查看大文件路径
+git rev-list --objects --all | grep 8f10eff91bb6aa2de1f5d096ee2e1687b0eab007
+```
+
 - 删除文件
 ``` shell
 git filter-branch --force --index-filter 'git rm --cached --ignore-unmatch pom.xml' --prune-empty --tag-name-filter cat -- --all
@@ -388,7 +397,7 @@ git filter-branch --force --index-filter 'git rm --cached -r --ignore-unmatch qe
 ```
 
 - 删除回收
-```
+``` shell
 rm -rf .git/refs/original/
 git reflog expire --expire=now --all
 git gc --prune=now

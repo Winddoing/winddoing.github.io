@@ -95,11 +95,81 @@ INFO[0000] Mixed(http+socks) proxy listening at: [::]:7890
 
 ![](../../images/clash%20for%20linux.png)
 
+命令行设置：
+``` shell
+gsettings set org.gnome.system.proxy.http host '127.0.0.1'
+gsettings set org.gnome.system.proxy.http port 7890
+gsettings set org.gnome.system.proxy.https host '127.0.0.1'
+gsettings set org.gnome.system.proxy.https port 7890
+gsettings set org.gnome.system.proxy.ftp host ''
+gsettings set org.gnome.system.proxy.ftp port 0
+gsettings set org.gnome.system.proxy.socks host '127.0.0.1'
+gsettings set org.gnome.system.proxy.socks port 7890
+
+gsettings set org.gnome.system.proxy mode 'manual';
+```
 
 ### git代理
 
+#### https传输
+
+- http代理
 ```
-git config --global http.proxy 'http://127.0.0.1:7890'
+git config --global http.proxy 'http://127.0.0.1:1080'
+git config --global https.proxy 'http://127.0.0.1:1080'
+```
+
+- socks5代理
+```
+git config --global http.proxy 'socks5://127.0.0.1:1081'  
+git config --global https.proxy 'socks5://127.0.0.1:1081'
+```
+
+- 取消代理
+```
+git config --global --unset http.proxy  
+git config --global --unset https.proxy
+```
+
+#### ssh传输
+
+通过 [netcat](https://en.wikipedia.org/wiki/Netcat) 或 [ssh-connect](https://github.com/gotoh/ssh-connect) 可以建立连接以供 ssh 使用。
+
+修改 OpenSSH 的 `config` 文件（Unix/Linux/Git-Bash：`~/.ssh/config`），添加如下内容之一
+
+#####  netcat
+
+- http代理
+```
+Host github.com  
+	HostName github.com  
+	User git  
+	ProxyCommand nc -v -X connect -x 127.0.0.1:1080 %h %p
+```
+- socks5代理
+```
+Host github.com  
+	HostName github.com  
+	User git  
+	ProxyCommand nc -v -x 127.0.0.1:1081 %h %p
+```
+
+##### ssh-connect
+
+- http代理
+```
+Host github.com  
+	HostName github.com  
+	User git  
+	ProxyCommand connect -H 127.0.0.1:1080 %h %p
+```
+
+- socks5代理
+```
+Host github.com  
+	HostName github.com  
+	User git  
+	ProxyCommand connect -S 127.0.0.1:1081 %h %p
 ```
 
 
@@ -225,3 +295,4 @@ service cron restart # 修改完都需要重启服务，不然不能生效
 
 - [如何在Linux中使用Clash](https://zhuanlan.zhihu.com/p/366589407)
 - [CLash for Linux 安装配置](https://www.alvinkwok.cn/2022/01/29/2022/01/Clash%20For%20Linux%20Install%20Guide/)
+- [如何在 Linux 上优雅的使用 Clash？](https://blog.zzsqwq.cn/posts/how-to-use-clash-on-linux/) —— Docker
