@@ -481,6 +481,12 @@ pick 5522ce1 add gnuplot test shell
 
 ## 仓库地址为http时,用户名密码保存
 
+- 临时生效
+
+``` shell
+git config --global credential.helper cache
+```
+
 ``` shell
 git config --global credential.helper store
 ```
