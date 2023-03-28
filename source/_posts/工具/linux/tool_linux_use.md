@@ -242,6 +242,19 @@ xdg-user-dirs-gtk-update
 ```
 
 
+## 浏览器配置中文
+
+点击图标启动系统文字默认中文
+
+``` shell
+sudo vim /usr/bin/microsoft-edge
+# 或
+sudo vim /usr/bin/google-chrome
+
+# 在开头添加一行：
+export LANGUAGE=ZH-CN.UTF-8
+```
+
 
 ## 主题
 

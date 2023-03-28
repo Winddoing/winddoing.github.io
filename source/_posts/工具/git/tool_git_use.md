@@ -518,6 +518,24 @@ git config --global core.pager 'less -x1,5'
 git config --global core.pager 'less'
 ```
 
+
+## .gitattributes
+
+当执行 git 动作时，.gitattributes 文件允许你指定由 git 使用的文件和路径的属性
+
+```
+# Declare files that always have LF line endings on checkout
+* text eol=lf
+# Denote all files that are truly binary and should not be modified
+*.bmp binary
+*.ttf binar
+```
+
+- `* text eol=lf`：所有文件上传仓库时将windows下的`eol`转换为linux下的`lf`
+
+> 开发者使用不同的操作系统，默认的文件结尾行就会不同。在 Windows 上默认的是回车换行（Carriage Return Line Feed, CRLF），然而，在 Linux/MacOS 上则是换行（Line Feed, LF）。
+
+
 ## 错误处理
 
 ### git clone
