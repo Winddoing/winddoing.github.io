@@ -173,7 +173,7 @@ Host github.com
 ```
 
 
-### 命令行下载代理——proxychains
+## 命令行下载代理——proxychains
 
 需要socks代理端口
 
@@ -222,6 +222,22 @@ if [ $# = 0 ] ; then
 fi
 export LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libproxychains.so.3   # 使用绝对路径
 exec "$@"
+```
+
+
+### 代理与source执行
+
+在需要代理并通过source执行脚本时，可以使用以下方法：
+
+``` shell
+proxychains bash -c source install.sh
+```
+
+
+### 代理与sudo
+
+``` shell
+sudo proxychains apt-get update
 ```
 
 
