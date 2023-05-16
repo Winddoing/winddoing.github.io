@@ -13,6 +13,17 @@ abbrlink: 1644
 
 <!-- more -->
 
+## 创建一个不能登录的账户
+
+创建一个git账户，不需要其登录系统
+
+``` shell
+useradd -s /bin/false -M git
+```
+
+- `-s /bin/false`：禁止login选项，用户无法登录且不会有任何提示
+- `-M` ：不创建用户Home目录
+
 ## 字符串转二进制
 
 ``` shell
