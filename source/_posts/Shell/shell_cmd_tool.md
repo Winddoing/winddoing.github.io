@@ -13,6 +13,19 @@ abbrlink: 1644
 
 <!-- more -->
 
+## 根据文件inode信息查找文件
+
+- 文件系统错误，有错误inode信息
+```
+EXT4-fs (sda7): Delayed block allocation failed for inode 23596895 at logical offset 673 with max blocks 1 with error 117
+```
+
+- 查找文件
+```
+find /home/ -inum 23596895  -print
+```
+> sda7挂载在home目录下。
+
 ## 创建一个不能登录的账户
 
 创建一个git账户，不需要其登录系统
