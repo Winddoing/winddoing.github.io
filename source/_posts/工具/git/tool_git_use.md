@@ -31,6 +31,25 @@ git init --bare --shared
 > git remote add origin hostname@192.168.1.1:/test.git
 > ```
 
+新建单独用户下载：
+``` shell
+# 为了禁止登录将shell，修改为git-shell或者/bin/false将禁止登录
+sudo useradd -c 'git version control' -s /usr/bin/git-shell -M git -d /git
+# 设置密码
+sudo passwd git
+# 创建home目录
+sudo mkdir /git
+# 修改所属权限
+sudo chown -R git:git /git/
+# 测试仓库
+sudo git init --bare --shared  /git/123.git
+```
+
+``` shell
+sudo adduser git
+sudo usermod -G sudo -a git
+```
+
 ## 创建分支
 ```
 git branch branch_name
