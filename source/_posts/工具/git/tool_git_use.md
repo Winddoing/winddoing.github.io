@@ -306,6 +306,7 @@ git archive --format=tar.gz --output "output.tar.gz" ac1c53d
 ```
 git archive --format=tar.gz --output "output.tar.gz" master dir1 dir2
 ```
+
 ## 合并代码
 
 - 合并指定分支到当前分支
@@ -317,6 +318,7 @@ git merge [branch_name]
 ```
 git cherry-pick [branch_name]
 ```
+
 ## 查看信息
 
 - 查看指定文件什么人在什么时间修改过
