@@ -1,0 +1,16 @@
+# hexo robots.txt
+User-agent: *
+
+Disallow: /
+
+Allow: /post/
+Allow: /archives/
+Allow: /tags/
+
+Allow: /search.xml
+Allow: /sitemap.*
+Allow: /baidusitemap.xml
+Allow: /index.html
+
+Sitemap: https://winddoing.github.io/sitemap.xml
+Sitemap: https://winddoing.github.io/baidusitemap.xml
