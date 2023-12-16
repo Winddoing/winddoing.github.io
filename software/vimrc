@@ -1,0 +1,330 @@
+
+" 鼠标模式
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set mouse=a
+set mouse=n
+set mouse=i
+set mouse=c
+set mouse=h
+set mouse=n
+"set mouse=v
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set clipboard+=unnamed
+set report=0
+
+" Fn 快捷键
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"F1 for uncomment
+"Vim help
+nnoremap <F1> :vertical botright help<CR>
+
+"F6 for uncomment
+"查找时区分大小写
+"nmap <F2> :set ic<cr>/
+
+"F6 for uncomment
+"查找时不区分大小写
+"nmap <F3> :set noic<cr>/
+
+"F7 for uncomment
+vmap <F7> :s=^\(//\)*=//=g<cr>:noh<cr>
+nmap <F7> :s=^\(//\)*=//=g<cr>:noh<cr>
+imap <F7> <ESC>:s=^\(//\)*=//=g<cr>:noh<cr>
+
+vmap <F7># :s=^\(#\)*=#=g<cr>:noh<cr>
+nmap <F7># :s=^\(#\)*=#=g<cr>:noh<cr>
+imap <F7># <ESC>:s=^\(#\)*=#=g<cr>:noh<cr>
+"F6 for uncomment
+
+vmap <F6> :s=^\(//\)*==g<cr>:noh<cr>
+nmap <F6> :s=^\(//\)*==g<cr>:noh<cr>
+imap <F6> <ESC>:s=^\(//\)*==g<cr>:noh<cr>
+"F12 for uncomment
+vmap <F12> :s=^\(//\)*=/*=g<cr>:s=\(//\)*$=*/=g<cr>:noh<cr>
+nmap <F12> :s=^\(//\)*=/*=g<cr>:s=\(//\)*$=*/=g<cr>:noh<cr>
+imap <F12> <ESC>:s=^\(//\)*=/*=g<cr>:s=\(//\)*$=*/=g<cr>:noh<cr>
+
+"F9 for uncomment
+vmap <F9> :s=^\(\/\*\)*==g<cr>:s=\(\*\/\)*$==g<cr>:noh<cr>
+nmap <F9> :s=^\(\/\*\)*==g<cr>:s=\(\*\/\)*$==g<cr>:noh<cr>
+imap <F9> <ESC>:s=^\(\/\*\)*==g<cr>:s=\(\*\/\)*$==g<cr>:noh<cr>
+"-----------------------------------------------------csc
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => General
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Sets how many lines of history VIM has to remember
+set history=700
+
+" 开启文件类型侦测
+filetype on
+" 根据侦测到的不同类型加载对应的插件
+" Enable filetype plugin
+filetype plugin on
+" 自适应不同语言的智能缩进
+filetype indent on
+
+" Set to auto read when a file is changed from the outside
+set autoread
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => VIM user interface
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Set 7 lines to the curors - when moving vertical..
+set so=7
+
+set wildmenu "Turn on WiLd menu
+
+" 显示光标当前位置
+set ruler "Always show current position
+
+set cmdheight=1 "The commandbar height
+
+set hid "Change buffer - without saving
+
+" Set backspace config
+set backspace=eol,start,indent
+set whichwrap+=<,>,h,l
+
+""Ignore case when searching
+set ignorecase
+set smartcase
+
+" 高亮显示搜索结果
+set hlsearch "Highlight search things
+
+set incsearch "Make search act like search in modern browsers
+set nolazyredraw "Don't redraw while executing macros
+
+set magic "Set magic on, for regular expressions
+
+set showmatch "Show matching bracets when text indicator is over them
+set mat=2 "How many tenths of a second to blink
+
+" No sound on errors
+set noerrorbells
+set novisualbell
+set t_vb=
+set tm=500
+
+set selection=exclusive
+set selectmode=mouse,key
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Text, tab and indent related
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 设置格式化时制表符占用空格数
+set shiftwidth=4
+" 让 vim 把连续数量的空格视为一个制表符
+set softtabstop=4
+" 设置编辑时制表符占用空格数
+set tabstop=4
+"set smarttab
+
+"输入tab时自动将其转化为空格
+set expandtab
+"set noexpandtab
+
+"Linux kernel code style
+""set expandtab
+"set noexpandtab
+
+set lbr
+set tw=500
+
+set ai "Auto indent
+set si "Smart indet
+set wrap "Wrap lines
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 光标停留在上次打开的位置
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Uncomment the following to have Vim jump to the last position when reopening a file
+if has("autocmd")
+	au BufReadPost * if line("`\"") > 1 && line("`\"") <= line("$") | exe "normal! g`\"" | endif
+endif
+"""""""""""""""""""""
+"Only do this part when compiled with support for autocommands.
+if has("autocmd")
+	" When editing a file, always jump to the last known cursor position.
+	" Don't do it when the position is invalid or when inside an event handler
+	" (happens when dropping a file on gvim).
+	autocmd BufReadPost *
+				\ if line("'\"") > 0 && line("'\"") <= line("$") |
+				\   exe "normal g`\"" |
+				\ endif
+
+endif " has("autocmd")
+""""""""""""""""""""""""""""""
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Visual mode related
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Really useful!
+"  In visual mode when you press * or # to search for the current selection
+vnoremap <silent> * :call VisualSearch('f')<CR>
+vnoremap <silent> # :call VisualSearch('b')<CR>
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => General Abbrevs
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+iab xdate <c-r>=strftime("%Y/%m/%d %H:%M:%S")<cr>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => MISC
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+set csprg=/usr/bin/cscope
+set csto=0
+set cst
+set csverb
+set cscopetag
+"let g:winManagerWindowLayout='FileExplorer|TagList'
+let g:winManagerWindowLayout='FileExplorer'
+set iskeyword+=_,$,@,%,#,-
+
+set completeopt=longest,menu
+"let g:SuperTabRetainCompletionType=2
+"let g:SuperTabDefaultCompletionType="<C-X><C-O>"
+
+set autoindent
+set cindent
+
+" 带有如下符号的单词不要被换行分割
+set iskeyword+=_,$,@,%,#,-
+
+"折叠方式"zf创建折叠
+"set fdm=indent
+set fdm=manual
+
+"set notextmode
+
+"以unix格式显示换行符
+nmap xsm :e ++ff=unix
+"以dos格式显示换行符
+nmap xsm :e ++ff=dos
+
+"set filetype=unix
+"删除行尾的一个^M
+nmap dm :%s/\r\+$//e<cr>:set ff=unix<cr>
+"以UNIX的换行符格式保存文件，注意是去掉一个^M
+":set ff=unix
+"以dos的换行符格式保存文件, 注意是在行尾变为两个^M
+"set ff=dos
+
+"文本编码
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set fencs=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936
+set termencoding=utf-8
+set encoding=utf-8
+set fileencodings=ucs-bom,utf-8,cp936
+set fileencoding=utf-8
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+"属性设置
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 在处理未保存或只读文件的时候，弹出确认
+"set confirm
+
+" 去掉输入错误的提示声音
+set noeb
+
+" 高亮显示当前行/列
+set cursorline
+"set cursorcolumn
+
+" 开启行号显示
+set nu
+
+" 允许用指定语法高亮配色方案替换默认方案
+syntax on
+
+" 分割线显示
+" color set: ColorColumn
+set colorcolumn=80
+" Make it obvious where 80 characters is
+"set textwidth=110
+"set colorcolumn=+1
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"格式化
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" XML
+function XML()
+    set filetype=xml
+    :%s/></>\r</g   "把><替换成>回车<
+    :normal gg=G<cr>
+endfunction
+
+nmap xml :call XML()<cr>
+
+nmap 216 :%!xxd<cr>
+
+" 快捷键
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 定义快捷键到行首和行尾
+nmap LB 0
+nmap LE $
+
+nmap qq :q!<cr>
+
+nmap ww <C-w><C-w>
+nmap -- 5<C-w>-
+nmap ++ 5<C-w>+
+nmap >> 5<C-w>>
+nmap << 5<C-w><
+nmap 11 :set nonu<cr>
+nmap 22 :set nu<cr>
+nmap cm :!
+map ss :split<cr>
+map vv :vsplit<cr>
+nmap ff :1,$s///g
+nmap fk :1,$s/ *$//g<cr>
+"nmap fk :1,$s/^.*\.//g<cr>	"exaple 12.aaa-->aaa
+
+"取出多余空格
+nmap ds :%s/\s\+$//<cr>
+nmap db :g/^$/d<cr>
+
+"删除多余空行只留一个空行
+nmap dh :g/^\s*$\n\s*$/d<cr>
+
+"nmap ff :cs find t <C-R>=expand("<cword>")<CR><CR>:cw<CR>
+map dk oprintk("===> func: %s, line: %d\n", __func__, __LINE__);<Esc>
+map df oprintf("===> func: %s, line: %d\n", __func__, __LINE__);<Esc>
+map dff oprintf("===> func: %s, line: %d, file: %s\n", __func__, __LINE__, __FILE__);<Esc>
+
+"查找当前所有文件下光标所在的字符
+"https://blog.csdn.net/ckmufeng/article/details/50396632
+nnoremap fw yiw:vimgrep /<C-R>0/gj **<CR>:copen<CR>
+
+map json :%!python -m json.tool<cr>
+
+"paste模式,为粘贴是注释不换行
+map <leader>p :set paste<cr>
+map <leader>pp :set nopaste<cr>
+
+" 配置
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => 将case 标记之后的语句放在标记缩进位置之后的 N 个字符处。(省缺'shiftwidth')。
+set cinoptions=:N,lN,bN
+
+" => Ctrl + s保存文件
+nmap <C-S> :update<CR>
+vmap <C-S> <C-C>:update<CR>
+imap <C-S> <C-O>:update<CR>
+
+" => ctag configure
+set tags=./tags;,tags
+set path+=include;
+
+" => Files, backups and undo
+" Turn backup off, since most stuff is in SVN, git anyway...
+set nobackup
+set nowb
+set noswapfile
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
