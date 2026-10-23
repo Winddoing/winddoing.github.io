@@ -1,0 +1,6 @@
+[submodule "resource/docs"]
+	path = resource/docs
+	url = https://e.coding.net/Winddoing/blog//docs.git
+[submodule "resource/tools"]
+	path = resource/tools
+	url = https://e.coding.net/Winddoing/blog//tools.git
